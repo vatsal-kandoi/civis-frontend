@@ -1,0 +1,26 @@
+@import "../helpers/variables";
+@import "../helpers/mixins";
+
+.app-btn {
+  position: relative;
+  padding: 5px 10px;
+  border: none;
+  border-radius: $radius-3;
+  transition: background-color .2s linear;
+  cursor: pointer;
+
+  &.primary {
+    background-color: $cta-dark-color;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: darken($cta-dark-color, 5%);
+    }
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  
+}

@@ -1,0 +1,150 @@
+@import '../../../../assets/styles/app';
+
+.indeterminate-progress-bar {
+  width: 100%;
+  height: 2px;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  animation: colors 1.5s infinite ease-out 0s;
+  -webkit-animation: colors 1.5s infinite ease-out 0s;
+
+  .colors {
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #DA4530;
+    animation: loader 1.5s infinite ease-out 0s;
+    -webkit-animation: loader 1.5s infinite ease-out 0s;
+  }
+}
+
+
+@keyframes loader {
+  0% {
+    width: 0;
+    background-color: #FFF;
+  }
+  24.9% {
+    width: 100%;
+    background-color: #FFF;
+  }
+  25% {
+    width: 0;
+    background-color: $primary-color;
+  }
+  49.9% {
+    width: 100%;
+    background-color: $primary-color;
+  }
+  50% {
+    width: 0;
+    background-color: #F5F5F5;
+  }
+  74.9% {
+    width: 100%;
+    background-color: #F5F5F5;
+  }
+  75% {
+    width: 0;
+    background-color: $primary-color;
+  }
+  100% {
+    width: 100%;
+    background-color: $primary-color;
+  }
+}
+
+@-webkit-keyframes loader {
+  0% {
+    width: 0;
+    background-color: #FFF;
+  }
+  24.9% {
+    width: 100%;
+    background-color: #FFF;
+  }
+  25% {
+    width: 0;
+    background-color: $primary-color;
+  }
+  49.9% {
+    width: 100%;
+    background-color: $primary-color;
+  }
+  50% {
+    width: 0;
+    background-color: #F5F5F5;
+  }
+  74.9% {
+    width: 100%;
+    background-color: #F5F5F5;
+  }
+  75% {
+    width: 0;
+    background-color: #FFF;
+  }
+  100% {
+    width: 100%;
+    background-color: #FFF;
+  }
+}
+
+@keyframes colors {
+  0% {
+    background-color: $primary-color;
+  }
+  24.9% {
+    background-color: $primary-color;
+  }
+  25% {
+    background-color: #FFF;
+  }
+  49.9% {
+    background-color: #FFF;
+  }
+  50% {
+    background-color: $primary-color;
+  }
+  74.9% {
+    background-color: $primary-color;
+  }
+  75% {
+    background-color: #F5F5F5;
+  }
+  100% {
+    background-color: #F5F5F5;
+  }
+}
+
+@-webkit-keyframes colors {
+  0% {
+    background-color: $primary-color;
+  }
+  24.9% {
+    background-color: $primary-color;
+  }
+  25% {
+    background-color: #FFF;
+  }
+  49.9% {
+    background-color: #FFF;
+  }
+  50% {
+    background-color: $primary-color;
+  }
+  74.9% {
+    background-color: $primary-color;
+  }
+  75% {
+    background-color: #F5F5F5;
+  }
+  100% {
+    background-color: #F5F5F5;
+  }
+}

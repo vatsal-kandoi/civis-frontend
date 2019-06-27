@@ -1,0 +1,4 @@
+<div *ngIf="showModal" class="response-alert bg-danger">
+  <p>{{ customMessage ? customMessage : error?.message }}</p>
+  <button class="btn-ed btn-oblique-red text-white" (click)="close()">Okay</button>
+</div>

@@ -1,0 +1,35 @@
+@import "../../../../assets/styles/helpers/variables";
+
+.spinner, .spinner * {
+  box-sizing: border-box;
+}
+.spinner {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  position: relative;
+}
+.spinner .circle {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border: calc(60px / 10) solid transparent;
+}
+.spinner .circle.circle-1 {
+  border-top-color: $primary-color;
+  animation: spinner-animation 750ms infinite;
+}
+.spinner .circle.circle-2 {
+  border-bottom-color: $primary-color;
+  animation: spinner-animation 750ms infinite alternate;
+}
+@keyframes spinner-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}

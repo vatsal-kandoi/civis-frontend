@@ -6,6 +6,9 @@ import { ConsultationCardComponent } from './consultation-card.component';
   declarations: [ConsultationCardComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    ConsultationCardComponent,
   ]
 })
 export class ConsultationCardModule { }

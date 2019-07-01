@@ -1,0 +1,44 @@
+@import "../helpers/variables";
+@import "../helpers/mixins";
+
+.app-btn {
+  position: relative;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: $radius-3;
+  transition: background-color .2s linear;
+  cursor: pointer;
+
+  &.primary {
+    background-color: $cta-dark-color;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: darken($cta-dark-color, 5%);
+    }
+  }
+
+  &.secondary {
+    background-color: $secondary-color;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: darken($secondary-color, 5%);
+    }
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-arrow-right {
+  @extend .app-btn;
+  &::after {
+    content: '>';
+    margin-left: 10px;
+  }
+}

@@ -1,0 +1,5 @@
+@mixin regular-text($color: $black, $weight: normal) {
+  font-size: 14px;
+  color: $color;
+  font-weight: $weight;
+}

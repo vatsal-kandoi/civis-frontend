@@ -1,0 +1,187 @@
+.sign-up-index {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+
+    &__left {
+        width: 30%;
+        padding: 70px;
+        background: linear-gradient(180deg, #0E73B9 28.22%, rgba(14, 115, 185, 0) 95.05%);
+
+        .back-btn {
+            border: none;
+            padding: 0;
+            color: #FFFFFF;
+            font-size: 12px;
+            cursor: pointer;
+            background: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .info-box {
+            margin-top: 100px;
+
+            &__title {
+                font-size: 12px;
+                color: #FFFFFF;
+                opacity: 0.5;
+                margin-bottom: 5px;
+            }
+
+            &__heading {
+                width: 250px;
+                font-weight: bold;
+                font-size: 24px;
+                color: #FFFFFF;
+                margin-bottom: 5px;
+                text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+                border-radius: 8px;
+            }
+
+            &__sub-heading {
+                font-size: 14px;
+                color: #FFFFFF;
+                text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+                border-radius: 8px;
+            }
+
+            &__message {
+                font-size: 14px;
+                font-weight: 500;
+                color: #FFFFFF;
+                margin: 14px 0;
+            }
+
+            .rounded-btn {
+                font-size: 9px;
+                color: #FFFFFF;
+                background: transparent;
+                border-radius: 10px;
+                padding: 5px 15px;
+                cursor: pointer;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    &__right {
+        width: 70%;
+        padding: 50px;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .login-container {
+                display: flex;
+                align-items: center;
+
+                .rounded-btn {
+                    border: 1px solid #151515;
+                    box-sizing: border-box;
+                    border-radius: 25px;
+                    font-size: 12px;
+                    color: #151515;
+                    cursor: pointer;
+                    margin-left: 5px;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+
+        .heading {
+            margin: 5px 0;
+            div {
+                font-weight: 500;
+                font-size: 16px;
+                color: #0E73B9;
+            }
+        }
+
+        .form-space {
+            margin-top: 50px;
+            display: flex;
+
+            &__left {
+                width: 50%;
+
+                .input-box {
+                    margin-bottom: 15px;
+
+                    &__border {
+                        width: 75%;
+                        border: 1px solid #AEAEAE;
+                        box-sizing: border-box;
+                        border-radius: 3px;
+
+                        input { 
+                            width: calc(100% - 23px);
+                            font-weight: 500;
+                            font-size: 15px;
+                            padding: 10px;
+                            background: #FFFFFF;
+                            border: none;
+                        }
+                    }
+                    label{
+                        display: block;
+                        font-weight: 500;
+                        font-size: 15px;
+                        color: #151515;
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .input-checbox {
+                    display: flex;
+                    margin-bottom: 15px;
+
+                    label {
+                        margin-left: 10px;
+                        font-size: 14px;
+                        color: #151515;
+                    }
+                }
+
+                .location-box {
+                    width: 75%;
+                    margin-bottom: 15px;
+
+                    label {
+                        display: block;
+                        font-weight: 500;
+                        font-size: 15px;
+                        color: #151515;
+                        margin-bottom: 5px;
+                    }
+                }
+
+                .submit-btn {
+                    border: none;
+                    background: #F0653A;
+                    border-radius: 3px;
+                    color: #FFFFFF;
+                    padding: 15px 25px;
+                    width: 75%; 
+                }
+
+                .error-msg {
+                    margin: 10px 0;
+                    color: #F0653A;
+                    font-size: 14px;
+                }
+            }
+        }
+
+    }
+}

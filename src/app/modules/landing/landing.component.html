@@ -1,0 +1,25 @@
+<div class="app-landing">
+  <section class="app-landing__cover-section">
+    <div class="cover-inner-container">
+      <div class="cover-details">
+        <p class="cover-title">Your turn, citizen</p>
+        <p class="cover-subtitle">
+          Simple thing is, the bodies that create laws, rules and regulations seek 
+          feedback from us, the citizens, to finalise them. What are we waiting for?
+        </p>
+        <button class="app-btn secondary text-uppercase">Start participating</button>
+      </div>
+      <div class="cover-card">
+        <div class="card-carousel">
+          <app-consultation-card [data]="covercardData" [type]="'landing'"></app-consultation-card>
+          <div class="card-carousel__carousel-indicators">
+            <span (click)="showCard(0)" class="dot"></span>
+            <span (click)="showCard(1)" class="dot"></span>
+            <span (click)="showCard(2)" class="dot"></span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,6 +1,6 @@
-<div class="login-index">
+<div class="login-index row no-gutters">
 
-    <div class="login-index__left">
+    <div class="login-index__left col-md-4">
       <button class="back-btn">Back</button>
   
       <div class="info-box">
@@ -20,7 +20,7 @@
       </div>
   
     </div>
-    <div class="login-index__right">
+    <div class="login-index__right col-md-8 col-12 p-3 p-md-5">
       <div class="header">
         <div class="logo-container">
           <img class="logo" src='../../../../assets/images/brand-logo/brand-logo.svg' />
@@ -31,13 +31,18 @@
           </div>
           <button class="rounded-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
         </div>
+        <div class="sign-up-mobile-container">
+            <div>
+              <button class="sign-up-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
+            </div>
+          </div>
       </div>
-      <div class="heading">
+      <div class="heading my-md-3 mt-5 mb-3">
         <div>Sign in to your Citizen Leader account</div>
       </div>
   
-      <div class="form-space">
-        <div class="form-space__left">
+      <div class="form-space row no-gutters mt-md-5 mt-2">
+        <div class="form-space__left col-md-5">
           <form #loginForm="ngForm" (ngSubmit)="submit(loginForm.valid)" autocomplete="off">
       
               <div class="input-box">

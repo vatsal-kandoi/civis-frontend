@@ -5,6 +5,7 @@ import {ActionButtonComponent} from './action-button/action-button.component';
 import {ActionModalComponent} from './action-modal/action-modal.component';
 import {ConfirmationModalComponent} from './confirmation-modal/confirmation-modal.component';
 import {ErrorComponent} from './error-modal/error.component';
+import {ConsultationCardComponent} from './consultation-card/consultation-card.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {ErrorComponent} from './error-modal/error.component';
     ActionModalComponent,
     ConfirmationModalComponent,
     ErrorComponent,
+    ConsultationCardComponent
   ],
   // imports: [BrowserModule],
   imports: [
@@ -23,6 +25,7 @@ import {ErrorComponent} from './error-modal/error.component';
     ActionModalComponent,
     ConfirmationModalComponent,
     ErrorComponent,
+    ConsultationCardComponent
   ]
 })
 export class SharedComponentsModule {

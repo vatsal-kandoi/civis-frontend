@@ -1,0 +1,51 @@
+@import './src/assets/styles/app';
+
+.app-landing {
+
+  &__cover-section {
+    width: 100%;
+    height: 773px;
+    background-color: $primary-color;
+    .cover-inner-container {
+      display: flex;
+      align-items: center;
+      width: 90%;
+      height: 773px;
+      margin: 0 auto;
+      .cover-details {
+        width: 40%;
+        .cover-title {
+          font-size: 82px;
+          font-weight: bold;
+          color: $white;
+          margin: 0;
+        }
+        .cover-subtitle {
+          @include general-text($color: rgba(255, 255, 255, 0.7));
+          margin: 0;
+        }
+      }
+      .cover-card {
+        width: 60%;
+      }
+    }
+  }
+
+}
+
+
+.card-carousel {
+  &__carousel-indicators {
+    display: flex;
+    justify-content: center;
+    .dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      margin: 20px 5px 0 5px;
+      background-color: #A6DAFF;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+}

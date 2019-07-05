@@ -1,5 +1,17 @@
 @import './variables';
 
+@mixin display-text($color: $black, $weight: normal) {
+  font-size: 38px;
+  line-height: 46px;
+  color: $color;
+  font-weight: $weight;
+}
+
+@mixin general-text($font-size: 18px, $color: $black, $weight: normal) {
+  font-size: $font-size;
+  color: $color;
+  font-weight: $weight;
+}
 @mixin regular-text($color: $black, $weight: normal) {
   font-size: 14px;
   color: $color;

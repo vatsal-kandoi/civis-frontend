@@ -1,8 +1,8 @@
 <div class="consultation-card">
-  <div role=”img” class="consultation-card__image" alt="Random image"></div>
+  <img [src]="data.cardImg" class="consultation-card__card-image" alt="Random image">
   <div class="consultation-card__details">
-    <p class="title">National Urban Policy Framework, 2018</p>
-    <p class="sub-title">Ministry of Housing & Urban Affairs</p>
+    <p class="title">{{ data.title }}</p>
+    <p class="sub-title">{{ data.subTitle }}</p>
     <div class="cta-section">
       <div>
         <p class="days-remaining-text">12 Days Remaining</p>

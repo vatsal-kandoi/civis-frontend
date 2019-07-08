@@ -18,7 +18,7 @@ export class GraphqlService {
   initializeApollo() {
     return new Promise((resolve, reject) => {
     this.apollo.create({
-      link: this.httpLink.create({uri: 'https://api-staging.civis.vote/graphql'}),
+      link: this.httpLink.create({uri: staging['api']}),
       cache: new InMemoryCache()
     });
     resolve();

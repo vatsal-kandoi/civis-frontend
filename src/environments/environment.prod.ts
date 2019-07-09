@@ -9,7 +9,7 @@ export const environment = {
 export const staging = {
   ... environment,
   ... {
-    api: 'https://api-staging.civis.vote/graphql'
+    api: 'https://api-staging.civis.vote'
   },
 };
 

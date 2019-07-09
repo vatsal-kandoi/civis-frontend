@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       .subscribe((apiToken: any) => {
         if (apiToken) {
           this.tokenService.storeToken(apiToken);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/home');
         }
       }, (err: any) => {
           console.log(err);

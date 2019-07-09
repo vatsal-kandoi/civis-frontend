@@ -97,7 +97,7 @@ conditions = {
       .subscribe((token) => {
         if (token) {
           this.tokenService.storeToken(token);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/home');
         }
       }, err => {
         console.log(err);

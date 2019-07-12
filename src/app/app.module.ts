@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {GraphQLModule} from './graphql/graphql.module';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
 import {SharedDirectivesModule} from './shared/directives/shared-directives.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {SharedDirectivesModule} from './shared/directives/shared-directives.modu
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     SharedDirectivesModule,
     SharedComponentsModule,
     GraphQLModule,

@@ -1,7 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {ApolloModule} from 'apollo-angular';
+import {ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
 import {HttpLinkModule} from 'apollo-angular-link-http';
 import {GraphqlService} from './graphql.service';
 

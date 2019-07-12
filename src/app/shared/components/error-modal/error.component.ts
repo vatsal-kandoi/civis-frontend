@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {ErrorService} from './error.service';
 
@@ -7,7 +7,7 @@ import {ErrorService} from './error.service';
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.scss']
 })
-export class ErrorComponent {
+export class ErrorComponent implements OnInit {
 
   showModal: boolean;
   error: any;
@@ -17,20 +17,23 @@ export class ErrorComponent {
   constructor(
     private errorService: ErrorService,
     private userService: UserService
-  ) {
-    this.errorService.showModal.subscribe(data => {
-      if (data) {
-        this.showModal = true;
-        this.error = this.errorService.error;
-        this.customMessage = this.errorService.customMessage;
-        this.shouldReload = this.errorService.shouldReload;
-      } else {
-        this.showModal = false;
-        this.error = null;
-        this.customMessage = null;
-        this.shouldReload = false;
-      }
-    });
+  ) {}
+
+  ngOnInit(): void {
+    this.errorService.showModal
+      .subscribe(data => {
+        if (data) {
+          console.log(data);
+          this.error = this.errorService.error;
+          this.showModal = true;
+          this.shouldReload = this.errorService.shouldReload;
+        } else {
+          this.showModal = false;
+          this.error = null;
+          this.customMessage = null;
+          this.shouldReload = false;
+        }
+      });
   }
 
   close() {

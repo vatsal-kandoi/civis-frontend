@@ -4,7 +4,8 @@ import {NgModule} from '@angular/core';
 import {ActionButtonComponent} from './action-button/action-button.component';
 import {ActionModalComponent} from './action-modal/action-modal.component';
 import {ConfirmationModalComponent} from './confirmation-modal/confirmation-modal.component';
-import {ErrorModalComponent} from './error-modal/error-modal.component';
+import {ErrorComponent} from './error-modal/error.component';
+import {ConsultationCardComponent} from './consultation-card/consultation-card.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {ErrorModalComponent} from './error-modal/error-modal.component';
     ActionButtonComponent,
     ActionModalComponent,
     ConfirmationModalComponent,
-    ErrorModalComponent
+    ErrorComponent,
+    ConsultationCardComponent
   ],
   // imports: [BrowserModule],
   imports: [
@@ -22,7 +24,8 @@ import {ErrorModalComponent} from './error-modal/error-modal.component';
     ActionButtonComponent,
     ActionModalComponent,
     ConfirmationModalComponent,
-    ErrorModalComponent
+    ErrorComponent,
+    ConsultationCardComponent
   ]
 })
 export class SharedComponentsModule {

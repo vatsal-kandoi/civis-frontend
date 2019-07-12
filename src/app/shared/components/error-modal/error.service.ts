@@ -12,6 +12,9 @@ export class ErrorService {
   customMessage: string;
   shouldReload: boolean;
 
+  constructor() {
+  }
+
   showErrorModal(error, customMessage?: string, shouldReload?: boolean) {
     if (error) {
       this.error = new Error(error);

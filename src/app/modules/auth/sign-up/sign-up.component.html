@@ -1,0 +1,123 @@
+<div class="sign-up-index row no-gutters">
+
+  <div class="sign-up-index__left col-md-4">
+    <button class="back-btn" [routerLink]="['/']">Back</button>
+    <div class="info-box">
+        <div class="info-box__title">
+          IN THE PAST
+        </div>
+        <div class="info-box__heading">
+          National Urban Policy Framework, 2018
+        </div>
+        <div class="info-box__sub-heading">
+          Ministry of Housing and Urban Affairs
+        </div>
+        <div class="info-box__message">
+          3251 citizen leaders participated
+        </div>
+        <button class="rounded-btn">READ CASE STUDY</button>
+    </div>
+  </div>
+
+  <div class="sign-up-index__right col-md-8 col-12 p-3 p-md-5">
+    <div class="header">
+      <div class="logo-container">
+        <img class="logo" src='../../../../assets/images/brand-logo/brand-logo.svg' />
+      </div>
+      <div class="login-container">
+        <div> 
+          Already have an account with Civis?
+        </div>
+        <button class="rounded-btn" [routerLink]="['/auth', 'login']">Sign in</button>
+      </div>
+      <div class="login-mobile-container">
+        <div>
+          <button class="sign-in-btn" [routerLink]="['/auth', 'login']">Sign in</button>
+        </div>
+      </div>
+    </div>
+    <div class="heading my-md-3 mt-5 mb-3">
+      <div>Sign up as a Citizen Leader.</div>
+      <div>Join the movement towards citizen-led governance.</div>
+    </div>
+
+    <div class="form-space row no-gutters mt-md-5 mt-2">
+      <div class="form-space__left col-md-5">
+        <form #signupForm="ngForm" (ngSubmit)="submit(signupForm.valid)" autocomplete="off">
+            <div class="input-box">
+                <label for="fname">First name</label>
+                <div class="input-box__border">
+                    <input placeholder="firstname" type="text" id="fname" #fname="ngModel" name="fname" [(ngModel)]="signupObject.firstName" required />   
+                </div>
+                <div *ngIf="fname.invalid && (fname.touched || signupForm.submitted)" class="error-msg">First name is Required</div>
+            </div>
+    
+            <div class="input-box">
+                <label for="fname">Last name</label>
+                <div class="input-box__border">
+                    <input placeholder="lastname" type="text" id="lname" #lname="ngModel" name="lname" [(ngModel)]="signupObject.lastName" required />
+                </div>
+                <div *ngIf="lname.invalid && (lname.touched || signupForm.submitted)" class="error-msg">Last name is Required</div>
+
+            </div>
+
+            <div class="location-box">
+              <label for="locations">
+                  Location
+              </label>
+              <div class="location-box__border">
+                <ng-select id="locations" #city="ngModel" name="city" [loading]="loadingCities"
+                [items]="cities" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
+                bindValue="id" notFoundText="City not found" [clearable]="false" loadingText="Searching..."
+                (search)="onSearch($event)" [(ngModel)]="signupObject.cityId" required>
+                </ng-select>  
+              </div>
+              <div *ngIf="city.invalid && (city.touched || signupForm.submitted)" class="error-msg">Location is Required</div>
+            </div>
+    
+            <div class="input-box">
+                <label for="efname">Email</label>
+                <div class="input-box__border">
+                    <input placeholder="email" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="signupObject.email" required email />
+                </div>
+                <div *ngIf="email.invalid && (email.touched || signupForm.submitted)" class="error-msg">
+                  <div *ngIf="email.errors.required">Email is Required</div>
+                  <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                </div>
+            </div>
+    
+            <div class="input-box">
+                <label for="password">Password</label>
+                <div class="input-box__border">
+                    <input placeholder="password" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="signupObject.password" required />
+                </div>
+                <div *ngIf="password.invalid && (password.touched || signupForm.submitted)" class="error-msg">Password is Required</div>
+            </div>
+
+            <div class="input-checbox">
+                <input  type="checkbox" #agreedForTermsCondition="ngModel" id="termsConditions"  name="termsConditions" [(ngModel)]="conditions.agreedForTermsCondition" required email /> 
+                <label for="termsConditions"> I'm good with the Civis' <br> Terms of Service & Privacy Policy.</label>
+            </div>
+            <div class="error-msg"  *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)">
+              Please read our Terms of Service & Privacy Policy and select to continue.
+            </div>
+    
+            <div class="input-checbox">
+                <input  type="checkbox"  id="notifyMe" #notifyMe="ngModel"  name="notifyMe" [(ngModel)]="signupObject.notifyForNewConsultation" /> 
+                <label for="notifyMe">Notify me when an open consultation <br> is created on Civis.</label>
+            </div>
+    
+            <div>
+              <button class="submit-btn" type="submit">GET WORKING</button>
+            </div>
+          </form>
+      </div>
+      <div class="form-space-middle">
+      </div>
+      <div class="form-space-right">
+      </div>
+    </div>
+    
+  </div>
+
+</div>

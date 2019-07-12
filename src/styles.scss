@@ -1,2 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/styles/app";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+* {
+  font-family: 'Encode Sans', sans-serif;;
+
+  &::selection {
+    background-color: $primary-color;
+    color: #FFF;
+  }
+}
+
+*::-webkit-scrollbar:horizontal {
+  height: 3px;
+}
+
+*::-webkit-scrollbar {
+  width: 3px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $primary-color;
+  -webkit-border-radius: 80px;
+  -moz-border-radius: 80px;
+  border-radius: 80px;
+}
+
+body {
+  height: 100vh;
+  font-size: 14px;
+  margin: 0;
+}

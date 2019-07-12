@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 import { LoginMutation } from './login.graphql';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { Router } from '@angular/router';
+import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private apollo: Apollo, private tokenService: TokenService, private router: Router) { }
+  constructor(private apollo: Apollo, private tokenService: TokenService, private errorService: ErrorService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/home');
         }
       }, (err: any) => {
-          console.log(err);
+        this.errorService.showErrorModal(err);
       });
   }
 

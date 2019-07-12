@@ -48,7 +48,7 @@
               <div class="input-box">
                   <label for="email">Email</label>
                   <div class="input-box__border">
-                      <input placeholder="email" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="loginObject.email" required />
+                      <input placeholder="email" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="loginObject.email" required email />
                   </div>
                   <div *ngIf="email.invalid && (email.touched || loginForm.submitted)" class="error-msg">
                       <div *ngIf="email.errors.required">Email is Required</div>
@@ -59,7 +59,7 @@
               <div class="input-box">
                   <label for="password">Password</label>
                   <div class="input-box__border">
-                      <input placeholder="password" type="text" id="password" #password="ngModel" name="password" [(ngModel)]="loginObject.password" required />
+                      <input placeholder="password" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="loginObject.password" required />
                   </div>
                   <div *ngIf="password.invalid && (password.touched || loginForm.submitted)" class="error-msg">Password is Required</div>
               </div>

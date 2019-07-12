@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { SignUpMutation, CitiesSearchQuery } from './sign-up.graphql';
 import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from 'rxjs/operators';
 import { TokenService } from 'src/app/shared/services/token.service';
+import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,7 +33,7 @@ conditions = {
   cities: any;
 
 
-  constructor(private apollo: Apollo, private tokenService: TokenService, private router: Router) { }
+  constructor(private apollo: Apollo, private tokenService: TokenService, private errorService: ErrorService, private router: Router) { }
 
   ngOnInit() {
     this.subscribeToSearch();
@@ -83,10 +84,8 @@ conditions = {
 
   submit(isValid: boolean) {
     if (!isValid) {
-      console.log('invalid');
       return;
     } else {
-      console.log('valid');
       const variables = {
         auth: this.signupObject
       };
@@ -100,7 +99,7 @@ conditions = {
           this.router.navigateByUrl('/home');
         }
       }, err => {
-        console.log(err);
+        this.errorService.showErrorModal(err);
       });
     }
   }

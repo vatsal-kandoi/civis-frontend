@@ -6,12 +6,15 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./consultation-card.component.scss']
 })
 export class ConsultationCardComponent implements OnInit {
-  @Input() data: any;
+  @Input() consultation: any;
   @Input() type: string;
   
   constructor() { }
 
   ngOnInit() {
   }
-
+  
+  fetchConsultationList() {
+    
+  }
 }

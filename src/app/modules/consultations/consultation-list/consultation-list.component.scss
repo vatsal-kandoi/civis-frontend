@@ -1,0 +1,23 @@
+@import './src/assets/styles/app';
+
+.bg-color-wrapper {
+  background-color: $blue-bg-light;
+}
+
+.consultation-listing-container {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 46px;
+  .card-listing-flex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .card-item {
+      width: 33.3%;
+    }
+  }
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

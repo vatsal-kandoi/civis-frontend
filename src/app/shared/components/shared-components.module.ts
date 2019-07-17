@@ -6,6 +6,9 @@ import {ActionModalComponent} from './action-modal/action-modal.component';
 import {ConfirmationModalComponent} from './confirmation-modal/confirmation-modal.component';
 import {ErrorComponent} from './error-modal/error.component';
 import {ConsultationCardComponent} from './consultation-card/consultation-card.component';
+import { LinearLoaderModule } from './linear-loader/linear-loader.module';
+import { LinearLoaderComponent } from './linear-loader/linear-loader.component';
+import { LinearLoaderService } from './linear-loader/linear-loader.service';
 
 
 @NgModule({
@@ -18,14 +21,19 @@ import {ConsultationCardComponent} from './consultation-card/consultation-card.c
   ],
   // imports: [BrowserModule],
   imports: [
-    CommonModule
+    CommonModule,
+    LinearLoaderModule
   ],
   exports: [
     ActionButtonComponent,
     ActionModalComponent,
     ConfirmationModalComponent,
     ErrorComponent,
-    ConsultationCardComponent
+    ConsultationCardComponent,
+    LinearLoaderComponent
+  ],
+  providers: [
+    LinearLoaderService
   ]
 })
 export class SharedComponentsModule {

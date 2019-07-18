@@ -15,8 +15,9 @@ export class ConsultationListComponent implements OnInit {
 
   consultationListData: any;
   consultationListArray: Array<any>;
-  perPageLimit = 10;
+  perPageLimit = 15;
   consultationListQuery: QueryRef<any>;
+  loadingElements: any = {};
   
   @HostListener('document:scroll', ['$event'])
   onScroll(event: any) {
@@ -35,31 +36,38 @@ export class ConsultationListComponent implements OnInit {
   fetchConsultationList() {
     this.consultationListQuery = this.getQuery();
     this.loader.show();
+    this.loadingElements.consultationList = true;
     this.consultationListQuery
       .valueChanges 
         .pipe (
           map((res: any) => res.data.consultationList)
         )
         .subscribe(item => {
+            this.loadingElements.consultationList = false;
             this.consultationListData = item;
             this.consultationListArray = item.data;
             console.log(this.consultationListData, 'data come here');
         }, err => {
+            this.loadingElements.consultationList = false;
             this.loader.hide();
             console.log('not working', err);
         })
   }
 
   loadMoreCard() {
-    console.log('comes here')
+    if (this.loadingElements.consultationListMore || this.loadingElements.consultationList) {
+      return;
+    }
     if(this.consultationListData.paging.totalPages > this.consultationListData.paging.currentPage) {
       this.loader.show();
+      this.loadingElements.consultationListMore = true;
       this.consultationListQuery.fetchMore({
         variables: {
           page: ++this.consultationListData.paging.currentPage
         },
         updateQuery: (prev, {fetchMoreResult}) => {
           this.loader.hide();
+          this.loadingElements.consultationListMore = false;
           if (!fetchMoreResult) {
             return prev;
           }

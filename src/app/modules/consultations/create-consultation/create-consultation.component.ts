@@ -145,11 +145,10 @@ export class CreateConsultationComponent implements OnInit {
     }
   }
 
-  onClose(event) {
+  onClose() {
     this._ngZone.run(() => {
       setTimeout(() => {
         this.showAddMinistryBlock = false;
-        console.log('came here');
       }, 100);
     });
   }
@@ -161,10 +160,7 @@ export class CreateConsultationComponent implements OnInit {
     }
   }
 
-  openAddMinistryModal(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
+  openAddMinistryModal() {
     this.ministryObject.name = this.searchText;
     this.showAddMinistryBlock = false;
     this.addMinistryModal.show();
@@ -227,9 +223,5 @@ addMinistry(valid) {
         this.errorService.showErrorModal(err);
       });
     }
-  }
-
-  test(event) {
-    console.log('event is: ', event);
   }
 }

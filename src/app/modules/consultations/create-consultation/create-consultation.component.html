@@ -74,7 +74,7 @@
                   <ng-select id="ministry" #ministry="ngModel" name="ministry" [loading]="loadingMinistries"
                   [items]="ministries" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
                   bindValue="id" notFoundText="Ministry not found" [clearable]="true" loadingText="Searching..."
-                  (search)="onSearch($event)" [(ngModel)]="departmentInfo.ministryId" required> 
+                  (search)="onSearch($event)" (close)="onClose()" [(ngModel)]="departmentInfo.ministryId" required> 
                   </ng-select>  
               </div>    
               <div *ngIf="ministry.invalid && (ministry.touched || consultationForm2.submitted)" class="error-msg">

@@ -7,10 +7,11 @@ import {GraphQLModule} from './graphql/graphql.module';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
 import {SharedDirectivesModule} from './shared/directives/shared-directives.module';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     SharedDirectivesModule,
     SharedComponentsModule,
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

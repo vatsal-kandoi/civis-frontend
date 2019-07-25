@@ -68,7 +68,7 @@
               <div class="location-box__border">
                 <ng-select id="locations" #city="ngModel" name="city" [loading]="loadingCities"
                 [items]="cities" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
-                bindValue="id" notFoundText="City not found" [clearable]="false" loadingText="Searching..."
+                bindValue="id" notFoundText="City not found" [clearable]="true" loadingText="Searching..."
                 (search)="onSearch($event)" [(ngModel)]="signupObject.cityId" required>
                 </ng-select>  
               </div>

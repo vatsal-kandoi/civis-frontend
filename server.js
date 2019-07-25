@@ -8,7 +8,7 @@ if(!process.env.APP_ENVIRONMENT) {
     require('dotenv').config();
 }
 
-app.use(secure);
+// app.use(secure);
 
 app.use(compression());
 

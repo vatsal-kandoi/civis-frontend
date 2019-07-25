@@ -10,6 +10,9 @@ if(!process.env.APP_ENVIRONMENT) {
 
 // app.use(secure);
 
+const PORT = process.env.PORT || 4000;
+app.listen(PORT);
+
 app.use(compression());
 
 app.use(express.static(__dirname + '/dist/browser'));
@@ -23,9 +26,6 @@ app.use(function (req, res, next) {
 
     next();
 });
-
-const PORT = process.env.PORT || 4000;
-app.listen(PORT);
 
 app.get('/getEnvironment', (req, res) => {
     const environment = process.env.APP_ENVIRONMENT;

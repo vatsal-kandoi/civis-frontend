@@ -2,7 +2,7 @@
 
 export const environment = {
   hmr: false,
-  production: false
+  production: true
 };
 
 // Staging API environment

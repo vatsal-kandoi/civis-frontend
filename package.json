@@ -1,6 +1,6 @@
 {
-  "name": "angular-starterpack",
-  "version": "0.0.0",
+  "name": "civis",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",

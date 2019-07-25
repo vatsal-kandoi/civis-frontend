@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpLink} from 'apollo-angular-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {prod, staging} from '../../environments/environment';
+import { ApolloLink, concat } from 'apollo-link';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +34,26 @@ export class GraphqlService {
 
     return new Promise((resolve, reject) => {
       this.apollo.create({
-        link: http,
+        link: concat(this.authMiddleware(), http),
         cache: new InMemoryCache()
       });
       resolve();
+    });
+  }
+
+  authMiddleware() {
+    return new ApolloLink((operation, forward) => {
+      // Check for token
+      const token: string = localStorage.getItem('civis-token') || null;
+      if (!token) {
+        return forward(operation);
+      }
+      // add the authorization to the headers
+      operation.setContext({
+        headers: new HttpHeaders().set('Authorization', token)
+      });
+
+      return forward(operation);
     });
   }
 

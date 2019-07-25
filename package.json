@@ -10,7 +10,8 @@
     "build": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "npm run build"
   },
   "private": true,
   "dependencies": {
@@ -70,5 +71,8 @@
     "tslint": "~5.11.0",
     "typescript": "^3.2.4",
     "yargs": "^13.2.4"
+  },
+  "engines": {
+    "node": "10.15.3"
   }
 }

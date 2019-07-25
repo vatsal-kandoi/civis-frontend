@@ -4,7 +4,7 @@ const path = require('path');
 const secure = require('ssl-express-www');
 const compression = require('compression');
 
-if(!process.env.environment) {
+if(!process.env.APP_ENVIRONMENT) {
     require('dotenv').config();
 }
 

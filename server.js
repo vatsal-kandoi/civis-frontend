@@ -15,7 +15,7 @@ app.listen(PORT);
 
 app.use(compression());
 
-app.use(express.static(__dirname + '/dist/browser'));
+app.use(express.static(__dirname + '/dist/civis'));
 
 app.use(function (req, res, next) {
 

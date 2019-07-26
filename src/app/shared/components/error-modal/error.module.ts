@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ErrorComponent } from './error.component';
 
 @NgModule({
-  declarations: [ErrorComponent],
+  // declarations: [ErrorComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    // ErrorComponent,
   ]
 })
 export class ErrorModule { }

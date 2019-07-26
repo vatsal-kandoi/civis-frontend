@@ -1,8 +1,8 @@
 // The configuration in this file are used for the running the app on prod mode
 
 export const environment = {
-  hmr: true,
-  production: false
+  hmr: false,
+  production: true
 };
 
 // Staging API environment

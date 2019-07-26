@@ -1,6 +1,6 @@
 {
-  "name": "angular-starterpack",
-  "version": "0.0.0",
+  "name": "civis",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
@@ -10,7 +10,8 @@
     "build": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "npm run build"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +39,7 @@
     "hmr-enabled": "^0.1.4",
     "moment": "^2.24.0",
     "ngx-bootstrap": "^5.1.0",
+    "ngx-uploader": "^7.1.0",
     "ngx-webstorage": "^4.0.1",
     "path": "^0.12.7",
     "rxjs": "~6.3.3",
@@ -71,5 +73,8 @@
     "tslint": "~5.11.0",
     "typescript": "^3.2.4",
     "yargs": "^13.2.4"
+  },
+  "engines": {
+    "node": "10.15.3"
   }
 }

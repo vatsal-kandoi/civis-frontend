@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: './modules/auth/auth.module#AuthModule'
-  }
+  },
+  {
+    path: 'consultations',
+    loadChildren: './modules/consultations/consultations.module#ConsultationsModule'
+  },
 ];
 
 @NgModule({

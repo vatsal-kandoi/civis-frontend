@@ -8,10 +8,11 @@ import {SharedComponentsModule} from './shared/components/shared-components.modu
 import {SharedDirectivesModule} from './shared/directives/shared-directives.module';
 import { RouterModule } from '@angular/router';
 import { NavbarModule } from './modules/navbar/navbar.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,6 +23,7 @@ import { NavbarModule } from './modules/navbar/navbar.module';
     GraphQLModule,
     HttpClientModule,
     NavbarModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

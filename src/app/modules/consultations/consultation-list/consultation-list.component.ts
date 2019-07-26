@@ -34,7 +34,7 @@ export class ConsultationListComponent implements OnInit {
   }
   
   fetchConsultationList() {
-    this.consultationListQuery = this.getQuery();
+    this.consultationListQuery = this.getQuery('published');
     this.loader.show();
     this.loadingElements.consultationList = true;
     this.consultationListQuery
@@ -46,7 +46,6 @@ export class ConsultationListComponent implements OnInit {
             this.loadingElements.consultationList = false;
             this.consultationListData = item;
             this.consultationListArray = item.data;
-            console.log(this.consultationListData, 'data come here');
         }, err => {
             this.loadingElements.consultationList = false;
             this.loader.hide();
@@ -88,10 +87,11 @@ export class ConsultationListComponent implements OnInit {
     }
   }  
 
-  getQuery() {
+  getQuery(status) {
     const variables = {
       perPage: this.perPageLimit,
-      page: 1
+      page: 1,
+      statusFilter: status
     };
     return this.apollo.watchQuery({query: ConsultationList, variables});
   }

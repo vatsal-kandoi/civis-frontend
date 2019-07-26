@@ -6,6 +6,8 @@ import { ConsultationsRoutingModule } from './consultations-routing.module';
 import { FormsModule } from '@angular/forms';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directives.module';
+import { ConsultationProfileComponent } from './consultation-profile/consultation-profile.component';
+import { ProfileCardComponent } from './consultation-profile/profile-card/profile-card.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directi
     exports: [],
     declarations: [
         CreateConsultationComponent,
-        ConsultationListComponent
+        ConsultationListComponent,
+        ConsultationProfileComponent,
+        ProfileCardComponent
     ],
     providers: []
 })

@@ -1,4 +1,41 @@
 
+@import "helpers/variables";
+
+.regular-text {
+  font-size: 14px;
+  line-height: 22px;
+  color: $black;
+}
+
+.text-18 {
+  font-size: 18px;
+  color: $black;
+}
+
+.text-16 {
+  font-size: 16px;
+  color: $black;
+}
+
+.blue-text {
+  font-size: 14px;
+  line-height: 22px;
+  color: $primary-color;
+}
+
+.clr-blue {
+  color: $primary-color;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
 .pointer {
   cursor: pointer;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
 }

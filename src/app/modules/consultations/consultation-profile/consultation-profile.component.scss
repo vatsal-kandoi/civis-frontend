@@ -1,0 +1,39 @@
+@import './src/assets/styles/app';
+
+.consultation-profile {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  grid-column-gap: 20px;
+  width: 80%;
+  margin: 25px auto;
+
+  &__sidebar-section {
+
+  }
+
+  &__main-section {
+
+    .paper-effect {
+      padding: 28px 32px;
+      background-color: $white;
+      box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.13);
+      border-radius: 5px;
+    }
+
+    .heading {
+      @include general-text($font-size: 16px, $weight: bold);
+    }
+
+    .content {
+      @include general-text;
+    }
+
+    .response-container {
+      padding: 25px 0;
+      border-bottom: 1px solid $divider-border;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}

@@ -1,6 +1,5 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-
 import {ActionButtonComponent} from './action-button/action-button.component';
 import {ActionModalComponent} from './action-modal/action-modal.component';
 import {ConfirmationModalComponent} from './confirmation-modal/confirmation-modal.component';
@@ -9,6 +8,7 @@ import {ConsultationCardComponent} from './consultation-card/consultation-card.c
 import { LinearLoaderModule } from './linear-loader/linear-loader.module';
 import { LinearLoaderComponent } from './linear-loader/linear-loader.component';
 import { LinearLoaderService } from './linear-loader/linear-loader.service';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { LinearLoaderService } from './linear-loader/linear-loader.service';
   // imports: [BrowserModule],
   imports: [
     CommonModule,
-    LinearLoaderModule
+    LinearLoaderModule,
+    RouterModule
   ],
   exports: [
     ActionButtonComponent,

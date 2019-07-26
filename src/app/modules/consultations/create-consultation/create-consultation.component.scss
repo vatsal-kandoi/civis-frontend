@@ -1,0 +1,315 @@
+.consultation-index {
+    width: 80%;
+    margin: 10vh auto;
+
+    &__left {
+       .heading-text {
+        font-weight: 500;
+        font-size: 42px;
+        line-height: 111.5%;    
+        letter-spacing: 0.005em;
+        color: #0E73B9;
+       }
+       .heading-tips {
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: 0.045em;
+        color: #929292;
+        margin: 10px 0;
+       }
+    }
+
+
+    &__right {
+        .form-space {
+            .input-block {
+                margin: 20px 0;
+                label {
+                    font-weight: 500;
+                    font-size: 15px;
+                    color: #151515;
+                }
+                &__border {
+                    background: #FFFFFF;
+                    border: 1px solid #AEAEAE;
+                    box-sizing: border-box;
+                    border-radius: 3px;
+                    padding: 10px;
+
+                    input {
+                        width: 100%;
+                        border: none;
+                        font-weight: 500;
+                        font-size: 15px;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                    }
+                }
+
+                &__tips {
+                    font-size: 13px;
+                    color: #919191;
+                    letter-spacing: 0.045em;
+                    margin: 10px 0;
+                }
+            }
+
+            .submit-btn {
+                border: none;
+                background: #BCBCBC;       
+                padding: 15px 0;         
+                border-radius: 3px;
+                color: #FFFFFF;
+                width: 100%; 
+            }
+
+            .active-btn {
+                background: #F0653A !important;      
+            }
+
+            .error-msg {
+                margin: 10px 0;
+                color: #F0653A;
+                font-size: 14px;
+            }
+    
+
+            .query-block {
+                margin: 50px 0;
+                div {
+                    font-size: 13px;
+                    letter-spacing: 0.065em;
+                    &:nth-child(1) {
+                        font-weight: bold;
+                        color: #909090;
+                        margin-bottom: 10px;
+                    }
+                    &:nth-child(2) {
+                        color: #919191;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.ministry-index {
+    width: 80%;
+    margin: 10vh auto;
+
+    &__left {
+        .heading-text {
+            font-weight: 500;
+            font-size: 42px;
+            line-height: 111.5%;    
+            letter-spacing: 0.005em;
+            color: #0E73B9;
+           }
+           .heading-tips {
+            font-size: 18px;
+            line-height: 22px;
+            letter-spacing: 0.045em;
+            color: #929292;
+            margin: 10px 0;
+           }
+    }
+
+    &__right {
+
+
+        .input-block {
+            margin: 20px 0;
+            label {
+                font-weight: 500;
+                font-size: 15px;
+                color: #151515;
+            }
+            &__border {
+                background: #FFFFFF;
+                border: 1px solid #AEAEAE;
+                box-sizing: border-box;
+                border-radius: 3px;
+                padding: 10px;
+
+                input {
+                    width: 100%;
+                    border: none;
+                    font-weight: 500;
+                    font-size: 15px;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                }
+            }
+
+            &__tips {
+                font-size: 13px;
+                color: #919191;
+                letter-spacing: 0.045em;
+                margin: 10px 0;
+            }
+        }
+
+        .add-ministry-block {
+            border: 1px solid #1894EA;
+            box-sizing: border-box;
+            border-radius: 3px;
+            margin : 50px 0 20px; 
+            padding: 10px;
+            color: #1894EA;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .submit-btn {
+            border: none;
+            background: #BCBCBC;       
+            padding: 15px 0;         
+            border-radius: 3px;
+            color: #FFFFFF;
+            width: 100%; 
+        }
+
+        .active-btn {
+            background: #F0653A !important;      
+        }
+
+        .back-btn {
+            margin: 50px 0;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.105em;
+            color: #61B8F5;
+            cursor: pointer;
+        }
+
+        .error-msg {
+            margin: 10px 0;
+            color: #F0653A;
+            font-size: 14px;
+        }
+
+        .query-block {
+            margin: 50px 0;
+            div {
+                font-size: 13px;
+                letter-spacing: 0.065em;
+                &:nth-child(1) {
+                    font-weight: bold;
+                    color: #909090;
+                    margin-bottom: 10px;
+                }
+                &:nth-child(2) {
+                    color: #919191;
+                }
+            }
+        }
+
+    }
+}
+
+.ministry-modal {
+ background: rgba(14, 115, 185, 0.6) !important;
+ .modal-dialog {
+     margin: 0 0 0 auto;
+     max-width: 600px !important;
+
+    .modal-content {
+        height: 100vh !important;
+        border: none;
+        border-radius: 0;
+        .space-around {
+            width: 80%;
+            margin: 0 auto;
+
+            .modal-header {
+                border: none;
+                .subheader-text {
+                    font-weight: 500;
+                    font-size: 15px;
+                    color: #F0653A;
+
+                    .light-text {
+                        font-weight: normal;
+                        font-size: 13px;
+                        line-height: 16px;
+                        letter-spacing: 0.045em;
+
+                        color: #929292;
+                    }
+
+                    .link-text {
+                        font-weight: normal;
+                        font-size: 13px;
+                        line-height: 16px;
+                        letter-spacing: 0.045em;
+                        color: #1894EA;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .modal-body {
+                .form-space {
+                    .input-block {
+                        margin: 20px 0;
+                        label {
+                            font-weight: 500;
+                            font-size: 15px;
+                            color: #151515;
+                        }
+                        &__border {
+                            background: #FFFFFF;
+                            border: 1px solid #AEAEAE;
+                            box-sizing: border-box;
+                            border-radius: 3px;
+                            padding: 10px;
+        
+                            input {
+                                width: 100%;
+                                border: none;
+                                font-weight: 500;
+                                font-size: 15px;
+        
+                                &:focus {
+                                    outline: none;
+                                }
+        
+                            }
+                        }
+        
+                        &__tips {
+                            font-size: 13px;
+                            color: #919191;
+                            letter-spacing: 0.045em;
+                            margin: 10px 0;
+                        }
+                    }
+        
+                    .submit-btn {
+                        border: none;
+                        background: #F0653A;;       
+                        padding: 15px 0;         
+                        border-radius: 3px;
+                        color: #FFFFFF;
+                        width: 100%; 
+                    }        
+
+                    .error-msg {
+                        margin: 10px 0;
+                        color: #F0653A;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+    }
+ }
+}

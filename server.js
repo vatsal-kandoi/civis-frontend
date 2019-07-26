@@ -4,15 +4,18 @@ const path = require('path');
 const secure = require('ssl-express-www');
 const compression = require('compression');
 
-if(!process.env.environment) {
+if(!process.env.APP_ENVIRONMENT) {
     require('dotenv').config();
 }
 
-app.use(secure);
+// app.use(secure);
+
+const PORT = process.env.PORT || 4000;
+app.listen(PORT);
 
 app.use(compression());
 
-app.use(express.static(__dirname + '/dist/browser'));
+app.use(express.static(__dirname + '/dist/civis'));
 
 app.use(function (req, res, next) {
 
@@ -24,18 +27,15 @@ app.use(function (req, res, next) {
     next();
 });
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT);
-
 app.get('/getEnvironment', (req, res) => {
-    const environment = process.env.environment;
+    const environment = process.env.APP_ENVIRONMENT;
     res.status(200).json({environment});
 });
 
 
 
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/dist/angular-starterpack/index.html'));
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/civis/index.html'));
 });
 
 console.log("listing on port:", PORT);

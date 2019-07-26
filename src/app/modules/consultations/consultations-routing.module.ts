@@ -5,9 +5,9 @@ import { ConsultationListComponent } from './consultation-list/consultation-list
 import { ConsultationProfileComponent } from './consultation-profile/consultation-profile.component';
 
 const routes: Routes = [
-    { path: '', component: CreateConsultationComponent },
+    { path: 'new', component: CreateConsultationComponent },
     { path: 'list', component: ConsultationListComponent},
-    { path: ':id', component: ConsultationProfileComponent}
+    { path: ':id', component: ConsultationProfileComponent},
 ];
 
 @NgModule({

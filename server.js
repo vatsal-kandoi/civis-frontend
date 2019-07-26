@@ -34,7 +34,7 @@ app.get('/getEnvironment', (req, res) => {
 
 
 
-app.get('/*', function(req, res) {
+app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/civis/index.html'));
 });
 

@@ -5,19 +5,22 @@
    background-color: #0E73B9;
    position: fixed;
    top:0;
-   .navbar-space {
-       display: flex;
-       align-items: center;
-       height: 77px;
 
+   @media screen and (max-width: 991px) {
+        height: 58px;
+        padding: 0 20px;    
+    }
+
+   .navbar-space {
+       height: 100%;
+       align-items: center;
        &__left{
-        width: 50%;
+        height: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         .logo-space {
-            height: 77px;
+            height: 100%;
             background: #ffffff;
             width: 135px;
             display: flex;
@@ -26,6 +29,10 @@
             .logo {
                 width: 100%;
             }
+
+            @media screen and (max-width: 991px) {
+                width: 100.18px; 
+            }
         }
 
         .nav-btns {
@@ -33,18 +40,22 @@
                 font-size: 18px;
                 color: #E2F3FF;
             }
+
+            @media screen and (max-width: 991px) {
+                display: none;
+            }
         }
        }
 
        &__right {
+           height: 100%;
            display: flex;
            justify-content: flex-end;
            align-items: center;
-           width: 50%;
 
            .nav-btns {
                .btn-oval {   
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: bold;   
                 background: rgba(255, 255, 255, 0.3);
                 border-radius: 33px;
@@ -54,10 +65,46 @@
 
                .auth-btn {
                 font-weight: 600;
-                font-size: 18px;
+                font-size: 16px;
                 line-height: 17px;
                 color: rgba(255, 255, 255, 0.7);
                }
+
+               @media screen and (max-width: 991px) {
+                display: none;
+               }
+           }
+
+           .mobile-space {
+               display: none;
+               height: 100%;
+
+               @media screen and (max-width: 991px) {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                }
+
+                &__auth {
+                    margin-right: 15px;
+                    .nav-btn {
+                        background-color: #1894EA;
+                        border-radius: 3px;
+                        color: #FFFFFF;
+                        padding: 5px 15px;
+                        font-weight: 500;
+                        font-size: 13px;
+                    }
+                }
+                &__menu {
+                    color: white;
+
+                    .menu-modal {
+                        z-index: 999;
+                    }
+                }
+
+
            }
        }
 

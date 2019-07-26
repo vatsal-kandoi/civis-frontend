@@ -1,6 +1,6 @@
 <div class="navbar-index">
-  <nav class="navbar-space">
-    <div class="navbar-space__left">
+  <nav class="navbar-space row no-gutters">
+    <div class="navbar-space__left col-6">
       <div class="logo-space">
         <img class="logo" src='../../../../assets/images/brand-logo/brand-logo.svg' />
       </div>
@@ -14,12 +14,36 @@
         <button class="btn btn-transparent">How Civis Works</button>
       </div>
     </div>
-    <div class="navbar-space__right">
+    <div class="navbar-space__right col-6">
       <div class="nav-btns">
         <button class="btn btn-oval">Submit a consultation</button>
       </div>
       <div class="nav-btns">
         <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">Log in / Sign up</button>
+      </div>
+      <div class="mobile-space">
+        <div class="mobile-space__auth">
+          <button class="nav-btn">Sign Up</button>
+        </div>
+        <div class="mobile-space__menu">
+          
+          <p (click)="openMenu()">---</p>
+
+          <div bsModal #menuModal="bs-modal" class="modal fade menu-modal" 
+            [config]="{show: false, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}"
+            role="dialog" aria-labelledby="menuModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <p (click)="closeMenu()">djkjandjnkjasndkjankjdsnaknsdk</p>
+                  </div>
+                  <div class="modal-body">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
       </div>
     </div>
   </nav>

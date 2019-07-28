@@ -19,15 +19,9 @@ export class SignUpComponent implements OnInit {
     email: '',
     password: '',
     cityId: null,
-    notifyForNewConsultation: false
+    notifyForNewConsultation: false,
+    agreedForTermsCondition: false,
   };
-
-conditions = {
-  agreedForTermsCondition: false
-};
-
-
-
   searchEmitter: EventEmitter<any> = new EventEmitter();
   loadingCities: boolean;
   cities: any;
@@ -86,8 +80,10 @@ conditions = {
     if (!isValid) {
       return;
     } else {
+      const signupObject = {...this.signupObject};
+      delete signupObject['agreedForTermsCondition'];
       const variables = {
-        auth: this.signupObject
+        auth: signupObject
       };
       this.apollo.mutate({mutation: SignUpMutation, variables: variables})
       .pipe(

@@ -1,7 +1,7 @@
 <div class="navbar-index" *ngIf ="currentUrl !== 'auth'" [ngClass]="currentUrl == 'landing' ? 'blue-nav' : 'white-nav'">
   <nav class="navbar-space row no-gutters">
     <div class="navbar-space__left col-6">
-      <div class="logo-space">
+      <div class="logo-space" [routerLink]="['/']">
         <img class="logo" src='../../../../assets/images/brand-logo/brand-logo.svg' />
       </div>
       <div class="nav-btns">

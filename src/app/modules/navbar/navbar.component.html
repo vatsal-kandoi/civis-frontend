@@ -1,4 +1,4 @@
-<div class="navbar-index">
+<div class="navbar-index" *ngIf ="currentUrl !== 'auth'" [ngClass]="currentUrl == 'landing' ? 'blue-nav' : 'white-nav'">
   <nav class="navbar-space row no-gutters">
     <div class="navbar-space__left col-6">
       <div class="logo-space">

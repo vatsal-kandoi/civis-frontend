@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +9,18 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   @ViewChild('menuModal') menuModal;
+  showNav = true;
+  currentUrl: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  this.router.events.subscribe(event => {
+    if (event instanceof NavigationEnd) {
+      this.currentUrl = this.findUrl(event.url);
+      console.log(this.currentUrl);
+    }
+  });
   }
 
   openMenu() {
@@ -20,6 +29,16 @@ export class NavbarComponent implements OnInit {
 
   closeMenu() {
     this.menuModal.hide();
+  }
+
+  findUrl(url) {
+    if (url === '/') {
+      return 'landing';
+    }
+    if (url.search('auth') !== -1) {
+      return 'auth';
+    }
+      return '';
   }
 
 }

@@ -5,6 +5,7 @@
    background-color: #0E73B9;
    position: fixed;
    top:0;
+   z-index: 999999;
 
    @media screen and (max-width: 991px) {
         height: 58px;
@@ -97,17 +98,59 @@
                     }
                 }
                 &__menu {
-                    color: white;
-
-                    .menu-modal {
-                        z-index: 999;
-                    }
+                    color: #ffffff;
                 }
-
-
            }
        }
-
-
    }
+}
+
+.mobile-menu {
+    background: rgba(14, 115, 185, 0.5);
+
+    .modal-dialog {
+        margin: 0;
+
+        .modal-content {
+            background: #003F6B !important;
+            border: none;
+            border-radius: 0;
+            padding: 24px;
+
+            .modal-body {
+                padding: 0;
+                .nav-btn {
+                    margin-bottom: 25px;
+                    .close-btn {
+                        color: #FFFFFF;
+                        font-size: 22px;
+
+                        &:focus {
+                            box-shadow: none;
+                        }
+                    }
+
+                    .btn-oval {
+                        border: none;
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 33px;
+                        color: #ffffff;
+                        font-size: 22px;
+                        padding: 10px 15px;
+
+                        &:focus {
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+}
+
+.modal.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(125%, 0, 0);
+    transform: translate3d(125%, 0, 0);
 }

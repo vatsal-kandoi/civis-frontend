@@ -9,7 +9,6 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('menuModal') menuModal;
 
-
   constructor() { }
 
   ngOnInit() {

@@ -10,7 +10,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     imports: [
         CommonModule,
         RouterModule,
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
     ],
     exports: [
         NavbarComponent

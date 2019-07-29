@@ -8,15 +8,27 @@
   width: 90%;
   margin: 0 auto;
   padding-top: 46px;
-  .card-listing-flex {
-    display: flex;
-    flex-wrap: wrap;
+  .card-listing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px 20px;
     width: 100%;
     .card-item {
-      width: 33.3%;
+      
     }
   }
 }
+
+.list-heading {
+  font-size: 36px;
+  color: $primary-color;
+  margin: 0;
+}
+
+.list-subheading {
+  @include regular-text($color: $primary-color);
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

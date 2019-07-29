@@ -7,8 +7,17 @@
   color: $black;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .text-18 {
   font-size: 18px;
+  color: $black;
+}
+
+.text-24 {
+  font-size: 24px;
   color: $black;
 }
 
@@ -38,4 +47,12 @@
 .sticky {
   position: sticky;
   top: 0;
+}
+
+.decoration-none {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
 }

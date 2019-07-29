@@ -1,6 +1,8 @@
 <div class="bg-color-wrapper">
   <div class="consultation-listing-container">
-    <div class="card-listing-flex">
+  <p class="list-heading"> {{consultationListArray.length}} Active Consultations </p>
+    <p class="list-subheading mb-5">These are open consultatons which are still seeking feedback from citizens like yourself</p>
+    <div class="card-listing-grid">
       <ng-container *ngFor="let item of consultationListArray">
         <div class="card-item">
           <app-consultation-card [consultation]="item"></app-consultation-card>

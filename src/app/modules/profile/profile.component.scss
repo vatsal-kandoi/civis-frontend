@@ -1,0 +1,185 @@
+.profile-index {
+    background: #E5F4FF;
+    width: 100%;
+    height: 100%;
+
+    &__left {
+        .heading {
+            font-weight: 500;
+            font-size: 20px;
+            color: #0E73B9;
+            margin-bottom: 35px;
+        }
+
+        .profile-space {
+            padding-bottom: 25px;
+            border-bottom: 1px solid #BFE4FF;
+            .header {
+                font-weight: 500;
+                font-size: 11px;
+                color: #6DB4E4;
+            }
+
+            .profile-info {
+                margin: 20px 0;
+                .profile-details {
+                    &__name {
+                        font-size: 16px;
+                        color: #151515;
+                        margin-bottom: 5px;
+                    }
+                    &__active {
+                        font-weight: normal;
+                        font-size: 13px;
+                        color: #4B94C7;
+                    }
+                }
+            }
+
+            .profile-change-cta {
+                font-size: 13px;
+                color: #0E73B9;
+            }
+        }
+
+        .login-space {
+            padding: 25px 0;
+            border-bottom: 1px solid #BFE4FF;
+
+            .header {
+                font-weight: 500;
+                font-size: 11px;
+                color: #6DB4E4;
+            }
+
+            .login-info {
+                margin: 20px 0;
+                .login-details {
+                    &__email {
+                        font-size: 16px;
+                        color: #151515;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+
+            .login-change-cta {
+                font-size: 13px;
+                color: #0E73B9;
+                margin-bottom: 5px;
+            }
+        }
+
+        .contact-space {
+            padding: 25px 0;
+            border-bottom: 1px solid #BFE4FF;
+
+            .header {
+                font-weight: 500;
+                font-size: 11px;
+                color: #6DB4E4;
+            }
+
+            .contact-info {
+                margin: 20px 0;
+                .contact-details {
+                    &__phone {
+                        font-size: 16px;
+                        color: #151515;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+
+            .contact-change-cta {
+                font-size: 13px;
+                color: #0E73B9;
+                margin-bottom: 5px;
+            }
+        }
+
+        .delete-space {
+            margin-top: 20px;
+
+            .delete-cta {
+                font-size: 13px;
+                color: #ED5C5C;
+                margin-bottom: 5px;
+            }
+
+            .tips {
+                font-size: 13px;
+                color: #919191;
+            }
+        }
+    }
+
+    &__right {
+
+        .achievements-block {
+            .heading {
+                font-weight: 500;
+                font-size: 20px;
+                color: #0E73B9;
+            }
+            .info-block {
+                margin: 20px 0;
+                .sm-text {
+                    font-size: 13px;
+                    color: #4B94C7;
+                }
+                .lg-text {
+                    font-weight: 600;
+                    font-size: 24px;
+                    color: #61B8F5;
+                }   
+            }
+            .stats-info {
+                padding: 30px 0;
+                border-bottom: 1px solid #BFE4FF;
+
+                &__heading {
+                    font-weight: 500;
+                    font-size: 11px;
+                    color: #6DB4E4;
+                    margin-bottom: 10px;
+                }
+                &__rewards {
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: #151515;
+                }
+            }
+        }
+
+        .consultations-block {
+            padding: 30px 0;
+            .heading {
+                margin-bottom: 70px;
+                font-weight: 500;
+                font-size: 20px;
+                color: #0E73B9;
+            }
+            .message {
+                text-align: center;
+                font-weight: 500;
+                font-size: 24px;
+                color: #6EB9ED;
+            }
+            .consultations-cta {
+                text-align: center;
+                margin-top: 15px;
+                .btn-oval {
+                    font-weight: bold;
+                    font-size: 17px;
+                    color: #FFFFFF;
+                    background: #F0653A;
+                    border-radius: 33px;
+                    padding: 10px 15px;
+                }
+
+            }
+        }
+
+    }
+}

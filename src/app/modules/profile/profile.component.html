@@ -1,0 +1,142 @@
+<div class="profile-index row no-gutters p-5">
+  <div class="col-md-2 profile-index__left">
+    <div class="heading">
+        My Account
+    </div>
+
+    <div class="profile-space">
+      <div class="header">
+        PROFILE
+      </div>
+
+      <div class="profile-info">
+        <div class="profile-image">
+          </div>
+        <div class="profile-details">
+          <div class="profile-details__name">
+            {{currentUser?.firstName}}
+          </div>
+          <div class="profile-details__active">
+              Citizen Leader since {{currentUser?.createdAt | date}}
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-change-cta">
+          Change name
+      </div>
+    </div>
+
+    <div class="login-space">
+        <div class="header">
+            LOGIN DETAILS • EMAIL & USERNAME
+        </div>
+
+        <div class="login-info">
+            <div class="login-details">
+                <div class="login-details__email">
+                  {{currentUser?.email}}
+                </div>
+              </div>
+        </div>
+
+        <div class="login-change-cta">
+            Change email/username        
+        </div>
+
+        <div class="login-change-cta">
+            Reset password        
+        </div>
+
+    </div>
+
+    <div class="contact-space">
+
+        <div class="header">
+          PHONE
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-details">
+                <div class="contact-details__phone">
+                    +91 9108292413
+                </div>
+              </div>
+        </div>
+
+        <div class="contact-change-cta">
+            Change phone number        
+        </div>
+
+    </div>
+
+    <div class="delete-space">
+      <div class="delete-cta">
+          Delete your account
+      </div>
+      <div class="tips">
+        Your account information will be erased. The<br>
+        responses submitted will remain.
+      </div>
+    </div>
+  </div>
+  
+  <div class="offset-md-1 col-md-8 profile-index__right">
+    <div class="achievements-block">
+      <div class="heading">
+          My Achievements
+      </div>
+      <div class="info-block">
+        <div class="sm-text">Great! You’re an</div>
+        <div class="lg-text">Active Citizen</div>
+      </div>
+      <div class="stats-info row no-gutters">
+        <div class="col-md-2">
+            <div class="stats-info__heading">
+                TOTAL POINTS
+            </div>
+            <div class="stats-info__rewards">
+              NA
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stats-info__heading">
+                TOTAL POINTS
+            </div>
+            <div class="stats-info__rewards">
+              NA
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stats-info__heading">
+                TOTAL POINTS
+            </div>
+            <div class="stats-info__rewards">
+              NA
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stats-info__heading">
+                TOTAL POINTS
+            </div>
+            <div class="stats-info__rewards">
+              NA
+            </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="consultations-block">
+        <div class="heading">
+            Consultations I’ve participated in
+        </div>
+        <div class="message">
+            You’ve not participated in any public consultations yet
+        </div>
+        <div class="consultations-cta">
+          <button class="btn-transpaent btn-oval">Start participating</button>
+        </div>
+    </div>
+  </div>
+
+</div>

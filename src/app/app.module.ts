@@ -8,7 +8,8 @@ import {SharedComponentsModule} from './shared/components/shared-components.modu
 import {SharedDirectivesModule} from './shared/directives/shared-directives.module';
 import { RouterModule } from '@angular/router';
 import { NavbarModule } from './modules/navbar/navbar.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileModule } from './modules/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     GraphQLModule,
     HttpClientModule,
     NavbarModule,
+    ProfileModule,
     BrowserAnimationsModule,
   ],
   providers: [],

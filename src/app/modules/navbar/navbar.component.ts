@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
+import {filter, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -11,8 +13,9 @@ export class NavbarComponent implements OnInit {
   @ViewChild('menuModal') menuModal;
   showNav = true;
   currentUrl: any;
+  currentUser: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
   this.router.events.subscribe(event => {
@@ -21,6 +24,7 @@ export class NavbarComponent implements OnInit {
       console.log(this.currentUrl);
     }
   });
+  this.getCurrentUser();
   }
 
   openMenu() {
@@ -40,5 +44,21 @@ export class NavbarComponent implements OnInit {
     }
       return '';
   }
+
+  getCurrentUser() {
+    this.userService.userLoaded$
+    .pipe(
+      filter(data => !!data),
+      take(1)
+    )
+    .subscribe((data) => {
+      if (data) {
+        this.currentUser = this.userService.currentUser;
+        console.log(this.currentUser);
+      }
+    });
+  }
+
+
 
 }

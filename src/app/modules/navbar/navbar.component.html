@@ -18,8 +18,11 @@
       <div class="nav-btns">
         <button class="btn btn-oval">Submit a consultation</button>
       </div>
-      <div class="nav-btns">
+      <div class="nav-btns" *ngIf="!currentUser">
         <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">Log in / Sign up</button>
+      </div>
+      <div class="nav-btns" *ngIf="currentUser">
+        <button class="btn btn-transparent auth-btn" [routerLink]="['/profile']">{{currentUser?.firstName}}</button>
       </div>
       <div class="mobile-space">
         <div class="mobile-space__auth">

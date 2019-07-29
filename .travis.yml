@@ -1,0 +1,26 @@
+language: node_js
+
+node_js:
+  - 10.15.1
+
+cache:
+  directories:
+    - node_modules
+
+branches:
+  only:
+    - staging
+    - master
+
+before_script:
+  - npm install
+
+script:
+  - npm run build
+before_deploy:
+  - cd $TRAVIS_BUILD_DIR
+  - sed -i '/dist/d' .gitignore
+  - git add . && git commit -m "latest build"
+
+after_deploy:
+  - echo "Deployed!"

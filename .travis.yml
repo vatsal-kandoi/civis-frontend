@@ -8,10 +8,8 @@ branches:
   only:
   - staging
   - master
-before_script:
-- npm install
 script:
-- npm run build
+  - npm install
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
 - sed -i '/dist/d' .gitignore

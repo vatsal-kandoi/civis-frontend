@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+- 10.15.1
+cache:
+  directories:
+  - node_modules
+branches:
+  only:
+  - staging
+  - master
+script:
+  - npm install
+before_deploy:
+- cd $TRAVIS_BUILD_DIR
+- sed -i '/dist/d' .gitignore
+- git add . && git commit -m "latest build"
+after_deploy:
+- echo "Deployed!"
+deploy:
+  provider: cloud66
+  redeployment_hook:
+    secure: fDoPz4qXF1kVqBHimqzjTVC60a2V3l06BW97lRXpXUShboAOnWebA/+LxNvltfRYxQaWmnT6ZE/705zJGbCfXuVfaejc+R9oBTSM5UKck6scoM+Lj7Y/6mPArCrkcPcfk2mmx89hi0mMdSTLWWIkBPog0mf3B57Va84fYlW83MPWDi8njDrhj3GOn5aZtP8j/m9UrX9zf96W6G5JbT5czp0jeWxs+/ePIqSarTqraMZfadJ3IkTKo3GVehGtDV/H2LZpXPM7QENs5qP2sSVtrwQhU/mmUC6C4sYquu4Peob0hMHwJ6oz2rMwaYkLIdW3wn2M9svuNkx1+fdx+haEaSGfzyPmr3ebgogDBvQMxgvfMsRmMJWoYwty05HWkJwaPrm+ZY1QTLZSE4SiB2U04ErlIGiMS0WKX30JvKkxw1cFKIMsRThKVE7HtSD+ccCWsgjoVJZRfoDS5HNMkE82aP3YidX7CltcVK+kA4ujn9K8TYWBmawjB6BZey2sGxj1p08CSDjZepPuQevRRJTpzFwnhBsVdIJjYO5j8hZxxZArkkOSWEaaISUUPXYFzjUy26SnHPlo8PhElold87CayMHttwzaVVmj8cE96yAWsSCK8GqeI6XsSwPEI4DSJ31nJDxz2vfHY/bS2PImUj7KhW6HJWI34ddRMaFHBc5PyMU=
+  on:
+    repo: civis-vote/civis-frontend
+    branch: staging

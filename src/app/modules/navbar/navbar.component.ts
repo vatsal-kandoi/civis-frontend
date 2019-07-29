@@ -21,7 +21,6 @@ export class NavbarComponent implements OnInit {
   this.router.events.subscribe(event => {
     if (event instanceof NavigationEnd) {
       this.currentUrl = this.findUrl(event.url);
-      console.log(this.currentUrl);
     }
   });
   this.getCurrentUser();
@@ -54,7 +53,6 @@ export class NavbarComponent implements OnInit {
     .subscribe((data) => {
       if (data) {
         this.currentUser = this.userService.currentUser;
-        console.log(this.currentUser);
       }
     });
   }

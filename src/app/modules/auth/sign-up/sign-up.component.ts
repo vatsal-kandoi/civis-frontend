@@ -5,6 +5,7 @@ import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from
 import { TokenService } from 'src/app/shared/services/token.service';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -27,7 +28,11 @@ export class SignUpComponent implements OnInit {
   cities: any;
 
 
-  constructor(private apollo: Apollo, private tokenService: TokenService, private errorService: ErrorService, private router: Router) { }
+  constructor(private apollo: Apollo,
+              private tokenService: TokenService,
+              private errorService: ErrorService,
+              private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
     this.subscribeToSearch();
@@ -93,11 +98,17 @@ export class SignUpComponent implements OnInit {
         if (token) {
           this.tokenService.storeToken(token);
           this.router.navigateByUrl('/home');
+          this.onSignUp();
         }
       }, err => {
         this.errorService.showErrorModal(err);
       });
     }
+  }
+
+  onSignUp() {
+    this.tokenService.tokenHandler();
+    this.userService.manageUserToken();
   }
 
 }

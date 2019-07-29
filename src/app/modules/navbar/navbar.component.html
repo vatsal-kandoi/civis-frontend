@@ -2,7 +2,7 @@
   <nav class="navbar-space row no-gutters">
     <div class="navbar-space__left col-6">
       <div class="logo-space" [routerLink]="['/']">
-        <img class="logo" src='../../../../assets/images/brand-logo/brand-logo.svg' />
+        <img class="logo" src='assets/images/brand-logo/brand-logo.svg' />
       </div>
       <div class="nav-btns">
         <button class="btn btn-transparent font-weight-bold">Active Consultations</button>
@@ -22,15 +22,19 @@
         <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">Log in / Sign up</button>
       </div>
       <div class="nav-btns" *ngIf="currentUser">
-        <button class="btn btn-transparent auth-btn" [routerLink]="['/profile']">{{currentUser?.firstName}}</button>
+        <button class="btn btn-transparent auth-btn" [routerLink]="['/profile']">
+          {{currentUser?.firstName}}
+        </button>
       </div>
+
       <div class="mobile-space">
         <div class="mobile-space__auth">
           <button class="nav-btn">Sign Up</button>
         </div>
-        <div class="mobile-space__menu">
-          
-          <p (click)="openMenu()">---</p>
+        <div class="mobile-space__menu"> 
+          <div class="icon" (click)="openMenu()">
+              <i class="fa fa-bars"></i>
+          </div>
         </div>
       </div>
     </div>

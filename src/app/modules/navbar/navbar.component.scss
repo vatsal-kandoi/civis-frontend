@@ -98,6 +98,12 @@
                 }
                 &__menu {
                     color: #ffffff;
+
+                    .icon {
+                        i {
+                            font-size: 18px;
+                        }
+                    }
                 }
            }
        }

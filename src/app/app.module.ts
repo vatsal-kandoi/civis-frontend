@@ -7,6 +7,7 @@ import {GraphQLModule} from './graphql/graphql.module';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
 import {SharedDirectivesModule} from './shared/directives/shared-directives.module';
 import { RouterModule } from '@angular/router';
+import { NavbarModule } from './modules/navbar/navbar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     SharedComponentsModule,
     GraphQLModule,
     HttpClientModule,
+    NavbarModule,
     BrowserAnimationsModule,
   ],
   providers: [],

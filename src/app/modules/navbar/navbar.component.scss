@@ -1,0 +1,185 @@
+.navbar-index {
+   height: 77px;
+   width: 100%;
+   padding: 0 30px 0 80px;
+   position: fixed;
+   top:0;
+   z-index: 999999;
+
+   @media screen and (max-width: 991px) {
+        height: 58px;
+        padding: 0 20px;    
+    }
+
+   .navbar-space {
+       height: 100%;
+       align-items: center;
+       &__left{
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .logo-space {
+            height: 100%;
+            background: #ffffff;
+            width: 135px;
+            display: flex;
+            align-items: center;
+
+            .logo {
+                width: 100%;
+            }
+
+            @media screen and (max-width: 991px) {
+                width: 100.18px; 
+            }
+        }
+
+        .nav-btns {
+            .btn {
+                font-size: 18px;
+                color: #E2F3FF;
+            }
+
+            @media screen and (max-width: 991px) {
+                display: none;
+            }
+        }
+       }
+
+       &__right {
+           height: 100%;
+           display: flex;
+           justify-content: flex-end;
+           align-items: center;
+
+           .nav-btns {
+               .btn-oval {   
+                font-size: 16px;
+                font-weight: bold;   
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 33px;
+                color: #ffffff;
+                margin-right: 15px;
+               }
+
+               .auth-btn {
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 17px;
+                color: rgba(255, 255, 255, 0.7);
+               }
+
+               @media screen and (max-width: 991px) {
+                display: none;
+               }
+           }
+
+           .mobile-space {
+               display: none;
+               height: 100%;
+
+               @media screen and (max-width: 991px) {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                }
+
+                &__auth {
+                    margin-right: 15px;
+                    .nav-btn {
+                        background-color: #1894EA;
+                        border-radius: 3px;
+                        color: #FFFFFF;
+                        padding: 5px 15px;
+                        font-weight: 500;
+                        font-size: 13px;
+                    }
+                }
+                &__menu {
+                    color: #ffffff;
+                }
+           }
+       }
+   }
+}
+
+.blue-nav {
+    background-color: #0E73B9;
+}
+
+.white-nav {
+    background-color: #FFFFFF;
+
+    .nav-btns {
+        .btn {
+            color: #0E73B9 !important; 
+        }
+
+        .btn-oval {   
+            font-size: 16px;
+            font-weight: bold;   
+            background: rgba(14, 115, 185, 0.7) !important;            
+            border-radius: 33px;
+            color: #ffffff !important;
+            margin-right: 15px;
+           }
+
+           .auth-btn {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 17px;
+            color: rgba(255, 255, 255, 0.7);
+           }
+    }
+}
+
+.mobile-menu {
+    background: rgba(14, 115, 185, 0.5);
+
+    .modal-dialog {
+        margin: 0;
+
+        .modal-content {
+            background: #003F6B !important;
+            border: none;
+            border-radius: 0;
+            padding: 24px;
+
+            .modal-body {
+                padding: 0;
+                .nav-btn {
+                    margin-bottom: 25px;
+                    .close-btn {
+                        color: #FFFFFF;
+                        font-size: 22px;
+
+                        &:focus {
+                            box-shadow: none;
+                        }
+                    }
+
+                    .btn-oval {
+                        border: none;
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 33px;
+                        color: #ffffff;
+                        font-size: 22px;
+                        padding: 10px 15px;
+
+                        &:focus {
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+}
+
+.modal.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(125%, 0, 0);
+    transform: translate3d(125%, 0, 0);
+}

@@ -1,0 +1,70 @@
+<div class="navbar-index" *ngIf ="currentUrl !== 'auth'" [ngClass]="currentUrl == 'landing' ? 'blue-nav' : 'white-nav'">
+  <nav class="navbar-space row no-gutters">
+    <div class="navbar-space__left col-6">
+      <div class="logo-space" [routerLink]="['/']">
+        <img class="logo" src='../../../../assets/images/brand-logo/brand-logo.svg' />
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-transparent font-weight-bold">Active Consultations</button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-transparent font-weight-bold">Leaderboard</button>
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-transparent">How Civis Works</button>
+      </div>
+    </div>
+    <div class="navbar-space__right col-6">
+      <div class="nav-btns">
+        <button class="btn btn-oval">Submit a consultation</button>
+      </div>
+      <div class="nav-btns" *ngIf="!currentUser">
+        <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">Log in / Sign up</button>
+      </div>
+      <div class="nav-btns" *ngIf="currentUser">
+        <button class="btn btn-transparent auth-btn" [routerLink]="['/profile']">{{currentUser?.firstName}}</button>
+      </div>
+      <div class="mobile-space">
+        <div class="mobile-space__auth">
+          <button class="nav-btn">Sign Up</button>
+        </div>
+        <div class="mobile-space__menu">
+          
+          <p (click)="openMenu()">---</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="menu-modal">
+    <div bsModal #menuModal="bs-modal" class="modal fade mobile-menu" tabindex="-1" 
+    [config]="{show: false, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}"
+    role="dialog" aria-labelledby="menuModal">
+    <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="nav-btn">
+          <button class="close-btn btn btn-transparent" (click)="closeMenu()">X</button>
+        </div>
+        <div class="nav-btn">
+          <button class="close-btn btn btn-transparent">Active Consultations</button>
+        </div>
+        <div class="nav-btn">
+          <button class="close-btn btn btn-transparent">Leaderboard</button>
+        </div>
+        <div class="nav-btn">
+          <button class="close-btn btn btn-transparent">How Civis works</button>
+        </div>
+        <div class="nav-btn">
+          <button class="btn-oval">Submit a consultation</button>
+        </div>
+        <div class="nav-btn">
+          <button class="close-btn btn btn-transparent" (click)="closeMenu()" [routerLink]="['/auth', 'sign-up']">Log in / Sign up</button>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+</div>
+

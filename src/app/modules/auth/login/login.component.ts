@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { LoginMutation } from './login.graphql';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { Router } from '@angular/router';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,11 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private apollo: Apollo, private tokenService: TokenService, private errorService: ErrorService, private router: Router) { }
+  constructor(private apollo: Apollo,
+              private userService: UserService,
+              private tokenService: TokenService,
+              private errorService: ErrorService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -39,11 +44,17 @@ export class LoginComponent implements OnInit {
         console.log(tokenObject);
         if (tokenObject) {
           this.tokenService.storeToken(tokenObject);
-          this.router.navigateByUrl('/home');
+          // this.router.navigateByUrl('/home');
+          this.onLoggedIn();
         }
       }, (err: any) => {
         this.errorService.showErrorModal(err);
       });
+  }
+
+  onLoggedIn() {
+    this.tokenService.tokenHandler();
+    this.userService.manageUserToken();
   }
 
 }

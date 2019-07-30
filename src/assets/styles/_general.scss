@@ -1,10 +1,64 @@
+@import "helpers/variables";
+
+.regular-text {
+  font-size: 14px;
+  line-height: 22px;
+  color: $black;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.text-18 {
+  font-size: 18px;
+  color: $black;
+}
+
+.text-24 {
+  font-size: 24px;
+  color: $black;
+}
+
+.text-16 {
+  font-size: 16px;
+  color: $black;
+}
+
+.blue-text {
+  font-size: 14px;
+  line-height: 22px;
+  color: $primary-color;
+}
+
+.clr-blue {
+  color: $primary-color;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
 .content {
   margin-top: 77px;
-
   @media screen and (max-width: 991px) {
     margin-top: 57px;
   }
 }
+
 .pointer {
   cursor: pointer;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.decoration-none {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
 }

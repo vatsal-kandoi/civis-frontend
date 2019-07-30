@@ -1,0 +1,35 @@
+@import './src/assets/styles/app';
+
+.bg-color-wrapper {
+  background-color: $blue-bg-light;
+}
+
+.consultation-listing-container {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 46px;
+  .card-listing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px 20px;
+    width: 100%;
+    .card-item {
+      
+    }
+  }
+}
+
+.list-heading {
+  font-size: 36px;
+  color: $primary-color;
+  margin: 0;
+}
+
+.list-subheading {
+  @include regular-text($color: $primary-color);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

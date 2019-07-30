@@ -7,11 +7,16 @@
           Simple thing is, the bodies that create laws, rules and regulations seek 
           feedback from us, the citizens, to finalise them. What are we waiting for?
         </p>
-        <button class="app-btn secondary text-uppercase">Start participating</button>
+        <div class="d-flex align-items-center mt-4">
+          <button class="app-btn secondary circular participate-btn">Start participating</button>
+          <a class="civis-works-link">How Civis Works</a>
+        </div>
+        
       </div>
       <!-- <div class="cover-card">
         <div class="card-carousel">
-          <app-consultation-card [data]="covercardData" [type]="'landing'"></app-consultation-card>
+          <p class="card-carousel__carouse-title">IN FOCUS</p>
+          <app-consultation-card [consultation]="covercardData" [type]="'landing'"></app-consultation-card>
           <div class="card-carousel__carousel-indicators">
             <span (click)="showCard(0)" class="dot"></span>
             <span (click)="showCard(1)" class="dot"></span>
@@ -21,5 +26,83 @@
         
       </div> -->
     </div>
+  </section>
+
+  <section class="app-landing__detail-section">
+
+    <div class="latest-response-container">
+      <p class="section-heading">LATEST RESPONSES</p>
+      <div class="person-carousel">
+        <div class="carousel-arrow-left"><i class="fa fa-angle-left"></i></div>
+        <div class="carousel-inner-container">
+          <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60" />
+          <p class="text-18 bold-text">Sameer Agarwal</p>
+          <p class="text-24 bold-text">National Urban Policy Framework, 2018</p>
+          <p class="text-18 italic">“The National Urban Policy Framework (NUPF) 2018 drafted by Ministry of Housing and Urban Affairs outlines an integrated and coherent approach towards the future of...”</p>
+        </div>
+        <div class="carousel-indicator">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="carousel-arrow-right"><i class="fa fa-angle-right"></i></div>
+      </div>
+    </div>
+
+    <div class="citizen-leader-section">
+      <p class="section-heading">CITIZEN LEADERS ON CIVIS</p>
+      <div class="leaders-list">
+        <div class="leader-profile" *ngFor='let item of [1,2,3,4,5,6]'>
+          <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60 mb-2" />
+          <p class="text-18 m-0">Sameer Agarwal</p>
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="app-btn circular blue-light">View leaderboard</button>
+      </div>
+    </div>
+
+    <div class="civis-work-section">
+      <p class="section-heading">HOW CIVIS WORKS</p>
+      <div class="d-flex justify-content-center mt-5">
+        <button class="app-btn circular primary">Submit Response</button>
+        <button class="app-btn circular blue-light ml-4">Add a Consultation</button>
+      </div>
+    </div>
+
+    <div class="steps-wrapper">
+      <div class="carousel-arrow-left"><i class="fa fa-angle-left"></i></div>
+      <div class="steps-inner-container">
+        <div class="step-left-section"><img src="../../../assets/images/illustrations.png" /></div>
+        <div class="step-right-section">
+          <p>STEP 1</p>
+          <p>Select the consultation you want to respond to</p>
+          <button class="app-btn circular blue-light">NEXT</button>
+        </div>
+      </div>
+      <div class="carousel-arrow-right"><i class="fa fa-angle-right"></i></div>
+    </div>
+
+    <div class="impact-section">
+        <p class="section-heading">IMPACT SO FAR</p>
+      <div class="count-grid">
+        <div class="count-item">
+          <p>Consultations created on Civis</p>
+          <p>37</p>
+        </div>
+        <div class="count-item">
+          <p>Total no. of responses</p>
+          <p>4210</p>
+        </div>
+        <div class="count-item">
+          <p>Total no. of citizens engaged</p>
+          <p>2,352</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer-section">
+    <h1 class="text-center"></h1>
   </section>
 </div>

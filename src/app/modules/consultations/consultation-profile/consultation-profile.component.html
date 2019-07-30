@@ -1,0 +1,26 @@
+<div class="consultation-profile">
+  <section class="consultation-profile__sidebar-section">
+    <app-profile-card [profile]='profileData'></app-profile-card>
+  </section>
+  <section class="consultation-profile__main-section">
+    <div class="paper-effect">
+      <p class="heading">Summary</p>
+      <p class="content">{{profileData.summary}}</p>
+    </div>
+    <div class="paper-effect mt-4">
+      <div class="d-flex justify-content-between">
+        <p class="text-18 m-0 bold-text">Public responses</p>
+        <a href="javascript:void(0)">What are public responses?</a>
+      </div>
+      <ng-container *ngFor="let response of responseList">
+        <div class="response-container">
+          <div class="d-inline-flex align-items-center">
+            <img class="avatar avatar--42" src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" />
+            <p class="regular-text bold-text m-0 ml-2">{{response.node.user.firstName}}</p>
+          </div>
+          <p class="text-16">{{response.node.responseText}}</p>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</div>

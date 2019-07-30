@@ -1,14 +1,17 @@
-<div class="consultation-card">
-  <img [src]="data.cardImg" class="consultation-card__card-image" alt="Random image">
-  <div class="consultation-card__details">
-    <p class="title">{{ data.title }}</p>
-    <p class="sub-title">{{ data.subTitle }}</p>
-    <div class="cta-section">
-      <div>
-        <p class="days-remaining-text">12 Days Remaining</p>
-        <p class="responses-text">6,712 Responses so far</p>
+<a href="javascript:void(0)" class="decoration-none" [routerLink]="['/consultations', consultation.id]">
+  <div class="consultation-card">
+    <img [src]='consultation.ministry.coverPhoto.url' class="consultation-card__card-image" alt="Random image">
+    <div class="consultation-card__details">
+      <p class="title">{{ consultation.title}}</p>
+      <p class="sub-title">{{ consultation.ministry.name}}</p>
+      <div class="cta-section">
+        <div>
+          <p class="days-remaining-text">{{getRemainigDays(consultation.responseDeadline)}}</p>
+          <p class="responses-text">{{consultation.responses.totalCount}} Responses so far</p>
+        </div>
+        <button class="app-btn secondary">RESPOND</button>
       </div>
-      <button class="btn-arrow-right secondary">RESPOND</button>
-    </div>
-  </div>  
-</div>
+    </div>  
+  </div>
+</a>
+

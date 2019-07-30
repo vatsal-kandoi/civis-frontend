@@ -6,35 +6,173 @@
     width: 100%;
     height: 773px;
     background-color: $primary-color;
+
     .cover-inner-container {
       display: flex;
       align-items: center;
-      width: 90%;
+      width: 80%;
       height: 773px;
       margin: 0 auto;
+
       .cover-details {
         width: 40%;
+        
         .cover-title {
           font-size: 82px;
           font-weight: bold;
           color: $white;
-          margin: 0;
+          line-height: 86px;
         }
         .cover-subtitle {
           @include general-text($color: rgba(255, 255, 255, 0.7));
           margin: 0;
         }
       }
+      
       .cover-card {
         width: 60%;
       }
     }
   }
 
+  &__detail-section {
+    background-color: $blue-bg-light;
+    padding: 46px 0;
+  }
+
+  .latest-response-container {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+
+  .person-carousel {
+    position: relative;
+    width: 100%;
+    padding-top: 37px;
+    .carousel-inner-container {
+      width: 50%;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .carousel-indicator {
+      display: flex;
+      justify-content: center;
+      padding-top: 80px;
+      .dot {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        margin: 20px 5px 0 5px;
+        background-color: #A6DAFF;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .carousel-arrow-left {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    font-size: 84px;
+    color: rgba(24, 148, 234, .4);
+  }
+
+  .carousel-arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    font-size: 84px;
+    color: rgba(24, 148, 234, .4);
+  }
+
+  .citizen-leader-section {
+    padding: 50px 0;
+    .leaders-list {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      padding: 48px 0 42px;
+      .leader-profile {
+        text-align: center;
+      }
+    }
+  }
+
+  .steps-wrapper {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    padding: 50px 0;
+    .steps-inner-container {
+      display: flex;
+      align-items: center;
+      .step-left-section {
+        width: 60%;
+        text-align: center;
+      }
+      .step-right-section {
+        width: 40%;
+      }
+    }
+  }
+
+  .impact-section {
+    .count-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding-top: 36px;
+      .count-item {
+        text-align: center;
+        p:nth-child(1) {
+          @include general-text(16px, $primary-color);
+        }
+        p:nth-child(2) {
+          @include general-text(53px, $primary-color);
+        }
+      }
+    }
+  }
+  
+  .section-heading {
+    text-align: center;
+    font-size: 16px;
+    color: #F0653A;
+    font-weight: bold;
+    letter-spacing: 0.38em;
+  }
+
+  .participate-btn {
+    font-size: 16px;
+    color: $white;
+    font-weight: bold;
+    padding: 15px 25px;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+  }
+
+  .civis-works-link {
+    @include general-text($color: $white, $weight: 600);
+    border-bottom: 1px dashed $white;
+    border-bottom-width: 2px;
+    margin-left: 20px;
+  }
 }
 
+.footer-section {
+  background-color: $white;
+  height: 300px;
+}
 
 .card-carousel {
+  width: 50%;
+  float: right;
+
+  &__carouse-title {
+    text-align: center;
+    @include general-text(18px, $white, bold);
+  }
+
   &__carousel-indicators {
     display: flex;
     justify-content: center;

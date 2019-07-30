@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-consultation-card',
-  templateUrl: './consultation-card.component.html',
-  styleUrls: ['./consultation-card.component.scss']
+  selector: 'app-profile-card',
+  templateUrl: './profile-card.component.html',
+  styleUrls: ['./profile-card.component.scss']
 })
-export class ConsultationCardComponent implements OnInit {
-  @Input() consultation: any;
-  @Input() type: string;
-  
+export class ProfileCardComponent implements OnInit {
+
+  @Input() profile: any;
+
   constructor() { }
 
   ngOnInit() {
@@ -25,5 +25,8 @@ export class ConsultationCardComponent implements OnInit {
       return `${difference} Days Remaining`;
     }
   }
-
+  
+  convertDateFormat(date) {
+    return moment(date).format("Do MMM YY");
+  }
 }

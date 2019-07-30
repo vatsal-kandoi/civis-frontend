@@ -8,6 +8,7 @@ query{
       id
       name
     }
+    createdAt
     firstName
     lastName
     email

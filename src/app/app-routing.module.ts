@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'consultations',
     loadChildren: './modules/consultations/consultations.module#ConsultationsModule'
   },
+  {
+    path: 'profile',
+    loadChildren: './modules/profile/profile.module#ProfileModule'
+  },
 ];
 
 @NgModule({

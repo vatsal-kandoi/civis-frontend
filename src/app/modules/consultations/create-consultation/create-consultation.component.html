@@ -39,7 +39,7 @@
           <div class="input-block">
               <label for="deadline">Response submission deadline</label>
               <div class="input-block__border">
-                  <input placeholder="mm | dd | yyyy" name="deadline" #deadline="ngModel" id="deadline" [(ngModel)]="consultationInfo.responseDeadline" bsDatepicker required />
+                  <input placeholder="dd / mm / yyyy" name="deadline" #deadline="ngModel" id="deadline" [(ngModel)]="consultationInfo.responseDeadline" bsDatepicker [bsConfig]="bsConfig" required />
               </div>
               <div *ngIf="deadline.invalid && (deadline.touched || consultationForm1.submitted)" class="error-msg">
                   Deadline is Required

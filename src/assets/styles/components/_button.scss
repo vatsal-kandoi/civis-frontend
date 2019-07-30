@@ -30,6 +30,34 @@
     }
   }
 
+  &.gmail {
+    display: flex;
+    padding: 10px 18px;
+    background: rgba(196, 196, 196, 0.14);
+    border: 1px solid #BFBFBF;
+    .social-img {
+      width: 25px;
+    }
+    p {
+      font-size: 14px;
+      color: #636363;
+    }
+  }
+
+  &.facebook {
+    display: flex;
+    padding: 10px 18px;
+    background: rgba(196, 196, 196, 0.14);
+    border: 1px solid #4469B0;
+    .social-img {
+      width: 25px;
+    }
+    p {
+      font-size: 14px;
+      color: #4469B0;
+    }
+  }
+
   &.blue-light {
     background-color: $cta-light-color;
     color: $primary-color;

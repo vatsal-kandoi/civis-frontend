@@ -159,9 +159,35 @@
   }
 }
 
-.footer-section {
+.footer-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  padding: 51px 0;
   background-color: $white;
   height: 300px;
+
+  &__top-section {
+    display: flex;
+    justify-content: space-between;
+
+    .left-item {
+      display: flex;
+
+      .item-list {
+        list-style-type: none;
+        padding: 0;
+        &:nth-child(2) {
+          margin-left: 10rem;
+        }
+      }
+      
+    }
+  }
+
+  &__bottom-section {
+    
+  }
+
 }
 
 .card-carousel {

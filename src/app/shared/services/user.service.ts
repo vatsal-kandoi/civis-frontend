@@ -10,7 +10,7 @@ import {TokenService} from './token.service';
 })
 export class UserService {
   token: string;
-  userDataLoading = new BehaviorSubject(null);
+  userLoaded$ = new BehaviorSubject(null);
   currentUser: any;
 
 constructor(
@@ -29,7 +29,7 @@ constructor(
       .subscribe((data: any) => {
         if (!data) {
           this.token = '';
-          this.userDataLoading.next(false);
+          this.userLoaded$.next(false);
           return;
         } else {
           this.token = this.tokenService.token;
@@ -50,12 +50,11 @@ constructor(
       .subscribe((user: any) => {
         if (user) {
           this.currentUser = user;
-          this.userDataLoading.next(true);
+          this.userLoaded$.next(true);
         }
       }, (err: any) => {
-        this.userDataLoading.next(false);
+        this.userLoaded$.next(false);
       });
   }
-  
 }
 

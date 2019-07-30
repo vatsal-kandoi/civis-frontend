@@ -1,4 +1,3 @@
-
 @import "helpers/variables";
 
 .regular-text {
@@ -38,6 +37,13 @@
 
 .bold-text {
   font-weight: bold;
+}
+
+.content {
+  margin-top: 77px;
+  @media screen and (max-width: 991px) {
+    margin-top: 57px;
+  }
 }
 
 .pointer {

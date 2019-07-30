@@ -95,8 +95,8 @@
             </div>
 
             <div class="input-checbox">
-                <input  type="checkbox" #agreedForTermsCondition="ngModel" id="termsConditions"  name="termsConditions" [(ngModel)]="conditions.agreedForTermsCondition" required email /> 
-                <label for="termsConditions"> I'm good with the Civis' <br> Terms of Service & Privacy Policy.</label>
+                <input  type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required /> 
+                <label for="agreedForTermsCondition"> I'm good with the Civis' <br> Terms of Service & Privacy Policy.</label>
             </div>
             <div class="error-msg"  *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)">
               Please read our Terms of Service & Privacy Policy and select to continue.

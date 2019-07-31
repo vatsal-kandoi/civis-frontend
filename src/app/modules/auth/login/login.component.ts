@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         console.log(tokenObject);
         if (tokenObject) {
           this.tokenService.storeToken(tokenObject);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/profile');
           this.onLoggedIn();
         }
       }, (err: any) => {

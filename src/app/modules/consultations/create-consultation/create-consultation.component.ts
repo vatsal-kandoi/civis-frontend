@@ -230,7 +230,7 @@ addMinistry(valid) {
   }
 
   applyTheme() {
-    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme });
+    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme, dateInputFormat: 'DD / MM / YYYY' });
   }
 
 }

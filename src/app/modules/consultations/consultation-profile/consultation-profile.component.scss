@@ -5,7 +5,8 @@
   grid-template-columns: 350px 1fr;
   grid-column-gap: 20px;
   width: 80%;
-  margin: 25px auto;
+  margin: 0 auto;
+  padding: 25px 0;
 
   &__sidebar-section {
 
@@ -24,7 +25,7 @@
       @include general-text($font-size: 16px, $weight: bold);
     }
 
-    .content {
+    .summary-content {
       @include general-text;
     }
 

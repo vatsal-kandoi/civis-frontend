@@ -97,7 +97,7 @@ export class SignUpComponent implements OnInit {
       .subscribe((token) => {
         if (token) {
           this.tokenService.storeToken(token);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/profile');
           this.onSignUp();
         }
       }, err => {

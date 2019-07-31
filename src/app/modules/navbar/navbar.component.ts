@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import {filter, take} from 'rxjs/operators';
 
@@ -14,16 +14,19 @@ export class NavbarComponent implements OnInit {
   showNav = true;
   currentUrl: any;
   currentUser: any;
+  profilePopup = false;
+  profilePopupUser = false;
+  routerId: any;
 
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-  this.router.events.subscribe(event => {
-    if (event instanceof NavigationEnd) {
-      this.currentUrl = this.findUrl(event.url);
-    }
-  });
-  this.getCurrentUser();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentUrl = this.findUrl(event.url);
+      }
+    });
+    this.getCurrentUser();
   }
 
   openMenu() {
@@ -41,7 +44,18 @@ export class NavbarComponent implements OnInit {
     if (url.search('auth') !== -1) {
       return 'auth';
     }
-      return '';
+    if (url.search('/consultations') !== -1) {
+
+      if (url.search('/consultations/new') !== -1) {
+        return 'consultations-new';
+      }
+      if (url.search('/consultations/list') !== -1) {
+        return 'consultations-list';
+      }
+        
+      return 'consultations-profile';
+    }
+    return '';
   }
 
   getCurrentUser() {
@@ -56,5 +70,28 @@ export class NavbarComponent implements OnInit {
       }
     });
   }
+  
+  showProfilePopup() {
+    this.profilePopup = !this.profilePopup;
+  }
 
+  showProfilePopupUser() {
+    this.profilePopupUser = !this.profilePopupUser;
+  }
+
+  logout() {
+    localStorage.removeItem('civis-token');
+    this.router.navigate(['']);
+    this.userService.currentUser = null;
+    this.userService.userLoaded$.next(false);
+    this.profilePopup = false;
+  }
+
+  logoutUser() {
+    localStorage.removeItem('civis-token');
+    this.router.navigate(['']);
+    this.userService.currentUser = null;
+    this.userService.userLoaded$.next(false);
+    this.profilePopupUser = false;
+  }
 }

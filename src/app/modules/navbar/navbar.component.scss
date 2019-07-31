@@ -1,10 +1,12 @@
+@import './src/assets/styles/app';
+
 .navbar-index {
    height: 77px;
    width: 100%;
    padding: 0 30px 0 80px;
    position: fixed;
    top:0;
-   z-index: 999999;
+   z-index: 999;
 
    @media screen and (max-width: 991px) {
         height: 58px;
@@ -75,6 +77,14 @@
                }
            }
 
+           .profile-item {
+               position: relative;
+                span {
+                    font-size: 20px;
+                    line-height: 0;
+                }
+           }
+
            .mobile-space {
                display: none;
                height: 100%;
@@ -110,6 +120,44 @@
    }
 }
 
+.profile-nav {
+    height: 100%;
+    .tabs-container {
+        display: flex;
+        .profile-tab {
+            text-align: center;
+            padding-top: 15px;
+            &:nth-child(2) {
+                margin-left: 30px;
+                border-bottom: none;
+            }
+            border-bottom: 4px solid #1894EA;
+            p:nth-child(1) {
+                color: $primary-color;
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0;
+            }
+            p:nth-child(2) {
+                font-size: 14px;
+                font-weight: 500;
+                color: #71BCF0;
+                margin: 0;
+            }
+        }
+    }
+    .custom-width {
+        width: 85%;
+        justify-content: center;
+    }
+
+    .center-align {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+}
+
 .blue-nav {
     background-color: #0E73B9;
 }
@@ -137,6 +185,26 @@
             line-height: 17px;
             color: rgba(255, 255, 255, 0.7);
            }
+    }
+}
+
+.profile-popup {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 160px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,.2), 0 4px 20px 0 rgba(0,0,0,.19); 
+    p {
+        font-size: 14px;
+        color: $black;
+        padding: 5px;
+        margin: 0;
+        &:hover {
+            background-color: $primary-color;
+            color: $white;
+        }
     }
 }
 

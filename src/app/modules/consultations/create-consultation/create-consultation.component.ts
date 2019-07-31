@@ -7,6 +7,7 @@ import { CreateConsultationMutation,
 import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from 'rxjs/operators';
 import { ModalDirective } from 'ngx-bootstrap';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes } from 'ngx-uploader';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 
 @Component({
@@ -15,7 +16,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
   styleUrls: ['./create-consultation.component.scss']
 })
 export class CreateConsultationComponent implements OnInit {
-
+  
   @ViewChild('addMinistryModal') addMinistryModal: ModalDirective;
   @ViewChild('addMinistryElement') addMinistryElement: ElementRef;
 
@@ -68,6 +69,8 @@ export class CreateConsultationComponent implements OnInit {
   humanizeBytes: Function;
   showAddMinistryBlock: boolean;
   searchText: any;
+  colorTheme = 'theme-dark-blue';
+  bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(
     private apollo: Apollo,
@@ -79,6 +82,7 @@ export class CreateConsultationComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeToSearch();
+    this.applyTheme();
   }
 
   getCateoriesList() {
@@ -248,4 +252,9 @@ addMinistry(valid) {
       });
     }
   }
+
+  applyTheme() {
+    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme, dateInputFormat: 'DD / MM / YYYY' });
+  }
+
 }

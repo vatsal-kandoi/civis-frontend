@@ -1,11 +1,12 @@
 <div class="navbar-index" *ngIf ="currentUrl !== 'auth'" [ngClass]="currentUrl == 'landing' ? 'blue-nav' : 'white-nav'">
-  <nav class="navbar-space row no-gutters">
+
+  <nav class="navbar-space row no-gutters user-nav" *ngIf="currentUrl !== 'consultations-profile'">
     <div class="navbar-space__left col-6">
-      <div class="logo-space" [routerLink]="['/']">
+      <div class="logo-space" [routerLink]="currentUser ? '/profile' : '/'">
         <img class="logo" src='assets/images/brand-logo/brand-logo.svg' />
       </div>
       <div class="nav-btns">
-        <button class="btn btn-transparent font-weight-bold">Active Consultations</button>
+        <button class="btn btn-transparent font-weight-bold" [routerLink]="['consultations/list']">Active Consultations</button>
       </div>
       <div class="nav-btns">
         <button class="btn btn-transparent font-weight-bold">Leaderboard</button>
@@ -21,10 +22,14 @@
       <div class="nav-btns" *ngIf="!currentUser">
         <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">Log in / Sign up</button>
       </div>
-      <div class="nav-btns" *ngIf="currentUser">
-        <button class="btn btn-transparent auth-btn" [routerLink]="['/profile']">
-          {{currentUser?.firstName}}
-        </button>
+      <div class="nav-btns profile-item pointer" *ngIf="currentUser" (click)="showProfilePopup()">
+        <img class="avatar--42" src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" />
+        <span [ngClass]="currentUrl == 'landing' ? 'clr-white' : 'clr-black'"><i class="fa fa-angle-down ml-2"></i></span>
+        
+        <div class="profile-popup" *ngIf="profilePopup">
+          <p [routerLink]="['/profile']">Profile</p>
+          <p (click)="logout()">Logout</p>
+        </div>
       </div>
 
       <div class="mobile-space">
@@ -36,6 +41,31 @@
               <i class="fa fa-bars"></i>
           </div>
         </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="nav-space row d-flex justify-content-between profile-nav" *ngIf="currentUrl === 'consultations-profile'">
+    <div class="logo-space center-align" [routerLink]="currentUser ? '/profile' : '/'">
+      <img class="logo" src='assets/images/brand-logo/brand-logo.svg' />
+    </div>
+    <div class="tabs-container" [ngClass]="!currentUser ? 'custom-width' : ''">
+      <div class="profile-tab">
+        <p>Read & Respond</p>
+        <p>Submit your feedback</p>
+      </div>
+      <div class="profile-tab">
+        <p>Discuss & Engage</p>
+        <p>Talk to the community</p>
+      </div>
+    </div>
+    <div class="nav-btns profile-item pointer center-align" *ngIf="currentUser" (click)="showProfilePopup()">
+      <img class="avatar--42" src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" />
+      <span [ngClass]="currentUrl == 'landing' ? 'clr-white' : 'clr-black'"><i class="fa fa-angle-down ml-2"></i></span>
+      
+      <div class="profile-popup" *ngIf="profilePopup">
+        <p [routerLink]="['/profile']">Profile</p>
+        <p (click)="logout()">Logout</p>
       </div>
     </div>
   </nav>

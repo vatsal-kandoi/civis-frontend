@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       .subscribe((tokenObject: any) => {
         if (tokenObject) {
           this.tokenService.storeToken(tokenObject);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/profile');
           this.onLoggedIn();
         }
       }, (err: any) => {

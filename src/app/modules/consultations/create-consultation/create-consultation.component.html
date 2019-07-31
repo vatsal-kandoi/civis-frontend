@@ -100,6 +100,26 @@
     </div>
   </div>
 
+  <div class="consultation-success-index" *ngIf="step === 3">
+      <div class="success-message">
+        <div class="heading">
+            Hooraah!
+        </div>
+        <div class="text">
+            Thank you for submitting the consultation.
+        </div>
+        <div class="text">
+            We’ll notify and post your draft within 24-36 hours    
+        </div>
+        <div class="link">
+            You’ve been mailed the draft. Preview it here
+        </div>
+      </div>
+      <div class="succes-image">
+        <img src='assets/images/success.png'>
+      </div>
+    </div>
+
 <div bsModal #addMinistryModal="bs-modal" class="modal fade ministry-modal" tabindex="-1" (onHidden)="hideAddMinistryModal()"
      [config]="{show: false}"
      role="dialog" aria-labelledby="addMinistryModal">

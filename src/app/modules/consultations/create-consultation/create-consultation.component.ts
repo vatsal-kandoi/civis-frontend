@@ -242,6 +242,7 @@ addMinistry(valid) {
         variables: variables
       })
       .subscribe((res) => {
+        this.step = 3;
       }, err => {
         this.errorService.showErrorModal(err);
       });

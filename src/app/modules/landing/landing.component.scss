@@ -31,6 +31,7 @@
       
       .cover-card {
         width: 60%;
+        pointer-events: none;
       }
     }
   }
@@ -159,9 +160,68 @@
   }
 }
 
-.footer-section {
+.footer-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  padding: 51px 0;
   background-color: $white;
   height: 300px;
+
+  &__top-section {
+    display: flex;
+    justify-content: space-between;
+
+    .left-item {
+      display: flex;
+
+      .item-list {
+        list-style-type: none;
+        padding: 0;
+        &:nth-child(2) {
+          margin-left: 10rem;
+        }
+        li {
+          color: #757575;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .right-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      .social-icons {
+        span {
+          font-size: 38px;
+          margin-right: 14px;
+          opacity: .2;
+        }
+      }
+      .help-text {
+        font-size: 24px;
+        color: $black;
+      }
+    }
+  }
+
+  &__bottom-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo-container {
+      .logo-2 {
+        margin-left: 30px;
+        margin-top: 15px;
+      }
+      .policy-text {
+        margin-left: 53px;
+        font-size: 12px;
+        color: #767676;
+      }
+    }
+  }
+
 }
 
 .card-carousel {

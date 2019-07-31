@@ -1,3 +1,5 @@
+@import './src/assets/styles/app';
+
 .sign-up-index {
     height: 100vh;
     width: 100%;
@@ -5,13 +7,13 @@
     top: 0;
 
     &__left {
-        padding: 70px;
+        padding: 70px 80px;
         background: linear-gradient(180deg, #0E73B9 28.22%, rgba(14, 115, 185, 0) 95.05%);
 
         .back-btn {
             border: none;
             padding: 0;
-            color: #FFFFFF;
+            color: $white;
             font-size: 12px;
             cursor: pointer;
             background: none;
@@ -19,50 +21,54 @@
             &:focus {
                 outline: none;
             }
+            .back-arrow {
+                font-size: 16px;
+                font-weight: bold;
+                margin-right: 5px;
+                vertical-align: top;
+            }
         }
 
         .info-box {
-            margin-top: 100px;
+            margin-top: 95px;
 
             &__title {
                 font-size: 12px;
-                color: #FFFFFF;
+                font-weight: bold;
+                letter-spacing: 0.165em;
+                color: $white;
                 opacity: 0.5;
-                margin-bottom: 5px;
+                margin-bottom: 10px;
             }
 
             &__heading {
-                width: 250px;
+                width: 300px;
                 font-weight: bold;
                 font-size: 24px;
-                color: #FFFFFF;
+                line-height: 28px;
+                color: $white;
                 margin-bottom: 5px;
-                text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
-                border-radius: 8px;
             }
 
             &__sub-heading {
                 font-size: 14px;
-                color: #FFFFFF;
-                text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
-                border-radius: 8px;
+                color: $white;
             }
 
             &__message {
                 font-size: 14px;
-                font-weight: 500;
-                color: #FFFFFF;
+                font-weight: bold;
+                color: $white;
                 margin: 14px 0;
             }
 
-            .rounded-btn {
+            .read-case-btn {
                 font-size: 9px;
-                color: #FFFFFF;
-                background: transparent;
-                border-radius: 10px;
-                padding: 5px 15px;
-                cursor: pointer;
-
+                letter-spacing: 0.1em;
+                color: $white;
+                padding: 7px 20px;
+                background-color: transparent;
+                border: 1px solid $white;
                 &:focus {
                     outline: none;
                 }
@@ -75,6 +81,7 @@
     }
 
     &__right {
+        padding: 50px 70px;
 
         .header {
             display: flex;
@@ -85,18 +92,20 @@
                 display: flex;
                 align-items: center;
 
-                .rounded-btn {
-                    border: 1px solid #151515;
-                    box-sizing: border-box;
-                    border-radius: 25px;
+                .auth-text {
                     font-size: 12px;
-                    color: #151515;
-                    cursor: pointer;
-                    margin-left: 5px;
-
-                    &:focus {
-                        outline: none;
-                    }
+                    color: $black;
+                    margin-right: 10px;
+                    margin-bottom: 0;
+                }
+                
+                .auth-btn {
+                    background-color: transparent;
+                    padding: 3px 15px;
+                    font-size: 12px;
+                    font-weight: normal;
+                    color: $black;
+                    border: 1px solid $black;
                 }
 
                 @media screen and (max-width: 991px) {
@@ -128,21 +137,12 @@
             }
         }
 
-        .heading {
-            margin: 5px 0;
-            div {
-                font-weight: 500;
-                font-size: 16px;
-                color: #0E73B9;
-
-                @media screen and (max-width: 991px) {
-                    font-weight: bold;
-                    font-size: 20px;
-                    &:nth-child(2) {
-                        display: none;
-                    }
-                }                
-            }
+        .logo-heading {
+            margin: 15px 0;
+            font-size: 16px;
+            color: $primary-color;
+            font-weight: 600;
+            letter-spacing: 0.025em;
         }
 
         .form-space {
@@ -152,17 +152,18 @@
 
                     &__border {
                         width: 90%;
-                        border: 1px solid #AEAEAE;
+                        border: 1px solid $input-border;
                         box-sizing: border-box;
                         border-radius: 3px;
-                        padding: 10px;
 
                         input { 
                             width: 100%;
                             font-weight: 500;
                             font-size: 15px;
-                            background: #FFFFFF;
+                            background: $white;
+                            padding: 10px;
                             border: none;
+                            border-radius: 3px;
 
                             &:focus {
                                 outline: none;
@@ -173,11 +174,12 @@
                             width: 100%;
                         }
                     }
-                    label{
+
+                    label {
                         display: block;
-                        font-weight: 500;
-                        font-size: 15px;
-                        color: #151515;
+                        font-weight: 600;
+                        font-size: 14px;
+                        color: $black;
                         margin-bottom: 10px;
                     }
                 }
@@ -187,9 +189,9 @@
                     margin-bottom: 15px;
 
                     label {
-                        margin-left: 10px;
+                        margin-left: 12px;
                         font-size: 14px;
-                        color: #151515;
+                        color: $black;
                     }
                 }
 
@@ -210,16 +212,19 @@
                     }
                 }
 
-                .submit-btn {
-                    border: none;
-                    background: #F0653A;
-                    border-radius: 3px;
-                    color: #FFFFFF;
-                    padding: 15px 25px;
+                .get-start-btn {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
                     width: 90%; 
+                    padding: 12px 20px;
 
                     @media screen and (max-width: 991px) {
                         width: 100%;
+                    }
+
+                    i {
+                        font-size: 24px;
                     }
                 }
 
@@ -228,6 +233,46 @@
                     color: #F0653A;
                     font-size: 14px;
                 }
+            }
+
+            .vertical-divider {
+                position: absolute;
+                display: table;
+                text-align: center;
+                height: 95%;
+                
+                .center-element {
+                    position: relative;
+                    display: table-cell;
+                    vertical-align: middle;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #C0C0C0;
+                    
+                    &:before, &:after {
+                        position: absolute;
+                        content: "";
+                        width: 1px;
+                        left: 50%;
+                        border-left: 1px solid #DFDFDF;
+                    }
+                    &:before {
+                        bottom: 50%;
+                        top: 0;
+                        margin-bottom: 20px;
+                    }
+                    &:after {
+                        top: 50%;
+                        bottom: 0;
+                        margin-top: 20px;
+                    }
+                }
+            }
+
+            .form-space-right {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
         }
 

@@ -1,10 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import { LandingGuard } from './shared/guards/landing.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './modules/landing/landing.module#LandingModule'
+    loadChildren: './modules/landing/landing.module#LandingModule',
+    canActivate: [LandingGuard]
   },
 
   {
@@ -21,7 +24,8 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: './modules/profile/profile.module#ProfileModule'
+    loadChildren: './modules/profile/profile.module#ProfileModule',
+    canActivate: [AuthGuard]
   },
 ];
 

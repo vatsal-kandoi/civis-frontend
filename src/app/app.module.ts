@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { NavbarModule } from './modules/navbar/navbar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileModule } from './modules/profile/profile.module';
+import { LandingGuard } from './shared/guards/landing.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,10 @@ import { ProfileModule } from './modules/profile/profile.module';
     ProfileModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    LandingGuard,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

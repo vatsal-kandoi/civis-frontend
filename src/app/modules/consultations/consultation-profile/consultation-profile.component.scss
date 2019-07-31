@@ -5,7 +5,8 @@
   grid-template-columns: 350px 1fr;
   grid-column-gap: 20px;
   width: 80%;
-  margin: 25px auto;
+  margin: 0 auto;
+  padding: 25px 0;
 
   &__sidebar-section {
 
@@ -24,7 +25,7 @@
       @include general-text($font-size: 16px, $weight: bold);
     }
 
-    .content {
+    .summary-content {
       @include general-text;
     }
 
@@ -33,6 +34,30 @@
       border-bottom: 1px solid $divider-border;
       &:last-child {
         border-bottom: none;
+      }
+      .vote-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .vote-count {
+          span:nth-child(1) {
+            color: $blue-bg-light;
+            font-size: 24px;
+            cursor: pointer;
+          }
+          span:nth-child(2) {
+            color: #A6A6A6;
+            font-size: 24px;
+            cursor: pointer;
+          }
+        }
+        .response-btn {
+          padding: 5px 10px;
+          color: $primary-color;
+          background-color: transparent;
+          border-radius: 3px;
+          border: 1px solid #1894EA;
+        }
       }
     }
   }

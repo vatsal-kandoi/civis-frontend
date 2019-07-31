@@ -6,8 +6,8 @@
       <p class="sub-title">{{ consultation.ministry.name}}</p>
       <div class="cta-section">
         <div>
-          <p class="days-remaining-text">{{getRemainigDays(consultation.responseDeadline)}}</p>
-          <p class="responses-text">{{consultation.responses.totalCount}} Responses so far</p>
+          <p class="days-remaining-text">{{getRemainigDays(consultation?.responseDeadline)}}</p>
+          <p class="responses-text">{{consultation?.responses?.totalCount}} Responses so far</p>
         </div>
         <button class="app-btn secondary">RESPOND</button>
       </div>

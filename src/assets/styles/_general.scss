@@ -35,6 +35,13 @@
   color: $primary-color;
 }
 
+.clr-white {
+  color: $white;
+}
+.clr-black {
+  color: $black;
+}
+
 .bold-text {
   font-weight: bold;
 }
@@ -52,7 +59,7 @@
 
 .sticky {
   position: sticky;
-  top: 0;
+  top: 77px;
 }
 
 .decoration-none {

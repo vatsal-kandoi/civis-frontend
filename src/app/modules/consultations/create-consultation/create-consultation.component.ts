@@ -175,6 +175,7 @@ export class CreateConsultationComponent implements OnInit {
   }
 
   hideAddMinistryModal() {
+    this.showAddMinistryBlock = false;
     this.addMinistryModal.hide();
   }
 
@@ -205,7 +206,6 @@ onUploadOutput(output: UploadOutput): void {
 onClick(targetElement) {
   if (this.showAddMinistryBlock) {
     if (this.addMinistryElement.nativeElement.contains(targetElement)) {
-          this.showAddMinistryBlock = false;
           this.openAddMinistryModal();
     } else {
       this.showAddMinistryBlock = false;

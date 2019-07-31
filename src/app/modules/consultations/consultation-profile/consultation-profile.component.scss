@@ -35,6 +35,30 @@
       &:last-child {
         border-bottom: none;
       }
+      .vote-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .vote-count {
+          span:nth-child(1) {
+            color: $blue-bg-light;
+            font-size: 24px;
+            cursor: pointer;
+          }
+          span:nth-child(2) {
+            color: #A6A6A6;
+            font-size: 24px;
+            cursor: pointer;
+          }
+        }
+        .response-btn {
+          padding: 5px 10px;
+          color: $primary-color;
+          background-color: transparent;
+          border-radius: 3px;
+          border: 1px solid #1894EA;
+        }
+      }
     }
   }
 }

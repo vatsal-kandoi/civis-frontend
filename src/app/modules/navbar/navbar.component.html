@@ -2,7 +2,7 @@
 
   <nav class="navbar-space row no-gutters user-nav" *ngIf="currentUrl !== 'consultations-profile'">
     <div class="navbar-space__left col-6">
-      <div class="logo-space" [routerLink]="['/']">
+      <div class="logo-space" [routerLink]="currentUser ? '/profile' : '/'">
         <img class="logo" src='assets/images/brand-logo/brand-logo.svg' />
       </div>
       <div class="nav-btns">
@@ -46,7 +46,7 @@
   </nav>
 
   <nav class="nav-space row d-flex justify-content-between profile-nav" *ngIf="currentUrl === 'consultations-profile'">
-    <div class="logo-space center-align" [routerLink]="['/']">
+    <div class="logo-space center-align" [routerLink]="currentUser ? '/profile' : '/'">
       <img class="logo" src='assets/images/brand-logo/brand-logo.svg' />
     </div>
     <div class="tabs-container" [ngClass]="!currentUser ? 'custom-width' : ''">

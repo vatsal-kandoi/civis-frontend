@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   currentUrl: any;
   currentUser: any;
   profilePopup = false;
+  profilePopupUser = false;
   routerId: any;
 
   constructor(private router: Router, private userService: UserService) { }
@@ -74,11 +75,23 @@ export class NavbarComponent implements OnInit {
     this.profilePopup = !this.profilePopup;
   }
 
+  showProfilePopupUser() {
+    this.profilePopupUser = !this.profilePopupUser;
+  }
+
   logout() {
     localStorage.removeItem('civis-token');
     this.router.navigate(['']);
     this.userService.currentUser = null;
     this.userService.userLoaded$.next(false);
+    this.profilePopup = false;
   }
 
+  logoutUser() {
+    localStorage.removeItem('civis-token');
+    this.router.navigate(['']);
+    this.userService.currentUser = null;
+    this.userService.userLoaded$.next(false);
+    this.profilePopupUser = false;
+  }
 }

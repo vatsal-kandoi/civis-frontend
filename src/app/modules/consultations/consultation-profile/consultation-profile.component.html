@@ -19,6 +19,15 @@
             <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
           </div>
           <p class="text-16">{{response.node.responseText}}</p>
+          <div class="vote-section">
+            <div class="vote-count">
+              <span><i class="fa fa-thumbs-up"></i></span>
+              <span class="ml-4"><i class="fa fa-thumbs-down"></i></span>
+            </div>
+            <div>
+              <button class="app-btn response-btn">Use this response</button>
+            </div>
+          </div>
         </div>
       </ng-container>
     </div>

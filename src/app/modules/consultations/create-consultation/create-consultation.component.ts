@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, ElementRef, NgZone, HostListener } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { CreateConsultationMutation,
          MinistryAutocompleteQuery,
@@ -17,6 +17,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 export class CreateConsultationComponent implements OnInit {
 
   @ViewChild('addMinistryModal') addMinistryModal: ModalDirective;
+  @ViewChild('addMinistryElement') addMinistryElement: ElementRef;
 
   consultationInfo = {
     title: '',
@@ -39,10 +40,11 @@ export class CreateConsultationComponent implements OnInit {
     pocEmailPrimary: '',
     pocEmailSecondary: ''
   };
+  dropdownText = 'Begin Typing';
 
   step = 1;
   searchEmitter: EventEmitter<any> = new EventEmitter();
-  ministries: any;
+  ministries: any = [];
   loadingMinistries: boolean;
   categoriesList: any;
   levels = [
@@ -114,10 +116,26 @@ export class CreateConsultationComponent implements OnInit {
         this.ministries = result;
         if (this.searchText && !this.ministries.length) {
           this.showAddMinistryBlock = true;
+          this.dropdownText = 'Ministry not found';
+        } else if (this.searchText && this.ministries.length) {
+          this.showAddMinistryBlock = this.checkMinistryExist(this.ministries);
         } else {
           this.showAddMinistryBlock = false;
         }
       }, (err: any) => this.loadingMinistries = false);
+  }
+
+  checkMinistryExist(ministries) {
+      const ministryExist = ministries.find((val) => {
+        const found =  val.name.toLowerCase().indexOf(this.searchText);
+        return found !== -1;
+      });
+      if (!ministryExist) {
+        this.dropdownText = 'Ministry not found';
+        return true;
+      }
+      return false;
+
   }
 
   onSearch(query: any) {
@@ -145,15 +163,6 @@ export class CreateConsultationComponent implements OnInit {
     }
   }
 
-  onClose() {
-    this._ngZone.run(() => {
-      setTimeout(() => {
-        this.showAddMinistryBlock = false;
-      }, 100);
-    });
-  }
-
-
   stepNext(valid) {
     if (valid) {
       this.step = 2;
@@ -162,7 +171,6 @@ export class CreateConsultationComponent implements OnInit {
 
   openAddMinistryModal() {
     this.ministryObject.name = this.searchText;
-    this.showAddMinistryBlock = false;
     this.addMinistryModal.show();
   }
 
@@ -193,6 +201,18 @@ onUploadOutput(output: UploadOutput): void {
     }
 }
 
+@HostListener('document:click', ['$event.target'])
+onClick(targetElement) {
+  if (this.showAddMinistryBlock) {
+    if (this.addMinistryElement.nativeElement.contains(targetElement)) {
+          this.showAddMinistryBlock = false;
+          this.openAddMinistryModal();
+    } else {
+      this.showAddMinistryBlock = false;
+    }
+  }
+}
+
 addMinistry(valid) {
   if (valid && this.ministryObject.logoFile.filename) {
       this.apollo.mutate({
@@ -203,6 +223,9 @@ addMinistry(valid) {
         })
         .subscribe((res) => {
           this.addMinistryModal.hide();
+          const ministry = res.data.ministryCreate;
+          this.ministries = [ministry];
+          this.departmentInfo.ministryId =  ministry.id;
         }, err => {
           this.errorService.showErrorModal(err);
         });

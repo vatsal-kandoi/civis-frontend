@@ -216,6 +216,7 @@
 
 .ministry-modal {
  background: rgba(14, 115, 185, 0.6) !important;
+ z-index: 999999;
  .modal-dialog {
      margin: 0 0 0 auto;
      max-width: 600px !important;

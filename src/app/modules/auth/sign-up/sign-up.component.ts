@@ -26,6 +26,7 @@ export class SignUpComponent implements OnInit {
   searchEmitter: EventEmitter<any> = new EventEmitter();
   loadingCities: boolean;
   cities: any;
+  dropdownText = 'Begin Typing'
 
 
   constructor(private apollo: Apollo,
@@ -54,11 +55,14 @@ export class SignUpComponent implements OnInit {
       .subscribe((result) => {
         this.loadingCities = false;
         this.cities = result;
+        if (!this.cities.length) {
+          this.dropdownText = 'City not found';
+        }
       }, (err: any) => this.loadingCities = false);
   }
 
   onSearch(query: any) {
-    if (!query) {
+    if (!query.term) {
       query = null;
       return;
     }

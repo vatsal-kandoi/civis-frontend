@@ -73,17 +73,18 @@
               <div class="location-box__border">
                   <ng-select id="ministry" #ministry="ngModel" name="ministry" [loading]="loadingMinistries"
                   [items]="ministries" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
-                  bindValue="id" notFoundText="Ministry not found" [clearable]="true" loadingText="Searching..."
-                  (search)="onSearch($event)" (close)="onClose()" [(ngModel)]="departmentInfo.ministryId" required> 
+                  bindValue="id" [notFoundText]="dropdownText" [clearable]="true" loadingText="Searching..."
+                  (search)="onSearch($event)"  [(ngModel)]="departmentInfo.ministryId" required> 
                   </ng-select>  
               </div>    
               <div *ngIf="ministry.invalid && (ministry.touched || consultationForm2.submitted)" class="error-msg">
                 Ministry is Required
               </div>
-       
-            <button class="add-ministry-block w-100" *ngIf="searchText && showAddMinistryBlock" (click)="openAddMinistryModal($event)">
-              Add Ministry {{'"' + searchText + '"'}}
-            </button>
+            <div #addMinistryElement>
+                <button class="add-ministry-block w-100" *ngIf="searchText && showAddMinistryBlock" (click)="openAddMinistryModal($event)">
+                    Add Ministry {{'"' + searchText + '"'}}
+                  </button>
+            </div>
           </div>
           <div>
               <button type="submit" class="btn submit-btn" [ngClass]="{'active-btn': consultationForm2.valid}">SUBMIT CONSULTATION  ></button>
@@ -141,7 +142,7 @@
                   <div class="input-block">
                       <label for="deadline">Department Logo</label>   
                       <div class="input-block__border">
-                        <label>
+                        <label class="w-100">
                           <input type="file" ngFileSelect (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" hidden required /> 
                           {{ ministryObject?.logoFile?.filename ? ministryObject.logoFile.filename :  'Select File'  }}
                         </label>

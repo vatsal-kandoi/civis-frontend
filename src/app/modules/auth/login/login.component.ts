@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
         map((res: any) => res.data.authLogin)
       )
       .subscribe((tokenObject: any) => {
-        console.log(tokenObject);
         if (tokenObject) {
           this.tokenService.storeToken(tokenObject);
           this.router.navigateByUrl('/home');

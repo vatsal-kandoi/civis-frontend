@@ -16,7 +16,7 @@
     </div>
     <div class="navbar-space__right col-6">
       <div class="nav-btns">
-        <button class="btn btn-oval">Submit a consultation</button>
+        <button class="btn btn-oval" [routerLink]="currentUser ? '/consultations/new' : '/auth'">Submit a consultation</button>
       </div>
       <div class="nav-btns" *ngIf="!currentUser">
         <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">Log in / Sign up</button>

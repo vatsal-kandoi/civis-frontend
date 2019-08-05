@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: './modules/profile/profile.module#ProfileModule',
     canActivate: [AuthGuard]
   },
+  {
+    path: 'how-civis-works',
+    loadChildren: './modules/how-civis-works/how-civis-works.module#HowCivisWorksModule'
+  }
 ];
 
 @NgModule({

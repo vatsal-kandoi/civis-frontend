@@ -4,8 +4,9 @@
 
 
 .consultation-card {
+  position: relative;
   width: 100%;
-  height: auto;
+  height: 500px;
   margin: 10px 0;
   background-color: $white;
   border-radius: 8px;
@@ -23,6 +24,12 @@
   &__details {
     padding: 25px;
     .title {
+      /* autoprefixer: off */
+      -webkit-box-orient: vertical;
+      /* autoprefixer: on */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
       font-size: 24px;
       font-weight: bold;
       color: $black;
@@ -38,6 +45,10 @@
       justify-content: space-between;
       align-items: center;
       margin-top: 40px;
+      position: absolute;
+      left: 25px;
+      right: 25px;
+      bottom: 25px;
       .days-remaining-text {
         @include regular-text($color: $error-color, $weight: 600);
         margin: 0;

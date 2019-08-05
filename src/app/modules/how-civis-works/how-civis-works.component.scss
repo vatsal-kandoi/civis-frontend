@@ -1,0 +1,10 @@
+@import './src/assets/styles/app';
+
+.works-wrapper {
+  padding: 60px;
+  background-color: $blue-bg-light;
+  &__title {
+    font-size: 42px;
+    color: #0E73B9;
+  }
+}

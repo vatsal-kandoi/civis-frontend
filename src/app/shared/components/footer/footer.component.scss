@@ -22,6 +22,11 @@
         li {
           color: #757575;
           margin-bottom: 10px;
+          transition: all .2s linear;
+          cursor: pointer;
+          &:hover {
+            color: $primary-color;
+          }
         }
       }
     }

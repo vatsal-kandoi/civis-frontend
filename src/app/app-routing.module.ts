@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'how-civis-works',
     loadChildren: './modules/how-civis-works/how-civis-works.module#HowCivisWorksModule'
+  },
+  {
+    path: 'about-us',
+    loadChildren: './modules/about-us/about-us.module#AboutUsModule'
   }
 ];
 

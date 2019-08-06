@@ -24,9 +24,8 @@
   &__details {
     padding: 25px;
     .title {
-      /* autoprefixer: off */
+      /* autoprefixer: ignore next */      
       -webkit-box-orient: vertical;
-      /* autoprefixer: on */
       display: -webkit-box;
       -webkit-line-clamp: 2;
       overflow: hidden;

@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'about-us',
     loadChildren: './modules/about-us/about-us.module#AboutUsModule'
+  },
+  {
+    path: 'policy',
+    loadChildren: './modules/policy/policy.module#PolicyModule'
   }
 ];
 

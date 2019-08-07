@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Rx';
+import { interval } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { slideInRight } from '../../shared/animations/slide';
 import { ConsultationList } from '../consultations/consultation-list/consultation-list.graphql';
@@ -66,7 +66,7 @@ constructor( private apollo: Apollo ) { }
   }
 
   rotateFeature() {
-    Observable.interval(5000).subscribe(() => {
+    interval(5000).subscribe(() => {
 
       if(this.current_card_index === 2) {
         this.current_card_index = 0;

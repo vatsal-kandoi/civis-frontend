@@ -2,6 +2,12 @@
 
 .app-landing {
 
+  margin-top: 77px;
+  
+  @media screen and (max-width: 991px) {
+    margin-top: 57px;
+  }
+
   &__cover-section {
     width: 100%;
     height: 773px;

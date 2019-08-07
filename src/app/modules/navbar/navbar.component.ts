@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
-import {filter, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +14,6 @@ export class NavbarComponent implements OnInit {
   currentUrl: any;
   currentUser: any;
   profilePopup = false;
-  profilePopupUser = false;
   routerId: any;
 
   constructor(private router: Router, private userService: UserService) { }
@@ -52,7 +50,7 @@ export class NavbarComponent implements OnInit {
       if (url.search('/consultations/list') !== -1) {
         return 'consultations-list';
       }
-        
+
       return 'consultations-profile';
     }
     return '';
@@ -60,38 +58,27 @@ export class NavbarComponent implements OnInit {
 
   getCurrentUser() {
     this.userService.userLoaded$
-    .pipe(
-      filter(data => !!data),
-      take(1)
-    )
     .subscribe((data) => {
       if (data) {
         this.currentUser = this.userService.currentUser;
+      } else {
+        this.currentUser = null;
       }
     });
   }
-  
+
   showProfilePopup() {
     this.profilePopup = !this.profilePopup;
   }
 
-  showProfilePopupUser() {
-    this.profilePopupUser = !this.profilePopupUser;
-  }
 
-  logout() {
-    localStorage.removeItem('civis-token');
-    this.router.navigate(['']);
-    this.userService.currentUser = null;
-    this.userService.userLoaded$.next(false);
+  logout(event) {
+    event.stopPropagation();
     this.profilePopup = false;
-  }
-
-  logoutUser() {
     localStorage.removeItem('civis-token');
-    this.router.navigate(['']);
     this.userService.currentUser = null;
     this.userService.userLoaded$.next(false);
-    this.profilePopupUser = false;
+    this.router.navigate(['']);
   }
+
 }

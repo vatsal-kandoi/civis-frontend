@@ -19,7 +19,6 @@
        &__left{
         height: 100%;
         display: flex;
-        justify-content: space-between;
         align-items: center;
         .logo-space {
             height: 100%;
@@ -37,6 +36,11 @@
             }
         }
 
+        .links {
+            margin-left: 37px;
+            width: calc(100% - 172px);
+        }
+
         .nav-btns {
             .btn {
                 font-size: 18px;
@@ -46,6 +50,34 @@
             @media screen and (max-width: 991px) {
                 display: none;
             }
+        }
+       }
+
+       &__middle {
+           height: 100%;
+        .profile-tab {
+            height: 100%;
+            text-align: center;
+            padding-top: 15px;
+            &:nth-child(2) {
+                margin-left: 30px;
+            }
+            p:nth-child(1) {
+                color: $primary-color;
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0;
+            }
+            p:nth-child(2) {
+                font-size: 12px;
+                font-weight: 500;
+                color: #71BCF0;
+                margin: 0;
+            }
+        }
+
+        .active-tab {
+            border-bottom: 4px solid #1894EA;
         }
        }
 
@@ -118,44 +150,6 @@
            }
        }
    }
-}
-
-.profile-nav {
-    height: 100%;
-    .tabs-container {
-        display: flex;
-        .profile-tab {
-            text-align: center;
-            padding-top: 15px;
-            &:nth-child(2) {
-                margin-left: 30px;
-                border-bottom: none;
-            }
-            border-bottom: 4px solid #1894EA;
-            p:nth-child(1) {
-                color: $primary-color;
-                font-size: 16px;
-                font-weight: bold;
-                margin: 0;
-            }
-            p:nth-child(2) {
-                font-size: 14px;
-                font-weight: 500;
-                color: #71BCF0;
-                margin: 0;
-            }
-        }
-    }
-    .custom-width {
-        width: 85%;
-        justify-content: center;
-    }
-
-    .center-align {
-        display: flex;
-        align-items: center;
-        height: 100%;
-    }
 }
 
 .blue-nav {

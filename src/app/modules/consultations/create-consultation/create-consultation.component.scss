@@ -1,8 +1,17 @@
 @import './src/assets/styles/app';
 
+.consultation-container {
+    margin-top: 77px;
+
+    @media screen and (max-width: 991px) {
+      margin-top: 57px;
+    }
+}
+
 .consultation-index {
     width: 80%;
     height: calc(100vh - 77px);
+    
     margin: 0 auto;
 
     &__left {

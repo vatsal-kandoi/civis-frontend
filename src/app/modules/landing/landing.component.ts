@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { map } from 'rxjs/operators';
 import { slideInRight } from '../../shared/animations/slide';
 import { ConsultationList } from '../consultations/consultation-list/consultation-list.graphql';
+import { ConsultationResponseList } from './landing.graphql'; 
 
 @Component({
   selector: 'app-landing',
@@ -14,12 +15,16 @@ import { ConsultationList } from '../consultations/consultation-list/consultatio
 
 export class LandingComponent implements OnInit {
   coverCardData: any;
-  current_index = 0;
+  latestResponse: any
+  current_card_index = 0;
+  current_response_index = 0;
+  currentReponseData: any;
 
 constructor( private apollo: Apollo ) { }
   
   ngOnInit() {
     this.getConsultationCard();
+    this.getLatestResponse();
     this.rotateFeature();
   }
   
@@ -43,18 +48,69 @@ constructor( private apollo: Apollo ) { }
     });
   }
   
-  rotateFeature() {
-    Observable.interval(5000).subscribe(() => {
-      if (this.current_index === 2) {
-        this.current_index = 0;
-      } else {
-        this.current_index++;
-      }
+  getLatestResponse() {
+    this.apollo.query({
+      query: ConsultationResponseList, 
+      variables: {sort: 'created_at', sortDirection: 'desc'}
+    })
+    .pipe (
+      map((res: any) => res.data.consultationResponseList)
+    )
+    .subscribe((response: any) => {
+      this.latestResponse = response.data
+      this.currentReponseData = this.latestResponse[this.current_response_index];
+      console.log(this.latestResponse, 'response');
+    }, err => {
+        console.log('err', err);
     });
   }
 
-  changeCard(index) {
-    this.current_index = index;
-  }
+  rotateFeature() {
+    Observable.interval(5000).subscribe(() => {
 
+      if(this.current_card_index === 2) {
+        this.current_card_index = 0;
+      } else {
+        this.current_card_index++;
+      }
+
+      if(this.current_response_index === 2) {
+        this.current_response_index = 0;
+        this.currentReponseData = this.latestResponse[this.current_response_index];
+      } else {
+        this.current_response_index++;
+        this.currentReponseData = this.latestResponse[this.current_response_index];
+      }
+
+    });
+  }
+  
+  changeCard(index) {
+    this.current_card_index = index;
+  }
+  
+  changeSlider(index) {
+    this.current_response_index = index;
+    this.currentReponseData = this.latestResponse[this.current_response_index];
+  }
+  
+  nextSlide() {
+    if(this.current_response_index == 2) {
+      this.current_response_index = 0;
+      this.currentReponseData = this.latestResponse[this.current_response_index];
+    } else {
+      this.current_response_index++
+      this.currentReponseData = this.latestResponse[this.current_response_index];
+    }
+  }
+  
+  previousSlide() {
+    if(this.current_response_index == 0) {
+      this.current_response_index = 2;
+      this.currentReponseData = this.latestResponse[this.current_response_index];
+    } else {
+      this.current_response_index--;
+      this.currentReponseData = this.latestResponse[this.current_response_index];
+    } 
+  }
 }

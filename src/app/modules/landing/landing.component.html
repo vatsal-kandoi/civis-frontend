@@ -17,22 +17,22 @@
         <div class="card-carousel">
           <p class="card-carousel__carouse-title">IN FOCUS</p>
           <div @slideInRight>
-            <app-consultation-card *ngIf='coverCardData?.length' [consultation]="coverCardData[current_index]"></app-consultation-card> 
+            <app-consultation-card *ngIf='coverCardData?.length' [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
           </div>
           <div class="card-carousel__carousel-indicators">
             <span 
               class="dot" 
-              [ngStyle]="{'background-color': current_index == 0 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
+              [ngStyle]="{'background-color': current_card_index == 0 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
               (click)="changeCard(0)">
             </span>
             <span 
               class="dot" 
-              [ngStyle]="{'background-color': current_index == 1 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
+              [ngStyle]="{'background-color': current_card_index == 1 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
               (click)="changeCard(1)">
             </span>
             <span 
               class="dot" 
-              [ngStyle]="{'background-color': current_index == 2 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
+              [ngStyle]="{'background-color': current_card_index == 2 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
               (click)="changeCard(2)">
             </span>
           </div>
@@ -47,19 +47,31 @@
     <div class="latest-response-container">
       <p class="section-heading">LATEST RESPONSES</p>
       <div class="person-carousel">
-        <div class="carousel-arrow-left"><i class="fa fa-angle-left"></i></div>
-        <div class="carousel-inner-container">
+        <div class="carousel-arrow-left pointer" (click)='previousSlide()'><i class="fa fa-angle-left"></i></div>
+        <div @slideInRight class="carousel-inner-container">
           <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60" />
-          <p class="text-18 bold-text">Sameer Agarwal</p>
+          <p class="text-18 bold-text">{{currentReponseData?.user?.firstName}}</p>
           <p class="text-24 bold-text">National Urban Policy Framework, 2018</p>
-          <p class="text-18 italic">“The National Urban Policy Framework (NUPF) 2018 drafted by Ministry of Housing and Urban Affairs outlines an integrated and coherent approach towards the future of...”</p>
+          <p class="text-18 italic truncate">{{currentReponseData?.responseText}}</p>
         </div>
         <div class="carousel-indicator">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
+          <span 
+            class="dot" 
+            [ngStyle]="{'background-color': current_response_index == 0 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
+            (click)="changeSlider(0)">
+          </span>
+          <span 
+            class="dot" 
+            [ngStyle]="{'background-color': current_response_index == 1 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
+            (click)="changeSlider(1)">
+          </span>
+          <span 
+            class="dot" 
+            [ngStyle]="{'background-color': current_response_index == 2 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
+            (click)="changeSlider(2)">
+          </span>
         </div>
-        <div class="carousel-arrow-right"><i class="fa fa-angle-right"></i></div>
+        <div class="carousel-arrow-right pointer" (click)='nextSlide()'><i class="fa fa-angle-right"></i></div>
       </div>
     </div>
 

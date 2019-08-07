@@ -16,11 +16,25 @@
       <div class="cover-card">
         <div class="card-carousel">
           <p class="card-carousel__carouse-title">IN FOCUS</p>
-          <app-consultation-card [consultation]="covercardData" [type]="'landing'"></app-consultation-card>
+          <div @slideInRight>
+            <app-consultation-card *ngIf='coverCardData?.length' [consultation]="coverCardData[current_index]"></app-consultation-card> 
+          </div>
           <div class="card-carousel__carousel-indicators">
-            <span (click)="showCard(0)" class="dot"></span>
-            <span (click)="showCard(1)" class="dot"></span>
-            <span (click)="showCard(2)" class="dot"></span>
+            <span 
+              class="dot" 
+              [ngStyle]="{'background-color': current_index == 0 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
+              (click)="changeCard(0)">
+            </span>
+            <span 
+              class="dot" 
+              [ngStyle]="{'background-color': current_index == 1 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
+              (click)="changeCard(1)">
+            </span>
+            <span 
+              class="dot" 
+              [ngStyle]="{'background-color': current_index == 2 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
+              (click)="changeCard(2)">
+            </span>
           </div>
         </div>
         

@@ -30,10 +30,10 @@ export class ConsultationListComponent implements OnInit {
   constructor(private apollo: Apollo, private loader: LinearLoaderService) { }
 
   ngOnInit() {
-    this.fetchConsultationList();
+    this.fetchActiveConsultationList();
   }
   
-  fetchConsultationList() {
+  fetchActiveConsultationList() {
     this.consultationListQuery = this.getQuery('published');
     this.loader.show();
     this.loadingElements.consultationList = true;

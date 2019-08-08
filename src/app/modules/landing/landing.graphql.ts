@@ -19,3 +19,8 @@ export const ConsultationResponseList = gql`
     }
   }
 `
+export const ImpactStats = gql`
+  query ImpactStats {
+    impactStats
+  }
+`

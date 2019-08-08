@@ -3,14 +3,15 @@ import { Apollo } from 'apollo-angular';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { slideInRight } from '../../shared/animations/slide';
+import { fadeIn } from '../../shared/animations/fade';
 import { ConsultationList } from '../consultations/consultation-list/consultation-list.graphql';
-import { ConsultationResponseList } from './landing.graphql'; 
+import { ConsultationResponseList, ImpactStats } from './landing.graphql'; 
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
-  animations: [slideInRight],
+  animations: [slideInRight, fadeIn],
 })
 
 export class LandingComponent implements OnInit {
@@ -19,6 +20,9 @@ export class LandingComponent implements OnInit {
   current_card_index = 0;
   current_response_index = 0;
   currentReponseData: any;
+  activeTab = 'sumbit-response';
+  impactStats: any;
+  
 
 constructor( private apollo: Apollo ) { }
   
@@ -26,6 +30,7 @@ constructor( private apollo: Apollo ) { }
     this.getConsultationCard();
     this.getLatestResponse();
     this.rotateFeature();
+    this.getImpactStats();
   }
   
   getConsultationCard() {
@@ -58,11 +63,18 @@ constructor( private apollo: Apollo ) { }
     )
     .subscribe((response: any) => {
       this.latestResponse = response.data
+      console.log(this.latestResponse, 'response')
       this.currentReponseData = this.latestResponse[this.current_response_index];
-      console.log(this.latestResponse, 'response');
     }, err => {
         console.log('err', err);
     });
+  }
+
+  getImpactStats() {
+    this.apollo.query({query: ImpactStats})
+    .subscribe((stats: any) => {
+      this.impactStats = stats.data.impactStats;
+    })
   }
 
   rotateFeature() {
@@ -112,5 +124,13 @@ constructor( private apollo: Apollo ) { }
       this.current_response_index--;
       this.currentReponseData = this.latestResponse[this.current_response_index];
     } 
+  }
+
+  submitResponse() {
+    this.activeTab = 'sumbit-response';
+  }
+
+  addConsultation() {
+    this.activeTab = 'add-consultation';
   }
 }

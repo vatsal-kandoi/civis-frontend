@@ -91,38 +91,27 @@
     <div class="civis-work-section">
       <p class="section-heading">HOW CIVIS WORKS</p>
       <div class="d-flex justify-content-center mt-5">
-        <button class="app-btn circular primary">Submit Response</button>
-        <button class="app-btn circular blue-light ml-4">Add a Consultation</button>
+        <button class="app-btn circular primary" (click)="submitResponse('submit-response')">Submit Response</button>
+        <button class="app-btn circular blue-light ml-4" (click)="addConsultation('add-consultation')">Add a Consultation</button>
       </div>
     </div>
 
-    <div class="steps-wrapper">
-      <div class="carousel-arrow-left"><i class="fa fa-angle-left"></i></div>
-      <div class="steps-inner-container">
-        <div class="step-left-section"><img src="../../../assets/images/illustrations.png" /></div>
-        <div class="step-right-section">
-          <p>STEP 1</p>
-          <p>Select the consultation you want to respond to</p>
-          <button class="app-btn circular blue-light">NEXT</button>
-        </div>
-      </div>
-      <div class="carousel-arrow-right"><i class="fa fa-angle-right"></i></div>
-    </div>
+    <app-how-civis-works-carousel [tab]="activeTab"></app-how-civis-works-carousel>
 
     <div class="impact-section">
         <p class="section-heading">IMPACT SO FAR</p>
       <div class="count-grid">
         <div class="count-item">
           <p>Consultations created on Civis</p>
-          <p>37</p>
+          <p>{{impactStats?.consultation_count}}</p>
         </div>
         <div class="count-item">
           <p>Total no. of responses</p>
-          <p>4210</p>
+          <p>{{impactStats?.consultation_response_count}}</p>
         </div>
         <div class="count-item">
           <p>Total no. of citizens engaged</p>
-          <p>2,352</p>
+          <p>{{impactStats?.consultation_response_distinct_users}}</p>
         </div>
       </div>
     </div>

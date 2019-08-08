@@ -126,11 +126,11 @@ constructor( private apollo: Apollo ) { }
     } 
   }
 
-  submitResponse() {
-    this.activeTab = 'sumbit-response';
+  submitResponse(tabName) {
+    this.activeTab = tabName;
   }
 
-  addConsultation() {
-    this.activeTab = 'add-consultation';
+  addConsultation(tabName) {
+    this.activeTab = tabName;
   }
 }

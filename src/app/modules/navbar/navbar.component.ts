@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import {filter, take} from 'rxjs/operators';
@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   profilePopup = false;
   profilePopupUser = false;
   routerId: any;
+  tranparentNav = false;
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -94,4 +95,15 @@ export class NavbarComponent implements OnInit {
     this.userService.userLoaded$.next(false);
     this.profilePopupUser = false;
   }
+
+  @HostListener('window:scroll', [])
+	scrollPos() {
+		let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+		if (number < 100) {
+			this.tranparentNav = false;
+		} else if (number > 100) {
+			this.tranparentNav = true;
+		}
+  }
+  
 }

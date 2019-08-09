@@ -1,5 +1,18 @@
 @import './src/assets/styles/app';
 
+.consultation-bg-img {
+  position: fixed;
+  top: 77px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .consultation-profile {
   display: grid;
   grid-template-columns: 350px 1fr;
@@ -15,10 +28,12 @@
   &__main-section {
 
     .paper-effect {
+      position: relative;
       padding: 28px 32px;
       background-color: $white;
       box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.13);
       border-radius: 5px;
+      z-index: 1;
     }
 
     .heading {

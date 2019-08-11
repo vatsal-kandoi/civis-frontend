@@ -46,6 +46,25 @@
   font-weight: bold;
 }
 
+.italic-text {
+  font-style: italic;
+}
+
+.content {
+  margin-top: 77px;
+  @media screen and (max-width: 991px) {
+    margin-top: 57px;
+  }
+}
+
+.truncate {
+  /* autoprefixer: ignore next */      
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
 .pointer {
   cursor: pointer;
 }

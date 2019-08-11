@@ -1,0 +1,30 @@
+@import './src/assets/styles/app';
+
+.content-policy-wrapper {
+  padding: 60px;
+
+  &__title {
+    font-size: 42px;
+    color: $primary-color;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    color: #808080;
+  }
+
+  &__policy-detail-container {
+    margin-top: 33px;
+
+    .dark-text {
+      font-size: 20px;
+      color: #000;
+    }
+
+    .detail-section {
+      padding-bottom: 5rem;
+    }
+
+  }
+}

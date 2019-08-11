@@ -1,0 +1,42 @@
+@import './src/assets/styles/app';
+
+.works-wrapper {
+  padding: 60px;
+  background-color: $blue-bg-light;
+
+  &__title {
+    font-size: 42px;
+    color: #0E73B9;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    color: $black;
+  }
+
+  &__step-section {
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: 640px 1fr;
+      align-items: center;
+
+      .step-image {
+        width: 640px;
+        height: 640px;
+        object-fit: cover;
+      }
+
+      .step-points {
+        font-size: 20px;
+        color: $black;
+        li {
+          list-style-type: circle;
+        }
+      }
+
+    }
+
+  }
+  
+}

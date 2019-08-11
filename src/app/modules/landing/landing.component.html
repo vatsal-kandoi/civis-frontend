@@ -8,19 +8,33 @@
           feedback from us, the citizens, to finalise them. What are we waiting for?
         </p>
         <div class="d-flex align-items-center mt-4">
-          <button class="app-btn secondary circular participate-btn">Start participating</button>
-          <a class="civis-works-link">How Civis Works</a>
+          <button class="app-btn secondary circular participate-btn" [routerLink]="['consultations/list']">Start participating</button>
+          <p class="civis-works-link pointer" [routerLink]="['/how-civis-works']">How Civis Works</p>
         </div>
         
       </div>
       <div class="cover-card">
         <div class="card-carousel">
           <p class="card-carousel__carouse-title">IN FOCUS</p>
-          <app-consultation-card [consultation]="covercardData" [type]="'landing'"></app-consultation-card>
+          <div @slideInRight>
+            <app-consultation-card *ngIf='coverCardData?.length' [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
+          </div>
           <div class="card-carousel__carousel-indicators">
-            <span (click)="showCard(0)" class="dot"></span>
-            <span (click)="showCard(1)" class="dot"></span>
-            <span (click)="showCard(2)" class="dot"></span>
+            <span 
+              class="dot" 
+              [ngStyle]="{'background-color': current_card_index == 0 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
+              (click)="changeCard(0)">
+            </span>
+            <span 
+              class="dot" 
+              [ngStyle]="{'background-color': current_card_index == 1 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
+              (click)="changeCard(1)">
+            </span>
+            <span 
+              class="dot" 
+              [ngStyle]="{'background-color': current_card_index == 2 ? '#A6DAFF' : 'rgba(24, 148, 234, 0.7)'}" 
+              (click)="changeCard(2)">
+            </span>
           </div>
         </div>
         
@@ -33,19 +47,31 @@
     <div class="latest-response-container">
       <p class="section-heading">LATEST RESPONSES</p>
       <div class="person-carousel">
-        <div class="carousel-arrow-left"><i class="fa fa-angle-left"></i></div>
-        <div class="carousel-inner-container">
+        <div class="carousel-arrow-left pointer" (click)='previousSlide()'><i class="fa fa-angle-left"></i></div>
+        <div @slideInRight class="carousel-inner-container">
           <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60" />
-          <p class="text-18 bold-text">Sameer Agarwal</p>
+          <p class="text-18 bold-text">{{currentReponseData?.user?.firstName}}</p>
           <p class="text-24 bold-text">National Urban Policy Framework, 2018</p>
-          <p class="text-18 italic">“The National Urban Policy Framework (NUPF) 2018 drafted by Ministry of Housing and Urban Affairs outlines an integrated and coherent approach towards the future of...”</p>
+          <p class="text-18 italic truncate">{{currentReponseData?.responseText}}</p>
         </div>
         <div class="carousel-indicator">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
+          <span 
+            class="dot" 
+            [ngStyle]="{'background-color': current_response_index == 0 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
+            (click)="changeSlider(0)">
+          </span>
+          <span 
+            class="dot" 
+            [ngStyle]="{'background-color': current_response_index == 1 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
+            (click)="changeSlider(1)">
+          </span>
+          <span 
+            class="dot" 
+            [ngStyle]="{'background-color': current_response_index == 2 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
+            (click)="changeSlider(2)">
+          </span>
         </div>
-        <div class="carousel-arrow-right"><i class="fa fa-angle-right"></i></div>
+        <div class="carousel-arrow-right pointer" (click)='nextSlide()'><i class="fa fa-angle-right"></i></div>
       </div>
     </div>
 
@@ -65,79 +91,40 @@
     <div class="civis-work-section">
       <p class="section-heading">HOW CIVIS WORKS</p>
       <div class="d-flex justify-content-center mt-5">
-        <button class="app-btn circular primary">Submit Response</button>
-        <button class="app-btn circular blue-light ml-4">Add a Consultation</button>
+        <button 
+          class="app-btn circular" 
+          [ngClass]="activeTab == 'sumbit-response' ? 'primary' : 'blue-light'"
+          (click)="submitResponse('sumbit-response')">
+          Submit Response
+        </button>
+        <button 
+          class="app-btn circular ml-4"
+          [ngClass]="activeTab == 'add-consultation' ? 'primary' : 'blue-light'" 
+          (click)="addConsultation('add-consultation')">
+          Add a Consultation
+        </button>
       </div>
     </div>
 
-    <div class="steps-wrapper">
-      <div class="carousel-arrow-left"><i class="fa fa-angle-left"></i></div>
-      <div class="steps-inner-container">
-        <div class="step-left-section"><img src="../../../assets/images/illustrations.png" /></div>
-        <div class="step-right-section">
-          <p>STEP 1</p>
-          <p>Select the consultation you want to respond to</p>
-          <button class="app-btn circular blue-light">NEXT</button>
-        </div>
-      </div>
-      <div class="carousel-arrow-right"><i class="fa fa-angle-right"></i></div>
-    </div>
+    <app-how-civis-works-carousel [tab]="activeTab"></app-how-civis-works-carousel>
 
     <div class="impact-section">
         <p class="section-heading">IMPACT SO FAR</p>
       <div class="count-grid">
         <div class="count-item">
           <p>Consultations created on Civis</p>
-          <p>37</p>
+          <p>{{impactStats?.consultation_count}}</p>
         </div>
         <div class="count-item">
           <p>Total no. of responses</p>
-          <p>4210</p>
+          <p>{{impactStats?.consultation_response_count}}</p>
         </div>
         <div class="count-item">
           <p>Total no. of citizens engaged</p>
-          <p>2,352</p>
+          <p>{{impactStats?.consultation_response_distinct_users}}</p>
         </div>
       </div>
     </div>
   </section>
-
-  <section class="footer-wrapper">
-    <div class="footer-wrapper__top-section">
-      <div class="left-item">
-        <ul class="item-list">
-          <li>About Us</li>
-          <li>Careers</li>
-          <li>Blog</li>
-        </ul>
-        <ul class="item-list">
-          <li>Terms of Service</li>
-          <li>Privacy Policy </li>
-          <li>Content Policy</li>
-        </ul>
-      </div>
-      <div class="right-item">
-        <div class="social-icons">
-          <span><i class="fa fa-linkedin-square"></i></span>
-          <span><i class="fa fa-github-square"></i></span>
-          <span><i class="fa fa-facebook-square"></i></span>
-          <span><i class="fa fa-twitter-square"></i></span>
-        </div>
-        <p class="help-text">We’re here to help. <b>Get in touch</b></p>
-      </div>
-    </div>
-    <div class="footer-wrapper__bottom-section">
-      <div class="logo-container d-flex align-items-center">
-        <img src="../../../assets/images/footerlogo2.png" />
-        <img class="logo-2" src="../../../assets/images/footerlogo-1.png" />
-        <div class="policy-text">
-          Civic Innovation Foundation 2019. Unless otherwise mentioned, 
-          all content is licensed under <br /> a creative commons Attibution-No Derivates 4.0 International License
-        </div>
-      </div>
-      <div>
-        <img src="../../../assets/images/footerlogo3.png" />
-      </div>
-    </div>
-  </section>
+  <app-footer></app-footer>
 </div>

@@ -17,7 +17,9 @@ export class ConsultationListComponent implements OnInit {
   consultationListArray: Array<any>;
   perPageLimit = 15;
   consultationListQuery: QueryRef<any>;
+  closedConsultationQuery: QueryRef<any>;
   loadingElements: any = {};
+  closeConsultationData: any;
   
   @HostListener('document:scroll', ['$event'])
   onScroll(event: any) {
@@ -30,10 +32,11 @@ export class ConsultationListComponent implements OnInit {
   constructor(private apollo: Apollo, private loader: LinearLoaderService) { }
 
   ngOnInit() {
-    this.fetchConsultationList();
+    this.fetchActiveConsultationList();
+    this.fetchClosedConsultationList();
   }
   
-  fetchConsultationList() {
+  fetchActiveConsultationList() {
     this.consultationListQuery = this.getQuery('published');
     this.loader.show();
     this.loadingElements.consultationList = true;
@@ -95,5 +98,19 @@ export class ConsultationListComponent implements OnInit {
     };
     return this.apollo.watchQuery({query: ConsultationList, variables});
   }
-
+  
+  fetchClosedConsultationList() {
+    this.apollo.query({
+      query: ConsultationList, 
+      variables: {statusFilter: 'expired'}
+    })
+    .pipe (
+      map((res: any) => res.data.consultationList)
+    )
+    .subscribe(item => {
+      this.closeConsultationData = item.data;
+      console.log(this.closeConsultationData, 'closed data')
+    })
+  }
+  
 }

@@ -9,6 +9,7 @@ import { LinearLoaderComponent } from './linear-loader/linear-loader.component';
 import { LinearLoaderService } from './linear-loader/linear-loader.service';
 import { RouterModule } from '@angular/router';
 import { ErrorComponent } from './error-modal/error.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ErrorComponent } from './error-modal/error.component';
     ConfirmationModalComponent,
     ConsultationCardComponent,
     ErrorComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { ErrorComponent } from './error-modal/error.component';
     ConsultationCardComponent,
     ErrorComponent,
     ConsultationCardComponent,
-    LinearLoaderComponent
+    LinearLoaderComponent,
+    FooterComponent
   ],
   providers: [
     LinearLoaderService

@@ -19,6 +19,79 @@
   }
 }
 
+.closed-list-container {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 80px;
+  .closed-list-table {
+
+    .table-header {
+      display: flex;
+      width: 100%;
+      border-bottom: 1px solid #A8DCFF;
+      padding-bottom: 5px;
+      .header-title {
+        font-size: 12px;
+        color: #6DB4E4;
+        font-weight: 500;
+      }
+    }
+    .table-body {
+      display: flex;
+      width: 100%;
+      padding-top: 20px;
+    }
+    .cell-1 {
+      width: 40%;
+    }
+    .cell-2 {
+      width: 15%;
+    }
+    .cell-3 {
+      width: 15%;
+    }
+    .cell-4 {
+      width: 30%;
+    }
+
+    .consultation-cell {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      align-items: center;
+      grid-column-gap: 20px;
+      .c-profile-data {
+        width: 80%;
+        p:nth-child(1) {
+          color: $black;
+          font-size: 16px;
+          font-weight: 600;
+          margin: 0;
+        }
+        p:nth-child(2) {
+          color: $black;
+          font-size: 12px;
+          margin: 0;
+        }
+      }
+    }
+
+    .view-btn {
+      font-size: 13px;
+      background-color: #6DB4E4;
+      color: $white;
+      padding: 7px 22px;
+      &:hover {
+        background-color: darken(#6DB4E4, 5%);
+      }
+    }
+
+    .row-divider {
+      margin: 10px 0 10px 10rem;
+      border: .5px solid #BFE4FF;
+    }
+  }
+}
+
 .list-heading {
   font-size: 36px;
   color: $primary-color;

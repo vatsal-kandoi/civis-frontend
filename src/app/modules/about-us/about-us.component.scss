@@ -1,0 +1,106 @@
+@import './src/assets/styles/app';
+
+.about-us-wrapper {
+  padding-top: 60px;
+  background-color: $blue-bg-light;
+  &__quote-section {
+    padding: 0 65px;
+    max-width: 900px;
+
+    .quote-title {
+      font-size: 47px;
+      color: $primary-color;
+      line-height: 54px;
+      font-family: Playfair Display;
+      margin-bottom: 10px;
+    }
+
+    .quote-subtitle {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1998F0;
+      margin-bottom: 20px;
+    }
+
+    .quote-content {
+      font-size: 24px;
+      color: #000;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__content-section {
+    padding: 30px 65px;
+    max-width: 900px;
+   
+    .content-detail {
+      font-size: 18px;
+      color: #000;
+    }
+  }
+
+  &__people-section {
+    padding: 30px 65px;
+
+    .people-list-wrapper {
+      padding-bottom: 35px;
+
+      .list-title {
+        font-size: 15px;
+        font-weight: 500;
+        color: #F0653A;
+      }
+
+      .people-list-grid {
+        display: grid;
+        grid-column-gap: 113px;
+        grid-template-columns: repeat(5, 1fr);
+        padding-top: 15px;
+
+        .people-profile {
+          text-align: center;
+
+          .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: $primary-color;
+            margin: 5px 0 0;
+            
+          }
+
+          .profile-subtitle {
+            font-size: 16px;
+            color: $black;
+          }
+        }
+      }
+    }
+  }
+
+  .content-title {
+    font-size: 42px;
+    color: $primary-color;
+  }
+
+  .content-divider {
+    border-bottom: 1px solid #A8DCFF;
+    margin: 0;
+  }
+
+  .abt-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: $white;
+    color: $primary-color;
+    font-size: 13px;
+    padding: 7px 21px;
+    &:hover {
+      background-color: darken($white, 2%);
+    }
+    span {
+      margin-left: 15px;
+      font-size: 20px;
+      line-height: 0;
+    }
+  }
+}

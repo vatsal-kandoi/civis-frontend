@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   currentUser: any;
   profilePopup = false;
   routerId: any;
-  tranparentNav = false;
+  transparentNav = false;
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -84,11 +84,11 @@ export class NavbarComponent implements OnInit {
   
   @HostListener('window:scroll', [])
 	scrollPos() {
-		let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-		if (number < 100) {
-			this.tranparentNav = false;
-		} else if (number > 100) {
-			this.tranparentNav = true;
+    let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+		if (number < 150) {
+      this.transparentNav = false;
+		} else if (number > 150) {
+			this.transparentNav = true;
 		}
   }
 }

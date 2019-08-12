@@ -1,4 +1,4 @@
-<div class="navbar-index" *ngIf ="currentUrl !== 'auth'" [ngClass]="currentUrl == 'landing' ? 'blue-nav' : 'white-nav'">
+<div class="navbar-index" *ngIf ="currentUrl !== 'auth'" [ngClass]="(currentUrl == 'landing') && (transparentNav === false) ? 'blue-nav' : 'white-nav'">
 
   <nav class="navbar-space row no-gutters user-nav">
     <div class="navbar-space__left" [ngClass]="currentUrl !== 'consultations-profile' ? 'col-6' : 'col-4'">

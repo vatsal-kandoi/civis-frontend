@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { LandingGuard } from './shared/guards/landing.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { TermsOfServiceComponent } from './modules/policy/terms-of-service/terms-of-service.component';
 
 const routes: Routes = [
   {
@@ -36,8 +37,8 @@ const routes: Routes = [
     loadChildren: './modules/about-us/about-us.module#AboutUsModule'
   },
   {
-    path: 'policy',
-    loadChildren: './modules/policy/policy.module#PolicyModule'
+    path: 'terms',
+    component: TermsOfServiceComponent
   }
 ];
 

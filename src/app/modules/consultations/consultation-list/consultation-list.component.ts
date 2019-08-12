@@ -3,7 +3,7 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { ConsultationList } from './consultation-list.graphql';
 import { LinearLoaderService } from '../../../shared/components/linear-loader/linear-loader.service';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-consultation-list',
@@ -94,7 +94,8 @@ export class ConsultationListComponent implements OnInit {
     const variables = {
       perPage: this.perPageLimit,
       page: 1,
-      statusFilter: status
+      statusFilter: status,
+      featuredFilter: false 
     };
     return this.apollo.watchQuery({query: ConsultationList, variables});
   }
@@ -111,6 +112,10 @@ export class ConsultationListComponent implements OnInit {
       this.closeConsultationData = item.data;
       console.log(this.closeConsultationData, 'closed data')
     })
+  }
+  
+  convertDateType(date) {
+    return moment(date).format("Do MMM YY");
   }
   
 }

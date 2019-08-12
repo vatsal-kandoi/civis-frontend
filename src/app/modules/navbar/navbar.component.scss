@@ -154,10 +154,12 @@
 
 .blue-nav {
     background-color: #0E73B9;
+    transition: background-color .3s ease-in-out;
 }
 
 .white-nav {
     background-color: #FFFFFF;
+    transition: background-color .3s ease-in-out;
 
     .nav-btns {
         .btn {

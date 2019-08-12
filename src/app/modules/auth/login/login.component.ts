@@ -6,6 +6,7 @@ import { TokenService } from 'src/app/shared/services/token.service';
 import { Router } from '@angular/router';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { GraphqlService } from 'src/app/graphql/graphql.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit {
               private userService: UserService,
               private tokenService: TokenService,
               private errorService: ErrorService,
-              private router: Router) { }
+              private router: Router,
+              private graphqlService: GraphqlService,
+              ) { }
 
   ngOnInit() {
   }
@@ -54,6 +57,17 @@ export class LoginComponent implements OnInit {
   onLoggedIn() {
     this.tokenService.tokenHandler();
     this.userService.manageUserToken();
+  }
+
+  redirectTo(socialPlatform) {
+    switch (socialPlatform) {
+      case 'google':
+        window.location.href = `${this.graphqlService.environment.api}/signin_google`;
+        break;
+      case 'facebook':
+        window.location.href = `${this.graphqlService.environment.api}/signin_facebook`;
+        break;
+    }
   }
 
 }

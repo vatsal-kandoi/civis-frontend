@@ -22,6 +22,7 @@ export const ConsultationProfile = gql`
           url
         }
       }
+      satisfactionRatingDistribution
       responses {
         edges {
           node {
@@ -39,3 +40,19 @@ export const ConsultationProfile = gql`
     }
   }
 `
+
+export const SubmitResponseQuery = gql`
+  mutation consultationResponseCreate($consultationResponse: ConsultationResponseCreateInput!){
+    consultationResponseCreate(consultationResponse: $consultationResponse){
+      id
+      user {
+        firstName
+      }
+      consultation {
+        title
+      }
+    }
+  }
+`
+
+

@@ -18,10 +18,8 @@
   grid-template-columns: 350px 1fr;
   grid-column-gap: 20px;
   width: 80%;
-  margin: 0 auto;
+  margin: 77px auto;
   padding: 25px 0;
-
-  margin-top: 77px;
   
   @media screen and (max-width: 991px) {
     margin-top: 57px;
@@ -34,9 +32,25 @@
   &__main-section {
 
     .submit-cta {
-      position: sticky;
+      position: fixed;
       bottom: 0;
-      border: 1px solid;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      height: 63px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $primary-color;
+      .sticky-btn {
+       background: transparent;
+       color: $white;
+       padding: 10px 30px;
+       border: 1px solid $white;
+       box-sizing: border-box;
+       border-radius: 4px;
+      }
     }
 
     .paper-effect {

@@ -264,13 +264,12 @@
                 top: 0;
                 bottom: 0;
                 left: 0;
-                background-color: $primary-color;
-                opacity: .2;
+                background-color: #E3F1FC;
                 z-index: 1;
               }
 
               .active-progress {
-                opacity: .8;
+                background-color: #7EC6FF;
               }
           }
         }

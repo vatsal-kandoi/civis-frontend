@@ -76,6 +76,7 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
         this.feedbackModal.show();
       } else {
         this.router.navigateByUrl('/auth');
+        this.consultationsService.enableSubmitResponse.next(false);
       }
 
     }
@@ -137,6 +138,17 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
         this.currentUser = null;
       }
     });
+  }
+
+  getPercentageValue(rating, selectedKey) {
+    let total = 0;
+    for (const key in rating) {
+      if (rating[key]) {
+        total += rating[key];
+      }
+    }
+    const selectedPercentage = (rating[selectedKey] / total) * 100;
+    return selectedPercentage;
   }
 
   ngOnDestroy() {

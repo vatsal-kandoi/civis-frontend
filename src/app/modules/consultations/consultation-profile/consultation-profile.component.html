@@ -85,8 +85,9 @@
       <div class="modal-body">
         <label class="radio-block">
             <div class="radio-btn">
-              <div>Dissatisfied</div>
-              <div class="mx-2">{{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : 0}}</div>
+              <div class="radio-text" [class.active-text]="responseFeedback === 'dissatisfied'">Dissatisfied</div>
+              <div class="mx-2" *ngIf="responseFeedback">{{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : 0}}</div>
+              <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseFeedback === 'dissatisfied'" [ngStyle]="{'width': satisfactionRatingDistribution?.dissatisfied ? getPercentageValue(satisfactionRatingDistribution, 'dissatisfied') + '%' : '0%' }"></div>
             </div>
             <div class="input-space">
                 <input type="radio" class="cm-radio ml-3" name="feedback" value="dissatisfied" [(ngModel)]="responseFeedback"
@@ -95,8 +96,9 @@
         </label>
         <label class="radio-block">
             <div class="radio-btn">
-              <div>Somewhat Dissatisfied</div>
-              <div class="mx-2">{{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : 0}}</div>
+              <div class="radio-text" [class.active-text]="responseFeedback === 'somewhat_dissatisfied'">Somewhat Dissatisfied</div>
+              <div class="mx-2" *ngIf="responseFeedback">{{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : 0}}</div>
+              <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseFeedback === 'somewhat_dissatisfied'" [ngStyle]="{'width': satisfactionRatingDistribution?.somewhat_dissatisfied ? getPercentageValue(satisfactionRatingDistribution, 'somewhat_dissatisfied') + '%' : '0%' }"></div>
             </div>
             <div class="input-space">
                 <input type="radio" class="cm-radio ml-3" name="feedback" value="somewhat_dissatisfied" [(ngModel)]="responseFeedback"
@@ -105,8 +107,9 @@
         </label>
         <label class="radio-block">
             <div class="radio-btn">
-                <div>Somewhat Satisfied</div>
-                <div class="mx-2">{{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : 0}}</div>
+                <div class="radio-text" [class.active-text]="responseFeedback === 'somewhat_satisfied'">Somewhat Satisfied</div>
+                <div class="mx-2" *ngIf="responseFeedback">{{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : 0}}</div>
+                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseFeedback === 'somewhat_satisfied'" [ngStyle]="{'width': satisfactionRatingDistribution?.somewhat_satisfied ? getPercentageValue(satisfactionRatingDistribution, 'somewhat_satisfied') + '%' : '0%' }"></div>
               </div>
               <div class="input-space">
                   <input type="radio" class="cm-radio ml-3" name="feedback" value="somewhat_satisfied" [(ngModel)]="responseFeedback"
@@ -115,8 +118,9 @@
         </label>
         <label class="radio-block">
             <div class="radio-btn">
-                <div>Satisfied</div>
-                <div class="mx-2">{{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : 0}}</div>
+                <div class="radio-text" [class.active-text]="responseFeedback === 'satisfied'">Satisfied</div>
+                <div class="mx-2" *ngIf="responseFeedback">{{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : 0}}</div>
+                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseFeedback === 'satisfied'" [ngStyle]="{'width': satisfactionRatingDistribution?.satisfied ? getPercentageValue(satisfactionRatingDistribution, 'satisfied') + '%' : '0%' }"></div>
               </div>
               <div class="input-space">
                   <input type="radio" class="cm-radio ml-3" name="feedback" value="satisfied" [(ngModel)]="responseFeedback"

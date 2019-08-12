@@ -7,7 +7,7 @@ import { ContentPolicyComponent } from './content-policy/content-policy.componen
 
 const routes: Routes = [
   {
-    path: 'terms-of-service',
+    path: 'terms',
     component: TermsOfServiceComponent
   },
   {

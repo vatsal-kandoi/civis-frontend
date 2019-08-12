@@ -37,7 +37,8 @@ constructor( private apollo: Apollo ) { }
     const variables = {
       perPage: null,
       page: null,
-      statusFilter: 'published'
+      statusFilter: 'published',
+      featuredFilter: true 
     };
     this.apollo.query({
       query: ConsultationList, 

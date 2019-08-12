@@ -7,10 +7,6 @@ import { ContentPolicyComponent } from './content-policy/content-policy.componen
 
 const routes: Routes = [
   {
-    path: 'terms',
-    component: TermsOfServiceComponent
-  },
-  {
     path: 'content-policy',
     component: ContentPolicyComponent
   }
@@ -22,6 +18,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedComponentsModule
+  ],
+  exports: [
+    TermsOfServiceComponent
   ]
 })
 

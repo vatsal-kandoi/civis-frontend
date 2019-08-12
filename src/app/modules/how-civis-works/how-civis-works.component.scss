@@ -1,6 +1,7 @@
 @import './src/assets/styles/app';
 
 .works-wrapper {
+  margin-top: 77px;
   padding: 60px;
   background-color: $blue-bg-light;
 
@@ -16,6 +17,13 @@
 
   &__step-section {
 
+    .step-section-title {
+      display: inline-block;
+      font-size: 34px;
+      color: $primary-color;
+      border-bottom: 2px solid $primary-color;
+    }
+
     .step-grid {
       display: grid;
       grid-template-columns: 640px 1fr;
@@ -28,9 +36,15 @@
       }
 
       .step-points {
-        font-size: 20px;
         color: $black;
+
+        .step-number {
+          font-size: 20px;
+          font-weight: bold;
+        }
+
         li {
+          font-size: 16px;
           list-style-type: circle;
         }
       }

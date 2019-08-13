@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { LandingGuard } from './shared/guards/landing.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { TermsOfServiceComponent } from './modules/policy/terms-of-service/terms-of-service.component';
+import { ContentPolicyComponent } from './modules/policy/content-policy/content-policy.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'terms',
     component: TermsOfServiceComponent
+  },
+  {
+    path: 'content-policy',
+    component: ContentPolicyComponent
   }
 ];
 

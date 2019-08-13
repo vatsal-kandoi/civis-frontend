@@ -30,13 +30,13 @@
             </div>
           </div>
           <div class="cell-2">
-            <p class="text-14">{{item.responses.totalCount}}</p>
+            <p class="reponse-count-text">{{item.responses.totalCount}}</p>
           </div>
           <div class="cell-3">
-
+            <p class="closed-date">{{convertDateType(item.responseDeadline)}}</p>
           </div>
           <div class="cell-4 text-center">
-            <button class="app-btn view-btn">VIEW DISCUSSION</button>
+            <button class="app-btn view-btn" [routerLink]="['/consultations', item.id]">VIEW DISCUSSION</button>
           </div>
         </div>
         <hr class="row-divider" />

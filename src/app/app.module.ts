@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileModule } from './modules/profile/profile.module';
 import { LandingGuard } from './shared/guards/landing.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { PolicyModule } from './modules/policy/policy.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
     NavbarModule,
     ProfileModule,
     BrowserAnimationsModule,
+    PolicyModule
   ],
   providers: [
     LandingGuard,

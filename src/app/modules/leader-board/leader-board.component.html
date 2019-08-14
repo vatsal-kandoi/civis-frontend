@@ -8,7 +8,7 @@
       <p class="header-right">All India<span><i class="fa fa-angle-down"></i></span></p>
     </section>
     <section class="container-body">
-      <div class="container-body__data-row">
+      <div class="container-body__data-row pointer" (click)="openLeaderModal()">
         <div class="row-left-item">
           <p class="row-num">#1</p>
           <img 
@@ -57,5 +57,75 @@
         <p class="row-right-item mb-0">2,300 <span>Points</span></p>
       </div>
     </section>
+  </div>
+</div>
+
+<!-- leader modal -->
+<div 
+  bsModal #leaderModal="bs-modal" class="modal fade leader-modal" tabindex="-1"
+  [config]="{show: false}"
+  role="dialog" aria-labelledby="leaderModal"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div class="leader-profile">
+          <img 
+            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
+            class="avatar avatar--80"
+          />
+          <p class="profile-name">Siddharth Adelkar</p>
+        </div>
+        <div class="modal-close-btn" (click)="closeModal()"><i class="fa fa-times"></i></div>
+      </div>
+
+      <div class="modal-body">
+        <div class="leader-detail-grid">
+          <div class="detail-item">
+            <p>TOTAL POINTS</p>
+            <p>3,450</p>
+          </div>
+          <div class="detail-item">
+            <p>RANK IN MUMBAI</p>
+            <p>1</p>
+          </div>
+          <div class="detail-item">
+            <p>RANK IN MAHARASHTRA</p>
+            <p>1</p>
+          </div>
+          <div class="detail-item">
+            <p>BEST SO FAR</p>
+            <p>#1 in All India</p>
+          </div>
+        </div>
+
+        <div class="participated-section">
+          <p class="paticipant-title">Consultations participated in</p>
+          <div class="paticipant-list">
+            <img 
+              class="avatar avatar--42" 
+              src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
+            />
+            <div class="list-detail">
+              <p>National Urban Policy Framework</p>
+              <p>Ministry of Housing and Urban Planning</p>
+            </div>
+          </div>
+          <hr  class="paticipant-divider" />
+          <div class="paticipant-list">
+            <img 
+              class="avatar avatar--42" 
+              src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
+            />
+            <div class="list-detail">
+              <p>National Urban Policy Framework</p>
+              <p>Ministry of Housing and Urban Planning</p>
+            </div>
+          </div>
+          <hr  class="paticipant-divider" />
+        </div>
+      </div>
+    </div>
   </div>
 </div>

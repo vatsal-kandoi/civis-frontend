@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-leader-board',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderBoardComponent implements OnInit {
 
+  @ViewChild('leaderModal') leaderModal: ModalDirective;
+
   constructor() { }
 
   ngOnInit() {
+  }
+  
+  openLeaderModal() {
+    this.leaderModal.show();
+  }
+
+  closeModal() {
+    this.leaderModal.hide();
   }
 
 }

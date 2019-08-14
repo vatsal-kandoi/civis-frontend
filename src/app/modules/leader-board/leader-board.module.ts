@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SharedComponentsModule } from '../../shared/components/shared-components.module';
 import { Routes, RouterModule } from '@angular/router';
 import { LeaderBoardComponent } from './leader-board.component';
+import { ModalModule } from 'ngx-bootstrap';
+ 
 
 const routes: Routes = [
   {
@@ -17,6 +19,7 @@ const routes: Routes = [
     CommonModule,
     SharedComponentsModule,
     RouterModule.forChild(routes),
+    ModalModule
   ]
 })
 

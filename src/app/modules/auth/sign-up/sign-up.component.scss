@@ -6,7 +6,25 @@
 
     &__left {
         padding: 70px 80px;
-        background: linear-gradient(180deg, #0E73B9 28.22%, rgba(14, 115, 185, 0) 95.05%);
+        background-image: url('../../../../assets/images/featured-case-study.png');
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(180deg, #0E73B9 28.22%, rgba(14, 115, 185, 0) 95.05%);
+        }
+
+        .cover-detail {
+            position: relative;
+            z-index: 1;
+        }
 
         .back-btn {
             border: none;

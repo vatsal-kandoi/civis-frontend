@@ -4,6 +4,7 @@ import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.com
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { Routes, RouterModule } from '@angular/router';
 import { ContentPolicyComponent } from './content-policy/content-policy.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TermsOfServiceComponent, ContentPolicyComponent],
+  declarations: [TermsOfServiceComponent, ContentPolicyComponent, PrivacyPolicyComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -25,6 +25,19 @@
 
     .detail-section {
       padding-bottom: 5rem;
+      &__heading {
+        font-size: 18px;
+        font-weight: bold;
+        color: $black;
+      }
+      &__subheading {
+        font-size: 16px;
+        color: $black;
+      }
+      &__content {
+        font-size: 16px;
+        color: $black; 
+      }
     }
 
   }

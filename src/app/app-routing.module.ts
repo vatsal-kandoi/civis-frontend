@@ -31,6 +31,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'leader-board',
+    loadChildren: './modules/leader-board/leader-board.module#LeaderBoardModule'
+  },
+  {
     path: 'how-civis-works',
     loadChildren: './modules/how-civis-works/how-civis-works.module#HowCivisWorksModule'
   },

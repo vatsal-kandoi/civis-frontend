@@ -23,7 +23,8 @@ export const ConsultationProfile = gql`
         }
       }
       satisfactionRatingDistribution
-      responses {
+      respondedOn
+      sharedResponses {
         edges {
           node {
             id
@@ -50,6 +51,20 @@ export const SubmitResponseQuery = gql`
       }
       consultation {
         title
+        respondedOn
+        sharedResponses {
+          edges {
+            node {
+              id
+              responseText
+              user {
+                id
+                firstName
+              }
+            }
+          }
+          totalCount
+        }
       }
     }
   }

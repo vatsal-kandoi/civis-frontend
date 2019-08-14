@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ConsultationProfile, SubmitResponseQuery } from './consultation-profile.graphql';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { ModalDirective } from 'ngx-bootstrap';
@@ -27,7 +28,7 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
   satisfactionRatingDistribution: any;
   responseFeedback: any;
   responseText = '';
-  responseVisibility = false;
+  responseVisibility = true;
   step: number;
   currentUser: any;
 
@@ -52,17 +53,18 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
   }
 
   getConsultationProfile() {
-    this.apollo.query({
+    this.apollo.watchQuery({
       query: ConsultationProfile,
       variables: {id: this.consultationId}
     })
+    .valueChanges
     .pipe (
       map((res: any) => res.data.consultationProfile)
     )
     .subscribe((data: any) => {
         this.profileData = data;
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
-        this.responseList = data.responses.edges
+        this.responseList = data.sharedResponses.edges
         console.log(this.responseList);
     }, err => {
       console.log('err', err);
@@ -87,17 +89,28 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
       consultationId: this.consultationId,
       responseText : this.responseText,
       satisfactionRating : this.responseFeedback,
-      visibility: this.responseVisibility ? 'public' : 'shared'
+      visibility: this.responseVisibility ? 'shared' : 'anonymous'
     };
     if (this.checkProperties(consultationResponse)) {
       this.apollo.mutate({
         mutation: SubmitResponseQuery,
         variables: {
           consultationResponse: consultationResponse
+        },
+        update: (store, {data: res}) => {
+          const variables = {id: this.consultationId};
+          const resp: any = store.readQuery({query: ConsultationProfile, variables});
+          if (res) {
+            resp.consultationProfile.respondedOn = res.consultationResponseCreate.consultation.respondedOn;
+            resp.consultationProfile.sharedResponses = res.consultationResponseCreate.consultation.sharedResponses;
+          }
+          store.writeQuery({query: ConsultationProfile, variables, data: res});
         }
       })
-      .subscribe((res) => {
-        console.log('response', res);
+      .pipe (
+        map((res: any) => res.data.consultationResponseCreate)
+      )
+      .subscribe((response) => {
         this.feedbackModal.hide();
       });
     }
@@ -105,7 +118,7 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
 
   checkProperties(obj) {
     for (const key in obj) {
-      if (obj[key] === null && obj[key] === '') {
+      if (obj[key] === null ||  obj[key] === '' || obj[key] === undefined) {
         return false;
       }
     }
@@ -113,8 +126,9 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
 }
 
   choose(value) {
-    console.log(value);
-    this.responseFeedback = value;
+    if (!this.responseFeedback) {
+      this.responseFeedback = value;
+    }
   }
 
   enableSubmitResponse(value) {
@@ -149,6 +163,27 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
     }
     const selectedPercentage = (rating[selectedKey] / total) * 100;
     return selectedPercentage;
+  }
+
+  showCreateResponse() {
+    if ((this.checkExpired(this.profileData ? this.profileData.responseDeadline : null) === 'Expired')
+        || !this.currentUser || (this.profileData && this.profileData.respondedOn)) {
+        return false;
+    }
+    return true;
+  }
+
+  checkExpired(deadline) {
+    if (deadline) {
+      const today = moment();
+      const lastDate = moment(deadline);
+      const difference = lastDate.diff(today, 'days');
+      if (difference <= 0) {
+        return 'Expired';
+      } else {
+        return `Active`;
+      }
+    }
   }
 
   ngOnDestroy() {

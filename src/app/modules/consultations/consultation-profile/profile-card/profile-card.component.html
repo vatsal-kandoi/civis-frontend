@@ -13,11 +13,13 @@
     </div>
     <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
       <p class="days-remaining m-0">{{getRemainigDays(profile?.responseDeadline)}}</p>
-      <a href="javascript:void(0)" class="icon-circle">
+      <a [href]="'https://calendar.google.com/calendar/r/eventedit?text=' + profile?.title" class="icon-circle" target="_blank">
         <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
       </a>
     </div>
-    <button class="btn-submit mt-3 mb-3" [ngClass]="enableSubmitResponse ? 'active' : ''" (click)='stepNext()'>SUBMIT RESPONSE</button>
+    <button class="btn-submit mt-3 mb-3" [ngClass]="enableSubmitResponse ? 'active' : ''" (click)='stepNext()'>
+      {{profile?.respondedOn ? 'RESPONSE SUBMITTED' : 'SUBMIT RESPONSE'}}
+    </button>
     <button class="btn-circular">
       <span class="mr-2 clr-blue"><i class="fa fa-share"></i></span>
       <span class="blue-text bold-text">Spread the word</span>

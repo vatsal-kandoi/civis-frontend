@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ConsultationProfile, SubmitResponseQuery } from './consultation-profile.graphql';
+import { ConsultationProfile, SubmitResponseQuery, ConsultationProfileCurrentUser } from './consultation-profile.graphql';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
@@ -42,9 +42,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
       this.subscription = this.activatedRoute.params.subscribe((param: any) => {
         this.consultationId = +param['id'];
         console.log(param['id']);
-        if (this.consultationId) {
-          this.getConsultationProfile();
-        }
       });
   }
 
@@ -53,8 +50,9 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
   }
 
   getConsultationProfile() {
+    const query = ConsultationProfileCurrentUser;
     this.apollo.watchQuery({
-      query: ConsultationProfile,
+      query: this.currentUser ? ConsultationProfileCurrentUser : ConsultationProfile,
       variables: {id: this.consultationId}
     })
     .valueChanges
@@ -99,12 +97,12 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
         },
         update: (store, {data: res}) => {
           const variables = {id: this.consultationId};
-          const resp: any = store.readQuery({query: ConsultationProfile, variables});
+          const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
           if (res) {
-            resp.consultationProfile.respondedOn = res.consultationResponseCreate.consultation.respondedOn;
-            resp.consultationProfile.sharedResponses = res.consultationResponseCreate.consultation.sharedResponses;
+            resp.consultationProfileCConsultationProfileCurrentUser.respondedOn = res.consultationResponseCreate.consultation.respondedOn;
+            resp.consultationProfileCConsultationProfileCurrentUser.sharedResponses = res.consultationResponseCreate.consultation.sharedResponses;
           }
-          store.writeQuery({query: ConsultationProfile, variables, data: res});
+          store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: res});
         }
       })
       .pipe (
@@ -148,8 +146,14 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
     .subscribe((data) => {
       if (data) {
         this.currentUser = this.userService.currentUser;
+        if (this.consultationId) {
+          this.getConsultationProfile();
+        }
       } else {
         this.currentUser = null;
+        if (this.consultationId) {
+          this.getConsultationProfile();
+        }
       }
     });
   }

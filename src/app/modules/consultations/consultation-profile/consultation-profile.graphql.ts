@@ -23,6 +23,47 @@ export const ConsultationProfile = gql`
         }
       }
       satisfactionRatingDistribution
+      sharedResponses {
+        edges {
+          node {
+            id
+            responseText
+            user {
+              id
+              firstName
+            }
+          }
+        }
+        totalCount
+      }
+      updatedAt
+    }
+  }
+`
+
+export const ConsultationProfileCurrentUser = gql`
+  query consultationProfileCurrentUser($id: Int!) {
+    consultationProfile(id: $id) {
+      id
+      title
+      summary
+      responseDeadline
+      url
+      ministry {
+        id
+        name
+        coverPhoto {
+          id
+          filename
+          url
+        }
+        logo {
+          id
+          filename
+          url
+        }
+      }
+      satisfactionRatingDistribution
       respondedOn
       sharedResponses {
         edges {

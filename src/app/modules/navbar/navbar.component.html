@@ -1,4 +1,4 @@
-<div class="navbar-index" *ngIf ="currentUrl !== 'auth'" [ngClass]="currentUrl == 'landing' ? 'blue-nav' : 'white-nav'">
+<div class="navbar-index" *ngIf ="currentUrl !== 'auth'" [ngClass]="(currentUrl == 'landing') && (transparentNav === false) ? 'blue-nav' : 'white-nav'">
 
   <nav class="navbar-space row no-gutters user-nav">
     <div class="navbar-space__left" [ngClass]="currentUrl !== 'consultations-profile' ? 'col-6' : 'col-4'">
@@ -13,7 +13,7 @@
           <button class="btn btn-transparent font-weight-bold">Leaderboard</button>
         </div>
         <div class="nav-btns">
-          <button class="btn btn-transparent">How Civis Works</button>
+          <button class="btn btn-transparent" [routerLink]="['/how-civis-works']">How Civis Works</button>
         </div>
       </div>
     </div>

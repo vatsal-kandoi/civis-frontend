@@ -3,8 +3,7 @@
     <div class="left-item">
       <ul class="item-list">
         <li [routerLink]="['/about-us']">About Us</li>
-        <li>Careers</li>
-        <li>Blog</li>
+        <a href="https://medium.com/civis-vote" target="_blank" class="text-decoration-none"><li>Blog</li></a>
       </ul>
       <ul class="item-list">
         <li [routerLink]="['/terms']">Terms of Service</li>
@@ -14,12 +13,20 @@
     </div>
     <div class="right-item">
       <div class="social-icons">
-        <span><i class="fa fa-linkedin-square"></i></span>
-        <span><i class="fa fa-github-square"></i></span>
-        <span><i class="fa fa-facebook-square"></i></span>
-        <span><i class="fa fa-twitter-square"></i></span>
+        <a href="https://in.linkedin.com/company/civis-vote" target="_blank">
+          <span><i class="fa fa-linkedin-square"></i></span>
+        </a>
+        <a href="https://github.com/civis-vote" target="_blank">
+          <span><i class="fa fa-github-square"></i></span>
+        </a>
+        <a href="https://www.facebook.com/Civis.Vote/" target="_blank">
+          <span><i class="fa fa-facebook-square"></i></span>
+        </a>
+        <a href="https://twitter.com/civis_vote" target="_blank">
+          <span><i class="fa fa-twitter-square"></i></span>
+        </a>
       </div>
-      <p class="help-text">We’re here to help. <b>Get in touch</b></p>
+      <p class="help-text">We’re here to help. <b><a class="text-decoration-none" href="mailto:info@civis.vote">Get in touch</a></b></p>
     </div>
   </div>
   <div class="footer-wrapper__bottom-section">

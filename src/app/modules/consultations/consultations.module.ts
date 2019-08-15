@@ -12,6 +12,8 @@ import { ProfileCardComponent } from './consultation-profile/profile-card/profil
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {ModalModule} from 'ngx-bootstrap';
 import { NgxUploaderModule } from 'ngx-uploader';
+import { AngularDraggableModule } from 'angular2-draggable';
+
 
 
 
@@ -25,7 +27,8 @@ import { NgxUploaderModule } from 'ngx-uploader';
         NgSelectModule,
         BsDatepickerModule.forRoot(),
         ModalModule,
-        NgxUploaderModule
+        NgxUploaderModule,
+        AngularDraggableModule
     ],
     exports: [],
     declarations: [

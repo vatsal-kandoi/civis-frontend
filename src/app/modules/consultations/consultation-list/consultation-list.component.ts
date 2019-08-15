@@ -15,11 +15,14 @@ export class ConsultationListComponent implements OnInit {
 
   consultationListData: any;
   consultationListArray: Array<any>;
+  consultationListPaging: any;
   perPageLimit = 15;
   consultationListQuery: QueryRef<any>;
   closedConsultationQuery: QueryRef<any>;
   loadingElements: any = {};
-  closeConsultationData: any;
+  closedConsultationList: Array<any>;
+  closedConsultationPaging: any;
+  loadClosedConsultation = false;
   
   @HostListener('document:scroll', ['$event'])
   onScroll(event: any) {
@@ -33,7 +36,6 @@ export class ConsultationListComponent implements OnInit {
 
   ngOnInit() {
     this.fetchActiveConsultationList();
-    this.fetchClosedConsultationList();
   }
   
   fetchActiveConsultationList() {
@@ -49,6 +51,12 @@ export class ConsultationListComponent implements OnInit {
             this.loadingElements.consultationList = false;
             this.consultationListData = item;
             this.consultationListArray = item.data;
+            this.consultationListPaging = item.paging;
+            if (!this.consultationListArray.length || 
+              (this.consultationListPaging.currentPage === this.consultationListPaging.totalPages)) {
+                this.loadClosedConsultation = true;
+                this.fetchClosedConsultationList();
+              }
         }, err => {
             this.loadingElements.consultationList = false;
             this.loader.hide();
@@ -60,12 +68,16 @@ export class ConsultationListComponent implements OnInit {
     if (this.loadingElements.consultationListMore || this.loadingElements.consultationList) {
       return;
     }
-    if(this.consultationListData.paging.totalPages > this.consultationListData.paging.currentPage) {
+    let pagingData = this.consultationListData.paging;
+    if (this.loadClosedConsultation) {
+      pagingData = this.closedConsultationPaging;
+    }
+    if(pagingData.totalPages > pagingData.currentPage) {
       this.loader.show();
       this.loadingElements.consultationListMore = true;
       this.consultationListQuery.fetchMore({
         variables: {
-          page: ++this.consultationListData.paging.currentPage
+          page: ++pagingData.currentPage
         },
         updateQuery: (prev, {fetchMoreResult}) => {
           this.loader.hide();
@@ -101,17 +113,24 @@ export class ConsultationListComponent implements OnInit {
   }
   
   fetchClosedConsultationList() {
-    this.apollo.query({
-      query: ConsultationList, 
-      variables: {statusFilter: 'expired'}
-    })
-    .pipe (
-      map((res: any) => res.data.consultationList)
-    )
-    .subscribe(item => {
-      this.closeConsultationData = item.data;
-      console.log(this.closeConsultationData, 'closed data')
-    })
+    this.consultationListQuery = this.getQuery('expired');
+    this.loader.show();
+    this.loadingElements.consultationList = true;
+    this.consultationListQuery
+      .valueChanges 
+        .pipe (
+          map((res: any) => res.data.consultationList)
+        )
+        .subscribe(item => {
+            this.loadingElements.consultationList = false;
+            // this.closedConsultationData = item;
+            this.closedConsultationList = item.data;
+            this.closedConsultationPaging = item.paging;
+        }, err => {
+            this.loadingElements.consultationList = false;
+            this.loader.hide();
+            console.log('not working', err);
+        })
   }
   
   convertDateType(date) {

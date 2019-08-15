@@ -3,14 +3,16 @@
   <nav class="navbar-space row no-gutters user-nav">
     <div class="navbar-space__left" [ngClass]="currentUrl !== 'consultations-profile' ? 'col-6' : 'col-4'">
       <div class="logo-space" [routerLink]="currentUser ? '/profile' : '/'">
-        <img class="logo" src='assets/images/brand-logo/brand-logo.svg' />
+        <img class="logo" src='assets/images/navlogo.png' />
       </div>
       <div class="row no-gutters justify-content-between align-items-center links" *ngIf="currentUrl !== 'consultations-profile'">
         <div class="nav-btns">
-          <button class="btn btn-transparent font-weight-bold" [routerLink]="['consultations/list']">Active Consultations</button>
+          <button class="btn btn-transparent font-weight-bold" [routerLink]="['consultations/list']">
+            Active Consultations <span class="active-count-box">{{activeCount}}</span>
+          </button>
         </div>
         <div class="nav-btns">
-          <button class="btn btn-transparent font-weight-bold">Leaderboard</button>
+          <button class="btn btn-transparent font-weight-bold" [routerLink]="['/leader-board']">Leaderboard</button>
         </div>
         <div class="nav-btns">
           <button class="btn btn-transparent" [routerLink]="['/how-civis-works']">How Civis Works</button>

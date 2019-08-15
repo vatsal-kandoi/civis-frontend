@@ -14,10 +14,13 @@
     border-bottom: 1px solid #DCDCDC;
 
     .section-title {
-      @include regular-text($color: #000);
+      font-size: 18px;
+      font-weight: bold;
+      color: $black;
     }
     .section-content {
-      @include regular-text($color: #000);
+      font-size: 16px;
+      color: $black;
     }
   }
 }

@@ -4,6 +4,7 @@ import { LandingGuard } from './shared/guards/landing.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { TermsOfServiceComponent } from './modules/policy/terms-of-service/terms-of-service.component';
 import { ContentPolicyComponent } from './modules/policy/content-policy/content-policy.component';
+import { PrivacyPolicyComponent } from './modules/policy/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'leader-board',
+    loadChildren: './modules/leader-board/leader-board.module#LeaderBoardModule'
+  },
+  {
     path: 'how-civis-works',
     loadChildren: './modules/how-civis-works/how-civis-works.module#HowCivisWorksModule'
   },
@@ -44,6 +49,10 @@ const routes: Routes = [
   {
     path: 'content-policy',
     component: ContentPolicyComponent
+  },
+  {
+    path: 'privacy',
+    component: PrivacyPolicyComponent
   }
 ];
 

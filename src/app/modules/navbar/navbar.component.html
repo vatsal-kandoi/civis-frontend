@@ -7,10 +7,12 @@
       </div>
       <div class="row no-gutters justify-content-between align-items-center links" *ngIf="currentUrl !== 'consultations-profile'">
         <div class="nav-btns">
-          <button class="btn btn-transparent font-weight-bold" [routerLink]="['consultations/list']">Active Consultations</button>
+          <button class="btn btn-transparent font-weight-bold" [routerLink]="['consultations/list']">
+            Active Consultations <span class="active-count-box">{{activeCount}}</span>
+          </button>
         </div>
         <div class="nav-btns">
-          <button class="btn btn-transparent font-weight-bold">Leaderboard</button>
+          <button class="btn btn-transparent font-weight-bold" [routerLink]="['/leader-board']">Leaderboard</button>
         </div>
         <div class="nav-btns">
           <button class="btn btn-transparent" [routerLink]="['/how-civis-works']">How Civis Works</button>

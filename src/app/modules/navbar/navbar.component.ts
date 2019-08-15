@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
+import { Apollo } from 'apollo-angular';
+import { map } from 'rxjs/operators';
+import { ConsultationList } from './navbar.graphql';
 
 @Component({
   selector: 'app-navbar',
@@ -16,8 +19,9 @@ export class NavbarComponent implements OnInit {
   profilePopup = false;
   routerId: any;
   transparentNav = false;
+  activeCount: any;
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService, private apollo: Apollo,) { }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -26,6 +30,7 @@ export class NavbarComponent implements OnInit {
       }
     });
     this.getCurrentUser();
+    this.getActiveConsulationCount();
   }
 
   openMenu() {
@@ -90,5 +95,18 @@ export class NavbarComponent implements OnInit {
 		} else if (number > 150) {
 			this.transparentNav = true;
 		}
+  }
+
+  getActiveConsulationCount() {
+    this.apollo.query({
+      query: ConsultationList, 
+      variables: {statusFilter: 'published',featuredFilter: false}
+    })
+    .pipe (
+      map((res: any) => res.data.consultationList)
+    )
+    .subscribe(item => {
+      this.activeCount = item.paging.totalItems;
+    })
   }
 }

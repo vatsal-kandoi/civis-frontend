@@ -23,7 +23,7 @@
       </div>
 
       <div class="profile-change-cta">
-          Change name
+          <button class="btn btn-transparent p-0" (click)="openModal() ; updateField = 'name'">Change name</button>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
         </div>
 
         <div class="login-change-cta">
-            Change email/username        
+            <button class="btn btn-transparent p-0">Change email/username</button>
         </div>
 
         <div class="login-change-cta">
@@ -59,13 +59,13 @@
         <div class="contact-info">
             <div class="contact-details">
                 <div class="contact-details__phone">
-                    +91 9108292413
+                    {{currentUser?.phoneNumber ? currentUser?.phoneNumber : 'N/A'}}
                 </div>
               </div>
         </div>
 
         <div class="contact-change-cta">
-            Change phone number        
+            <button class="btn btn-transparent p-0" (click)="openModal() ; updateField = 'phone number'">Change phone number</button>     
         </div>
 
     </div>
@@ -96,28 +96,28 @@
                 TOTAL POINTS
             </div>
             <div class="stats-info__rewards">
-              NA
+              {{ getTotalPoints(currentUser?.responses?.edges) }}
             </div>
         </div>
         <div class="col-md-2">
             <div class="stats-info__heading">
-                TOTAL POINTS
+                {{'Rank in ' + currentUser?.city?.name | uppercase}}
             </div>
             <div class="stats-info__rewards">
-              NA
+              {{currentUser?.cityRank}}
             </div>
         </div>
         <div class="col-md-2">
             <div class="stats-info__heading">
-                TOTAL POINTS
+                {{'Rank in ' + currentUser?.city?.parent?.name | uppercase}}
             </div>
             <div class="stats-info__rewards">
-              NA
+              {{currentUser?.stateRank}}
             </div>
         </div>
         <div class="col-md-2">
             <div class="stats-info__heading">
-                TOTAL POINTS
+              BEST SO FAR
             </div>
             <div class="stats-info__rewards">
               NA
@@ -140,3 +140,89 @@
   </div>
 
 </div>
+
+
+<div class="update-user-index">
+    <div bsModal #updateUserModal="bs-modal" class="modal fade" tabindex="-1"
+    [config]="{show: false, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}"
+    [ngClass]="showModal ? 'align-center' : ''"
+    role="dialog" aria-labelledby="updateUserModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <div class="title"> {{'Change your '+ updateField}}</div>
+            <div (click)="closeModal()">X</div>
+        </div>
+        <div class="modal-body">
+          <div>
+            <form #userForm="ngForm" (ngSubmit)="updateUser(userForm)" autocomplete="off">
+              <div *ngIf="updateField == 'name'">
+                  <div class="input-box">
+                      <label for="firstName">First name</label>
+                      <div class="input-box__border">
+                          <input placeholder="Siddharth" type="text" id="firstName" #firstName="ngModel" name="firstName" [(ngModel)]="user.firstName" required />   
+                      </div>
+                      <div *ngIf="firstName?.invalid && (firstName?.touched || userForm.submitted)" class="error-msg">First name is Required</div>
+                  </div>
+          
+                  <div class="input-box">
+                      <label for="lastName">Last name</label>
+                      <div class="input-box__border">
+                          <input placeholder="Gautam" type="text" id="lastName" #lastName="ngModel" name="lastName" [(ngModel)]="user.lastName" required />
+                      </div>
+                      <div *ngIf="lastName?.invalid && (lastName?.touched || userForm.submitted)" class="error-msg">Last name is Required</div>
+                  </div>
+              </div>
+              <div *ngIf="updateField == 'email'">
+                  <div class="info-tips">
+                      When you change your email, you will be looged out and will need to confirm it when logging into your account again
+                  </div>
+                  <div class="input-box">
+                      <label>Type your current password</label>
+                      <div class="input-box__border">
+                          <input placeholder="password" id="password" #password="ngModel" name="password" [(ngModel)]="user.password"  required  />
+                      </div>
+                      <div *ngIf="password.invalid && (password.touched || userForm.submitted)" class="error-msg">
+                        <div>Password is required</div>
+                      </div>
+                  </div>
+                  <div class="input-box">
+                      <label>Enter your new email</label>
+                      <div class="input-box__border">
+                          <input placeholder="email" id="email" #email="ngModel" name="email" [(ngModel)]="user.email"  required  email />
+                      </div>
+                      <div *ngIf="email.invalid && (email.touched || userForm.submitted)" class="error-msg">
+                        <div *ngIf="email.errors.required">Email is Required</div>
+                        <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                      </div>
+                  </div>
+              </div>
+              <div *ngIf="updateField == 'phone number'">
+                  <div class="input-box">
+                      <label>Phone Number</label>
+                      <div class="input-box__border">
+                          <input placeholder="+91 9108292413" type="tel" pattern="[+0-9]{13}" id="phoneNumber" #phoneNumber="ngModel" name="phoneNumber" [(ngModel)]="user.phoneNumber"  required  />
+                        </div>
+                      <div *ngIf="phoneNumber.invalid && (phoneNumber.touched || userForm.submitted)" class="error-msg">
+                          <div>Phone Number must be a valid number</div>
+                      </div>
+                  </div>
+              </div>
+              <div>
+                <button class="app-btn secondary get-start-btn" type="submit">
+                  <p class="m-0">Save changes</p>
+                  <i class="fa fa-angle-right"></i>
+                </button>
+              </div>
+              <div class="cancel-btn" (click)="closeModal()">
+                <button class="btn btn-transparent cancel-btn">
+                    Cancel
+                </button></div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>

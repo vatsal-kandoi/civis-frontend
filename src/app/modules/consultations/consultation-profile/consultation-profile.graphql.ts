@@ -23,7 +23,7 @@ export const ConsultationProfile = gql`
         }
       }
       satisfactionRatingDistribution
-      sharedResponses {
+      sharedResponses(sort: created_at, sortDirection: desc) {
         edges {
           node {
             id
@@ -65,7 +65,7 @@ export const ConsultationProfileCurrentUser = gql`
       }
       satisfactionRatingDistribution
       respondedOn
-      sharedResponses {
+      sharedResponses(sort: created_at, sortDirection: desc) {
         edges {
           node {
             id
@@ -93,7 +93,7 @@ export const SubmitResponseQuery = gql`
       consultation {
         title
         respondedOn
-        sharedResponses {
+        sharedResponses(sort: created_at, sortDirection: desc) {
           edges {
             node {
               id

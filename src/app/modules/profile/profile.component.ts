@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
-import {filter, take} from 'rxjs/operators';
-
+import { ModalDirective } from 'ngx-bootstrap';
+import { Apollo } from 'apollo-angular';
+import { CurrentUserUpdate } from './profile.graphql';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +11,19 @@ import {filter, take} from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
 
+  @ViewChild('updateUserModal') updateUserModal: ModalDirective;
   currentUser;
+  showModal: boolean;
+  user = {
+    firstName: '',
+    lastName: '',
+    email: null,
+    phoneNumber: null,
+    password: ''
+  };
+  updateField = '';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private apollo: Apollo) { }
 
   ngOnInit() {
     this.getCurrentUser();
@@ -20,10 +31,6 @@ export class ProfileComponent implements OnInit {
 
   getCurrentUser() {
     this.userService.userLoaded$
-    .pipe(
-      filter(data => !!data),
-      take(1)
-    )
     .subscribe((data) => {
       if (data) {
         this.currentUser = this.userService.currentUser;
@@ -31,4 +38,37 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  openModal() {
+    this.updateUserModal.show();
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.updateUserModal.hide();
+    this.showModal = false;
+  }
+
+  updateUser(userForm) {
+    console.log(userForm);
+    if (userForm.valid) {
+      this.apollo.mutate({
+        mutation: CurrentUserUpdate,
+        variables : {
+          user : userForm.value
+        }
+      }).subscribe ((res) => {
+        this.closeModal();
+        this.userService.getCurrentUser();
+      });
+    }
+  }
+
+  getTotalPoints(responses) {
+    let points = 0;
+    if (responses.length) {
+      responses.forEach( response => points += +response.node.points);
+      return points;
+    }
+    return 0;
+  }
 }

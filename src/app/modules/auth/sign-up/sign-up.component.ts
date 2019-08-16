@@ -19,6 +19,7 @@ export class SignUpComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
+    phoneNumber: null,
     password: '',
     cityId: null,
     notifyForNewConsultation: false,

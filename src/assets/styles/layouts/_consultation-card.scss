@@ -34,6 +34,9 @@
       font-weight: bold;
       color: $black;
       margin: 0;
+      @media screen and (max-width: 991px) {
+        font-size: 18px;
+      }
     }
     .sub-title {
       font-size: 16px;

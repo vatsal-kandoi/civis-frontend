@@ -1,14 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { modalSlideIn } from 'src/app/shared/animations/slide';
 
 @Component({
   selector: 'app-leader-board',
   templateUrl: './leader-board.component.html',
   styleUrls: ['./leader-board.component.scss'],
-  animations: [modalSlideIn],
 })
 export class LeaderBoardComponent implements OnInit {
+
+  level = null;
+
+  levels = [
+    {
+      name: 'national'
+    },
+    {
+      name: 'state'
+    },
+    {
+      name: 'local'
+    }
+  ];
 
   @ViewChild('leaderModal') leaderModal: ModalDirective;
 
@@ -23,6 +35,10 @@ export class LeaderBoardComponent implements OnInit {
 
   closeModal() {
     this.leaderModal.hide();
+  }
+
+  selectLevel(event) {
+    this.level = event;
   }
 
 }

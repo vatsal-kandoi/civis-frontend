@@ -55,15 +55,5 @@ export const slideInFade: any = trigger('slideInFade', [
   ]),
 ]);
 
-export const modalSlideIn: any = trigger('modalSlideIn', [
-  transition(':enter', [
-    style({transform: 'translateX(100%)'}),
-    animate('3s cubic-bezier(1,0,0,1)', style({transform: 'translateX(0)'}))
-  ]),
-  transition(':leave', [
-    style({transform: 'translateX(0)'}),
-    animate('2s cubic-bezier(1,0,0,1)', style({transform: 'translateX(-100%)'}))
-  ]),
-]);
 
 

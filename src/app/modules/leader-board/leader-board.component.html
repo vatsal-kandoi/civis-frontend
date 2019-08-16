@@ -5,7 +5,13 @@
         <p>Civis Citizen Leaders</p>
         <p>Everyday citizens who’re taking initiative and making sure our voices reach the government</p>
       </div>
-      <p class="header-right">All India<span><i class="fa fa-angle-down"></i></span></p>
+      <div class="header-right">
+        <ng-select 
+          [items]="levels" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
+          bindValue="name" [searchable]="false" (change)="selectLevel($event)"> 
+        </ng-select>  
+      </div>
+      <!-- <span class="header-right">All India<span><i class="fa fa-angle-down"></i></span></p> -->
     </section>
     <section class="container-body">
       <div class="container-body__data-row pointer" (click)="openLeaderModal()">
@@ -78,11 +84,11 @@
 
 <!-- leader modal -->
 <div 
-  bsModal #leaderModal="bs-modal" class="modal leader-modal" tabindex="-1"
-  [config]="{show: false}"
+  bsModal #leaderModal="bs-modal" class="modal fade leader-modal" tabindex="-1"
+  [config]="{show: false, backdrop: 'static'}"
   role="dialog" aria-labelledby="leaderModal"
 >
-  <div @modalSlideIn class="modal-dialog">
+  <div class="modal-dialog">
     <div class="modal-content">
 
       <div class="modal-header">

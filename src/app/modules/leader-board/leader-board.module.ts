@@ -4,7 +4,7 @@ import { SharedComponentsModule } from '../../shared/components/shared-component
 import { Routes, RouterModule } from '@angular/router';
 import { LeaderBoardComponent } from './leader-board.component';
 import { ModalModule } from 'ngx-bootstrap';
- 
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const routes: Routes = [
   {
@@ -18,6 +18,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedComponentsModule,
+    NgSelectModule,
     RouterModule.forChild(routes),
     ModalModule
   ]

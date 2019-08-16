@@ -9,15 +9,26 @@
   &__top-section {
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 991px) {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
     .left-item {
       display: flex;
+      @media screen and (max-width: 991px) {
+        justify-content: center;
+        width: 100%;
+      }
 
       .item-list {
         list-style-type: none;
         padding: 0;
         &:nth-child(2) {
           margin-left: 10rem;
+          @media screen and (max-width: 991px) {
+           margin-left: 5rem;
+          }
         }
         li {
           color: #757575;
@@ -35,6 +46,9 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      @media screen and (max-width: 991px) {
+        text-align: right;
+      }
       .social-icons {
         span {
           font-size: 38px;
@@ -42,6 +56,9 @@
           opacity: .2;
           color: $black;
           transition: all .2s linear;
+          @media screen and (max-width: 991px) {
+            font-size: 28px;
+          }
           &:hover {
             color: $primary-color;
             opacity: 1;
@@ -51,6 +68,9 @@
       .help-text {
         font-size: 24px;
         color: $black;
+        @media screen and (max-width: 991px) {
+          font-size: 20px;
+        }
       }
     }
   }
@@ -59,7 +79,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media screen and (max-width: 991px) {
+      flex-wrap: wrap;
+    }
     .logo-container {
+      display: flex;
+      align-items: center;
+      @media screen and (max-width: 991px) {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
       .logo-2 {
         margin-left: 30px;
         margin-top: 15px;
@@ -68,6 +97,15 @@
         margin-left: 53px;
         font-size: 12px;
         color: #767676;
+        @media screen and (max-width: 991px) {
+          margin: 15px 0;
+        }
+      }
+    }
+    .logo-right {
+      @media screen and (max-width: 991px) and (min-width: 450px) {
+        width: 100%;
+        text-align: center; 
       }
     }
   }

@@ -209,6 +209,14 @@
                         font-size: 14px;
                         color: $black;
                     }
+
+                    .policy-link {
+                        color: $black;
+                        text-decoration: underline;
+                        &:hover {
+                            color: $black;
+                        }
+                    }
                 }
 
                 .location-box {

@@ -57,6 +57,19 @@
   }
 }
 
+.hidden-md-down {
+  @media screen and (max-width: 991px) {
+    display: none;
+  }
+}
+
+.hidden-md-up {
+  display: none;
+  @media screen and (max-width: 991px) {
+    display: block;
+  }    
+}
+
 .truncate {
   /* autoprefixer: ignore next */      
   -webkit-box-orient: vertical;

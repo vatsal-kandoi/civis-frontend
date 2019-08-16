@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { ConsultationResponseList, ImpactStats } from './landing.graphql';
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
   animations: [slideInRight, fadeIn],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class LandingComponent implements OnInit {

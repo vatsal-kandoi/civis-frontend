@@ -101,9 +101,9 @@
                 <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required /> 
                 <label for="agreedForTermsCondition">
                   I'm good with the Civis'<br> 
-                  <a href="/terms">Terms of Service</a>
+                  <a href="/terms" class="policy-link">Terms of Service</a>
                   & 
-                  <a href="/privacy">Privacy Policy.</a>
+                  <a href="/privacy" class="policy-link">Privacy Policy.</a>
                 </label>
             </div>
             <div class="error-msg"  *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)">

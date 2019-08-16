@@ -135,4 +135,8 @@ constructor( private apollo: Apollo ) { }
   addConsultation(tabName) {
     this.activeTab = tabName;
   }
+
+  numberWithCommas(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 }

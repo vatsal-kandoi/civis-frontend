@@ -11,6 +11,9 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  @media screen and (max-width: 991px) {
+    display: none;
+  }
 }
 
 .consultation-profile {
@@ -23,6 +26,9 @@
   
   @media screen and (max-width: 991px) {
     margin-top: 57px;
+    grid-template-columns: auto;
+    grid-column-gap: 0;
+    width: 100%;
   }
 
   &__sidebar-section {
@@ -60,6 +66,11 @@
       box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.13);
       border-radius: 5px;
       z-index: 1;
+      @media screen and (max-width: 991px) {
+        padding: 20px 15px;
+        border-radius: 0;
+        box-shadow: none;
+      }
     }
 
     .heading {
@@ -68,6 +79,15 @@
 
     .summary-content {
       @include general-text;
+      @media screen {
+        font-size: 14px;
+      }
+    }
+
+    .what-resp-text {
+      font-size: 13px;
+      color: #939393;
+      text-decoration: underline;
     }
 
     .response-container {
@@ -98,6 +118,11 @@
           background-color: transparent;
           border-radius: 3px;
           border: 1px solid #1894EA;
+        }
+      }
+      .text-16 {
+        @media screen and (max-width: 991px) {
+          font-size: 14px;
         }
       }
     }

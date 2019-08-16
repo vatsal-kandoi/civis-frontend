@@ -1,3 +1,5 @@
+@import './src/assets/styles/app';
+
 .profile-index {
     background: #E5F4FF;
     width: 100%;
@@ -43,8 +45,12 @@
             }
 
             .profile-change-cta {
-                font-size: 13px;
-                color: #0E73B9;
+                .btn {
+                    font-size: 13px;
+                    color: #0E73B9;
+                    cursor: pointer;
+                }
+                
             }
         }
 
@@ -70,10 +76,12 @@
             }
 
             .login-change-cta {
-                font-size: 13px;
-                color: #0E73B9;
-                margin-bottom: 5px;
-            }
+                .btn {
+                    font-size: 13px;
+                    color: #0E73B9;
+                    margin-bottom: 5px;
+                }
+            }   
         }
 
         .contact-space {
@@ -98,9 +106,12 @@
             }
 
             .contact-change-cta {
-                font-size: 13px;
-                color: #0E73B9;
-                margin-bottom: 5px;
+                .btn {
+                    font-size: 13px;
+                    color: #0E73B9;
+                    margin-bottom: 5px;
+                    cursor: pointer;
+                }
             }
         }
 
@@ -187,5 +198,116 @@
             }
         }
 
+    }
+}
+
+.update-user-index {
+    .align-center {
+        display: flex !important;
+        align-items: center;
+      }
+    
+      .modal {
+        background: rgba(14, 115, 185, 0.6);
+        height: 100vh;
+        
+      .modal-dialog {
+        width: 30%;
+        max-width: 30% !important;
+        margin: 0 auto;
+
+        .modal-header {
+            padding: 30px;
+            .title {
+                font-weight: 500;
+                font-size: 21px;
+                line-height: 124.7%;
+                letter-spacing: 0.02em;
+                color: #525252;
+            }
+        }
+
+        .modal-body {
+            padding: 30px;
+
+            .input-box {
+                margin-bottom: 15px;
+
+                &__border {
+                    width: 100%;
+                    border: 1px solid $input-border;
+                    box-sizing: border-box;
+                    border-radius: 3px;
+                    padding: 10px;
+                    input { 
+                        width: 100%;
+                        font-weight: 500;
+                        font-size: 15px;
+                        background: $white;
+                        
+                        border: none;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    @media screen and (max-width: 991px) {
+                        width: 100%;
+                    }
+                }
+
+                label {
+                    display: block;
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: $black;
+                    margin-bottom: 10px;
+                }
+
+                .error-msg {
+                    margin: 10px 0;
+                    color: #F0653A;
+                    font-size: 14px;
+                }
+            }
+
+            .get-start-btn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%; 
+                padding: 12px 20px;
+
+                @media screen and (max-width: 991px) {
+                    width: 100%;
+                }
+
+                i {
+                    font-size: 24px;
+                }
+            }
+
+            .cancel-btn {
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 17px;
+                text-align: center;
+                letter-spacing: 0.105em;
+                text-transform: uppercase;
+                color: #A4A4A4;
+                margin-top: 5px;
+            }
+
+            .info-tips {
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 130.5%;
+                letter-spacing: 0.045em;
+                color: #919191;
+                margin-bottom: 15px;
+            }
+        }
+      }
     }
 }

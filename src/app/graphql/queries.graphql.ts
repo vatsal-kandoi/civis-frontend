@@ -12,6 +12,7 @@ query{
     firstName
     lastName
     email
+    phoneNumber
     notifyForNewConsultation
   }
 }

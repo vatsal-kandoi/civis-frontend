@@ -3,12 +3,19 @@
 .privacy-wrapper {
   margin-top: 77px;
   padding: 60px;
+  @media screen and (max-width: 991px) {
+    margin-top: 58px;
+    padding: 30px;
+  }
 
   &__header {
     .title {
       font-size: 42px;
       color: $primary-color;
-      margin: 0;  
+      margin: 0; 
+      @media screen and (max-width: 991px) {
+        font-size: 28px;
+      } 
     }
     .sub-title {
       font-size: 16px;
@@ -19,6 +26,9 @@
   &__dark-text {
     font-size: 20px;
     color: #000;
+    @media screen and (max-width: 991px) {
+      font-size: 18px;
+    } 
   }
 
   &__detail {
@@ -28,17 +38,26 @@
       font-size: 18px;
       font-weight: bold;
       color: $black;
+      @media screen and (max-width: 991px) {
+        font-size: 16px;
+      } 
     }
 
     .detail-content {
       font-size: 16px;
       color: $black;
+      @media screen and (max-width: 991px) {
+        font-size: 14px;
+      } 
     }
 
     .content-point {
       display: flex;
       font-size: 16px;
       color: $black;
+      @media screen and (max-width: 991px) {
+        font-size: 14px;
+      } 
       span:nth-child(1) {
         font-weight: 500;
       }
@@ -51,6 +70,9 @@
       display: flex;
       font-size: 16px;
       color: $black;
+      @media screen and (max-width: 991px) {
+        font-size: 14px;
+      } 
       span:nth-child(1) {
         display: inline-block;
         width: 7px;

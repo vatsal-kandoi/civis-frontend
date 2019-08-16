@@ -61,7 +61,6 @@
                     <input placeholder="Gautam" type="text" id="lname" #lname="ngModel" name="lname" [(ngModel)]="signupObject.lastName" required />
                 </div>
                 <div *ngIf="lname.invalid && (lname.touched || signupForm.submitted)" class="error-msg">Last name is Required</div>
-
             </div>
 
             <div class="location-box">
@@ -86,6 +85,16 @@
                 <div *ngIf="email.invalid && (email.touched || signupForm.submitted)" class="error-msg">
                   <div *ngIf="email.errors.required">Email is Required</div>
                   <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label for="phone">Phone</label>
+                <div class="input-box__border">
+                    <input placeholder="+91 9108292413" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"  required  />
+                </div>
+                <div *ngIf="phone.invalid && (phone.touched || signupForm.submitted)" class="error-msg">
+                  <div>Phone Number must be a valid number</div>
                 </div>
             </div>
     

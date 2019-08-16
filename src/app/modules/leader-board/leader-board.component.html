@@ -56,17 +56,33 @@
         </div>
         <p class="row-right-item mb-0">2,300 <span>Points</span></p>
       </div>
+
+      <!-- data-row-mobile-layout -->
+      <ng-container *ngFor='let item of [1,2,3,4,5,6]'>
+        <div class="container-body__data-row-xs" (click)="openLeaderModal()">
+          <p class="row-num">#1</p>
+          <img 
+            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
+            class="avatar avatar--42 profile-pic"
+            alt="profile Picture"
+          />
+          <div class="leader-detail">
+            <p>Antaraa Vasudev</p>
+            <p><span class="bold-text">2,300 </span> Points</p>
+          </div>
+        </div>
+      </ng-container>
     </section>
   </div>
 </div>
 
 <!-- leader modal -->
 <div 
-  bsModal #leaderModal="bs-modal" class="modal fade leader-modal" tabindex="-1"
+  bsModal #leaderModal="bs-modal" class="modal leader-modal" tabindex="-1"
   [config]="{show: false}"
   role="dialog" aria-labelledby="leaderModal"
 >
-  <div class="modal-dialog">
+  <div @modalSlideIn class="modal-dialog">
     <div class="modal-content">
 
       <div class="modal-header">

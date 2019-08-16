@@ -10,21 +10,35 @@
     width: 80%;
     margin: 0 auto;
     padding: 34px 0 20px;
+    @media screen and (max-width: 991px) {
+      width: 100%;
+    }
     
     .container-header {
       display: flex;
       justify-content: space-between;
       padding-bottom: 28px;
       border-bottom: 3px solid #BFE4FF;
+      @media screen and (max-width: 991px) {
+       flex-wrap: wrap;
+       padding: 0 20px 20px;
+       border-bottom: 2px solid #BFE4FF;
+      }
       .header-left {
         p:nth-child(1) {
           font-size: 36px;
           color: $primary-color;
           margin: 0;
+          @media screen and (max-width: 991px) {
+            font-size: 20px;
+          }
         }
         p:nth-child(2) {
           @include regular-text($color: $primary-color);
           margin: 0;
+          @media screen and (max-width: 991px) {
+            font-size: 12px;
+          }
         }
       }
 
@@ -47,6 +61,9 @@
         align-items: center;
         padding: 15px 0;
         border-bottom: 1px solid #BFE4FF;
+        @media screen and (max-width: 991px) {
+          display: none;
+        }
 
         .row-left-item {
           display: flex;
@@ -74,6 +91,38 @@
           color: $primary-color;
           span {
             font-size: 12px;
+          }
+        }
+      }
+
+      &__data-row-xs {
+        display: none;
+        align-items: center;
+        padding: 15px 20px;
+        border-bottom: 1px solid #BFE4FF;
+        @media screen and (max-width: 991px) {
+          display: flex;
+        }
+        .row-num {
+          font-size: 12px;
+          font-weight: 600;
+          color: #6DB4E4;
+          margin-bottom: 0;
+        }
+        .profile-pic {
+          margin: 0 15px 0 12px;
+        }
+        .leader-detail {
+          p:nth-child(1) {
+            font-size: 14px;
+            font-weight: 600;
+            color: $black;
+            margin: 0;
+          }
+          p:nth-child(2) {
+           color: $primary-color;
+           font-size: 13px;
+           margin: 0; 
           }
         }
       }

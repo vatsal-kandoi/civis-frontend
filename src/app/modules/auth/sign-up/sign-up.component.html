@@ -38,7 +38,7 @@
       </div>
       <div class="login-mobile-container">
         <div>
-          <button class="sign-in-btn" [routerLink]="['/auth', 'login']">Sign in</button>
+          <button class="app-btn primary sign-in-btn" [routerLink]="['/auth', 'login']">Sign in</button>
         </div>
       </div>
     </div>
@@ -127,6 +127,7 @@
         <div class="vertical-divider">
           <div class="center-element">OR</div>
         </div>
+        <hr class="horizontal-divider" data-content="OR">
       </div>
       <div class="form-space-right col-md-5">
         <button class="app-btn gmail mb-3" (click)="redirectTo('google')">

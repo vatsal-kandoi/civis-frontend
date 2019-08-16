@@ -62,5 +62,13 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
-  
+
+  getTotalPoints(responses) {
+    let points = 0;
+    if (responses.length) {
+      responses.forEach( response => points += +response.node.points);
+      return points;
+    }
+    return 0;
+  }
 }

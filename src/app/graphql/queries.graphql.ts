@@ -7,13 +7,28 @@ query{
     city {
       id
       name
+      parent {
+        id
+        name
+      }
     }
+    cityRank
     createdAt
+    email
     firstName
     lastName
-    email
-    phoneNumber
     notifyForNewConsultation
+    phoneNumber
+    rank
+    responses {
+      edges {
+        node {
+          id
+          points
+        }
+      }
+    }
+    stateRank
   }
 }
 `;

@@ -12,7 +12,7 @@ export class ProfileCardComponent implements OnInit {
   @Input() profile: any;
   enableSubmitResponse: boolean;
   currentUser: any;
-  @Output() openFeedbackModal: EventEmitter<boolean> = new EventEmitter();
+  @Output() openFeedbackModal = new EventEmitter();
 
 
   constructor(private consultationsService: ConsultationsService ) { }
@@ -49,7 +49,7 @@ export class ProfileCardComponent implements OnInit {
 
   stepNext() {
     if (this.enableSubmitResponse) {
-      this.openFeedbackModal.emit(true);
+      this.openFeedbackModal.emit('create');
     }
   }
 }

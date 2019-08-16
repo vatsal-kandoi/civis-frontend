@@ -81,15 +81,21 @@
         justify-content: space-between;
         align-items: center;
         .vote-count {
-          span:nth-child(1) {
-            color: $blue-bg-light;
-            font-size: 24px;
-            cursor: pointer;
-          }
-          span:nth-child(2) {
+          display: flex;
+          align-items: center;
+          span:nth-child(odd) {
             color: #A6A6A6;
             font-size: 24px;
+            margin-right: 5px;
             cursor: pointer;
+          }
+          span:nth-child(even) {
+            color: #A6A6A6;
+            font-size: 14px;
+          } 
+
+          .active {
+            color: $blue-bg-light;
           }
         }
         .response-btn {

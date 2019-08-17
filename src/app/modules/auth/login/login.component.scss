@@ -100,11 +100,21 @@
 
     &__right {
         padding: 50px 70px;
+        @media screen and (max-width: 991px) {
+            padding: 20px;
+        }
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            .logo-container {
+                img {
+                    @media screen and (max-width: 991px) {
+                        width: 80px;
+                    }
+                }
+            }
 
             .sign-up-container {
                 display: flex;
@@ -138,18 +148,10 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    width: 35%;
 
                     .sign-up-btn {
-                        background: #1894EA;
-                        border-radius: 3px;
-                        font-weight: 500;
-                        font-size: 13px;
-                        line-height: 16px;
-                        text-align: center;
-                        color: #FFFFFF;
-                        padding: 15px 30px;
-                        cursor: pointer;
+                        font-weight: normal;
+                        padding: 7px 10px;
                     }
                 }
             }
@@ -161,11 +163,17 @@
             color: $primary-color;
             font-weight: 600;
             letter-spacing: 0.025em;
+            @media screen and (max-width: 991px) {
+                margin: 3rem 0 25px;
+            }
         }
 
 
         .form-space {
             padding-top: 7rem;
+            @media screen and (max-width: 991px) {
+                padding-top: 0;
+            }
             &__left {
                 .input-box {
                     margin-bottom: 15px;
@@ -232,6 +240,9 @@
                 display: table;
                 text-align: center;
                 height: 100%;
+                @media screen and (max-width: 991px) {
+                    display: none;
+                }
                 
                 .center-element {
                     position: relative;
@@ -260,6 +271,40 @@
                     }
                 }
             }
+
+            .horizontal-divider {
+                display: none;
+                @media screen and (max-width: 991px) {
+                    display: block;
+                }
+                line-height: 1em;
+                position: relative;
+                outline: 0;
+                border: 0;
+                color: black;
+                text-align: center;
+                height: 1.5em;
+                opacity: .5;
+                &:before {
+                  content: '';
+                  background: #DFDFDF;
+                  position: absolute;
+                  left: 0;
+                  top: 50%;
+                  width: 100%;
+                  height: 1px;
+                }
+                &:after {
+                  content: attr(data-content);
+                  position: relative;
+                  display: inline-block;
+                  color: black;
+                  padding: 0 .5em;
+                  line-height: 1.5em;
+                  color: #C0C0C0;
+                  background-color: $white;
+                }
+              }
 
             .form-space-right {
                 display: flex;

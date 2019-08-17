@@ -38,7 +38,7 @@
       </div>
       <div class="login-mobile-container">
         <div>
-          <button class="sign-in-btn" [routerLink]="['/auth', 'login']">Sign in</button>
+          <button class="app-btn primary sign-in-btn" [routerLink]="['/auth', 'login']">Sign in</button>
         </div>
       </div>
     </div>
@@ -110,9 +110,9 @@
                 <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required /> 
                 <label for="agreedForTermsCondition">
                   I'm good with the Civis'<br> 
-                  <a href="/terms">Terms of Service</a>
+                  <a href="/terms" class="policy-link">Terms of Service</a>
                   & 
-                  <a href="/privacy">Privacy Policy.</a>
+                  <a href="/privacy" class="policy-link">Privacy Policy.</a>
                 </label>
             </div>
             <div class="error-msg"  *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)">
@@ -136,6 +136,7 @@
         <div class="vertical-divider">
           <div class="center-element">OR</div>
         </div>
+        <hr class="horizontal-divider" data-content="OR">
       </div>
       <div class="form-space-right col-md-5">
         <button class="app-btn gmail mb-3" (click)="redirectTo('google')">

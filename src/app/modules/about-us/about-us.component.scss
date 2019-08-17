@@ -4,9 +4,18 @@
   margin-top: 77px;
   padding-top: 60px;
   background-color: $blue-bg-light;
+  @media screen and (max-width: 991px) {
+    margin-top: 58px;
+    padding-top: 30px;
+  }
+
   &__quote-section {
     padding: 0 65px 30px;
     max-width: 900px;
+    @media screen and (max-width: 991px) {
+      max-width: 100%;
+      padding: 0 30px 20px;
+    }
 
     .quote-title {
       font-size: 47px;
@@ -27,22 +36,34 @@
       font-size: 24px;
       color: #000;
       margin-bottom: 2rem;
+      @media screen and (max-width: 991px) {
+        font-size: 18px;
+      }
     }
   }
 
   &__content-section {
     padding: 30px 65px;
     max-width: 900px;
+    @media screen and (max-width: 991px) {
+      max-width: 100%;
+      padding: 30px;
+    }
    
     .content-detail {
       font-size: 18px;
       color: #000;
+      @media screen and (max-width: 991px) {
+       font-size: 14px;
+      }
     }
   }
 
   &__people-section {
     padding: 30px 65px;
-
+    @media screen and (max-width: 991px) {
+      padding: 30px;
+    }
     .people-list-wrapper {
       padding-bottom: 35px;
 
@@ -50,6 +71,9 @@
         font-size: 15px;
         font-weight: 500;
         color: #F0653A;
+        @media screen and (max-width: 500px) {
+          text-align: center;
+        }
       }
 
       .people-list-grid {
@@ -57,6 +81,11 @@
         grid-column-gap: 113px;
         grid-template-columns: repeat(5, 1fr);
         padding-top: 15px;
+        @media screen and (max-width: 500px) {
+          grid-template-columns: auto;
+          grid-column-gap: 0;
+          grid-row-gap: 25px;
+        }
 
         .people-profile {
           text-align: center;
@@ -81,6 +110,9 @@
   .content-title {
     font-size: 42px;
     color: $primary-color;
+    @media screen and (max-width: 991px) {
+      font-size: 28px;
+    }
   }
 
   .content-divider {

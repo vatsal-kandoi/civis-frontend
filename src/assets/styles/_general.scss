@@ -57,6 +57,40 @@
   }
 }
 
+.hidden-md-down {
+  @media screen and (max-width: 991px) {
+    display: none;
+  }
+}
+
+.hidden-md-up {
+  display: none;
+  @media screen and (max-width: 991px) {
+    display: block;
+  }    
+}
+
+@media screen and (max-width: 991px) {
+  .text-16-sm {
+    font-size: 16px;
+  }
+  
+  .text-14-sm {
+    font-size: 14px;
+  }
+
+  .text-13-sm {
+    font-size: 12px;
+  }
+
+  .text-12-sm {
+    font-size: 12px;
+  }
+  .m-0-sm {
+    margin: 0 !important;
+  }
+}
+
 .truncate {
   /* autoprefixer: ignore next */      
   -webkit-box-orient: vertical;

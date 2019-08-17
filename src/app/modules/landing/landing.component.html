@@ -7,7 +7,7 @@
           Simple thing is, the bodies that create laws, rules and regulations seek 
           feedback from us, the citizens, to finalise them. What are we waiting for?
         </p>
-        <div class="d-flex align-items-center mt-4">
+        <div class="d-flex align-items-center mt-4 cover-btn-section">
           <button class="app-btn secondary circular participate-btn" [routerLink]="['consultations/list']">Start participating</button>
           <p class="civis-works-link pointer" [routerLink]="['/how-civis-works']">How Civis Works</p>
         </div>
@@ -49,10 +49,12 @@
       <div class="person-carousel">
         <div class="carousel-arrow-left pointer" (click)='previousSlide()'><i class="fa fa-angle-left"></i></div>
         <div @slideInRight class="carousel-inner-container">
-          <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60" />
-          <p class="text-18 bold-text">{{currentReponseData?.user?.firstName}}</p>
-          <p class="text-24 bold-text">National Urban Policy Framework, 2018</p>
-          <p class="text-18 italic truncate">{{currentReponseData?.responseText}}</p>
+          <div class="carousel-header">
+            <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60" />
+            <p class="bold-text m-0">{{currentReponseData?.user?.firstName}}</p>
+          </div>
+          <p class="response-title bold-text">National Urban Policy Framework, 2018</p>
+          <p class="response-content italic truncate">{{currentReponseData?.responseText}}</p>
         </div>
         <div class="carousel-indicator">
           <span 
@@ -83,9 +85,19 @@
           <p class="text-18 m-0">Sameer Agarwal</p>
         </div>
       </div>
-      <div class="text-center">
-        <button class="app-btn circular blue-light">View leaderboard</button>
+      <!-- leaders-list-mobile -->
+      <div class="mb-3">
+        <div class="leaders-list-row" *ngFor='let item of [1,2,3,4,5,6]'>
+          <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--42" />
+          <div class="leader-detail">
+            <p class="leader-name">Sameer Agarwal</p>
+            <p class="leader-stats">
+              <span class="bold-text mr-1">370</span> Points <span class="seprator-dot"></span> Super Leader
+            </p>
+          </div>
+        </div>
       </div>
+      <button class="app-btn circular blue-light">View leaderboard</button>
     </div>
 
     <div class="civis-work-section">
@@ -113,15 +125,15 @@
       <div class="count-grid">
         <div class="count-item">
           <p>Consultations created on Civis</p>
-          <p>{{impactStats?.consultation_count}}</p>
+          <p>{{numberWithCommas(impactStats?.consultation_count + 33)}}</p>
         </div>
         <div class="count-item">
           <p>Total no. of responses</p>
-          <p>{{impactStats?.consultation_response_count}}</p>
+          <p>{{numberWithCommas(impactStats?.consultation_response_count + 3083)}}</p>
         </div>
         <div class="count-item">
           <p>Total no. of citizens engaged</p>
-          <p>{{impactStats?.consultation_response_distinct_users}}</p>
+          <p>{{numberWithCommas(impactStats?.consultation_response_distinct_users + 3057)}}</p>
         </div>
       </div>
     </div>

@@ -16,6 +16,9 @@
     .card-title {
       width: 90%;
       @include general-text($font-size: 20px, $weight: bold);
+      @media screen and (max-width: 991px) {
+        font-size: 16px;
+      }
     }
     
     .ministry-detail {

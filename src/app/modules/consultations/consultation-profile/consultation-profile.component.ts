@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { ModalDirective } from 'ngx-bootstrap';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
+import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 
 
 
@@ -31,17 +32,19 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
   responseVisibility = true;
   step: number;
   currentUser: any;
+  responseType = '';
+  templateId = null;
 
   constructor (
     private activatedRoute: ActivatedRoute,
     private apollo: Apollo,
     private userService: UserService,
     private consultationsService: ConsultationsService,
-    private router: Router
+    private router: Router,
+    private errorService: ErrorService
   ) {
       this.subscription = this.activatedRoute.params.subscribe((param: any) => {
         this.consultationId = +param['id'];
-        console.log(param['id']);
       });
   }
 
@@ -63,55 +66,73 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
         this.profileData = data;
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
         this.responseList = data.sharedResponses.edges
-        console.log(this.responseList);
     }, err => {
-      console.log('err', err);
+      this.errorService.showErrorModal(err);
     });
   }
 
-  openFeedbackModal(event?) {
-    if (this.responseText) {
-      if (this.currentUser) {
-        this.step = 2;
-        this.feedbackModal.show();
-      } else {
-        this.router.navigateByUrl('/auth');
-        this.consultationsService.enableSubmitResponse.next(false);
+  openFeedbackModal(type, response?) {
+    this.responseType = type;
+    if (this.responseType === 'create') {
+      if (this.responseText) {
+        this.checkUserPresent();
       }
-
+    } else {
+      if (!this.profileData.respondedOn) {
+        this.responseText = response.responseText;
+        this.templateId = response.id;
+        this.checkUserPresent();
+      }
     }
   }
 
-  submitResponse() {
+  checkUserPresent() {
+    if (this.currentUser) {
+      this.step = 2;
+      this.feedbackModal.show();
+    } else {
+      this.router.navigateByUrl('/auth');
+      this.consultationsService.enableSubmitResponse.next(false);
+    }
+  }
+
+  createResponse() {
     const consultationResponse =  {
       consultationId: this.consultationId,
       responseText : this.responseText,
       satisfactionRating : this.responseFeedback,
-      visibility: this.responseVisibility ? 'shared' : 'anonymous'
+      visibility: this.responseVisibility ? 'shared' : 'anonymous',
     };
     if (this.checkProperties(consultationResponse)) {
-      this.apollo.mutate({
-        mutation: SubmitResponseQuery,
-        variables: {
-          consultationResponse: consultationResponse
-        },
-        update: (store, {data: res}) => {
-          const variables = {id: this.consultationId};
-          const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
-          if (res) {
-            resp.consultationProfileCConsultationProfileCurrentUser.respondedOn = res.consultationResponseCreate.consultation.respondedOn;
-            resp.consultationProfileCConsultationProfileCurrentUser.sharedResponses = res.consultationResponseCreate.consultation.sharedResponses;
-          }
-          store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: res});
-        }
-      })
-      .pipe (
-        map((res: any) => res.data.consultationResponseCreate)
-      )
-      .subscribe((response) => {
-        this.feedbackModal.hide();
-      });
+      consultationResponse['templateId'] = null;
+      this.submitResponse(consultationResponse);
     }
+  }
+
+  submitResponse(consultationResponse) {
+    this.apollo.mutate({
+      mutation: SubmitResponseQuery,
+      variables: {
+        consultationResponse: consultationResponse
+      },
+      update: (store, {data: res}) => {
+        const variables = {id: this.consultationId};
+        const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
+        if (res) {
+          resp.consultationProfile.respondedOn = res.consultationResponseCreate.consultation.respondedOn;
+          resp.consultationProfile.sharedResponses = res.consultationResponseCreate.consultation.sharedResponses;
+        }
+        store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: res});
+      }
+    })
+    .pipe (
+      map((res: any) => res.data.consultationResponseCreate)
+    )
+    .subscribe((response) => {
+      this.feedbackModal.hide();
+    }, err => {
+      this.errorService.showErrorModal(err);
+    });
   }
 
   checkProperties(obj) {
@@ -188,6 +209,19 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
         return `Active`;
       }
     }
+  }
+
+  useThisResponse() {
+      const consultationResponse = {
+        consultationId: this.consultationId,
+        responseText : this.responseText,
+        satisfactionRating : this.responseFeedback,
+        visibility: 'shared',
+        templateId : this.templateId
+      };
+      if (this.checkProperties(consultationResponse)) {
+        this.submitResponse(consultationResponse);
+      }
   }
 
   ngOnDestroy() {

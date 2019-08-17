@@ -27,7 +27,10 @@ export const ConsultationProfile = gql`
         edges {
           node {
             id
+            downVoteCount
             responseText
+            templatesCount
+            upVoteCount
             user {
               id
               firstName
@@ -69,7 +72,10 @@ export const ConsultationProfileCurrentUser = gql`
         edges {
           node {
             id
+            downVoteCount
             responseText
+            templatesCount
+            upVoteCount
             user {
               id
               firstName
@@ -97,7 +103,10 @@ export const SubmitResponseQuery = gql`
           edges {
             node {
               id
+              downVoteCount
               responseText
+              templatesCount
+              upVoteCount
               user {
                 id
                 firstName

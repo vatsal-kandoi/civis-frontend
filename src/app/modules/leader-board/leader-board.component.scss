@@ -42,7 +42,7 @@
         }
       }
       .header-right {
-        width: 110px;
+        min-width: 90px;
 
         ng-select {
           .ng-select-container {

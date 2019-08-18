@@ -7,6 +7,7 @@ export const ConsultationList = gql`
         id
         title
         createdAt
+        consultationResponsesCount
         updatedAt
         responseDeadline
         ministry {
@@ -18,7 +19,6 @@ export const ConsultationList = gql`
           }
         }
         status
-        consultationResponsesCount
       }
       paging {
         currentPage

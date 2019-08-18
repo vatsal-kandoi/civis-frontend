@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { ConsultationProfile, SubmitResponseQuery, ConsultationProfileCurrentUser } from './consultation-profile.graphql';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,6 +21,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 export class ConsultationProfileComponent implements OnInit, OnDestroy {
 
   @ViewChild('feedbackModal') feedbackModal: ModalDirective;
+  @ViewChild('responseIndex', { read: ElementRef }) panel: ElementRef<any>;
 
   private subscription: Subscription;
   profileData: any;
@@ -71,19 +72,25 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  openFeedbackModal(type, response?) {
-    this.responseType = type;
-    if (this.responseType === 'create') {
+  // openFeedbackModal(type, response?) {
+  //   this.responseType = type;
+  //   if (this.responseType === 'create') {
+  //     if (this.responseText) {
+  //       this.checkUserPresent();
+  //     }
+  //   } else {
+  //     if (!this.profileData.respondedOn) {
+  //       this.responseText = response.responseText;
+  //       this.templateId = response.id;
+  //       this.checkUserPresent();
+  //     }
+  //   }
+  // }
+
+  openFeedbackModal() {
       if (this.responseText) {
         this.checkUserPresent();
       }
-    } else {
-      if (!this.profileData.respondedOn) {
-        this.responseText = response.responseText;
-        this.templateId = response.id;
-        this.checkUserPresent();
-      }
-    }
   }
 
   checkUserPresent() {
@@ -104,7 +111,7 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
       visibility: this.responseVisibility ? 'shared' : 'anonymous',
     };
     if (this.checkProperties(consultationResponse)) {
-      consultationResponse['templateId'] = null;
+      consultationResponse['templateId'] = this.templateId;
       this.submitResponse(consultationResponse);
     }
   }
@@ -211,17 +218,31 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  useThisResponse() {
-      const consultationResponse = {
-        consultationId: this.consultationId,
-        responseText : this.responseText,
-        satisfactionRating : this.responseFeedback,
-        visibility: 'shared',
-        templateId : this.templateId
-      };
-      if (this.checkProperties(consultationResponse)) {
-        this.submitResponse(consultationResponse);
+  // useThisResponse() {
+  //     const consultationResponse = {
+  //       consultationId: this.consultationId,
+  //       responseText : this.responseText,
+  //       satisfactionRating : this.responseFeedback,
+  //       visibility: 'shared',
+  //       templateId : this.templateId
+  //     };
+  //     if (this.checkProperties(consultationResponse)) {
+  //       this.submitResponse(consultationResponse);
+  //     }
+  // }
+
+  useThisResponse(response) {
+    if (response) {
+      this.responseText = response.responseText;
+      this.templateId = response.id;
+      window.scrollTo({
+        top: this.panel.nativeElement.offsetTop,
+        behavior: 'smooth',
+      });
+      if (this.responseText) {
+        this.consultationsService.enableSubmitResponse.next(true);
       }
+    }
   }
 
   ngOnDestroy() {

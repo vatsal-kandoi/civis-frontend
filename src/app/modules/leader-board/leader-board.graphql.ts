@@ -8,7 +8,11 @@ export const UserList = gql`
         city {
           id
           name
-          locationType
+          locationType 
+          parent {
+            id
+            locationType
+          }
         }
         cityRank
         firstName

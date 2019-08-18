@@ -8,8 +8,13 @@
       <div class="header-right">
         <ng-select 
           [items]="levels" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
-          bindValue="name" [searchable]="false" (change)="selectLevel($event)"> 
+          bindValue="name" [searchable]="false" [(ngModel)]="level" [clearable]="false"> 
         </ng-select>  
+        <!-- <ng-select id="level" #level="ngModel" name="level"  
+          [items]="levels" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
+          bindValue="name" [searchable]="false"
+          [(ngModel)]="level"> 
+        </ng-select> -->
       </div>
       <!-- <span class="header-right">All India<span><i class="fa fa-angle-down"></i></span></p> -->
     </section>

@@ -42,7 +42,23 @@
         }
       }
       .header-right {
-        width: 200px;
+        width: 110px;
+
+        ng-select {
+          .ng-select-container {
+            background-color: #e5f4ff;
+            border: none;
+            color: $primary-color;
+            font-weight: bold;
+          }
+        }
+        .ng-select.ng-select-opened>.ng-select-container .ng-arrow {
+          border-color: transparent transparent $primary-color;
+        }
+
+        .ng-select .ng-arrow-wrapper .ng-arrow {
+          border-color: $primary-color transparent transparent;
+        }
       }
       // .header-right {
       //   margin-top: 20px;

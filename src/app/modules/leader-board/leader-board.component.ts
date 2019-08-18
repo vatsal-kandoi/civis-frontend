@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, ViewEncapsulation } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { map } from 'rxjs/operators';
 import { Apollo, QueryRef } from 'apollo-angular';
@@ -9,20 +9,21 @@ import { UserList } from './leader-board.graphql';
   selector: 'app-leader-board',
   templateUrl: './leader-board.component.html',
   styleUrls: ['./leader-board.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LeaderBoardComponent implements OnInit {
 
-  level = null;
+  level = 'National';
 
   levels = [
     {
-      name: 'national'
+      name: 'National'
     },
     {
-      name: 'state'
+      name: 'State'
     },
     {
-      name: 'local'
+      name: 'Local'
     }
   ];
   perPageLimit = 15;
@@ -56,9 +57,10 @@ export class LeaderBoardComponent implements OnInit {
     this.leaderModal.hide();
   }
 
-  selectLevel(event) {
-    this.level = event;
-  }
+  // selectLevel(event) {
+  //   this.level = event;
+  //   console.log(this.level, 'event');
+  // }
   
   getQuery() {
     const variables = {

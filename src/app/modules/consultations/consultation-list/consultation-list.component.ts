@@ -123,8 +123,8 @@ export class ConsultationListComponent implements OnInit {
         )
         .subscribe(item => {
             this.loadingElements.consultationList = false;
-            // this.closedConsultationData = item;
             this.closedConsultationList = item.data;
+            console.log(this.closedConsultationList, "response count");
             this.closedConsultationPaging = item.paging;
         }, err => {
             this.loadingElements.consultationList = false;

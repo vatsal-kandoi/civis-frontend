@@ -30,7 +30,7 @@
             </div>
           </div>
           <div class="cell-2">
-            <p class="reponse-count-text">{{item.responses.totalCount}}</p>
+            <p class="reponse-count-text">{{item?.consultationResponsesCount}}</p>
           </div>
           <div class="cell-3">
             <p class="closed-date">{{convertDateType(item.responseDeadline)}}</p>
@@ -48,7 +48,7 @@
                 <p>{{item?.title}}</p>
                 <p>{{item?.ministry?.name}}</p>
               </div>
-              <p class="reponse-count-text">{{item.responses.totalCount}} RESPONSES</p>
+              <p class="reponse-count-text">{{item?.consultationResponsesCount}}RESPONSES</p>
               <p class="closed-date">{{convertDateType(item.responseDeadline)}}</p>
             </div>
           </div>

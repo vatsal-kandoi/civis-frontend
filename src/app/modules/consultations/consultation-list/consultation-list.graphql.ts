@@ -7,6 +7,7 @@ export const ConsultationList = gql`
         id
         title
         createdAt
+        consultationResponsesCount
         updatedAt
         responseDeadline
         ministry {

@@ -103,21 +103,29 @@
         .vote-count {
           display: flex;
           align-items: center;
+          color: #A6A6A6;
+
           span:nth-child(odd) {
-            color: #A6A6A6;
             font-size: 24px;
             margin-right: 5px;
             cursor: pointer;
           }
+
           span:nth-child(even) {
-            color: #A6A6A6;
             font-size: 14px;
           } 
+        }
 
-          .active {
-            color: $blue-bg-light;
+        .active {
+          color: $primary-color !important;
+
+          &__btn {
+            border: 1px solid $primary-color;
+            border-radius: 50%;
+            padding: 5px 10px;
           }
         }
+
         .response-btn {
           padding: 5px 10px;
           color: $primary-color;

@@ -3,10 +3,10 @@
   <div class="consultation-profile">
 
     <section class="consultation-profile__sidebar-section">
-      <app-profile-card [profile]='profileData' (openFeedbackModal)="openFeedbackModal($event)"></app-profile-card>
+      <app-profile-card [profile]='profileData' (openFeedbackModal)="openFeedbackModal()"></app-profile-card>
     </section>
 
-    <section class="consultation-profile__main-section">
+    <section class="consultation-profile__main-section" #responseIndex>
       <div class="paper-effect">
         <p class="heading">Summary</p>
         <p class="summary-content">{{profileData?.summary}}</p>
@@ -64,17 +64,12 @@
                 </div>
               </div>
               <div>
-                <button class="app-btn response-btn" (click)="openFeedbackModal('useThisResponse', response.node)">Use this response</button>
+                <button class="app-btn response-btn" (click)="useThisResponse(response?.node)" >Use this response</button>
               </div>
             </div>
           </div>
         </ng-container>
-      </div>
-
-      <!-- <div class="submit-cta">
-        <button class="app-btn sticky-btn" (click)="openFeedbackModal()">Submit Response</button>
-      </div> -->
-      
+      </div>      
     </section>
   </div>
 </section>
@@ -140,7 +135,7 @@
               <div class="link">View Leaderboard</div>
           </div>
           <div class="footer-space__right">
-            <button (click)="responseType === 'create' ? createResponse() : useThisResponse()">Ok Great</button>
+            <button (click)="createResponse()">Ok Great</button>
           </div>
         </div>
       </div>

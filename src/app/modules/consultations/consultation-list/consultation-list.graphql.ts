@@ -18,9 +18,6 @@ export const ConsultationList = gql`
           }
         }
         status
-        responses {
-          totalCount
-        }
       }
       paging {
         currentPage

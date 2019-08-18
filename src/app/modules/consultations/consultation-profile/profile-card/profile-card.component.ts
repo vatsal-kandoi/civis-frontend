@@ -49,7 +49,7 @@ export class ProfileCardComponent implements OnInit {
 
   stepNext() {
     if (this.enableSubmitResponse) {
-      this.openFeedbackModal.emit('create');
+      this.openFeedbackModal.emit(true);
     }
   }
 }

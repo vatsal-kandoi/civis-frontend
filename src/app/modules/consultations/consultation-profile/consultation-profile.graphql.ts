@@ -8,6 +8,7 @@ export const ConsultationProfile = gql`
       summary
       responseDeadline
       url
+      consultationResponsesCount
       ministry {
         id
         name
@@ -52,6 +53,7 @@ export const ConsultationProfileCurrentUser = gql`
       summary
       responseDeadline
       url
+      consultationResponsesCount
       ministry {
         id
         name

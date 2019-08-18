@@ -14,70 +14,46 @@
       <!-- <span class="header-right">All India<span><i class="fa fa-angle-down"></i></span></p> -->
     </section>
     <section class="container-body">
-      <div class="container-body__data-row pointer" (click)="openLeaderModal()">
+      <div class="container-body__data-row pointer" *ngFor="let item of userListData?.data; let i = index" (click)="openLeaderModal(item)">
         <div class="row-left-item">
-          <p class="row-num">#1</p>
+          <p class="row-num"># {{i + 1}}</p>
           <img 
+            *ngIf="item?.profilePicture"
+            [src]="item?.profilePicture.url" 
+            class="avatar avatar--56 profile-pic"
+            alt="profile Picture"
+          />
+          <img 
+            *ngIf="!item?.profilePicture"
             src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
             class="avatar avatar--56 profile-pic"
             alt="profile Picture"
           />
-          <p class="profile-name">Antaraa Vasudev</p>
+          <p class="profile-name">{{item?.firstName}}</p>
         </div>
-        <p class="row-right-item mb-0">3,450 <span>Points</span></p>
-      </div>
-      <div class="container-body__data-row">
-        <div class="row-left-item">
-          <p class="row-num">#2</p>
-          <img 
-            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            class="avatar avatar--56 profile-pic"
-            alt="profile Picture"
-          />
-          <p class="profile-name">Siddharth Adelkar</p>
-        </div>
-        <p class="row-right-item mb-0">3,400 <span>Points</span></p>
-      </div>
-      <div class="container-body__data-row">
-        <div class="row-left-item">
-          <p class="row-num">#3</p>
-          <img 
-            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            class="avatar avatar--56 profile-pic"
-            alt="profile Picture"
-          />
-          <p class="profile-name">Aditya Dipankar</p>
-        </div>
-        <p class="row-right-item mb-0">3,300 <span>Points</span></p>
-      </div>
-      <div class="container-body__data-row">
-        <div class="row-left-item">
-          <p class="row-num">#4</p>
-          <img 
-            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            class="avatar avatar--56 profile-pic"
-            alt="profile Picture"
-          />
-          <p class="profile-name">Samyukta Shastri</p>
-        </div>
-        <p class="row-right-item mb-0">2,300 <span>Points</span></p>
+        <p class="row-right-item mb-0">{{item?.points}}<span> Points</span></p>
       </div>
 
       <!-- data-row-mobile-layout -->
-      <ng-container *ngFor='let item of [1,2,3,4,5,6]'>
-        <div class="container-body__data-row-xs" (click)="openLeaderModal()">
-          <p class="row-num">#1</p>
-          <img 
-            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            class="avatar avatar--42 profile-pic"
-            alt="profile Picture"
-          />
-          <div class="leader-detail">
-            <p>Antaraa Vasudev</p>
-            <p><span class="bold-text">2,300 </span> Points</p>
-          </div>
+      <div class="container-body__data-row-xs" *ngFor="let item of userListData?.data; let i = index" (click)="openLeaderModal(item)">
+        <p class="row-num"># {{i + 1}}</p>
+        <img 
+          *ngIf="item?.profilePicture"
+          [src]="item?.profilePicture.url" 
+          class="avatar avatar--42 profile-pic"
+          alt="profile Picture"
+        />
+        <img 
+          *ngIf="!item?.profilePicture"
+          src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
+          class="avatar avatar--42 profile-pic"
+          alt="profile Picture"
+        />
+        <div class="leader-detail">
+          <p>{{item?.firstName}}</p>
+          <p><span class="bold-text">{{item?.points}}</span> Points</p>
         </div>
-      </ng-container>
+      </div>
     </section>
   </div>
 </div>
@@ -94,10 +70,16 @@
       <div class="modal-header">
         <div class="leader-profile">
           <img 
+            *ngIf="leaderData?.profilePicture"
+            [src]="leaderData?.profilePicture?.url" 
+            class="avatar avatar--80"
+          />
+          <img 
+            *ngIf="!leaderData?.profilePicture"
             src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
             class="avatar avatar--80"
           />
-          <p class="profile-name">Siddharth Adelkar</p>
+          <p class="profile-name">{{leaderData?.firstName}}</p>
         </div>
         <div class="modal-close-btn" (click)="closeModal()"><i class="fa fa-times"></i></div>
       </div>
@@ -106,19 +88,19 @@
         <div class="leader-detail-grid">
           <div class="detail-item">
             <p>TOTAL POINTS</p>
-            <p>3,450</p>
+            <p>{{leaderData?.points}}</p>
           </div>
           <div class="detail-item">
             <p>RANK IN MUMBAI</p>
-            <p>1</p>
+            <p>{{leaderData?.cityRank}}</p>
           </div>
           <div class="detail-item">
             <p>RANK IN MAHARASHTRA</p>
-            <p>1</p>
+            <p>{{leaderData?.stateRank}}</p>
           </div>
           <div class="detail-item">
             <p>BEST SO FAR</p>
-            <p>#1 in All India</p>
+            <p>#{{leaderData?.rank}} in All India</p>
           </div>
         </div>
 

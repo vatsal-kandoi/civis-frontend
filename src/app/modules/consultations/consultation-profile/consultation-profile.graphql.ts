@@ -35,6 +35,10 @@ export const ConsultationProfile = gql`
             user {
               id
               firstName
+              profilePicture(resolution: "") {
+                id
+                url
+              }
             }
           }
         }
@@ -81,6 +85,10 @@ export const ConsultationProfileCurrentUser = gql`
             user {
               id
               firstName
+              profilePicture(resolution: "") {
+                id
+                url
+              }
             }
             votedAs {
               id
@@ -125,6 +133,10 @@ export const SubmitResponseQuery = gql`
               user {
                 id
                 firstName
+                profilePicture(resolution: "") {
+                  id
+                  url
+                }
               }
               votedAs {
                 id

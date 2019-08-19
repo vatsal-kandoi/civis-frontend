@@ -6,6 +6,7 @@ query{
     id
     bestRank
     bestRankType
+    points
     city {
       id
       name
@@ -21,6 +22,10 @@ query{
     lastName
     notifyForNewConsultation
     phoneNumber
+    profilePicture(resolution: "") {
+      id
+      url
+    }
     rank
     responses(sort: created_at, sortDirection: asc) {
       edges {

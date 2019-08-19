@@ -6,6 +6,8 @@
     @media screen and (max-width: 991px) {
       margin-top: 57px;
     }
+    background: #E5F4FF;
+    min-height: 100vh;
 
     .consultation-profile {
         display: grid;
@@ -106,6 +108,22 @@
                 .text-16 {
                   @media screen and (max-width: 991px) {
                     font-size: 14px;
+                  }
+                }
+
+                // .user-profile {
+                //   width: 32px;
+                //   height: 32px;
+
+                //   img {
+                //     width: 100%;
+                //   }
+                // }
+
+                .user-icon {
+                  i {
+                    font-size: 32px;
+                    color: #C4C4C4;
                   }
                 }
               }

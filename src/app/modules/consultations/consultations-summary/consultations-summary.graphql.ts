@@ -35,6 +35,10 @@ export const ConsultationProfileQuery = gql`
             user {
               id
               firstName
+              profilePicture(resolution: "") {
+                id
+                url
+              }
             }
           }
         }

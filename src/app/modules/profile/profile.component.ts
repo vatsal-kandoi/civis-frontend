@@ -43,6 +43,26 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  getBestRank(rank, rankType) {
+    let bestRank = '';
+    if (rankType) {
+      switch (rankType) {
+        case 'city':
+          bestRank = `#${rank} in ${this.currentUser.city.name.toUppercase()}`;
+          break;
+        case 'state':
+          bestRank = `#${rank} in ${this.currentUser.city.parent.name.toUppercase()}`;
+          break;
+        case 'national':
+          bestRank = `#${rank} in INDIA}`;
+          break;
+        default:
+          break;
+      }
+    }
+    return bestRank;
+  }
+
   openModal() {
     this.updateUserModal.show();
     this.showModal = true;

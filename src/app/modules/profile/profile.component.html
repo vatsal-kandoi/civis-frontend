@@ -125,7 +125,7 @@
                 TOTAL POINTS
             </div>
             <div class="stats-info__rewards">
-              {{ getTotalPoints(currentUser?.responses?.edges) }}
+              {{ currentUser?.points ? currentUser?.points : '-' }}
             </div>
         </div>
         <div class="col-md-2">
@@ -133,7 +133,7 @@
                 {{'Rank in ' + currentUser?.city?.name | uppercase}}
             </div>
             <div class="stats-info__rewards">
-              {{currentUser?.cityRank}}
+              {{currentUser?.cityRank ? currentUser?.cityRank : '-'}}
             </div>
         </div>
         <div class="col-md-2">
@@ -141,7 +141,7 @@
                 {{'Rank in ' + currentUser?.city?.parent?.name | uppercase}}
             </div>
             <div class="stats-info__rewards">
-              {{currentUser?.stateRank}}
+              {{currentUser?.stateRank ? currentUser?.stateRank : '-'}}
             </div>
         </div>
         <div class="col-md-2">
@@ -149,7 +149,7 @@
               BEST SO FAR
             </div>
             <div class="stats-info__rewards">
-              {{currentUser?.bestRank ? currentUser?.bestRank : 'N/A' }}
+              {{currentUser?.bestRank ? getBestRank(currentUser?.bestRank, currentUser?.bestRankType) : '-' }}
             </div>
         </div>
 

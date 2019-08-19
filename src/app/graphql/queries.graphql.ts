@@ -33,7 +33,7 @@ query{
             ministry {
               id
               name
-              logo (resolution : "75*105>") {
+              logo (resolution : "") {
                 url
               }
             }

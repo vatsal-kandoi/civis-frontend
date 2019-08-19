@@ -193,6 +193,11 @@
                     .consultation-image {
                         width: 10%;
                         padding: 20px 0;
+
+                        img {
+                            width: 80%;
+                            border-radius: 50%;
+                        }
                     }
 
                     .consultation-info {

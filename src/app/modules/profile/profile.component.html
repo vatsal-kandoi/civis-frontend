@@ -120,7 +120,7 @@
               BEST SO FAR
             </div>
             <div class="stats-info__rewards">
-              NA
+              {{currentUser?.bestRank ? currentUser?.bestRank : 'N/A' }}
             </div>
         </div>
 
@@ -130,12 +130,48 @@
         <div class="heading">
             Consultations I’ve participated in
         </div>
-        <div class="message">
-            You’ve not participated in any public consultations yet
+
+        <div *ngIf="currentUser?.responses?.edges?.length" class="consultations-container">
+          <div class="consultation-item" *ngFor="let item of currentUser?.responses?.edges">
+              <div class="consultation-image">
+                  <img [src]="item?.node?.consultation?.ministry?.logo?.url"  alt=" " />
+              </div>
+              <div class="consultation-info">
+                <div class="consultation-info__left">
+                    <div class="title">
+                      {{item?.node?.consultation?.title}}
+                    </div>
+                    <div class="ministry-title">
+                        {{item?.node?.consultation?.ministry?.name}}
+                    </div>
+                    <div class="response-cta">
+                      <button class="btn btn-transparent action-btn" [routerLink]="['/consultations/', item?.node?.consultation?.id]">
+                          View my response
+                          <span><i class="fa fa-angle-right"></i></span>
+                      </button>
+                    </div>
+                </div>
+                <div class="consultation-info__right">
+                    <div class="deadline">
+                      Ended on {{item?.node?.consultation?.responseDeadline | date}}
+                    </div>
+                    <div class="rewards">
+                        {{item?.node?.points}} points earnt
+                    </div>
+                </div>
+              </div>
+            </div>
         </div>
-        <div class="consultations-cta">
-          <button class="btn-transpaent btn-oval">Start participating</button>
+
+        <div *ngIf="!currentUser?.responses?.edges?.length" class="no-consultations">
+            <div class="message">
+                You’ve not participated in any public consultations yet
+            </div>
+            <div class="consultations-cta">
+              <button class="btn-transpaent btn-oval">Start participating</button>
+            </div>
         </div>
+    
     </div>
   </div>
 

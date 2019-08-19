@@ -4,6 +4,8 @@ export const CurrentUser = gql`
 query{
   userCurrent {
     id
+    bestRank
+    bestRankType
     city {
       id
       name
@@ -20,11 +22,23 @@ query{
     notifyForNewConsultation
     phoneNumber
     rank
-    responses {
+    responses(sort: created_at, sortDirection: asc) {
       edges {
         node {
           id
           points
+          consultation {
+            id
+             title
+            ministry {
+              id
+              name
+              logo (resolution : "") {
+                url
+              }
+            }
+            responseDeadline
+          }
         }
       }
     }

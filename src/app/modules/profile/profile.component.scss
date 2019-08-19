@@ -172,29 +172,109 @@
         .consultations-block {
             padding: 30px 0;
             .heading {
-                margin-bottom: 70px;
+                margin-bottom: 20px;
                 font-weight: 500;
                 font-size: 20px;
                 color: #0E73B9;
             }
-            .message {
-                text-align: center;
-                font-weight: 500;
-                font-size: 24px;
-                color: #6EB9ED;
-            }
-            .consultations-cta {
-                text-align: center;
-                margin-top: 15px;
-                .btn-oval {
-                    font-weight: bold;
-                    font-size: 17px;
-                    color: #FFFFFF;
-                    background: #F0653A;
-                    border-radius: 33px;
-                    padding: 10px 15px;
-                }
 
+            .consultations-container {
+                height: 35vh;
+                padding: 10px;
+                max-height: 35vh;
+                overflow: auto;
+
+
+
+                .consultation-item {
+                    display: flex;
+                    width: 100%;
+
+                    .consultation-image {
+                        width: 10%;
+                        padding: 20px 0;
+
+                        img {
+                            width: 80%;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .consultation-info {
+                        width: 90%;
+                        display: flex;
+                        justify-content: space-between;
+                        border-bottom: 1px solid #BFE4FF;
+                        padding: 20px 0;
+
+                        &__left {
+                            .title {
+                                font-weight: 600;
+                                font-size: 16px;
+                                line-height: 127%;
+                                letter-spacing: 0.035em;
+                                color: #151515;
+                            }
+                            .ministry-title {
+                                font-weight: normal;
+                                font-size: 12px;
+                                line-height: 127%;
+                                letter-spacing: 0.04em;
+                                color: #151515;
+                            }
+                            .response-cta {
+                                margin-top: 20px;
+                                .action-btn {
+                                    padding: 0;
+                                    font-size: 13px;
+                                    line-height: 16px;
+                                    letter-spacing: 0.08em;
+
+                                    color: #0E73B9;
+                                }
+                            }
+                        }
+
+                        &__right {
+                            .deadline {
+                                font-size: 13px;
+                                line-height: 130.5%;
+                                letter-spacing: 0.045em;
+                                color: #919191;
+                            }
+                            .rewards {
+                                font-weight: 500;
+                                font-size: 16px;
+                                line-height: 127%;
+                                letter-spacing: 0.045em;
+                                color: #151515;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .no-consultations {
+                margin-bottom: 50px;
+                .message {
+                    text-align: center;
+                    font-weight: 500;
+                    font-size: 24px;
+                    color: #6EB9ED;
+                }
+                .consultations-cta {
+                    text-align: center;
+                    margin-top: 15px;
+                    .btn-oval {
+                        font-weight: bold;
+                        font-size: 17px;
+                        color: #FFFFFF;
+                        background: #F0653A;
+                        border-radius: 33px;
+                        padding: 10px 15px;
+                    }
+    
+                }
             }
         }
 

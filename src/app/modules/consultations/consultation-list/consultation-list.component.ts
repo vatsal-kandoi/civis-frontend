@@ -123,7 +123,6 @@ export class ConsultationListComponent implements OnInit {
         )
         .subscribe(item => {
             this.loadingElements.consultationList = false;
-            // this.closedConsultationData = item;
             this.closedConsultationList = item.data;
             this.closedConsultationPaging = item.paging;
         }, err => {

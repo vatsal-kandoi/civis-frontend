@@ -37,6 +37,8 @@ export class ProfileComponent implements OnInit {
     .subscribe((data) => {
       if (data) {
         this.currentUser = this.userService.currentUser;
+      } else {
+        this.currentUser = null;
       }
     });
   }

@@ -1,4 +1,4 @@
-<div class="profile-index row no-gutters p-5">
+<div class="profile-index row no-gutters">
   <div class="col-md-2 profile-index__left">
     <div class="heading">
         My Account
@@ -10,79 +10,108 @@
       </div>
 
       <div class="profile-info">
-        <div class="profile-image">
-          </div>
+        <div class="upload-pic">
+          <i class="fa fa-camera" aria-hidden="true"></i>
+        </div>
         <div class="profile-details">
-          <div class="profile-details__name">
+          <p class="profile-details__name">
             {{currentUser?.firstName}}
-          </div>
-          <div class="profile-details__active">
+          </p>
+          <p class="profile-details__active">
               Citizen Leader since {{currentUser?.createdAt | date}}
-          </div>
+          </p>
         </div>
       </div>
 
       <div class="profile-change-cta">
-          <button class="btn btn-transparent p-0" (click)="openModal() ; updateField = 'name'">Change name</button>
+          <button class="btn btn-transparent p-0 d-flex align-items-center" (click)="openModal() ; updateField = 'name'">
+            Change name
+            <span><i class="fa fa-angle-right ml-2"></i></span>
+          </button>
       </div>
     </div>
 
-    <div class="login-space">
-        <div class="header">
-            LOGIN DETAILS • EMAIL & USERNAME
-        </div>
-
-        <div class="login-info">
-            <div class="login-details">
-                <div class="login-details__email">
-                  {{currentUser?.email}}
-                </div>
-              </div>
-        </div>
-
-        <div class="login-change-cta">
-            <button class="btn btn-transparent p-0">Change email/username</button>
-        </div>
-
-        <div class="login-change-cta">
-            Reset password        
-        </div>
-
+    <!-- toggle-button-for-mobile-layout -->
+    <div class="view-more-section">
+      <button class="btn btn-transparent view-more-btn" (click)="toggleSettings()">
+        View more
+        <span><i class="ml-1" [ngClass]="showSettings === true ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i></span>
+      </button>
     </div>
+    <!-- toggle-button-for-mobile-layout -->
+        
+    <div class="user-setting-section" [ngClass]="showSettings === true ? 'show-section' : 'hide-section'">
+      <div class="login-space">
+          <div class="header">
+              LOGIN DETAILS • EMAIL & USERNAME
+          </div>
 
-    <div class="contact-space">
-
-        <div class="header">
-          PHONE
-        </div>
-
-        <div class="contact-info">
-            <div class="contact-details">
-                <div class="contact-details__phone">
-                    {{currentUser?.phoneNumber ? currentUser?.phoneNumber : 'N/A'}}
+          <div class="login-info">
+              <div class="login-details">
+                  <div class="login-details__email">
+                    {{currentUser?.email}}
+                  </div>
                 </div>
-              </div>
-        </div>
+          </div>
 
-        <div class="contact-change-cta">
-            <button class="btn btn-transparent p-0" (click)="openModal() ; updateField = 'phone number'">Change phone number</button>     
-        </div>
+          <div class="login-change-cta">
+            <button class="btn btn-transparent p-0">
+              Change email/username            
+              <span><i class="fa fa-angle-right ml-2"></i></span>
+            </button>
+          </div>
 
-    </div>
+          <div class="login-change-cta">
+            Reset password    
+          </div>
 
-    <div class="delete-space">
-      <div class="delete-cta">
-          Delete your account
       </div>
-      <div class="tips">
-        Your account information will be erased. 
-        The responses submitted will remain.
+
+      <div class="contact-space">
+
+          <div class="header">
+            PHONE
+          </div>
+
+          <div class="contact-info">
+              <div class="contact-details">
+                  <div class="contact-details__phone">
+                      {{currentUser?.phoneNumber ? currentUser?.phoneNumber : 'N/A'}}
+                  </div>
+                </div>
+          </div>
+
+          <div class="contact-change-cta">
+              <button class="btn btn-transparent p-0" (click)="openModal() ; updateField = 'phone number'">
+                Change phone number
+                <span><i class="fa fa-angle-right ml-2"></i></span>    
+              </button>     
+          </div>
+
+      </div>
+
+      <div class="delete-space">
+        <div class="delete-cta">
+            Delete your account
+            <span><i class="fa fa-angle-right ml-2"></i></span> 
+        </div>
+        <div class="tips">
+          Your account information will be erased. 
+          The responses submitted will remain.
+        </div>
       </div>
     </div>
   </div>
   
   <div class="offset-md-1 col-md-8 profile-index__right">
-    <div class="achievements-block">
+    <!-- tab-section-for-mobile -->
+    <div class="tab-section">
+      <p [ngClass]="showAchievement === true ? 'active-tab' : 'inactive-tab'" (click)="achievementTab()">Achievements</p>
+      <p [ngClass]="showConsultation === true ? 'active-tab' : 'inactive-tab'" (click)="consultationTab()">Consultations</p>
+    </div>
+    <!-- tab-section-for-mobile -->
+
+    <div class="achievements-block" [ngClass]="showAchievement === true ? 'show-block' : 'hide-block'">
       <div class="heading">
           My Achievements
       </div>
@@ -126,7 +155,7 @@
 
       </div>
     </div>
-    <div class="consultations-block">
+    <div class="consultations-block" [ngClass]="showConsultation === true ? 'show-block' : 'hide-block'">
         <div class="heading">
             Consultations I’ve participated in
         </div>

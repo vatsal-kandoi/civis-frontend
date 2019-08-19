@@ -54,10 +54,14 @@
             <p class="text-16">{{response.node.responseText}}</p>
             <div class="vote-section">
               <div class="vote-count">
-                <span><i class="fa fa-thumbs-up"></i></span>
-                <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
-                <span class="ml-4"><i class="fa fa-thumbs-down"></i></span>
-                <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
+                <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">
+                    <span (click)="vote('up', response?.node)" [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
+                    <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
+                </div>
+                <div [ngClass]="response?.node.votedAs?.voteDirection === 'down'  ? 'active' : ''">
+                    <span (click)="vote('down', response?.node)" class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
+                    <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
+                </div>
                 <div *ngIf="response.node?.templatesCount">
                     <span class="ml-4 mr-2"><i class="fa fa-refresh"></i></span>
                     <span>{{response.node?.templatesCount}}</span>

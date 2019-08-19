@@ -82,11 +82,24 @@ export const ConsultationProfileCurrentUser = gql`
               id
               firstName
             }
+            votedAs {
+              id
+              voteDirection
+            }
           }
         }
         totalCount
       }
       updatedAt
+    }
+  }
+`
+
+export const VoteCreateQuery = gql `
+  mutation voteCreate($consultationResponseVote: VoteCreateInput!) {
+    voteCreate(consultationResponseVote: $consultationResponseVote) {
+      id
+      voteDirection
     }
   }
 `
@@ -112,6 +125,10 @@ export const SubmitResponseQuery = gql`
               user {
                 id
                 firstName
+              }
+              votedAs {
+                id
+                voteDirection
               }
             }
           }

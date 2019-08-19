@@ -17,6 +17,6 @@ export const staging = {
 export const prod = {
   ... environment,
   ... {
-    api: 'YOURAPIURL'
+    api: 'https://api.civis.vote'
   }
 };

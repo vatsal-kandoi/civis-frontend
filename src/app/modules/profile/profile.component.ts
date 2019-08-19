@@ -22,6 +22,9 @@ export class ProfileComponent implements OnInit {
     password: ''
   };
   updateField = '';
+  showSettings = false;
+  showAchievement = true;
+  showConsultation = false;
 
   constructor(private userService: UserService, private apollo: Apollo) { }
 
@@ -70,5 +73,19 @@ export class ProfileComponent implements OnInit {
       return points;
     }
     return 0;
+  }
+
+  toggleSettings() {
+    this.showSettings = !this.showSettings;
+  }
+
+  achievementTab() {
+    this.showAchievement = true;
+    this.showConsultation = false;
+  }
+  
+  consultationTab() {
+    this.showConsultation = true;
+    this.showAchievement = false;
   }
 }

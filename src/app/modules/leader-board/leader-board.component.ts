@@ -85,7 +85,6 @@ export class LeaderBoardComponent implements OnInit {
         .subscribe(item => {
           this.loadingElements.userList = false;
           this.userListData = item;
-          console.log(this.userListData, 'coming data');
         }, err => {
           console.log('not working', err);
         });

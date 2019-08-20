@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router,  } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { ConsultationProfileQuery } from './consultations-summary.graphql';

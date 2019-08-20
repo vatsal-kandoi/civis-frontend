@@ -4,10 +4,14 @@ import { CreateConsultationComponent } from './create-consultation/create-consul
 import { ConsultationListComponent } from './consultation-list/consultation-list.component';
 import { ConsultationProfileComponent } from './consultation-profile/consultation-profile.component';
 import { ConsultationsSummaryComponent } from './consultations-summary/consultations-summary.component';
+import { ResponseComponent } from './response/response.component';
 
 const routes: Routes = [
     { path: 'new', component: CreateConsultationComponent },
     { path: 'list', component: ConsultationListComponent },
+    { path: 'response' , children : [
+        { path: ':id', component: ResponseComponent }
+    ]},
     {
         path: ':id', children: [
             { path: '', component: ConsultationProfileComponent },

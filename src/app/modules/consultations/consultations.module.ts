@@ -14,6 +14,7 @@ import {ModalModule} from 'ngx-bootstrap';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { ConsultationsSummaryComponent } from './consultations-summary/consultations-summary.component';
+import { ResponseComponent } from './response/response.component';
 
 
 
@@ -37,7 +38,8 @@ import { ConsultationsSummaryComponent } from './consultations-summary/consultat
         ConsultationListComponent,
         ConsultationProfileComponent,
         ProfileCardComponent,
-        ConsultationsSummaryComponent
+        ConsultationsSummaryComponent,
+        ResponseComponent,
     ],
     providers: []
 })

@@ -3,6 +3,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { map } from 'rxjs/operators';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { UserList } from './leader-board.graphql';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -13,9 +14,11 @@ import { UserList } from './leader-board.graphql';
 })
 export class LeaderBoardComponent implements OnInit {
 
-  level = 'National';
+  locationObject = {
+    name: 'National'
+  };
 
-  levels = [
+  locations = [
     {
       name: 'National'
     },
@@ -26,6 +29,9 @@ export class LeaderBoardComponent implements OnInit {
       name: 'Local'
     }
   ];
+
+  locationFilter = null;
+
   perPageLimit = 15;
   userListQuery: QueryRef<any>;
   userListData: any;
@@ -33,7 +39,8 @@ export class LeaderBoardComponent implements OnInit {
   leaderData: any;
 
   @ViewChild('leaderModal') leaderModal: ModalDirective;
-  
+  currentUser: any;
+
   @HostListener('document:scroll', ['$event'])
   onScroll(event: any) {
     const boundingBox = document.documentElement.getBoundingClientRect();
@@ -42,12 +49,32 @@ export class LeaderBoardComponent implements OnInit {
     }
   }
 
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo, private userService: UserService) { }
 
   ngOnInit() {
     this. fetchUserList();
+    this.getCurrentUser();
   }
-  
+
+  changeLocatioFilter(event) {
+    if (this.currentUser) {
+      switch (event.name) {
+        case 'Local':
+          this.locationFilter = this.currentUser.city.id;
+          break;
+        case 'State':
+          this.locationFilter = this.currentUser.city.parent.id;
+          break;
+        case 'National':
+          this.locationFilter = null;
+          break;
+        default:
+          break;
+      }
+      this.fetchUserList();
+    }
+  }
+
   openLeaderModal(data) {
     this.leaderData = data;
     this.leaderModal.show();
@@ -57,21 +84,27 @@ export class LeaderBoardComponent implements OnInit {
     this.leaderModal.hide();
   }
 
-  // selectLevel(event) {
-  //   this.level = event;
-  //   console.log(this.level, 'event');
-  // }
-  
   getQuery() {
     const variables = {
       perPage: this.perPageLimit,
       page: 1,
       roleFilter: 'citizen',
-      locationFilter: null,
+      locationFilter: this.locationFilter,
       sort: 'points',
       sortDirection: 'desc'
     };
     return this.apollo.watchQuery({query: UserList, variables});
+  }
+
+  getCurrentUser() {
+    this.userService.userLoaded$
+    .subscribe((data) => {
+      if (data) {
+        this.currentUser = this.userService.currentUser;
+      } else {
+        this.currentUser = null;
+      }
+    });
   }
 
   fetchUserList() {

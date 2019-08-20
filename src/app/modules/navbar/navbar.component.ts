@@ -56,6 +56,9 @@ export class NavbarComponent implements OnInit {
       if (url.search('/consultations/list') !== -1) {
         return 'consultations-list';
       }
+      if (url.search('summary') !== -1) {
+        return 'consultations-summary';
+      }
 
       return 'consultations-profile';
     }

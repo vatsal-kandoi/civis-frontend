@@ -10,6 +10,8 @@ import { ConsultationsService } from 'src/app/shared/services/consultations.serv
 export class ProfileCardComponent implements OnInit {
 
   @Input() profile: any;
+  @Input() summaryData: any;
+
   enableSubmitResponse: boolean;
   currentUser: any;
   @Output() openFeedbackModal = new EventEmitter();

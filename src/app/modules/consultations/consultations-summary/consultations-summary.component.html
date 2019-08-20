@@ -1,0 +1,69 @@
+<div class="summary-index">
+  <div class="consultation-profile">
+      <section class="consultation-profile__sidebar-section">
+        <app-profile-card [profile]='profileData' [summaryData]="summaryData"></app-profile-card>
+      </section>
+      <section class="consultation-profile__main-section">
+
+        <div *ngIf="publicResponses?.length">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="text-18 text-16-sm m-0 bold-text">Public responses</p>
+            <a href="javascript:void(0)" class="what-resp-text">What are public responses?</a>
+          </div>
+
+          <div class="paper-effect my-4 m-0-sm ">
+            <ng-container *ngFor="let response of publicResponses">
+              <div class="response-container">
+                <div class="d-inline-flex align-items-center">
+                    <img class="avatar avatar--42" 
+                    [src]="response?.node?.user?.profilePicture?.url ? response?.user?.node?.profilePicture?.url : 
+                    'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1'" />
+                  <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
+                </div>
+                <p class="text-16">{{response.node?.responseText}}</p>
+                <div class="vote-section">
+                  <div class="vote-count">
+                    <div>
+                        <span><i class="fa fa-thumbs-up"></i></span>
+                        <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
+                    </div>
+                    <div>
+                        <span class="ml-4"><i class="fa fa-thumbs-down"></i></span>
+                        <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
+                    </div>
+                    <div>
+                        <span class="ml-4 mr-2"><i class="fa fa-refresh"></i></span>
+                        <span>{{response.node?.templatesCount ? response.node?.templatesCount : ''}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>  
+        </div>
+
+        <div *ngIf="annonymousResponses?.length">
+            <div>
+                <p class="text-18 text-16-sm m-0 bold-text">Other responses</p>
+            </div>
+  
+            <div class="paper-effect my-4 m-0-sm" *ngFor="let response of annonymousResponses">
+              <ng-container>
+                <div class="response-container">
+                  <div class="d-inline-flex align-items-center">
+                    <div class="user-icon"><i class="fa fa-user-circle"></i></div>
+                    <p class="regular-text bold-text m-0 ml-2">
+                      {{'Citizen Leader [Name undisclosed]'}}
+                    </p>
+                  </div>
+                  <p class="text-16">{{response.node?.responseText}}</p>
+                </div>
+              </ng-container>
+            </div>  
+          </div>
+
+
+
+      </section>
+  </div>
+</div>

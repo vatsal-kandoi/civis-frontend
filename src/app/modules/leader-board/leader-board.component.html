@@ -6,15 +6,13 @@
         <p>Everyday citizens who’re taking initiative and making sure our voices reach the government</p>
       </div>
       <div class="header-right">
-        <ng-select 
-          [items]="levels" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
-          bindValue="name" [searchable]="false" [(ngModel)]="level" [clearable]="false"> 
-        </ng-select>  
-        <!-- <ng-select id="level" #level="ngModel" name="level"  
-          [items]="levels" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
-          bindValue="name" [searchable]="false"
-          [(ngModel)]="level"> 
-        </ng-select> -->
+        <form #locationForm="ngForm">
+          <ng-select id="location" #location="ngModel" name="location"  
+          [items]="locations" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
+          bindValue="name" [searchable]="false" [clearable]="false" (change)="changeLocatioFilter($event)"
+          [(ngModel)]="locationObject.name"> 
+          </ng-select>
+        </form>
       </div>
       <!-- <span class="header-right">All India<span><i class="fa fa-angle-down"></i></span></p> -->
     </section>

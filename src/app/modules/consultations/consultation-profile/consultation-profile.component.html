@@ -48,8 +48,10 @@
         <ng-container *ngFor="let response of responseList">
           <div class="response-container">
             <div class="d-inline-flex align-items-center">
-              <img class="avatar avatar--42" src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" />
-              <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
+                <img class="avatar avatar--42" 
+                [src]="response?.node?.user?.profilePicture?.url ? response?.node?.user?.profilePicture?.url : 
+                'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1'" />              
+                <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
             </div>
             <p class="text-16">{{response.node.responseText}}</p>
             <div class="vote-section">

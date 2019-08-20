@@ -28,8 +28,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-console.log('disqus: ', disqusRouter);
-
 app.use('/disqus', disqusRouter);
 
 app.get('/getEnvironment', (req, res) => {

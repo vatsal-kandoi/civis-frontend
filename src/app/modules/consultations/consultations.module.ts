@@ -15,6 +15,9 @@ import { NgxUploaderModule } from 'ngx-uploader';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { ConsultationsSummaryComponent } from './consultations-summary/consultations-summary.component';
 import { ResponseComponent } from './response/response.component';
+import { DisqusModule } from 'src/app/shared/components/disqus/disqus.module';
+import { ReadRespondComponent } from './consultation-profile/read-respond/read-respond.component';
+import { DiscussEngageComponent } from './consultation-profile/discuss-engage/discuss-engage.component';
 
 
 
@@ -30,7 +33,8 @@ import { ResponseComponent } from './response/response.component';
         BsDatepickerModule.forRoot(),
         ModalModule,
         NgxUploaderModule,
-        AngularDraggableModule
+        AngularDraggableModule,
+        DisqusModule,
     ],
     exports: [],
     declarations: [
@@ -40,6 +44,8 @@ import { ResponseComponent } from './response/response.component';
         ProfileCardComponent,
         ConsultationsSummaryComponent,
         ResponseComponent,
+        ReadRespondComponent,
+        DiscussEngageComponent,
     ],
     providers: []
 })

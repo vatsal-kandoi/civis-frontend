@@ -7,9 +7,13 @@ import { ConsultationsSummaryComponent } from './consultations-summary/consultat
 
 const routes: Routes = [
     { path: 'new', component: CreateConsultationComponent },
-    { path: 'list', component: ConsultationListComponent},
-    { path: ':id', component: ConsultationProfileComponent},
-    { path: ':id/summary' , component: ConsultationsSummaryComponent}
+    { path: 'list', component: ConsultationListComponent },
+    {
+        path: ':id', children: [
+            { path: '', component: ConsultationProfileComponent },
+            { path: 'summary', component: ConsultationsSummaryComponent }
+        ]
+    },
 ];
 
 @NgModule({

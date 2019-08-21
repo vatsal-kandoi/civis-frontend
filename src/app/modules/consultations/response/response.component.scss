@@ -1,0 +1,200 @@
+@import './src/assets/styles/app';
+
+.response-index {
+    margin-top: 77px;
+  
+    @media screen and (max-width: 991px) {
+      margin-top: 57px;
+    }
+    background: #E5F4FF;
+    min-height: 100vh;
+
+  .response-profile {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    grid-column-gap: 20px;
+    width: 80%;
+    margin: 77px auto;
+    padding: 25px 0;
+    
+    @media screen and (max-width: 991px) {
+      margin-top: 57px;
+      grid-template-columns: auto;
+      grid-column-gap: 0;
+      width: 100%;
+    }
+  
+    &__sidebar-section {
+      .c-profile-card {
+        width: 100%;
+        background-color: #F2FAFF;
+        box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.13);
+      
+        &__top-section {
+          padding: 20px 24px;
+          background-color: #F1F1F1;
+      
+          .light-text {
+            @include general-text($font-size: 12px, $color: $light-gray);
+          }
+        
+          .card-title {
+            width: 90%;
+            @include general-text($font-size: 20px, $weight: bold);
+            @media screen and (max-width: 991px) {
+              font-size: 16px;
+            }
+          }
+          
+          .ministry-detail {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            align-items: center;
+
+            .ministry-text {
+              font-weight: bold;
+              font-size: 16px;
+              line-height: 119.7%;
+              letter-spacing: 0.01em;
+              color: #767676;
+            }
+          }
+        
+          .divider {
+            border: 1px solid #CAE5F5;
+            margin: 0;
+          }
+        }
+
+        &__middle-section {
+          border-bottom: 1px solid #EAEAEA;
+
+          .deadline {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 119.7%;
+            letter-spacing: 0.115em;
+            color: #ABABAB;
+            padding: 20px 30px;
+          }
+        }
+      
+        &__bottom-section {
+          padding: 20px 24px;
+      
+          .count-text {
+            font-size: 14px;
+            color: #6F6F6F;
+          }
+        }
+      }
+    }
+  
+    &__main-section {
+      .response-info {
+        background: #FFFFFF;
+        box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.13);
+        border-radius: 5px;
+        .header {
+          background-color: #F1F1F1;
+          padding: 20px 30px;
+
+          .light-text {
+            @include general-text($font-size: 12px, $color: $light-gray);
+          }
+
+          .card-title {
+            width: 90%;
+            @include general-text($font-size: 30px, $weight: bold);
+            @media screen and (max-width: 991px) {
+              font-size: 16px;
+            }
+          }
+        }
+        .response-content {
+          padding: 15px 30px;
+          font-size: 15px;
+          line-height: 145%;
+          letter-spacing: 0.015em;
+          color: #525252;
+        }
+      }
+    }
+  }
+  .footer {
+    width: 100%;
+    height: 65px;
+    background: #0E73B9;
+    box-shadow: 0px -4px 14px rgba(0, 0, 0, 0.07);
+    position: fixed;
+    bottom: 0;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left-space {
+      display: flex;
+      align-items: center;
+
+      .back-btn {
+        i {
+          color: $white;
+          font-size: 24px;
+        }
+      }
+
+      .draft-btn {
+        padding: 12px 20px;
+        border: 1px solid #FFFFFF;
+        box-sizing: border-box;
+        border-radius: 4px;
+        cursor: pointer;
+
+        span{
+          color: $white;
+          i {
+            font-size: 18px;
+          }
+          &:nth-child(2) {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+          }
+          &:nth-child(3) {
+            color: rgba(255, 255, 255, 0.5) !important;
+          }
+        }     
+      }
+
+      .share-btn {
+        color: $white;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        opacity: 0.7;
+        cursor: pointer;
+      }
+    }
+
+    .right-space {
+      color: $white;
+
+      span {
+        &:nth-child(2) {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 18px;
+          line-height: 21px;
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+}

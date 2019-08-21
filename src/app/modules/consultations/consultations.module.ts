@@ -14,6 +14,7 @@ import {ModalModule} from 'ngx-bootstrap';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { ConsultationsSummaryComponent } from './consultations-summary/consultations-summary.component';
+import { ResponseComponent } from './response/response.component';
 import { DisqusModule } from 'src/app/shared/components/disqus/disqus.module';
 import { ReadRespondComponent } from './consultation-profile/read-respond/read-respond.component';
 import { DiscussEngageComponent } from './consultation-profile/discuss-engage/discuss-engage.component';
@@ -42,8 +43,9 @@ import { DiscussEngageComponent } from './consultation-profile/discuss-engage/di
         ConsultationProfileComponent,
         ProfileCardComponent,
         ConsultationsSummaryComponent,
+        ResponseComponent,
         ReadRespondComponent,
-        DiscussEngageComponent
+        DiscussEngageComponent,
     ],
     providers: []
 })

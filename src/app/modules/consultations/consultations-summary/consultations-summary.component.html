@@ -43,27 +43,25 @@
         </div>
 
         <div *ngIf="annonymousResponses?.length">
-            <div>
-                <p class="text-18 text-16-sm m-0 bold-text">Other responses</p>
-            </div>
-  
-            <div class="paper-effect my-4 m-0-sm" *ngFor="let response of annonymousResponses">
-              <ng-container>
-                <div class="response-container">
-                  <div class="d-inline-flex align-items-center">
-                    <div class="user-icon"><i class="fa fa-user-circle"></i></div>
-                    <p class="regular-text bold-text m-0 ml-2">
-                      {{'Citizen Leader [Name undisclosed]'}}
-                    </p>
-                  </div>
-                  <p class="text-16">{{response.node?.responseText}}</p>
-                </div>
-              </ng-container>
-            </div>  
+          <div>
+              <p class="text-18 text-16-sm m-0 bold-text">Other responses</p>
           </div>
 
-
-
+          <div class="paper-effect my-4 m-0-sm" *ngFor="let response of annonymousResponses">
+            <ng-container>
+              <div class="response-container">
+                <div class="d-inline-flex align-items-center">
+                  <div class="user-icon"><i class="fa fa-user-circle"></i></div>
+                  <p class="regular-text bold-text m-0 ml-2">
+                    {{'Citizen Leader [Name undisclosed]'}}
+                  </p>
+                </div>
+                <p class="text-16">{{response.node?.responseText}}</p>
+              </div>
+            </ng-container>
+          </div>  
+        </div>
       </section>
   </div>
 </div>
+<app-footer></app-footer>

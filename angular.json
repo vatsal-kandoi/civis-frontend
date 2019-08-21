@@ -71,7 +71,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "civis:build"
+            "browserTarget": "civis:build",
+            "port": 3400
           },
           "configurations": {
             "production": {

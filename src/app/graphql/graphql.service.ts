@@ -72,7 +72,7 @@ export class GraphqlService {
     this.host = `${document.location.protocol}//${document.location.host}`;
 
     if (document.location.hostname === 'localhost') {
-      this.appApiEndpoint = `${document.location.protocol}//${document.location.hostname}:4000`;
+      this.appApiEndpoint = `${document.location.protocol}//${document.location.hostname}:3401`;
     } else {
       this.appApiEndpoint = `${document.location.protocol}//${document.location.host}`;
     }

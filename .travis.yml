@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 10.15.1
+- 10.15.3
 cache:
   directories:
   - node_modules
@@ -9,23 +9,25 @@ branches:
   - staging
   - master
 script:
-  - npm install
+- npm install
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
 - sed -i '/dist/d' .gitignore
 - git add . && git commit -m "latest build"
-after_deploy:
-- echo "Deployed!"
 deploy:
   provider: cloud66
-  redeployment_hook:
-    secure: fDoPz4qXF1kVqBHimqzjTVC60a2V3l06BW97lRXpXUShboAOnWebA/+LxNvltfRYxQaWmnT6ZE/705zJGbCfXuVfaejc+R9oBTSM5UKck6scoM+Lj7Y/6mPArCrkcPcfk2mmx89hi0mMdSTLWWIkBPog0mf3B57Va84fYlW83MPWDi8njDrhj3GOn5aZtP8j/m9UrX9zf96W6G5JbT5czp0jeWxs+/ePIqSarTqraMZfadJ3IkTKo3GVehGtDV/H2LZpXPM7QENs5qP2sSVtrwQhU/mmUC6C4sYquu4Peob0hMHwJ6oz2rMwaYkLIdW3wn2M9svuNkx1+fdx+haEaSGfzyPmr3ebgogDBvQMxgvfMsRmMJWoYwty05HWkJwaPrm+ZY1QTLZSE4SiB2U04ErlIGiMS0WKX30JvKkxw1cFKIMsRThKVE7HtSD+ccCWsgjoVJZRfoDS5HNMkE82aP3YidX7CltcVK+kA4ujn9K8TYWBmawjB6BZey2sGxj1p08CSDjZepPuQevRRJTpzFwnhBsVdIJjYO5j8hZxxZArkkOSWEaaISUUPXYFzjUy26SnHPlo8PhElold87CayMHttwzaVVmj8cE96yAWsSCK8GqeI6XsSwPEI4DSJ31nJDxz2vfHY/bS2PImUj7KhW6HJWI34ddRMaFHBc5PyMU=
-  on:
-    repo: civis-vote/civis-frontend
-    branch: prod
-  provider: cloud66
-  redeployment_hook:
-    secure: fDoPz4qXF1kVqBHimqzjTVC60a2V3l06BW97lRXpXUShboAOnWebA/+LxNvltfRYxQaWmnT6ZE/705zJGbCfXuVfaejc+R9oBTSM5UKck6scoM+Lj7Y/6mPArCrkcPcfk2mmx89hi0mMdSTLWWIkBPog0mf3B57Va84fYlW83MPWDi8njDrhj3GOn5aZtP8j/m9UrX9zf96W6G5JbT5czp0jeWxs+/ePIqSarTqraMZfadJ3IkTKo3GVehGtDV/H2LZpXPM7QENs5qP2sSVtrwQhU/mmUC6C4sYquu4Peob0hMHwJ6oz2rMwaYkLIdW3wn2M9svuNkx1+fdx+haEaSGfzyPmr3ebgogDBvQMxgvfMsRmMJWoYwty05HWkJwaPrm+ZY1QTLZSE4SiB2U04ErlIGiMS0WKX30JvKkxw1cFKIMsRThKVE7HtSD+ccCWsgjoVJZRfoDS5HNMkE82aP3YidX7CltcVK+kA4ujn9K8TYWBmawjB6BZey2sGxj1p08CSDjZepPuQevRRJTpzFwnhBsVdIJjYO5j8hZxxZArkkOSWEaaISUUPXYFzjUy26SnHPlo8PhElold87CayMHttwzaVVmj8cE96yAWsSCK8GqeI6XsSwPEI4DSJ31nJDxz2vfHY/bS2PImUj7KhW6HJWI34ddRMaFHBc5PyMU=
+  app: civis-web-staging
+  api_key:
+    secure: qC3fGeYdIoFFkePNBKqOlt/qIJr1Rwoc+5GS+KK+m6buH8qkAAxI8/EHunF2U5+mKVW5OUGLmflDUE5Xie+tdTelAO9E36Q+kPwHX3TVkl0fjHDeuSU/wocLjk3GrxyKUnvr1R0hfjzaWPX8S6L3YVO8p1qcuYj500loF+ZXZb226qpQ3pa7QNFZcqzVOiBlvieN2Gi0+gHOD1Gd210zlZ0aGT7Bn8MP8ah4p0j3VunK/pATMZv1f1VLebFs3kPGH7vhHU3uTAXHp1heZXtw583D+iEtCw9DF4HKEvPyguRVfkSIwCAj6iw+bUe36EBhpvFgiMRcEB9koQXZ7lA2nT1FttRs2d5lu1tN4bFDoitlh3zkBBfd0qR4spzw25Uy7crL/sJz1bzVag7Ln7qSrqKini3jW3mb3eLSFISgZsOOdmHlPvrHMVa5mAiZLhgznZSgAnAHscWd3J+5iLIpzfLFC3h7poa2oUrJasS5HKeTPNYUjL1zXnXzCLhEIKGZeOnyNqKaOnR/ndzW4CrX2LaS6MhMFu9ZQaNOPkRTb2PiKt7zRY6jT0NbJ83jfMB4slf7MrwQR/8DTdRwmMpoxCPgRnyfnhgZGlZJ+fg10D7NH8gAijnr00mnm1RYaiANBdUxQl2Cj61mHCQCxzlMglJAfzGYcf0HrtCKrErrV4I=
   on:
     repo: civis-vote/civis-frontend
     branch: staging
+  provider: cloud66
+  app: civis-web
+  api_key:
+    secure: qC3fGeYdIoFFkePNBKqOlt/qIJr1Rwoc+5GS+KK+m6buH8qkAAxI8/EHunF2U5+mKVW5OUGLmflDUE5Xie+tdTelAO9E36Q+kPwHX3TVkl0fjHDeuSU/wocLjk3GrxyKUnvr1R0hfjzaWPX8S6L3YVO8p1qcuYj500loF+ZXZb226qpQ3pa7QNFZcqzVOiBlvieN2Gi0+gHOD1Gd210zlZ0aGT7Bn8MP8ah4p0j3VunK/pATMZv1f1VLebFs3kPGH7vhHU3uTAXHp1heZXtw583D+iEtCw9DF4HKEvPyguRVfkSIwCAj6iw+bUe36EBhpvFgiMRcEB9koQXZ7lA2nT1FttRs2d5lu1tN4bFDoitlh3zkBBfd0qR4spzw25Uy7crL/sJz1bzVag7Ln7qSrqKini3jW3mb3eLSFISgZsOOdmHlPvrHMVa5mAiZLhgznZSgAnAHscWd3J+5iLIpzfLFC3h7poa2oUrJasS5HKeTPNYUjL1zXnXzCLhEIKGZeOnyNqKaOnR/ndzW4CrX2LaS6MhMFu9ZQaNOPkRTb2PiKt7zRY6jT0NbJ83jfMB4slf7MrwQR/8DTdRwmMpoxCPgRnyfnhgZGlZJ+fg10D7NH8gAijnr00mnm1RYaiANBdUxQl2Cj61mHCQCxzlMglJAfzGYcf0HrtCKrErrV4I=
+  on:
+    repo: civis-vote/civis-frontend
+    branch: master
+after_deploy:
+- echo "Deployed!"

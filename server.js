@@ -11,7 +11,7 @@ if(!process.env.APP_ENVIRONMENT) {
 
 // app.use(secure);
 
-const PORT = process.env.PORT || 3201;
+const PORT = process.env.PORT || 3401;
 app.listen(PORT);
 
 app.use(compression());

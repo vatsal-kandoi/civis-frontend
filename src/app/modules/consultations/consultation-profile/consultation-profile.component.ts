@@ -95,7 +95,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
   checkUserPresent() {
     if (this.currentUser) {
       this.step = 2;
-      this.feedbackModal.show();
     } else {
       this.router.navigateByUrl('/auth');
       this.consultationsService.enableSubmitResponse.next(false);
@@ -135,7 +134,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
       map((res: any) => res.data.consultationResponseCreate)
     )
     .subscribe((response) => {
-      this.feedbackModal.hide();
     }, err => {
       this.errorService.showErrorModal(err);
     });
@@ -249,19 +247,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
   //     }
   // }
 
-  useThisResponse(response) {
-    if (response) {
-      this.responseText = response.responseText;
-      this.templateId = response.id;
-      window.scrollTo({
-        top: this.panel.nativeElement.offsetTop,
-        behavior: 'smooth',
-      });
-      if (this.responseText) {
-        this.consultationsService.enableSubmitResponse.next(true);
-      }
-    }
-  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

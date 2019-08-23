@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 
@@ -14,8 +14,6 @@ export class ProfileCardComponent implements OnInit {
 
   enableSubmitResponse: boolean;
   currentUser: any;
-  @Output() openFeedbackModal = new EventEmitter();
-
 
   constructor(private consultationsService: ConsultationsService ) { }
 
@@ -51,7 +49,7 @@ export class ProfileCardComponent implements OnInit {
 
   stepNext() {
     if (this.enableSubmitResponse) {
-      this.openFeedbackModal.emit(true);
+      this.consultationsService.openFeedbackModal.next(true);
     }
   }
 }

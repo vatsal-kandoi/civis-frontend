@@ -1,0 +1,64 @@
+<div *ngIf="tab == 'sumbit-response'">
+  <div class="steps-wrapper" @fadeIn [ngSwitch]="submitStep">
+    <div class="carousel-arrow-left pointer" (click)="sumbitPreviousStep()"><i class="fa fa-angle-left"></i></div>
+    <div class="steps-inner-container" *ngSwitchCase="1">
+      <div class="step-left-section"><img src="../../../assets/images/step1.png" /></div>
+      <div class="step-right-section">
+        <p class="step-text">STEP 1</p>
+        <ul class="step-detail">
+          <li>Select a consultation.</li>
+          <li>Read the summary.</li>
+        </ul>
+        <button class="app-btn circular blue-light btn-next" (click)="handleSubmitNext()">
+          NEXT
+          <span><i class="fa fa-angle-right"></i></span>
+        </button>
+      </div>
+    </div>
+    <div class="steps-inner-container" *ngSwitchCase="2"> 
+      <div class="step-left-section"><img src="../../../assets/images/step3.png" /></div>
+      <div class="step-right-section">
+        <p class="step-text">STEP 2</p>
+        <ul class="step-detail">
+          <li>Discuss the document and ask questions.</li>
+          <li>Choose a response, or write your own.</li>
+          <li>Submit your response!</li>
+          <li>Share the consultation with friends.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="carousel-arrow-right pointer" (click)="submitNextStep()"><i class="fa fa-angle-right"></i></div>
+  </div>
+</div>
+
+<div *ngIf="tab == 'add-consultation'">
+  <div class="steps-wrapper" @fadeIn [ngSwitch]="consultationStep">
+    <div class="carousel-arrow-left pointer" (click)="consultationPreviousStep()"><i class="fa fa-angle-left"></i></div>
+    <div class="steps-inner-container" *ngSwitchCase="1">
+      <div class="step-left-section"><img src="../../../assets/images/step2.png" /></div>
+      <div class="step-right-section">
+        <p class="step-text">STEP 1</p>
+        <ul class="step-detail">
+          <li>Have you stumbled upon a document open for consultation?</li>
+          <li>Click on ‘Submit A Consultation’</li>
+        </ul>
+        <button class="app-btn circular blue-light btn-next" (click)="handleConsultationNext()">
+          NEXT
+          <span><i class="fa fa-angle-right"></i></span>
+        </button>
+      </div>
+    </div>
+    <div class="steps-inner-container" *ngSwitchCase="2">
+      <div class="step-left-section"><img src="../../../assets/images/step4.png" /></div>
+      <div class="step-right-section">
+        <p class="step-text">STEP 2</p>
+        <ul class="step-detail w-80">
+          <li>Add a few details like the title and deadline, and share the link to the document.</li>
+          <li>Select the department the consultation has been shared by, or add a department.</li>
+          <li>Submit the consultation, our moderators will take a look and make it public.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="carousel-arrow-right pointer" (click)="consultationNextStep()"><i class="fa fa-angle-right"></i></div>
+  </div>
+</div>

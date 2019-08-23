@@ -1,54 +1,56 @@
 <div class="login-index row no-gutters">
 
     <div class="login-index__left col-md-4">
-      <button class="back-btn" [routerLink]="['/']">Back</button>
-  
-      <div class="info-box">
-          <div class="info-box__title">
+      <div class="overlay"></div>
+      <div class="cover-detail">
+        <button class="back-btn" [routerLink]="['/']">
+          <span><i class="fa fa-angle-left back-arrow"></i></span>
+          Back
+        </button>
+    
+        <div class="info-box">
+          <p class="info-box__title">
             IN THE PAST
-          </div>
-          <div class="info-box__heading">
+          </p>
+          <p class="info-box__heading">
             National Urban Policy Framework, 2018
-          </div>
-          <div class="info-box__sub-heading">
+          </p>
+          <p class="info-box__sub-heading">
             Ministry of Housing and Urban Affairs
-          </div>
-          <div class="info-box__message">
-            3251 citizen leaders participated
-          </div>
-          <button class="rounded-btn">READ CASE STUDY</button>
+          </p>
+          <p class="info-box__message mb-4">
+            <span><i class="fa fa-line-chart mr-2"></i></span>3251 citizen leaders participated
+          </p>
+          <button class="app-btn circular read-case-btn">READ CASE STUDY</button>
+        </div>
       </div>
-  
     </div>
-    <div class="login-index__right col-md-8 col-12 p-3 p-md-5">
+    <div class="login-index__right col-md-8 col-12">
       <div class="header">
         <div class="logo-container">
-          <img class="logo" src='../../../../assets/images/brand-logo/brand-logo.svg' />
+          <img class="logo" src='assets/images/brand-logo/brand-logo.svg' />
         </div>
         <div class="sign-up-container">
-          <div> 
+          <p class="auth-text"> 
             Don't have an account with Civis?
-          </div>
-          <button class="rounded-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
+          </p>
+          <button class="app-btn circular auth-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
         </div>
         <div class="sign-up-mobile-container">
             <div>
-              <button class="sign-up-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
+              <button class="app-btn primary sign-up-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
             </div>
           </div>
       </div>
-      <div class="heading my-md-3 mt-5 mb-3">
-        <div>Sign in to your Citizen Leader account</div>
-      </div>
+      <p class="logo-heading">Sign in to your Citizen Leader account</p>
   
       <div class="form-space row no-gutters mt-md-5 mt-2">
         <div class="form-space__left col-md-5">
           <form #loginForm="ngForm" (ngSubmit)="submit(loginForm.valid)" autocomplete="off">
-      
               <div class="input-box">
                   <label for="email">Email</label>
                   <div class="input-box__border">
-                      <input placeholder="email" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="loginObject.email" required email />
+                      <input placeholder="siddharth@gautam.com" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="loginObject.email" required email />
                   </div>
                   <div *ngIf="email.invalid && (email.touched || loginForm.submitted)" class="error-msg">
                       <div *ngIf="email.errors.required">Email is Required</div>
@@ -59,18 +61,44 @@
               <div class="input-box">
                   <label for="password">Password</label>
                   <div class="input-box__border">
-                      <input placeholder="password" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="loginObject.password" required />
+                      <input placeholder="At least 6 characters" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="loginObject.password" required />
                   </div>
                   <div *ngIf="password.invalid && (password.touched || loginForm.submitted)" class="error-msg">Password is Required</div>
               </div>
       
               <div>
-                <button class="submit-btn" type="submit">SIGN IN TO MY ACCOUNT</button>
+                <button class="app-btn secondary get-start-btn" type="submit">
+                    <p class="m-0">SIGN IN TO MY ACCOUNT</p>
+                    <i class="fa fa-angle-right"></i>
+                </button>
               </div>
             </form>
         </div>
+
+        <div class="form-space-middle col-md-1">
+          <div class="vertical-divider">
+            <div class="center-element">OR</div>
+          </div>
+          <hr class="horizontal-divider" data-content="OR">
+        </div>
+
+        <div class="form-space-right col-md-5">
+          <button class="app-btn gmail mb-3" (click)="redirectTo('google')">
+            <div class="social-img">
+              <img src="../../../../assets/images/Gmail.png" />
+            </div>
+            <p class="mb-0 ml-4">Sign in with Google</p>
+          </button> 
+          <button class="app-btn facebook" (click)="redirectTo('facebook')">
+            <div class="social-img">
+              <img src="../../../../assets/images/Facebook.png" />
+            </div>
+            
+            <p class="mb-0 ml-4">Sign in with Facebook</p>
+          </button>
+        </div>
+        
       </div>
-      
     </div>
   
   </div>

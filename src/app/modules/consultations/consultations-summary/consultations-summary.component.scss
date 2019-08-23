@@ -1,0 +1,132 @@
+@import './src/assets/styles/app';
+
+.summary-index {
+    margin-top: 77px;
+  
+    @media screen and (max-width: 991px) {
+      margin-top: 57px;
+    }
+    background: #E5F4FF;
+    min-height: 100vh;
+
+    .consultation-profile {
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        grid-column-gap: 20px;
+        width: 80%;
+        margin: 77px auto;
+        padding: 25px 0;
+        
+        @media screen and (max-width: 991px) {
+          margin-top: 57px;
+          grid-template-columns: auto;
+          grid-column-gap: 0;
+          width: 100%;
+        }
+      
+        &__sidebar-section {
+      
+        }
+      
+        &__main-section {
+
+            .paper-effect {
+                position: relative;
+                padding: 28px 32px;
+                background-color: $white;
+                box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.13);
+                border-radius: 5px;
+                z-index: 1;
+                @media screen and (max-width: 991px) {
+                  padding: 20px 15px;
+                  border-radius: 0;
+                  box-shadow: none;
+                }
+              }
+
+              .heading {
+                @include general-text($font-size: 16px, $weight: bold);
+              }            
+        
+            .summary-content {
+              @include general-text;
+              @media screen {
+                font-size: 14px;
+              }
+            }
+        
+            .what-resp-text {
+              font-size: 13px;
+              color: #939393;
+              text-decoration: underline;
+            }
+
+              .response-container {
+                padding: 25px 0;
+                border-bottom: 1px solid $divider-border;
+                &:last-child {
+                  border-bottom: none;
+                }
+                .vote-section {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  .vote-count {
+                    display: flex;
+                    align-items: center;
+                    color: #A6A6A6;
+          
+                    span:nth-child(odd) {
+                      font-size: 24px;
+                      margin-right: 5px;
+                      cursor: pointer;
+                    }
+          
+                    span:nth-child(even) {
+                      font-size: 14px;
+                    } 
+                    
+                    .active {
+                      color: $primary-color !important;
+            
+                      &__btn {
+                        border: 1px solid $primary-color;
+                        border-radius: 50%;
+                        padding: 5px 10px;
+                      }
+                    }
+                  }
+          
+                  .response-btn {
+                    padding: 5px 10px;
+                    color: $primary-color;
+                    background-color: transparent;
+                    border-radius: 3px;
+                    border: 1px solid #1894EA;
+                  }
+                }
+                .text-16 {
+                  @media screen and (max-width: 991px) {
+                    font-size: 14px;
+                  }
+                }
+
+                // .user-profile {
+                //   width: 32px;
+                //   height: 32px;
+
+                //   img {
+                //     width: 100%;
+                //   }
+                // }
+
+                .user-icon {
+                  i {
+                    font-size: 32px;
+                    color: #C4C4C4;
+                  }
+                }
+              }
+        }
+    }
+}

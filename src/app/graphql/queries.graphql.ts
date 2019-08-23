@@ -1,22 +1,53 @@
 import gql from 'graphql-tag';
 
 export const CurrentUser = gql`
-  query CurrentUser {
-    userCurrent {
-        city {
-            id
-            locationType {
-                city
-                state
-            }
-            name
-        }
-        createdAt
-        email
-        firstName
+query{
+  userCurrent {
+    id
+    bestRank
+    bestRankType
+    points
+    city {
+      id
+      name
+      parent {
         id
-        lastName
-        notifyForNewConsultation
+        name
+      }
     }
+    cityRank
+    createdAt
+    email
+    firstName
+    lastName
+    notifyForNewConsultation
+    phoneNumber
+    profilePicture(resolution: "") {
+      id
+      url
+    }
+    rank
+    responses(sort: created_at, sortDirection: asc) {
+      edges {
+        node {
+          id
+          points
+          consultation {
+            id
+             title
+            ministry {
+              id
+              name
+              logo (resolution : "") {
+                url
+              }
+            }
+            responseDeadline
+          }
+        }
+      }
+    }
+    stateRank
   }
+}
 `;

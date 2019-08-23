@@ -1,0 +1,182 @@
+@import './src/assets/styles/app';
+
+.bg-color-wrapper {
+  background-color: $blue-bg-light;
+  margin-top: 77px;
+  
+  @media screen and (max-width: 991px) {
+    margin-top: 57px;
+  }
+}
+
+.consultation-listing-container {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 46px;
+  @media screen and (max-width: 991px) {
+    width: 100%;
+  }
+  .card-listing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px 20px;
+    width: 100%;
+    @media screen and (max-width: 991px) {
+      grid-template-columns: auto;
+    }
+    .card-item {
+      max-width: 445px;
+      @media screen and (max-width: 991px) {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.closed-list-container {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 80px;
+  @media screen and (max-width: 991px) {
+    width: 100%;
+    padding-top: 25px;
+  }
+  .closed-list-table {
+
+    .table-header {
+      display: flex;
+      width: 100%;
+      border-bottom: 1px solid #A8DCFF;
+      padding-bottom: 5px;
+      @media screen and (max-width: 991px) {
+        display: none;
+      }
+      .header-title {
+        font-size: 12px;
+        color: #6DB4E4;
+        font-weight: 500;
+      }
+    }
+
+    .table-body {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 10px 0;
+      box-shadow: inset 90px 0 0 0 #e5f4ff, inset 0 -1px 0 0 #C0E6FF;
+      @media screen and (max-width: 991px) {
+        display: none;
+      }
+    }
+
+    .table-list {
+      display: none;
+      padding: 20px 15px;
+      border-bottom: 1px solid #BFE4FF;
+      @media screen and (max-width: 991px) {
+        display: block;
+      }
+      .list-grid {
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        grid-column-gap: 10px;
+      }
+    }
+
+    .cell-1 {
+      width: 40%;
+    }
+    .cell-2 {
+      width: 15%;
+    }
+    .cell-3 {
+      width: 15%;
+    }
+    .cell-4 {
+      width: 30%;
+    }
+
+    .consultation-cell {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      align-items: center;
+      grid-column-gap: 20px;
+    }
+
+    .c-profile-data {
+      width: 80%;
+      @media screen and (max-width: 991px) {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      p:nth-child(1) {
+        color: $black;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+        @media screen and (max-width: 991px) {
+          font-size: 15px;
+        }
+      }
+      p:nth-child(2) {
+        color: $black;
+        font-size: 12px;
+        margin: 0;
+      }
+    }
+
+    .reponse-count-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: $black;
+      margin: 0;
+      @media screen and (max-width: 991px) {
+        font-size: 12px;
+        color: #6DB4E4;
+        margin-bottom: 5px;
+      }
+    }
+
+    .closed-date {
+      font-size: 13px;
+      color: $black;
+      margin: 0;
+      @media screen and (max-width: 991px) {
+        font-size: 12px;
+      }
+    }
+
+    .view-btn {
+      font-size: 13px;
+      background-color: #6DB4E4;
+      color: $white;
+      padding: 7px 22px;
+      &:hover {
+        background-color: darken(#6DB4E4, 5%);
+      }
+    }
+  }
+}
+
+.list-heading {
+  font-size: 36px;
+  color: $primary-color;
+  margin: 0;
+  @media screen and (max-width: 991px) {
+    font-size: 20px;
+    padding: 0 20px;
+  }
+}
+
+.list-subheading {
+  @include regular-text($color: $primary-color);
+  @media screen and (max-width: 991px) {
+    padding: 0 20px;
+    margin-bottom: 10px !important;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

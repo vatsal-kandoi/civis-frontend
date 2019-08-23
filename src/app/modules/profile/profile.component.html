@@ -1,0 +1,293 @@
+<div class="profile-index row no-gutters">
+  <div class="col-md-2 profile-index__left">
+    <div class="heading">
+        My Account
+    </div>
+
+    <div class="profile-space">
+      <div class="header">
+        PROFILE
+      </div>
+
+      <div class="profile-info">
+        <div class="upload-pic">
+          <i class="fa fa-camera" aria-hidden="true"></i>
+        </div>
+        <div class="profile-details">
+          <p class="profile-details__name">
+            {{currentUser?.firstName}}
+          </p>
+          <p class="profile-details__active">
+              Citizen Leader since {{currentUser?.createdAt | date}}
+          </p>
+        </div>
+      </div>
+
+      <div class="profile-change-cta">
+          <button class="btn btn-transparent p-0 d-flex align-items-center" (click)="openModal() ; updateField = 'name'">
+            Change name
+            <span><i class="fa fa-angle-right ml-2"></i></span>
+          </button>
+      </div>
+    </div>
+
+    <!-- toggle-button-for-mobile-layout -->
+    <div class="view-more-section">
+      <button class="btn btn-transparent view-more-btn" (click)="toggleSettings()">
+        View more
+        <span><i class="ml-1" [ngClass]="showSettings === true ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i></span>
+      </button>
+    </div>
+    <!-- toggle-button-for-mobile-layout -->
+        
+    <div class="user-setting-section" [ngClass]="showSettings === true ? 'show-section' : 'hide-section'">
+      <div class="login-space">
+          <div class="header">
+              LOGIN DETAILS • EMAIL & USERNAME
+          </div>
+
+          <div class="login-info">
+              <div class="login-details">
+                  <div class="login-details__email">
+                    {{currentUser?.email}}
+                  </div>
+                </div>
+          </div>
+
+          <div class="login-change-cta">
+            <button class="btn btn-transparent p-0">
+              Change email/username            
+              <span><i class="fa fa-angle-right ml-2"></i></span>
+            </button>
+          </div>
+
+          <div class="login-change-cta">
+            Reset password    
+          </div>
+
+      </div>
+
+      <div class="contact-space">
+
+          <div class="header">
+            PHONE
+          </div>
+
+          <div class="contact-info">
+              <div class="contact-details">
+                  <div class="contact-details__phone">
+                      {{currentUser?.phoneNumber ? currentUser?.phoneNumber : 'N/A'}}
+                  </div>
+                </div>
+          </div>
+
+          <div class="contact-change-cta">
+              <button class="btn btn-transparent p-0" (click)="openModal() ; updateField = 'phone number'">
+                Change phone number
+                <span><i class="fa fa-angle-right ml-2"></i></span>    
+              </button>     
+          </div>
+
+      </div>
+
+      <div class="delete-space">
+        <div class="delete-cta">
+            Delete your account
+            <span><i class="fa fa-angle-right ml-2"></i></span> 
+        </div>
+        <div class="tips">
+          Your account information will be erased. 
+          The responses submitted will remain.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="offset-md-1 col-md-8 profile-index__right">
+    <!-- tab-section-for-mobile -->
+    <div class="tab-section">
+      <p [ngClass]="showAchievement === true ? 'active-tab' : 'inactive-tab'" (click)="achievementTab()">Achievements</p>
+      <p [ngClass]="showConsultation === true ? 'active-tab' : 'inactive-tab'" (click)="consultationTab()">Consultations</p>
+    </div>
+    <!-- tab-section-for-mobile -->
+
+    <div class="achievements-block" [ngClass]="showAchievement === true ? 'show-block' : 'hide-block'">
+      <div class="heading">
+          My Achievements
+      </div>
+      <div class="info-block">
+        <div class="sm-text">Great! You’re an</div>
+        <div class="lg-text">Active Citizen</div>
+      </div>
+      <div class="stats-info row no-gutters">
+        <div class="col-md-2">
+            <div class="stats-info__heading">
+                TOTAL POINTS
+            </div>
+            <div class="stats-info__rewards">
+              {{ currentUser?.points ? currentUser?.points : '-' }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stats-info__heading">
+                {{'Rank in ' + currentUser?.city?.name | uppercase}}
+            </div>
+            <div class="stats-info__rewards">
+              {{currentUser?.cityRank ? currentUser?.cityRank : '-'}}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stats-info__heading">
+                {{'Rank in ' + currentUser?.city?.parent?.name | uppercase}}
+            </div>
+            <div class="stats-info__rewards">
+              {{currentUser?.stateRank ? currentUser?.stateRank : '-'}}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stats-info__heading">
+              BEST SO FAR
+            </div>
+            <div class="stats-info__rewards">
+              {{currentUser?.bestRank ? getBestRank(currentUser?.bestRank, currentUser?.bestRankType) : '-' }}
+            </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="consultations-block" [ngClass]="showConsultation === true ? 'show-block' : 'hide-block'">
+        <div class="heading">
+            Consultations I’ve participated in
+        </div>
+
+        <div *ngIf="currentUser?.responses?.edges?.length" class="consultations-container">
+          <div class="consultation-item" *ngFor="let item of currentUser?.responses?.edges">
+              <div class="consultation-image">
+                  <img [src]="item?.node?.consultation?.ministry?.logo?.url"  alt=" " />
+              </div>
+              <div class="consultation-info">
+                <div class="consultation-info__left">
+                    <div class="title">
+                      {{item?.node?.consultation?.title}}
+                    </div>
+                    <div class="ministry-title">
+                        {{item?.node?.consultation?.ministry?.name}}
+                    </div>
+                    <div class="response-cta">
+                      <button class="btn btn-transparent action-btn" [routerLink]="['/consultations/response', item?.node?.id]">
+                          View my response
+                          <span><i class="fa fa-angle-right"></i></span>
+                      </button>
+                    </div>
+                </div>
+                <div class="consultation-info__right">
+                    <div class="deadline">
+                      Ended on {{item?.node?.consultation?.responseDeadline | date}}
+                    </div>
+                    <div class="rewards">
+                        {{item?.node?.points}} points earnt
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div *ngIf="!currentUser?.responses?.edges?.length" class="no-consultations">
+            <div class="message">
+                You’ve not participated in any public consultations yet
+            </div>
+            <div class="consultations-cta">
+              <button class="btn-transpaent btn-oval">Start participating</button>
+            </div>
+        </div>
+    
+    </div>
+  </div>
+
+</div>
+
+
+<div class="update-user-index">
+    <div bsModal #updateUserModal="bs-modal" class="modal fade" tabindex="-1"
+    [config]="{show: false, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}"
+    [ngClass]="showModal ? 'align-center' : ''"
+    role="dialog" aria-labelledby="updateUserModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <div class="title"> {{'Change your '+ updateField}}</div>
+            <div (click)="closeModal()">X</div>
+        </div>
+        <div class="modal-body">
+          <div>
+            <form #userForm="ngForm" (ngSubmit)="updateUser(userForm)" autocomplete="off">
+              <div *ngIf="updateField == 'name'">
+                  <div class="input-box">
+                      <label for="firstName">First name</label>
+                      <div class="input-box__border">
+                          <input placeholder="Siddharth" type="text" id="firstName" #firstName="ngModel" name="firstName" [(ngModel)]="user.firstName" required />   
+                      </div>
+                      <div *ngIf="firstName?.invalid && (firstName?.touched || userForm.submitted)" class="error-msg">First name is Required</div>
+                  </div>
+          
+                  <div class="input-box">
+                      <label for="lastName">Last name</label>
+                      <div class="input-box__border">
+                          <input placeholder="Gautam" type="text" id="lastName" #lastName="ngModel" name="lastName" [(ngModel)]="user.lastName" required />
+                      </div>
+                      <div *ngIf="lastName?.invalid && (lastName?.touched || userForm.submitted)" class="error-msg">Last name is Required</div>
+                  </div>
+              </div>
+              <div *ngIf="updateField == 'email'">
+                  <div class="info-tips">
+                      When you change your email, you will be looged out and will need to confirm it when logging into your account again
+                  </div>
+                  <div class="input-box">
+                      <label>Type your current password</label>
+                      <div class="input-box__border">
+                          <input placeholder="password" id="password" #password="ngModel" name="password" [(ngModel)]="user.password"  required  />
+                      </div>
+                      <div *ngIf="password.invalid && (password.touched || userForm.submitted)" class="error-msg">
+                        <div>Password is required</div>
+                      </div>
+                  </div>
+                  <div class="input-box">
+                      <label>Enter your new email</label>
+                      <div class="input-box__border">
+                          <input placeholder="email" id="email" #email="ngModel" name="email" [(ngModel)]="user.email"  required  email />
+                      </div>
+                      <div *ngIf="email.invalid && (email.touched || userForm.submitted)" class="error-msg">
+                        <div *ngIf="email.errors.required">Email is Required</div>
+                        <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                      </div>
+                  </div>
+              </div>
+              <div *ngIf="updateField == 'phone number'">
+                  <div class="input-box">
+                      <label>Phone Number</label>
+                      <div class="input-box__border">
+                          <input placeholder="+91 9108292413" type="tel" pattern="[+0-9]{13}" id="phoneNumber" #phoneNumber="ngModel" name="phoneNumber" [(ngModel)]="user.phoneNumber"  required  />
+                        </div>
+                      <div *ngIf="phoneNumber.invalid && (phoneNumber.touched || userForm.submitted)" class="error-msg">
+                          <div>Phone Number must be a valid number</div>
+                      </div>
+                  </div>
+              </div>
+              <div>
+                <button class="app-btn secondary get-start-btn" type="submit">
+                  <p class="m-0">Save changes</p>
+                  <i class="fa fa-angle-right"></i>
+                </button>
+              </div>
+              <div class="cancel-btn" (click)="closeModal()">
+                <button class="btn btn-transparent cancel-btn">
+                    Cancel
+                </button></div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>

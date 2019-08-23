@@ -7,7 +7,12 @@ import {GraphQLModule} from './graphql/graphql.module';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
 import {SharedDirectivesModule} from './shared/directives/shared-directives.module';
 import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NavbarModule } from './modules/navbar/navbar.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileModule } from './modules/profile/profile.module';
+import { LandingGuard } from './shared/guards/landing.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { PolicyModule } from './modules/policy/policy.module';
 
 @NgModule({
   declarations: [
@@ -21,9 +26,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     SharedComponentsModule,
     GraphQLModule,
     HttpClientModule,
+    NavbarModule,
+    ProfileModule,
     BrowserAnimationsModule,
+    PolicyModule
   ],
-  providers: [],
+  providers: [
+    LandingGuard,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

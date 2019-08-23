@@ -1,26 +1,33 @@
 language: node_js
-
 node_js:
-  - 10.15.1
-
+- 10.15.3
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 branches:
   only:
-    - staging
-    - master
-
-before_script:
-  - npm install
-
+  - staging
+  - master
 script:
-  - npm run build
+- npm install
 before_deploy:
-  - cd $TRAVIS_BUILD_DIR
-  - sed -i '/dist/d' .gitignore
-  - git add . && git commit -m "latest build"
-
+- cd $TRAVIS_BUILD_DIR
+- sed -i '/dist/d' .gitignore
+- git add . && git commit -m "latest build"
+deploy:
+- provider: heroku
+  app: civis-web-staging
+  api_key:
+    secure: Hendunvu3qnXjoPMJb7cBALLnQJonfcj3YFBpl+5JaJpm9q4qXQ4VVhpjE487hgU42UJ8z/f/HBR45HgOCTiG11pJYnO3VtKtEjSq4ykMMMbUGtauG4oBZZ2I0utdMvblTKo3B5mkgdD69t6rWPJtvhqpr6FMotIUFhMjo4IyspodiVfjaAKZpiaCkfmsSHHVR9yksF8n3iN8CJVjblQDoCu6MWec1wlXc32oUwSFje51Ka96LItIfr+nhI+qWKDKxuTa4Ge/xXspXM/0JKNtjk52OzUkRLRFbx7USfa9iuWUYysdm8mqqBnJNjwyr+PWuS+OCC6AVv4XM26CBRr/vXCNpTmsycL5hVDoe32ytGd0dup1wQ3rfXtOzutR0Wz3dSHOgR9g18RdYAXLEIoR3xoCDNJ8FVfjRhTh1eo0YJ74NtJjEm9Z2MZSaRNXZrt+mr2m8n16U+gB2vEl/FYlcg2mFJL6m+PjpOT//goH9B+oRwl25y/MO94PeDoHkkMdbGpOXqmPccSLfW0Z1ijCyz3mzKyYduEcKwSr/CORjsYxMqbDP5NxuN3OQa0weNSCt8HtUGrKL+V3JqeHHC3gxvDZsKW66VUcPw5wptjW+hinwEoQr/fabx2PPUU6kxEUAuON2NG89E6gHQmNSKlKVw0t1QTJThUKduha/IV0e8=
+  on:
+    repo: civis-vote/civis-frontend
+    branch: staging
+- provider: heroku
+  app: civis-web
+  api_key:
+    secure: Hendunvu3qnXjoPMJb7cBALLnQJonfcj3YFBpl+5JaJpm9q4qXQ4VVhpjE487hgU42UJ8z/f/HBR45HgOCTiG11pJYnO3VtKtEjSq4ykMMMbUGtauG4oBZZ2I0utdMvblTKo3B5mkgdD69t6rWPJtvhqpr6FMotIUFhMjo4IyspodiVfjaAKZpiaCkfmsSHHVR9yksF8n3iN8CJVjblQDoCu6MWec1wlXc32oUwSFje51Ka96LItIfr+nhI+qWKDKxuTa4Ge/xXspXM/0JKNtjk52OzUkRLRFbx7USfa9iuWUYysdm8mqqBnJNjwyr+PWuS+OCC6AVv4XM26CBRr/vXCNpTmsycL5hVDoe32ytGd0dup1wQ3rfXtOzutR0Wz3dSHOgR9g18RdYAXLEIoR3xoCDNJ8FVfjRhTh1eo0YJ74NtJjEm9Z2MZSaRNXZrt+mr2m8n16U+gB2vEl/FYlcg2mFJL6m+PjpOT//goH9B+oRwl25y/MO94PeDoHkkMdbGpOXqmPccSLfW0Z1ijCyz3mzKyYduEcKwSr/CORjsYxMqbDP5NxuN3OQa0weNSCt8HtUGrKL+V3JqeHHC3gxvDZsKW66VUcPw5wptjW+hinwEoQr/fabx2PPUU6kxEUAuON2NG89E6gHQmNSKlKVw0t1QTJThUKduha/IV0e8=
+  on:
+    repo: civis-vote/civis-frontend
+    branch: master
 after_deploy:
-  - echo "Deployed!"
+- echo "Deployed!"

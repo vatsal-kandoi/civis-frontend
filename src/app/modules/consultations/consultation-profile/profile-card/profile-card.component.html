@@ -1,0 +1,49 @@
+<div class="c-profile-card sticky">
+  <div class="c-profile-card__top-section">
+    <p class="light-text m-0">{{summaryData?.title ? summaryData?.title : 'SENDING IN YOUR RESPONSE TO'}}</p>
+    <div class="d-flex justify-content-between mb-1 mt-1">
+      <p class="card-title m-0">{{profile?.title}}</p>
+      <a class="icon-circle" [href]="profile?.url" target="_blank" *ngIf="!summaryData">
+        <i class="fa fa-link" aria-hidden="true"></i>
+      </a>
+    </div>
+      <div class="ministry-detail">
+        <img [src]="profile?.ministry?.logo?.url" class="avatar avatar--42" alt=" " />
+        <p class="regular-text m-0">{{profile?.ministry?.name}}</p>
+      </div>
+      <div *ngIf="!summaryData">
+        <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
+          <p class="days-remaining m-0">{{getRemainigDays(profile?.responseDeadline)}}</p>
+          <a [href]="'https://calendar.google.com/calendar/r/eventedit?text=' + profile?.title" class="icon-circle" target="_blank">
+            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+          </a>
+        </div>
+        <button class="btn-submit mt-3 mb-3" [ngClass]="enableSubmitResponse ? 'active' : ''" (click)='stepNext()'>
+          {{profile?.respondedOn ? 'RESPONSE SUBMITTED' : 'SUBMIT RESPONSE'}}
+        </button>
+        <button class="btn-circular">
+          <span class="mr-2 clr-blue"><i class="fa fa-share"></i></span>
+          <span class="blue-text bold-text">Spread the word</span>
+        </button>
+      </div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="c-profile-card__bottom-section">
+    <div class="d-flex justify-content-between mb-2">
+      <p class="count-text m-0">TOTAL RESPONSES</p>
+      <p class="count-text bold-text text-right m-0">{{profile?.consultationResponsesCount}}</p>
+    </div>
+    <div class="d-flex justify-content-between mb-2">
+      <p class="count-text m-0">TOTAL PUBLIC RESPONSES</p>
+      <p class="count-text bold-text text-right m-0">
+        {{profile?.sharedResponses?.totalCount ? profile?.sharedResponses?.totalCount : summaryData?.publicResponseCount }}
+      </p>
+    </div>
+    <div class="d-flex justify-content-between mb-2">
+      <p class="count-text m-0">DRAFT MADE PUBLIC ON</p>
+      <p class="count-text bold-text text-right m-0">{{convertDateFormat(profile?.updatedAt)}}</p>
+    </div>
+  </div>
+</div>

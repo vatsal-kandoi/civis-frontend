@@ -5,6 +5,8 @@ import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from
 import { TokenService } from 'src/app/shared/services/token.service';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
+import { GraphqlService } from 'src/app/graphql/graphql.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,23 +19,25 @@ export class SignUpComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
+    phoneNumber: null,
     password: '',
     cityId: null,
-    notifyForNewConsultation: false
+    notifyForNewConsultation: false,
+    agreedForTermsCondition: false,
   };
-
-conditions = {
-  agreedForTermsCondition: false
-};
-
-
-
   searchEmitter: EventEmitter<any> = new EventEmitter();
   loadingCities: boolean;
   cities: any;
+  dropdownText = 'Begin Typing';
 
 
-  constructor(private apollo: Apollo, private tokenService: TokenService, private errorService: ErrorService, private router: Router) { }
+  constructor(private apollo: Apollo,
+              private tokenService: TokenService,
+              private errorService: ErrorService,
+              private userService: UserService,
+              private router: Router,
+              private graphqlService: GraphqlService,
+              ) { }
 
   ngOnInit() {
     this.subscribeToSearch();
@@ -55,11 +59,14 @@ conditions = {
       .subscribe((result) => {
         this.loadingCities = false;
         this.cities = result;
+        if (!this.cities.length) {
+          this.dropdownText = 'City not found';
+        }
       }, (err: any) => this.loadingCities = false);
   }
 
   onSearch(query: any) {
-    if (!query) {
+    if (!query.term) {
       query = null;
       return;
     }
@@ -86,8 +93,10 @@ conditions = {
     if (!isValid) {
       return;
     } else {
+      const signupObject = {...this.signupObject};
+      delete signupObject['agreedForTermsCondition'];
       const variables = {
-        auth: this.signupObject
+        auth: signupObject
       };
       this.apollo.mutate({mutation: SignUpMutation, variables: variables})
       .pipe(
@@ -96,11 +105,28 @@ conditions = {
       .subscribe((token) => {
         if (token) {
           this.tokenService.storeToken(token);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/profile');
+          this.onSignUp();
         }
       }, err => {
         this.errorService.showErrorModal(err);
       });
+    }
+  }
+
+  onSignUp() {
+    this.tokenService.tokenHandler();
+    this.userService.manageUserToken();
+  }
+
+  redirectTo(socialPlatform) {
+    switch (socialPlatform) {
+      case 'google':
+        window.location.href = `${this.graphqlService.environment.api}/signin_google`;
+        break;
+      case 'facebook':
+        window.location.href = `${this.graphqlService.environment.api}/signin_facebook`;
+        break;
     }
   }
 

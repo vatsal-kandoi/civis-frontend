@@ -1,0 +1,82 @@
+@import './src/assets/styles/app';
+
+.c-profile-card {
+  width: 100%;
+  min-height: 435px;
+  background-color: #F2FAFF;
+  box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.13);
+
+  &__top-section {
+    padding: 20px 24px;
+
+    .light-text {
+      @include general-text($font-size: 12px, $color: $light-gray);
+    }
+  
+    .card-title {
+      width: 90%;
+      @include general-text($font-size: 20px, $weight: bold);
+      @media screen and (max-width: 991px) {
+        font-size: 16px;
+      }
+    }
+    
+    .ministry-detail {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  
+    .days-remaining {
+      @include general-text($font-size: 14px, $color: $error-color, $weight: bold);
+    }
+  
+    .icon-circle {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      width: 36px;
+      height: 36px;
+      background-color: #E5F2FA;
+      border-radius: 50%;
+    }
+  
+    .divider {
+      border: 1px solid #CAE5F5;
+      margin: 0;
+    }
+  
+    .btn-circular {
+      padding: 5px 15px;
+      background-color: #E5F2FA;
+      border: none;
+      border-radius: 22px;
+    }
+  
+    .btn-submit {
+      width: 100%;
+      font-size: 14px;
+      color: $white;
+      font-weight: 600;
+      padding: 10px 0;
+      background-color: #CACACA;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .active {
+      background-color: #F0653A;
+    }
+  }
+
+  &__bottom-section {
+    padding: 20px 24px;
+
+    .count-text {
+      font-size: 14px;
+      color: #6F6F6F;
+    }
+  }
+}

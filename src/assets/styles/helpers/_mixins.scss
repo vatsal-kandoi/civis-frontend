@@ -12,6 +12,7 @@
   color: $color;
   font-weight: $weight;
 }
+
 @mixin regular-text($color: $black, $weight: normal) {
   font-size: 14px;
   color: $color;

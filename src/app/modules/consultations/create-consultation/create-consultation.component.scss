@@ -1,14 +1,36 @@
+@import './src/assets/styles/app';
+
+.consultation-container {
+    margin-top: 77px;
+
+    @media screen and (max-width: 991px) {
+      margin-top: 58px;
+    }
+}
+
 .consultation-index {
     width: 80%;
-    margin: 10vh auto;
+    height: calc(100vh - 77px);
+    margin: 0 auto;
+    @media screen and (max-width: 991px) {
+        width: 95%;
+        padding: 20px 0;
+    }
 
     &__left {
+        @media screen and (max-width: 991px) {
+            max-width: 100%;
+            flex: inherit;
+        }
        .heading-text {
         font-weight: 500;
         font-size: 42px;
         line-height: 111.5%;    
         letter-spacing: 0.005em;
         color: #0E73B9;
+        @media screen and (max-width: 991px) {
+            font-size: 24px;
+        }
        }
        .heading-tips {
         font-size: 18px;
@@ -16,11 +38,19 @@
         letter-spacing: 0.045em;
         color: #929292;
         margin: 10px 0;
+        @media screen and (max-width: 991px) {
+            font-size: 14px;
+        }
        }
     }
 
 
     &__right {
+        @media screen and (max-width: 991px) {
+            max-width: 100%;
+            flex: inherit;
+            margin: 0;
+        }
         .form-space {
             .input-block {
                 margin: 20px 0;
@@ -60,10 +90,16 @@
             .submit-btn {
                 border: none;
                 background: #BCBCBC;       
-                padding: 15px 0;         
+                padding: 12px 15px;         
                 border-radius: 3px;
-                color: #FFFFFF;
+                color: $white;
+                font-weight: bold;
+                font-size: 14px;
                 width: 100%; 
+                i {
+                    font-size: 20px;
+                    line-height: 0;
+                }
             }
 
             .active-btn {
@@ -79,17 +115,16 @@
 
             .query-block {
                 margin: 50px 0;
-                div {
-                    font-size: 13px;
-                    letter-spacing: 0.065em;
-                    &:nth-child(1) {
-                        font-weight: bold;
-                        color: #909090;
-                        margin-bottom: 10px;
-                    }
-                    &:nth-child(2) {
-                        color: #919191;
-                    }
+                .query-heading {
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #909090;
+                    margin-bottom: 5px;
+                }
+                .query-content {
+                    font-size: 14px;
+                    color: #919191;
+                    margin: 0;
                 }
             }
 
@@ -99,15 +134,28 @@
 
 .ministry-index {
     width: 80%;
-    margin: 10vh auto;
+    height: calc(100vh - 77px);
+    margin: 0 auto;
+    align-items: center;
+    @media screen and (max-width: 991px) {
+        width: 95%;
+        padding: 20px 0;
+    }
 
     &__left {
+        @media screen and (max-width: 991px) {
+            max-width: 100%;
+            flex: inherit;
+        }
         .heading-text {
             font-weight: 500;
             font-size: 42px;
             line-height: 111.5%;    
             letter-spacing: 0.005em;
             color: #0E73B9;
+            @media screen and (max-width: 991px) {
+                font-size: 24px;
+            }
            }
            .heading-tips {
             font-size: 18px;
@@ -115,12 +163,18 @@
             letter-spacing: 0.045em;
             color: #929292;
             margin: 10px 0;
+            @media screen and (max-width: 991px) {
+                font-size: 14px;
+            }
            }
     }
 
     &__right {
-
-
+        @media screen and (max-width: 991px) {
+            max-width: 100%;
+            flex: inherit;
+            margin: 0;
+        }
         .input-block {
             margin: 20px 0;
             label {
@@ -158,10 +212,10 @@
 
         .add-ministry-block {
             border: 1px solid #1894EA;
-            box-sizing: border-box;
+            background-color: $white;
             border-radius: 3px;
             margin : 50px 0 20px; 
-            padding: 10px;
+            padding: 10px 15px;
             color: #1894EA;
             font-weight: 500;
             font-size: 15px;
@@ -170,10 +224,16 @@
         .submit-btn {
             border: none;
             background: #BCBCBC;       
-            padding: 15px 0;         
+            padding: 12px 15px;         
             border-radius: 3px;
-            color: #FFFFFF;
+            color: $white;
+            font-weight: bold;
+            font-size: 14px;
             width: 100%; 
+            i {
+                font-size: 20px;
+                line-height: 0;
+            }
         }
 
         .active-btn {
@@ -181,12 +241,17 @@
         }
 
         .back-btn {
-            margin: 50px 0;
+            margin: 40px 0;
             font-weight: 600;
             font-size: 14px;
             letter-spacing: 0.105em;
             color: #61B8F5;
             cursor: pointer;
+            span {
+                font-size: 20px;
+                line-height: 0;
+                margin-right: 5px;
+            }
         }
 
         .error-msg {
@@ -197,17 +262,16 @@
 
         .query-block {
             margin: 50px 0;
-            div {
-                font-size: 13px;
-                letter-spacing: 0.065em;
-                &:nth-child(1) {
-                    font-weight: bold;
-                    color: #909090;
-                    margin-bottom: 10px;
-                }
-                &:nth-child(2) {
-                    color: #919191;
-                }
+            .query-heading {
+                font-size: 14px;
+                font-weight: bold;
+                color: #909090;
+                margin-bottom: 5px;
+            }
+            .query-content {
+                font-size: 14px;
+                color: #919191;
+                margin: 0;
             }
         }
 
@@ -216,6 +280,7 @@
 
 .ministry-modal {
  background: rgba(14, 115, 185, 0.6) !important;
+ z-index: 999999;
  .modal-dialog {
      margin: 0 0 0 auto;
      max-width: 600px !important;
@@ -225,14 +290,16 @@
         border: none;
         border-radius: 0;
         .space-around {
-            width: 80%;
-            margin: 0 auto;
+            padding: 15px 38px; 
+            @media screen and (max-width: 991px) {
+                padding: 0;
+            }
 
             .modal-header {
                 border: none;
                 .subheader-text {
                     font-weight: 500;
-                    font-size: 15px;
+                    font-size: 16px;
                     color: #F0653A;
 
                     .light-text {
@@ -240,7 +307,6 @@
                         font-size: 13px;
                         line-height: 16px;
                         letter-spacing: 0.045em;
-
                         color: #929292;
                     }
 
@@ -250,8 +316,17 @@
                         line-height: 16px;
                         letter-spacing: 0.045em;
                         color: #1894EA;
+                        text-decoration: underline;
                         cursor: pointer;
                     }
+                }
+                .modal-close-btn {
+                    position: absolute;
+                    right: 20px;
+                    top: 20px;
+                    color: #C7C7C7;
+                    font-size: 20px;
+                    cursor: pointer;
                 }
             }
 
@@ -283,7 +358,24 @@
         
                             }
                         }
-        
+
+                        &__upload-field {
+                            padding: 10px;
+                            border-radius: 3px;
+                            background: #EDEDED;
+                            border: 1px solid #AEAEAE;
+                            color: #8B8B8B;
+                            font-size: 15px;
+                            font-weight: 500px;
+                            span {
+                                margin-right: 10px;
+                                font-size: 24px;
+                                line-height: 0;
+                                vertical-align: sub;
+                                color: #C2C2C2;
+                            }
+                        }
+
                         &__tips {
                             font-size: 13px;
                             color: #919191;
@@ -295,10 +387,15 @@
                     .submit-btn {
                         border: none;
                         background: #F0653A;;       
-                        padding: 15px 0;         
+                        padding: 12px 15px;         
                         border-radius: 3px;
-                        color: #FFFFFF;
+                        color: $white;
                         width: 100%; 
+                        font-weight: 600;
+                        span {
+                            font-size: 24px;
+                            line-height: 0;
+                        }
                     }        
 
                     .error-msg {
@@ -312,4 +409,55 @@
 
     }
  }
+}
+
+.consultation-success-index {
+    width: 100%;
+    height: 100vh;
+    background: #E6F4FF;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; 
+
+    .success-message {
+        width: 100%;
+        .heading {
+            font-weight: bold;
+            font-size: 48px;
+            line-height: 60px;
+            text-align: center;
+            color: #0E73B9;
+        }
+
+        .text {
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 147.19%;
+            text-align: center;
+            letter-spacing: -0.015em;
+            color: #151515;
+        }
+
+        .link {
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 147.19%;
+            text-align: center;
+            letter-spacing: -0.015em;
+            color: #151515;
+        }
+    }
+
+    .succes-image {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        img {
+            @media screen and (max-width: 991px) {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
 }

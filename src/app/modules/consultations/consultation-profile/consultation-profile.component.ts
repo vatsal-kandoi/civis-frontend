@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit,  OnDestroy } from '@angular/core';
 import { ConsultationProfile, SubmitResponseQuery, ConsultationProfileCurrentUser, VoteCreateQuery } from './consultation-profile.graphql';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,9 +19,6 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 })
 
 export class ConsultationProfileComponent implements OnInit, OnDestroy {
-
-  @ViewChild('feedbackModal') feedbackModal: ModalDirective;
-  @ViewChild('responseIndex', { read: ElementRef }) panel: ElementRef<any>;
 
   private subscription: Subscription;
   profileData: any;
@@ -98,7 +95,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
   checkUserPresent() {
     if (this.currentUser) {
       this.step = 2;
-      this.feedbackModal.show();
     } else {
       this.router.navigateByUrl('/auth');
       this.consultationsService.enableSubmitResponse.next(false);
@@ -138,7 +134,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
       map((res: any) => res.data.consultationResponseCreate)
     )
     .subscribe((response) => {
-      this.feedbackModal.hide();
     }, err => {
       this.errorService.showErrorModal(err);
     });
@@ -252,19 +247,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
   //     }
   // }
 
-  useThisResponse(response) {
-    if (response) {
-      this.responseText = response.responseText;
-      this.templateId = response.id;
-      window.scrollTo({
-        top: this.panel.nativeElement.offsetTop,
-        behavior: 'smooth',
-      });
-      if (this.responseText) {
-        this.consultationsService.enableSubmitResponse.next(true);
-      }
-    }
-  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

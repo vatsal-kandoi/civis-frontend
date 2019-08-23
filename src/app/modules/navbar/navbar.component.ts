@@ -12,7 +12,7 @@ import { ConsultationList } from './navbar.graphql';
 })
 export class NavbarComponent implements OnInit {
 
-  @ViewChild('menuModal') menuModal;
+  @ViewChild('menuModal', { static: false }) menuModal;
   showNav = true;
   currentUrl: any;
   currentUser: any;

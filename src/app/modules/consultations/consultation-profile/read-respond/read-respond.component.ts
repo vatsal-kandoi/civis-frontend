@@ -17,8 +17,8 @@ import { Router } from '@angular/router';
 export class ReadRespondComponent implements OnInit {
 
 
-  @ViewChild('feedbackModal') feedbackModal: ModalDirective;
-  @ViewChild('responseIndex', { read: ElementRef }) panel: ElementRef<any>;
+  @ViewChild('feedbackModal', { static: false }) feedbackModal: ModalDirective;
+  @ViewChild('responseIndex', { read: ElementRef , static: false }) panel: ElementRef<any>;
 
   profileData: any;
   responseList: any;

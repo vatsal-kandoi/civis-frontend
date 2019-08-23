@@ -38,7 +38,7 @@ export class LeaderBoardComponent implements OnInit {
   loadingElements: any = {};
   leaderData: any;
 
-  @ViewChild('leaderModal') leaderModal: ModalDirective;
+  @ViewChild('leaderModal', { static: false }) leaderModal: ModalDirective;
   currentUser: any;
 
   @HostListener('document:scroll', ['$event'])

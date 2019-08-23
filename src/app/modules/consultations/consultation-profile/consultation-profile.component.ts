@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit,  OnDestroy } from '@angular/core';
 import { ConsultationProfile, SubmitResponseQuery, ConsultationProfileCurrentUser, VoteCreateQuery } from './consultation-profile.graphql';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,9 +19,6 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 })
 
 export class ConsultationProfileComponent implements OnInit, OnDestroy {
-
-  @ViewChild('feedbackModal') feedbackModal: ModalDirective;
-  @ViewChild('responseIndex', { read: ElementRef }) panel: ElementRef<any>;
 
   private subscription: Subscription;
   profileData: any;

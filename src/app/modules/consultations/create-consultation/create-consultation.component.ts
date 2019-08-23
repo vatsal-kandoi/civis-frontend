@@ -16,9 +16,9 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
   styleUrls: ['./create-consultation.component.scss']
 })
 export class CreateConsultationComponent implements OnInit {
-  
-  @ViewChild('addMinistryModal') addMinistryModal: ModalDirective;
-  @ViewChild('addMinistryElement') addMinistryElement: ElementRef;
+
+  @ViewChild('addMinistryModal', { static: false }) addMinistryModal: ModalDirective;
+  @ViewChild('addMinistryElement', { static: false }) addMinistryElement: ElementRef;
 
   consultationInfo = {
     title: '',

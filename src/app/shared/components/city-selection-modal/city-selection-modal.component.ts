@@ -13,7 +13,7 @@ import { ErrorService } from '../error-modal/error.service';
 })
 export class CitySelectionModalComponent implements OnInit {
 
-  @ViewChild('citySelectionModal') citySelectionModal: ModalDirective;
+  @ViewChild('citySelectionModal', { static: false }) citySelectionModal: ModalDirective;
   searchEmitter: EventEmitter<any> = new EventEmitter();
   loadingCities: boolean;
   cities: any;

@@ -97,20 +97,20 @@
           </div>
         </div>
       </div>
-      <button [routerLink]="['/leader-board']" class="app-btn circular blue-light">View leaderboard</button>
+      <button [routerLink]="['/leader-board']" class="app-btn circular blue-light landing-btn">View leaderboard</button>
     </div>
 
     <div class="civis-work-section">
       <p class="section-heading">HOW CIVIS WORKS</p>
       <div class="d-flex justify-content-center mt-5">
         <button 
-          class="app-btn circular" 
+          class="app-btn circular landing-btn" 
           [ngClass]="activeTab == 'sumbit-response' ? 'primary' : 'blue-light'"
           (click)="submitResponse('sumbit-response')">
           Submit Response
         </button>
         <button 
-          class="app-btn circular ml-4"
+          class="app-btn circular ml-4 landing-btn"
           [ngClass]="activeTab == 'add-consultation' ? 'primary' : 'blue-light'" 
           (click)="addConsultation('add-consultation')">
           Add a Consultation

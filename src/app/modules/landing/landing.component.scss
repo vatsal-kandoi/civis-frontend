@@ -333,6 +333,10 @@
       margin-top: 20px;
     }
   }
+
+  .landing-btn {
+    padding: 5px 23px;
+  }
 }
 
 .card-carousel {
@@ -458,11 +462,11 @@
   .btn-next {
     display: flex;
     align-items: center;
-    padding: 10px 15px;
+    padding: 10px 20px;
     span {
       font-size: 20px;
       line-height: 0;
-      margin-left: 15px;
+      margin-left: 20px;
     }
   }
   .w-80 {

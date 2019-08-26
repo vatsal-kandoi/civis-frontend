@@ -11,7 +11,7 @@ import { CurrentUserUpdate } from './profile.graphql';
 })
 export class ProfileComponent implements OnInit {
 
-  @ViewChild('updateUserModal') updateUserModal: ModalDirective;
+  @ViewChild('updateUserModal', { static: false }) updateUserModal: ModalDirective;
   currentUser;
   showModal: boolean;
   user = {

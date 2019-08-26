@@ -6,10 +6,11 @@ const CryptoJS = require('crypto-js');
 disqusRouter.use(bodyParser.json()); // support json encoded bodies
 disqusRouter.use(bodyParser.urlencoded({ extended: true }));
 
-var DISQUS_SECRET = process.env.DISQUS_SECRET;
-var DISQUS_PUBLIC = process.env.DISQUS_PUBLIC;
-
 disqusRouter.post('/sso', (req, res) => {
+
+  var DISQUS_SECRET = process.env.DISQUS_SECRET;
+  var DISQUS_PUBLIC = process.env.DISQUS_PUBLIC;
+  console.log('secret is: ', DISQUS_SECRET);
 
   var disqusData = {
     id: req.body.userId,

@@ -23,7 +23,7 @@
       <ng-container *ngFor="let item of closedConsultationList">
         <div class="table-body">
           <div class="cell-1 consultation-cell">
-            <img [src]="item.ministry.coverPhoto.url" class="avatar avatar--64" />
+            <img [src]="item.ministry?.coverPhoto?.url" class="avatar avatar--64" />
             <div class="c-profile-data">
               <p>{{item?.title}}</p>
               <p>{{item?.ministry?.name}}</p>
@@ -42,7 +42,7 @@
         <!-- list-mobile-layout -->
         <div class="table-list">
           <div class="list-grid">
-            <img [src]="item.ministry.coverPhoto.url" class="avatar avatar--42" />
+            <img [src]="item.ministry?.coverPhoto?.url" class="avatar avatar--42" />
             <div class="list-detail">
               <div class="c-profile-data">
                 <p>{{item?.title}}</p>

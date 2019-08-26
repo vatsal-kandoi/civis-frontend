@@ -241,20 +241,20 @@ export class ReadRespondComponent implements OnInit {
   }
 
   showCreateResponse() {
-    if ((this.checkExpired(this.profileData ? this.profileData.responseDeadline : null) === 'Expired')
+    if ((this.checkClosed(this.profileData ? this.profileData.responseDeadline : null) === 'Closed')
         || !this.currentUser || (this.profileData && this.profileData.respondedOn)) {
         return false;
     }
     return true;
   }
 
-  checkExpired(deadline) {
+  checkClosed(deadline) {
     if (deadline) {
       const today = moment();
       const lastDate = moment(deadline);
       const difference = lastDate.diff(today, 'days');
       if (difference <= 0) {
-        return 'Expired';
+        return 'Closed';
       } else {
         return `Active`;
       }

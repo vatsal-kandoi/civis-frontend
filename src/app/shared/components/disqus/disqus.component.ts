@@ -65,7 +65,7 @@ export class DisqusComponent implements OnInit {
     (<any>window).disqus_config = this.getConfig();
 
     const script = this.renderer.createElement('script');
-    script.src = `//${this.shortname}.disqus.com/embed.js`;
+    script.src = `https://civis-1.disqus.com/embed.js`;
     script.async = true;
     script.type = 'text/javascript';
     script.setAttribute('data-timestamp', new Date().getTime().toString());
@@ -79,7 +79,7 @@ export class DisqusComponent implements OnInit {
     const _self = this;
     return function () {
       this.page.url = window.location.href;
-      this.page.identifier = this.identifier;
+      this.page.identifier = _self.identifier;
       this.page.remote_auth_s3 = _self.ssoAuth;
       this.page.api_key = _self.pubKey;
       this.language = 'en';

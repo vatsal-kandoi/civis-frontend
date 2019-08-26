@@ -1,14 +1,26 @@
 @import './src/assets/styles/app';
 
-.profile-index {
-    background: #E5F4FF;
+.fixed-bg-clr {
+    position: fixed;
+    top: 77px;
+    right: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: calc(100vh - 77px);
+    height: 100%;
+    background: #E5F4FF;
+    @media screen and (max-width: 991px) {
+        top: 57px;
+    }
+}
+
+.profile-index {
+    position: relative;
+    width: 100%;
     margin-top: 77px;
     padding: 30px 40px;
 
     @media screen and (max-width: 991px) {
-        height: auto;
         margin-top: 57px;
         padding: 20px 0;
     }

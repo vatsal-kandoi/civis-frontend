@@ -50,7 +50,7 @@
             <div class="input-box">
                 <label for="fname">First name</label>
                 <div class="input-box__border">
-                    <input placeholder="Siddharth" type="text" id="fname" #fname="ngModel" name="fname" [(ngModel)]="signupObject.firstName" required />   
+                    <input placeholder="First Name" type="text" id="fname" #fname="ngModel" name="fname" [(ngModel)]="signupObject.firstName" required />   
                 </div>
                 <div *ngIf="fname.invalid && (fname.touched || signupForm.submitted)" class="error-msg">First name is Required</div>
             </div>
@@ -58,7 +58,7 @@
             <div class="input-box">
                 <label for="fname">Last name</label>
                 <div class="input-box__border">
-                    <input placeholder="Gautam" type="text" id="lname" #lname="ngModel" name="lname" [(ngModel)]="signupObject.lastName" required />
+                    <input placeholder="Last Name" type="text" id="lname" #lname="ngModel" name="lname" [(ngModel)]="signupObject.lastName" required />
                 </div>
                 <div *ngIf="lname.invalid && (lname.touched || signupForm.submitted)" class="error-msg">Last name is Required</div>
             </div>
@@ -80,7 +80,7 @@
             <div class="input-box">
                 <label for="efname">Email</label>
                 <div class="input-box__border">
-                    <input placeholder="siddharth@gautam.com" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="signupObject.email" required email />
+                    <input placeholder="Email" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="signupObject.email" required email />
                 </div>
                 <div *ngIf="email.invalid && (email.touched || signupForm.submitted)" class="error-msg">
                   <div *ngIf="email.errors.required">Email is Required</div>
@@ -91,7 +91,7 @@
             <div class="input-box">
                 <label for="phone">Phone</label>
                 <div class="input-box__border">
-                    <input placeholder="+91 9108292413" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"  required  />
+                    <input placeholder="Phone Number" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"  required  />
                 </div>
                 <div *ngIf="phone.invalid && (phone.touched || signupForm.submitted)" class="error-msg">
                   <div>Phone Number must be a valid number</div>

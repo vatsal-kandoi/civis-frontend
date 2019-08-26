@@ -60,6 +60,7 @@
     </section>
   </div>
 </div>
+<app-footer></app-footer>
 
 <!-- leader modal -->
 <div 
@@ -95,11 +96,13 @@
           </div>
           <div class="detail-item">
             <p>RANK IN MUMBAI</p>
-            <p>{{leaderData?.cityRank}}</p>
+            <p *ngIf="leaderData?.cityRank">{{leaderData?.cityRank}}</p>
+            <p *ngIf="!leaderData?.cityRank">N/A</p>
           </div>
           <div class="detail-item">
             <p>RANK IN MAHARASHTRA</p>
-            <p>{{leaderData?.stateRank}}</p>
+            <p *ngIf="leaderData?.stateRank">{{leaderData?.stateRank}}</p>
+            <p *ngIf="!leaderData?.stateRank">N/A</p>
           </div>
           <div class="detail-item">
             <p>BEST SO FAR</p>

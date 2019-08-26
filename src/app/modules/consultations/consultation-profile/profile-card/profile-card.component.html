@@ -21,10 +21,31 @@
         <button class="btn-submit mt-3 mb-3" [ngClass]="enableSubmitResponse ? 'active' : ''" (click)='stepNext(profile?.respondedOn)'>
           {{profile?.respondedOn ? 'RESPONSE SUBMITTED' : 'SUBMIT RESPONSE'}}
         </button>
-        <button class="btn-circular">
-          <span class="mr-2 clr-blue"><i class="fa fa-share"></i></span>
-          <span class="blue-text bold-text">Spread the word</span>
-        </button>
+        <div class="share-block">
+          <div class="share-block__position">
+            <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">
+                <share-button 
+                [button]="'facebook'"
+                [url]="currentUrl"
+                [autoSetMeta]="false"
+                (closed)="showShareOptions = false"
+              ></share-button>
+              <share-button 
+                [button]="'twitter'"
+                [url]="currentUrl"
+                [autoSetMeta]="false"
+                (closed)="showShareOptions = false"
+                ></share-button>
+            </div>
+          </div>
+          <div class="spread-btn">
+            <button #spreadButtonElement  class="btn-circular" (click)="showShareOptions = !showShareOptions">
+              <span class="mr-2 clr-blue"><i class="fa fa-share"></i></span>
+              <span class="blue-text bold-text">Spread the word</span>
+            </button>
+          </div>
+        </div>
+
       </div>
   </div>
 

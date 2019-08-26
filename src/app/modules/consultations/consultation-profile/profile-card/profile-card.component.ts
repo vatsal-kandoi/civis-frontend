@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-card',
@@ -15,10 +16,12 @@ export class ProfileCardComponent implements OnInit {
   enableSubmitResponse: boolean;
   currentUser: any;
   showShareOptions: boolean;
+  currentUrl = '';
 
-  constructor(private consultationsService: ConsultationsService ) { }
+  constructor(private consultationsService: ConsultationsService, private router: Router ) { }
 
   ngOnInit() {
+      this.currentUrl = this.router.url;
       this.CheckSubmitResponseEnabled();
   }
 

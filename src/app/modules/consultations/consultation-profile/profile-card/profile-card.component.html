@@ -26,13 +26,15 @@
             <div class="share-pop-up" *ngIf="showShareOptions">
                 <share-button 
                 [button]="'facebook'"
-                [url]="'https://twitter.com/'"
+                [url]="'https://api-staging.civis.vote/graphql'"
                 [autoSetMeta]="false"
+                (closed)="showShareOptions = false"
               ></share-button>
               <share-button 
                 [button]="'twitter'"
-                [url]="'https://twitter.com/'"
+                [url]="currentUrl"
                 [autoSetMeta]="false"
+                (closed)="showShareOptions = false"
                 ></share-button>
             </div>
           </div>

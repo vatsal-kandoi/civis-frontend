@@ -23,10 +23,10 @@
         </button>
         <div class="share-block">
           <div class="share-block__position">
-            <div class="share-pop-up" *ngIf="showShareOptions">
+            <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">
                 <share-button 
                 [button]="'facebook'"
-                [url]="'https://api-staging.civis.vote/graphql'"
+                [url]="currentUrl"
                 [autoSetMeta]="false"
                 (closed)="showShareOptions = false"
               ></share-button>
@@ -39,7 +39,7 @@
             </div>
           </div>
           <div class="spread-btn">
-            <button class="btn-circular" (click)="showShareOptions = !showShareOptions">
+            <button #spreadButtonElement  class="btn-circular" (click)="showShareOptions = !showShareOptions">
               <span class="mr-2 clr-blue"><i class="fa fa-share"></i></span>
               <span class="blue-text bold-text">Spread the word</span>
             </button>

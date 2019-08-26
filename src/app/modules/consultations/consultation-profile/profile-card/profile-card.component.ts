@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { Router } from '@angular/router';
@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile-card.component.scss']
 })
 export class ProfileCardComponent implements OnInit {
+
+  @ViewChild('shareOptionsElement', { static: false }) shareOptionsElement: ElementRef;
+  @ViewChild('spreadButtonElement', { static: false }) spreadButtonElement: ElementRef;
 
   @Input() profile: any;
   @Input() summaryData: any;
@@ -23,6 +26,18 @@ export class ProfileCardComponent implements OnInit {
   ngOnInit() {
       this.currentUrl = this.router.url;
       this.CheckSubmitResponseEnabled();
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  onClick(targetElement) {
+    if (this.showShareOptions) {
+      if (this.shareOptionsElement.nativeElement.contains(targetElement) ||
+          this.spreadButtonElement.nativeElement.contains(targetElement)) {
+            return;
+      } else {
+        this.showShareOptions = false;
+      }
+    }
   }
 
   getRemainigDays(deadline) {

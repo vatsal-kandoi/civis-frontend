@@ -53,6 +53,7 @@ export class ReadRespondComponent implements OnInit {
   ngOnInit() {
     this.getCurrentUser();
     this.createSatisfactionRating();
+    this.scrollToCreateResponse();
   }
 
   getConsultationProfile() {
@@ -258,6 +259,19 @@ export class ReadRespondComponent implements OnInit {
         return `Active`;
       }
     }
+  }
+
+  scrollToCreateResponse() {
+    this.consultationService.scrollToCreateResponse
+    .subscribe((scrollTo) => {
+      if (scrollTo) {
+        window.scrollTo({
+          top: this.panel.nativeElement.offsetTop,
+          behavior: 'smooth',
+        });
+        this.consultationService.scrollToCreateResponse.next(false);
+      }
+    });
   }
 
   useThisResponse(response) {

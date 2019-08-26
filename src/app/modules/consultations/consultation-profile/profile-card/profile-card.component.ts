@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-card',
@@ -15,10 +17,24 @@ export class ProfileCardComponent implements OnInit {
   enableSubmitResponse: boolean;
   currentUser: any;
 
-  constructor(private consultationsService: ConsultationsService ) { }
+  constructor(private consultationsService: ConsultationsService,
+              private userService: UserService,
+              private router: Router ) { }
 
   ngOnInit() {
       this.CheckSubmitResponseEnabled();
+      this.getCurrentUser();
+  }
+
+  getCurrentUser() {
+    this.userService.userLoaded$
+    .subscribe((data) => {
+      if (data) {
+        this.currentUser = this.userService.currentUser;
+      } else {
+        this.currentUser = null;
+      }
+    });
   }
 
   getRemainigDays(deadline) {
@@ -47,7 +63,14 @@ export class ProfileCardComponent implements OnInit {
     });
   }
 
-  stepNext() {
+  stepNext(hasResponseSubmited) {
+    if (!this.currentUser) {
+      this.router.navigateByUrl('/auth');
+      return;
+    }
+    if (!hasResponseSubmited) {
+      this.consultationsService.scrollToCreateResponse.next(true);
+    }
     if (this.enableSubmitResponse) {
       this.consultationsService.openFeedbackModal.next(true);
     }

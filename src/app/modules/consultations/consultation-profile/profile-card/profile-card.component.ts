@@ -14,6 +14,7 @@ export class ProfileCardComponent implements OnInit {
 
   enableSubmitResponse: boolean;
   currentUser: any;
+  showShareOptions: boolean;
 
   constructor(private consultationsService: ConsultationsService ) { }
 

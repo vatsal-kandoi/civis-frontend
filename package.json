@@ -41,6 +41,7 @@
     "graphql-tag": "^2.10.0",
     "hmr-enabled": "^0.1.4",
     "moment": "^2.24.0",
+    "ng-recaptcha": "^5.0.0",
     "ngx-bootstrap": "^5.1.0",
     "ngx-uploader": "^7.1.0",
     "ngx-webstorage": "^4.0.1",

@@ -263,15 +263,27 @@
                 color: #0E73B9;
             }
             .info-block {
+                display: grid;
+                grid-template-columns: 70px 1fr;
+                grid-gap: 27px;
+                align-items: center;
                 margin: 20px 0;
                 .sm-text {
                     font-size: 13px;
                     color: #4B94C7;
+                    margin: 0;
                 }
                 .lg-text {
                     font-weight: 600;
                     font-size: 24px;
                     color: #61B8F5;
+                    margin: 0;
+                }  
+                .super-lg-text {
+                    font-weight: 600;
+                    font-size: 24px;
+                    color: #DFAE00;
+                    margin: 0;
                 }   
             }
             .stats-info {

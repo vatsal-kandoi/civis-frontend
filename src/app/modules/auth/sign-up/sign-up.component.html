@@ -34,11 +34,11 @@
         <p class="auth-text"> 
           Already have an account with Civis?
         </p>
-        <button class="app-btn circular auth-btn" [routerLink]="['/auth', 'login']">Sign in</button>
+        <button class="app-btn circular auth-btn" [routerLink]="['/auth', 'login']">Sign In</button>
       </div>
       <div class="login-mobile-container">
         <div>
-          <button class="app-btn primary sign-in-btn" [routerLink]="['/auth', 'login']">Sign in</button>
+          <button class="app-btn primary sign-in-btn" [routerLink]="['/auth', 'login']">Sign In</button>
         </div>
       </div>
     </div>
@@ -110,9 +110,11 @@
                 <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required /> 
                 <label for="agreedForTermsCondition">
                   I'm good with the Civis'<br> 
-                  <a href="/terms" class="policy-link">Terms of Service</a>
+                  <a href="/terms" class="policy-link">Terms of Service,</a>
+                  &nbsp;
+                  <a href="/privacy" class="policy-link">Privacy Policy</a>
                   & 
-                  <a href="/privacy" class="policy-link">Privacy Policy.</a>
+                  <a href="/content-policy" class="policy-link">Content Policy.</a>
                 </label>
             </div>
             <div class="error-msg"  *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)">

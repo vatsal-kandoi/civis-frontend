@@ -63,7 +63,7 @@
   </div>
 
   <div class="ministry-index row" *ngIf="step == 2">
-    <div class="ministry-index__left col-5">
+    <div class="ministry-index__left col-6">
       <div class="heading-text">
           Which ministry is this consultation by? 
       </div>
@@ -71,7 +71,7 @@
         To publish the consultation, help us with the name of the corresponding department
       </div>
     </div>
-    <div class="ministry-index__right offset-3 col-4">
+    <div class="ministry-index__right offset-2 col-4">
         <form #consultationForm2="ngForm" (ngSubmit)="submit(consultationForm2.valid)" autocomplete="off">
           <div class="input-block">
             <label for="ministry">Ministry</label>

@@ -116,10 +116,26 @@
       <div class="heading">
           My Achievements
       </div>
-      <div class="info-block">
-        <div class="sm-text">Great! You’re an</div>
-        <div class="lg-text">Active Citizen</div>
+      <div class="info-block" *ngIf='currentUser?.points < 500'>
+        <div>
+          <img class="citizen-logo" src="../../../assets/images/citizen.png" />
+        </div>
+        <div>
+          <p class="sm-text">Great! You’re an</p>
+          <p class="lg-text">Active Citizen</p>
+        </div>
       </div>
+
+      <div class="info-block" *ngIf='currentUser?.points > 500'>
+        <div>
+          <img class="citizen-logo" src="../../../assets/images/super-citizen.png" />
+        </div>
+        <div>
+          <p class="sm-text">Wow! You’re a</p>
+          <p class="super-lg-text">Super Citizen</p>
+        </div>
+      </div>
+
       <div class="stats-info row no-gutters">
         <div class="col-md-2">
             <div class="stats-info__heading">

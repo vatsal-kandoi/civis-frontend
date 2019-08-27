@@ -21,14 +21,8 @@
         <div class="row-left-item">
           <p class="row-num"># {{i + 1}}</p>
           <img 
-            *ngIf="item?.profilePicture"
-            [src]="item?.profilePicture.url" 
-            class="avatar avatar--56 profile-pic"
-            alt="profile Picture"
-          />
-          <img 
-            *ngIf="!item?.profilePicture"
-            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
+            appDefaultImage [type]="'user'"
+            [src]="item?.profilePicture?.url" 
             class="avatar avatar--56 profile-pic"
             alt="profile Picture"
           />
@@ -41,17 +35,11 @@
       <div class="container-body__data-row-xs" *ngFor="let item of userListData?.data; let i = index" (click)="openLeaderModal(item)">
         <p class="row-num"># {{i + 1}}</p>
         <img 
-          *ngIf="item?.profilePicture"
-          [src]="item?.profilePicture.url" 
-          class="avatar avatar--42 profile-pic"
-          alt="profile Picture"
-        />
-        <img 
-          *ngIf="!item?.profilePicture"
-          src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-          class="avatar avatar--42 profile-pic"
-          alt="profile Picture"
-        />
+            appDefaultImage [type]="'user'"
+            [src]="item?.profilePicture?.url" 
+            class="avatar avatar--42 profile-pic"
+            alt="profile Picture"
+          />
         <div class="leader-detail">
           <p>{{item?.firstName}}</p>
           <p><span class="bold-text">{{item?.points}}</span> Points</p>
@@ -73,14 +61,9 @@
       <div class="modal-header">
         <div class="leader-profile">
           <img 
-            *ngIf="leaderData?.profilePicture"
-            [src]="leaderData?.profilePicture?.url" 
-            class="avatar avatar--80"
-          />
-          <img 
-            *ngIf="!leaderData?.profilePicture"
-            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            class="avatar avatar--80"
+          appDefaultImage [type]="'user'"
+          [src]="leaderData?.profilePicture?.url" 
+          class="avatar avatar--80"
           />
           <p class="profile-name">{{leaderData?.firstName}}</p>
         </div>

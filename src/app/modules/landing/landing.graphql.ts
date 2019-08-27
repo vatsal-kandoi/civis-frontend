@@ -9,6 +9,10 @@ export const ConsultationResponseList = gql`
         user {
           id
           firstName
+          profilePicture {
+            id
+            url
+          }
         }
       }
       paging {

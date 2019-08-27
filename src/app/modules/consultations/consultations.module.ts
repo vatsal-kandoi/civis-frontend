@@ -18,9 +18,7 @@ import { ResponseComponent } from './response/response.component';
 import { DisqusModule } from 'src/app/shared/components/disqus/disqus.module';
 import { ReadRespondComponent } from './consultation-profile/read-respond/read-respond.component';
 import { DiscussEngageComponent } from './consultation-profile/discuss-engage/discuss-engage.component';
-
-
-
+import { ShareButtonModule } from '@ngx-share/button';
 
 @NgModule({
     imports: [
@@ -35,6 +33,7 @@ import { DiscussEngageComponent } from './consultation-profile/discuss-engage/di
         NgxUploaderModule,
         AngularDraggableModule,
         DisqusModule,
+        ShareButtonModule,
     ],
     exports: [],
     declarations: [

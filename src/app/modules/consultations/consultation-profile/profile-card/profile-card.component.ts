@@ -70,6 +70,21 @@ export class ProfileCardComponent implements OnInit {
     return moment(date).format('Do MMM YY');
   }
 
+  createCalendarEvent() {
+    if (this.profile && this.profile.title && this.profile.responseDeadline) {
+      let startDate: any =  new Date(this.profile.responseDeadline).setHours(0, 0, 0);
+      startDate = new Date(startDate).toISOString();
+      let endDate: any  = new Date(this.profile.responseDeadline).setHours(23, 59, 59);
+      endDate = new Date(endDate).toISOString();
+      const calendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=${this.profile.title}` +
+      `&dates=${startDate.split('-').join('').split(':').join('').split('.000').join('')}/` +
+      `${endDate.split('-').join('').split(':').join('').split('.000').join('')}` +
+      `&details=&sf=true&output=xml`;
+      return calendarUrl;
+    }
+    return '';
+  }
+
   CheckSubmitResponseEnabled() {
     this.consultationsService.enableSubmitResponse
     .subscribe((value) => {

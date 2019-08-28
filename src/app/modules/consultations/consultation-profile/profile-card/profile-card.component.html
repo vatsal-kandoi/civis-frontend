@@ -14,7 +14,7 @@
       <div *ngIf="!summaryData">
         <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
           <p class="days-remaining m-0">{{getRemainigDays(profile?.responseDeadline)}}</p>
-          <a [href]="'https://calendar.google.com/calendar/r/eventedit?text=' + profile?.title" class="icon-circle" target="_blank">
+          <a  [href]="createCalendarEvent()" class="icon-circle" target="_blank">
             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
           </a>
         </div>

@@ -15,7 +15,7 @@ export class CitySelectionModalComponent implements OnInit {
 
   @ViewChild('citySelectionModal', { static: false }) citySelectionModal: ModalDirective;
   searchEmitter: EventEmitter<any> = new EventEmitter();
-  loadingCities: boolean;
+  loading: boolean;
   cities: any;
   dropdownText = 'Begin Typing';
   user = {
@@ -40,19 +40,19 @@ export class CitySelectionModalComponent implements OnInit {
         takeWhile(data => !!data),
         switchMap(data => {
           if (data) {
-            this.loadingCities = true;
+            this.loading = true;
             return this.searchCity(data.term);
           }
         })
       )
       .subscribe((result) => {
-        this.loadingCities = false;
+        this.loading = false;
         this.cities = result;
         if (!this.cities.length) {
           this.dropdownText = 'City not found';
         }
       }, (err: any) => {
-        this.loadingCities = false;
+        this.loading = false;
       });
   }
 
@@ -74,7 +74,7 @@ export class CitySelectionModalComponent implements OnInit {
         })
         .pipe(
           map((i: any) => i.data.locationAutocomplete),
-          tap(() => this.loadingCities = false)
+          tap(() => this.loading = false)
         );
     }
   }

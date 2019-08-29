@@ -12,7 +12,7 @@
           To help us serve you better, please select a city from the dropdown below.
         </p>
         <div class="d-flex">
-            <ng-select class="w-50" id="locations" #city="ngModel" name="city" [loading]="loadingCities" [clearable]="false"
+            <ng-select class="w-50" id="locations" #city="ngModel" name="city" [loading]="loading" [clearable]="false"
             [items]="cities" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
             bindValue="id" [notFoundText]="dropdownText" [clearable]="true" loadingText="Searching..."
             (search)="onCitySearch($event)" [(ngModel)]="user.cityId" placeholder="Type to search" required>

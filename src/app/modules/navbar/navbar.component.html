@@ -1,9 +1,9 @@
 <div class="navbar-index" *ngIf ="currentUrl !== 'auth'" [ngClass]="(currentUrl == 'landing') && (transparentNav === false) ? 'blue-nav' : 'white-nav'">
 
   <nav class="navbar-space row no-gutters user-nav">
-    <div class="navbar-space__left" [ngClass]="currentUrl !== 'consultations-profile' ? 'col-6' : 'col-4'">
+    <div class="navbar-space__left" [ngClass]="currentUrl !== 'consultations-profile' ? 'col-6' : 'col-2 col-md-4'">
       <div class="logo-space pointer" [routerLink]="currentUser ? '/profile' : '/'">
-        <img class="logo pointer" src='assets/images/brand-logo/brand-logo.svg' />
+        <img class="logo pointer" [src]="getLogoUrl()" />
       </div>
       <div class="row no-gutters justify-content-between align-items-center links" *ngIf="currentUrl !== 'consultations-profile'">
         <div class="nav-btns">
@@ -20,8 +20,8 @@
       </div>
     </div>
 
-    <div class="navbar-space__middle col-4" *ngIf="currentUrl === 'consultations-profile'">
-      <div class="row no-gutters justify-content-center h-100">
+    <div class="navbar-space__middle col-md-4 col-6"  *ngIf="currentUrl === 'consultations-profile'">
+      <div class="row no-gutters justify-content-center h-100 consultation-profile-section">
           <a class="profile-tab active-tab px-3" (click)="routeToConsultation('read')">
             <p>Read  &  Respond</p>
             <p>Submit your feedback</p>
@@ -30,6 +30,29 @@
             <p>Discuss  &  Engage</p>
             <p>Talk to the community</p>
           </a>
+      </div>
+      <div class="consultation-profile-section-mobile">
+        <div class="profile-options-container">
+          <form #consultationTab="ngForm">
+            <ng-select id="menu" #menu="ngModel" name="menu"  
+            [items]="menus" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
+            bindValue="name" [searchable]="false" [clearable]="false" (change)="changeMenu($event)"
+            [(ngModel)]="menuObject.name"> 
+              <ng-template ng-option-tmp let-item="item" let-index="index">
+                <div>
+                  <p class="mb-1 font-weight-bold">{{item.name}}</p>
+                  <p class="m-0" style="font-size:13px">{{item.description}}</p>            
+                </div>
+              </ng-template>
+              <ng-template ng-label-tmp let-item="item">
+                <div>
+                  <p class="mb-1 font-weight-bold">{{item.name}}</p>
+                  <p class="m-0" style="font-size:13px">{{item.description}}</p>            
+                </div>            
+              </ng-template>
+            </ng-select>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -50,16 +73,27 @@
         </div>
       </div>
 
-      <div class="mobile-space">
+      <div class="mobile-space" *ngIf="!currentUser">
         <div class="mobile-space__auth">
-          <button class="nav-btn">Sign Up</button>
+          <button class="nav-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
         </div>
         <div class="mobile-space__menu"> 
           <div class="icon" (click)="openMenu()">
-              <i class="fa fa-bars"></i>
+              <i class="fa fa-bars"></i>          
+            </div>
           </div>
-        </div>
       </div>
+
+      <div class="mobile-space" *ngIf="currentUser" (click)="showProfilePopup()">
+          <img class="avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url"/>
+          <span [ngClass]="currentUrl == 'landing' ? 'clr-white' : 'clr-black'"><i class="fa fa-angle-down ml-2"></i></span>
+
+          <div class="profile-popup" *ngIf="profilePopup">
+              <p [routerLink]="['/profile']">Profile</p>
+              <p (click)="logout($event)">Logout</p>
+            </div>
+      </div>
+
     </div>
   </nav>
 </div>
@@ -75,16 +109,16 @@
           <button class="close-btn btn btn-transparent" (click)="closeMenu()">X</button>
         </div>
         <div class="nav-btn">
-          <button class="close-btn btn btn-transparent">Active Consultations</button>
+          <button class="close-btn btn btn-transparent" [routerLink]="['consultations/list']" (click)="closeMenu()">Active Consultations</button>
         </div>
         <div class="nav-btn">
-          <button class="close-btn btn btn-transparent">Leaderboard</button>
+          <button class="close-btn btn btn-transparent" [routerLink]="['/leader-board']" (click)="closeMenu()">Leaderboard</button>
         </div>
         <div class="nav-btn">
-          <button class="close-btn btn btn-transparent">How Civis works</button>
+          <button class="close-btn btn btn-transparent" [routerLink]="['/how-civis-works']" (click)="closeMenu()">How Civis works</button>
         </div>
         <div class="nav-btn">
-          <button class="btn-oval">Submit a consultation</button>
+          <button class="btn-oval" [routerLink]="currentUser ? '/consultations/new' : '/auth'" (click)="closeMenu()">Submit a consultation</button>
         </div>
         <div class="nav-btn">
           <button class="close-btn btn btn-transparent" (click)="closeMenu()" [routerLink]="['/auth', 'sign-up']">Log in / Sign up</button>

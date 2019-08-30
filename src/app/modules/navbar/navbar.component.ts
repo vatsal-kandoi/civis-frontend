@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Apollo } from 'apollo-angular';
@@ -8,7 +8,8 @@ import { ConsultationList } from './navbar.graphql';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit {
 
@@ -21,6 +22,20 @@ export class NavbarComponent implements OnInit {
   transparentNav = false;
   activeCount: any;
 
+  menuObject = {
+    name: 'Read & Respond'
+  };
+
+  menus = [
+    {
+      name: 'Read & Respond',
+      description: 'Submit your feedback'
+    },
+    {
+      name: 'Discuss & Engage',
+      description: 'Talk to the community'
+    },
+  ];
   constructor(
     private router: Router,
     private userService: UserService,
@@ -36,7 +51,6 @@ export class NavbarComponent implements OnInit {
     });
     this.getCurrentUser();
     this.getActiveConsulationCount();
-    console.log('navbar ac route: ', this.router);
   }
 
   openMenu() {
@@ -86,6 +100,16 @@ export class NavbarComponent implements OnInit {
     this.profilePopup = !this.profilePopup;
   }
 
+  getLogoUrl() {
+    if (screen && screen.width <= 991) {
+      if (this.currentUrl === 'consultations-profile') {
+        return 'assets/images/mobile-logo.svg';
+      }
+      return 'assets/images/brand-logo/brand-logo.svg';
+    } else {
+      return 'assets/images/brand-logo/brand-logo.svg';
+    }
+  }
 
   logout(event) {
     event.stopPropagation();
@@ -127,4 +151,17 @@ export class NavbarComponent implements OnInit {
       this.router.navigateByUrl(`/consultations/${consulationId}/${subRoute}`);
     }
   }
+
+  changeMenu(event) {
+      switch (event.name) {
+        case 'Read & Respond':
+            this.routeToConsultation('read');
+          break;
+        case 'Discuss & Engage':
+            this.routeToConsultation('discuss');
+          break;
+        default:
+          break;
+      }
+    }
 }

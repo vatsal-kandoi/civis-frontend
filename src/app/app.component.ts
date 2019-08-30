@@ -17,10 +17,9 @@ export class AppComponent implements OnInit {
     this.setDisqus();
 
     this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-          return;
+      if (evt instanceof NavigationEnd) {
+         window.scrollTo(0, 0)
       }
-      window.scrollTo(0, 0)
     });
     
   }

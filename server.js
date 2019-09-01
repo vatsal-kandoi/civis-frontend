@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
 app.use('/disqus', disqusRouter);
 
 app.get('/getEnvironment', (req, res) => {
-    const environment = process.env.APP_ENVIRONMENT;
+    const environment = process.env;
     res.status(200).json({environment});
 });
 

@@ -11,6 +11,7 @@ import {TokenService} from './token.service';
 export class UserService {
   token: string;
   userLoaded$ = new BehaviorSubject(null);
+  forceCitySelection$ = new BehaviorSubject(null);
   currentUser: any;
 
 constructor(
@@ -51,6 +52,9 @@ constructor(
         if (user) {
           this.currentUser = user;
           this.userLoaded$.next(true);
+          if (!this.currentUser.city || !this.currentUser.city.id) {
+            this.forceCitySelection$.next(true);
+          }
         }
       }, (err: any) => {
         this.userLoaded$.next(false);

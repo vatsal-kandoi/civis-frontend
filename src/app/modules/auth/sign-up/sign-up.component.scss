@@ -203,6 +203,16 @@
                     }
                 }
 
+                .required-field { 
+                    label {
+                        &::after {
+                            content: "*";
+                            color: #F0653A;
+                        }
+                    }
+                 
+                }
+
                 .input-checbox {
                     display: flex;
                     margin-bottom: 15px;

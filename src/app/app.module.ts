@@ -13,6 +13,7 @@ import { ProfileModule } from './modules/profile/profile.module';
 import { LandingGuard } from './shared/guards/landing.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { PolicyModule } from './modules/policy/policy.module';
+import { CitySelectionModalModule } from './shared/components/city-selection-modal/city-selection-modal.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PolicyModule } from './modules/policy/policy.module';
     NavbarModule,
     ProfileModule,
     BrowserAnimationsModule,
-    PolicyModule
+    PolicyModule,
+    CitySelectionModalModule,
   ],
   providers: [
     LandingGuard,

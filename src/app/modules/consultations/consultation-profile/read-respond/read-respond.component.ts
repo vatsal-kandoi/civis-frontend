@@ -53,6 +53,7 @@ export class ReadRespondComponent implements OnInit {
   ngOnInit() {
     this.getCurrentUser();
     this.createSatisfactionRating();
+    this.scrollToCreateResponse();
   }
 
   getConsultationProfile() {
@@ -240,24 +241,37 @@ export class ReadRespondComponent implements OnInit {
   }
 
   showCreateResponse() {
-    if ((this.checkExpired(this.profileData ? this.profileData.responseDeadline : null) === 'Expired')
+    if ((this.checkClosed(this.profileData ? this.profileData.responseDeadline : null) === 'Closed')
         || !this.currentUser || (this.profileData && this.profileData.respondedOn)) {
         return false;
     }
     return true;
   }
 
-  checkExpired(deadline) {
+  checkClosed(deadline) {
     if (deadline) {
       const today = moment();
       const lastDate = moment(deadline);
       const difference = lastDate.diff(today, 'days');
       if (difference <= 0) {
-        return 'Expired';
+        return 'Closed';
       } else {
         return `Active`;
       }
     }
+  }
+
+  scrollToCreateResponse() {
+    this.consultationService.scrollToCreateResponse
+    .subscribe((scrollTo) => {
+      if (scrollTo) {
+        window.scrollTo({
+          top: this.panel.nativeElement.offsetTop,
+          behavior: 'smooth',
+        });
+        this.consultationService.scrollToCreateResponse.next(false);
+      }
+    });
   }
 
   useThisResponse(response) {

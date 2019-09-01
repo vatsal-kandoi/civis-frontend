@@ -5,6 +5,8 @@ import {AppModule} from './app/app.module';
 import {environment} from './environments/environment';
 import {hmrBootstrap} from './hmr';
 
+import './app/shared/icons';
+
 if (environment.production) {
   enableProdMode();
 }

@@ -50,7 +50,7 @@
         <div class="carousel-arrow-left pointer" (click)='previousSlide()'><i class="fa fa-angle-left"></i></div>
         <div @slideInRight class="carousel-inner-container">
           <div class="carousel-header">
-            <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60" />
+            <img class="avatar avatar--60" appDefaultImage [type]="'user'" [src]="currentReponseData?.user?.profilePicture?.url" />
             <p class="bold-text m-0">{{currentReponseData?.user?.firstName}}</p>
           </div>
           <p class="response-title bold-text">National Urban Policy Framework, 2018</p>

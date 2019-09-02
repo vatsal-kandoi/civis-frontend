@@ -20,7 +20,7 @@ export class ConsultationCardComponent implements OnInit {
     let lastDate = moment(deadline);
     let difference = lastDate.diff(today, 'days');
     if (difference <= 0) {
-      return 'Closed'
+      return 'Closed';
     } else {
       return `${difference} Days Remaining`;
     }

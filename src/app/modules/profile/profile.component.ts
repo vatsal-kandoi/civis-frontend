@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
           bestRank = `#${rank} in ${this.currentUser.city.parent.name.toUppercase()}`;
           break;
         case 'national':
-          bestRank = `#${rank} in INDIA}`;
+          bestRank = `#${rank} in INDIA`;
           break;
         default:
           break;

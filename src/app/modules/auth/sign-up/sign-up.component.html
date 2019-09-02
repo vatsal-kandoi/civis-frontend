@@ -46,7 +46,7 @@
 
     <div class="form-space row no-gutters mt-md-5 mt-2">
       <div class="form-space__left col-md-5">
-        <form #signupForm="ngForm" (ngSubmit)="submit(signupForm.valid)" autocomplete="off">
+        <form #signupForm="ngForm" autocomplete="off">
             <div class="input-box">
                 <label for="fname">First name</label>
                 <div class="input-box__border">
@@ -55,7 +55,7 @@
                 <div *ngIf="fname.invalid && (fname.touched || signupForm.submitted)" class="error-msg">First name is Required</div>
             </div>
     
-            <div class="input-box">
+            <div class="input-box required-field">
                 <label for="fname">Last name</label>
                 <div class="input-box__border">
                     <input placeholder="Last Name" type="text" id="lname" #lname="ngModel" name="lname" [(ngModel)]="signupObject.lastName" required />
@@ -63,7 +63,7 @@
                 <div *ngIf="lname.invalid && (lname.touched || signupForm.submitted)" class="error-msg">Last name is Required</div>
             </div>
 
-            <div class="location-box">
+            <div class="location-box required-field">
               <label for="locations">
                   Location
               </label>
@@ -77,7 +77,7 @@
               <div *ngIf="city.invalid && (city.touched || signupForm.submitted)" class="error-msg">Location is Required</div>
             </div>
     
-            <div class="input-box">
+            <div class="input-box required-field">
                 <label for="efname">Email</label>
                 <div class="input-box__border">
                     <input placeholder="Email" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="signupObject.email" required email />
@@ -91,14 +91,14 @@
             <div class="input-box">
                 <label for="phone">Phone</label>
                 <div class="input-box__border">
-                    <input placeholder="Phone Number" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"  required  />
+                    <input placeholder="Phone Number" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"/>
                 </div>
                 <div *ngIf="phone.invalid && (phone.touched || signupForm.submitted)" class="error-msg">
                   <div>Phone Number must be a valid number</div>
                 </div>
             </div>
     
-            <div class="input-box">
+            <div class="input-box required-field">
                 <label for="password">Password</label>
                 <div class="input-box__border">
                     <input placeholder="At least 6 characters" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="signupObject.password" required />
@@ -126,8 +126,9 @@
                 <label for="notifyMe">Notify me when an open consultation <br> is created on Civis.</label>
             </div>
     
+            <re-captcha #captchaRef="reCaptcha" (resolved)="captchaResolved($event)" [siteKey]="reCAPTCHA_KEY" size="invisible"></re-captcha>
             <div>
-              <button class="app-btn secondary get-start-btn" type="submit">
+              <button class="app-btn secondary get-start-btn" (click)="checkForCaptcha()">
                 <p class="m-0">GET WORKING</p>
                 <i class="fa fa-angle-right"></i>
               </button>

@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { SuccessComponent } from './success/success.component';
 import { FailureComponent } from './failure/failure.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FailureComponent } from './failure/failure.component';
         RouterModule,
         AuthRoutingModule,
         NgSelectModule,
-        FormsModule
+        FormsModule,
+        RecaptchaModule,
     ],
     exports: []
 })

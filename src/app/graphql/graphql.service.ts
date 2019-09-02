@@ -24,11 +24,15 @@ export class GraphqlService {
 
   async initializeApollo(): Promise<any> {
 
-    this.environmentName = await this.getEnvironment().catch(e => {
+    this.environment = await this.getEnvironment().catch(e => {
       console.error('Error fetching environment');
     });
 
-    this.environment = this.environmentName === 'staging' ? staging : prod;
+    const localEnvironment = this.environment && this.environment.APP_ENVIRONMENT === 'staging' ? staging : prod;
+
+    this.environment = {...localEnvironment, ...this.environment};
+
+    console.log('env is: ', this.environment);
 
     const http = this.httpLink.create({uri: `${this.environment.api}/graphql`});
 

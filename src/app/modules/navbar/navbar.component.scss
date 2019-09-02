@@ -49,44 +49,58 @@
                 padding-top: 0;
             }
         }
+      }
+    }
 
-        .nav-btns {
-            .btn {
-                font-size: 14px;
-                color: #E2F3FF;
-            }
+    &__center-item {
 
-            @media screen and (max-width: 991px) {
-                display: none;
-            }
-        }
-       }
+      .profile-tab-wrapper {
+        display: flex;
+        align-items: center;
 
        &__middle {
         height: 100%;
         .profile-tab {
-            height: 100%;
-            text-align: center;
-            padding-top: 15px;
-            &:nth-child(2) {
-                margin-left: 30px;
-            }
-            p:nth-child(1) {
-                color: $primary-color;
-                font-size: 16px;
-                font-weight: bold;
-                margin: 0;
-            }
-            p:nth-child(2) {
-                font-size: 12px;
-                font-weight: 500;
-                color: #71BCF0;
-                margin: 0;
-            }
-        }
+          height: 100%;
+          text-align: center;
+          padding: 30px 0 5px;
+          cursor: pointer;
 
+          &:nth-child(2) {
+            margin-left: 30px;
+          }
+  
+          p:nth-child(1) {
+            color: $primary-color;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+          }
+  
+          p:nth-child(2) {
+            font-size: 12px;
+            font-weight: 500;
+            color: #71BCF0;
+            margin: 0;
+          }
+        }
+  
         .active-tab {
-            border-bottom: 4px solid #1894EA;
+          border-bottom: 4px solid #1894EA;
+        }
+      }
+    }
+
+    &__right-item {
+      display: flex;
+      align-items: center;
+      height: 100%l;
+      .profile-item {
+        position: relative;
+
+        span {
+          font-size: 20px;
+          line-height: 0;
         }
 
         .consultation-profile-section-mobile {
@@ -212,34 +226,45 @@
 }
 
 .blue-nav {
-    background-color: #0E73B9;
-    transition: background-color .3s ease-in-out;
+  background-color: $primary-color;
+  transition: background-color .3s linear;
 }
 
 .white-nav {
-    background-color: #FFFFFF;
-    transition: background-color .3s ease-in-out;
+  background-color: $white;
+  transition: background-color .3s linear;
 
-    .nav-btns {
-        .btn {
-            color: #0E73B9 !important; 
-        }
+  .nav-link-text {
+    font-size: 14px;
+    color: $primary-color !important;
+    margin: 0 30px;
+    cursor: pointer;
+  }
 
-        .btn-oval {   
-            font-size: 14px;
-            font-weight: bold;   
-            background: rgba(14, 115, 185, 0.7) !important;            
-            border-radius: 33px;
-            color: #ffffff !important;
-            margin-right: 15px;
-           }
+  .nav-btns {
+    .btn {
+      color: #0E73B9 !important;
+    }
 
-           .auth-btn {
-            font-weight: 600;
-            font-size: 14px;
-            line-height: 17px;
-            color: rgba(255, 255, 255, 0.7);
-           }
+    .btn-oval {
+      font-size: 14px;
+      font-weight: bold;
+      background: rgba(14, 115, 185, 0.7) !important;
+      border-radius: 33px;
+      color: #ffffff !important;
+      margin-right: 15px;
+    }
+
+    .auth-btn {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+  .mobile-space {
+    &__menu {
+      color: $primary-color !important;
     }
 
     .mobile-space {
@@ -270,65 +295,68 @@
             color: $white;
         }
     }
+  }
 }
 
 .mobile-menu {
-    background: rgba(14, 115, 185, 0.5);
+  background: rgba(14, 115, 185, 0.5);
 
-    .modal-dialog {
-        margin: 0;
+  .modal-dialog {
+    margin: 0;
 
-        .modal-content {
-            background: #003F6B !important;
-            border: none;
-            border-radius: 0;
-            padding: 24px;
+    .modal-content {
+      background: #003F6B !important;
+      border: none;
+      border-radius: 0;
+      padding: 24px;
 
-            .modal-body {
-                padding: 0;
-                .nav-btn {
-                    margin-bottom: 25px;
-                    .close-btn {
-                        color: #FFFFFF;
-                        font-size: 22px;
+      .modal-body {
+        padding: 0;
 
-                        &:focus {
-                            box-shadow: none;
-                        }
-                    }
+        .nav-btn {
+          margin-bottom: 25px;
 
-                    .btn-oval {
-                        border: none;
-                        background: rgba(255, 255, 255, 0.3);
-                        border-radius: 33px;
-                        color: #ffffff;
-                        font-size: 22px;
-                        padding: 10px 15px;
+          .close-btn {
+            color: #FFFFFF;
+            font-size: 22px;
 
-                        &:focus {
-                            box-shadow: none;
-                        }
-                    }
-                }
+            &:focus {
+              box-shadow: none;
             }
+          }
 
+          .btn-oval {
+            border: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 33px;
+            color: #ffffff;
+            font-size: 22px;
+            padding: 10px 15px;
+
+            &:focus {
+              box-shadow: none;
+            }
+          }
         }
+      }
+
     }
+  }
 
 }
 
 .active-count-box {
-    display: inline-block;
-    margin-left: 5px;
-    padding: 1px 5px;
-    font-size: 14px;
-    font-weight: 600;
-    color: $white;
-    background-color: #46A4E5;
-    border-radius: 2px;
+  display: inline-block;
+  margin-left: 5px;
+  padding: 1px 5px;
+  font-size: 14px;
+  font-weight: 600;
+  color: $white;
+  background-color: #46A4E5;
+  border-radius: 2px;
 }
 
 .modal.fade:not(.in) .modal-dialog {
-    -webkit-transform: translate3d(125%, 0, 0);
-    transform: translate3d(125%, 0, 0);
+  -webkit-transform: translate3d(125%, 0, 0);
+  transform: translate3d(125%, 0, 0);
 }

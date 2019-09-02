@@ -13,7 +13,7 @@ export const ConsultationList = gql`
         ministry {
           id
           name
-          coverPhoto {
+          coverPhoto (resolution: "350X285>") {
             id
             url
           }

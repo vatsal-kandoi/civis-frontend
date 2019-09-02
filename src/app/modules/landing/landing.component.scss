@@ -333,6 +333,10 @@
       margin-top: 20px;
     }
   }
+
+  .landing-btn {
+    padding: 5px 23px;
+  }
 }
 
 .card-carousel {
@@ -417,12 +421,12 @@
         @include regular-text($color: #A1D5FA, $weight: bold);
       }
       .step-detail {
-        padding-left: 20px;
+        padding: 0;
         li {
           font-size: 24px;
           color: #F0653A;
           font-weight: bold;
-          list-style-type: circle;
+          list-style-type: none;
           @media screen and (max-width: 991px) {
             font-size: 16px;
           }
@@ -458,11 +462,11 @@
   .btn-next {
     display: flex;
     align-items: center;
-    padding: 10px 15px;
+    padding: 10px 20px;
     span {
       font-size: 20px;
       line-height: 0;
-      margin-left: 15px;
+      margin-left: 20px;
     }
   }
   .w-80 {

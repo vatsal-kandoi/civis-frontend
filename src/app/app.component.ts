@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from './shared/services/user.service';
 import { filter } from 'rxjs/operators';
 
@@ -11,14 +12,21 @@ export class AppComponent implements OnInit {
 
   title = 'civis';
   showCitySelection: boolean;
-
+  
   constructor(
     private userService: UserService,
+    private router: Router
   ) {
+
 
   }
 
   ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+         window.scrollTo(0, 0)
+      }
+    });
     this.checkCityPresent();
   }
 

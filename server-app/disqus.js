@@ -10,7 +10,6 @@ disqusRouter.post('/sso', (req, res) => {
 
   var DISQUS_SECRET = process.env.DISQUS_SECRET;
   var DISQUS_PUBLIC = process.env.DISQUS_PUBLIC;
-  console.log('secret is: ', DISQUS_SECRET);
 
   var disqusData = {
     id: req.body.userId,

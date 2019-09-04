@@ -44,7 +44,7 @@
           <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
         </div>
         <p class="text-16">{{response.node.responseText}}</p>
-        <div class="vote-section">
+        <div class="vote-section" *ngIf="currentUser">
           <div class="vote-count">
             <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">
                 <span (click)="vote('up', response?.node)" [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>

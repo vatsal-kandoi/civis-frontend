@@ -210,35 +210,39 @@
     }
 
     .participated-section {
-
-      .paticipant-title {
-        font-size: 12px;
-        font-weight: 500;
-        color: #6DB4E4;
-        margin-bottom: 15px;
-      }
-      .paticipant-list {
-        display: grid;
-        grid-template-columns: 40px 1fr;
-        grid-column-gap: 20px;
-        padding: 10px 0;
-        .list-detail {
-          p:nth-child(1) {
-            font-size: 15px;
-            font-weight: 600;
-            color: $black;
-            margin: 0;
-          }
-          p:nth-child(2) {
-            font-size: 11px;
-            color: $black;
-            margin: 0;
+      .participation-list-container {
+        min-height: 55vh;
+        max-height: 55vh;
+        overflow: auto;
+        .paticipant-title {
+          font-size: 12px;
+          font-weight: 500;
+          color: #6DB4E4;
+          margin-bottom: 15px;
+        }
+        .paticipant-list {
+          display: grid;
+          grid-template-columns: 40px 1fr;
+          grid-column-gap: 20px;
+          padding: 10px 0;
+          .list-detail {
+            p:nth-child(1) {
+              font-size: 15px;
+              font-weight: 600;
+              color: $black;
+              margin: 0;
+            }
+            p:nth-child(2) {
+              font-size: 11px;
+              color: $black;
+              margin: 0;
+            }
           }
         }
-      }
-      .paticipant-divider {
-        border-bottom: .5px solid #BFE4FF;
-        margin: 0 0 0 60px;
+        .paticipant-divider {
+          border-bottom: .5px solid #BFE4FF;
+          margin: 0 0 0 60px;
+        }
       }
     }
 

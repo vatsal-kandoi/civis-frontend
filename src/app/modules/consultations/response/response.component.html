@@ -1,4 +1,4 @@
-<div class="response-index">
+<div class="response-index" [ngStyle]="{'background-image': 'url(' + profile?.consultation?.ministry?.coverPhoto?.url + ')'}">
     <div class="response-profile">
         <section class="response-profile__sidebar-section">
             <div class="c-profile-card sticky">
@@ -25,7 +25,7 @@
                     </p>
                   </div>
                   <div>
-                    <p class="count-text m-0">DRAFT MADE PUBLIC ON {{convertDateFormat(profile?.updatedAt)}}</p>
+                    <p class="count-text m-0">DRAFT MADE PUBLIC ON {{convertDateFormat(profile?.consultation?.updatedAt)}}</p>
                   </div>
                 </div>
               </div>              
@@ -51,10 +51,6 @@
               <span><i class="fa fa-file"></i></span>
               <span class="mx-3">READ THE FULL DRAFT</span>
               <span><i class="fa fa-external-link"></i></span>
-        </div>
-        <div class="share-btn">
-          <span><i class="fa fa-share"></i></span>
-          share
         </div>
       </div>
       <div class="right-space">

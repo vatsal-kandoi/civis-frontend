@@ -2,7 +2,7 @@
 
 .works-wrapper {
   margin-top: 77px;
-  padding: 60px;
+  padding: 60px 60px 60px 45px;
   background-color: $blue-bg-light;
   @media screen and (max-width: 991px) {
     margin-top: 58px;
@@ -18,8 +18,15 @@
   }
 
   &__subtitle {
-    font-size: 16px;
     color: $black;
+    font-size: 24px;
+    margin-bottom: 2rem;
+    line-height: 36px;
+    letter-spacing: 0.03em;
+    @media screen and (max-width: 991px) {
+      font-size: 20px;
+      line-height: 32px;
+    }
   }
 
   &__step-section {
@@ -28,7 +35,6 @@
       display: inline-block;
       font-size: 34px;
       color: $primary-color;
-      border-bottom: 2px solid $primary-color;
       @media screen and (max-width: 991px) {
         font-size: 20px;
       }
@@ -56,7 +62,9 @@
 
       .step-points {
         color: $black;
-
+        @media screen and (max-width: 991px) {
+          padding: 0;
+        }
         .step-number {
           font-size: 20px;
           font-weight: bold;

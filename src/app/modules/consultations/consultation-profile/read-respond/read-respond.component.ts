@@ -161,42 +161,45 @@ export class ReadRespondComponent implements OnInit {
   }
 
   vote(direction, response) {
-    if (!response.votedAs && this.currentUser) {
-        const vote = {
-          consultationResponseVote: {
-            consultationResponseId: response.id,
-            voteDirection: direction
-          }
-        };
-        this.apollo.mutate({
-          mutation: VoteCreateQuery,
-          variables: vote,
-          update: (store, {data: res}) => {
-            const variables = {id: this.consultationId};
-            const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
-            if (res) {
-              for (const value of resp['consultationProfile'].sharedResponses.edges) {
-                if (value.node.id ===  response['id']) {
-                  if (value.node[res.voteCreate.voteDirection + 'VoteCount']) {
-                    value.node[res.voteCreate.voteDirection + 'VoteCount'] += 1;
-                  } else {
-                    value.node[res.voteCreate.voteDirection + 'VoteCount'] = 1;
-                  }
-                  value.node.votedAs = res.voteCreate;
-                  break;
-                }
-              }
-            }
-            store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
-          }
-        })
-        .subscribe((data) => {
-          console.log(data);
-        }, err => {
-          this.errorService.showErrorModal(err);
-        });
+    if (response.votedAs && (response.votedAs.voteDirection === direction) ) {
+      return;
     }
-
+    const vote = {
+      consultationResponseVote: {
+        consultationResponseId: response.id,
+        voteDirection: direction
+      }
+    };
+    this.apollo.mutate({
+      mutation: VoteCreateQuery,
+      variables: vote,
+      update: (store, {data: res}) => {
+        const variables = {id: this.consultationId};
+        const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
+        if (res) {
+          for (const value of resp['consultationProfile'].sharedResponses.edges) {
+            if (value.node.id ===  response['id']) {
+              if (value.node[res.voteCreate.voteDirection + 'VoteCount']) {
+                value.node[res.voteCreate.voteDirection + 'VoteCount'] += 1;
+                if (response.votedAs) {
+                  value.node[response.votedAs.voteDirection + 'VoteCount'] -= 1;
+                }
+              } else {
+                value.node[res.voteCreate.voteDirection + 'VoteCount'] = 1;
+              }
+              value.node.votedAs = res.voteCreate;
+              break;
+            }
+          }
+        }
+        store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
+      }
+    })
+    .subscribe((data) => {
+      console.log(data);
+    }, err => {
+      this.errorService.showErrorModal(err);
+    });
   }
 
   choose(value) {

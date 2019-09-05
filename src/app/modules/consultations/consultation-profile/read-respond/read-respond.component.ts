@@ -31,6 +31,8 @@ export class ReadRespondComponent implements OnInit {
   currentUser: any;
   responseType = '';
   templateId = null;
+  responseSubmitted: boolean;
+  responseSubmitLoading: boolean;
 
 
   constructor(
@@ -129,6 +131,7 @@ export class ReadRespondComponent implements OnInit {
   }
 
   submitResponse(consultationResponse) {
+    this.responseSubmitLoading = true;
     this.apollo.mutate({
       mutation: SubmitResponseQuery,
       variables: {
@@ -148,8 +151,11 @@ export class ReadRespondComponent implements OnInit {
       map((res: any) => res.data.consultationResponseCreate)
     )
     .subscribe((response) => {
-      this.closeFeedbackModal();
+      this.responseSubmitted = true;
+      this.responseSubmitLoading = false;
+      this.consultationService.enableSubmitResponse.next(false);
     }, err => {
+      this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);
     });
   }
@@ -194,7 +200,7 @@ export class ReadRespondComponent implements OnInit {
   }
 
   choose(value) {
-    if (!this.responseFeedback) {
+    if (!this.responseFeedback && !this.responseSubmitted) {
       this.responseFeedback = value;
     }
   }

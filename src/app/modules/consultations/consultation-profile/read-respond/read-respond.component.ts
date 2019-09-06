@@ -19,6 +19,7 @@ export class ReadRespondComponent implements OnInit {
 
   @ViewChild('feedbackModal', { static: false }) feedbackModal: ModalDirective;
   @ViewChild('responseIndex', { read: ElementRef , static: false }) panel: ElementRef<any>;
+  @ViewChild('responsesListContainer', { read: ElementRef , static: false }) responsesListContainer: ElementRef<any>;
 
   profileData: any;
   responseList: any;
@@ -26,7 +27,7 @@ export class ReadRespondComponent implements OnInit {
   satisfactionRatingDistribution: any;
   responseFeedback: any;
   responseText = '';
-  responseVisibility = true;
+  responseVisibility = false;
   step: number;
   currentUser: any;
   responseType = '';
@@ -325,7 +326,17 @@ export class ReadRespondComponent implements OnInit {
     });
   }
 
+  scrollToResponses() {
+    window.scrollTo({
+      top: this.responsesListContainer.nativeElement.offsetTop,
+      behavior: 'smooth',
+    });
+  }
+
   useThisResponse(response) {
+    if (this.profileData.respondedOn) {
+      return;
+    }
     if (response) {
       this.responseText = response.responseText;
       this.templateId = response.id;

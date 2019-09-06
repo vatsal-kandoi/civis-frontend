@@ -10,7 +10,7 @@
         <div class="heading">Your response</div>
       </div>
       <div class="w-50 row no-gutters justify-content-end align-items-center">
-        <div class="link mr-3">or, select a public response</div>
+        <div (click)="scrollToResponses()" class="link mr-3">or, select a public response</div>
         <div class="info-mark"><i class="fa fa-question-circle"></i></div>
       </div>
     </div>
@@ -47,7 +47,7 @@
       </p>
     </div>
     <ng-container *ngFor="let response of responseList">
-      <div class="response-container">
+      <div class="response-container" #responsesListContainer>
         <div class="d-inline-flex align-items-center">
           <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="response?.node?.user?.profilePicture?.url" />
           <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>

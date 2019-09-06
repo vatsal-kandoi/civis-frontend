@@ -24,6 +24,7 @@ export const ConsultationProfile = gql`
         }
       }
       satisfactionRatingDistribution
+      status
       sharedResponses(sort: created_at, sortDirection: desc) {
         edges {
           node {
@@ -73,6 +74,7 @@ export const ConsultationProfileCurrentUser = gql`
         }
       }
       satisfactionRatingDistribution
+      status
       respondedOn
       sharedResponses(sort: created_at, sortDirection: desc) {
         edges {

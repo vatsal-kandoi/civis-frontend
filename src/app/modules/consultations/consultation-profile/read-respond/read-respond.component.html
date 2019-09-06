@@ -1,7 +1,7 @@
 <section class="read-response-container" #responseIndex>
   <div class="paper-effect">
     <p class="heading">Summary</p>
-    <p class="summary-content">{{profileData?.summary}}</p>
+    <p class="summary-content" [innerHTML]="profileData?.summary"></p>
   </div>
 
   <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()"> 

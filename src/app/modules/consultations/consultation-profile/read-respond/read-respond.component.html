@@ -54,9 +54,9 @@
                 <span (click)="vote('down', response?.node)" class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
                 <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
             </div>
-            <div *ngIf="response.node?.templatesCount">
-                <span class="ml-4 mr-2"><i class="fa fa-refresh"></i></span>
-                <span>{{response.node?.templatesCount}}</span>
+            <div>
+                <span (click)="useThisResponse(response?.node)" class="ml-4 mr-2"><i class="fa fa-refresh"></i></span>
+                <span>{{response.node?.templatesCount ? response.node?.templatesCount : '' }}</span>
             </div>
           </div>
           <div>

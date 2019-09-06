@@ -112,6 +112,12 @@ export const VoteCreateQuery = gql `
   }
 `
 
+export const VoteDeleteQuery = gql `
+  mutation voteDelete($consultationResponseId : Int!) {
+    voteDelete(consultationResponseId : $consultationResponseId )
+  }
+`
+
 export const SubmitResponseQuery = gql`
   mutation consultationResponseCreate($consultationResponse: ConsultationResponseCreateInput!){
     consultationResponseCreate(consultationResponse: $consultationResponse){

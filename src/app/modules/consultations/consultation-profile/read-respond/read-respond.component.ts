@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
-import { ConsultationProfileCurrentUser, ConsultationProfile, SubmitResponseQuery, VoteCreateQuery } from '../consultation-profile.graphql';
+import { ConsultationProfileCurrentUser, ConsultationProfile, SubmitResponseQuery, VoteCreateQuery, VoteDeleteQuery } from '../consultation-profile.graphql';
 import { Apollo } from 'apollo-angular';
 import { map, filter } from 'rxjs/operators';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
@@ -161,9 +161,52 @@ export class ReadRespondComponent implements OnInit {
   }
 
   vote(direction, response) {
-    if (response.votedAs && (response.votedAs.voteDirection === direction) ) {
-      return;
+    if (response.votedAs) {
+      if (response.votedAs.voteDirection === direction) {
+        this.undoVote(response, direction);
+      } else {
+        this.undoVote(response, direction, true);
+      }
+    } else {
+      this.createVote(response, direction);
     }
+  }
+
+  undoVote(response, direction, createVote?) {
+    if (response.id) {
+      this.apollo.mutate({
+        mutation: VoteDeleteQuery,
+        variables: {
+          consultationResponseId: response.id
+        },
+        update: (store, {data: res}) => {
+          const variables = {id: this.consultationId};
+          const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
+          if (res) {
+            for (const value of resp['consultationProfile'].sharedResponses.edges) {
+              if (value.node.id ===  response['id']) {
+                if (response.votedAs) {
+                  value.node[response.votedAs.voteDirection + 'VoteCount'] -= 1;
+                }
+                value.node.votedAs = null;
+                break;
+              }
+            }
+          }
+          store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
+        }
+      })
+      .subscribe((res) => {
+        if (createVote) {
+          this.createVote(response, direction);
+        }
+      }, err => {
+        this.errorService.showErrorModal(err);
+      });
+    }
+  }
+
+  createVote(response, direction) {
     const vote = {
       consultationResponseVote: {
         consultationResponseId: response.id,
@@ -181,9 +224,6 @@ export class ReadRespondComponent implements OnInit {
             if (value.node.id ===  response['id']) {
               if (value.node[res.voteCreate.voteDirection + 'VoteCount']) {
                 value.node[res.voteCreate.voteDirection + 'VoteCount'] += 1;
-                if (response.votedAs) {
-                  value.node[response.votedAs.voteDirection + 'VoteCount'] -= 1;
-                }
               } else {
                 value.node[res.voteCreate.voteDirection + 'VoteCount'] = 1;
               }
@@ -196,7 +236,6 @@ export class ReadRespondComponent implements OnInit {
       }
     })
     .subscribe((data) => {
-      console.log(data);
     }, err => {
       this.errorService.showErrorModal(err);
     });

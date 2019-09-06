@@ -105,9 +105,9 @@ export class NavbarComponent implements OnInit {
       if (this.currentUrl === 'consultations-profile') {
         return 'assets/images/mobile-logo.svg';
       }
-      return 'assets/images/brand-logo/brand-logo.svg';
+      return 'assets/images/navlogo.png';
     } else {
-      return 'assets/images/brand-logo/brand-logo.svg';
+      return 'assets/images/navlogo.png';
     }
   }
 

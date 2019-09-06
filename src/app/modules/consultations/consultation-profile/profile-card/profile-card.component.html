@@ -1,7 +1,7 @@
 <div class="c-profile-card sticky">
   <div class="c-profile-card__top-section">
     <p class="light-text m-0">{{summaryData?.title ? summaryData?.title : 'SENDING IN YOUR RESPONSE TO'}}</p>
-    <div class="d-flex justify-content-between mb-1 mt-1">
+    <div class="d-flex justify-content-between mb-1 mt-2">
       <p class="card-title m-0">{{profile?.title}}</p>
       <a class="icon-circle" [href]="profile?.url" target="_blank" *ngIf="!summaryData">
         <i class="fa fa-link" aria-hidden="true"></i>
@@ -52,19 +52,19 @@
   <hr class="divider" />
 
   <div class="c-profile-card__bottom-section">
-    <div class="d-flex justify-content-between mb-2">
+    <div class="d-flex justify-content-between mb-3">
       <p class="count-text m-0">TOTAL RESPONSES</p>
-      <p class="count-text bold-text text-right m-0">{{profile?.consultationResponsesCount}}</p>
+      <p class="count-number bold-text text-right m-0">{{profile?.consultationResponsesCount}}</p>
     </div>
-    <div class="d-flex justify-content-between mb-2">
+    <div class="d-flex justify-content-between mb-3">
       <p class="count-text m-0">TOTAL PUBLIC RESPONSES</p>
-      <p class="count-text bold-text text-right m-0">
+      <p class="count-number bold-text text-right m-0">
         {{profile?.sharedResponses?.totalCount ? profile?.sharedResponses?.totalCount : summaryData?.publicResponseCount }}
       </p>
     </div>
-    <div class="d-flex justify-content-between mb-2">
+    <div class="d-flex justify-content-between">
       <p class="count-text m-0">DRAFT MADE PUBLIC ON</p>
-      <p class="count-text bold-text text-right m-0">{{convertDateFormat(profile?.updatedAt)}}</p>
+      <p class="count-number bold-text text-right m-0">{{convertDateFormat(profile?.updatedAt)}}</p>
     </div>
   </div>
 </div>

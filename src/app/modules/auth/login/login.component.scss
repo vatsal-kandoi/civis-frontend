@@ -192,10 +192,6 @@
                             padding: 10px;
                             border: none;
                             border-radius: 3px;
-
-                            &:focus {
-                                outline: none;
-                            }
                         }
 
                         @media screen and (max-width: 991px) {

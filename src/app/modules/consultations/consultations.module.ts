@@ -10,7 +10,7 @@ import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directi
 import { ConsultationProfileComponent } from './consultation-profile/consultation-profile.component';
 import { ProfileCardComponent } from './consultation-profile/profile-card/profile-card.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import {ModalModule} from 'ngx-bootstrap';
+import {ModalModule, TooltipModule} from 'ngx-bootstrap';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { ConsultationsSummaryComponent } from './consultations-summary/consultations-summary.component';
@@ -29,13 +29,14 @@ import { ShareButtonModule } from '@ngx-share/button';
         SharedDirectivesModule,
         NgSelectModule,
         BsDatepickerModule.forRoot(),
+        TooltipModule.forRoot(),
         ModalModule,
         NgxUploaderModule,
         AngularDraggableModule,
         DisqusModule,
         ShareButtonModule,
     ],
-    exports: [],
+    exports: [TooltipModule],
     declarations: [
         CreateConsultationComponent,
         ConsultationListComponent,

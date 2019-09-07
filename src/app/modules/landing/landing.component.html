@@ -17,7 +17,7 @@
         <div class="card-carousel">
           <p class="card-carousel__carouse-title">IN FOCUS</p>
           <div @slideInRight>
-            <app-consultation-card *ngIf='coverCardData?.length' [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
+            <app-consultation-card *ngIf='coverCardData?.length && coverCardData[current_card_index]' [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
           </div>
           <div class="card-carousel__carousel-indicators">
             <span 
@@ -83,8 +83,7 @@
         <div class="leader-profile" *ngFor='let item of citizenLeaders'>
           <img class="avatar avatar--60 mb-2" appDefaultImage [type]="'user'" [src]="item?.profilePicture?.url" />
           <p class="text-18 m-0">{{item?.firstName}}</p>
-          <p class="blue-text">{{item?.points}} Points</p>
-
+          <p class="blue-text m-0">{{item?.points}} Points</p>
         </div>
       </div>
       <!-- leaders-list-mobile -->

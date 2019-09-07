@@ -16,7 +16,7 @@
         </div>
         <div class="profile-details">
           <p class="profile-details__name">
-            {{currentUser?.firstName}}
+            {{currentUser?.firstName + ' ' + currentUser?.lastName}}
           </p>
           <p class="profile-details__active">
               Citizen Leader since {{currentUser?.createdAt | date}}

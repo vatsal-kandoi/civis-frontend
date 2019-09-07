@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length">
+  <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
     <div class="d-flex justify-content-between">
       <p class="text-16 m-0 bold-text">Public responses</p>
       <p 
@@ -47,7 +47,7 @@
       </p>
     </div>
     <ng-container *ngFor="let response of responseList">
-      <div class="response-container" #responsesListContainer>
+      <div class="response-container">
         <div class="d-inline-flex align-items-center">
           <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="response?.node?.user?.profilePicture?.url" />
           <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>

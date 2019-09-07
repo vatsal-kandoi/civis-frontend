@@ -328,7 +328,7 @@ export class ReadRespondComponent implements OnInit {
 
   scrollToResponses() {
     window.scrollTo({
-      top: this.responsesListContainer.nativeElement.offsetTop,
+      top: this.responsesListContainer.nativeElement.getBoundingClientRect().top - 80,
       behavior: 'smooth',
     });
   }

@@ -107,7 +107,9 @@ export class ConsultationListComponent implements OnInit {
       perPage: this.perPageLimit,
       page: 1,
       statusFilter: status,
-      featuredFilter: false 
+      featuredFilter: false,
+      sort: 'response_deadline',
+      sortDirection: 'desc',
     };
     return this.apollo.watchQuery({query: ConsultationList, variables});
   }

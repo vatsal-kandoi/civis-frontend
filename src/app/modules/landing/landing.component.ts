@@ -42,6 +42,8 @@ constructor( private apollo: Apollo ) { }
       perPage: null,
       page: null,
       statusFilter: status,
+      sort: 'response_deadline',
+      sortDirection: 'desc',
       featuredFilter: status === 'published' ? true : false,
     };
     this.apollo.query({

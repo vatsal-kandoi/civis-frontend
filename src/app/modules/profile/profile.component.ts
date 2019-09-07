@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   showSettings = false;
   showAchievement = true;
   showConsultation = false;
+  openUploader: boolean;
 
   constructor(private userService: UserService, private apollo: Apollo) { }
 
@@ -86,6 +87,10 @@ export class ProfileComponent implements OnInit {
         this.userService.getCurrentUser();
       });
     }
+  }
+
+  changeDp(event) {
+    console.log(event);
   }
 
   getTotalPoints(responses) {

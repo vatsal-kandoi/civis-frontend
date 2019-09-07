@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
-         window.scrollTo(0, 0)
+         window.scrollTo(0, 0);
       }
     });
     this.checkCityPresent();

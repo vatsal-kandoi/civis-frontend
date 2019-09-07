@@ -82,7 +82,7 @@ export class CreateConsultationComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeToSearch();
-    this.applyTheme();
+    this.configDatePicker();
   }
 
   getCateoriesList() {
@@ -253,8 +253,8 @@ addMinistry(valid) {
     }
   }
 
-  applyTheme() {
-    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme, dateInputFormat: 'DD / MM / YYYY' });
+  configDatePicker() {
+    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme, dateInputFormat: 'DD / MM / YYYY', showWeekNumbers : false });
   }
 
 }

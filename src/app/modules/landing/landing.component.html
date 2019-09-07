@@ -17,7 +17,7 @@
         <div class="card-carousel">
           <p class="card-carousel__carouse-title">IN FOCUS</p>
           <div @slideInRight>
-            <app-consultation-card *ngIf='coverCardData?.length' [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
+            <app-consultation-card *ngIf='coverCardData?.length && coverCardData[current_card_index]' [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
           </div>
           <div class="card-carousel__carousel-indicators">
             <span 
@@ -80,19 +80,20 @@
     <div class="citizen-leader-section">
       <p class="section-heading">CITIZEN LEADERS ON CIVIS</p>
       <div class="leaders-list">
-        <div class="leader-profile" *ngFor='let item of [1,2,3,4,5,6]'>
-          <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60 mb-2" />
-          <p class="text-18 m-0">Sameer Agarwal</p>
+        <div class="leader-profile" *ngFor='let item of citizenLeaders'>
+          <img class="avatar avatar--60 mb-2" appDefaultImage [type]="'user'" [src]="item?.profilePicture?.url" />
+          <p class="text-18 m-0">{{item?.firstName}}</p>
+          <p class="blue-text m-0">{{item?.points}} Points</p>
         </div>
       </div>
       <!-- leaders-list-mobile -->
       <div class="mb-3">
-        <div class="leaders-list-row" *ngFor='let item of [1,2,3,4,5,6]'>
-          <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--42" />
+        <div class="leaders-list-row" *ngFor='let item of citizenLeaders'>
+          <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="item?.profilePicture?.url" />
           <div class="leader-detail">
-            <p class="leader-name">Sameer Agarwal</p>
+            <p class="leader-name">{{item?.firstName}}</p>
             <p class="leader-stats">
-              <span class="bold-text mr-1">370</span> Points <span class="seprator-dot"></span> Super Leader
+              <span class="bold-text mr-1">{{item?.points}}</span> Points <span class="seprator-dot"></span> {{item?.points > 500 ? 'SuperLeader' : 'ActiveLeader'}}
             </p>
           </div>
         </div>

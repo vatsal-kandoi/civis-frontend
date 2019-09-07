@@ -12,15 +12,28 @@
         <p class="regular-text m-0">{{profile?.ministry?.name}}</p>
       </div>
       <div *ngIf="!summaryData">
-        <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
-          <p class="days-remaining m-0">{{getRemainigDays(profile?.responseDeadline)}}</p>
-          <a  [href]="createCalendarEvent()" class="icon-circle" target="_blank">
-            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-          </a>
+        <div *ngIf="!profile?.respondedOn">
+          <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
+            <p class="days-remaining m-0">{{getRemainigDays(profile?.responseDeadline)}}</p>
+            <a  [href]="createCalendarEvent()" class="icon-circle" target="_blank">
+              <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+            </a>
+          </div>
+          <button  class="btn-submit mt-3 mb-3" [ngClass]="enableSubmitResponse ? 'active' : ''" (click)='stepNext(profile?.respondedOn)'>
+            SUBMIT RESPONSE
+          </button>
         </div>
-        <button class="btn-submit mt-3 mb-3" [ngClass]="enableSubmitResponse ? 'active' : ''" (click)='stepNext(profile?.respondedOn)'>
-          {{profile?.respondedOn ? 'RESPONSE SUBMITTED' : 'SUBMIT RESPONSE'}}
-        </button>
+        <div *ngIf="profile?.respondedOn" class="response-submitted-block">
+          <div>
+            <span class="success-text mr-1"><i class="fa fa-check"></i></span>
+          </div>
+          <div>
+            <p class="mb-1 success-text">
+              RESPONSE SUBMITTED
+            </p>
+            <p class="success-date m-0">{{convertDateFormat(profile?.respondedOn)}}</p>
+          </div>
+        </div>
         <div class="share-block">
           <div class="share-block__position">
             <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">

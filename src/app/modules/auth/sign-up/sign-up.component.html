@@ -71,7 +71,7 @@
                 <ng-select id="locations" #city="ngModel" name="city" [loading]="loadingCities"
                 [items]="cities" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
                 bindValue="id" [notFoundText]="dropdownText" [clearable]="true" loadingText="Searching..."
-                (search)="onSearch($event)" [(ngModel)]="signupObject.cityId" placeholder="Mumbai" required>
+                (search)="onSearch($event)" (open)="loadCities()" [(ngModel)]="signupObject.cityId" placeholder="Mumbai" required>
                 </ng-select>  
               </div>
               <div *ngIf="city.invalid && (city.touched || signupForm.submitted)" class="error-msg">Location is Required</div>

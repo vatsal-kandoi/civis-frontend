@@ -76,7 +76,8 @@ export class ProfileCardComponent implements OnInit {
       startDate = new Date(startDate).toISOString();
       let endDate: any  = new Date(this.profile.responseDeadline).setHours(23, 59, 59);
       endDate = new Date(endDate).toISOString();
-      const calendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=${this.profile.title}` +
+      const calendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=` +
+      `Civis consultation response deadline- ${this.profile.title}` +
       `&dates=${startDate.split('-').join('').split(':').join('').split('.000').join('')}/` +
       `${endDate.split('-').join('').split(':').join('').split('.000').join('')}` +
       `&details=&sf=true&output=xml`;

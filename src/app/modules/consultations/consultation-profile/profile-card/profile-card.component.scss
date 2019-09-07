@@ -60,6 +60,27 @@
       border-radius: 22px;
     }
 
+    .response-submitted-block {
+      display: flex;
+      margin: 20px 0;
+      .success-text {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.105em;
+        text-transform: uppercase;
+        color: #3AC52E;
+      }
+
+      .success-date {
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.035em;
+        color: #929292;
+      }
+    }
+
     .share-block {
       position: relative;
 

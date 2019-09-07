@@ -11,12 +11,12 @@
       </div>
 
       <div class="profile-info">
-        <div class="upload-pic">
+        <div class="upload-pic" (click)="openUploader = false">
           <i class="fa fa-camera" aria-hidden="true"></i>
         </div>
         <div class="profile-details">
           <p class="profile-details__name">
-            {{currentUser?.firstName}}
+            {{currentUser?.firstName + ' ' + currentUser?.lastName}}
           </p>
           <p class="profile-details__active">
               Citizen Leader since {{currentUser?.createdAt | date}}
@@ -299,7 +299,8 @@
               <div class="cancel-btn" (click)="closeModal()">
                 <button class="btn btn-transparent cancel-btn">
                     Cancel
-                </button></div>
+                </button>
+              </div>
             </form>
             
           </div>
@@ -308,3 +309,5 @@
     </div>
     </div>
   </div>
+
+  <app-img-uploader *ngIf="openUploader" [config]="{}" (upload)="changeDp($event); openUploader = false"></app-img-uploader>

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
-import { ConsultationProfileCurrentUser, ConsultationProfile, SubmitResponseQuery, VoteCreateQuery } from '../consultation-profile.graphql';
+import { ConsultationProfileCurrentUser, ConsultationProfile, SubmitResponseQuery, VoteCreateQuery, VoteDeleteQuery } from '../consultation-profile.graphql';
 import { Apollo } from 'apollo-angular';
 import { map, filter } from 'rxjs/operators';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
@@ -19,6 +19,7 @@ export class ReadRespondComponent implements OnInit {
 
   @ViewChild('feedbackModal', { static: false }) feedbackModal: ModalDirective;
   @ViewChild('responseIndex', { read: ElementRef , static: false }) panel: ElementRef<any>;
+  @ViewChild('responsesListContainer', { read: ElementRef , static: false }) responsesListContainer: ElementRef<any>;
 
   profileData: any;
   responseList: any;
@@ -26,11 +27,13 @@ export class ReadRespondComponent implements OnInit {
   satisfactionRatingDistribution: any;
   responseFeedback: any;
   responseText = '';
-  responseVisibility = true;
+  responseVisibility = false;
   step: number;
   currentUser: any;
   responseType = '';
   templateId = null;
+  responseSubmitted: boolean;
+  responseSubmitLoading: boolean;
 
 
   constructor(
@@ -129,6 +132,7 @@ export class ReadRespondComponent implements OnInit {
   }
 
   submitResponse(consultationResponse) {
+    this.responseSubmitLoading = true;
     this.apollo.mutate({
       mutation: SubmitResponseQuery,
       variables: {
@@ -148,53 +152,98 @@ export class ReadRespondComponent implements OnInit {
       map((res: any) => res.data.consultationResponseCreate)
     )
     .subscribe((response) => {
-      this.closeFeedbackModal();
+      this.responseSubmitted = true;
+      this.responseSubmitLoading = false;
+      this.consultationService.enableSubmitResponse.next(false);
     }, err => {
+      this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);
     });
   }
 
   vote(direction, response) {
-    if (!response.votedAs && this.currentUser) {
-        const vote = {
-          consultationResponseVote: {
-            consultationResponseId: response.id,
-            voteDirection: direction
-          }
-        };
-        this.apollo.mutate({
-          mutation: VoteCreateQuery,
-          variables: vote,
-          update: (store, {data: res}) => {
-            const variables = {id: this.consultationId};
-            const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
-            if (res) {
-              for (const value of resp['consultationProfile'].sharedResponses.edges) {
-                if (value.node.id ===  response['id']) {
-                  if (value.node[res.voteCreate.voteDirection + 'VoteCount']) {
-                    value.node[res.voteCreate.voteDirection + 'VoteCount'] += 1;
-                  } else {
-                    value.node[res.voteCreate.voteDirection + 'VoteCount'] = 1;
-                  }
-                  value.node.votedAs = res.voteCreate;
-                  break;
+    if (response.votedAs) {
+      if (response.votedAs.voteDirection === direction) {
+        this.undoVote(response, direction);
+      } else {
+        this.undoVote(response, direction, true);
+      }
+    } else {
+      this.createVote(response, direction);
+    }
+  }
+
+  undoVote(response, direction, createVote?) {
+    if (response.id) {
+      this.apollo.mutate({
+        mutation: VoteDeleteQuery,
+        variables: {
+          consultationResponseId: response.id
+        },
+        update: (store, {data: res}) => {
+          const variables = {id: this.consultationId};
+          const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
+          if (res) {
+            for (const value of resp['consultationProfile'].sharedResponses.edges) {
+              if (value.node.id ===  response['id']) {
+                if (response.votedAs) {
+                  value.node[response.votedAs.voteDirection + 'VoteCount'] -= 1;
                 }
+                value.node.votedAs = null;
+                break;
               }
             }
-            store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
           }
-        })
-        .subscribe((data) => {
-          console.log(data);
-        }, err => {
-          this.errorService.showErrorModal(err);
-        });
+          store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
+        }
+      })
+      .subscribe((res) => {
+        if (createVote) {
+          this.createVote(response, direction);
+        }
+      }, err => {
+        this.errorService.showErrorModal(err);
+      });
     }
+  }
 
+  createVote(response, direction) {
+    const vote = {
+      consultationResponseVote: {
+        consultationResponseId: response.id,
+        voteDirection: direction
+      }
+    };
+    this.apollo.mutate({
+      mutation: VoteCreateQuery,
+      variables: vote,
+      update: (store, {data: res}) => {
+        const variables = {id: this.consultationId};
+        const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
+        if (res) {
+          for (const value of resp['consultationProfile'].sharedResponses.edges) {
+            if (value.node.id ===  response['id']) {
+              if (value.node[res.voteCreate.voteDirection + 'VoteCount']) {
+                value.node[res.voteCreate.voteDirection + 'VoteCount'] += 1;
+              } else {
+                value.node[res.voteCreate.voteDirection + 'VoteCount'] = 1;
+              }
+              value.node.votedAs = res.voteCreate;
+              break;
+            }
+          }
+        }
+        store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
+      }
+    })
+    .subscribe((data) => {
+    }, err => {
+      this.errorService.showErrorModal(err);
+    });
   }
 
   choose(value) {
-    if (!this.responseFeedback) {
+    if (!this.responseFeedback && !this.responseSubmitted) {
       this.responseFeedback = value;
     }
   }
@@ -230,14 +279,17 @@ export class ReadRespondComponent implements OnInit {
   }
 
   getPercentageValue(rating, selectedKey) {
-    let total = 0;
-    for (const key in rating) {
-      if (rating[key]) {
-        total += rating[key];
+    if (this.responseSubmitted) {
+      let total = 0;
+      for (const key in rating) {
+        if (rating[key]) {
+          total += rating[key];
+        }
       }
+      const selectedPercentage = (rating[selectedKey] / total) * 100;
+      return selectedPercentage;
     }
-    const selectedPercentage = (rating[selectedKey] / total) * 100;
-    return selectedPercentage;
+    return 0;
   }
 
   showCreateResponse() {
@@ -274,7 +326,17 @@ export class ReadRespondComponent implements OnInit {
     });
   }
 
+  scrollToResponses() {
+    window.scrollTo({
+      top: this.responsesListContainer.nativeElement.getBoundingClientRect().top - 80,
+      behavior: 'smooth',
+    });
+  }
+
   useThisResponse(response) {
+    if (this.profileData.respondedOn) {
+      return;
+    }
     if (response) {
       this.responseText = response.responseText;
       this.templateId = response.id;

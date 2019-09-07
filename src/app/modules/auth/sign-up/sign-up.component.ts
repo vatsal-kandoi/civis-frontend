@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { SignUpMutation, CitiesSearchQuery } from './sign-up.graphql';
+import { SignUpMutation, CitiesSearchQuery, LocationListQuery } from './sign-up.graphql';
 import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from 'rxjs/operators';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
@@ -145,6 +145,23 @@ export class SignUpComponent implements OnInit {
         this.captchaRef.execute();
       }
     }
+  }
+
+  loadCities() {
+    this.loadingCities = true;
+    this.apollo.query({
+      query: LocationListQuery
+    })
+    .pipe(
+      map((res: any) => res.data.locationList)
+    )
+    .subscribe((cities) => {
+      this.loadingCities = false;
+      this.cities = cities;
+    }, err => {
+      this.loadingCities = false;
+      this.errorService.showErrorModal(err);
+    });
   }
 
   captchaResolved(event) {

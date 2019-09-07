@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { slideInRight } from '../../shared/animations/slide';
 import { fadeIn } from '../../shared/animations/fade';
 import { ConsultationList } from '../consultations/consultation-list/consultation-list.graphql';
-import { ConsultationResponseList, ImpactStats } from './landing.graphql'; 
+import { ConsultationResponseList, ImpactStats, LeaderListQuery } from './landing.graphql'; 
 
 @Component({
   selector: 'app-landing',
@@ -23,6 +23,7 @@ export class LandingComponent implements OnInit {
   currentReponseData: any;
   activeTab = 'sumbit-response';
   impactStats: any;
+  citizenLeaders: any;
   
 
 constructor( private apollo: Apollo ) { }
@@ -32,6 +33,7 @@ constructor( private apollo: Apollo ) { }
     this.getLatestResponse();
     this.rotateFeature();
     this.getImpactStats();
+    this.getCiitizenLeaders();
   }
   
   getConsultationCard() {
@@ -77,6 +79,23 @@ constructor( private apollo: Apollo ) { }
     .subscribe((stats: any) => {
       this.impactStats = stats.data.impactStats;
     })
+  }
+
+  getCiitizenLeaders() {
+    this.apollo.query({
+      query: LeaderListQuery,
+      variables: {
+        roleFilter: 'citizen',
+        sort: 'points',
+        sortDirection: 'desc'
+      }
+    })
+    .pipe (
+      map((res: any) => res.data.userList.data)
+    )
+    .subscribe ((citizens) => {
+      this.citizenLeaders = citizens.length ? citizens.slice(0, 6) : null;
+    });
   }
 
   rotateFeature() {

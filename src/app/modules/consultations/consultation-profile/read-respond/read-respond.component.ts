@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {Title} from '@angular/platform-browser';
 import * as moment from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationProfileCurrentUser, ConsultationProfile, SubmitResponseQuery, VoteCreateQuery, VoteDeleteQuery } from '../consultation-profile.graphql';
@@ -43,6 +44,7 @@ export class ReadRespondComponent implements OnInit {
     private apollo: Apollo,
     private errorService: ErrorService,
     private consultationService: ConsultationsService,
+    private title: Title,
   ) {
     this.consultationService.consultationId$
     .pipe(
@@ -59,6 +61,10 @@ export class ReadRespondComponent implements OnInit {
     this.scrollToCreateResponse();
   }
 
+  public setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
+
   getConsultationProfile() {
     const query = ConsultationProfileCurrentUser;
     this.apollo.watchQuery({
@@ -73,9 +79,59 @@ export class ReadRespondComponent implements OnInit {
         this.profileData = data;
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
         this.responseList = data.sharedResponses.edges;
+        this.createMetaTags(this.profileData);
     }, err => {
       this.errorService.showErrorModal(err);
     });
+  }
+
+  createMetaTags(consultationProfile) {
+    const title = consultationProfile.title ? consultationProfile.title : '' ;
+    const image = (consultationProfile['mininstry'] ?
+     (consultationProfile['mininstry']['coverPhoto'] ? consultationProfile['mininstry']['coverPhoto']['url'] : '') : '');
+    const description = consultationProfile['summary'].length < 140 ?
+                        consultationProfile['summary'] : consultationProfile['summary'].slice(0, 140);
+    this.deleteMetaTags();
+    this.setTitle(title);
+    const smTags = [].concat(this.makeTwitterTags(description, title))
+        .concat(this.makeFacebookTags(image, description, title));
+
+    const head = document.getElementsByTagName('head')[0];
+    for (const item of smTags) {
+      head.appendChild(item);
+    }
+  }
+
+  makeTwitterTags(description, title) {
+    const tags = [];
+    tags.push(this.createElement('meta', 'twitter:title', title));
+    tags.push(this.createElement('meta', 'twitter:description', description));
+    return tags;
+  }
+
+  makeFacebookTags(image, description, title) {
+    const tags = [];
+    tags.push(this.createElement('meta', 'og:title', title));
+    tags.push(this.createElement('meta', 'og:url', window.location.href));
+    tags.push(this.createElement('meta', 'og:type', 'website'));
+    tags.push(this.createElement('meta', 'og:image', image));
+    tags.push(this.createElement('meta', 'og:description', description));
+    return tags;
+  }
+
+  deleteMetaTags() {
+    const meta = document.querySelectorAll('meta');
+    console.log(meta);
+    for (let i = 2; i < meta.length; i++) {
+    meta[i].remove();
+    }
+  }
+
+  createElement(el, attr, value) {
+    const element = document.createElement(el);
+    element.setAttribute('name', attr);
+    element.setAttribute('content', value);
+    return element;
   }
 
   openFeedbackModal() {

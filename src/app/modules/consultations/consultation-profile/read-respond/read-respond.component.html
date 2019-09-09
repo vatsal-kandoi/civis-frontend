@@ -156,14 +156,17 @@
               </div>
               <div class="footer-space__right">
                 <button  class="app-btn secondary mt-xs" *ngIf="responseSubmitted" (click)="closeFeedbackModal()">
-                  <p class="m-0">Ok Great</p>
+                  <p class="m-0">
+                    <span class="submit-logo"><img src="assets/images/Vector.png" /></span>
+                    Ok Great
+                  </p>
                   <i class="fa fa-angle-right"></i>
                 </button>
                 <span class="mr-2" *ngIf="responseSubmitLoading">
                     <img src="assets/images/loading.svg">
                 </span>
                 <button class="app-btn secondary" *ngIf="!responseSubmitted" (click)="createResponse()">
-                  <p class="m-0">Select and submit</p>
+                  <p class="m-0"><span class="submit-logo"><img src="assets/images/Vector.png" /></span>Select and submit</p>
                   <i class="fa fa-angle-right"></i>
                 </button>
               </div>

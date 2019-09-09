@@ -1,5 +1,10 @@
 @import './src/assets/styles/app';
 
+.footer-bg {
+  width: 100%;
+   background-color: $white;
+}
+
 .footer-wrapper {
   width: 90%;
   margin: 0 auto;

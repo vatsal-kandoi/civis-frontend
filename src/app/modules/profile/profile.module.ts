@@ -5,6 +5,7 @@ import { ProfileRoutingModule } from './profile.routing.module';
 import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ImageUploaderModule } from 'src/app/shared/components/image-uploader/image-uploader.module';
+import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import { ImageUploaderModule } from 'src/app/shared/components/image-uploader/im
         ProfileRoutingModule,
         ModalModule,
         FormsModule,
-        ImageUploaderModule
+        ImageUploaderModule,
+        SharedComponentsModule
     ],
     exports: [],
     declarations: [ProfileComponent],

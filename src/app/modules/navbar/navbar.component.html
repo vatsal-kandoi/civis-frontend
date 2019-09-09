@@ -16,11 +16,11 @@
 
     <div class="app-navbar__center-item" *ngIf="currentUrl === 'consultations-profile'">
       <div class="profile-tab-wrapper">
-        <a class="profile-tab active-tab px-3" (click)="routeToConsultation('read')">
+        <a class="profile-tab px-3" [ngClass]="activeTab === 'read & respond' ? 'active-tab' : ''" (click)="routeToConsultation('read')">
           <p>Read & Respond</p>
           <p>Submit your feedback</p>
         </a>
-        <a class="profile-tab px-3" (click)="routeToConsultation('discuss')">
+        <a class="profile-tab px-3" [ngClass]="activeTab === 'discuss & engage' ? 'active-tab' : ''" (click)="routeToConsultation('discuss')">
           <p>Discuss & Engage</p>
           <p>Talk to the community</p>
         </a>
@@ -60,8 +60,8 @@
         <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">Log In / Sign Up</button>
       </div>
       <div class="nav-btns profile-item pointer" *ngIf="currentUser" (click)="showProfilePopup()">
-        <img class="avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url"/>
-        <span [ngClass]="(currentUrl == 'landing') && (transparentNav === false) ? 'clr-white' : 'clr-black'"><i
+        <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url"/>
+        <span [ngClass]="currentUrl == 'landing' ? 'clr-white' : 'clr-black'"><i
             class="fa fa-angle-down ml-2"></i></span>
 
         <div class="profile-popup" *ngIf="profilePopup">

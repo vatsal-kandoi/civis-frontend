@@ -91,7 +91,8 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <p class="heading">Here’re the overall satisfation levels for this draft from people</p>
+            <p class="heading" *ngIf="!responseSubmitted">How satisfied are you with this draft?</p>
+            <p class="heading" *ngIf="responseSubmitted">Here’re the overall satisfation levels for this draft from people</p>
           </div>
           <div class="modal-body">
             <label class="radio-block">
@@ -150,7 +151,7 @@
             </label>
             <div class="footer-space" [ngClass]="responseSubmitted ? 'justify-content-between' : 'justify-content-end'">
               <div class="footer-space__left" *ngIf="responseSubmitted">
-                <div class="points-text">You get 50 points for submitting this!</div>
+                <div class="points-text">{{'You get ' + earnedPoints + ' points for submitting this!'}}</div>
                 <div class="link">View Leaderboard</div>
               </div>
               <div class="footer-space__right">

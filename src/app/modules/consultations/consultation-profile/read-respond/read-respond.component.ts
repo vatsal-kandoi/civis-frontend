@@ -35,6 +35,7 @@ export class ReadRespondComponent implements OnInit {
   templateId = null;
   responseSubmitted: boolean;
   responseSubmitLoading: boolean;
+  earnedPoints: any;
 
 
   constructor(
@@ -210,6 +211,7 @@ export class ReadRespondComponent implements OnInit {
     .subscribe((response) => {
       this.responseSubmitted = true;
       this.responseSubmitLoading = false;
+      this.earnedPoints = response.points;
       this.consultationService.enableSubmitResponse.next(false);
     }, err => {
       this.responseSubmitLoading = false;

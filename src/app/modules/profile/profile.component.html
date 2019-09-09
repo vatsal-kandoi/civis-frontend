@@ -11,8 +11,15 @@
       </div>
 
       <div class="profile-info">
-        <div class="upload-pic" (click)="openUploader = false">
-          <i class="fa fa-camera" aria-hidden="true"></i>
+        <div class="upload-pic" (click)="openUploader = true">
+          <i class="fa fa-camera" *ngIf="!currentUser?.profilePicture?.url" aria-hidden="true"></i>
+          <div *ngIf="currentUser?.profilePicture?.url">
+              <img 
+              [src]="currentUser?.profilePicture?.url" 
+              class="avatar avatar--42 profile-pic"
+              alt="profile Picture"
+            />
+          </div>   
         </div>
         <div class="profile-details">
           <p class="profile-details__name">
@@ -214,7 +221,7 @@
                 You’ve not participated in any public consultations yet
             </div>
             <div class="consultations-cta">
-              <button class="btn-transpaent btn-oval">Start participating</button>
+              <button class="btn-transpaent btn-oval" [routerLink]="['consultations/list']">Start participating</button>
             </div>
         </div>
     

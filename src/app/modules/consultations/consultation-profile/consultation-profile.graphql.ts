@@ -124,6 +124,7 @@ export const SubmitResponseQuery = gql`
   mutation consultationResponseCreate($consultationResponse: ConsultationResponseCreateInput!){
     consultationResponseCreate(consultationResponse: $consultationResponse){
       id
+      points
       user {
         firstName
       }

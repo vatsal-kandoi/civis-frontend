@@ -53,7 +53,7 @@
             <img class="avatar avatar--60" appDefaultImage [type]="'user'" [src]="currentReponseData?.user?.profilePicture?.url" />
             <p class="bold-text mt-1 mb-1">{{currentReponseData?.user?.firstName}}</p>
           </div>
-          <p class="response-title bold-text">National Urban Policy Framework, 2018</p>
+          <p class="response-title bold-text">{{currentReponseData?.consultation?.title}}</p>
           <p class="response-content italic truncate">{{currentReponseData?.responseText}}</p>
         </div>
         <div class="carousel-indicator">

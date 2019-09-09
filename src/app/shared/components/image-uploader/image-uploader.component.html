@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-header">
           <div class="title">Upload Image</div>
-          <div (click)="hideModal()">X</div>
+          <div (click)="closeModal()">X</div>
       </div>
       <div class="modal-body pt-0">
         <ngx-img (onSelect)="base64 = $event" (onReset)="base64 = $event" [config]="_options"></ngx-img>
@@ -19,7 +19,7 @@
           </div>
           <div class="col-12 text-center">
             <div class="cancel-btn">
-              <button class="btn btn-transparent cancel-btn" (click)="hideModal()">
+              <button class="btn btn-transparent cancel-btn" (click)="closeModal()">
                   Cancel
               </button>
             </div>

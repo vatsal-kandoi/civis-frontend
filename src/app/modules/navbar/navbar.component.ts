@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
       description: 'Talk to the community'
     },
   ];
+  activeTab: string;
   constructor(
     private router: Router,
     private userService: UserService,
@@ -79,6 +80,12 @@ export class NavbarComponent implements OnInit {
       }
       if (url.search('summary') !== -1) {
         return 'consultations-summary';
+      }
+      if (url.search('read') !== -1) {
+        this.activeTab = 'read & respond';
+      }
+      if (url.search('discuss') !== -1) {
+        this.activeTab = 'discuss & engage';
       }
 
       return 'consultations-profile';

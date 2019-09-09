@@ -34,9 +34,13 @@ export class ImageUploaderComponent implements OnChanges {
     this.hideModal();
   }
 
+  closeModal() {
+    this.upload.emit(false);
+    this.hideModal();
+  }
+
   hideModal() {
     this.showModal = false;
-    this.upload.emit(false);
     this.imgUploadModal.hide();
   }
 

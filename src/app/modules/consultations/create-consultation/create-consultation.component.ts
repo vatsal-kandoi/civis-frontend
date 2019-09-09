@@ -102,6 +102,27 @@ export class CreateConsultationComponent implements OnInit {
     });
   }
 
+  getMinistriesList() {
+    this.loadingMinistries = true;
+    this.apollo.query({
+      query: MinistryAutocompleteQuery,
+      variables: {
+        q: name
+      }
+    })
+    .pipe(
+      map((i: any) => i.data.ministryAutocomplete),
+      tap(() => this.loadingMinistries = false)
+    )
+    .subscribe ((list) => {
+      this.loadingMinistries = false;
+      this.ministries = list;
+    }, (err: any) => {
+     this.loadingMinistries = false;
+     this.errorService.showErrorModal(err);
+    });
+  }
+
   subscribeToSearch() {
     this.searchEmitter
       .pipe(
@@ -126,7 +147,10 @@ export class CreateConsultationComponent implements OnInit {
         } else {
           this.showAddMinistryBlock = false;
         }
-      }, (err: any) => this.loadingMinistries = false);
+      }, (err: any) => {
+        this.loadingMinistries = false;
+        this.errorService.showErrorModal(err);
+      });
   }
 
   checkMinistryExist(ministries) {

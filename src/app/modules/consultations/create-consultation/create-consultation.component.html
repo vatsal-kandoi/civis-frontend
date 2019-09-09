@@ -79,7 +79,7 @@
                   <ng-select id="ministry" #ministry="ngModel" name="ministry" [loading]="loadingMinistries"
                   [items]="ministries" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
                   bindValue="id" [notFoundText]="dropdownText" [clearable]="true" loadingText="Searching..."
-                  (search)="onSearch($event)" placeholder="Select"  [(ngModel)]="departmentInfo.ministryId" required> 
+                  (search)="onSearch($event)" placeholder="Select" (open)="getMinistriesList()" [(ngModel)]="departmentInfo.ministryId" required> 
                   </ng-select>  
               </div>    
               <div *ngIf="ministry.invalid && (ministry.touched || consultationForm2.submitted)" class="error-msg">

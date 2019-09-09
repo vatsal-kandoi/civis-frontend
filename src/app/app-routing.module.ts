@@ -10,7 +10,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: './modules/landing/landing.module#LandingModule',
-    canActivate: [LandingGuard]
   },
 
   {

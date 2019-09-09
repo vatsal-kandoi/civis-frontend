@@ -1,12 +1,13 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { SignUpMutation, CitiesSearchQuery } from './sign-up.graphql';
+import { SignUpMutation, CitiesSearchQuery, LocationListQuery } from './sign-up.graphql';
 import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from 'rxjs/operators';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,6 +16,8 @@ import { GraphqlService } from 'src/app/graphql/graphql.service';
 })
 export class SignUpComponent implements OnInit {
 
+  @ViewChild('signupForm', {static: false}) signupForm: NgForm;
+  @ViewChild('captchaRef', {static: false}) captchaRef;
   signupObject = {
     firstName: '',
     lastName: '',
@@ -29,6 +32,8 @@ export class SignUpComponent implements OnInit {
   loadingCities: boolean;
   cities: any;
   dropdownText = 'Begin Typing';
+  reCAPTCHA_KEY: string;
+  isCaptchaResolved: boolean;
 
 
   constructor(private apollo: Apollo,
@@ -37,7 +42,9 @@ export class SignUpComponent implements OnInit {
               private userService: UserService,
               private router: Router,
               private graphqlService: GraphqlService,
-              ) { }
+              ) {
+  this.reCAPTCHA_KEY = this.graphqlService.environment.RECAPTCHA_SITE_KEY;
+  }
 
   ngOnInit() {
     this.subscribeToSearch();
@@ -89,8 +96,8 @@ export class SignUpComponent implements OnInit {
   }
 
 
-  submit(isValid: boolean) {
-    if (!isValid) {
+  submit() {
+    if (!this.signupForm.valid || !this.isCaptchaResolved) {
       return;
     } else {
       const signupObject = {...this.signupObject};
@@ -127,6 +134,41 @@ export class SignUpComponent implements OnInit {
       case 'facebook':
         window.location.href = `${this.graphqlService.environment.api}/signin_facebook`;
         break;
+    }
+  }
+
+  checkForCaptcha() {
+    if (this.isCaptchaResolved) {
+      this.submit();
+    } else {
+      if (!this.captchaRef.executeRequested) {
+        this.captchaRef.execute();
+      }
+    }
+  }
+
+  loadCities() {
+    this.loadingCities = true;
+    this.apollo.query({
+      query: LocationListQuery
+    })
+    .pipe(
+      map((res: any) => res.data.locationList)
+    )
+    .subscribe((cities) => {
+      this.loadingCities = false;
+      this.cities = cities;
+    }, err => {
+      this.loadingCities = false;
+      this.errorService.showErrorModal(err);
+    });
+  }
+
+  captchaResolved(event) {
+    console.log('event is: ', event);
+    this.isCaptchaResolved = true;
+    if (this.signupForm.valid) {
+      this.submit();
     }
   }
 

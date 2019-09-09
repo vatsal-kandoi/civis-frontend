@@ -10,7 +10,7 @@
   }
 
   &__quote-section {
-    padding: 0 65px 30px;
+    padding: 0 65px 30px 45px;
     max-width: 900px;
     @media screen and (max-width: 991px) {
       max-width: 100%;
@@ -23,6 +23,10 @@
       line-height: 54px;
       font-family: Playfair Display;
       margin-bottom: 10px;
+      @media screen and (max-width: 991px) {
+        font-size: 28px;
+        line-height: 32px;
+      }
     }
 
     .quote-subtitle {
@@ -36,8 +40,11 @@
       font-size: 24px;
       color: #000;
       margin-bottom: 2rem;
+      line-height: 36px;
+      letter-spacing: 0.03em;
       @media screen and (max-width: 991px) {
         font-size: 18px;
+        line-height: 28px;
       }
     }
   }
@@ -53,14 +60,18 @@
     .content-detail {
       font-size: 18px;
       color: #000;
+      line-height: 27px;
+      letter-spacing: 0.03em;      
       @media screen and (max-width: 991px) {
        font-size: 14px;
+       line-height: 22px;
       }
     }
   }
 
   &__people-section {
     padding: 30px 65px;
+    background-color: rgba(255, 255, 255, 0.6);
     @media screen and (max-width: 991px) {
       padding: 30px;
     }

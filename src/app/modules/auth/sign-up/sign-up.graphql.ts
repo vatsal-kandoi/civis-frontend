@@ -18,6 +18,16 @@ export const CitiesSearchQuery = gql`
 	}
 `;
 
+export const LocationListQuery = gql`
+	query locationList {
+		locationList{
+			name
+			 id
+			 locationType
+		 }
+	}
+`;
+
 
 
 

@@ -78,8 +78,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px 0;
+        padding: 15px;
         border-bottom: 1px solid #BFE4FF;
+        transition: all .2s linear;
+        &:hover {
+          background-color: #BFE4FF;
+          box-shadow: 0px 0px 3px #A0D4F8;
+        }
         @media screen and (max-width: 991px) {
           display: none;
         }
@@ -210,35 +215,39 @@
     }
 
     .participated-section {
-
-      .paticipant-title {
-        font-size: 12px;
-        font-weight: 500;
-        color: #6DB4E4;
-        margin-bottom: 15px;
-      }
-      .paticipant-list {
-        display: grid;
-        grid-template-columns: 40px 1fr;
-        grid-column-gap: 20px;
-        padding: 10px 0;
-        .list-detail {
-          p:nth-child(1) {
-            font-size: 15px;
-            font-weight: 600;
-            color: $black;
-            margin: 0;
-          }
-          p:nth-child(2) {
-            font-size: 11px;
-            color: $black;
-            margin: 0;
+      .participation-list-container {
+        min-height: 55vh;
+        max-height: 55vh;
+        overflow: auto;
+        .paticipant-title {
+          font-size: 12px;
+          font-weight: 500;
+          color: #6DB4E4;
+          margin-bottom: 15px;
+        }
+        .paticipant-list {
+          display: grid;
+          grid-template-columns: 40px 1fr;
+          grid-column-gap: 20px;
+          padding: 10px 0;
+          .list-detail {
+            p:nth-child(1) {
+              font-size: 15px;
+              font-weight: 600;
+              color: $black;
+              margin: 0;
+            }
+            p:nth-child(2) {
+              font-size: 11px;
+              color: $black;
+              margin: 0;
+            }
           }
         }
-      }
-      .paticipant-divider {
-        border-bottom: .5px solid #BFE4FF;
-        margin: 0 0 0 60px;
+        .paticipant-divider {
+          border-bottom: .5px solid #BFE4FF;
+          margin: 0 0 0 60px;
+        }
       }
     }
 

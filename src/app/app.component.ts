@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { UserService } from './shared/services/user.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -6,20 +9,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'civis';
 
+  title = 'civis';
+  showCitySelection: boolean;
+  
   constructor(
+    private userService: UserService,
+    private router: Router
   ) {
+
 
   }
 
   ngOnInit() {
-    this.setDisqus();
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+         window.scrollTo(0, 0);
+      }
+    });
+    this.checkCityPresent();
   }
 
 
-  setDisqus() {
-
+  checkCityPresent() {
+    this.userService.forceCitySelection$
+    .pipe(
+      filter((data) => data !== null)
+    )
+    .subscribe(res => {
+      if (res) {
+        this.showCitySelection = true;
+      }
+    });
   }
 
 }

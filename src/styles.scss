@@ -1,15 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/styles/app";
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~@ngx-share/button/themes/default/default-theme';
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans:400,500,600,700&display=swap');
 
 * {
-  font-family: 'Encode Sans', sans-serif;;
-
   &::selection {
     background-color: $primary-color;
     color: #FFF;
   }
 }
+
 
 *::-webkit-scrollbar:horizontal {
   height: 3px;
@@ -25,10 +26,17 @@
   -moz-border-radius: 80px;
   border-radius: 80px;
 }
+
 *:focus {
   outline: 0 !important;
   box-shadow: none !important;
 }
+
+input:focus {
+  border: 1px solid #A4D0EF !important;
+  box-shadow: 0px 0px 5px #A0D4F8 !important;
+}
+
 *button:focus {
   outline: 0 !important;
   box-shadow: none !important;
@@ -38,4 +46,5 @@ body {
   height: 100vh;
   font-size: 14px;
   margin: 0;
+  font-family: 'Encode Sans', sans-serif;;
 }

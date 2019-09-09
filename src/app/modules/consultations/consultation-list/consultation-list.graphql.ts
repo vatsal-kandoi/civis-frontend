@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const ConsultationList = gql`
-  query consultationList($perPage: Int, $page: Int, $statusFilter: String, $featuredFilter: Boolean) {
-    consultationList(perPage: $perPage, page: $page, statusFilter: $statusFilter, featuredFilter: $featuredFilter) {
+  query consultationList($perPage: Int, $page: Int, $statusFilter: String, $featuredFilter: Boolean, $sort: ConsultationSorts, $sortDirection: SortDirections ) {
+    consultationList(perPage: $perPage, page: $page, statusFilter: $statusFilter, featuredFilter: $featuredFilter, sort: $sort, sortDirection: $sortDirection) {
       data {
         id
         title
@@ -13,7 +13,7 @@ export const ConsultationList = gql`
         ministry {
           id
           name
-          coverPhoto {
+          coverPhoto (resolution: "350X285>") {
             id
             url
           }

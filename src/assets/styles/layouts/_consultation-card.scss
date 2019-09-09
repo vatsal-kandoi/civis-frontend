@@ -62,4 +62,15 @@
       }
     }
   }
+
+  .btn-respond {
+    display: flex;
+    align-items: center;
+    padding: 6px 15px;
+    .btn-right-arrow {
+      margin-left: 15px;
+      font-size: 20px;
+      line-height: 14px;
+    }
+  }
 }

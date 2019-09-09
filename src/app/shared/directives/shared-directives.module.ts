@@ -5,6 +5,7 @@ import {LimitToDirective} from './limit-to.directive';
 import {SearchInputDirective} from './search-input.directive';
 import { InfiniteScrollDirective } from './infinite-scroll.directive';
 import { LazyLoadDirective } from './lazy-load.directive';
+import { DefaultImageDirective } from './default-image.directive';
 
 
 @NgModule({
@@ -12,13 +13,15 @@ import { LazyLoadDirective } from './lazy-load.directive';
     LimitToDirective,
     SearchInputDirective,
     InfiniteScrollDirective,
-    LazyLoadDirective
+    LazyLoadDirective,
+    DefaultImageDirective,
   ],
   exports: [
     LimitToDirective,
     SearchInputDirective,
     InfiniteScrollDirective,
-    LazyLoadDirective
+    LazyLoadDirective,
+    DefaultImageDirective,
   ],
   imports: [
     CommonModule

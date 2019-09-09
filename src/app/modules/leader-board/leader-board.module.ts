@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LeaderBoardComponent } from './leader-board.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directives.module';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
     NgSelectModule,
     RouterModule.forChild(routes),
     ModalModule,
-    FormsModule
+    FormsModule,
+    SharedDirectivesModule,
   ]
 })
 

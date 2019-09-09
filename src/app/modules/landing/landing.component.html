@@ -8,7 +8,7 @@
           feedback from us, the citizens, to finalise them. What are we waiting for?
         </p>
         <div class="d-flex align-items-center mt-4 cover-btn-section">
-          <button class="app-btn secondary circular participate-btn" [routerLink]="['consultations/list']">Start participating</button>
+          <button class="app-btn secondary circular participate-btn" [routerLink]="['/consultations', 'list']">Start participating</button>
           <p class="civis-works-link pointer" [routerLink]="['/how-civis-works']">How Civis Works</p>
         </div>
         
@@ -17,7 +17,7 @@
         <div class="card-carousel">
           <p class="card-carousel__carouse-title">IN FOCUS</p>
           <div @slideInRight>
-            <app-consultation-card *ngIf='coverCardData?.length' [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
+            <app-consultation-card *ngIf='coverCardData?.length && coverCardData[current_card_index]' [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
           </div>
           <div class="card-carousel__carousel-indicators">
             <span 
@@ -50,10 +50,10 @@
         <div class="carousel-arrow-left pointer" (click)='previousSlide()'><i class="fa fa-angle-left"></i></div>
         <div @slideInRight class="carousel-inner-container">
           <div class="carousel-header">
-            <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60" />
-            <p class="bold-text m-0">{{currentReponseData?.user?.firstName}}</p>
+            <img class="avatar avatar--60" appDefaultImage [type]="'user'" [src]="currentReponseData?.user?.profilePicture?.url" />
+            <p class="bold-text mt-1 mb-1">{{currentReponseData?.user?.firstName}}</p>
           </div>
-          <p class="response-title bold-text">National Urban Policy Framework, 2018</p>
+          <p class="response-title bold-text">{{currentReponseData?.consultation?.title}}</p>
           <p class="response-content italic truncate">{{currentReponseData?.responseText}}</p>
         </div>
         <div class="carousel-indicator">
@@ -80,40 +80,46 @@
     <div class="citizen-leader-section">
       <p class="section-heading">CITIZEN LEADERS ON CIVIS</p>
       <div class="leaders-list">
-        <div class="leader-profile" *ngFor='let item of [1,2,3,4,5,6]'>
-          <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--60 mb-2" />
-          <p class="text-18 m-0">Sameer Agarwal</p>
+        <div class="leader-profile" *ngFor='let item of citizenLeaders'>
+          <img class="avatar avatar--60 mb-2" appDefaultImage [type]="'user'" [src]="item?.profilePicture?.url" />
+          <p class="text-18 m-0">{{item?.firstName}}</p>
+          <p class="blue-text m-0">{{item?.points}} Points</p>
         </div>
       </div>
       <!-- leaders-list-mobile -->
       <div class="mb-3">
-        <div class="leaders-list-row" *ngFor='let item of [1,2,3,4,5,6]'>
-          <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1"  class="avatar avatar--42" />
+        <div class="leaders-list-row" *ngFor='let item of citizenLeaders'>
+          <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="item?.profilePicture?.url" />
           <div class="leader-detail">
-            <p class="leader-name">Sameer Agarwal</p>
+            <p class="leader-name">{{item?.firstName}}</p>
             <p class="leader-stats">
-              <span class="bold-text mr-1">370</span> Points <span class="seprator-dot"></span> Super Leader
+              <span class="bold-text mr-1">{{item?.points}}</span> Points <span class="seprator-dot"></span> {{item?.points > 500 ? 'SuperLeader' : 'ActiveLeader'}}
             </p>
           </div>
         </div>
       </div>
-      <button class="app-btn circular blue-light">View leaderboard</button>
+      <button [routerLink]="['/leader-board']" class="app-btn circular blue-light landing-btn">
+        View Leaderboard
+        <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
+      </button>
     </div>
 
     <div class="civis-work-section">
       <p class="section-heading">HOW CIVIS WORKS</p>
       <div class="d-flex justify-content-center mt-5">
         <button 
-          class="app-btn circular" 
+          class="app-btn circular landing-btn" 
           [ngClass]="activeTab == 'sumbit-response' ? 'primary' : 'blue-light'"
           (click)="submitResponse('sumbit-response')">
-          Submit Response
+          Submit a Response
+          <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
         </button>
         <button 
-          class="app-btn circular ml-4"
+          class="app-btn circular ml-4 landing-btn"
           [ngClass]="activeTab == 'add-consultation' ? 'primary' : 'blue-light'" 
           (click)="addConsultation('add-consultation')">
           Add a Consultation
+          <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
         </button>
       </div>
     </div>
@@ -124,15 +130,15 @@
         <p class="section-heading">IMPACT SO FAR</p>
       <div class="count-grid">
         <div class="count-item">
-          <p>Consultations created on Civis</p>
+          <p>Consultations Created on Civis</p>
           <p>{{numberWithCommas(impactStats?.consultation_count + 33)}}</p>
         </div>
         <div class="count-item">
-          <p>Total no. of responses</p>
+          <p>Total Number of Responses</p>
           <p>{{numberWithCommas(impactStats?.consultation_response_count + 3083)}}</p>
         </div>
         <div class="count-item">
-          <p>Total no. of citizens engaged</p>
+          <p>Total Number of Citizens Engaged</p>
           <p>{{numberWithCommas(impactStats?.consultation_response_distinct_users + 3057)}}</p>
         </div>
       </div>

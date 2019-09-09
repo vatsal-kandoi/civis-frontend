@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {Title} from '@angular/platform-browser';
 import * as moment from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
-import { ConsultationProfileCurrentUser, ConsultationProfile, SubmitResponseQuery, VoteCreateQuery } from '../consultation-profile.graphql';
+import { ConsultationProfileCurrentUser, ConsultationProfile, SubmitResponseQuery, VoteCreateQuery, VoteDeleteQuery } from '../consultation-profile.graphql';
 import { Apollo } from 'apollo-angular';
 import { map, filter } from 'rxjs/operators';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
@@ -19,6 +20,7 @@ export class ReadRespondComponent implements OnInit {
 
   @ViewChild('feedbackModal', { static: false }) feedbackModal: ModalDirective;
   @ViewChild('responseIndex', { read: ElementRef , static: false }) panel: ElementRef<any>;
+  @ViewChild('responsesListContainer', { read: ElementRef , static: false }) responsesListContainer: ElementRef<any>;
 
   profileData: any;
   responseList: any;
@@ -26,11 +28,14 @@ export class ReadRespondComponent implements OnInit {
   satisfactionRatingDistribution: any;
   responseFeedback: any;
   responseText = '';
-  responseVisibility = true;
+  responseVisibility = false;
   step: number;
   currentUser: any;
   responseType = '';
   templateId = null;
+  responseSubmitted: boolean;
+  responseSubmitLoading: boolean;
+  earnedPoints: any;
 
 
   constructor(
@@ -40,6 +45,7 @@ export class ReadRespondComponent implements OnInit {
     private apollo: Apollo,
     private errorService: ErrorService,
     private consultationService: ConsultationsService,
+    private title: Title,
   ) {
     this.consultationService.consultationId$
     .pipe(
@@ -53,6 +59,16 @@ export class ReadRespondComponent implements OnInit {
   ngOnInit() {
     this.getCurrentUser();
     this.createSatisfactionRating();
+    this.scrollToCreateResponse();
+    this.setActiveTab();
+  }
+
+  public setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
+
+  setActiveTab() {
+    this.consultationService.activeTab.next('read & respond');
   }
 
   getConsultationProfile() {
@@ -69,9 +85,59 @@ export class ReadRespondComponent implements OnInit {
         this.profileData = data;
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
         this.responseList = data.sharedResponses.edges;
+        this.createMetaTags(this.profileData);
     }, err => {
       this.errorService.showErrorModal(err);
     });
+  }
+
+  createMetaTags(consultationProfile) {
+    const title = consultationProfile.title ? consultationProfile.title : '' ;
+    const image = (consultationProfile['mininstry'] ?
+     (consultationProfile['mininstry']['coverPhoto'] ? consultationProfile['mininstry']['coverPhoto']['url'] : '') : '');
+    const description = consultationProfile['summary'].length < 140 ?
+                        consultationProfile['summary'] : consultationProfile['summary'].slice(0, 140);
+    this.deleteMetaTags();
+    this.setTitle(title);
+    const smTags = [].concat(this.makeTwitterTags(description, title))
+        .concat(this.makeFacebookTags(image, description, title));
+
+    const head = document.getElementsByTagName('head')[0];
+    for (const item of smTags) {
+      head.appendChild(item);
+    }
+  }
+
+  makeTwitterTags(description, title) {
+    const tags = [];
+    tags.push(this.createElement('meta', 'twitter:title', title));
+    tags.push(this.createElement('meta', 'twitter:description', description));
+    return tags;
+  }
+
+  makeFacebookTags(image, description, title) {
+    const tags = [];
+    tags.push(this.createElement('meta', 'og:title', title));
+    tags.push(this.createElement('meta', 'og:url', window.location.href));
+    tags.push(this.createElement('meta', 'og:type', 'website'));
+    tags.push(this.createElement('meta', 'og:image', image));
+    tags.push(this.createElement('meta', 'og:description', description));
+    return tags;
+  }
+
+  deleteMetaTags() {
+    const meta = document.querySelectorAll('meta');
+    console.log(meta);
+    for (let i = 2; i < meta.length; i++) {
+    meta[i].remove();
+    }
+  }
+
+  createElement(el, attr, value) {
+    const element = document.createElement(el);
+    element.setAttribute('name', attr);
+    element.setAttribute('content', value);
+    return element;
   }
 
   openFeedbackModal() {
@@ -128,6 +194,7 @@ export class ReadRespondComponent implements OnInit {
   }
 
   submitResponse(consultationResponse) {
+    this.responseSubmitLoading = true;
     this.apollo.mutate({
       mutation: SubmitResponseQuery,
       variables: {
@@ -147,53 +214,99 @@ export class ReadRespondComponent implements OnInit {
       map((res: any) => res.data.consultationResponseCreate)
     )
     .subscribe((response) => {
-      this.closeFeedbackModal();
+      this.responseSubmitted = true;
+      this.responseSubmitLoading = false;
+      this.earnedPoints = response.points;
+      this.consultationService.enableSubmitResponse.next(false);
     }, err => {
+      this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);
     });
   }
 
   vote(direction, response) {
-    if (!response.votedAs && this.currentUser) {
-        const vote = {
-          consultationResponseVote: {
-            consultationResponseId: response.id,
-            voteDirection: direction
-          }
-        };
-        this.apollo.mutate({
-          mutation: VoteCreateQuery,
-          variables: vote,
-          update: (store, {data: res}) => {
-            const variables = {id: this.consultationId};
-            const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
-            if (res) {
-              for (const value of resp['consultationProfile'].sharedResponses.edges) {
-                if (value.node.id ===  response['id']) {
-                  if (value.node[res.voteCreate.voteDirection + 'VoteCount']) {
-                    value.node[res.voteCreate.voteDirection + 'VoteCount'] += 1;
-                  } else {
-                    value.node[res.voteCreate.voteDirection + 'VoteCount'] = 1;
-                  }
-                  value.node.votedAs = res.voteCreate;
-                  break;
+    if (response.votedAs) {
+      if (response.votedAs.voteDirection === direction) {
+        this.undoVote(response, direction);
+      } else {
+        this.undoVote(response, direction, true);
+      }
+    } else {
+      this.createVote(response, direction);
+    }
+  }
+
+  undoVote(response, direction, createVote?) {
+    if (response.id) {
+      this.apollo.mutate({
+        mutation: VoteDeleteQuery,
+        variables: {
+          consultationResponseId: response.id
+        },
+        update: (store, {data: res}) => {
+          const variables = {id: this.consultationId};
+          const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
+          if (res) {
+            for (const value of resp['consultationProfile'].sharedResponses.edges) {
+              if (value.node.id ===  response['id']) {
+                if (response.votedAs) {
+                  value.node[response.votedAs.voteDirection + 'VoteCount'] -= 1;
                 }
+                value.node.votedAs = null;
+                break;
               }
             }
-            store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
           }
-        })
-        .subscribe((data) => {
-          console.log(data);
-        }, err => {
-          this.errorService.showErrorModal(err);
-        });
+          store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
+        }
+      })
+      .subscribe((res) => {
+        if (createVote) {
+          this.createVote(response, direction);
+        }
+      }, err => {
+        this.errorService.showErrorModal(err);
+      });
     }
+  }
 
+  createVote(response, direction) {
+    const vote = {
+      consultationResponseVote: {
+        consultationResponseId: response.id,
+        voteDirection: direction
+      }
+    };
+    this.apollo.mutate({
+      mutation: VoteCreateQuery,
+      variables: vote,
+      update: (store, {data: res}) => {
+        const variables = {id: this.consultationId};
+        const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
+        if (res) {
+          for (const value of resp['consultationProfile'].sharedResponses.edges) {
+            if (value.node.id ===  response['id']) {
+              if (value.node[res.voteCreate.voteDirection + 'VoteCount']) {
+                value.node[res.voteCreate.voteDirection + 'VoteCount'] += 1;
+              } else {
+                value.node[res.voteCreate.voteDirection + 'VoteCount'] = 1;
+              }
+              value.node.votedAs = res.voteCreate;
+              break;
+            }
+          }
+        }
+        store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
+      }
+    })
+    .subscribe((data) => {
+    }, err => {
+      this.errorService.showErrorModal(err);
+    });
   }
 
   choose(value) {
-    if (!this.responseFeedback) {
+    if (!this.responseFeedback && !this.responseSubmitted) {
       this.responseFeedback = value;
     }
   }
@@ -229,38 +342,64 @@ export class ReadRespondComponent implements OnInit {
   }
 
   getPercentageValue(rating, selectedKey) {
-    let total = 0;
-    for (const key in rating) {
-      if (rating[key]) {
-        total += rating[key];
+    if (this.responseSubmitted) {
+      let total = 0;
+      for (const key in rating) {
+        if (rating[key]) {
+          total += rating[key];
+        }
       }
+      const selectedPercentage = (rating[selectedKey] / total) * 100;
+      return selectedPercentage;
     }
-    const selectedPercentage = (rating[selectedKey] / total) * 100;
-    return selectedPercentage;
+    return 0;
   }
 
   showCreateResponse() {
-    if ((this.checkExpired(this.profileData ? this.profileData.responseDeadline : null) === 'Expired')
+    if ((this.checkClosed(this.profileData ? this.profileData.responseDeadline : null) === 'Closed')
         || !this.currentUser || (this.profileData && this.profileData.respondedOn)) {
         return false;
     }
     return true;
   }
 
-  checkExpired(deadline) {
+  checkClosed(deadline) {
     if (deadline) {
       const today = moment();
       const lastDate = moment(deadline);
       const difference = lastDate.diff(today, 'days');
       if (difference <= 0) {
-        return 'Expired';
+        return 'Closed';
       } else {
         return `Active`;
       }
     }
   }
 
+  scrollToCreateResponse() {
+    this.consultationService.scrollToCreateResponse
+    .subscribe((scrollTo) => {
+      if (scrollTo) {
+        window.scrollTo({
+          top: this.panel.nativeElement.offsetTop,
+          behavior: 'smooth',
+        });
+        this.consultationService.scrollToCreateResponse.next(false);
+      }
+    });
+  }
+
+  scrollToResponses() {
+    window.scrollTo({
+      top: this.responsesListContainer.nativeElement.getBoundingClientRect().top - 80,
+      behavior: 'smooth',
+    });
+  }
+
   useThisResponse(response) {
+    if (this.profileData.respondedOn) {
+      return;
+    }
     if (response) {
       this.responseText = response.responseText;
       this.templateId = response.id;

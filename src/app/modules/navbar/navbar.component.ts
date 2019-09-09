@@ -1,18 +1,21 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, ViewEncapsulation, ElementRef } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { ConsultationList } from './navbar.graphql';
+import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit {
 
   @ViewChild('menuModal', { static: false }) menuModal;
+  @ViewChild('userProfileElement', { static: false }) userProfileElement: ElementRef;
   showNav = true;
   currentUrl: any;
   currentUser: any;
@@ -21,11 +24,27 @@ export class NavbarComponent implements OnInit {
   transparentNav = false;
   activeCount: any;
 
+  menuObject = {
+    name: 'Read & Respond'
+  };
+
+  menus = [
+    {
+      name: 'Read & Respond',
+      description: 'Submit your feedback'
+    },
+    {
+      name: 'Discuss & Engage',
+      description: 'Talk to the community'
+    },
+  ];
+  activeTab: string;
   constructor(
     private router: Router,
     private userService: UserService,
     private apollo: Apollo,
     private route: ActivatedRoute,
+    private consultationService: ConsultationsService,
     ) { }
 
   ngOnInit() {
@@ -36,7 +55,7 @@ export class NavbarComponent implements OnInit {
     });
     this.getCurrentUser();
     this.getActiveConsulationCount();
-    console.log('navbar ac route: ', this.router);
+    this.getActiveTab();
   }
 
   openMenu() {
@@ -65,6 +84,9 @@ export class NavbarComponent implements OnInit {
       if (url.search('summary') !== -1) {
         return 'consultations-summary';
       }
+      if (url.search('response') !== -1) {
+        return 'consultations-response';
+      }
 
       return 'consultations-profile';
     }
@@ -82,10 +104,29 @@ export class NavbarComponent implements OnInit {
       });
   }
 
+  getActiveTab() {
+    this.consultationService.activeTab
+    .subscribe((tab) => {
+      if (tab) {
+        this.activeTab = tab;
+      }
+    });
+  }
+
   showProfilePopup() {
     this.profilePopup = !this.profilePopup;
   }
 
+  getLogoUrl() {
+    if (screen && screen.width <= 991) {
+      if (this.currentUrl === 'consultations-profile') {
+        return 'assets/images/mobile-logo.svg';
+      }
+      return 'assets/images/navlogo.png';
+    } else {
+      return 'assets/images/navlogo.png';
+    }
+  }
 
   logout(event) {
     event.stopPropagation();
@@ -103,6 +144,17 @@ export class NavbarComponent implements OnInit {
       this.transparentNav = false;
     } else if (number > 150) {
       this.transparentNav = true;
+    }
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  onClick(targetElement) {
+    if (this.profilePopup) {
+      if (this.userProfileElement.nativeElement.contains(targetElement)) {
+            return;
+      } else {
+        this.profilePopup = false;
+      }
     }
   }
 
@@ -127,4 +179,17 @@ export class NavbarComponent implements OnInit {
       this.router.navigateByUrl(`/consultations/${consulationId}/${subRoute}`);
     }
   }
+
+  changeMenu(event) {
+      switch (event.name) {
+        case 'Read & Respond':
+            this.routeToConsultation('read');
+          break;
+        case 'Discuss & Engage':
+            this.routeToConsultation('discuss');
+          break;
+        default:
+          break;
+      }
+    }
 }

@@ -1,7 +1,7 @@
 <section class="read-response-container" #responseIndex>
   <div class="paper-effect">
     <p class="heading">Summary</p>
-    <p class="summary-content">{{profileData?.summary}}</p>
+    <p class="summary-content" [innerHTML]="profileData?.summary"></p>
   </div>
 
   <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()"> 
@@ -10,7 +10,7 @@
         <div class="heading">Your response</div>
       </div>
       <div class="w-50 row no-gutters justify-content-end align-items-center">
-        <div class="link mr-3">or, select a public response</div>
+        <div (click)="scrollToResponses()" class="link mr-3">or, select a public response</div>
         <div class="info-mark"><i class="fa fa-question-circle"></i></div>
       </div>
     </div>
@@ -32,31 +32,46 @@
     </div>
   </div>
 
-  <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length">
+  <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
     <div class="d-flex justify-content-between">
-      <p class="text-18 text-16-sm m-0 bold-text">Public responses</p>
-      <a href="javascript:void(0)" class="what-resp-text">What are public responses?</a>
+      <p class="text-16 m-0 bold-text">Public responses</p>
+      <p 
+        class="what-resp-text" 
+        tooltip="If you feel passionately about this Consultation, you can make your response public, 
+        for others to use as a template. Your first name is shared with the Government if you make your response public.
+        If you’re not sure what to write, you can choose other people’s responses to send as your own." 
+        placement="left"
+        container="body"
+        >
+          What are public responses?
+      </p>
     </div>
     <ng-container *ngFor="let response of responseList">
       <div class="response-container">
         <div class="d-inline-flex align-items-center">
-          <img class="avatar avatar--42" src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" />
+          <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="response?.node?.user?.profilePicture?.url" />
           <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
         </div>
         <p class="text-16">{{response.node.responseText}}</p>
-        <div class="vote-section">
+        <div class="vote-section" *ngIf="currentUser">
           <div class="vote-count">
             <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">
-                <span (click)="vote('up', response?.node)" [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
+                <span (click)="vote('up', response?.node)"
+                  tooltip="{{'upvote'}}"
+                 [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
                 <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
             </div>
             <div [ngClass]="response?.node.votedAs?.voteDirection === 'down'  ? 'active' : ''">
-                <span (click)="vote('down', response?.node)" class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
+                <span (click)="vote('down', response?.node)" 
+                tooltip="{{'downvote'}}"
+                class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
                 <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
             </div>
-            <div *ngIf="response.node?.templatesCount">
-                <span class="ml-4 mr-2"><i class="fa fa-refresh"></i></span>
-                <span>{{response.node?.templatesCount}}</span>
+            <div>
+                <span (click)="useThisResponse(response?.node)" 
+                tooltip="{{'use this response'}}"
+                class="ml-4 mr-2"><i class="fa fa-refresh"></i></span>
+                <span>{{response.node?.templatesCount ? response.node?.templatesCount : '' }}</span>
             </div>
           </div>
           <div>
@@ -76,70 +91,84 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <p class="heading">Here’re the overall satisfation levels for this draft from people</p>
+            <p class="heading" *ngIf="!responseSubmitted">How satisfied are you with this draft?</p>
+            <p class="heading" *ngIf="responseSubmitted">Here’re the overall satisfation levels for this draft from people</p>
           </div>
           <div class="modal-body">
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseFeedback === 'dissatisfied'">Dissatisfied</div>
-                <div class="mx-2 count-text" *ngIf="responseFeedback">{{satisfactionRatingDistribution?.dissatisfied ?
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'dissatisfied'">Dissatisfied</div>
+                <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.dissatisfied ?
                   satisfactionRatingDistribution?.dissatisfied : 0}}</div>
-                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseFeedback === 'dissatisfied'"
+                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'dissatisfied'"
                   [ngStyle]="{'width': satisfactionRatingDistribution?.dissatisfied ? getPercentageValue(satisfactionRatingDistribution, 'dissatisfied') + '%' : '0%' }"></div>
               </div>
               <div class="input-space">
                 <input type="radio" class="cm-radio ml-3" name="feedback" value="dissatisfied" [(ngModel)]="responseFeedback"
-                  (ngModelChange)="choose($event)" [disabled]="(responseFeedback && responseFeedback !== 'dissatisfied')">
+                  (ngModelChange)="choose($event)" [disabled]="(responseSubmitted && responseFeedback && responseFeedback !== 'dissatisfied')">
               </div>
             </label>
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseFeedback === 'somewhat_dissatisfied'">Somewhat
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'somewhat_dissatisfied'">Somewhat
                   Dissatisfied</div>
-                <div class="mx-2 count-text" *ngIf="responseFeedback">{{satisfactionRatingDistribution?.somewhat_dissatisfied
+                <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.somewhat_dissatisfied
                   ? satisfactionRatingDistribution?.somewhat_dissatisfied : 0}}</div>
-                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseFeedback === 'somewhat_dissatisfied'"
+                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'somewhat_dissatisfied'"
                   [ngStyle]="{'width': satisfactionRatingDistribution?.somewhat_dissatisfied ? getPercentageValue(satisfactionRatingDistribution, 'somewhat_dissatisfied') + '%' : '0%' }"></div>
               </div>
               <div class="input-space">
                 <input type="radio" class="cm-radio ml-3" name="feedback" value="somewhat_dissatisfied" [(ngModel)]="responseFeedback"
-                  (ngModelChange)="choose($event)" [disabled]="(responseFeedback && responseFeedback !== 'somewhat_dissatisfied')">
+                  (ngModelChange)="choose($event)" [disabled]="(responseSubmitted && responseFeedback && responseFeedback !== 'somewhat_dissatisfied')">
               </div>
             </label>
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseFeedback === 'somewhat_satisfied'">Somewhat
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'somewhat_satisfied'">Somewhat
                   Satisfied</div>
-                <div class="mx-2 count-text" *ngIf="responseFeedback">{{satisfactionRatingDistribution?.somewhat_satisfied
+                <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.somewhat_satisfied
                   ? satisfactionRatingDistribution?.somewhat_satisfied : 0}}</div>
-                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseFeedback === 'somewhat_satisfied'"
+                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'somewhat_satisfied'"
                   [ngStyle]="{'width': satisfactionRatingDistribution?.somewhat_satisfied ? getPercentageValue(satisfactionRatingDistribution, 'somewhat_satisfied') + '%' : '0%' }"></div>
               </div>
               <div class="input-space">
                 <input type="radio" class="cm-radio ml-3" name="feedback" value="somewhat_satisfied" [(ngModel)]="responseFeedback"
-                  (ngModelChange)="choose($event)" [disabled]="(responseFeedback && responseFeedback !== 'somewhat_satisfied')">
+                  (ngModelChange)="choose($event)" [disabled]="(responseSubmitted && responseFeedback && responseFeedback !== 'somewhat_satisfied')">
               </div>
             </label>
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseFeedback === 'satisfied'">Satisfied</div>
-                <div class="mx-2 count-text" *ngIf="responseFeedback">{{satisfactionRatingDistribution?.satisfied ?
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'satisfied'">Satisfied</div>
+                <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.satisfied ?
                   satisfactionRatingDistribution?.satisfied : 0}}</div>
-                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseFeedback === 'satisfied'"
+                <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'satisfied'"
                   [ngStyle]="{'width': satisfactionRatingDistribution?.satisfied ? getPercentageValue(satisfactionRatingDistribution, 'satisfied') + '%' : '0%' }"></div>
               </div>
               <div class="input-space">
                 <input type="radio" class="cm-radio ml-3" name="feedback" value="satisfied" [(ngModel)]="responseFeedback"
-                  (ngModelChange)="choose($event)" [disabled]="(responseFeedback && responseFeedback !== 'satisfied')">
+                  (ngModelChange)="choose($event)" [disabled]="(responseSubmitted && responseFeedback && responseFeedback !== 'satisfied')">
               </div>
             </label>
-            <div class="footer-space">
-              <div class="footer-space__left">
-                <div class="points-text">You get 50 points for submitting this!</div>
+            <div class="footer-space" [ngClass]="responseSubmitted ? 'justify-content-between' : 'justify-content-end'">
+              <div class="footer-space__left" *ngIf="responseSubmitted">
+                <div class="points-text">{{'You get ' + earnedPoints + ' points for submitting this!'}}</div>
                 <div class="link">View Leaderboard</div>
               </div>
               <div class="footer-space__right">
-                <button (click)="createResponse()">Ok Great</button>
+                <button  class="app-btn secondary mt-xs" *ngIf="responseSubmitted" (click)="closeFeedbackModal()">
+                  <p class="m-0">
+                    <span class="submit-logo"><img src="assets/images/Vector.png" /></span>
+                    Ok Great
+                  </p>
+                  <i class="fa fa-angle-right"></i>
+                </button>
+                <span class="mr-2" *ngIf="responseSubmitLoading">
+                    <img src="assets/images/loading.svg">
+                </span>
+                <button class="app-btn secondary" *ngIf="!responseSubmitted" (click)="createResponse()">
+                  <p class="m-0"><span class="submit-logo"><img src="assets/images/Vector.png" /></span>Select and submit</p>
+                  <i class="fa fa-angle-right"></i>
+                </button>
               </div>
             </div>
           </div>

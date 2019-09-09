@@ -43,7 +43,9 @@ export class ResponseComponent implements OnInit {
    }
 
    convertDateFormat(date) {
-    return moment(date).format('Do MMM YY');
+     if (date) {
+      return moment(date).format('Do MMM YY');
+     }
   }
 
   ngOnInit() {

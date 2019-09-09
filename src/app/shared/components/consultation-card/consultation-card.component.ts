@@ -9,18 +9,21 @@ import * as moment from 'moment';
 export class ConsultationCardComponent implements OnInit {
   @Input() consultation: any;
   @Input() type: string;
-  
+
   constructor() { }
 
   ngOnInit() {
   }
-  
+
   getRemainigDays(deadline) {
-    let today = moment();
-    let lastDate = moment(deadline);
-    let difference = lastDate.diff(today, 'days');
+    if (this.consultation.status === 'expired') {
+      return 'Closed';
+    }
+    const today = moment();
+    const lastDate = moment(deadline);
+    const difference = lastDate.diff(today, 'days');
     if (difference <= 0) {
-      return 'Expired'
+      return difference === 0 ? 'Last day to respond' : 'Closed';
     } else {
       return `${difference} Days Remaining`;
     }

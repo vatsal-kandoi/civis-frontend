@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   showSettings = false;
   showAchievement = true;
   showConsultation = false;
+  openUploader: boolean;
 
   constructor(private userService: UserService, private apollo: Apollo) { }
 
@@ -54,7 +55,7 @@ export class ProfileComponent implements OnInit {
           bestRank = `#${rank} in ${this.currentUser.city.parent.name.toUppercase()}`;
           break;
         case 'national':
-          bestRank = `#${rank} in INDIA}`;
+          bestRank = `#${rank} in INDIA`;
           break;
         default:
           break;
@@ -76,15 +77,31 @@ export class ProfileComponent implements OnInit {
   updateUser(userForm) {
     console.log(userForm);
     if (userForm.valid) {
-      this.apollo.mutate({
-        mutation: CurrentUserUpdate,
-        variables : {
-          user : userForm.value
+      this.update(userForm.value);
+    }
+  }
+
+  update(value) {
+    this.apollo.mutate({
+      mutation: CurrentUserUpdate,
+      variables : {
+        user : value
+      }
+    }).subscribe ((res) => {
+      this.closeModal();
+      this.userService.getCurrentUser();
+    });
+  }
+
+  changeDp(event) {
+    if (event) {
+      const file = {
+        profilePictureFile : {
+          filename: 'profile.png',
+          content: event
         }
-      }).subscribe ((res) => {
-        this.closeModal();
-        this.userService.getCurrentUser();
-      });
+      };
+      this.update(file);
     }
   }
 

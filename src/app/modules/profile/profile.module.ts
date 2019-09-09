@@ -4,13 +4,17 @@ import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile.routing.module';
 import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { ImageUploaderModule } from 'src/app/shared/components/image-uploader/image-uploader.module';
+import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 
 @NgModule({
     imports: [
         CommonModule,
         ProfileRoutingModule,
         ModalModule,
-        FormsModule
+        FormsModule,
+        ImageUploaderModule,
+        SharedComponentsModule
     ],
     exports: [],
     declarations: [ProfileComponent],

@@ -21,14 +21,8 @@
         <div class="row-left-item">
           <p class="row-num"># {{i + 1}}</p>
           <img 
-            *ngIf="item?.profilePicture"
-            [src]="item?.profilePicture.url" 
-            class="avatar avatar--56 profile-pic"
-            alt="profile Picture"
-          />
-          <img 
-            *ngIf="!item?.profilePicture"
-            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
+            appDefaultImage [type]="'user'"
+            [src]="item?.profilePicture?.url" 
             class="avatar avatar--56 profile-pic"
             alt="profile Picture"
           />
@@ -41,17 +35,11 @@
       <div class="container-body__data-row-xs" *ngFor="let item of userListData?.data; let i = index" (click)="openLeaderModal(item)">
         <p class="row-num"># {{i + 1}}</p>
         <img 
-          *ngIf="item?.profilePicture"
-          [src]="item?.profilePicture.url" 
-          class="avatar avatar--42 profile-pic"
-          alt="profile Picture"
-        />
-        <img 
-          *ngIf="!item?.profilePicture"
-          src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-          class="avatar avatar--42 profile-pic"
-          alt="profile Picture"
-        />
+            appDefaultImage [type]="'user'"
+            [src]="item?.profilePicture?.url" 
+            class="avatar avatar--42 profile-pic"
+            alt="profile Picture"
+          />
         <div class="leader-detail">
           <p>{{item?.firstName}}</p>
           <p><span class="bold-text">{{item?.points}}</span> Points</p>
@@ -60,6 +48,7 @@
     </section>
   </div>
 </div>
+<app-footer></app-footer>
 
 <!-- leader modal -->
 <div 
@@ -73,14 +62,9 @@
       <div class="modal-header">
         <div class="leader-profile">
           <img 
-            *ngIf="leaderData?.profilePicture"
-            [src]="leaderData?.profilePicture?.url" 
-            class="avatar avatar--80"
-          />
-          <img 
-            *ngIf="!leaderData?.profilePicture"
-            src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            class="avatar avatar--80"
+          appDefaultImage [type]="'user'"
+          [src]="leaderData?.profilePicture?.url" 
+          class="avatar avatar--80"
           />
           <p class="profile-name">{{leaderData?.firstName}}</p>
         </div>
@@ -95,11 +79,13 @@
           </div>
           <div class="detail-item">
             <p>RANK IN MUMBAI</p>
-            <p>{{leaderData?.cityRank}}</p>
+            <p *ngIf="leaderData?.cityRank">{{leaderData?.cityRank}}</p>
+            <p *ngIf="!leaderData?.cityRank">N/A</p>
           </div>
           <div class="detail-item">
             <p>RANK IN MAHARASHTRA</p>
-            <p>{{leaderData?.stateRank}}</p>
+            <p *ngIf="leaderData?.stateRank">{{leaderData?.stateRank}}</p>
+            <p *ngIf="!leaderData?.stateRank">N/A</p>
           </div>
           <div class="detail-item">
             <p>BEST SO FAR</p>
@@ -109,28 +95,18 @@
 
         <div class="participated-section">
           <p class="paticipant-title">Consultations participated in</p>
-          <div class="paticipant-list">
-            <img 
-              class="avatar avatar--42" 
-              src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            />
-            <div class="list-detail">
-              <p>National Urban Policy Framework</p>
-              <p>Ministry of Housing and Urban Planning</p>
+          <div class="participation-list-container">
+            <div *ngFor="let item of leaderData?.sharedResponses?.edges">
+              <div class="paticipant-list">
+                <img [src]="item?.node?.consultation?.ministry?.logo?.url"  class="avatar avatar--42" />
+                <div class="list-detail">
+                  <p>{{item?.node?.consultation?.title}}</p>
+                  <p>{{item?.node?.consultation?.ministry?.name}}</p>
+                </div>
+              </div>
+              <hr  class="paticipant-divider" />
             </div>
           </div>
-          <hr  class="paticipant-divider" />
-          <div class="paticipant-list">
-            <img 
-              class="avatar avatar--42" 
-              src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            />
-            <div class="list-detail">
-              <p>National Urban Policy Framework</p>
-              <p>Ministry of Housing and Urban Planning</p>
-            </div>
-          </div>
-          <hr  class="paticipant-divider" />
         </div>
       </div>
     </div>

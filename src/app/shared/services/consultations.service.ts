@@ -10,6 +10,7 @@ export class ConsultationsService {
     consultationId$ = new BehaviorSubject(null);
     openFeedbackModal = new BehaviorSubject (null);
     scrollToCreateResponse = new BehaviorSubject (null);
+    activeTab = new BehaviorSubject (null);
 
   constructor() {
   }

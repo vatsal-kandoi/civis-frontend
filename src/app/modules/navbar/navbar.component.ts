@@ -4,6 +4,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { ConsultationList } from './navbar.graphql';
+import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 
 @Component({
   selector: 'app-navbar',
@@ -43,6 +44,7 @@ export class NavbarComponent implements OnInit {
     private userService: UserService,
     private apollo: Apollo,
     private route: ActivatedRoute,
+    private consultationService: ConsultationsService,
     ) { }
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class NavbarComponent implements OnInit {
     });
     this.getCurrentUser();
     this.getActiveConsulationCount();
+    this.getActiveTab();
   }
 
   openMenu() {
@@ -81,11 +84,8 @@ export class NavbarComponent implements OnInit {
       if (url.search('summary') !== -1) {
         return 'consultations-summary';
       }
-      if (url.search('read') !== -1) {
-        this.activeTab = 'read & respond';
-      }
-      if (url.search('discuss') !== -1) {
-        this.activeTab = 'discuss & engage';
+      if (url.search('response') !== -1) {
+        return 'consultations-response';
       }
 
       return 'consultations-profile';
@@ -102,6 +102,15 @@ export class NavbarComponent implements OnInit {
           this.currentUser = null;
         }
       });
+  }
+
+  getActiveTab() {
+    this.consultationService.activeTab
+    .subscribe((tab) => {
+      if (tab) {
+        this.activeTab = tab;
+      }
+    });
   }
 
   showProfilePopup() {

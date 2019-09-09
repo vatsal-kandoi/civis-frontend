@@ -155,11 +155,17 @@
                 <div class="link">View Leaderboard</div>
               </div>
               <div class="footer-space__right">
-                <button *ngIf="responseSubmitted" (click)="closeFeedbackModal()">Ok Great</button>
+                <button  class="app-btn secondary mt-xs" *ngIf="responseSubmitted" (click)="closeFeedbackModal()">
+                  <p class="m-0">Ok Great</p>
+                  <i class="fa fa-angle-right"></i>
+                </button>
                 <span class="mr-2" *ngIf="responseSubmitLoading">
                     <img src="assets/images/loading.svg">
                 </span>
-                <button *ngIf="!responseSubmitted" (click)="createResponse()">Select and submit</button>
+                <button class="app-btn secondary" *ngIf="!responseSubmitted" (click)="createResponse()">
+                  <p class="m-0">Select and submit</p>
+                  <i class="fa fa-angle-right"></i>
+                </button>
               </div>
             </div>
           </div>

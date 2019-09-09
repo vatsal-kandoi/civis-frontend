@@ -77,20 +77,32 @@ export class ProfileComponent implements OnInit {
   updateUser(userForm) {
     console.log(userForm);
     if (userForm.valid) {
-      this.apollo.mutate({
-        mutation: CurrentUserUpdate,
-        variables : {
-          user : userForm.value
-        }
-      }).subscribe ((res) => {
-        this.closeModal();
-        this.userService.getCurrentUser();
-      });
+      this.update(userForm.value);
     }
   }
 
+  update(value) {
+    this.apollo.mutate({
+      mutation: CurrentUserUpdate,
+      variables : {
+        user : value
+      }
+    }).subscribe ((res) => {
+      this.closeModal();
+      this.userService.getCurrentUser();
+    });
+  }
+
   changeDp(event) {
-    console.log(event);
+    if (event) {
+      const file = {
+        profilePictureFile : {
+          filename: 'profile.png',
+          content: event
+        }
+      };
+      this.update(file);
+    }
   }
 
   getTotalPoints(responses) {

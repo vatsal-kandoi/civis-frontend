@@ -209,3 +209,10 @@
     }
   }
 }
+
+.footer-margin {
+  margin-bottom: 40px;
+  @media screen and (max-width: 600px) {
+    margin-bottom: 100px;
+  }
+}

@@ -1,12 +1,12 @@
-<section>
-  <div class="consultation-bg-img" [ngStyle]="{'background-image': 'url(' + profileData?.ministry?.coverPhoto?.url + ')'}"></div>
-  <div class="consultation-profile">
+<div class="consultation-bg-img"
+  [ngStyle]="{'background-image': 'url(' + profileData?.ministry?.coverPhoto?.url + ')'}"></div>
+<div class="consultation-profile">
 
-    <aside class="consultation-profile__sidebar-section">
-      <app-profile-card [profile]='profileData'></app-profile-card>
-    </aside>
-    <section>
-      <router-outlet></router-outlet>
-    </section>
-  </div>
-</section>
+  <aside class="consultation-profile__sidebar-section">
+    <app-profile-card [profile]='profileData'></app-profile-card>
+  </aside>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+</div>
+<app-footer></app-footer>

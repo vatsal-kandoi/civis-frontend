@@ -84,8 +84,8 @@
           <button class="nav-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
         </div>
         <div *ngIf="currentUser">
-          <img class="avatar--32" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
-          <span (click)="showProfilePopup()" [ngClass]="(currentUrl == 'landing') && (transparentNav === false) ? 'clr-white' : 'clr-black'"><i
+          <img class="avatar avatar--32" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
+          <span (click)="showProfilePopup()" [ngClass]="currentUrl == 'landing' ? 'clr-white' : 'clr-black'"><i
               class="fa fa-angle-down ml-2 mr-3"></i></span>
   
           <div class="profile-popup" *ngIf="profilePopup">

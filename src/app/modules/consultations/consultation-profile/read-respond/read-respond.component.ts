@@ -60,10 +60,15 @@ export class ReadRespondComponent implements OnInit {
     this.getCurrentUser();
     this.createSatisfactionRating();
     this.scrollToCreateResponse();
+    this.setActiveTab();
   }
 
   public setTitle(newTitle: string) {
     this.title.setTitle(newTitle);
+  }
+
+  setActiveTab() {
+    this.consultationService.activeTab.next('read & respond');
   }
 
   getConsultationProfile() {

@@ -26,6 +26,10 @@ export class DiscussEngageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.setActiveTab();
   }
 
+  setActiveTab() {
+    this.consultationService.activeTab.next('discuss & engage');
+  }
 }

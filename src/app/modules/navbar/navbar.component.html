@@ -16,11 +16,11 @@
 
     <div class="app-navbar__center-item" *ngIf="currentUrl === 'consultations-profile'">
       <div class="profile-tab-wrapper">
-        <a class="profile-tab active-tab px-3" (click)="routeToConsultation('read')">
+        <a class="profile-tab px-3" [ngClass]="activeTab === 'read & respond' ? 'active-tab' : ''" (click)="routeToConsultation('read')">
           <p>Read & Respond</p>
           <p>Submit your feedback</p>
         </a>
-        <a class="profile-tab px-3" (click)="routeToConsultation('discuss')">
+        <a class="profile-tab px-3" [ngClass]="activeTab === 'discuss & engage' ? 'active-tab' : ''" (click)="routeToConsultation('discuss')">
           <p>Discuss & Engage</p>
           <p>Talk to the community</p>
         </a>

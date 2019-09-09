@@ -6,6 +6,10 @@ export const ConsultationResponseList = gql`
       data {
         id
         responseText
+        consultation {
+          id
+          title
+        }
         user {
           id
           firstName

@@ -114,6 +114,10 @@
   top: 77px;
 }
 
+.fit-cover {
+  object-fit: cover;
+}
+
 .decoration-none {
   text-decoration: none;
   &:hover {

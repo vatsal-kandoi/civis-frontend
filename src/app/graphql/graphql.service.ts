@@ -32,8 +32,6 @@ export class GraphqlService {
 
     this.environment = {...localEnvironment, ...this.environment};
 
-    console.log('env is: ', this.environment);
-
     const http = this.httpLink.create({uri: `${this.environment.api}/graphql`});
 
     return new Promise((resolve, reject) => {

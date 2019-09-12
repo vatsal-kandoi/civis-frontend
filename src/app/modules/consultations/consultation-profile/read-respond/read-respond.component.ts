@@ -127,7 +127,6 @@ export class ReadRespondComponent implements OnInit {
 
   deleteMetaTags() {
     const meta = document.querySelectorAll('meta');
-    console.log(meta);
     for (let i = 2; i < meta.length; i++) {
     meta[i].remove();
     }

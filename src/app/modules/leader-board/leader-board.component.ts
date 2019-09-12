@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { UserList } from './leader-board.graphql';
 import { UserService } from 'src/app/shared/services/user.service';
+import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class LeaderBoardComponent implements OnInit {
     }
   }
 
-  constructor(private apollo: Apollo, private userService: UserService) { }
+  constructor(private apollo: Apollo, private userService: UserService, private errorService: ErrorService) { }
 
   ngOnInit() {
     this. fetchUserList();
@@ -119,7 +120,8 @@ export class LeaderBoardComponent implements OnInit {
           this.loadingElements.userList = false;
           this.userListData = item;
         }, err => {
-          console.log('not working', err);
+          this.errorService.showErrorModal(err);
+          console.log('error', err);
         });
   }
 

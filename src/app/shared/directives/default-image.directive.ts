@@ -21,8 +21,6 @@ export class DefaultImageDirective implements AfterViewInit, AfterViewChecked {
      if (this.ele.src && this.ele.src !== this.graphqlService.host + '/null') {
       return;
      }
-    console.log(this.ele.src, 'source of a image');
-
      this.setDefaultImage();
    }
 

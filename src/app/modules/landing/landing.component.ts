@@ -6,6 +6,7 @@ import { slideInRight } from '../../shared/animations/slide';
 import { fadeIn } from '../../shared/animations/fade';
 import { ConsultationList } from '../consultations/consultation-list/consultation-list.graphql';
 import { ConsultationResponseList, ImpactStats, LeaderListQuery } from './landing.graphql'; 
+import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 
 @Component({
   selector: 'app-landing',
@@ -21,13 +22,13 @@ export class LandingComponent implements OnInit {
   current_card_index = 0;
   current_response_index = 0;
   currentReponseData: any;
-  activeTab = 'sumbit-response';
+  activeTab = 'submit-response';
   impactStats: any;
   citizenLeaders: any;
   activeConsultations: any;
   closedConsultations: any;
 
-constructor( private apollo: Apollo ) { }
+constructor( private apollo: Apollo, private errorService: ErrorService) { }
 
   ngOnInit() {
     this.getConsultationCard('published');
@@ -72,6 +73,7 @@ constructor( private apollo: Apollo ) { }
       }
     }, err => {
       console.log('err', err);
+      this.errorService.showErrorModal(err);
     });
   }
 
@@ -84,11 +86,11 @@ constructor( private apollo: Apollo ) { }
       map((res: any) => res.data.consultationResponseList)
     )
     .subscribe((response: any) => {
-      this.latestResponse = response.data
-      console.log(this.latestResponse, 'response')
+      this.latestResponse = response.data;
       this.currentReponseData = this.latestResponse[this.current_response_index];
     }, err => {
         console.log('err', err);
+        this.errorService.showErrorModal(err);
     });
   }
 

@@ -23,7 +23,6 @@ export class ErrorComponent implements OnInit {
     this.errorService.showModal
       .subscribe(data => {
         if (data) {
-          console.log(data);
           this.error = this.errorService.error;
           this.showModal = true;
           this.shouldReload = this.errorService.shouldReload;
@@ -38,8 +37,6 @@ export class ErrorComponent implements OnInit {
 
   close() {
     this.showModal = false;
-    // this.userService.checkUser();
-    // this.errorModal.hide();
     if (this.shouldReload) {
       window.location.href = '/auth';
     }

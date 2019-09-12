@@ -16,7 +16,6 @@ export class HowCivisWorksCarouselComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.tab);
   }
   
   submitNextStep() {
@@ -27,7 +26,7 @@ export class HowCivisWorksCarouselComponent implements OnInit {
     }
   }
 
-  sumbitPreviousStep() {
+  submitPreviousStep() {
     if(this.submitStep == 1) {
       this.submitStep = 2;
     } else {

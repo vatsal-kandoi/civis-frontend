@@ -75,7 +75,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(userForm) {
-    console.log(userForm);
     if (userForm.valid) {
       this.update(userForm.value);
     }

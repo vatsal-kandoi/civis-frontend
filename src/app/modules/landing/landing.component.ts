@@ -22,7 +22,7 @@ export class LandingComponent implements OnInit {
   current_card_index = 0;
   current_response_index = 0;
   currentReponseData: any;
-  activeTab = 'sumbit-response';
+  activeTab = 'submit-response';
   impactStats: any;
   citizenLeaders: any;
   activeConsultations: any;

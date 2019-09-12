@@ -49,7 +49,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getCurrentUser();
-    console.log('ac route: ', this.activatedRoute.url);
   }
 
   getConsultationProfile() {
@@ -226,7 +225,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
           }
         })
         .subscribe((data) => {
-          console.log(data);
         }, err => {
           this.errorService.showErrorModal(err);
         });

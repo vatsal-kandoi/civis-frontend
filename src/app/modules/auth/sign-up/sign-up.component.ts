@@ -165,7 +165,6 @@ export class SignUpComponent implements OnInit {
   }
 
   captchaResolved(event) {
-    console.log('event is: ', event);
     this.isCaptchaResolved = true;
     if (this.signupForm.valid) {
       this.submit();

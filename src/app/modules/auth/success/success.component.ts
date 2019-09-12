@@ -24,7 +24,6 @@ export class SuccessComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params.access_token) {
         const accessToken = params.access_token;
-        console.log('access token is: ', accessToken);
         this.tokenService.storeToken({
           accessToken
         });

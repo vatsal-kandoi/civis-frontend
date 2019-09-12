@@ -2,6 +2,7 @@ import { Component, Input, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { UserService } from '../../services/user.service';
+import { ErrorService } from '../error-modal/error.service';
 
 @Component({
   selector: 'app-disqus',
@@ -25,6 +26,7 @@ export class DisqusComponent implements OnInit {
     private http: HttpClient,
     private graphqlService: GraphqlService,
     private userService: UserService,
+    private errorService: ErrorService
     ) {
     this.dom = el.nativeElement;
   }
@@ -54,6 +56,7 @@ export class DisqusComponent implements OnInit {
       this.setupDisqus();
     }, err => {
       console.log('error is: ', err);
+      this.errorService.showErrorModal(err);
     });
   }
 

@@ -16,7 +16,6 @@ export class HowCivisWorksCarouselComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.tab);
   }
   
   submitNextStep() {

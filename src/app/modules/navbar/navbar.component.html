@@ -1,5 +1,4 @@
-<div class="nav-container" *ngIf="currentUrl !== 'auth'"
-  [ngClass]="(currentUrl == 'landing') && (transparentNav === false) ? 'blue-nav' : 'white-nav'">
+<div class="nav-container white-nav" *ngIf="currentUrl !== 'auth'">
   <nav class="app-navbar" [ngClass]="currentUrl == 'landing' ? 'landing-nav-spacer' : 'nav-spacer'">
     <div class="app-navbar__left-item">
       <div class="logo-space pointer" [routerLink]="['/']">
@@ -61,7 +60,7 @@
       </div>
       <div class="nav-btns profile-item pointer" *ngIf="currentUser" (click)="showProfilePopup()">
         <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url"/>
-        <span [ngClass]="currentUrl == 'landing' ? 'clr-white' : 'clr-black'"><i
+        <span class="clr-black"><i
             class="fa fa-angle-down ml-2"></i></span>
 
         <div class="profile-popup" *ngIf="profilePopup">
@@ -85,7 +84,7 @@
         </div>
         <div *ngIf="currentUser">
           <img class="avatar avatar--32" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
-          <span (click)="showProfilePopup()" [ngClass]="currentUrl == 'landing' ? 'clr-white' : 'clr-black'"><i
+          <span (click)="showProfilePopup()" class="clr-black"><i
               class="fa fa-angle-down ml-2 mr-3"></i></span>
   
           <div class="profile-popup" *ngIf="profilePopup">

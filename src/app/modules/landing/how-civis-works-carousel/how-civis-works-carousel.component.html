@@ -1,6 +1,6 @@
-<div *ngIf="tab == 'sumbit-response'">
+<div *ngIf="tab == 'submit-response'">
   <div class="steps-wrapper" @fadeIn [ngSwitch]="submitStep">
-    <div class="carousel-arrow-left pointer" (click)="sumbitPreviousStep()"><i class="fa fa-angle-left"></i></div>
+    <div class="carousel-arrow-left pointer" (click)="submitPreviousStep()"><i class="fa fa-angle-left"></i></div>
     <div class="steps-inner-container" *ngSwitchCase="1">
       <div class="step-left-section"><img src="../../../assets/images/step1.png" /></div>
       <div class="step-right-section">

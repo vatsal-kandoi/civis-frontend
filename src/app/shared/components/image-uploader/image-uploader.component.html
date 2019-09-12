@@ -1,0 +1,31 @@
+<div bsModal #imgUploadModal="bs-modal" class="modal fade image-modal" tabindex="-1" (onHidden)="hideModal()"
+     [config]="{show: true, backdrop: 'static', ignoreBackdropClick: true}"
+     [ngClass]="showModal ? 'align-center' : ''"
+     role="dialog" aria-labelledby="imgUploadModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <div class="title">Upload Image</div>
+          <div (click)="closeModal()">X</div>
+      </div>
+      <div class="modal-body pt-0">
+        <ngx-img (onSelect)="base64 = $event" (onReset)="base64 = $event" [config]="_options"></ngx-img>
+        <div *ngIf="!!base64" class="row">
+          <div class="col-12 text-center pt-3">
+            <button class="app-btn secondary get-start-btn" (click)="sendData()">
+              <p class="m-0">Save changes</p>
+              <i class="fa fa-angle-right"></i>
+            </button>
+          </div>
+          <div class="col-12 text-center">
+            <div class="cancel-btn">
+              <button class="btn btn-transparent cancel-btn" (click)="closeModal()">
+                  Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

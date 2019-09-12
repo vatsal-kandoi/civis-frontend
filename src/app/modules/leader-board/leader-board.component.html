@@ -95,28 +95,18 @@
 
         <div class="participated-section">
           <p class="paticipant-title">Consultations participated in</p>
-          <div class="paticipant-list">
-            <img 
-              class="avatar avatar--42" 
-              src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            />
-            <div class="list-detail">
-              <p>National Urban Policy Framework</p>
-              <p>Ministry of Housing and Urban Planning</p>
+          <div class="participation-list-container">
+            <div *ngFor="let item of leaderData?.sharedResponses?.edges">
+              <div class="paticipant-list">
+                <img [src]="item?.node?.consultation?.ministry?.logo?.url"  class="avatar avatar--42" />
+                <div class="list-detail">
+                  <p>{{item?.node?.consultation?.title}}</p>
+                  <p>{{item?.node?.consultation?.ministry?.name}}</p>
+                </div>
+              </div>
+              <hr  class="paticipant-divider" />
             </div>
           </div>
-          <hr  class="paticipant-divider" />
-          <div class="paticipant-list">
-            <img 
-              class="avatar avatar--42" 
-              src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100&ssl=1" 
-            />
-            <div class="list-detail">
-              <p>National Urban Policy Framework</p>
-              <p>Ministry of Housing and Urban Planning</p>
-            </div>
-          </div>
-          <hr  class="paticipant-divider" />
         </div>
       </div>
     </div>

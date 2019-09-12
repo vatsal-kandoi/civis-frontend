@@ -55,7 +55,7 @@
           </div>
           <div class="query-block">
             <p class="query-heading">Get Queries?</p>
-            <p class="query-content">If you may need any kind of help with the upload of the consultation, please <span class="clr-blue">get in touch</span> with us.</p>
+            <p class="query-content">If you may need any kind of help with the upload of the consultation, please <a href="mailto:info@civis.vote" class="clr-blue">get in touch</a> with us.</p>
           </div>
         </form>
       </div>
@@ -79,7 +79,7 @@
                   <ng-select id="ministry" #ministry="ngModel" name="ministry" [loading]="loadingMinistries"
                   [items]="ministries" bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" 
                   bindValue="id" [notFoundText]="dropdownText" [clearable]="true" loadingText="Searching..."
-                  (search)="onSearch($event)" placeholder="Select"  [(ngModel)]="departmentInfo.ministryId" required> 
+                  (search)="onSearch($event)" placeholder="Select" (open)="getMinistriesList()" [(ngModel)]="departmentInfo.ministryId" required> 
                   </ng-select>  
               </div>    
               <div *ngIf="ministry.invalid && (ministry.touched || consultationForm2.submitted)" class="error-msg">
@@ -104,7 +104,7 @@
         </div>
         <div class="query-block">
             <p class="query-heading">Get Queries?</p>
-            <p class="query-content">If you need any kind of help with creating a consultation, please <span class="clr-blue">get in touch</span> with us.</p>
+            <p class="query-content">If you need any kind of help with creating a consultation, please <a href="mailto:info@civis.vote" class="clr-blue">get in touch</a> with us.</p>
           </div>
     </div>
   </div>
@@ -222,3 +222,4 @@
   </div>
 </div>
 </div>
+<app-footer></app-footer>

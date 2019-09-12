@@ -1,5 +1,10 @@
 @import './src/assets/styles/app';
 
+.footer-bg {
+  width: 100%;
+   background-color: $white;
+}
+
 .footer-wrapper {
   width: 90%;
   margin: 0 auto;
@@ -10,14 +15,14 @@
     display: flex;
     justify-content: space-between;
     @media screen and (max-width: 991px) {
-      justify-content: center;
+      justify-content: flex-start;
       flex-wrap: wrap;
     }
 
     .left-item {
       display: flex;
       @media screen and (max-width: 991px) {
-        justify-content: center;
+        justify-content: flex-start;
         width: 100%;
       }
 
@@ -47,7 +52,8 @@
       flex-direction: column;
       align-items: flex-end;
       @media screen and (max-width: 991px) {
-        text-align: right;
+        align-items: flex-start;
+        text-align: left;
       }
       .social-icons {
         span {
@@ -68,8 +74,14 @@
       .help-text {
         font-size: 24px;
         color: $black;
+        margin: 10px 0 0;
         @media screen and (max-width: 991px) {
           font-size: 20px;
+          margin: 22px 0 0;
+        }
+        a {
+          color: inherit;
+          text-decoration: underline;
         }
       }
     }
@@ -86,7 +98,7 @@
       display: flex;
       align-items: center;
       @media screen and (max-width: 991px) {
-        justify-content: center;
+        justify-content: flex-start;
         flex-wrap: wrap;
       }
       .logo-2 {
@@ -105,7 +117,7 @@
     .logo-right {
       @media screen and (max-width: 991px) and (min-width: 450px) {
         width: 100%;
-        text-align: center; 
+        text-align: left; 
       }
     }
   }

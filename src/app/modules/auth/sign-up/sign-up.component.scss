@@ -175,18 +175,15 @@
                         border: 1px solid $input-border;
                         box-sizing: border-box;
                         border-radius: 3px;
-                        padding: 10px;
 
                         input { 
                             width: 100%;
                             font-weight: 500;
                             font-size: 15px;
                             background: $white;
+                            padding: 10px;
                             border: none;
-
-                            &:focus {
-                                outline: none;
-                            }
+                            border-radius: 3px;
                         }
 
                         @media screen and (max-width: 991px) {

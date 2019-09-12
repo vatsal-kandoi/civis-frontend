@@ -91,6 +91,12 @@
   }
 }
 
+.btn-arrow {
+  font-size: 16px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
 .truncate {
   /* autoprefixer: ignore next */      
   -webkit-box-orient: vertical;
@@ -106,6 +112,10 @@
 .sticky {
   position: sticky;
   top: 77px;
+}
+
+.fit-cover {
+  object-fit: cover;
 }
 
 .decoration-none {

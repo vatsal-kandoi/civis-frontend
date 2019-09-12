@@ -5,6 +5,8 @@ export const ResponseProfileQuery = gql`
         consultationResponseProfile(id: $id){
             id
             responseText
+            createdAt
+            updatedAt
             consultation {
                 id
                 title

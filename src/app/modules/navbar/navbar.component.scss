@@ -21,7 +21,10 @@
   }
 
   .nav-spacer {
-    padding: 0 20px;
+    padding: 0 30px;
+    @media screen and (max-width: 500px) {
+        padding: 0 10px;
+    }
   }
 
   .app-navbar {
@@ -61,6 +64,10 @@
         display: flex;
         align-items: center;
 
+        @media screen and (max-width: 991px) {
+          display: none;
+        }
+
         .profile-tab {
           height: 100%;
           text-align: center;
@@ -90,12 +97,60 @@
           border-bottom: 4px solid #1894EA;
         }
       }
+
+      .profile-tab-mobile {
+        display: none;
+      }
+
+      @media screen and (max-width: 991px) {
+        .profile-tab-mobile {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+      
+          .profile-options-container {
+            width: 100%;
+      
+            form {
+              width: 100%;
+            }
+          }
+      
+          ng-select {
+            .ng-select-container {
+              background-color: transparent;
+              border: none;
+              color: $primary-color;
+              font-size: 14px;
+            }
+          }
+      
+          .ng-select.ng-select-opened>.ng-select-container .ng-arrow {
+            border-color: transparent transparent $primary-color;
+          }
+      
+          .ng-select .ng-arrow-wrapper .ng-arrow {
+            border-color: $primary-color transparent transparent;
+          }
+      
+          .ng-dropdown-panel {
+            margin-top: 10px;
+      
+            .ng-option {
+              color: $primary-color;
+              font-size: 14px;
+            }
+          }
+        }
+
+      }
     }
 
     &__right-item {
       display: flex;
       align-items: center;
-      height: 100%l;
+      height: 100%;
 
       .profile-item {
         position: relative;
@@ -109,8 +164,10 @@
 
     .nav-link-text {
       font-size: 14px;
-      color: $white;
+      color: #E2F3FF;
       margin: 0 30px;
+      font-family: Encode Sans Semi Condensed;
+      letter-spacing: 0.065em;
       cursor: pointer;
     }
 
@@ -121,7 +178,8 @@
         padding: 5px 20px;
         background: rgba(255, 255, 255, 0.3);
         border-radius: 33px;
-        color: #ffffff;
+        color: $white;
+        letter-spacing: 0.005em;
         margin-right: 15px;
       }
 
@@ -129,12 +187,19 @@
         font-weight: 600;
         font-size: 14px;
         line-height: 17px;
+        letter-spacing: 0.035em;
         color: rgba(255, 255, 255, 0.7);
       }
 
       @media screen and (max-width: 991px) {
         display: none;
       }
+    }
+  }
+
+  .xs-logo {
+    @media screen and (max-width: 991px) {
+      width: 30px;
     }
   }
 }
@@ -148,7 +213,10 @@
   padding: 10px;
   background-color: #fff;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .2), 0 4px 20px 0 rgba(0, 0, 0, .19);
-
+  @media screen and (max-width: 991px) {
+    width: 110px;
+    right: 45px;
+  }
   p {
     font-size: 14px;
     color: $black;
@@ -175,6 +243,8 @@
     font-size: 14px;
     color: $primary-color !important;
     margin: 0 30px;
+    font-family: Encode Sans Semi Condensed;
+    letter-spacing: 0.05em;
     cursor: pointer;
   }
 
@@ -196,6 +266,7 @@
       font-weight: 600;
       font-size: 14px;
       line-height: 17px;
+      letter-spacing: 0.035em;
       color: rgba(255, 255, 255, 0.7);
     }
   }
@@ -227,6 +298,8 @@
       padding: 5px 15px;
       font-weight: 500;
       font-size: 13px;
+      letter-spacing: 0.05em;
+      border: none
     }
   }
 
@@ -303,3 +376,6 @@
   -webkit-transform: translate3d(125%, 0, 0);
   transform: translate3d(125%, 0, 0);
 }
+
+
+

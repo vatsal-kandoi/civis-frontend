@@ -68,7 +68,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
         if (!this.activeConsultations.length) {
           this.coverCardData = item;
         } else {
-          this.coverCardData = [this.activeConsultations, ...this.closedConsultations.slice(0, 3 - this.activeConsultations.length)];
+          this.coverCardData = [...this.activeConsultations, ...this.closedConsultations.slice(0, 3 - this.activeConsultations.length)];
         }
       }
     }, err => {

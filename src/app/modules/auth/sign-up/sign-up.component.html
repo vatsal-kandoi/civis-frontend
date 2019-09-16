@@ -93,7 +93,7 @@
             <div class="input-box">
                 <label for="phone">Phone</label>
                 <div class="input-box__border">
-                    <input placeholder="Phone Number" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"/>
+                    <input placeholder="+919223386370" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"/>
                 </div>
                 <div *ngIf="phone.invalid && (phone.touched || signupForm.submitted)" class="error-msg">
                   <div>Phone Number must be a valid number</div>

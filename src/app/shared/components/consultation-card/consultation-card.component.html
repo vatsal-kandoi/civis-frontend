@@ -8,7 +8,8 @@
         <div>
           <p class="days-remaining-text">{{getRemainigDays(consultation?.responseDeadline)}}</p>
           <p class="responses-text">
-            {{consultation?.consultationResponsesCount ? consultation?.consultationResponsesCount : '--'}} Responses so far
+            {{consultation?.consultationResponsesCount ? consultation?.consultationResponsesCount : '--'}} 
+            {{ consultation?.consultationResponsesCount <= 1 ? 'Response so far' : 'Responses so far' }} 
           </p>
         </div>
         <button class="app-btn secondary btn-respond">

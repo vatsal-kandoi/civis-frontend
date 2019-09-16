@@ -62,7 +62,7 @@ export class ProfileCardComponent implements OnInit {
     const lastDate = moment(deadline);
     const difference = lastDate.diff(today, 'days');
     if (difference <= 0) {
-      return 'Closed';
+      return difference === 0 ? 'Last day to respond' : 'Closed';
     } else {
       return `${difference} Days Remaining`;
     }

@@ -315,10 +315,9 @@ export class ReadRespondComponent implements OnInit {
       this.consultationsService.enableSubmitResponse.next(false);
       return;
     } else {
-      if (value.length === 1) {
-        this.consultationsService.enableSubmitResponse.next(true);
-        return;
-      }
+      this.consultationsService.enableSubmitResponse.next(true);
+      return;
+
     }
   }
 

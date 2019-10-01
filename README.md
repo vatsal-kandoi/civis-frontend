@@ -10,7 +10,7 @@ STEPS TO GET STARTED:
 5. npm run start:staging
 
 DEPLOYMENT:
-This app is configured to auto trigger deployment on master and staging branches.
+This app is configured to auto trigger deployment on master and staging branches configuration of which can be found in travis.yml
 1. Any push or merge to staging branch deploys this app to staging.civis.vote
 2. Any push or merge to master branch deploys this app to civis.vote
 

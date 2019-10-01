@@ -7,7 +7,8 @@ STEPS TO GET STARTED:
 2. git checkout staging
 3. npm install
 4. Get environment files from your colleagues and paste them in the root directory as an env folder
-5. npm run start:staging
+5. For staging api - npm run start:staging
+6. For prod api - npm run start:prod
 
 DEPLOYMENT:
 This app is configured to auto trigger deployment on master and staging branches configuration of which can be found in travis.yml

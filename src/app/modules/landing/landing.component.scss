@@ -17,34 +17,35 @@
     .cover-inner-container {
       display: flex;
       align-items: center;
-      width: 80%;
+      width: 100%;
       height: 773px;
       margin: 0 auto;
-      @media screen and (max-width: 1400px) and (min-width: 991px) {
-        width: 90%;
-      }
+      padding: 0 90px;
       @media screen and (max-width: 990px) {
         flex-wrap: wrap;
         width: 100%;
+        padding: 0;
         height: auto;
       }
 
       .cover-details {
-        width: 40%;
+        width: 35%;
         @media screen and (max-width: 1400px) and (min-width: 991px) {
           width: 50%;
         }
         @media screen and (max-width: 990px) {
           width: 80%;
           margin: 0 auto;
-          padding: 30px 0;
+          padding: 40px 0;
           text-align: center;
         }
         .cover-title {
           font-size: 82px;
           font-weight: bold;
+          font-family: Encode Sans Semi Condensed;
           color: $white;
-          line-height: 86px;
+          line-height: 77px;
+          letter-spacing: 0.005em;
           @media screen and (max-width: 990px) {
             font-size: 40px;
             line-height: 46px;
@@ -300,10 +301,11 @@
 
   .section-heading {
     text-align: center;
-    font-size: 16px;
+    font-size: 17px;
+    font-family: Encode Sans Semi Condensed;
     color: #F0653A;
     font-weight: bold;
-    letter-spacing: 0.38em;
+    letter-spacing: 0.58em;
     @media screen and (max-width: 991px) {
       text-align: left;
       font-size: 14px;
@@ -314,6 +316,7 @@
     font-size: 16px;
     color: $white;
     font-weight: bold;
+    font-family: Encode Sans Semi Condensed;
     padding: 15px 25px;
     letter-spacing: 0.105em;
     text-transform: uppercase;
@@ -324,23 +327,36 @@
   }
 
   .civis-works-link {
-    @include general-text($color: $white, $weight: 600);
-    border-bottom: 1px dashed $white;
+    @include general-text($color: #E2F3FF, $weight: 600);
+    border-bottom: 1px dashed #E2F3FF;
     border-bottom-width: 2px;
     margin-left: 20px;
+    margin-bottom: 0;
+    font-family: Encode Sans Semi Condensed;
+    letter-spacing: 0.065em;
     @media screen and (max-width: 991px) {
       font-size: 14px;
       margin-top: 20px;
+      margin-left: 0;
     }
   }
 
   .landing-btn {
-    padding: 5px 23px;
+    padding: 7px 20px;
+    span {
+      font-size: 16px;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+    @media screen and (max-width: 991px) {
+      font-size: 12px;
+    }
   }
 }
 
 .card-carousel {
   width: 50%;
+  margin-right: 20px;
   float: right;
   @media screen and (max-width: 1400px) and (min-width: 991px) {
     width: 80%;
@@ -351,6 +367,8 @@
   }
   &__carouse-title {
     text-align: center;
+    font-family: Encode Sans Semi Condensed;
+    letter-spacing: 0.38em;
     @include general-text(18px, $white, bold);
     @media screen and (max-width: 990px) {
       text-align: left;
@@ -419,6 +437,9 @@
       }
       .step-text {
         @include regular-text($color: #A1D5FA, $weight: bold);
+        line-height: 20px;
+        letter-spacing: 0.125em;
+        margin-bottom: 5px;
       }
       .step-detail {
         padding: 0;
@@ -426,6 +447,7 @@
           font-size: 24px;
           color: #F0653A;
           font-weight: bold;
+          font-family: Encode Sans Semi Condensed;
           list-style-type: none;
           @media screen and (max-width: 991px) {
             font-size: 16px;
@@ -462,11 +484,11 @@
   .btn-next {
     display: flex;
     align-items: center;
-    padding: 10px 20px;
+    padding: 5px 20px;
     span {
-      font-size: 20px;
-      line-height: 0;
-      margin-left: 20px;
+      font-size: 18px;
+      margin-left: 10px;
+      vertical-align: middle;
     }
   }
   .w-80 {

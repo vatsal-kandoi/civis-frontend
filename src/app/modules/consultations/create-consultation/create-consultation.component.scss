@@ -14,6 +14,7 @@
     margin: 0 auto;
     @media screen and (max-width: 991px) {
         width: 95%;
+        height: auto;
         padding: 20px 0;
     }
 
@@ -64,26 +65,23 @@
                     border: 1px solid #AEAEAE;
                     box-sizing: border-box;
                     border-radius: 3px;
-                    padding: 10px;
 
                     input {
                         width: 100%;
                         border: none;
                         font-weight: 500;
                         font-size: 15px;
-
-                        &:focus {
-                            outline: none;
-                        }
-
+                        padding: 10px;
+                        border-radius: 3px;
                     }
                 }
 
                 &__tips {
                     font-size: 13px;
                     color: #919191;
+                    line-height: 17px;
                     letter-spacing: 0.045em;
-                    margin: 10px 0;
+                    margin: 8px 0;
                 }
             }
 
@@ -125,6 +123,9 @@
                     font-size: 14px;
                     color: #919191;
                     margin: 0;
+                    a {
+                        text-decoration: underline;
+                    }
                 }
             }
 
@@ -205,8 +206,9 @@
             &__tips {
                 font-size: 13px;
                 color: #919191;
+                line-height: 17px;
                 letter-spacing: 0.045em;
-                margin: 10px 0;
+                margin: 8px 0;
             }
         }
 
@@ -272,6 +274,9 @@
                 font-size: 14px;
                 color: #919191;
                 margin: 0;
+                a {
+                    text-decoration: underline;
+                }
             }
         }
 
@@ -379,8 +384,9 @@
                         &__tips {
                             font-size: 13px;
                             color: #919191;
+                            line-height: 17px;
                             letter-spacing: 0.045em;
-                            margin: 10px 0;
+                            margin: 8px 0;
                         }
                     }
         

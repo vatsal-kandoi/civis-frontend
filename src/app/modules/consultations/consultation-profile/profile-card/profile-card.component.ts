@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile-card',
   templateUrl: './profile-card.component.html',
-  styleUrls: ['./profile-card.component.scss']
+  styleUrls: ['./profile-card.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class ProfileCardComponent implements OnInit {
 
@@ -76,7 +78,8 @@ export class ProfileCardComponent implements OnInit {
       startDate = new Date(startDate).toISOString();
       let endDate: any  = new Date(this.profile.responseDeadline).setHours(23, 59, 59);
       endDate = new Date(endDate).toISOString();
-      const calendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=${this.profile.title}` +
+      const calendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=` +
+      `Civis consultation response deadline- ${this.profile.title}` +
       `&dates=${startDate.split('-').join('').split(':').join('').split('.000').join('')}/` +
       `${endDate.split('-').join('').split(':').join('').split('.000').join('')}` +
       `&details=&sf=true&output=xml`;

@@ -6,7 +6,6 @@
     @media screen and (max-width: 991px) {
       margin-top: 57px;
     }
-    background: #E5F4FF;
     min-height: 100vh;
 
   .response-profile {
@@ -18,7 +17,7 @@
     padding: 25px 0;
     
     @media screen and (max-width: 991px) {
-      margin-top: 57px;
+      margin: 57px 0 120px;
       grid-template-columns: auto;
       grid-column-gap: 0;
       width: 100%;
@@ -132,7 +131,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    @media screen and (max-width: 600px) {
+      flex-wrap: wrap;
+      justify-content: center;
+      height: 120px;
+      padding: 10px;
+    }
     .left-space {
       display: flex;
       align-items: center;
@@ -150,7 +154,11 @@
         box-sizing: border-box;
         border-radius: 4px;
         cursor: pointer;
-
+        @media screen and (max-width: 600px) {
+          display: flex;
+          align-items: center;
+          padding: 12px 10px;
+        }
         span{
           color: $white;
           i {
@@ -163,6 +171,9 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
             color: #FFFFFF;
+            @media screen and (max-width: 600px) {
+              font-size: 12px;
+            }
           }
           &:nth-child(3) {
             color: rgba(255, 255, 255, 0.5) !important;
@@ -190,11 +201,18 @@
         &:nth-child(2) {
           font-style: normal;
           font-weight: normal;
-          font-size: 18px;
+          font-size: 14px;
           line-height: 21px;
           color: #FFFFFF;
         }
       }
     }
+  }
+}
+
+.footer-margin {
+  margin-bottom: 40px;
+  @media screen and (max-width: 600px) {
+    margin-bottom: 100px;
   }
 }

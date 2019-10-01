@@ -1,24 +1,11 @@
 @import './src/assets/styles/app';
 
-.fixed-bg-clr {
-    position: fixed;
-    top: 77px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #E5F4FF;
-    @media screen and (max-width: 991px) {
-        top: 57px;
-    }
-}
-
 .profile-index {
     position: relative;
     width: 100%;
     margin-top: 77px;
-    padding: 30px 40px;
+    padding: 30px 45px;
+    background-color: #E5F4FF;
 
     @media screen and (max-width: 991px) {
         margin-top: 57px;
@@ -28,8 +15,8 @@
 
     &__left {
         .heading {
-            font-weight: 500;
             font-size: 20px;
+            font-weight: bold;
             color: #0E73B9;
             margin-bottom: 35px;
             @media screen and (max-width: 991px) {
@@ -49,6 +36,8 @@
                 font-weight: 500;
                 font-size: 11px;
                 color: #6DB4E4;
+                letter-spacing: 0.125em;
+                line-height: 14px;
             }
 
             .profile-info {
@@ -74,12 +63,14 @@
                         font-size: 16px;
                         color: #151515;
                         margin-bottom: 5px;
+                        letter-spacing: 0.025em;
                     }
                     &__active {
                         font-weight: normal;
                         font-size: 13px;
                         color: #4B94C7;
                         margin: 0;
+                        letter-spacing: 0.065em;
                     }
                 }
             }
@@ -91,6 +82,7 @@
                 .btn {
                     font-size: 13px;
                     color: #0E73B9;
+                    letter-spacing: 0.08em;
                     cursor: pointer;
                 }
                 
@@ -144,6 +136,7 @@
                 font-weight: 500;
                 font-size: 11px;
                 color: #6DB4E4;
+                letter-spacing: 0.125em;
             }
 
             .login-info {
@@ -162,6 +155,7 @@
                     font-size: 13px;
                     color: #0E73B9;
                     margin-bottom: 5px;
+                    letter-spacing: 0.055em;
                 }
             }   
         }
@@ -174,6 +168,7 @@
                 font-weight: 500;
                 font-size: 11px;
                 color: #6DB4E4;
+                letter-spacing: 0.125em;
             }
 
             .contact-info {
@@ -192,6 +187,7 @@
                     font-size: 13px;
                     color: #0E73B9;
                     margin-bottom: 5px;
+                    letter-spacing: 0.055em;
                     cursor: pointer;
                 }
             }
@@ -206,11 +202,14 @@
                 font-size: 13px;
                 color: #ED5C5C;
                 margin-bottom: 5px;
+                letter-spacing: 0.055em;
             }
 
             .tips {
                 font-size: 13px;
                 color: #919191;
+                letter-spacing: 0.045em;
+                line-height: 17px;
             }
         }
     }
@@ -258,7 +257,7 @@
                 padding: 20px;
             }
             .heading {
-                font-weight: 500;
+                font-weight: bold;
                 font-size: 20px;
                 color: #0E73B9;
             }
@@ -301,7 +300,9 @@
                     font-weight: 500;
                     font-size: 11px;
                     color: #6DB4E4;
-                    margin-bottom: 10px;
+                    margin-bottom: 5px;
+                    line-height: 17px;
+                    letter-spacing: 0.125em;
                 }
                 &__rewards {
                     font-weight: 600;
@@ -318,18 +319,13 @@
             }
             .heading {
                 margin-bottom: 20px;
-                font-weight: 500;
+                font-weight: bold;
                 font-size: 20px;
                 color: #0E73B9;
             }
 
             .consultations-container {
-                height: 35vh;
                 padding: 10px;
-                max-height: 35vh;
-                overflow: auto;
-
-
 
                 .consultation-item {
                     display: flex;
@@ -359,6 +355,7 @@
                                 line-height: 127%;
                                 letter-spacing: 0.035em;
                                 color: #151515;
+                                margin-bottom: 5px;
                             }
                             .ministry-title {
                                 font-weight: normal;
@@ -386,6 +383,7 @@
                                 line-height: 130.5%;
                                 letter-spacing: 0.045em;
                                 color: #919191;
+                                margin-bottom: 10px;
                             }
                             .rewards {
                                 font-weight: 500;
@@ -463,18 +461,15 @@
                     border: 1px solid $input-border;
                     box-sizing: border-box;
                     border-radius: 3px;
-                    padding: 10px;
+                    
                     input { 
                         width: 100%;
                         font-weight: 500;
                         font-size: 15px;
                         background: $white;
-                        
+                        padding: 10px;
                         border: none;
-
-                        &:focus {
-                            outline: none;
-                        }
+                        border-radius: 3px;
                     }
 
                     @media screen and (max-width: 991px) {

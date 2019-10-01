@@ -24,7 +24,6 @@ export class ConsultationsSummaryComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private apollo: Apollo, private errorService: ErrorService) {
     this.activatedRoute.params.subscribe((param: any) => {
       this.consultationId = +param['id'];
-      console.log(this.consultationId);
     });
     this.activatedRoute.queryParams
     .subscribe((queryParams: any) => {

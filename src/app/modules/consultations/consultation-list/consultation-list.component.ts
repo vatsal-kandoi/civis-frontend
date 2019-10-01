@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { ConsultationList } from './consultation-list.graphql';
 import { LinearLoaderService } from '../../../shared/components/linear-loader/linear-loader.service';
 import * as moment from 'moment';
+import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 
 @Component({
   selector: 'app-consultation-list',
@@ -32,7 +33,7 @@ export class ConsultationListComponent implements OnInit {
     }
   }
 
-  constructor(private apollo: Apollo, private loader: LinearLoaderService) { }
+  constructor(private apollo: Apollo, private loader: LinearLoaderService, private errorService: ErrorService) { }
 
   ngOnInit() {
     this.fetchActiveConsultationList();
@@ -60,8 +61,9 @@ export class ConsultationListComponent implements OnInit {
         }, err => {
             this.loadingElements.consultationList = false;
             this.loader.hide();
-            console.log('not working', err);
-        })
+            this.errorService.showErrorModal(err);
+            console.log('error', err);
+        });
   }
 
   loadMoreCard() {
@@ -107,7 +109,9 @@ export class ConsultationListComponent implements OnInit {
       perPage: this.perPageLimit,
       page: 1,
       statusFilter: status,
-      featuredFilter: false 
+      featuredFilter: false,
+      sort: 'response_deadline',
+      sortDirection: 'desc',
     };
     return this.apollo.watchQuery({query: ConsultationList, variables});
   }
@@ -128,8 +132,9 @@ export class ConsultationListComponent implements OnInit {
         }, err => {
             this.loadingElements.consultationList = false;
             this.loader.hide();
-            console.log('not working', err);
-        })
+            this.errorService.showErrorModal(err);
+            console.log('error', err);
+        });
   }
   
   convertDateType(date) {

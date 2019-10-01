@@ -17,6 +17,7 @@
             Select a consultation to get started! 
           </li>
           <li>Can’t find a consultation you know about on Civis? Why don’t you add it in!</li>
+          <button class="app-btn primary mt-2" (click)="scrollToResponses()">Add A Consultation</button>
         </ul>
         <ul class="step-points">
           <p class="step-number">Step Two: Read The Summary</p>
@@ -72,7 +73,7 @@
     </div>
   </div>
 
-  <div class="works-wrapper__step-section">
+  <div class="works-wrapper__step-section" #addConultationSection>
     <p class="step-section-title">Add A Consultation</p>
     <div class="step-grid">
       <img class="step-image" src="../../../assets/images/step2.png" />
@@ -110,6 +111,9 @@
             When you select the department the consultation is from, you help us share feedback with the right people. 
             If you can’t find the department in the dropdown menu, be sure to add it.
           </li>
+          <button class="app-btn primary mt-2" [routerLink]="['/consultations/new']">
+            Add a department page
+          </button>
         </ul>
         <ul class="step-points">
           <p class="step-number">Step Five: Submit The Consultation</p>

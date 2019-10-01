@@ -24,6 +24,7 @@ export const ConsultationProfile = gql`
         }
       }
       satisfactionRatingDistribution
+      status
       sharedResponses(sort: created_at, sortDirection: desc) {
         edges {
           node {
@@ -73,6 +74,7 @@ export const ConsultationProfileCurrentUser = gql`
         }
       }
       satisfactionRatingDistribution
+      status
       respondedOn
       sharedResponses(sort: created_at, sortDirection: desc) {
         edges {
@@ -112,10 +114,17 @@ export const VoteCreateQuery = gql `
   }
 `
 
+export const VoteDeleteQuery = gql `
+  mutation voteDelete($consultationResponseId : Int!) {
+    voteDelete(consultationResponseId : $consultationResponseId )
+  }
+`
+
 export const SubmitResponseQuery = gql`
   mutation consultationResponseCreate($consultationResponse: ConsultationResponseCreateInput!){
     consultationResponseCreate(consultationResponse: $consultationResponse){
       id
+      points
       user {
         firstName
       }

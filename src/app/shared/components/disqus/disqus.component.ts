@@ -1,6 +1,8 @@
 import { Component, Input, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
+import { UserService } from '../../services/user.service';
+import { ErrorService } from '../error-modal/error.service';
 
 @Component({
   selector: 'app-disqus',
@@ -16,36 +18,54 @@ export class DisqusComponent implements OnInit {
   pubKey = '0OmI8FaGlf8KlhbV1J0EGtLHLtgZRVn93wP0OmQniIkti1Tl7LZqjIQWfJj2c687';
 
   dom: any;
+  currentUser: any;
 
   constructor(
     private el: ElementRef,
     private renderer: Renderer2,
     private http: HttpClient,
     private graphqlService: GraphqlService,
+    private userService: UserService,
+    private errorService: ErrorService
     ) {
     this.dom = el.nativeElement;
   }
 
   ngOnInit() {
-    this.getSSO();
+    this.userService.userLoaded$
+    .subscribe(data => {
+      if (data) {
+        this.currentUser = this.userService.currentUser;
+        this.getSSO();
+      } else {
+        this.setupDisqus();
+      }
+    });
   }
 
   getSSO() {
     this.http.post(`${this.graphqlService.appApiEndpoint}/disqus/sso`,
       {
-        userId: 34, username: 'manzurtest', email: 'manzur+hardcoded@commutatus.com'
+        userId: this.currentUser.id,
+        username: `${this.currentUser.firstName} ${this.currentUser.lastName}`,
+        email: this.currentUser.email
       }
     )
     .subscribe((res: any) => {
       this.ssoAuth = res.auth;
-      if ((<any>window).DISQUS === undefined) {
-        this.addScriptTag();
-      } else {
-        this.reset();
-      }
+      this.setupDisqus();
     }, err => {
       console.log('error is: ', err);
+      this.errorService.showErrorModal(err);
     });
+  }
+
+  setupDisqus() {
+    if ((<any>window).DISQUS === undefined) {
+      this.addScriptTag();
+    } else {
+      this.reset();
+    }
   }
 
   /**

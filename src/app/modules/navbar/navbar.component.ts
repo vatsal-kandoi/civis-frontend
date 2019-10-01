@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, HostListener, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, ViewEncapsulation, ElementRef } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { ConsultationList } from './navbar.graphql';
+import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,7 @@ import { ConsultationList } from './navbar.graphql';
 export class NavbarComponent implements OnInit {
 
   @ViewChild('menuModal', { static: false }) menuModal;
+  @ViewChild('userProfileElement', { static: false }) userProfileElement: ElementRef;
   showNav = true;
   currentUrl: any;
   currentUser: any;
@@ -36,11 +38,13 @@ export class NavbarComponent implements OnInit {
       description: 'Talk to the community'
     },
   ];
+  activeTab: string;
   constructor(
     private router: Router,
     private userService: UserService,
     private apollo: Apollo,
     private route: ActivatedRoute,
+    private consultationService: ConsultationsService,
     ) { }
 
   ngOnInit() {
@@ -51,6 +55,7 @@ export class NavbarComponent implements OnInit {
     });
     this.getCurrentUser();
     this.getActiveConsulationCount();
+    this.getActiveTab();
   }
 
   openMenu() {
@@ -79,6 +84,9 @@ export class NavbarComponent implements OnInit {
       if (url.search('summary') !== -1) {
         return 'consultations-summary';
       }
+      if (url.search('response') !== -1) {
+        return 'consultations-response';
+      }
 
       return 'consultations-profile';
     }
@@ -96,6 +104,15 @@ export class NavbarComponent implements OnInit {
       });
   }
 
+  getActiveTab() {
+    this.consultationService.activeTab
+    .subscribe((tab) => {
+      if (tab) {
+        this.activeTab = tab;
+      }
+    });
+  }
+
   showProfilePopup() {
     this.profilePopup = !this.profilePopup;
   }
@@ -105,9 +122,9 @@ export class NavbarComponent implements OnInit {
       if (this.currentUrl === 'consultations-profile') {
         return 'assets/images/mobile-logo.svg';
       }
-      return 'assets/images/brand-logo/brand-logo.svg';
+      return 'assets/images/navlogo.png';
     } else {
-      return 'assets/images/brand-logo/brand-logo.svg';
+      return 'assets/images/navlogo.png';
     }
   }
 
@@ -127,6 +144,17 @@ export class NavbarComponent implements OnInit {
       this.transparentNav = false;
     } else if (number > 150) {
       this.transparentNav = true;
+    }
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  onClick(targetElement) {
+    if (this.profilePopup) {
+      if (this.userProfileElement.nativeElement.contains(targetElement)) {
+            return;
+      } else {
+        this.profilePopup = false;
+      }
     }
   }
 

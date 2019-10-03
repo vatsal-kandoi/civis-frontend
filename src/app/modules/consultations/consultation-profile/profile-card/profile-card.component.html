@@ -46,13 +46,14 @@
                 [url]="currentUrl"
                 [autoSetMeta]="false"
                 (closed)="showShareOptions = false"
-              ></share-button>
-              <share-button 
-                [button]="'twitter'"
-                [url]="currentUrl"
-                [autoSetMeta]="false"
-                (closed)="showShareOptions = false"
                 ></share-button>
+                <a  class="tweet-block"
+                [href]="getTwitterUrl(currentUrl)"
+                target="_blank">
+                  <span>
+                      <i class="fa fa-twitter"></i>
+                  </span>
+                </a>
                 <share-button 
                 [button]="'whatsapp'"
                 [url]="currentUrl"

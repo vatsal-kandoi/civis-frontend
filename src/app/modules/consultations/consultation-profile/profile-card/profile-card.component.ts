@@ -29,7 +29,7 @@ export class ProfileCardComponent implements OnInit {
               private router: Router ) { }
 
   ngOnInit() {
-      this.currentUrl = this.router.url;
+      this.currentUrl = window.location.href;
       this.CheckSubmitResponseEnabled();
       this.getCurrentUser();
   }
@@ -70,6 +70,13 @@ export class ProfileCardComponent implements OnInit {
 
   convertDateFormat(date) {
     return moment(date).format('Do MMM YY');
+  }
+
+  getTwitterUrl(link) {
+    const text  = `I did my bit, I just shared my feedback on a draft law-` +
+                  `${this.profile.title} on Civis in India. You should do it too!`;
+    const url = `https://twitter.com/intent/tweet?text=${text}&url=${link}`;
+    return url;
   }
 
   createCalendarEvent() {

@@ -65,6 +65,12 @@
                   </div>
                   <div *ngIf="password.invalid && (password.touched || loginForm.submitted)" class="error-msg">Password is Required</div>
               </div>
+              
+              <div>
+                <button class="forgot-link" [routerLink]="['/auth', 'forgot_password']">
+                   Forgot my password
+                </button>
+              </div>
       
               <div>
                 <button class="app-btn secondary get-start-btn" type="submit">

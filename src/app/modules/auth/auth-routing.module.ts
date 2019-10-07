@@ -12,7 +12,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'success', component: SuccessComponent},
     { path: 'failure', component: FailureComponent},
-    { path: 'forgot_password', component: ForgotPasswordComponent}
+    { path: 'forgot-password', component: ForgotPasswordComponent}
 ];
 
 

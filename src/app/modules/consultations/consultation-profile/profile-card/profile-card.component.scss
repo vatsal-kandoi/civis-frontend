@@ -109,6 +109,31 @@
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
           }
+          .tweet-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: .3125em;
+            border: none;
+            border-radius: 5px;
+            background-color: #00acee;
+            min-width: 3.8em;
+
+            &:visited {
+              color: transparent;
+            }
+            &:hover {
+              color: transparent;
+            }
+            &:active {
+              color: transparent;
+            }
+
+            i {
+              color: $white;
+              font-size: 18px;
+            }
+          }
         }
       }
     }

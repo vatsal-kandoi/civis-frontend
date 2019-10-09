@@ -22,6 +22,8 @@ export class ForgotPasswordComponent implements OnInit {
   resetPasswordToken: any;
   passwordMismatch: boolean;
   loading: boolean;
+  emailFormSubmitted: boolean;
+  showSuccessMessage: boolean;
 
   constructor(private apollo: Apollo,
               private errorService: ErrorService,
@@ -38,11 +40,12 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit(isValid: boolean) {
-    if (!isValid) {
+  submit(emailForm) {
+    if (!emailForm.valid) {
       return;
     }
     this.loading = true;
+    this.emailFormSubmitted = true;
     this.apollo.mutate({
         mutation: ForgotPasswordMutation,
         variables: {
@@ -54,8 +57,12 @@ export class ForgotPasswordComponent implements OnInit {
       )
       .subscribe((token: any) => {
         this.loading = false;
+        this.showSuccessMessage = true;
+        this.emailFormSubmitted = false;
+        emailForm.reset();
       }, (err: any) => {
         this.loading = false;
+        this.emailFormSubmitted = false;
         this.errorService.showErrorModal(err);
       });
   }

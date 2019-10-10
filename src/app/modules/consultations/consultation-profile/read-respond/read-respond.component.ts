@@ -95,8 +95,8 @@ export class ReadRespondComponent implements OnInit {
     const title = consultationProfile.title ? consultationProfile.title : '' ;
     const image = (consultationProfile['mininstry'] ?
      (consultationProfile['mininstry']['coverPhoto'] ? consultationProfile['mininstry']['coverPhoto']['url'] : '') : '');
-    const description = consultationProfile['summary'].length < 140 ?
-                        consultationProfile['summary'] : consultationProfile['summary'].slice(0, 140);
+    const description = consultationProfile['summary'] ? (consultationProfile['summary'].length < 140 ?
+                        consultationProfile['summary'] : consultationProfile['summary'].slice(0, 140)) : '';
     this.deleteMetaTags();
     this.setTitle(title);
     const smTags = [].concat(this.makeTwitterTags(description, title))

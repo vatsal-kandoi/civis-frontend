@@ -1,0 +1,29 @@
+<div bsModal #confirmEmailModal="bs-modal" class="modal fade email-modal" tabindex="-1" (onHidden)="hideModal()"
+     [config]="{show: true, backdrop: 'static', ignoreBackdropClick: true}"
+     [ngClass]="showModal ? 'align-center' : ''"
+     role="dialog" aria-labelledby="confirmEmailModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <div class="title">Verify your email ID</div>
+          <div class="pointer" (click)="closeModal()">X</div>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">
+            Your email ID {{currentUser?.email}} is not verified yet.
+        </p>
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="col-10 text-center pt-3" (click)="resendEmail()">
+                <button class="app-btn secondary get-start-btn">
+                    <p class="m-0">Resend confirmation</p>
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
+            <div class="pt-3" *ngIf="loading">
+                <img src="assets/images/loading.svg">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

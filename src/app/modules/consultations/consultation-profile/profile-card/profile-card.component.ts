@@ -23,6 +23,7 @@ export class ProfileCardComponent implements OnInit {
   currentUser: any;
   showShareOptions: boolean;
   currentUrl = '';
+  showConfirmEmailModal: boolean;
 
   constructor(private consultationsService: ConsultationsService,
               private userService: UserService,
@@ -111,6 +112,12 @@ export class ProfileCardComponent implements OnInit {
       this.router.navigateByUrl('/auth');
       return;
     }
+
+    if (this.currentUser && !this.currentUser.confirmedAt) {
+      this.showConfirmEmailModal = true;
+      return;
+    }
+
     if (!hasResponseSubmited) {
       this.consultationsService.scrollToCreateResponse.next(true);
     }

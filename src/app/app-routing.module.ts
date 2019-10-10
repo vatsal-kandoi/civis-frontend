@@ -5,6 +5,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { TermsOfServiceComponent } from './modules/policy/terms-of-service/terms-of-service.component';
 import { ContentPolicyComponent } from './modules/policy/content-policy/content-policy.component';
 import { PrivacyPolicyComponent } from './modules/policy/privacy-policy/privacy-policy.component';
+import { ConfirmUserGuard } from './shared/guards/confirm-user.guard';
 
 const routes: Routes = [
   {
@@ -52,6 +53,11 @@ const routes: Routes = [
   {
     path: 'privacy',
     component: PrivacyPolicyComponent
+  },
+  {
+    path: 'confirm',
+    loadChildren: './modules/home/home.module#HomeModule',
+    canActivate: [ConfirmUserGuard]
   }
 ];
 

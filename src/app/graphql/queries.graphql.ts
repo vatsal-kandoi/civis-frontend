@@ -16,6 +16,7 @@ query{
       }
     }
     cityRank
+    confirmedAt
     createdAt
     email
     firstName

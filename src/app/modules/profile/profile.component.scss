@@ -157,7 +157,12 @@
                     margin-bottom: 5px;
                     letter-spacing: 0.055em;
                 }
-            }   
+            }  
+            
+            .reset-cta {
+                display: inline-block;
+                cursor: pointer;
+            }
         }
 
         .contact-space {

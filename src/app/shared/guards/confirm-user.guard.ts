@@ -6,6 +6,8 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { ErrorService } from '../components/error-modal/error.service';
 import { TokenService } from '../services/token.service';
+import { map } from 'rxjs/operators';
+
 
 const ConfirmEmailMutation = gql`
     mutation confirmEmail($confirmationToken: String!) {
@@ -35,10 +37,13 @@ export class ConfirmUserGuard implements CanActivate {
             confirmationToken: token
         };
         this.apollo.mutate({mutation: ConfirmEmailMutation, variables: variables})
-        .subscribe( (accessToken) => {
-            if (accessToken) {
-                this.router.navigateByUrl('/');
-                this.tokenService.storeToken(token);
+        .pipe(
+            map((res: any) => res.data.authConfirmEmail)
+        )
+        .subscribe((tokenObj) => {
+            if (tokenObj) {
+                this.tokenService.storeToken(tokenObj);
+                this.router.navigateByUrl('/profile');
                 this.tokenService.tokenHandler();
                 this.userService.manageUserToken();
             }

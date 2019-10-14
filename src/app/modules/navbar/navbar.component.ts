@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit {
     },
   ];
   activeTab: string;
+  showConfirmEmailModal: boolean;
   constructor(
     private router: Router,
     private userService: UserService,
@@ -179,6 +180,21 @@ export class NavbarComponent implements OnInit {
       this.router.navigateByUrl(`/consultations/${consulationId}/${subRoute}`);
     }
   }
+
+  submitConsultation() {
+    if (!this.currentUser) {
+      this.router.navigateByUrl('/auth');
+      return;
+    } else {
+      if (this.currentUser && this.currentUser.confirmedAt) {
+        this.router.navigateByUrl('/consultations/new');
+      } else {
+        this.showConfirmEmailModal = true;
+      }
+    }
+  }
+
+
 
   changeMenu(event) {
       switch (event.name) {

@@ -23,6 +23,7 @@ export class ProfileCardComponent implements OnInit {
   currentUser: any;
   showShareOptions: boolean;
   currentUrl = '';
+  showConfirmEmailModal: boolean;
 
   constructor(private consultationsService: ConsultationsService,
               private userService: UserService,
@@ -73,8 +74,17 @@ export class ProfileCardComponent implements OnInit {
   }
 
   getTwitterUrl(link) {
-    const text  = `I did my bit, I just shared my feedback on a draft law-` +
-                  `${this.profile.title} on Civis in India. You should do it too!`;
+    const today = moment();
+    const lastDate = moment(this.profile.responseDeadline);
+    const difference = lastDate.diff(today, 'days');
+    let remainingDays = '';
+    if (difference <= 0) {
+      remainingDays =  difference === 0 ? ', last day for you to share your feedback too!' : '.';
+    } else {
+      remainingDays =  `, only ` + `${difference} Days Remaining for you to share your feedback too!`;
+    }
+    const text  = `It’s your turn citizen! I shared my feedback on ` +
+                  `${this.profile.title}${remainingDays}`;
     const url = `https://twitter.com/intent/tweet?text=${text}&url=${link}`;
     return url;
   }
@@ -111,6 +121,12 @@ export class ProfileCardComponent implements OnInit {
       this.router.navigateByUrl('/auth');
       return;
     }
+
+    if (this.currentUser && !this.currentUser.confirmedAt) {
+      this.showConfirmEmailModal = true;
+      return;
+    }
+
     if (!hasResponseSubmited) {
       this.consultationsService.scrollToCreateResponse.next(true);
     }

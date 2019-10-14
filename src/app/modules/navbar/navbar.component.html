@@ -51,7 +51,7 @@
 
     <div class="app-navbar__right-item">
       <div class="nav-btns" *ngIf="currentUrl !== 'consultations-profile'">
-        <button class="btn btn-oval" [routerLink]="currentUser ? '/consultations/new' : '/auth'">
+        <button class="btn btn-oval" (click)="submitConsultation()">
           Submit a Consultation
         </button>
       </div>
@@ -131,8 +131,8 @@
             </button>
           </div>
           <div class="nav-btn">
-            <button class="btn-oval" [routerLink]="currentUser ? '/consultations/new' : '/auth'"
-              (click)="closeMenu()">Submit a Consultation</button>
+            <button class="btn-oval" 
+              (click)="closeMenu(); submitConsultation()">Submit a Consultation</button>
           </div>
           <div class="nav-btn" *ngIf="!currentUser">
             <button class="close-btn btn btn-transparent" (click)="closeMenu()" [routerLink]="['/auth', 'sign-up']">
@@ -144,3 +144,5 @@
     </div>
   </div>
 </div>
+
+<app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false"></app-confirm-email-modal>

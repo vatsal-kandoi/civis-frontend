@@ -6,6 +6,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directives.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { ConfirmEmailModule } from 'src/app/shared/confirm-email-modal/confirm-email.module';
 
 
 
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
         ModalModule.forRoot(),
         NgSelectModule,
         FormsModule,
+        ConfirmEmailModule,
     ],
     exports: [
         NavbarComponent

@@ -41,7 +41,7 @@
   .heading {
     @include general-text($font-size: 16px, $weight: bold);
   }
-
+  
   .summary-content {
     @include general-text;
     @media screen {

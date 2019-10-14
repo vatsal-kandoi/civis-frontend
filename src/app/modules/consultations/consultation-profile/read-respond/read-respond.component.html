@@ -1,6 +1,9 @@
 <section class="read-response-container" #responseIndex>
   <div class="paper-effect">
-    <p class="heading">Summary</p>
+    <p class="heading">
+      Summary
+      <span>{{profileData?.responsesReadingTimes ? '(' + profileData?.responsesReadingTimes + ' min)' : '' }}</span>
+    </p>
     <p class="summary-content" [innerHTML]="profileData?.summary"></p>
   </div>
 

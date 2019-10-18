@@ -17,7 +17,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 })
 
 export class LandingComponent implements OnInit {
-  coverCardData: any;
+  coverCardData = [];
   latestResponse: any
   current_card_index = 0;
   current_response_index = 0;
@@ -25,27 +25,25 @@ export class LandingComponent implements OnInit {
   activeTab = 'submit-response';
   impactStats: any;
   citizenLeaders: any;
-  activeConsultations: any;
-  closedConsultations: any;
 
 constructor( private apollo: Apollo, private errorService: ErrorService) { }
 
   ngOnInit() {
-    this.getConsultationCard('published');
+    this.getConsultationCard('published', true);
     this.getLatestResponse();
     this.rotateFeature();
     this.getImpactStats();
     this.getCiitizenLeaders();
   }
 
-  getConsultationCard(status) {
+  getConsultationCard(status, featuredFilter) {
     const variables = {
       perPage: null,
       page: null,
       statusFilter: status,
       sort: 'response_deadline',
       sortDirection: 'desc',
-      featuredFilter: status === 'published' ? true : false,
+      featuredFilter: featuredFilter,
     };
     this.apollo.query({
       query: ConsultationList,
@@ -55,21 +53,34 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
       map((res: any) => res.data.consultationList.data)
     )
     .subscribe((item: any) => {
-      if (status === 'published') {
-        this.activeConsultations = item;
-        if (this.activeConsultations.length  < 3) {
-          this.getConsultationCard('expired');
+      if (status === 'published' && featuredFilter) {
+        if (this.coverCardData && this.coverCardData.length >= 3) {
+          return;
         } else {
-            this.coverCardData = item;
-            return;
+          this.getConsultationCard('expired', true);
+          return;
         }
-      } else {
-        this.closedConsultations = item;
-        if (!this.activeConsultations.length) {
-          this.coverCardData = item;
+      }
+      if (status === 'expired' && featuredFilter) {
+        this.coverCardData = this.coverCardData.concat(item);
+        if (this.coverCardData && this.coverCardData.length >= 3) {
+          return;
         } else {
-          this.coverCardData = [...this.activeConsultations, ...this.closedConsultations.slice(0, 3 - this.activeConsultations.length)];
+          this.getConsultationCard('published', false);
+          return;
         }
+      }
+      if (status === 'published'  && !featuredFilter) {
+        this.coverCardData = this.coverCardData.concat(item);
+        if (this.coverCardData && this.coverCardData.length >= 3) {
+          return;
+        } else {
+          this.getConsultationCard('expired', false);
+          return;
+        }
+      }
+      if (status === 'expired'  && !featuredFilter) {
+        this.coverCardData = this.coverCardData.concat(item);
       }
     }, err => {
       console.log('err', err);

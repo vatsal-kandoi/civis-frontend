@@ -6,6 +6,7 @@ import { TermsOfServiceComponent } from './modules/policy/terms-of-service/terms
 import { ContentPolicyComponent } from './modules/policy/content-policy/content-policy.component';
 import { PrivacyPolicyComponent } from './modules/policy/privacy-policy/privacy-policy.component';
 import { ConfirmUserGuard } from './shared/guards/confirm-user.guard';
+import { UnsubscribeUserGuard } from './shared/guards/unsubscribe-user.guard';
 
 const routes: Routes = [
   {
@@ -58,6 +59,11 @@ const routes: Routes = [
     path: 'confirm',
     loadChildren: './modules/home/home.module#HomeModule',
     canActivate: [ConfirmUserGuard]
+  },
+  {
+    path: 'emails/unsubscribe',
+    loadChildren: './modules/landing/landing.module#LandingModule',
+    canActivate: [UnsubscribeUserGuard]
   }
 ];
 

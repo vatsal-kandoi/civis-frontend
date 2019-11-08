@@ -36,6 +36,9 @@ export class DefaultImageDirective implements AfterViewInit, AfterViewChecked {
       case 'user':
         this.ele.src = './assets/images/person-default.svg';
         break;
+      case 'consultation-cover':
+        this.ele.src = 'https://storage.cloud.google.com/civis-api-static/ministry-cover-photos/8-conversation-02.png';
+        break;
     }
    }
 

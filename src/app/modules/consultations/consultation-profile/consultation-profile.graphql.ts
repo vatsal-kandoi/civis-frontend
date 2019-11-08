@@ -7,6 +7,7 @@ export const ConsultationProfile = gql`
       title
       summary
       responseDeadline
+      readingTime
       responsesReadingTimes
       url
       consultationResponsesCount
@@ -58,6 +59,7 @@ export const ConsultationProfileCurrentUser = gql`
       title
       summary
       responseDeadline
+      readingTime
       responsesReadingTimes
       url
       consultationResponsesCount

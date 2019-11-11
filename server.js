@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express()
 const path = require('path');
-const secure = require('ssl-express-www');
+// const secure = require('ssl-express-www');
 const compression = require('compression');
 const disqusRouter = require('./server-app/disqus');
 
@@ -9,7 +9,7 @@ if(!process.env.APP_ENVIRONMENT) {
     require('dotenv').config();
 }
 
-app.use(secure);
+// app.use(secure);
 
 const PORT = process.env.PORT || 3401;
 app.listen(PORT);

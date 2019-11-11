@@ -14,6 +14,8 @@ import { LandingGuard } from './shared/guards/landing.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { PolicyModule } from './modules/policy/policy.module';
 import { CitySelectionModalModule } from './shared/components/city-selection-modal/city-selection-modal.module';
+import { ConfirmUserGuard } from './shared/guards/confirm-user.guard';
+import { UnsubscribeUserGuard } from './shared/guards/unsubscribe-user.guard';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { CitySelectionModalModule } from './shared/components/city-selection-mod
   ],
   providers: [
     LandingGuard,
-    AuthGuard
+    AuthGuard,
+    ConfirmUserGuard,
+    UnsubscribeUserGuard,
   ],
   bootstrap: [AppComponent]
 })

@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { SuccessComponent } from './success/success.component';
 import { FailureComponent } from './failure/failure.component';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
         SignUpComponent,
         LoginComponent,
         SuccessComponent,
-        FailureComponent
+        FailureComponent,
+        ForgotPasswordComponent
     ],
     imports: [
         CommonModule,

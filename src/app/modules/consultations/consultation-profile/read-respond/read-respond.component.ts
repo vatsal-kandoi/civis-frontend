@@ -95,8 +95,8 @@ export class ReadRespondComponent implements OnInit {
     const title = consultationProfile.title ? consultationProfile.title : '' ;
     const image = (consultationProfile['mininstry'] ?
      (consultationProfile['mininstry']['coverPhoto'] ? consultationProfile['mininstry']['coverPhoto']['url'] : '') : '');
-    const description = consultationProfile['summary'].length < 140 ?
-                        consultationProfile['summary'] : consultationProfile['summary'].slice(0, 140);
+    const description = consultationProfile['summary'] ? (consultationProfile['summary'].length < 140 ?
+                        consultationProfile['summary'] : consultationProfile['summary'].slice(0, 140)) : '';
     this.deleteMetaTags();
     this.setTitle(title);
     const smTags = [].concat(this.makeTwitterTags(description, title))
@@ -315,10 +315,9 @@ export class ReadRespondComponent implements OnInit {
       this.consultationsService.enableSubmitResponse.next(false);
       return;
     } else {
-      if (value.length === 1) {
-        this.consultationsService.enableSubmitResponse.next(true);
-        return;
-      }
+      this.consultationsService.enableSubmitResponse.next(true);
+      return;
+
     }
   }
 
@@ -368,7 +367,7 @@ export class ReadRespondComponent implements OnInit {
       const lastDate = moment(deadline);
       const difference = lastDate.diff(today, 'days');
       if (difference <= 0) {
-        return 'Closed';
+        return difference === 0 ? 'Last day to respond' : 'Closed';
       } else {
         return `Active`;
       }

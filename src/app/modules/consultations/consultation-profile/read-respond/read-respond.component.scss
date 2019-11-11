@@ -41,7 +41,7 @@
   .heading {
     @include general-text($font-size: 16px, $weight: bold);
   }
-
+  
   .summary-content {
     @include general-text;
     @media screen {
@@ -90,6 +90,9 @@
             padding: 5px 10px;
           }
         }
+        .fs-20 {
+          font-size: 20px !important;
+        }
       }
 
       .response-btn {
@@ -109,6 +112,7 @@
 
   .response-index {
     min-height: 386px;
+    height: 386px;
     background: #FFFFFF;
     box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.13);
     border-radius: 5px;
@@ -146,11 +150,12 @@
 
     &__content {
       padding: 5px 30px;
+      height: calc(100% - 115px);
       .text-space {
         resize: none;
         border: none;
         width: 100%;
-        min-height: 275px;
+        height: 100%;
 
         &:focus {
           outline: none;
@@ -209,7 +214,7 @@
       }
 
       .draggable-area {
-        padding: 5px 0;
+        height: 20px;
         background: #E3E3E3;
         display: flex;
         align-items: center;

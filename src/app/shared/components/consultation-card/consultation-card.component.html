@@ -1,6 +1,7 @@
 <a href="javascript:void(0)" class="decoration-none" [routerLink]="['/consultations', consultation?.id]">
   <div class="consultation-card">
-    <img [src]='consultation?.ministry?.coverPhoto?.url' class="consultation-card__card-image" alt="Random image">
+    <!-- <img [src]='consultation?.ministry?.coverPhoto?.url' class="consultation-card__card-image" alt="Random image"> -->
+    <div class="consultation-card__card-image" [ngStyle]="consultation?.ministry?.coverPhoto?.url ? {'background-image': 'url(' + consultation?.ministry?.coverPhoto?.url + ')'} : null"></div>
     <div class="consultation-card__details">
       <p class="title">{{ consultation?.title}}</p>
       <p class="sub-title">{{ consultation?.ministry?.name}}</p>
@@ -8,7 +9,8 @@
         <div>
           <p class="days-remaining-text">{{getRemainigDays(consultation?.responseDeadline)}}</p>
           <p class="responses-text">
-            {{consultation?.consultationResponsesCount ? consultation?.consultationResponsesCount : '--'}} Responses so far
+            {{consultation?.consultationResponsesCount ? consultation?.consultationResponsesCount : '--'}} 
+            {{ consultation?.consultationResponsesCount <= 1 ? 'Response so far' : 'Responses so far' }} 
           </p>
         </div>
         <button class="app-btn secondary btn-respond">

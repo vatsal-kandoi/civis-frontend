@@ -40,11 +40,11 @@ export class DefaultImageDirective implements AfterViewInit, AfterViewChecked {
         break;
       case 'consultation-cover':
         if (this.ele.tagName === 'IMG') {
-          this.ele.src = 'https://storage.cloud.google.com/civis-api-static/ministry-cover-photos/8-conversation-02.png';
+          this.ele.src = 'https://storage.googleapis.com/civis-api-static/ministry-cover-photos/8-conversation-02.png';
           return;
         } else {
           this.ele.style.backgroundImage =
-          'url(https://storage.cloud.google.com/civis-api-static/ministry-cover-photos/8-conversation-02.png)';
+          'url(https://storage.googleapis.com/civis-api-static/ministry-cover-photos/8-conversation-02.png)';
         }
         break;
     }

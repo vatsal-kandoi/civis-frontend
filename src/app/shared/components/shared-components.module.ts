@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ErrorComponent } from './error-modal/error.component';
 import { FooterComponent } from './footer/footer.component';
 import { ToastComponent } from './toast/toast.component';
+import { SharedDirectivesModule } from '../directives/shared-directives.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ToastComponent } from './toast/toast.component';
   imports: [
     CommonModule,
     LinearLoaderModule,
-    RouterModule
+    RouterModule,
+    SharedDirectivesModule,
   ],
   exports: [
     ActionButtonComponent,

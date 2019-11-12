@@ -50,7 +50,7 @@
       </p>
     </div>
     <ng-container *ngFor="let response of responseList">
-      <div class="response-container">
+      <div class="response-container" [id]="response?.node?.id">
         <div class="d-inline-flex align-items-center">
           <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="response?.node?.user?.profilePicture?.url" />
           <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
@@ -70,10 +70,32 @@
                 class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
                 <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
             </div>
-            <div>
-                <span (click)="useThisResponse(response?.node)" 
-                tooltip="{{'use this response'}}"
-                class="ml-4 mr-2 fs-20"><i class="fa fa-share"></i></span>
+            <div class="share-block">
+                <div class="share-block__position">
+                  <div #shareBlockElement *ngIf="showShareBlock" class="share-pop-up">
+                      <share-button 
+                      [button]="'facebook'"
+                      [url]="getSharingUrl(response?.node?.id)"
+                      [autoSetMeta]="false"
+                      (closed)="showShareOptions = false"
+                      ></share-button>
+                      <a  class="tweet-block"
+                      [href]="getTwitterUrl(currentUrl, response?.node?.id)"
+                      target="_blank">
+                        <span>
+                            <i class="fa fa-twitter"></i>
+                        </span>
+                      </a>
+                      <share-button 
+                      [button]="'whatsapp'"
+                      [url]="getSharingUrl(response?.node?.id)"
+                      [autoSetMeta]="false"
+                      (closed)="showShareOptions = false"
+                      ></share-button>
+                  </div>
+                </div>
+                <span #shareButtonElement (click)="showShareBlock = !showShareBlock"
+                class="ml-4 mr-2 fs-20 pointer"><i class="fa fa-share"></i></span>
                 <span>{{response.node?.templatesCount ? response.node?.templatesCount : '' }}</span>
             </div>
           </div>

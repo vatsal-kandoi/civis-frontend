@@ -93,6 +93,63 @@
         .fs-20 {
           font-size: 20px !important;
         }
+        .share-block {
+          position: relative;
+    
+          &__position {
+            position: absolute;
+            bottom: 35px;
+            .share-pop-up {
+              width: 250px;
+              display: flex;
+              justify-content: center;
+              margin-bottom: 10px;
+              margin-left: -35%;
+              background: white;
+              padding: 10px; 
+              box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.13);
+              border-radius: 5px;
+              position: relative;
+        
+              &:after {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                margin: 0 auto;
+                width: 0;
+                height: 0;
+                border-top: 10px solid white;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+              }
+              .tweet-block {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: .3125em;
+                border: none;
+                border-radius: 5px;
+                background-color: #00acee;
+                min-width: 3.8em;
+    
+                &:visited {
+                  color: transparent;
+                }
+                &:hover {
+                  color: transparent;
+                }
+                &:active {
+                  color: transparent;
+                }
+    
+                i {
+                  color: $white;
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+        }
       }
 
       .response-btn {

@@ -1,26 +1,33 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewChecked } from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import * as moment from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
-import { ConsultationProfileCurrentUser, ConsultationProfile, SubmitResponseQuery, VoteCreateQuery, VoteDeleteQuery } from '../consultation-profile.graphql';
+import { ConsultationProfileCurrentUser,
+         ConsultationProfile,
+         SubmitResponseQuery,
+         VoteCreateQuery,
+         VoteDeleteQuery } from '../consultation-profile.graphql';
 import { Apollo } from 'apollo-angular';
 import { map, filter } from 'rxjs/operators';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { ModalDirective } from 'ngx-bootstrap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-read-respond',
   templateUrl: './read-respond.component.html',
   styleUrls: ['./read-respond.component.scss']
 })
-export class ReadRespondComponent implements OnInit {
+export class ReadRespondComponent implements OnInit, AfterViewChecked {
 
 
   @ViewChild('feedbackModal', { static: false }) feedbackModal: ModalDirective;
   @ViewChild('responseIndex', { read: ElementRef , static: false }) panel: ElementRef<any>;
   @ViewChild('responsesListContainer', { read: ElementRef , static: false }) responsesListContainer: ElementRef<any>;
+  @ViewChild('shareBlockElement', { static: false }) shareBlockElement: ElementRef;
+  @ViewChild('shareButtonElement', { static: false }) shareButtonElement: ElementRef;
+
 
   profileData: any;
   responseList: any;
@@ -36,11 +43,16 @@ export class ReadRespondComponent implements OnInit {
   responseSubmitted: boolean;
   responseSubmitLoading: boolean;
   earnedPoints: any;
+  fragment: string;
+  currentUrl: string;
+  showShareBlock: any;
+  checkForFragments: boolean;
 
 
   constructor(
     private consultationsService: ConsultationsService,
     private router: Router,
+    private route: ActivatedRoute,
     private userService: UserService,
     private apollo: Apollo,
     private errorService: ErrorService,
@@ -57,10 +69,18 @@ export class ReadRespondComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUrl = window.location.href;
     this.getCurrentUser();
     this.createSatisfactionRating();
     this.scrollToCreateResponse();
     this.setActiveTab();
+  }
+
+  ngAfterViewChecked() {
+    if (this.checkForFragments) {
+      this.subscribeToFragment();
+      this.checkForFragments = false;
+    }
   }
 
   public setTitle(newTitle: string) {
@@ -69,6 +89,18 @@ export class ReadRespondComponent implements OnInit {
 
   setActiveTab() {
     this.consultationService.activeTab.next('read & respond');
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  onClick(targetElement) {
+    if (this.showShareBlock) {
+      if (this.shareBlockElement.nativeElement.contains(targetElement) ||
+          this.shareButtonElement.nativeElement.contains(targetElement)) {
+            return;
+      } else {
+        this.showShareBlock = false;
+      }
+    }
   }
 
   getConsultationProfile() {
@@ -86,6 +118,7 @@ export class ReadRespondComponent implements OnInit {
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
         this.responseList = data.sharedResponses.edges;
         this.createMetaTags(this.profileData);
+        this.checkForFragments = true;
     }, err => {
       this.errorService.showErrorModal(err);
     });
@@ -191,6 +224,22 @@ export class ReadRespondComponent implements OnInit {
     }
     return true;
   }
+
+  subscribeToFragment() {
+    this.route.fragment.subscribe(fragment => {
+      this.fragment = fragment;
+      if (this.fragment) {
+        const element = document.getElementById(this.fragment);
+        if (element) {
+          window.scrollTo({
+            top: element.getBoundingClientRect().top - 80,
+            behavior: 'smooth',
+          });
+        }
+      }
+    });
+  }
+
 
   submitResponse(consultationResponse) {
     this.responseSubmitLoading = true;
@@ -351,6 +400,26 @@ export class ReadRespondComponent implements OnInit {
       return selectedPercentage;
     }
     return 0;
+  }
+
+  getTwitterUrl(link, id) {
+    const today = moment();
+    const lastDate = moment(this.profileData.responseDeadline);
+    const difference = lastDate.diff(today, 'days');
+    let remainingDays = '';
+    if (difference <= 0) {
+      remainingDays =  difference === 0 ? ', last day for you to share your feedback too!' : '.';
+    } else {
+      remainingDays =  `, only ` + `${difference} Days Remaining for you to share your feedback too!`;
+    }
+    const text  = `It’s your turn citizen! I shared my feedback on ` +
+                  `${this.profileData.title}${remainingDays}`;
+    const url = `https://twitter.com/intent/tweet?text=${text}&url=${link}%23${id}`;
+    return url;
+  }
+
+  getSharingUrl(id) {
+    return this.currentUrl + `%23${id}`;
   }
 
   showCreateResponse() {

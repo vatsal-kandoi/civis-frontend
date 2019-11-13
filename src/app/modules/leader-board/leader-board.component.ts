@@ -89,7 +89,7 @@ export class LeaderBoardComponent implements OnInit {
     const variables = {
       perPage: this.perPageLimit,
       page: 1,
-      roleFilter: 'citizen',
+      roleFilter: ['citizen', 'moderator'],
       locationFilter: this.locationFilter,
       sort: 'points',
       sortDirection: 'desc'

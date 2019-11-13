@@ -1,5 +1,5 @@
-<div class="consultation-bg-img"
-  [ngStyle]="{'background-image': 'url(' + profileData?.ministry?.coverPhoto?.url + ')'}"></div>
+<div class="consultation-bg-img" appDefaultImage [type]="'consultation-cover'"
+[ngStyle]="profileData?.ministry?.coverPhoto?.url ? {'background-image': 'url(' + profileData?.ministry?.coverPhoto?.url + ')'} : null"></div>
 <div class="consultation-profile">
 
   <aside class="consultation-profile__sidebar-section">

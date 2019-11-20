@@ -1,20 +1,38 @@
+# CIVIS FRONTEND
+
+This app is generated from AngularStarterpack, instruction of which is given below.
+
+STEPS TO GET STARTED:
+1. Clone this repo.
+2. git checkout staging
+3. npm install
+4. Get environment files from your colleagues and paste them in the root directory as an env folder
+5. For staging api - npm run start:staging
+6. For prod api - npm run start:prod
+
+DEPLOYMENT:
+This app is configured to auto trigger deployment on master and staging branches configuration of which can be found in travis.yml
+1. Any push or merge to staging branch deploys this app to staging.civis.vote
+2. Any push or merge to master branch deploys this app to civis.vote
+
+
 # AngularStarterpack
 
-This is an Angular Boilerplate that can be used to kickstart the development on any Angular project with speed. In the 4 years of working in a service industry, we have built numerous projects and accumulated a lot of learnings from them, that are baked into this boilerplate. Over time, we also noticed certain similarities that repeat themselves in all the projects. We did not necessarily have to re-invent the wheel everytime a new project was started. This boilerplate was all that we would need to get to writing the business logic of the project, the stuff that truly mattered. Using this boilerplate as the base for a project would also force devs to adopt a certian standard set by the boilerplate, thereby ensuring everyone is writing efficient, abstarcted and highly readable code!
+This is app is build from Angular Boilerplate. Angular Boilerplate is a template that can be used to kickstart the development on any Angular project with speed. In the 4 years of working in a service industry, we have built numerous projects and accumulated a lot of learnings from them, that are baked into this boilerplate. Over time, we also noticed certain similarities that repeat themselves in all the projects. We did not necessarily have to re-invent the wheel everytime a new project was started. This boilerplate was all that we would need to get to writing the business logic of the project, the stuff that truly mattered. Using this boilerplate as the base for a project would also force devs to adopt a certian standard set by the boilerplate, thereby ensuring everyone is writing efficient, abstarcted and highly readable code!
 
 The boilerplate has/will have the following- 
 
 ## Components
 
-1. Linear loader (In Progress)
-2. Spinner (In Progress)
+1. Linear loader
+2. Spinner
 3. Pseudo cards (In Progress)
 4. Avatar (In Progress)
-5. Success/Error Toast Messages (In Progress)
+5. Success/Error Toast Messages
 6. Action Buttons (In Progress)
 7. Action Modals (In Progress)
-8. Error Modals (In Progress)
-9. Confirmations Modals (In Progress)
+8. Error Modals
+9. Confirmations Modals
 
 ## Directives
 
@@ -33,11 +51,11 @@ The boilerplate has/will have the following-
 
 ## Services
 
-1. Authentication (basic scaffolding) (In Progress)
-2. User Service (basic scaffolding) (In Progress)
-3. Apollo Service (In Progress)
-4. Error Service (In Progress)
-5. Constants service (In Progress)
+1. Authentication (basic scaffolding)
+2. User Service (basic scaffolding)
+3. Apollo Service
+4. Error Service
+5. Constants service
 6. Validators (In Progress)
 
 ## Style components

@@ -116,7 +116,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     this.apollo.query({
       query: LeaderListQuery,
       variables: {
-        roleFilter: 'citizen',
+        roleFilter: ['citizen', 'moderator'],
         sort: 'points',
         sortDirection: 'desc'
       }

@@ -403,17 +403,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   }
 
   getTwitterUrl(link, id) {
-    const today = moment();
-    const lastDate = moment(this.profileData.responseDeadline);
-    const difference = lastDate.diff(today, 'days');
-    let remainingDays = '';
-    if (difference <= 0) {
-      remainingDays =  difference === 0 ? ', last day for you to share your feedback too!' : '.';
-    } else {
-      remainingDays =  `, only ` + `${difference} Days Remaining for you to share your feedback too!`;
-    }
-    const text  = `It’s your turn citizen! I shared my feedback on ` +
-                  `${this.profileData.title}${remainingDays}`;
+    const text  = `I shared my feedback on ` +
+                  `${this.profileData.title}, support me and share your feedback on %23Civis today!`;
     const url = `https://twitter.com/intent/tweet?text=${text}&url=${link}%23${id}`;
     return url;
   }

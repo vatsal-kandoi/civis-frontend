@@ -102,6 +102,12 @@
                 <div class="list-detail">
                   <p>{{item?.node?.consultation?.title}}</p>
                   <p>{{item?.node?.consultation?.ministry?.name}}</p>
+                  <div class="response-cta">
+                    <button class="btn btn-transparent action-btn" [routerLink]="['/consultations/response', item?.node?.id]">
+                        View my response
+                        <span><i class="fa fa-angle-right"></i></span>
+                    </button>
+                  </div>
                 </div>
               </div>
               <hr  class="paticipant-divider" />

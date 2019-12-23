@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation, OnDestroy } from '@angular/core';
 import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 
 })
-export class ProfileCardComponent implements OnInit {
+export class ProfileCardComponent implements OnInit, OnDestroy {
 
   @ViewChild('shareOptionsElement', { static: false }) shareOptionsElement: ElementRef;
   @ViewChild('spreadButtonElement', { static: false }) spreadButtonElement: ElementRef;
@@ -33,6 +33,10 @@ export class ProfileCardComponent implements OnInit {
       this.currentUrl = window.location.href;
       this.CheckSubmitResponseEnabled();
       this.getCurrentUser();
+  }
+
+  ngOnDestroy() {
+    this.consultationsService.enableSubmitResponse.next(false);
   }
 
   getCurrentUser() {

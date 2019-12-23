@@ -74,6 +74,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     this.createSatisfactionRating();
     this.scrollToCreateResponse();
     this.setActiveTab();
+    this.getResponseText();
   }
 
   ngAfterViewChecked() {
@@ -366,7 +367,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     } else {
       this.consultationsService.enableSubmitResponse.next(true);
       return;
-
     }
   }
 
@@ -403,19 +403,72 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   }
 
   getTwitterUrl(link, id) {
-    const today = moment();
-    const lastDate = moment(this.profileData.responseDeadline);
-    const difference = lastDate.diff(today, 'days');
-    let remainingDays = '';
-    if (difference <= 0) {
-      remainingDays =  difference === 0 ? ', last day for you to share your feedback too!' : '.';
-    } else {
-      remainingDays =  `, only ` + `${difference} Days Remaining for you to share your feedback too!`;
-    }
-    const text  = `It’s your turn citizen! I shared my feedback on ` +
-                  `${this.profileData.title}${remainingDays}`;
+    const text  = `I shared my feedback on ` +
+                  `${this.profileData.title}, support me and share your feedback on %23Civis today!`;
     const url = `https://twitter.com/intent/tweet?text=${text}&url=${link}%23${id}`;
     return url;
+  }
+
+  getResponseText() {
+    let draftObj: any = localStorage.getItem('responseDraft');
+    if (draftObj && this.currentUser) {
+      draftObj = JSON.parse(draftObj);
+      const currentUser = draftObj.users.find(user => user.id === this.currentUser.id);
+      if (currentUser) {
+        const consultation = currentUser.consultations.find(item => item.id === this.consultationId);
+        if (consultation) {
+          this.responseText = consultation.responseText;
+        }
+      }
+    }
+  }
+
+  autoSave(text) {
+    if (text)  {
+      let draftObj: any = localStorage.getItem('responseDraft');
+      if (!draftObj) {
+        draftObj = {};
+        draftObj['users'] = [{
+          id: this.currentUser.id,
+          consultations: [{
+            id: this.consultationId,
+            responseText: text
+          }]
+        }];
+      } else {
+        draftObj = JSON.parse(draftObj);
+        const currentUser = draftObj.users.find(user => user.id === this.currentUser.id);
+        if (currentUser) {
+          const consultation = currentUser.consultations.find(item => item.id === this.consultationId);
+          if (consultation) {
+            currentUser.consultations.forEach(item => {
+              if (item.id === this.consultationId) {
+                item.responseText = text;
+              }
+            });
+          } else {
+            currentUser.consultations.push({
+              id: this.consultationId,
+              responseText: text
+            });
+          }
+          draftObj.users.forEach((item) => {
+            if (item.id === this.currentUser.id) {
+              item = currentUser;
+            }
+          });
+        } else {
+          draftObj.users.push({
+            id: this.currentUser.id,
+            consultations: [{
+              id: this.consultationId,
+              responseText: text
+            }]
+          });
+        }
+      }
+      localStorage.setItem('responseDraft', JSON.stringify(draftObj));
+    }
   }
 
   getSharingUrl(id) {

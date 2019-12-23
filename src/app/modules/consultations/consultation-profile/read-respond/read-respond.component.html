@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="response-index__content">
-      <textarea class="text-space" placeholder="Type your response here..." [(ngModel)]="responseText" (ngModelChange)="enableSubmitResponse($event)"></textarea>
+      <textarea class="text-space" placeholder="Type your response here..." [(ngModel)]="responseText" (blur)="autoSave(responseText)" (ngModelChange)="enableSubmitResponse($event)"></textarea>
     </div>
     <div class="response-index__footer">
       <div class="checkbox-area">

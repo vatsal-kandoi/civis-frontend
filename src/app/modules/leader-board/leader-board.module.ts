@@ -7,6 +7,7 @@ import { LeaderBoardComponent } from './leader-board.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directives.module';
+import { UserProfileModalModule } from 'src/app/shared/user-profile-modal/user-profile-modal.module';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     ModalModule,
     FormsModule,
     SharedDirectivesModule,
+    UserProfileModalModule,
   ]
 })
 

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, HostListener, ViewEncapsulation } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap';
 import { map } from 'rxjs/operators';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { UserList } from './leader-board.graphql';
@@ -39,8 +38,8 @@ export class LeaderBoardComponent implements OnInit {
   loadingElements: any = {};
   leaderData: any;
 
-  @ViewChild('leaderModal', { static: false }) leaderModal: ModalDirective;
   currentUser: any;
+  showLeaderProfileModal: boolean;
 
   @HostListener('document:scroll', ['$event'])
   onScroll(event: any) {
@@ -78,11 +77,13 @@ export class LeaderBoardComponent implements OnInit {
 
   openLeaderModal(data) {
     this.leaderData = data;
-    this.leaderModal.show();
+    this.showLeaderProfileModal = true;
   }
 
-  closeModal() {
-    this.leaderModal.hide();
+  closeModal(event) {
+    if (event) {
+      this.showLeaderProfileModal = false;
+    }
   }
 
   getQuery() {

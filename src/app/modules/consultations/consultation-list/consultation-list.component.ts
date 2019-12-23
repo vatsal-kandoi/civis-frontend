@@ -111,7 +111,7 @@ export class ConsultationListComponent implements OnInit {
       statusFilter: status,
       featuredFilter: false,
       sort: 'response_deadline',
-      sortDirection: 'desc',
+      sortDirection: status === 'published' ? 'asc' : 'desc',
     };
     return this.apollo.watchQuery({query: ConsultationList, variables});
   }

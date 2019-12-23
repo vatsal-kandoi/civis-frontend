@@ -42,7 +42,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
       page: null,
       statusFilter: status,
       sort: 'response_deadline',
-      sortDirection: 'desc',
+      sortDirection: status === 'published' ? 'asc' : 'desc',
       featuredFilter: featuredFilter,
     };
     this.apollo.query({
@@ -54,6 +54,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     )
     .subscribe((item: any) => {
       if (status === 'published' && featuredFilter) {
+        this.coverCardData = this.coverCardData.concat(item);
         if (this.coverCardData && this.coverCardData.length >= 3) {
           return;
         } else {

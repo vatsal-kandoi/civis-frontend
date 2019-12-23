@@ -98,9 +98,10 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
 
   sort(data) {
     this.coverCardData = data.sort((a, b) => {
-      return new Date(a.responseDeadline) - new Date(b.responseDeadline);
+      const x: any = new Date(a.responseDeadline);
+      const y: any = new Date(b.responseDeadline);
+      return x - y;
     });
-    console.log(this.coverCardData);
   }
 
   getLatestResponse() {

@@ -47,6 +47,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   currentUrl: string;
   showShareBlock: any;
   checkForFragments: boolean;
+  showAutoSaved: boolean;
 
 
   constructor(
@@ -425,6 +426,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
 
   autoSave(text) {
     if (text)  {
+      this.showAutoSaved = true;
       let draftObj: any = localStorage.getItem('responseDraft');
       if (!draftObj) {
         draftObj = {};
@@ -468,6 +470,9 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         }
       }
       localStorage.setItem('responseDraft', JSON.stringify(draftObj));
+      setTimeout(() => {
+        this.showAutoSaved = false;
+      }, 1250);
     }
   }
 

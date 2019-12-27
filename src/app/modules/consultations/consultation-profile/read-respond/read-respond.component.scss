@@ -249,7 +249,9 @@
         min-height: 40px;
         background: #F8F8F8;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
+        justify-content: space-between;
         padding: 0 30px;
 
         label {
@@ -267,6 +269,16 @@
           text-decoration-line: underline;
           color: #939393;
           cursor: pointer;
+        }
+
+        .auto-save-text {
+          font-size: 14px;
+          color: $primary-color;
+          margin: 0;
+          @media screen and (max-width: 991px) {
+            width: 100%;
+            margin: 15px 0 ;
+          }
         }
       }
 

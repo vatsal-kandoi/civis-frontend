@@ -16,16 +16,27 @@ export class ConsultationCardComponent implements OnInit {
   }
 
   getRemainigDays(deadline) {
-    if (this.consultation.status === 'expired') {
-      return 'Closed';
+    if (deadline) {
+      if (this.consultation.status === 'expired') {
+        return 'Closed';
+      }
+      const diff_in_days = this.getDifferenceInDays(deadline);
+      if (diff_in_days <= 0) {
+        return diff_in_days === 0 ? 'Last day to respond' : 'Closed';
+      } else {
+        return `${diff_in_days} Days Remaining`;
+      }
     }
-    const today = moment();
-    const lastDate = moment(deadline);
-    const difference = lastDate.diff(today, 'days');
-    if (difference <= 0) {
-      return difference === 0 ? 'Last day to respond' : 'Closed';
-    } else {
-      return `${difference} Days Remaining`;
+  }
+
+  getDifferenceInDays(deadline) {
+    if (deadline) {
+      const today = new Date();
+      today.setUTCHours(0, 0, 0, 0);
+      const lastDate = moment(deadline);
+      const diff_in_time = lastDate.valueOf() - today.getTime();
+      const diff_in_days = diff_in_time / (1000 * 3600 * 24);
+      return diff_in_days;
     }
   }
 

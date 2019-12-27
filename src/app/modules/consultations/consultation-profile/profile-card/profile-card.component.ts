@@ -63,13 +63,13 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
   }
 
   getRemainigDays(deadline) {
-    const today = moment();
-    const lastDate = moment(deadline);
-    const difference = lastDate.diff(today, 'days');
-    if (difference <= 0) {
-      return difference === 0 ? 'Last day to respond' : 'Closed';
-    } else {
-      return `${difference} Days Remaining`;
+    if (deadline) {
+      const diff_in_days = this.getDifferenceInDays(deadline);
+      if (diff_in_days <= 0) {
+        return diff_in_days === 0 ? 'Last day to respond' : 'Closed';
+      } else {
+        return `${diff_in_days} Days Remaining`;
+      }
     }
   }
 
@@ -77,20 +77,29 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     return moment(date).format('Do MMM YY');
   }
 
-  getTwitterUrl(link) {
-    const today = moment();
-    const lastDate = moment(this.profile.responseDeadline);
-    const difference = lastDate.diff(today, 'days');
-    let remainingDays = '';
-    if (difference <= 0) {
-      remainingDays =  difference === 0 ? ', last day for you to share your feedback too!' : '.';
-    } else {
-      remainingDays =  `, only ` + `${difference} Days Remaining for you to share your feedback too!`;
+  getDifferenceInDays(deadline) {
+    if (deadline) {
+      const today = new Date();
+      today.setUTCHours(0, 0, 0, 0);
+      const lastDate = moment(deadline);
+      const diff_in_time = lastDate.valueOf() - today.getTime();
+      const diff_in_days = diff_in_time / (1000 * 3600 * 24);
+      return diff_in_days;
     }
-    const text  = `It’s your turn citizen! I shared my feedback on ` +
-                  `${this.profile.title}${remainingDays}`;
-    const url = `https://twitter.com/intent/tweet?text=${text}&url=${link}`;
-    return url;
+  }
+
+  getTwitterUrl(link) {
+      const diff_in_days = this.getDifferenceInDays(this.profile.responseDeadline);
+      let remainingDays = '';
+      if (diff_in_days <= 0) {
+        remainingDays =  diff_in_days === 0 ? ', last day for you to share your feedback too!' : '.';
+      } else {
+        remainingDays =  `, only ` + `${diff_in_days} Days Remaining for you to share your feedback too!`;
+      }
+      const text  = `It’s your turn citizen! I shared my feedback on ` +
+      `${this.profile.title}${remainingDays}`;
+      const url = `https://twitter.com/intent/tweet?text=${text}&url=${link}`;
+      return url;
   }
 
   createCalendarEvent() {

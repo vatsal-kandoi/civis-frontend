@@ -39,6 +39,7 @@ export class UserProfileModalComponent implements OnInit {
   }
 
   viewResponse(response) {
+    this.closeModal();
     this.router.navigateByUrl(`/consultations/${response.consultation.id}/read#${response.id}`);
   }
 

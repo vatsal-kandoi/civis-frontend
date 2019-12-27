@@ -42,7 +42,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
       page: null,
       statusFilter: status,
       sort: 'response_deadline',
-      sortDirection: 'desc',
+      sortDirection: status === 'published' ? 'asc' : 'desc',
       featuredFilter: featuredFilter,
     };
     this.apollo.query({
@@ -54,33 +54,41 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     )
     .subscribe((item: any) => {
       if (status === 'published' && featuredFilter) {
-        if (this.coverCardData && this.coverCardData.length >= 3) {
-          return;
-        } else {
-          this.getConsultationCard('expired', true);
-          return;
-        }
-      }
-      if (status === 'expired' && featuredFilter) {
         this.coverCardData = this.coverCardData.concat(item);
         if (this.coverCardData && this.coverCardData.length >= 3) {
+          this.sort(this.coverCardData.slice(0, 3));
           return;
         } else {
           this.getConsultationCard('published', false);
           return;
         }
       }
+
       if (status === 'published'  && !featuredFilter) {
         this.coverCardData = this.coverCardData.concat(item);
         if (this.coverCardData && this.coverCardData.length >= 3) {
+          this.sort(this.coverCardData.slice(0, 3));
+          return;
+        } else {
+          this.getConsultationCard('expired', true);
+          return;
+        }
+      }
+
+      if (status === 'expired' && featuredFilter) {
+        this.coverCardData = this.coverCardData.concat(item);
+        if (this.coverCardData && this.coverCardData.length >= 3) {
+          this.sort(this.coverCardData.slice(0, 3));
           return;
         } else {
           this.getConsultationCard('expired', false);
           return;
         }
       }
+
       if (status === 'expired'  && !featuredFilter) {
         this.coverCardData = this.coverCardData.concat(item);
+        this.sort(this.coverCardData.slice(0, 3));
       }
     }, err => {
       console.log('err', err);
@@ -88,9 +96,17 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     });
   }
 
+  sort(data) {
+    this.coverCardData = data.sort((a, b) => {
+      const x: any = new Date(a.responseDeadline);
+      const y: any = new Date(b.responseDeadline);
+      return x - y;
+    });
+  }
+
   getLatestResponse() {
     this.apollo.query({
-      query: ConsultationResponseList, 
+      query: ConsultationResponseList,
       variables: {sort: 'created_at', sortDirection: 'desc'}
     })
     .pipe (
@@ -138,7 +154,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
         this.current_card_index++;
       }
 
-      if(this.current_response_index === 2) {
+      if (this.current_response_index === 2) {
         this.current_response_index = 0;
         this.currentReponseData = this.latestResponse[this.current_response_index];
       } else {

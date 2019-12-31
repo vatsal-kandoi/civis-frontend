@@ -48,6 +48,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   showShareBlock: any;
   checkForFragments: boolean;
   showAutoSaved: boolean;
+  selectedUser: any;
+  showLeaderProfileModal: boolean;
 
 
   constructor(
@@ -519,6 +521,17 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       top: this.responsesListContainer.nativeElement.getBoundingClientRect().top - 80,
       behavior: 'smooth',
     });
+  }
+
+  openUserProfile(data) {
+    this.selectedUser = data.id;
+    this.showLeaderProfileModal = true;
+  }
+
+  closeModal(event) {
+    if (event) {
+      this.showLeaderProfileModal = false;
+    }
   }
 
   useThisResponse(response) {

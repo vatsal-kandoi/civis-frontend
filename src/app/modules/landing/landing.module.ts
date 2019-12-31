@@ -5,6 +5,7 @@ import { LandingRoutingModule } from './landing-routing.module';
 import { SharedComponentsModule } from '../../shared/components/shared-components.module';
 import { HowCivisWorksCarouselComponent } from './how-civis-works-carousel/how-civis-works-carousel.component';
 import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directives.module';
+import { UserProfileModalModule } from 'src/app/shared/user-profile-modal/user-profile-modal.module';
 
 @NgModule({
   declarations: [LandingComponent, HowCivisWorksCarouselComponent],
@@ -12,7 +13,8 @@ import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directi
     CommonModule,
     LandingRoutingModule,
     SharedComponentsModule,
-    SharedDirectivesModule
+    SharedDirectivesModule,
+    UserProfileModalModule,
   ]
 })
 export class LandingModule { }

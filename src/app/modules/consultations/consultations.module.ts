@@ -20,6 +20,7 @@ import { ReadRespondComponent } from './consultation-profile/read-respond/read-r
 import { DiscussEngageComponent } from './consultation-profile/discuss-engage/discuss-engage.component';
 import { ShareButtonModule } from '@ngx-share/button';
 import { ConfirmEmailModule } from 'src/app/shared/confirm-email-modal/confirm-email.module';
+import { UserProfileModalModule } from 'src/app/shared/user-profile-modal/user-profile-modal.module';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { ConfirmEmailModule } from 'src/app/shared/confirm-email-modal/confirm-e
         AngularDraggableModule,
         DisqusModule,
         ShareButtonModule,
-        ConfirmEmailModule
+        ConfirmEmailModule,
+        UserProfileModalModule,
     ],
     exports: [TooltipModule],
     declarations: [

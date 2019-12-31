@@ -25,6 +25,8 @@ export class LandingComponent implements OnInit {
   activeTab = 'submit-response';
   impactStats: any;
   citizenLeaders: any;
+  selectedUser: any;
+  showLeaderProfileModal: boolean;
 
 constructor( private apollo: Apollo, private errorService: ErrorService) { }
 
@@ -126,6 +128,17 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     .subscribe((stats: any) => {
       this.impactStats = stats.data.impactStats;
     });
+  }
+
+  openUserProfile(data) {
+    this.selectedUser = data.id;
+    this.showLeaderProfileModal = true;
+  }
+
+  closeModal(event) {
+    if (event) {
+      this.showLeaderProfileModal = false;
+    }
   }
 
   getCiitizenLeaders() {

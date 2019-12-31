@@ -37,7 +37,6 @@ export class UserProfileModalComponent implements OnInit {
       variables: {id: id}
     })
     .subscribe((res: any) => {
-      console.log(res);
       this.user = res.data.userProfile;
     }, err => {
       console.log(err);

@@ -36,10 +36,10 @@ export class LeaderBoardComponent implements OnInit {
   userListQuery: QueryRef<any>;
   userListData: any;
   loadingElements: any = {};
-  leaderData: any;
 
   currentUser: any;
   showLeaderProfileModal: boolean;
+  selectedLeader: any;
 
   @HostListener('document:scroll', ['$event'])
   onScroll(event: any) {
@@ -76,7 +76,7 @@ export class LeaderBoardComponent implements OnInit {
   }
 
   openLeaderModal(data) {
-    this.leaderData = data;
+    this.selectedLeader = data.id;
     this.showLeaderProfileModal = true;
   }
 
@@ -156,6 +156,6 @@ export class LeaderBoardComponent implements OnInit {
         }
       });
     }
-  }  
+  }
 
 }

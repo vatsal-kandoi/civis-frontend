@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angu
 import { ModalDirective } from 'ngx-bootstrap';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { Apollo } from 'apollo-angular';
+import { UserProfileQuery } from './user-profile.graphql';
 
 @Component({
   selector: 'app-user-profile-modal',
@@ -10,16 +12,36 @@ import { Router } from '@angular/router';
 })
 export class UserProfileModalComponent implements OnInit {
 
-  @Input() leaderData: any;
+  @Input() userId: any;
+
   @Output() close: EventEmitter<any> = new EventEmitter();
   @ViewChild('leaderModal', { static: false }) leaderModal: ModalDirective;
   currentUser: any;
+  user: any;
 
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private apollo: Apollo) { }
 
   ngOnInit() {
     this.getCurrentUser();
+    if (this.userId) {
+      this.getUserDetail(this.userId);
+    }
+  }
+
+  getUserDetail(id) {
+    this.apollo.query({
+      query: UserProfileQuery,
+      variables: {id: id}
+    })
+    .subscribe((res: any) => {
+      console.log(res);
+      this.user = res.data.userProfile;
+    }, err => {
+      console.log(err);
+    });
   }
 
   closeModal() {

@@ -10,10 +10,10 @@
         <div class="leader-profile">
           <img 
           appDefaultImage [type]="'user'"
-          [src]="leaderData?.profilePicture?.url" 
+          [src]="user?.profilePicture?.url" 
           class="avatar avatar--80"
           />
-          <p class="profile-name">{{leaderData?.firstName}}</p>
+          <p class="profile-name">{{user?.firstName}}</p>
         </div>
         <div class="modal-close-btn" (click)="closeModal()"><i class="fa fa-times"></i></div>
       </div>
@@ -22,28 +22,28 @@
         <div class="leader-detail-grid">
           <div class="detail-item">
             <p>TOTAL POINTS</p>
-            <p>{{leaderData?.points}}</p>
+            <p>{{user?.points}}</p>
           </div>
           <div class="detail-item">
             <p>RANK IN CITY</p>
-            <p *ngIf="leaderData?.cityRank">{{leaderData?.cityRank}}</p>
-            <p *ngIf="!leaderData?.cityRank">N/A</p>
+            <p *ngIf="user?.cityRank">{{user?.cityRank}}</p>
+            <p *ngIf="!user?.cityRank">N/A</p>
           </div>
           <div class="detail-item">
             <p>RANK IN STATE</p>
-            <p *ngIf="leaderData?.stateRank">{{leaderData?.stateRank}}</p>
-            <p *ngIf="!leaderData?.stateRank">N/A</p>
+            <p *ngIf="user?.stateRank">{{user?.stateRank}}</p>
+            <p *ngIf="!user?.stateRank">N/A</p>
           </div>
           <div class="detail-item">
             <p>BEST SO FAR</p>
-            <p>#{{leaderData?.rank}} in All India</p>
+            <p>#{{user?.rank}} in All India</p>
           </div>
         </div>
 
         <div class="participated-section">
           <p class="paticipant-title">Consultations participated in</p>
           <div class="participation-list-container">
-            <div *ngFor="let item of leaderData?.sharedResponses?.edges">
+            <div *ngFor="let item of user?.sharedResponses?.edges">
               <div class="paticipant-list">
                 <img [src]="item?.node?.consultation?.ministry?.logo?.url"  class="avatar avatar--42" />
                 <div class="list-detail">

@@ -67,7 +67,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
       }
 
       if (status === 'published'  && !featuredFilter) {
-        this.coverCardData = this.coverCardData.concat(item);
+        this.coverCardData = this.removeDuplicates(item);
         if (this.coverCardData && this.coverCardData.length >= 3) {
           this.sort(this.coverCardData.slice(0, 3));
           return;
@@ -78,7 +78,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
       }
 
       if (status === 'expired' && featuredFilter) {
-        this.coverCardData = this.coverCardData.concat(item);
+        this.coverCardData = this.removeDuplicates(item);
         if (this.coverCardData && this.coverCardData.length >= 3) {
           this.sort(this.coverCardData.slice(0, 3));
           return;
@@ -89,7 +89,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
       }
 
       if (status === 'expired'  && !featuredFilter) {
-        this.coverCardData = this.coverCardData.concat(item);
+        this.coverCardData = this.removeDuplicates(item);
         this.sort(this.coverCardData.slice(0, 3));
       }
     }, err => {
@@ -104,6 +104,21 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
       const y: any = new Date(b.responseDeadline);
       return x - y;
     });
+  }
+
+  removeDuplicates(data) {
+    if (this.coverCardData.length < 3) {
+      const cardDataKeys = {};
+      this.coverCardData.map(item => {
+        cardDataKeys[item.id] = item.id;
+      });
+      data.map(item => {
+        if (!cardDataKeys.hasOwnProperty(item.id) && this.coverCardData.length < 3) {
+          this.coverCardData.push(item);
+        }
+      });
+    }
+    return this.coverCardData;
   }
 
   getLatestResponse() {

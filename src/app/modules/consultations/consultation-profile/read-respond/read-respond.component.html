@@ -66,13 +66,13 @@
           <div class="vote-count">
             <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">
                 <span (click)="vote('up', response?.node)"
-                  tooltip="{{'upvote'}}"
+                  tooltip="{{'Upvote'}}"
                  [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
                 <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
             </div>
             <div [ngClass]="response?.node.votedAs?.voteDirection === 'down'  ? 'active' : ''">
                 <span (click)="vote('down', response?.node)" 
-                tooltip="{{'downvote'}}"
+                tooltip="{{'Downvote'}}"
                 class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
                 <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
             </div>
@@ -101,7 +101,7 @@
                   </div>
                 </div>
                 <span #shareButtonElement (click)="showShareBlock = !showShareBlock"
-                class="ml-4 mr-2 fs-20 pointer"><i class="fa fa-share"></i></span>
+                class="ml-4 mr-2 fs-20 pointer" tooltip="{{'Share'}}"><i class="fa fa-share"></i></span>
                 <span>{{response.node?.templatesCount ? response.node?.templatesCount : '' }}</span>
             </div>
           </div>

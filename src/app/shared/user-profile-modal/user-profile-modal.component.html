@@ -1,6 +1,7 @@
 <div 
   bsModal #leaderModal="bs-modal" class="modal fade leader-modal" tabindex="-1"
-  [config]="{show: true, backdrop: 'static'}"
+  [config]="{show: true}"
+  (onHidden)="closeModal()"
   role="dialog" aria-labelledby="leaderModal"
 >
   <div class="modal-dialog">

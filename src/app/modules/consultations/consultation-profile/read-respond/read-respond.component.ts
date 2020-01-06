@@ -50,6 +50,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   showAutoSaved: boolean;
   selectedUser: any;
   showLeaderProfileModal: boolean;
+  templateText: any;
+  showPublicResponseOption = true;
 
 
   constructor(
@@ -368,6 +370,11 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       this.consultationsService.enableSubmitResponse.next(false);
       return;
     } else {
+      if (this.templateText && (value === this.templateText)) {
+        this.showPublicResponseOption = false;
+      } else {
+        this.showPublicResponseOption = true;
+      }
       this.consultationsService.enableSubmitResponse.next(true);
       return;
     }
@@ -539,8 +546,9 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       return;
     }
     if (response) {
-      this.responseText = response.responseText;
+      this.responseText =  this.templateText = response.responseText;
       this.templateId = response.id;
+      this.showPublicResponseOption = false;
       window.scrollTo({
         top: this.panel.nativeElement.offsetTop,
         behavior: 'smooth',

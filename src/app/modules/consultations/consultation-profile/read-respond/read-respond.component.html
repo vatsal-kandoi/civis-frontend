@@ -21,7 +21,7 @@
       <textarea class="text-space" placeholder="Type your response here..." [(ngModel)]="responseText" (blur)="autoSave(responseText)" (ngModelChange)="enableSubmitResponse($event)"></textarea>
     </div>
     <div class="response-index__footer">
-      <div class="checkbox-area">
+      <div class="checkbox-area" *ngIf="showPublicResponseOption">
         <div class="input-checbox">
           <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility"/> 
           <label class="m-0"> Make my response public </label>

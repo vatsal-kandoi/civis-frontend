@@ -58,20 +58,11 @@
         </div>
         <div class="carousel-indicator">
           <span 
-            class="dot" 
-            [ngStyle]="{'background-color': current_response_index == 0 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
-            (click)="changeSlider(0)">
-          </span>
-          <span 
-            class="dot" 
-            [ngStyle]="{'background-color': current_response_index == 1 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
-            (click)="changeSlider(1)">
-          </span>
-          <span 
-            class="dot" 
-            [ngStyle]="{'background-color': current_response_index == 2 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
-            (click)="changeSlider(2)">
-          </span>
+          class="dot" 
+          *ngFor="let response of latestResponse; let i = index"
+          [ngStyle]="{'background-color': current_response_index == i ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
+          (click)="changeSlider(i)">
+        </span>
         </div>
         <div class="carousel-arrow-right pointer" (click)='nextSlide()'><i class="fa fa-angle-right"></i></div>
       </div>

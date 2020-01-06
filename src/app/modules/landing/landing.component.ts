@@ -131,6 +131,9 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     )
     .subscribe((response: any) => {
       this.latestResponse = response.data;
+      if (this.latestResponse &&  this.latestResponse.length > 3) {
+        this.latestResponse = this.latestResponse.slice(0, 3);
+      }
       this.currentReponseData = this.latestResponse[this.current_response_index];
     }, err => {
         console.log('err', err);
@@ -176,7 +179,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
   rotateFeature() {
     interval(5000).subscribe(() => {
 
-      if(this.current_card_index === 2) {
+      if (this.current_card_index === 2) {
         this.current_card_index = 0;
       } else {
         this.current_card_index++;
@@ -187,9 +190,11 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
         this.currentReponseData = this.latestResponse[this.current_response_index];
       } else {
         this.current_response_index++;
+        if (!this.latestResponse[this.current_response_index]) {
+          this.current_response_index = 0;
+        }
         this.currentReponseData = this.latestResponse[this.current_response_index];
       }
-
     });
   }
 
@@ -203,18 +208,21 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
   }
 
   nextSlide() {
-    if (this.current_response_index == 2) {
+    if (this.current_response_index === 2) {
       this.current_response_index = 0;
       this.currentReponseData = this.latestResponse[this.current_response_index];
     } else {
       this.current_response_index++;
+      if (!this.latestResponse[this.current_response_index]) {
+        this.current_response_index = 0;
+      }
       this.currentReponseData = this.latestResponse[this.current_response_index];
     }
   }
 
   previousSlide() {
-    if (this.current_response_index == 0) {
-      this.current_response_index = 2;
+    if (this.current_response_index === 0) {
+      this.current_response_index = this.latestResponse.length - 1;
       this.currentReponseData = this.latestResponse[this.current_response_index];
     } else {
       this.current_response_index--;

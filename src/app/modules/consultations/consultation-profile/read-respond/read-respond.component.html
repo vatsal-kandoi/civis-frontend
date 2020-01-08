@@ -18,7 +18,15 @@
       </div>
     </div>
     <div class="response-index__content">
-      <textarea class="text-space" placeholder="Type your response here..." [(ngModel)]="responseText" (blur)="autoSave(responseText)" (ngModelChange)="enableSubmitResponse($event)"></textarea>
+      <ckeditor
+      [(ngModel)]="responseText"
+      [config]="ckeConfig"
+      (change)="enableSubmitResponse($event)"
+      (blur)="autoSave(responseText)"
+      debounce="0"
+      >
+      </ckeditor>
+      <!-- <textarea class="text-space" placeholder="Type your response here..." [(ngModel)]="responseText" (blur)="autoSave(responseText)" (ngModelChange)="enableSubmitResponse($event)"></textarea> -->
     </div>
     <div class="response-index__footer">
       <div class="checkbox-area" *ngIf="showPublicResponseOption">
@@ -61,7 +69,7 @@
           (click)="openUserProfile(response?.node?.user)" />
           <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
         </div>
-        <p class="text-16">{{response.node.responseText}}</p>
+        <p class="text-16" [innerHTML]="response.node.responseText"></p>
         <div class="vote-section" *ngIf="currentUser">
           <div class="vote-count">
             <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">

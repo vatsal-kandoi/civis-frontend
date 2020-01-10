@@ -25,6 +25,8 @@ export class LandingComponent implements OnInit {
   activeTab = 'submit-response';
   impactStats: any;
   citizenLeaders: any;
+  selectedUser: any;
+  showLeaderProfileModal: boolean;
 
 constructor( private apollo: Apollo, private errorService: ErrorService) { }
 
@@ -42,7 +44,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
       page: null,
       statusFilter: status,
       sort: 'response_deadline',
-      sortDirection: 'desc',
+      sortDirection: status === 'published' ? 'asc' : 'desc',
       featuredFilter: featuredFilter,
     };
     this.apollo.query({
@@ -54,33 +56,41 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     )
     .subscribe((item: any) => {
       if (status === 'published' && featuredFilter) {
-        if (this.coverCardData && this.coverCardData.length >= 3) {
-          return;
-        } else {
-          this.getConsultationCard('expired', true);
-          return;
-        }
-      }
-      if (status === 'expired' && featuredFilter) {
         this.coverCardData = this.coverCardData.concat(item);
         if (this.coverCardData && this.coverCardData.length >= 3) {
+          this.sort(this.coverCardData.slice(0, 3));
           return;
         } else {
           this.getConsultationCard('published', false);
           return;
         }
       }
+
       if (status === 'published'  && !featuredFilter) {
-        this.coverCardData = this.coverCardData.concat(item);
+        this.coverCardData = this.removeDuplicates(item);
         if (this.coverCardData && this.coverCardData.length >= 3) {
+          this.sort(this.coverCardData.slice(0, 3));
+          return;
+        } else {
+          this.getConsultationCard('expired', true);
+          return;
+        }
+      }
+
+      if (status === 'expired' && featuredFilter) {
+        this.coverCardData = this.removeDuplicates(item);
+        if (this.coverCardData && this.coverCardData.length >= 3) {
+          this.sort(this.coverCardData.slice(0, 3));
           return;
         } else {
           this.getConsultationCard('expired', false);
           return;
         }
       }
+
       if (status === 'expired'  && !featuredFilter) {
-        this.coverCardData = this.coverCardData.concat(item);
+        this.coverCardData = this.removeDuplicates(item);
+        this.sort(this.coverCardData.slice(0, 3));
       }
     }, err => {
       console.log('err', err);
@@ -88,9 +98,32 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     });
   }
 
+  sort(data) {
+    this.coverCardData = data.sort((a, b) => {
+      const x: any = new Date(a.responseDeadline);
+      const y: any = new Date(b.responseDeadline);
+      return x - y;
+    });
+  }
+
+  removeDuplicates(data) {
+    if (this.coverCardData.length < 3) {
+      const cardDataKeys = {};
+      this.coverCardData.map(item => {
+        cardDataKeys[item.id] = item.id;
+      });
+      data.map(item => {
+        if (!cardDataKeys.hasOwnProperty(item.id) && this.coverCardData.length < 3) {
+          this.coverCardData.push(item);
+        }
+      });
+    }
+    return this.coverCardData;
+  }
+
   getLatestResponse() {
     this.apollo.query({
-      query: ConsultationResponseList, 
+      query: ConsultationResponseList,
       variables: {sort: 'created_at', sortDirection: 'desc'}
     })
     .pipe (
@@ -98,6 +131,9 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     )
     .subscribe((response: any) => {
       this.latestResponse = response.data;
+      if (this.latestResponse &&  this.latestResponse.length > 3) {
+        this.latestResponse = this.latestResponse.slice(0, 3);
+      }
       this.currentReponseData = this.latestResponse[this.current_response_index];
     }, err => {
         console.log('err', err);
@@ -110,6 +146,17 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
     .subscribe((stats: any) => {
       this.impactStats = stats.data.impactStats;
     });
+  }
+
+  openUserProfile(data) {
+    this.selectedUser = data.id;
+    this.showLeaderProfileModal = true;
+  }
+
+  closeModal(event) {
+    if (event) {
+      this.showLeaderProfileModal = false;
+    }
   }
 
   getCiitizenLeaders() {
@@ -132,20 +179,22 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
   rotateFeature() {
     interval(5000).subscribe(() => {
 
-      if(this.current_card_index === 2) {
+      if (this.current_card_index === 2) {
         this.current_card_index = 0;
       } else {
         this.current_card_index++;
       }
 
-      if(this.current_response_index === 2) {
+      if (this.current_response_index === 2) {
         this.current_response_index = 0;
         this.currentReponseData = this.latestResponse[this.current_response_index];
       } else {
         this.current_response_index++;
+        if (!this.latestResponse[this.current_response_index]) {
+          this.current_response_index = 0;
+        }
         this.currentReponseData = this.latestResponse[this.current_response_index];
       }
-
     });
   }
 
@@ -159,18 +208,21 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
   }
 
   nextSlide() {
-    if (this.current_response_index == 2) {
+    if (this.current_response_index === 2) {
       this.current_response_index = 0;
       this.currentReponseData = this.latestResponse[this.current_response_index];
     } else {
       this.current_response_index++;
+      if (!this.latestResponse[this.current_response_index]) {
+        this.current_response_index = 0;
+      }
       this.currentReponseData = this.latestResponse[this.current_response_index];
     }
   }
 
   previousSlide() {
-    if (this.current_response_index == 0) {
-      this.current_response_index = 2;
+    if (this.current_response_index === 0) {
+      this.current_response_index = this.latestResponse.length - 1;
       this.currentReponseData = this.latestResponse[this.current_response_index];
     } else {
       this.current_response_index--;

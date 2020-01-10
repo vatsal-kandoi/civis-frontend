@@ -50,6 +50,6 @@
 </div>
 <app-footer></app-footer>
 
-<div *ngIf="leaderData && showLeaderProfileModal">
-  <app-user-profile-modal (close)="closeModal($event)" [leaderData]="leaderData"></app-user-profile-modal>
+<div *ngIf="selectedLeader && showLeaderProfileModal">
+  <app-user-profile-modal (close)="closeModal($event)" [userId]="selectedLeader"></app-user-profile-modal>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewChecked, ViewEncapsulation} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import * as moment from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -17,7 +17,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-read-respond',
   templateUrl: './read-respond.component.html',
-  styleUrls: ['./read-respond.component.scss']
+  styleUrls: ['./read-respond.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ReadRespondComponent implements OnInit, AfterViewChecked {
 
@@ -27,7 +28,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   @ViewChild('responsesListContainer', { read: ElementRef , static: false }) responsesListContainer: ElementRef<any>;
   @ViewChild('shareBlockElement', { static: false }) shareBlockElement: ElementRef;
   @ViewChild('shareButtonElement', { static: false }) shareButtonElement: ElementRef;
-
 
   profileData: any;
   responseList: any;
@@ -47,7 +47,16 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   currentUrl: string;
   showShareBlock: any;
   checkForFragments: boolean;
-
+  showAutoSaved: boolean;
+  selectedUser: any;
+  showLeaderProfileModal: boolean;
+  templateText: any;
+  showPublicResponseOption = true;
+  customStyleAdded: boolean;
+  ckeConfig =  {
+    removePlugins: 'elementspath',
+    resize_enabled: false,
+   };
 
   constructor(
     private consultationsService: ConsultationsService,
@@ -82,6 +91,25 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       this.subscribeToFragment();
       this.checkForFragments = false;
     }
+    this.editIframe();
+  }
+
+  editIframe() {
+   const iFrameElements =  document.getElementsByTagName('iframe');
+   if (iFrameElements.length) {
+    const doc = iFrameElements[0].contentDocument;
+    const checkElementExist = setInterval(() => {
+      if (!this.customStyleAdded) {
+        if (doc.body) {
+            this.customStyleAdded = true;
+            doc.body.setAttribute('style', 'margin: 0; font-size: 16px');
+        }
+      }
+    }, 100);
+    if (this.customStyleAdded) {
+      clearInterval(checkElementExist);
+    }
+   }
   }
 
   public setTitle(newTitle: string) {
@@ -365,6 +393,11 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       this.consultationsService.enableSubmitResponse.next(false);
       return;
     } else {
+      if (this.templateText && (value === this.templateText)) {
+        this.showPublicResponseOption = false;
+      } else {
+        this.showPublicResponseOption = true;
+      }
       this.consultationsService.enableSubmitResponse.next(true);
       return;
     }
@@ -418,6 +451,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         const consultation = currentUser.consultations.find(item => item.id === this.consultationId);
         if (consultation) {
           this.responseText = consultation.responseText;
+          this.consultationService.enableSubmitResponse.next(true);
         }
       }
     }
@@ -425,6 +459,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
 
   autoSave(text) {
     if (text)  {
+      this.showAutoSaved = true;
       let draftObj: any = localStorage.getItem('responseDraft');
       if (!draftObj) {
         draftObj = {};
@@ -468,6 +503,9 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         }
       }
       localStorage.setItem('responseDraft', JSON.stringify(draftObj));
+      setTimeout(() => {
+        this.showAutoSaved = false;
+      }, 1250);
     }
   }
 
@@ -516,13 +554,25 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  openUserProfile(data) {
+    this.selectedUser = data.id;
+    this.showLeaderProfileModal = true;
+  }
+
+  closeModal(event) {
+    if (event) {
+      this.showLeaderProfileModal = false;
+    }
+  }
+
   useThisResponse(response) {
     if (this.profileData.respondedOn) {
       return;
     }
     if (response) {
-      this.responseText = response.responseText;
+      this.responseText =  this.templateText = response.responseText;
       this.templateId = response.id;
+      this.showPublicResponseOption = false;
       window.scrollTo({
         top: this.panel.nativeElement.offsetTop,
         behavior: 'smooth',
@@ -530,8 +580,9 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       if (this.responseText) {
         this.consultationsService.enableSubmitResponse.next(true);
       }
+      this.customStyleAdded = false;
+      this.editIframe();
     }
   }
-
 
 }

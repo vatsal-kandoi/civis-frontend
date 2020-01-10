@@ -20,6 +20,8 @@ export class ConsultationsSummaryComponent implements OnInit {
   publicResponses: any;
   annonymousResponses: any;
   summaryData: any;
+  selectedUser: any;
+  showLeaderProfileModal: boolean;
 
   constructor(private activatedRoute: ActivatedRoute, private apollo: Apollo, private errorService: ErrorService) {
     this.activatedRoute.params.subscribe((param: any) => {
@@ -48,11 +50,22 @@ export class ConsultationsSummaryComponent implements OnInit {
       )
       .subscribe((data: any) => {
           this.profileData = data;
-          this.responseList = data.responses.edges
+          this.responseList = data.responses.edges;
           this.splitResponses(this.responseList);
       }, err => {
         this.errorService.showErrorModal(err);
       });
+    }
+  }
+
+  openUserProfile(data) {
+    this.selectedUser = data.id;
+    this.showLeaderProfileModal = true;
+  }
+
+  closeModal(event) {
+    if (event) {
+      this.showLeaderProfileModal = false;
     }
   }
 

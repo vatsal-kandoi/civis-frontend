@@ -50,7 +50,7 @@
         <div class="carousel-arrow-left pointer" (click)='previousSlide()'><i class="fa fa-angle-left"></i></div>
         <div @slideInRight class="carousel-inner-container">
           <div class="carousel-header">
-            <img class="avatar avatar--60" appDefaultImage [type]="'user'" [src]="currentReponseData?.user?.profilePicture?.url" />
+            <img class="avatar avatar--60 pointer" appDefaultImage [type]="'user'" [src]="currentReponseData?.user?.profilePicture?.url" (click)="openUserProfile(currentReponseData?.user)" />
             <p class="bold-text mt-1 mb-1">{{currentReponseData?.user?.firstName}}</p>
           </div>
           <p class="response-title bold-text">{{currentReponseData?.consultation?.title}}</p>
@@ -58,20 +58,11 @@
         </div>
         <div class="carousel-indicator">
           <span 
-            class="dot" 
-            [ngStyle]="{'background-color': current_response_index == 0 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
-            (click)="changeSlider(0)">
-          </span>
-          <span 
-            class="dot" 
-            [ngStyle]="{'background-color': current_response_index == 1 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
-            (click)="changeSlider(1)">
-          </span>
-          <span 
-            class="dot" 
-            [ngStyle]="{'background-color': current_response_index == 2 ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
-            (click)="changeSlider(2)">
-          </span>
+          class="dot" 
+          *ngFor="let response of latestResponse; let i = index"
+          [ngStyle]="{'background-color': current_response_index == i ? '#67B3E8' : 'rgba(172, 221, 255, 0.7)'}" 
+          (click)="changeSlider(i)">
+        </span>
         </div>
         <div class="carousel-arrow-right pointer" (click)='nextSlide()'><i class="fa fa-angle-right"></i></div>
       </div>
@@ -81,7 +72,7 @@
       <p class="section-heading">CITIZEN LEADERS ON CIVIS</p>
       <div class="leaders-list">
         <div class="leader-profile" *ngFor='let item of citizenLeaders'>
-          <img class="avatar avatar--60 mb-2" appDefaultImage [type]="'user'" [src]="item?.profilePicture?.url" />
+          <img class="avatar avatar--60 mb-2 pointer" appDefaultImage [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
           <p class="text-18 m-0">{{item?.firstName}}</p>
           <p class="blue-text m-0">{{item?.points}} Points</p>
         </div>
@@ -89,7 +80,7 @@
       <!-- leaders-list-mobile -->
       <div class="mb-3">
         <div class="leaders-list-row" *ngFor='let item of citizenLeaders'>
-          <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="item?.profilePicture?.url" />
+          <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
           <div class="leader-detail">
             <p class="leader-name">{{item?.firstName}}</p>
             <p class="leader-stats">
@@ -177,5 +168,8 @@
       </div>
     </div>
   </section>
+  <div *ngIf="selectedUser && showLeaderProfileModal">
+    <app-user-profile-modal (close)="closeModal($event)" [userId]="selectedUser"></app-user-profile-modal>
+  </div>
   <app-footer></app-footer>
 </div>

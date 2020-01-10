@@ -130,9 +130,11 @@ export const SubmitResponseQuery = gql`
       id
       points
       user {
+        id
         firstName
       }
       consultation {
+        id
         title
         respondedOn
         sharedResponses(sort: created_at, sortDirection: desc) {
@@ -162,6 +164,7 @@ export const SubmitResponseQuery = gql`
       }
     }
   }
-`
+`;
+
 
 

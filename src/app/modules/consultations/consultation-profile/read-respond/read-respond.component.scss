@@ -208,34 +208,20 @@
     &__content {
       padding: 5px 30px;
       height: calc(100% - 115px);
-      .text-space {
-        resize: none;
-        border: none;
-        width: 100%;
-        height: 100%;
 
-        &:focus {
-          outline: none;
-        }
-
-        &::-webkit-input-placeholder {
-          color: #C4C4C4;
-        }
-        
-        &:-moz-placeholder { /* Firefox 18- */
-          color: #C4C4C4;  
-        }
-        
-        &::-moz-placeholder {  /* Firefox 19+ */
-          color: #C4C4C4;  
-        }
-        
-        &:-ms-input-placeholder {
-          color: #C4C4C4;  
-        }
-        
-        &::placeholder {
-          color: #C4C4C4;  
+      ckeditor {
+        .cke {
+          height: 100% !important;
+          border: none !important;
+          .cke_inner {
+            height: 100% !important;
+            .cke_top {
+              display: none;
+            }
+            .cke_contents {
+              height: 100% !important;
+            }
+          }
         }
       }
     }

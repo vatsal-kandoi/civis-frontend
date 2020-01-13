@@ -54,7 +54,7 @@
             <p class="bold-text mt-1 mb-1">{{currentReponseData?.user?.firstName}}</p>
           </div>
           <p class="response-title bold-text">{{currentReponseData?.consultation?.title}}</p>
-          <p class="response-content italic truncate">{{currentReponseData?.responseText}}</p>
+          <p class="response-content italic truncate" [innerHTML]="currentReponseData?.responseText"></p>
         </div>
         <div class="carousel-indicator">
           <span 

@@ -30,7 +30,7 @@
                     [src]="'null'" />
                   <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
                 </div>
-                <p class="text-16">{{response.node?.responseText}}</p>
+                <p class="text-16" [innerHTML]="response.node?.responseText"></p>
                 <div class="vote-section">
                   <div class="vote-count">
                     <div>
@@ -70,7 +70,7 @@
                     {{'Citizen Leader [Name undisclosed]'}}
                   </p>
                 </div>
-                <p class="text-16">{{response.node?.responseText}}</p>
+                <p class="text-16" [innerHTML]="response.node?.responseText"></p>
               </div>
             </ng-container>
           </div>  

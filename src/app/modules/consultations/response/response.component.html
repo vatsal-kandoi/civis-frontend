@@ -38,8 +38,7 @@
           <p class="light-text">{{'SENDING IN YOUR RESPONSE TO'}}</p>
           <p class="card-title m-0">{{profile?.consultation?.title}}</p>
         </div>
-        <div class="response-content">
-          {{profile?.responseText}}
+        <div class="response-content" [innerHTML]="profile?.responseText">
         </div>
       </div>
     </section>

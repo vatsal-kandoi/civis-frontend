@@ -80,7 +80,7 @@ export const ConsultationProfileCurrentUser = gql`
       satisfactionRatingDistribution
       status
       respondedOn
-      sharedResponses(sort: created_at, sortDirection: desc) {
+      sharedResponses(sort: templates_count, sortDirection: desc) {
         edges {
           node {
             id
@@ -137,7 +137,7 @@ export const SubmitResponseQuery = gql`
         id
         title
         respondedOn
-        sharedResponses(sort: created_at, sortDirection: desc) {
+        sharedResponses(sort: templates_count, sortDirection: desc) {
           edges {
             node {
               id

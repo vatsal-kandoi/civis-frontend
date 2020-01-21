@@ -166,5 +166,11 @@ export const SubmitResponseQuery = gql`
   }
 `;
 
+export const ConsultationAnalysisQuery = gql`
+  query consultationAnalysis($id: Int!) {
+    consultationAnalysis(id: $id)
+  }
+`;
+
 
 

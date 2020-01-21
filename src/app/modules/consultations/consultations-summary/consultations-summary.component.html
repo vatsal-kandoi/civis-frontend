@@ -4,6 +4,21 @@
         <app-profile-card [profile]='profileData' [summaryData]="summaryData"></app-profile-card>
       </section>
       <section class="consultation-profile__main-section">
+        <div class="paper-effect mb-4">
+          <p class="heading">
+            Summary
+            <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
+          </p>
+          <p class="summary-content" [innerHTML]="profileData?.summary"></p>
+        </div>
+
+        <div class="paper-effect mb-4 inner-space" *ngIf="showKeywordGraph">
+          <p class="heading">
+            Graphical analysis of major keywords in citizen responses
+          </p> 
+          <div id="container" style="width:100%; height:400px;"></div>
+        </div>
+
 
         <div *ngIf="publicResponses?.length">
           <div class="d-flex justify-content-between align-items-center">

@@ -58,6 +58,13 @@
               #container {
                .highcharts-root {
                  text-transform: capitalize;
+                 .highcharts-xaxis-labels {
+                   text {
+                    font-size: 14px !important;
+                    color: #151515 !important;
+                    fill: #151515 !important;
+                   }
+                 }
                }
               }
 

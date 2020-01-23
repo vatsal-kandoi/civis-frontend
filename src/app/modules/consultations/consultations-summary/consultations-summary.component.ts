@@ -42,7 +42,7 @@ export class ConsultationsSummaryComponent implements OnInit {
         lineColor: '#6F6F6F',
         title: {
           useHTML: true,
-          text: "<p style='color: #0E73B9; font-weight: bold; margin: 5px 0'>" +
+          text: "<p style='color: #6F6F6F; font-size: 14px; margin: 5px 0'>" +
                 "Keywords" +
                 "</p>",
         },
@@ -54,7 +54,7 @@ export class ConsultationsSummaryComponent implements OnInit {
         gridLineWidth: 0,
         title: {
             useHTML: true,
-            text: "<p style='color: #0E73B9; font-weight: bold;'>Frequency of Occurance</p>"
+            text: "<p style='color: #6F6F6F; font-size: 14px;'>Frequency of Occurance</p>"
         }
     },
     plotOptions: {
@@ -131,7 +131,7 @@ export class ConsultationsSummaryComponent implements OnInit {
             && consultationAnalyis[title][key].length) {
               this.options.series.push({
                 showInLegend: false,
-                color: '#0E73B9',
+                color: '#F0653A',
                 enableMouseTracking: false,
                 data: [[key, consultationAnalyis[title][key].length]]
               });

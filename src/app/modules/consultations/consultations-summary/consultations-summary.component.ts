@@ -27,7 +27,7 @@ export class ConsultationsSummaryComponent implements OnInit {
 
   public options: any = {
     chart: {
-        renderTo: 'container', 
+        renderTo: 'highchartContainer',
         type: 'column'
     },
     title: {
@@ -137,7 +137,7 @@ export class ConsultationsSummaryComponent implements OnInit {
               });
             }
          }
-         Highcharts.chart('container', this.options);
+         Highcharts.chart('highchartContainer', this.options);
         }
       });
     }

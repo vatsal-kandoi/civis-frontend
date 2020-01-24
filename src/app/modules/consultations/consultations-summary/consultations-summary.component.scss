@@ -46,8 +46,28 @@
 
               .heading {
                 @include general-text($font-size: 16px, $weight: bold);
-              }            
-        
+              }  
+
+              .inner-space {
+                padding: 28px 32px 10px !important;
+                @media screen and (max-width: 991px) {
+                  padding: 20px 15px 0;
+                }
+              }
+
+              #highchartContainer {
+               .highcharts-root {
+                 text-transform: capitalize;
+                 .highcharts-xaxis-labels {
+                   text {
+                    font-size: 14px !important;
+                    color: #151515 !important;
+                    fill: #151515 !important;
+                   }
+                 }
+               }
+              }
+
             .summary-content {
               @include general-text;
               @media screen {

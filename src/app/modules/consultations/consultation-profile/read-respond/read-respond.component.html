@@ -1,4 +1,4 @@
-<section class="read-response-container" #responseIndex>
+<section class="read-response-container">
   <div class="paper-effect">
     <p class="heading">
       Summary
@@ -7,7 +7,7 @@
     <p class="summary-content" [innerHTML]="profileData?.summary"></p>
   </div>
 
-  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()"> 
+  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()" #responseIndex>
     <div class="response-index__nav">
       <div class="w-50">
         <div class="heading">Your response</div>

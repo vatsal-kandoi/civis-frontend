@@ -71,6 +71,16 @@
         </div>
 
       </div>
+      <div *ngIf="summaryData" class="report-download-block">
+        <div>
+          <button  class="btn-submit mt-3  active" (click)='downloadReport()'>
+            <p class="m-0">
+              <span><i class="fa fa-download"></i></span>
+              <span>Download report as pdf</span>
+            </p>
+          </button>
+        </div>
+      </div>
   </div>
 
   <hr class="divider" />

@@ -39,6 +39,10 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     this.consultationsService.enableSubmitResponse.next(false);
   }
 
+  downloadReport() {
+    window.print();
+  }
+
   getCurrentUser() {
     this.userService.userLoaded$
     .subscribe((data) => {

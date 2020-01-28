@@ -57,6 +57,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     removePlugins: 'elementspath',
     resize_enabled: false,
    };
+  usingTemplate: boolean;
 
   constructor(
     private consultationsService: ConsultationsService,
@@ -393,6 +394,10 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       this.consultationsService.enableSubmitResponse.next(false);
       return;
     } else {
+      if (this.usingTemplate) {
+        this.responseText = this.templateText = value;
+        this.usingTemplate = false;
+      }
       if (this.templateText && (value === this.templateText)) {
         this.showPublicResponseOption = false;
       } else {
@@ -570,9 +575,9 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       return;
     }
     if (response) {
+      this.usingTemplate = true;
       this.responseText =  this.templateText = response.responseText;
       this.templateId = response.id;
-      this.showPublicResponseOption = false;
       window.scrollTo({
         top: this.panel.nativeElement.offsetTop,
         behavior: 'smooth',

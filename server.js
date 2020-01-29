@@ -45,10 +45,9 @@ const s3BucketOptions = {
 
 app.get('/sitemap.xml.gz', s3Proxy({...s3BucketOptions, defaultKey: 'sitemap.xml.gz'}));
 
-const sitemapRouter = express.Router({mergeParams: true});
-app.use('/sitemaps', sitemapRouter);
-sitemapRouter.get('/sitemap-static.xml.gz', s3Proxy({...s3BucketOptions, defaultKey: 'sitemap-static.xml.gz'}));
-sitemapRouter.get('/consultations.xml.gz', s3Proxy({...s3BucketOptions, defaultKey: 'consultations.xml.gz'}));
+// const sitemapRouter = express.Router({mergeParams: true});
+// app.use('/sitemaps', sitemapRouter);
+app.get('/sitemaps/*', s3Proxy({...s3BucketOptions}));
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/civis/index.html'));

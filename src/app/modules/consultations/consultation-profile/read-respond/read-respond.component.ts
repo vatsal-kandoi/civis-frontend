@@ -396,7 +396,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     } else {
       if (this.usingTemplate) {
         this.responseText = this.templateText = value;
-        this.usingTemplate = false;
+        this.usingTemplate = this.showPublicResponseOption = false;
+        this.autoSave(value);
       }
       if (this.templateText && (value === this.templateText)) {
         this.showPublicResponseOption = false;
@@ -456,6 +457,9 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         const consultation = currentUser.consultations.find(item => item.id === this.consultationId);
         if (consultation) {
           this.responseText = consultation.responseText;
+          if (consultation.templatesText) {
+            this.showPublicResponseOption = false;
+          }
           this.consultationService.enableSubmitResponse.next(true);
         }
       }
@@ -472,7 +476,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
           id: this.currentUser.id,
           consultations: [{
             id: this.consultationId,
-            responseText: text
+            responseText: text,
+            templatesText: this.showPublicResponseOption ? false : true
           }]
         }];
       } else {
@@ -482,14 +487,16 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
           const consultation = currentUser.consultations.find(item => item.id === this.consultationId);
           if (consultation) {
             currentUser.consultations.forEach(item => {
-              if (item.id === this.consultationId) {
+              if (+item.id === +this.consultationId) {
                 item.responseText = text;
+                item['templatesText'] = this.showPublicResponseOption ? false : true;
               }
             });
           } else {
             currentUser.consultations.push({
               id: this.consultationId,
-              responseText: text
+              responseText: text,
+              templatesText: this.showPublicResponseOption ? false : true
             });
           }
           draftObj.users.forEach((item) => {
@@ -502,7 +509,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
             id: this.currentUser.id,
             consultations: [{
               id: this.consultationId,
-              responseText: text
+              responseText: text,
+              templatesText: this.showPublicResponseOption ? false : true
             }]
           });
         }

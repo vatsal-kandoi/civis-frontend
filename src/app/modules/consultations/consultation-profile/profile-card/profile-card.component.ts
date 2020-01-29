@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-profile-card',
@@ -27,6 +28,7 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
 
   constructor(private consultationsService: ConsultationsService,
               private userService: UserService,
+              private cookieService: CookieService,
               private router: Router ) { }
 
   ngOnInit() {
@@ -136,6 +138,7 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
   stepNext(hasResponseSubmited) {
     if (!this.currentUser) {
       this.router.navigateByUrl('/auth');
+      this.cookieService.set('loginCallbackUrl', this.router.url);
       return;
     }
 

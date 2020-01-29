@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { NgForm } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sign-up',
@@ -42,6 +43,7 @@ export class SignUpComponent implements OnInit {
               private userService: UserService,
               private router: Router,
               private graphqlService: GraphqlService,
+              private cookieService: CookieService,
               ) {
   this.reCAPTCHA_KEY = this.graphqlService.environment.RECAPTCHA_SITE_KEY;
   }
@@ -112,7 +114,13 @@ export class SignUpComponent implements OnInit {
       .subscribe((token) => {
         if (token) {
           this.tokenService.storeToken(token);
-          this.router.navigateByUrl('/profile');
+          const callbackUrl = this.cookieService.get('loginCallbackUrl');
+          if (callbackUrl) {
+            this.router.navigateByUrl(callbackUrl);
+            this.cookieService.set('loginCallbackUrl', '');
+          } else {
+            this.router.navigateByUrl('/profile');
+          }
           this.onSignUp();
         }
       }, err => {

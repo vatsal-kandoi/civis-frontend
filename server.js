@@ -36,13 +36,16 @@ app.get('/getEnvironment', (req, res) => {
     res.status(200).json({environment});
 });
 
-app.get('/sitemap.xml.gz', s3Proxy({
+const s3BucketOptions = {
     bucket: `civis-sitemaps-${process.env.APP_ENVIRONMENT === 'staging' ? 'staging' : 'production'}`,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     overrideCacheControl: 'max-age=100000',
-    defaultKey: 'sitemap.xml.gz'
-  }));
+}
+
+app.get('/sitemap.xml.gz', s3Proxy({...s3BucketOptions, defaultKey: 'sitemap.xml.gz'}));
+app.get('/sitemaps/sitemap-static.xml.gz', s3Proxy({...s3BucketOptions, defaultKey: 'sitemap-static.xml.gz'}));
+app.get('/sitemaps/consultations.xml.gz', s3Proxy({...s3BucketOptions, defaultKey: 'consultations.xml.gz'}));
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/civis/index.html'));

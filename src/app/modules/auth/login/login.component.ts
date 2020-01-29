@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
               private userService: UserService,
               private tokenService: TokenService,
               private errorService: ErrorService,
+              private cookieService: CookieService,
               private router: Router,
               private graphqlService: GraphqlService,
               ) { }
@@ -46,7 +48,13 @@ export class LoginComponent implements OnInit {
       .subscribe((tokenObject: any) => {
         if (tokenObject) {
           this.tokenService.storeToken(tokenObject);
-          this.router.navigateByUrl('/profile');
+          const callbackUrl = this.cookieService.get('loginCallbackUrl');
+          if (callbackUrl) {
+            this.router.navigateByUrl(callbackUrl);
+            this.cookieService.set('loginCallbackUrl', '');
+          } else {
+            this.router.navigateByUrl('/profile');
+          }
           this.onLoggedIn();
         }
       }, (err: any) => {

@@ -16,6 +16,7 @@ import { PolicyModule } from './modules/policy/policy.module';
 import { CitySelectionModalModule } from './shared/components/city-selection-modal/city-selection-modal.module';
 import { ConfirmUserGuard } from './shared/guards/confirm-user.guard';
 import { UnsubscribeUserGuard } from './shared/guards/unsubscribe-user.guard';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { UnsubscribeUserGuard } from './shared/guards/unsubscribe-user.guard';
     AuthGuard,
     ConfirmUserGuard,
     UnsubscribeUserGuard,
+    CookieService,
   ],
   bootstrap: [AppComponent]
 })

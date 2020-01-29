@@ -4,6 +4,7 @@ const path = require('path');
 // const secure = require('ssl-express-www');
 const compression = require('compression');
 const disqusRouter = require('./server-app/disqus');
+const s3Proxy = require('s3-proxy');
 
 if(!process.env.APP_ENVIRONMENT) {
     require('dotenv').config();
@@ -35,7 +36,18 @@ app.get('/getEnvironment', (req, res) => {
     res.status(200).json({environment});
 });
 
+const s3BucketOptions = {
+    bucket: `civis-sitemaps-${process.env.APP_ENVIRONMENT === 'staging' ? 'staging' : 'production'}`,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    overrideCacheControl: 'max-age=100000',
+}
 
+app.get('/sitemap.xml.gz', s3Proxy({...s3BucketOptions, defaultKey: 'sitemap.xml.gz'}));
+
+// const sitemapRouter = express.Router({mergeParams: true});
+// app.use('/sitemaps', sitemapRouter);
+app.get('/sitemaps/*', s3Proxy({...s3BucketOptions}));
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/civis/index.html'));

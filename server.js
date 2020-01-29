@@ -53,4 +53,4 @@ app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/civis/index.html'));
 });
 
-console.log("listing on port:", PORT);
+console.log("listing on port", PORT);

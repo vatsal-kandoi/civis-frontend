@@ -58,7 +58,10 @@
       <div class="nav-btns" *ngIf="!currentUser">
         <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">Log In / Sign Up</button>
       </div>
-      <div class="nav-btns profile-item pointer" *ngIf="currentUser" (click)="showProfilePopup()">
+      <div 
+      class="nav-btns profile-item" *ngIf="currentUser"
+      (click)="$event.preventDefault();$event.stopPropagation(); showProfilePopup()" 
+      [ngClass]="(currentUrl !== 'consultations-summary' ) ? 'pointer' : ''">
         <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url"/>
         <span class="clr-black"><i
             class="fa fa-angle-down ml-2"></i></span>

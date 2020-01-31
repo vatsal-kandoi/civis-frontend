@@ -142,12 +142,6 @@ export class ConsultationsSummaryComponent implements OnInit {
 
   }
 
-  closeModal(event) {
-    if (event) {
-      this.showLeaderProfileModal = false;
-    }
-  }
-
   splitResponses(responsesList) {
     if (responsesList.length) {
       this.annonymousResponses = responsesList.filter(response => (response.node.user === null || response.node.user === undefined));

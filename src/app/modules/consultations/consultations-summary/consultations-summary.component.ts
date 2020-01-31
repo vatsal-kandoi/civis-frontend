@@ -72,8 +72,6 @@ export class ConsultationsSummaryComponent implements OnInit {
   publicResponses: any;
   annonymousResponses: any;
   summaryData: any;
-  selectedUser: any;
-  showLeaderProfileModal: boolean;
   showKeywordGraph = true;
 
   constructor(private activatedRoute: ActivatedRoute, private apollo: Apollo, private errorService: ErrorService) {
@@ -142,11 +140,6 @@ export class ConsultationsSummaryComponent implements OnInit {
       });
     }
 
-  }
-
-  openUserProfile(data) {
-    this.selectedUser = data.id;
-    this.showLeaderProfileModal = true;
   }
 
   closeModal(event) {

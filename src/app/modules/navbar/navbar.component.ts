@@ -115,9 +115,7 @@ export class NavbarComponent implements OnInit {
   }
 
   showProfilePopup() {
-    if (this.currentUrl !== 'consultations-summary') {
       this.profilePopup = !this.profilePopup;
-    }
   }
 
   getLogoUrl() {

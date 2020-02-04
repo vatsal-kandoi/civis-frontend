@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: https://www.civis.vote/sitemap.xml.gz
+Sitemap: https://civis.vote/sitemap.xml.gz

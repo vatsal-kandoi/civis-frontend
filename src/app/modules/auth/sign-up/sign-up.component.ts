@@ -87,7 +87,8 @@ export class SignUpComponent implements OnInit {
       return this.apollo.query({
           query: CitiesSearchQuery,
           variables: {
-            q: name
+            q: name,
+            type: 'city'
           }
         })
         .pipe(
@@ -158,7 +159,10 @@ export class SignUpComponent implements OnInit {
   loadCities() {
     this.loadingCities = true;
     this.apollo.query({
-      query: LocationListQuery
+      query: LocationListQuery,
+      variables: {
+        type: 'city'
+      }
     })
     .pipe(
       map((res: any) => res.data.locationList)

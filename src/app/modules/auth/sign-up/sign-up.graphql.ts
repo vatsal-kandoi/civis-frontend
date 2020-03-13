@@ -9,8 +9,8 @@ export const SignUpMutation = gql`
 `;
 
 export const CitiesSearchQuery = gql`
-	query locationAutocomplete($q: String) {
-		locationAutocomplete(q: $q){
+	query locationAutocomplete($q: String, $type: String) {
+		locationAutocomplete(q: $q, type: $type){
 			name
 			 id
 			 locationType
@@ -19,8 +19,8 @@ export const CitiesSearchQuery = gql`
 `;
 
 export const LocationListQuery = gql`
-	query locationList {
-		locationList{
+	query locationList($type: String) {
+		locationList(type: $type){
 			name
 			 id
 			 locationType

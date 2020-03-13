@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const CitiesSearchQuery = gql`
-	query locationAutocomplete($q: String) {
-		locationAutocomplete(q: $q){
+	query locationAutocomplete($q: String, $type: String) {
+		locationAutocomplete(q: $q, type: $type){
 			name
 			 id
 			 locationType

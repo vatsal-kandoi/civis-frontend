@@ -21,7 +21,13 @@
           </div>
           <button  class="btn-submit mt-3 mb-3 active" (click)='stepNext(profile?.respondedOn)'>
             <p class="m-0">
-              <span><img src="assets/images/Vector.png" /></span>
+              <span>
+                <picture class="citizen-logo">
+                  <source srcset="../../../assets/images/Vector.webp" type="image/webp">
+                  <source srcset="../../../assets/images/Vector.jpg" type="image/jpeg">
+                  <img src="../../../assets/images/Vector.jpg" />
+                </picture>
+              </span>
               SUBMIT RESPONSE
             </p>
             <span><i class="fa fa-angle-right"></i></span>

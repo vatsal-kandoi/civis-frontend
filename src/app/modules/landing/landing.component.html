@@ -100,8 +100,8 @@
       <div class="d-flex justify-content-center mt-5">
         <button 
           class="app-btn circular landing-btn" 
-          [ngClass]="activeTab == 'sumbit-response' ? 'primary' : 'blue-light'"
-          (click)="submitResponse('sumbit-response')">
+          [ngClass]="activeTab == 'submit-response' ? 'primary' : 'blue-light'"
+          (click)="submitResponse('submit-response')">
           Submit a Response
           <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
         </button>
@@ -139,31 +139,51 @@
       <p class="section-heading">IN THE PRESS</p>
       <div class="press-logo-grid">
         <a href="https://audioboom.com/posts/6611014-what-is-civis" class="grid-item" target="_blank">
-          <img src="../../../assets/images/RedFM_Logo.png" alt="Red FM logo" />
+          <picture>
+            <source srcset="../../../assets/images/RedFM_Logo.webp" type="image/webp">
+            <source srcset="../../../assets/images/RedFM_Logo.jpg" type="image/jpeg">
+            <img src="../../../assets/images/RedFM_Logo.jpg" alt="Red FM logo" />
+          </picture>
         </a>
         <a 
           href="https://www.financialexpress.com/industry/technology/bridging-the-gap-apps-that-are-bringing-voters-closer-to-their-leaders/1540300/" 
           class="grid-item"
           target="_blank"
           >
-          <img src="../../../assets/images/Financial-Express-Logo.png" alt="Financial-Express-Logo"/>
+          <picture>
+            <source srcset="../../../assets/images/Financial-Express-Logo.webp" type="image/webp">
+            <source srcset="../../../assets/images/Financial-Express-Logo.jpg" type="image/jpeg">
+            <img src="../../../assets/images/Financial-Express-Logo.jpg" alt="Financial-Express-Logo" />
+          </picture>
         </a>
         <a 
           href="http://www.forbesindia.com/article/poll-vault/poll-apps-giving-power-to-the-people/52303/1" 
           class="grid-item" 
           target="_blank"
         >
-          <img src="../../../assets/images/forbes.png" alt="Forbes logo"/>
+          <picture>
+            <source srcset="../../../assets/images/forbes.webp" type="image/webp">
+            <source srcset="../../../assets/images/forbes.jpg" type="image/jpeg">
+            <img src="../../../assets/images/forbes.jpg" alt="Forbes logo" />
+          </picture>
         </a>
         <a href="https://www.dropbox.com/s/obr9ows30x9fukh/TOI_9.30.2018-1.png?dl=0" class="grid-item" target="_blank">
-          <img src="../../../assets/images/TOI.png" alt="TOI logo"/>
+          <picture>
+            <source srcset="../../../assets/images/TOI.webp" type="image/webp">
+            <source srcset="../../../assets/images/TOI.jpg" type="image/jpeg">
+            <img src="../../../assets/images/TOI.jpg" alt="TOI logo" />
+          </picture>
         </a>
         <a 
           href="https://www.livemint.com/Technology/hJ85warpy0LPmiimg3HhvJ/Civic-technology-apps-are-giving-voters-a-voice.html" 
           class="grid-item" 
           target="_blank"
         >
-          <img src="../../../assets/images/Mint-Logo.jpg" alt="Mint logo"/>
+          <picture>
+            <source srcset="../../../assets/images/Mint-Logo.webp" type="image/webp">
+            <source srcset="../../../assets/images/Mint-Logo.jpg" type="image/jpeg">
+            <img src="../../../assets/images/Mint-Logo.jpg" alt="Mint logo" />
+          </picture>
         </a>
       </div>
     </div>

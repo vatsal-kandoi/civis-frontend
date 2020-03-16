@@ -16,12 +16,15 @@ export const ResponseProfileQuery = gql`
                 consultationResponsesCount
                 ministry {
                   id
-                  name
-                  coverPhoto {
+                  category {
                     id
-                    filename
-                    url
+                    coverPhoto {
+                      id
+                      filename
+                      url
+                    }
                   }
+                  name
                   logo {
                     id
                     filename

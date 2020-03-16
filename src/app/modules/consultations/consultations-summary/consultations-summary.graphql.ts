@@ -12,10 +12,13 @@ export const ConsultationProfileQuery = gql`
       ministry {
         id
         name
-        coverPhoto {
+        category {
           id
-          filename
-          url
+          coverPhoto {
+            id
+            filename
+            url
+          }
         }
         logo {
           id

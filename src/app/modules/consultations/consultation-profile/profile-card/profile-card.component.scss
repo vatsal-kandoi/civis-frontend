@@ -60,6 +60,12 @@
       border-radius: 22px;
     }
 
+    .report-download-block {
+      @media screen and (max-width: 991px) {
+        display: none;
+      }
+    }
+
     .response-submitted-block {
       display: flex;
       margin: 20px 0;

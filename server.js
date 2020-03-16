@@ -45,12 +45,12 @@ const s3BucketOptions = {
 
 app.get('/sitemap.xml.gz', s3Proxy({...s3BucketOptions, defaultKey: 'sitemap.xml.gz'}));
 
-// const sitemapRouter = express.Router({mergeParams: true});
-// app.use('/sitemaps', sitemapRouter);
-app.get('/sitemaps/*', s3Proxy({...s3BucketOptions}));
+const sitemapRouter = express.Router({mergeParams: true});  // Nest rest of the files and folders in s3 bucket under '/sitemaps' path.
+app.use('/sitemaps', sitemapRouter);
+sitemapRouter.get('*', s3Proxy(s3BucketOptions));
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/civis/index.html'));
 });
 
-console.log("listing on port:", PORT);
+console.log("listing on port", PORT);

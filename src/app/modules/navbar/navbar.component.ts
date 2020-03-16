@@ -115,7 +115,7 @@ export class NavbarComponent implements OnInit {
   }
 
   showProfilePopup() {
-    this.profilePopup = !this.profilePopup;
+      this.profilePopup = !this.profilePopup;
   }
 
   getLogoUrl() {
@@ -147,16 +147,9 @@ export class NavbarComponent implements OnInit {
       this.transparentNav = true;
     }
   }
-
-  @HostListener('document:click', ['$event.target'])
-  onClick(targetElement) {
-    if (this.profilePopup) {
-      if (this.userProfileElement.nativeElement.contains(targetElement)) {
-            return;
-      } else {
-        this.profilePopup = false;
-      }
-    }
+  
+  @HostListener('document:click', ['$event']) clickedOutside(event) {
+    this.profilePopup = false;
   }
 
   getActiveConsulationCount() {

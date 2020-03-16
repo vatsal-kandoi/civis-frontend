@@ -42,7 +42,6 @@
         .cover-title {
           font-size: 82px;
           font-weight: bold;
-          font-family: Encode Sans Semi Condensed;
           color: $white;
           line-height: 77px;
           letter-spacing: 0.005em;
@@ -302,7 +301,6 @@
   .section-heading {
     text-align: center;
     font-size: 17px;
-    font-family: Encode Sans Semi Condensed;
     color: #F0653A;
     font-weight: bold;
     letter-spacing: 0.58em;
@@ -316,7 +314,6 @@
     font-size: 16px;
     color: $white;
     font-weight: bold;
-    font-family: Encode Sans Semi Condensed;
     padding: 15px 25px;
     letter-spacing: 0.105em;
     text-transform: uppercase;
@@ -332,7 +329,6 @@
     border-bottom-width: 2px;
     margin-left: 20px;
     margin-bottom: 0;
-    font-family: Encode Sans Semi Condensed;
     letter-spacing: 0.065em;
     @media screen and (max-width: 991px) {
       font-size: 14px;
@@ -367,7 +363,6 @@
   }
   &__carouse-title {
     text-align: center;
-    font-family: Encode Sans Semi Condensed;
     letter-spacing: 0.38em;
     @include general-text(18px, $white, bold);
     @media screen and (max-width: 990px) {
@@ -447,7 +442,6 @@
           font-size: 24px;
           color: #F0653A;
           font-weight: bold;
-          font-family: Encode Sans Semi Condensed;
           list-style-type: none;
           @media screen and (max-width: 991px) {
             font-size: 16px;

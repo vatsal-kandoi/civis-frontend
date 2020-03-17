@@ -1,29 +1,6 @@
-@import './src/assets/styles/app';
+@import "./src/assets/styles/app";
 
 .read-response-container {
-
-  .submit-cta {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    height: 63px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $primary-color;
-    .sticky-btn {
-     background: transparent;
-     color: $white;
-     padding: 10px 30px;
-     border: 1px solid $white;
-     box-sizing: border-box;
-     border-radius: 4px;
-    }
-  }
-
   .paper-effect {
     position: relative;
     padding: 28px 32px;
@@ -41,7 +18,7 @@
   .heading {
     @include general-text($font-size: 16px, $weight: bold);
   }
-  
+
   .summary-content {
     @include general-text;
     @media screen {
@@ -69,7 +46,7 @@
       .vote-count {
         display: flex;
         align-items: center;
-        color: #A6A6A6;
+        color: #a6a6a6;
 
         span:nth-child(odd) {
           font-size: 24px;
@@ -79,8 +56,8 @@
 
         span:nth-child(even) {
           font-size: 14px;
-        } 
-        
+        }
+
         .active {
           color: $primary-color !important;
 
@@ -95,7 +72,7 @@
         }
         .share-block {
           position: relative;
-    
+
           &__position {
             position: absolute;
             bottom: 35px;
@@ -106,11 +83,11 @@
               margin-bottom: 10px;
               margin-left: -35%;
               background: white;
-              padding: 10px; 
+              padding: 10px;
               box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.13);
               border-radius: 5px;
               position: relative;
-        
+
               &:after {
                 content: "";
                 position: absolute;
@@ -126,12 +103,12 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin: .3125em;
+                margin: 0.3125em;
                 border: none;
                 border-radius: 5px;
                 background-color: #00acee;
                 min-width: 3.8em;
-    
+
                 &:visited {
                   color: transparent;
                 }
@@ -141,7 +118,7 @@
                 &:active {
                   color: transparent;
                 }
-    
+
                 i {
                   color: $white;
                   font-size: 18px;
@@ -157,7 +134,7 @@
         color: $primary-color;
         background-color: transparent;
         border-radius: 3px;
-        border: 1px solid #1894EA;
+        border: 1px solid #1894ea;
       }
     }
     .text-16 {
@@ -170,14 +147,14 @@
   .response-index {
     min-height: 386px;
     height: 386px;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.13);
     border-radius: 5px;
     position: relative;
 
     &__nav {
       height: 60px;
-      background:#F2F2F2;
+      background: #f2f2f2;
       border-radius: 5px 5px 0 0;
       padding: 0 30px;
       display: flex;
@@ -195,7 +172,7 @@
         font-size: 14px;
         line-height: 106.6%;
         text-decoration-line: underline;
-        color: #0E73B9;
+        color: #0e73b9;
         cursor: pointer;
       }
 
@@ -233,7 +210,7 @@
 
       .checkbox-area {
         min-height: 40px;
-        background: #F8F8F8;
+        background: #f8f8f8;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -244,7 +221,7 @@
           font-size: 14px;
           line-height: 124.7%;
           letter-spacing: 0.02em;
-          color: #5A5A5A;
+          color: #5a5a5a;
         }
 
         .link {
@@ -263,21 +240,21 @@
           margin: 0;
           @media screen and (max-width: 991px) {
             width: 100%;
-            margin: 15px 0 ;
+            margin: 15px 0;
           }
         }
       }
 
       .draggable-area {
         height: 20px;
-        background: #E3E3E3;
+        background: #e3e3e3;
         display: flex;
         align-items: center;
         flex-direction: column;
         justify-content: center;
         .drag-bars {
           width: 30px;
-          border: 2px solid #FFFFFF;
+          border: 2px solid #ffffff;
 
           &:nth-child(1) {
             margin-bottom: 2px;
@@ -289,7 +266,6 @@
 }
 
 .feedback-index {
-
   .align-center {
     display: flex !important;
     align-items: center;
@@ -298,44 +274,45 @@
   .modal {
     background: rgba(14, 115, 185, 0.6);
     height: 100vh;
-    
-  .modal-dialog {
-    width: 50%;
-    max-width: 50% !important;
-    @media screen and (max-width: 991px) {
-      width: 100%;
-      max-width: unset !important;
-      margin: 0;
-    }
-  
-    .modal-content {
-      .modal-header {
-        .heading {
-          font-weight: 500;
-          font-size: 21px;
-          line-height: 124.7%;
-          letter-spacing: 0.02em;
-          color: #525252;
-          margin-bottom: 0;
-        }
+
+    .modal-dialog {
+      width: 50%;
+      max-width: 50% !important;
+      @media screen and (max-width: 991px) {
+        width: 100%;
+        max-width: unset !important;
+        margin: 0;
       }
-      .modal-body {
-        padding: 15px 30px;
 
-        .radio-block {
-          width: 100%;
-          display: flex;
-          align-items: center;
+      .modal-content {
+        .modal-header {
+          .heading {
+            font-weight: 500;
+            font-size: 21px;
+            line-height: 124.7%;
+            letter-spacing: 0.02em;
+            color: #525252;
+            margin-bottom: 0;
+          }
+        }
+        .modal-body {
+          padding: 15px 30px;
 
-          .radio-btn {
+          .radio-block {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            .radio-btn {
               position: relative;
               width: 95%;
               display: flex;
-              background: #F7F7F7;
+              background: #f7f7f7;
               padding: 10px;
               justify-content: space-between;
 
-              .radio-text, .count-text {
+              .radio-text,
+              .count-text {
                 z-index: 2;
               }
 
@@ -348,78 +325,78 @@
                 top: 0;
                 bottom: 0;
                 left: 0;
-                background-color: #E3F1FC;
+                background-color: #e3f1fc;
                 z-index: 1;
               }
 
               .active-progress {
-                background-color: #7EC6FF;
+                background-color: #7ec6ff;
               }
-          }
-        }
-
-        .footer-space {
-          margin-top: 50px;
-          display: flex;
-          justify-content: space-between;
-          @media screen and (max-width: 991px) {
-            flex-wrap: wrap;
-            justify-content: flex-start !important;
-          }
-
-          &__left {
-            .points-text {
-              font-weight: 600;
-              font-size: 18px;
-              line-height: 124.7%;
-              letter-spacing: 0.02em;
-              color: #525252;
-              margin-bottom: 5px;
-            }
-            .link {
-              font-weight: normal;
-              font-size: 14px;
-              line-height: 106.6%;
-              /* or 15px */
-
-              letter-spacing: 0.08em;
-              text-decoration-line: underline;
-              cursor: pointer;
-              color: #0E73B9;
             }
           }
 
-          &__right {
+          .footer-space {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
             @media screen and (max-width: 991px) {
-              width: 100%;
+              flex-wrap: wrap;
+              justify-content: flex-start !important;
             }
-            button {
-              display: flex;
-              justify-content: space-between;
-              width: 282px;
-              padding: 10px 15px;
-              border: none;
+
+            &__left {
+              .points-text {
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 124.7%;
+                letter-spacing: 0.02em;
+                color: #525252;
+                margin-bottom: 5px;
+              }
+              .link {
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 106.6%;
+                /* or 15px */
+
+                letter-spacing: 0.08em;
+                text-decoration-line: underline;
+                cursor: pointer;
+                color: #0e73b9;
+              }
+            }
+
+            &__right {
               @media screen and (max-width: 991px) {
                 width: 100%;
               }
-              i {
-                font-size: 18px;
-                line-height: 22px;
+              button {
+                display: flex;
+                justify-content: space-between;
+                width: 282px;
+                padding: 10px 15px;
+                border: none;
+                @media screen and (max-width: 991px) {
+                  width: 100%;
+                }
+                i {
+                  font-size: 18px;
+                  line-height: 22px;
+                }
               }
-            }
-            .mt-xs {
-              @media screen and (max-width: 991px) {
-                margin-top: 15px;
+              .mt-xs {
+                @media screen and (max-width: 991px) {
+                  margin-top: 15px;
+                }
               }
-            }
-            .submit-logo {
-              margin-right: 5px;
-              vertical-align: text-bottom;
+              .submit-logo {
+                margin-right: 5px;
+                vertical-align: text-bottom;
+              }
             }
           }
         }
       }
     }
   }
-}
 }

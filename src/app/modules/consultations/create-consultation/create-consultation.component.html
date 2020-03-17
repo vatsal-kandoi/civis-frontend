@@ -47,6 +47,16 @@
                   Deadline is Required
               </div>
           </div>
+          <div class="input-block">
+            <label for="email">Government Email ID to submit feedback</label>
+            <div class="input-block__border">
+                <input type="email" placeholder="Enter Email" name="email" #email="ngModel" id="email" [(ngModel)]="consultationInfo.consultationFeedbackEmail" required email />
+            </div>
+            <div *ngIf="email.invalid && (email.touched || consultationForm1.submitted)" class="error-msg">
+              <div *ngIf="email.errors.required">Email is Required</div>
+              <div *ngIf="email.errors.email">Email must be a valid email address</div>
+          </div>
+          </div>
           <div>
               <button type="submit" class="btn submit-btn d-flex justify-content-between" [ngClass]="{'active-btn' : consultationForm1.valid}">
                 <p class="m-0">NEXT:  DEPARTMENT INFO</p>  

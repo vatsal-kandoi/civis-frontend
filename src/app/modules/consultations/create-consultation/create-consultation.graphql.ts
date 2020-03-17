@@ -41,4 +41,22 @@ export const ConstantForTypeQuery = gql`
         name
         }
     }
-`
+`;
+
+export const CategoryListQuery = gql`
+query categoryList($sort: CategorySort, $sortDirection: SortDirections){
+    categoryList(sort: $sort, sortDirection: $sortDirection){
+    data {
+        id
+        name
+        coverPhoto {
+        filename
+        url
+        }
+    }
+    paging {
+        totalItems
+    }
+    }
+}
+`;

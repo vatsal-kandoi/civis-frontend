@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, ViewChild, ElementRef, NgZone, HostLis
 import { Apollo } from 'apollo-angular';
 import { CreateConsultationMutation,
          MinistryAutocompleteQuery,
-         ConstantForTypeQuery,
+         CategoryListQuery,
          MinistryCreateMutation } from './create-consultation.graphql';
 import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from 'rxjs/operators';
 import { ModalDirective } from 'ngx-bootstrap';
@@ -23,7 +23,8 @@ export class CreateConsultationComponent implements OnInit {
   consultationInfo = {
     title: '',
     url: '',
-    responseDeadline: null
+    responseDeadline: null,
+    consultationFeedbackEmail: ''
   };
 
   departmentInfo = {
@@ -87,16 +88,14 @@ export class CreateConsultationComponent implements OnInit {
 
   getCateoriesList() {
     this.apollo.query({
-      query: ConstantForTypeQuery,
-      variables: {
-        constantType: 'ministry_category'
-      }
+      query: CategoryListQuery,
+      variables: {}
     })
     .pipe(
-      map((i: any) => i.data.constantForType)
+      map((i: any) => i.data.categoryList)
     )
     .subscribe((list) => {
-      this.categoriesList = list;
+      this.categoriesList = list.data;
     }, err => {
       this.errorService.showErrorModal(err);
     });

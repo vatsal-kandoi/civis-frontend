@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-success',
@@ -18,6 +19,7 @@ export class SuccessComponent implements OnInit {
     private tokenService: TokenService,
     private router: Router,
     private userService: UserService,
+    private cookieService: CookieService,
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,13 @@ export class SuccessComponent implements OnInit {
         this.userService.manageUserToken();
         this.userService.userLoaded$.subscribe(data => {
           if (data) {
-            this.router.navigateByUrl('/profile');
+            const callbackUrl = this.cookieService.get('loginCallbackUrl');
+            if (callbackUrl) {
+              this.router.navigateByUrl(callbackUrl);
+              this.cookieService.set('loginCallbackUrl', '');
+            } else {
+              this.router.navigateByUrl('/profile');
+            }
           }
         });
       }

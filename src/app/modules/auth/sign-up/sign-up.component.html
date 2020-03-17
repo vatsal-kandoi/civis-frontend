@@ -49,7 +49,7 @@
     <div class="form-space row no-gutters mt-md-5 mt-2">
       <div class="form-space__left col-md-5">
         <form #signupForm="ngForm" autocomplete="off">
-            <div class="input-box">
+            <div class="input-box required-field">
                 <label for="fname">First name</label>
                 <div class="input-box__border">
                     <input placeholder="First Name" type="text" id="fname" #fname="ngModel" name="fname" [(ngModel)]="signupObject.firstName" required />   
@@ -57,17 +57,16 @@
                 <div *ngIf="fname.invalid && (fname.touched || signupForm.submitted)" class="error-msg">First name is Required</div>
             </div>
     
-            <div class="input-box required-field">
+            <div class="input-box">
                 <label for="fname">Last name</label>
                 <div class="input-box__border">
-                    <input placeholder="Last Name" type="text" id="lname" #lname="ngModel" name="lname" [(ngModel)]="signupObject.lastName" required />
+                    <input placeholder="Last Name" type="text" id="lname" #lname="ngModel" name="lname" [(ngModel)]="signupObject.lastName"  />
                 </div>
-                <div *ngIf="lname.invalid && (lname.touched || signupForm.submitted)" class="error-msg">Last name is Required</div>
             </div>
 
             <div class="location-box required-field">
               <label for="locations">
-                  Location
+                  City
               </label>
               <div class="location-box__border">
                 <ng-select id="locations" #city="ngModel" name="city" [loading]="loadingCities"

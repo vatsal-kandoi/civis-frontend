@@ -41,7 +41,6 @@
                 <div class="d-inline-flex align-items-center">
                     <img class="avatar avatar--42" 
                     appDefaultImage [type]="'user'"
-                    (click)="openUserProfile(response?.node?.user)"
                     [src]="'null'" />
                   <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
                 </div>
@@ -92,8 +91,5 @@
         </div>
       </section>
   </div>
-</div>
-<div *ngIf="selectedUser && showLeaderProfileModal">
-  <app-user-profile-modal (close)="closeModal($event)" [userId]="selectedUser"></app-user-profile-modal>
 </div>
 <app-footer></app-footer>

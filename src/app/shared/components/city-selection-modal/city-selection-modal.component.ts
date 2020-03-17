@@ -69,7 +69,8 @@ export class CitySelectionModalComponent implements OnInit {
       return this.apollo.query({
           query: CitiesSearchQuery,
           variables: {
-            q: name
+            q: name,
+            type: 'city'
           }
         })
         .pipe(

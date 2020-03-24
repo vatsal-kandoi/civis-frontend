@@ -28,9 +28,9 @@
       </ckeditor>
       <!-- <textarea class="text-space" placeholder="Type your response here..." [(ngModel)]="responseText" (blur)="autoSave(responseText)" (ngModelChange)="enableSubmitResponse($event)"></textarea> -->
     </div>
-    <div class="response-index__footer">
+    <div class="response-index__footer" *ngIf="profileData?.reviewType !== 'policy'">
       <div class="checkbox-area" *ngIf="showPublicResponseOption">
-        <div class="input-checbox">
+        <div class="input-checbox" >
           <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility"/> 
           <label class="m-0"> Make my response public </label>
           <span class="link">What does this mean?</span>
@@ -43,83 +43,85 @@
       </div>
     </div>
   </div>
-
-  <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
-    <div class="d-flex justify-content-between">
-      <p class="text-16 m-0 bold-text">Public responses</p>
-      <p 
-        class="what-resp-text" 
-        tooltip="If you feel passionately about this Consultation, you can make your response public, 
-        for others to use as a template. Your first name is shared with the Government if you make your response public.
-        If you’re not sure what to write, you can choose other people’s responses to send as your own." 
-        placement="left"
-        container="body"
-        >
-          What are public responses?
-      </p>
-    </div>
-    <ng-container *ngFor="let response of responseList">
-      <div class="response-container" [id]="response?.node?.id">
-        <div class="d-inline-flex align-items-center">
-          <img 
-          class="avatar avatar--42 pointer"
-          appDefaultImage
-          [type]="'user'"
-          [src]="response?.node?.user?.profilePicture?.url"
-          (click)="openUserProfile(response?.node?.user)" />
-          <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
-        </div>
-        <p class="text-16" [innerHTML]="response.node.responseText"></p>
-        <div class="vote-section" *ngIf="currentUser">
-          <div class="vote-count">
-            <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">
-                <span (click)="vote('up', response?.node)"
-                  tooltip="{{'Upvote'}}"
-                 [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
-                <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
-            </div>
-            <div [ngClass]="response?.node.votedAs?.voteDirection === 'down'  ? 'active' : ''">
-                <span (click)="vote('down', response?.node)" 
-                tooltip="{{'Downvote'}}"
-                class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
-                <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
-            </div>
-            <div class="share-block">
-                <div class="share-block__position">
-                  <div #shareBlockElement *ngIf="showShareBlock" class="share-pop-up">
-                      <share-button 
-                      [button]="'facebook'"
-                      [url]="getSharingUrl(response?.node?.id)"
-                      [autoSetMeta]="false"
-                      (closed)="showShareOptions = false"
-                      ></share-button>
-                      <a  class="tweet-block"
-                      [href]="getTwitterUrl(currentUrl, response?.node?.id)"
-                      target="_blank">
-                        <span>
-                            <i class="fa fa-twitter"></i>
-                        </span>
-                      </a>
-                      <share-button 
-                      [button]="'whatsapp'"
-                      [url]="getSharingUrl(response?.node?.id)"
-                      [autoSetMeta]="false"
-                      (closed)="showShareOptions = false"
-                      ></share-button>
-                  </div>
-                </div>
-                <span #shareButtonElement (click)="showShareBlock = !showShareBlock"
-                class="ml-4 mr-2 fs-20 pointer" tooltip="{{'Share'}}"><i class="fa fa-share"></i></span>
-                <span>{{response.node?.templatesCount ? response.node?.templatesCount : '' }}</span>
-            </div>
-          </div>
-          <div>
-            <button class="app-btn response-btn" (click)="useThisResponse(response?.node)" >Use this response</button>
-          </div>
-        </div>
+  
+  <ng-container *ngIf="profileData?.reviewType !== 'policy'">
+    <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
+      <div class="d-flex justify-content-between">
+        <p class="text-16 m-0 bold-text">Public responses</p>
+        <p 
+          class="what-resp-text" 
+          tooltip="If you feel passionately about this Consultation, you can make your response public, 
+          for others to use as a template. Your first name is shared with the Government if you make your response public.
+          If you’re not sure what to write, you can choose other people’s responses to send as your own." 
+          placement="left"
+          container="body"
+          >
+            What are public responses?
+        </p>
       </div>
-    </ng-container>
-  </div>      
+      <ng-container *ngFor="let response of responseList">
+        <div class="response-container" [id]="response?.node?.id">
+          <div class="d-inline-flex align-items-center">
+            <img 
+            class="avatar avatar--42 pointer"
+            appDefaultImage
+            [type]="'user'"
+            [src]="response?.node?.user?.profilePicture?.url"
+            (click)="openUserProfile(response?.node?.user)" />
+            <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
+          </div>
+          <p class="text-16" [innerHTML]="response.node.responseText"></p>
+          <div class="vote-section" *ngIf="currentUser">
+            <div class="vote-count">
+              <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">
+                  <span (click)="vote('up', response?.node)"
+                    tooltip="{{'Upvote'}}"
+                  [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
+                  <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
+              </div>
+              <div [ngClass]="response?.node.votedAs?.voteDirection === 'down'  ? 'active' : ''">
+                  <span (click)="vote('down', response?.node)" 
+                  tooltip="{{'Downvote'}}"
+                  class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
+                  <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
+              </div>
+              <div class="share-block">
+                  <div class="share-block__position">
+                    <div #shareBlockElement *ngIf="showShareBlock" class="share-pop-up">
+                        <share-button 
+                        [button]="'facebook'"
+                        [url]="getSharingUrl(response?.node?.id)"
+                        [autoSetMeta]="false"
+                        (closed)="showShareOptions = false"
+                        ></share-button>
+                        <a  class="tweet-block"
+                        [href]="getTwitterUrl(currentUrl, response?.node?.id)"
+                        target="_blank">
+                          <span>
+                              <i class="fa fa-twitter"></i>
+                          </span>
+                        </a>
+                        <share-button 
+                        [button]="'whatsapp'"
+                        [url]="getSharingUrl(response?.node?.id)"
+                        [autoSetMeta]="false"
+                        (closed)="showShareOptions = false"
+                        ></share-button>
+                    </div>
+                  </div>
+                  <span #shareButtonElement (click)="showShareBlock = !showShareBlock"
+                  class="ml-4 mr-2 fs-20 pointer" tooltip="{{'Share'}}"><i class="fa fa-share"></i></span>
+                  <span>{{response.node?.templatesCount ? response.node?.templatesCount : '' }}</span>
+              </div>
+            </div>
+            <div>
+              <button class="app-btn response-btn" (click)="useThisResponse(response?.node)" >Use this response</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>   
+  </ng-container>   
 </section>
 <div *ngIf="selectedUser && showLeaderProfileModal">
   <app-user-profile-modal (close)="closeModal($event)" [userId]="selectedUser"></app-user-profile-modal>

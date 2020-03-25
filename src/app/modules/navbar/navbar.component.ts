@@ -58,6 +58,9 @@ export class NavbarComponent implements OnInit {
         )
         .subscribe((consulationId: any) => {
           this.consultationId = consulationId;
+          if (this.consultationId) {
+            this.getConsultationProfile();
+          }
         });
       }
 
@@ -107,17 +110,6 @@ export class NavbarComponent implements OnInit {
     return '';
   }
 
-  // getCurrentUser() {
-  //   this.userService.userLoaded$
-  //     .subscribe((data) => {
-  //       if (data) {
-  //         this.currentUser = this.userService.currentUser;
-  //       } else {
-  //         this.currentUser = null;
-  //       }
-  //     });
-  // }
-
   getCurrentUser() {
     this.userService.userLoaded$
     .subscribe((data) => {
@@ -147,7 +139,6 @@ export class NavbarComponent implements OnInit {
     )
     .subscribe((data: any) => {
         this.reviewType  = data.reviewType;
-        console.log(this.reviewType, 'comes');
     }, err => {
       this.errorService.showErrorModal(err);
     });

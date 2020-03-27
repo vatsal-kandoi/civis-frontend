@@ -201,7 +201,13 @@
               <div class="footer-space__right">
                 <button  class="app-btn secondary mt-xs" *ngIf="responseSubmitted" (click)="closeFeedbackModal()">
                   <p class="m-0">
-                    <span class="submit-logo"><img src="assets/images/Vector.png" /></span>
+                    <span class="submit-logo">
+                      <picture class="citizen-logo">
+                        <source srcset="assets/images/Vector.webp" type="image/webp">
+                        <source srcset="assets/images/Vector.jpg" type="image/jpeg">
+                        <img src="assets/images/Vector.jpg" />
+                      </picture>
+                    </span>
                     Ok Great
                   </p>
                   <i class="fa fa-angle-right"></i>
@@ -210,7 +216,16 @@
                     <img src="assets/images/loading.svg">
                 </span>
                 <button class="app-btn secondary" *ngIf="!responseSubmitted" (click)="createResponse()">
-                  <p class="m-0"><span class="submit-logo"><img src="assets/images/Vector.png" /></span>Select and submit</p>
+                  <p class="m-0">
+                    <span class="submit-logo">
+                      <picture class="citizen-logo">
+                        <source srcset="assets/images/Vector.webp" type="image/webp">
+                        <source srcset="assets/images/Vector.jpg" type="image/jpeg">
+                        <img src="assets/images/Vector.jpg" />
+                      </picture>
+                    </span>
+                    Select and submit
+                  </p>
                   <i class="fa fa-angle-right"></i>
                 </button>
               </div>

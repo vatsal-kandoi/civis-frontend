@@ -83,16 +83,7 @@
           <p (click)="logout($event)">Logout</p>
         </div>
       </div>
-      <!-- <div class="mobile-space">
-        <div class="mobile-space__auth">
-          <button class="nav-btn">Sign Up</button>
-        </div>
-        <div class="mobile-space__menu">
-          <div class="icon" (click)="openMenu()">
-            <i class="fa fa-bars"></i>
-          </div>
-        </div>
-      </div> -->
+      
       <div class="mobile-space">
         <div class="mobile-space__auth" *ngIf="!currentUser">
           <button class="nav-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>

@@ -25,6 +25,7 @@ export const ConsultationProfile = gql`
           url
         }
       }
+      reviewType
       satisfactionRatingDistribution
       status
       sharedResponses(sort: created_at, sortDirection: desc) {
@@ -77,6 +78,7 @@ export const ConsultationProfileCurrentUser = gql`
           url
         }
       }
+      reviewType
       satisfactionRatingDistribution
       status
       respondedOn

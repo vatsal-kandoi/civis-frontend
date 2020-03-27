@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild, HostListener, ViewEncapsulation, ElementR
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { ConsultationList } from './navbar.graphql';
+import { ConsultationProfileCurrentUser, ConsultationProfile } from '../consultations/consultation-profile/consultation-profile.graphql';
+import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 
 @Component({
@@ -23,6 +25,8 @@ export class NavbarComponent implements OnInit {
   routerId: any;
   transparentNav = false;
   activeCount: any;
+  consultationId: number;
+  reviewType: any;
 
   menuObject = {
     name: 'Read & Respond'
@@ -46,7 +50,19 @@ export class NavbarComponent implements OnInit {
     private apollo: Apollo,
     private route: ActivatedRoute,
     private consultationService: ConsultationsService,
-    ) { }
+    private errorService: ErrorService,
+    ) {
+        this.consultationService.consultationId$
+        .pipe(
+          filter(i => i !== null)
+        )
+        .subscribe((consulationId: any) => {
+          this.consultationId = consulationId;
+          if (this.consultationId) {
+            this.getConsultationProfile();
+          }
+        });
+      }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -96,13 +112,36 @@ export class NavbarComponent implements OnInit {
 
   getCurrentUser() {
     this.userService.userLoaded$
-      .subscribe((data) => {
-        if (data) {
-          this.currentUser = this.userService.currentUser;
-        } else {
-          this.currentUser = null;
+    .subscribe((data) => {
+      if (data) {
+        this.currentUser = this.userService.currentUser;
+        if (this.consultationId) {
+          this.getConsultationProfile();
         }
-      });
+      } else {
+        this.currentUser = null;
+        if (this.consultationId) {
+          this.getConsultationProfile();
+        }
+      }
+    });
+  }
+
+  getConsultationProfile() {
+    const query = ConsultationProfileCurrentUser;
+    this.apollo.watchQuery({
+      query: this.currentUser ? ConsultationProfileCurrentUser : ConsultationProfile,
+      variables: {id: this.consultationId}
+    })
+    .valueChanges
+    .pipe (
+      map((res: any) => res.data.consultationProfile)
+    )
+    .subscribe((data: any) => {
+        this.reviewType  = data.reviewType;
+    }, err => {
+      this.errorService.showErrorModal(err);
+    });
   }
 
   getActiveTab() {

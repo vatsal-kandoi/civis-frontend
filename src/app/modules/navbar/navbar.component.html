@@ -2,7 +2,8 @@
   <nav class="app-navbar" [ngClass]="currentUrl == 'landing' ? 'landing-nav-spacer' : 'nav-spacer'">
     <div class="app-navbar__left-item">
       <div class="logo-space pointer" [routerLink]="['/']">
-        <img class="logo pointer" [src]="getLogoUrl()" [ngClass]="(currentUrl == 'consultations-profile') ? 'xs-logo' : ''" />
+        <img class="logo pointer" [src]="getLogoUrl()"
+          [ngClass]="(currentUrl == 'consultations-profile') ? 'xs-logo' : ''" />
       </div>
       <div class="left-nav-link" *ngIf="currentUrl !== 'consultations-profile'">
         <p class="nav-link-text bold-text" [routerLink]="['consultations/list']">
@@ -15,36 +16,50 @@
 
     <div class="app-navbar__center-item" *ngIf="currentUrl === 'consultations-profile'">
       <div class="profile-tab-wrapper">
-        <a class="profile-tab px-3" [ngClass]="activeTab === 'read & respond' ? 'active-tab' : ''" (click)="routeToConsultation('read')">
+        <a class="profile-tab px-3" [ngClass]="activeTab === 'read & respond' ? 'active-tab' : ''"
+          (click)="routeToConsultation('read')">
           <p>Read & Respond</p>
           <p>Submit your feedback</p>
         </a>
-        <a class="profile-tab px-3" [ngClass]="activeTab === 'discuss & engage' ? 'active-tab' : ''" (click)="routeToConsultation('discuss')">
-          <p>Discuss & Engage</p>
-          <p>Talk to the community</p>
-        </a>
+        <ng-container *ngIf="reviewType !== 'policy'">
+          <a class="profile-tab px-3" [ngClass]="activeTab === 'discuss & engage' ? 'active-tab' : ''"
+            (click)="routeToConsultation('discuss')">
+            <p>Discuss & Engage</p>
+            <p>Talk to the community</p>
+          </a>
+        </ng-container>
       </div>
       <!-- profile-tab-mobiel-code -->
       <div class="profile-tab-mobile">
         <div class="profile-options-container">
-          <form #consultationTab="ngForm">
-            <ng-select id="menu" #menu="ngModel" name="menu" [items]="menus" bindLabel="name" [virtualScroll]="true"
-              dropdownPosition="bottom" bindValue="name" [searchable]="false" [clearable]="false"
-              (change)="changeMenu($event)" [(ngModel)]="menuObject.name">
-              <ng-template ng-option-tmp let-item="item" let-index="index">
-                <div>
-                  <p class="mb-1 font-weight-bold">{{item.name}}</p>
-                  <p class="m-0" style="font-size:13px">{{item.description}}</p>
-                </div>
-              </ng-template>
-              <ng-template ng-label-tmp let-item="item">
-                <div>
-                  <p class="mb-1 font-weight-bold">{{item.name}}</p>
-                  <p class="m-0" style="font-size:13px">{{item.description}}</p>
-                </div>
-              </ng-template>
-            </ng-select>
-          </form>
+
+          <ng-container *ngIf="reviewType !== 'policy'">
+            <form #consultationTab="ngForm">
+              <ng-select id="menu" #menu="ngModel" name="menu" [items]="menus" bindLabel="name" [virtualScroll]="true"
+                dropdownPosition="bottom" bindValue="name" [searchable]="false" [clearable]="false"
+                (change)="changeMenu($event)" [(ngModel)]="menuObject.name">
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <div>
+                    <p class="mb-1 font-weight-bold">{{item.name}}</p>
+                    <p class="m-0" style="font-size:13px">{{item.description}}</p>
+                  </div>
+                </ng-template>
+                <ng-template ng-label-tmp let-item="item">
+                  <div>
+                    <p class="mb-1 font-weight-bold">{{item.name}}</p>
+                    <p class="m-0" style="font-size:13px">{{item.description}}</p>
+                  </div>
+                </ng-template>
+              </ng-select>
+            </form>
+          </ng-container>
+
+          <ng-container *ngIf="reviewType === 'policy'">
+            <div class="single-option">
+              <p class="mb-1 font-weight-bold">Read & Respond</p>
+              <p class="m-0" style="font-size:13px">Submit your feedback</p>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
@@ -58,12 +73,10 @@
       <div class="nav-btns" *ngIf="!currentUser">
         <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">Log In / Sign Up</button>
       </div>
-      <div 
-      class="nav-btns profile-item pointer" *ngIf="currentUser"
-      (click)="$event.preventDefault();$event.stopPropagation(); showProfilePopup()">
-        <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url"/>
-        <span class="clr-black"><i
-            class="fa fa-angle-down ml-2"></i></span>
+      <div class="nav-btns profile-item pointer" *ngIf="currentUser"
+        (click)="$event.preventDefault();$event.stopPropagation(); showProfilePopup()">
+        <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
+        <span class="clr-black"><i class="fa fa-angle-down ml-2"></i></span>
 
         <div class="profile-popup" *ngIf="profilePopup">
           <p [routerLink]="['/profile']">Profile</p>
@@ -77,9 +90,8 @@
         </div>
         <div *ngIf="currentUser">
           <img class="avatar avatar--32" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
-          <span (click)="showProfilePopup()" class="clr-black"><i
-              class="fa fa-angle-down ml-2 mr-3"></i></span>
-  
+          <span (click)="showProfilePopup()" class="clr-black"><i class="fa fa-angle-down ml-2 mr-3"></i></span>
+
           <div class="profile-popup" *ngIf="profilePopup">
             <p [routerLink]="['/profile']" (click)="showProfilePopup()">Profile</p>
             <p (click)="logout($event)">Logout</p>
@@ -124,8 +136,7 @@
             </button>
           </div>
           <div class="nav-btn">
-            <button class="btn-oval" 
-              (click)="closeMenu(); submitConsultation()">Submit a Consultation</button>
+            <button class="btn-oval" (click)="closeMenu(); submitConsultation()">Submit a Consultation</button>
           </div>
           <div class="nav-btn" *ngIf="!currentUser">
             <button class="close-btn btn btn-transparent" (click)="closeMenu()" [routerLink]="['/auth', 'sign-up']">
@@ -138,4 +149,5 @@
   </div>
 </div>
 
-<app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false"></app-confirm-email-modal>
+<app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false">
+</app-confirm-email-modal>

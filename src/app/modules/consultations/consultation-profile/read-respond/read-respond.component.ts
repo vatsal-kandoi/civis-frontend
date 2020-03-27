@@ -157,7 +157,9 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   createMetaTags(consultationProfile) {
     const title = consultationProfile.title ? consultationProfile.title : '' ;
     const image = (consultationProfile['mininstry'] ?
-     (consultationProfile['mininstry']['coverPhoto'] ? consultationProfile['mininstry']['coverPhoto']['url'] : '') : '');
+    consultationProfile['mininstry']['category'] ?
+    (consultationProfile['mininstry']['category']['coverPhoto'] ?
+    consultationProfile['mininstry']['category']['coverPhoto']['url'] : '') : '' : '');
     const description = consultationProfile['summary'] ? (consultationProfile['summary'].length < 140 ?
                         consultationProfile['summary'] : consultationProfile['summary'].slice(0, 140)) : '';
     this.deleteMetaTags();

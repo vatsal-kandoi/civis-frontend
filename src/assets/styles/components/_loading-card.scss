@@ -1,0 +1,58 @@
+.loading-card {
+  position: relative;
+  -webkit-box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  height: 500px;
+  overflow: hidden;
+  width: 100%;
+  margin: 10px auto;
+
+  .loading-wave {
+    animation-duration: 2.2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: loadingWave;
+    animation-timing-function: linear;
+    background: #e5f0fb;
+    background: linear-gradient(to right, #c1dceb 4%, #a3cbe1 25%, #c1dceb 36%);
+    background-size: 1200px 100%;
+  }
+
+  @keyframes loadingWave {
+    0% {
+      background-position: -1200px 0;
+    }
+    100% {
+      background-position: 1200px 0;
+    }
+  }
+
+  .image-space {
+    height: 250px;
+  }
+
+  .content-space {
+    margin-top: 40px;
+    padding: 25px;
+  }
+
+  .title-line {
+    height: 24px;
+    width: 100%;
+    margin-bottom: 12px;
+    border-radius: 20px;
+  }
+
+  .content-line {
+    height: 8px;
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: 8px;
+  }
+
+  .small-line {
+    width: 40%;
+  }
+}

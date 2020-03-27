@@ -13,18 +13,22 @@ export const ConsultationProfile = gql`
       consultationResponsesCount
       ministry {
         id
-        name
-        coverPhoto {
+        category {
           id
-          filename
-          url
+          coverPhoto {
+            id
+            filename
+            url
+          }
         }
+        name
         logo {
           id
           filename
           url
         }
       }
+      reviewType
       satisfactionRatingDistribution
       status
       sharedResponses(sort: created_at, sortDirection: desc) {
@@ -65,18 +69,22 @@ export const ConsultationProfileCurrentUser = gql`
       consultationResponsesCount
       ministry {
         id
-        name
-        coverPhoto {
+        category {
           id
-          filename
-          url
+          coverPhoto {
+            id
+            filename
+            url
+          }
         }
+        name
         logo {
           id
           filename
           url
         }
       }
+      reviewType
       satisfactionRatingDistribution
       status
       respondedOn

@@ -12,11 +12,15 @@ export const ConsultationList = gql`
         responseDeadline
         ministry {
           id
-          name
-          coverPhoto (resolution: "350X285>") {
+          category {
             id
-            url
+            coverPhoto (resolution: "350X285>") {
+              id
+              filename
+              url
+            }
           }
+          name
         }
         status
       }

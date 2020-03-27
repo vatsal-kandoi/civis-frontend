@@ -1,6 +1,6 @@
 <a href="javascript:void(0)" class="decoration-none" [routerLink]="['/consultations', consultation?.id]">
   <div class="consultation-card">
-    <div class="consultation-card__card-image" appDefaultImage [type]="'consultation-cover'" [ngStyle]="consultation?.ministry?.coverPhoto?.url ? {'background-image': 'url(' + consultation?.ministry?.coverPhoto?.url + ')'} : null"></div>
+    <div class="consultation-card__card-image" appDefaultImage [type]="'consultation-cover'" [ngStyle]="consultation?.ministry?.category?.coverPhoto?.url ? {'background-image': 'url(' + consultation?.ministry?.category?.coverPhoto?.url + ')'} : null"></div>
     <div class="consultation-card__details">
       <p class="title">{{ consultation?.title}}</p>
       <p class="sub-title">{{ consultation?.ministry?.name}}</p>

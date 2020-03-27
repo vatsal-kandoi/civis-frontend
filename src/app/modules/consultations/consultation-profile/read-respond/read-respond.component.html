@@ -12,7 +12,7 @@
       <div class="w-50">
         <div class="heading">Your response</div>
       </div>
-      <div class="w-50 row no-gutters justify-content-end align-items-center">
+      <div class="w-50 row no-gutters justify-content-end align-items-center" *ngIf="profileData?.reviewType !== 'policy'">
         <div (click)="scrollToResponses()" class="link mr-3">or, select a public response</div>
         <div class="info-mark"><i class="fa fa-question-circle"></i></div>
       </div>

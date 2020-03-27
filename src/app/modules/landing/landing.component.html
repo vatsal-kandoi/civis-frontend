@@ -15,11 +15,11 @@
       <div class="cover-card">
         <div class="card-carousel">
           <p class="card-carousel__carouse-title">IN FOCUS</p>
-          <div @slideInRight>
-            <app-consultation-card *ngIf='coverCardData?.length && coverCardData[current_card_index]' [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
-          </div>
-          <ng-container *ngIf="loadingCard">
-            <div class="loading-card">
+          <div class="card-carousel__inner">
+            <div *ngIf='coverCardData?.length && coverCardData[current_card_index]'>
+              <app-consultation-card [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
+            </div>
+            <div class="loading-card" *ngIf="loadingCard">
               <div class="loading-wave image-space"></div>
               <div class="content-space">
                 <div class="loading-wave title-line"></div>
@@ -28,7 +28,7 @@
                 <div class="loading-wave content-line"></div>
               </div>
             </div>
-          </ng-container>
+          </div>
           <div class="card-carousel__carousel-indicators">
             <span 
               class="dot" 

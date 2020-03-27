@@ -11,37 +11,37 @@ import { UnsubscribeUserGuard } from './shared/guards/unsubscribe-user.guard';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './modules/landing/landing.module#LandingModule',
+    loadChildren: () => import('./modules/landing/landing.module').then(m => m.LandingModule)
   },
 
   {
     path: 'home',
-    loadChildren: './modules/home/home.module#HomeModule'
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'auth',
-    loadChildren: './modules/auth/auth.module#AuthModule'
+    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'consultations',
-    loadChildren: './modules/consultations/consultations.module#ConsultationsModule'
+    loadChildren: () => import('./modules/consultations/consultations.module').then(m => m.ConsultationsModule)
   },
   {
     path: 'profile',
-    loadChildren: './modules/profile/profile.module#ProfileModule',
+    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'leader-board',
-    loadChildren: './modules/leader-board/leader-board.module#LeaderBoardModule'
+    loadChildren: () => import('./modules/leader-board/leader-board.module').then(m => m.LeaderBoardModule)
   },
   {
     path: 'how-civis-works',
-    loadChildren: './modules/how-civis-works/how-civis-works.module#HowCivisWorksModule'
+    loadChildren: () => import('./modules/how-civis-works/how-civis-works.module').then(m => m.HowCivisWorksModule)
   },
   {
     path: 'about-us',
-    loadChildren: './modules/about-us/about-us.module#AboutUsModule'
+    loadChildren: () => import('./modules/about-us/about-us.module').then(m => m.AboutUsModule)
   },
   {
     path: 'terms',
@@ -57,12 +57,12 @@ const routes: Routes = [
   },
   {
     path: 'confirm',
-    loadChildren: './modules/home/home.module#HomeModule',
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
     canActivate: [ConfirmUserGuard]
   },
   {
     path: 'emails/unsubscribe',
-    loadChildren: './modules/landing/landing.module#LandingModule',
+    loadChildren: () => import('./modules/landing/landing.module').then(m => m.LandingModule),
     canActivate: [UnsubscribeUserGuard]
   }
 ];

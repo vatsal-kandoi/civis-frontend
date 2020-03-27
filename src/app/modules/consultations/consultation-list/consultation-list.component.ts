@@ -24,6 +24,7 @@ export class ConsultationListComponent implements OnInit {
   closedConsultationList: Array<any>;
   closedConsultationPaging: any;
   loadClosedConsultation = false;
+  loadingCard = false;
   
   @HostListener('document:scroll', ['$event'])
   onScroll(event: any) {
@@ -40,6 +41,7 @@ export class ConsultationListComponent implements OnInit {
   }
   
   fetchActiveConsultationList() {
+    this.loadingCard = true;
     this.consultationListQuery = this.getQuery('published');
     this.loader.show();
     this.loadingElements.consultationList = true;
@@ -49,6 +51,7 @@ export class ConsultationListComponent implements OnInit {
           map((res: any) => res.data.consultationList)
         )
         .subscribe(item => {
+            this.loadingCard = false;
             this.loadingElements.consultationList = false;
             this.consultationListData = item;
             this.consultationListArray = item.data;
@@ -59,6 +62,7 @@ export class ConsultationListComponent implements OnInit {
                 this.fetchClosedConsultationList();
               }
         }, err => {
+          this.loadingCard = false;
             this.loadingElements.consultationList = false;
             this.loader.hide();
             this.errorService.showErrorModal(err);

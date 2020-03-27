@@ -2,7 +2,13 @@
   <div class="steps-wrapper" @fadeIn [ngSwitch]="submitStep">
     <div class="carousel-arrow-left pointer" (click)="submitPreviousStep()"><i class="fa fa-angle-left"></i></div>
     <div class="steps-inner-container" *ngSwitchCase="1">
-      <div class="step-left-section"><img src="../../../assets/images/step1.png" /></div>
+      <div class="step-left-section">
+        <picture>
+          <source srcset="assets/images/step1.webp" type="image/webp">
+          <source srcset="assets/images/step1.jpg" type="image/jpeg">
+          <img appLazyLoad src="assets/images/step1.jpg" alt="steps image" />
+        </picture>
+      </div>
       <div class="step-right-section">
         <p class="step-text">STEP 1</p>
         <ul class="step-detail w-80">
@@ -16,7 +22,13 @@
       </div>
     </div>
     <div class="steps-inner-container" *ngSwitchCase="2"> 
-      <div class="step-left-section"><img src="../../../assets/images/step3.png" /></div>
+      <div class="step-left-section">
+        <picture>
+          <source srcset="assets/images/step3.webp" type="image/webp">
+          <source srcset="assets/images/step3.jpg" type="image/jpeg">
+          <img appLazyLoad src="assets/images/step3.jpg" alt="steps image" />
+        </picture>
+      </div>
       <div class="step-right-section">
         <p class="step-text">STEP 2</p>
         <ul class="step-detail w-80">
@@ -33,7 +45,13 @@
   <div class="steps-wrapper" @fadeIn [ngSwitch]="consultationStep">
     <div class="carousel-arrow-left pointer" (click)="consultationPreviousStep()"><i class="fa fa-angle-left"></i></div>
     <div class="steps-inner-container" *ngSwitchCase="1">
-      <div class="step-left-section"><img src="../../../assets/images/step2.png" /></div>
+      <div class="step-left-section">
+        <picture>
+          <source srcset="assets/images/step2.webp" type="image/webp">
+          <source srcset="assets/images/step2.jpg" type="image/jpeg">
+          <img appLazyLoad src="assets/images/step2.jpg" alt="steps image" />
+        </picture>
+      </div>
       <div class="step-right-section">
         <p class="step-text">STEP 1</p>
         <ul class="step-detail w-80">
@@ -46,7 +64,13 @@
       </div>
     </div>
     <div class="steps-inner-container" *ngSwitchCase="2">
-      <div class="step-left-section"><img src="../../../assets/images/step4.png" /></div>
+      <div class="step-left-section">
+        <picture>
+          <source srcset="assets/images/step4.webp" type="image/webp">
+          <source srcset="assets/images/step4.jpg" type="image/jpeg">
+          <img appLazyLoad src="assets/images/step4.jpg" alt="steps image" />
+        </picture>
+      </div>
       <div class="step-right-section">
         <p class="step-text">STEP 2</p>
         <ul class="step-detail w-80">

@@ -140,20 +140,29 @@
         <div class="vertical-divider">
           <div class="center-element">OR</div>
         </div>
+        
+        <!-- horizontal-divider for mobile -->
         <hr class="horizontal-divider" data-content="OR">
       </div>
       <div class="form-space-right col-md-5">
         <button class="app-btn gmail mb-3" (click)="redirectTo('google')">
           <div class="social-img">
-            <img src="../../../../assets/images/Gmail.png" />
+            <picture>
+              <source srcset="assets/images/Gmail.webp" type="image/webp">
+              <source srcset="assets/images/Gmail.jpg" type="image/jpeg">
+              <img src="assets/images/Gmail.jpg" alt="Gmail logo" />
+            </picture>
           </div>
           <p class="mb-0 ml-4">Sign up with Google</p>
         </button> 
         <button class="app-btn facebook" (click)="redirectTo('facebook')">
           <div class="social-img">
-            <img src="../../../../assets/images/Facebook.png" />
+            <picture>
+              <source srcset="assets/images/Facebook.webp" type="image/webp">
+              <source srcset="assets/images/Facebook.jpg" type="image/jpeg">
+              <img src="assets/images/Facebook.jpg" alt="Facebook logo" />
+            </picture>
           </div>
-          
           <p class="mb-0 ml-4">Sign up with Facebook</p>
         </button>
       </div>

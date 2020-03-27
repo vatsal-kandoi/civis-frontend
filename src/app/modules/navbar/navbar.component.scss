@@ -1,5 +1,4 @@
-@import './src/assets/styles/app';
-
+@import "./src/assets/styles/app";
 
 .nav-container {
   position: fixed;
@@ -23,7 +22,7 @@
   .nav-spacer {
     padding: 0 30px;
     @media screen and (max-width: 500px) {
-        padding: 0 10px;
+      padding: 0 10px;
     }
   }
 
@@ -59,7 +58,6 @@
     }
 
     &__center-item {
-
       .profile-tab-wrapper {
         display: flex;
         align-items: center;
@@ -88,13 +86,13 @@
           p:nth-child(2) {
             font-size: 12px;
             font-weight: 500;
-            color: #71BCF0;
+            color: #71bcf0;
             margin: 0;
           }
         }
 
         .active-tab {
-          border-bottom: 4px solid #1894EA;
+          border-bottom: 4px solid #1894ea;
         }
       }
 
@@ -108,15 +106,15 @@
           width: 100%;
           display: flex;
           align-items: center;
-      
+
           .profile-options-container {
             width: 100%;
-      
+
             form {
               width: 100%;
             }
           }
-      
+
           ng-select {
             .ng-select-container {
               background-color: transparent;
@@ -125,25 +123,29 @@
               font-size: 14px;
             }
           }
-      
-          .ng-select.ng-select-opened>.ng-select-container .ng-arrow {
+
+          .ng-select.ng-select-opened > .ng-select-container .ng-arrow {
             border-color: transparent transparent $primary-color;
           }
-      
+
           .ng-select .ng-arrow-wrapper .ng-arrow {
             border-color: $primary-color transparent transparent;
           }
-      
+
           .ng-dropdown-panel {
             margin-top: 10px;
-      
+
             .ng-option {
               color: $primary-color;
               font-size: 14px;
             }
           }
-        }
 
+          .single-option {
+            color: $primary-color;
+            font-size: 14px;
+          }
+        }
       }
     }
 
@@ -164,9 +166,8 @@
 
     .nav-link-text {
       font-size: 14px;
-      color: #E2F3FF;
+      color: #e2f3ff;
       margin: 0 30px;
-      font-family: Encode Sans Semi Condensed;
       letter-spacing: 0.065em;
       cursor: pointer;
     }
@@ -204,7 +205,6 @@
   }
 }
 
-
 .profile-popup {
   position: absolute;
   top: 50px;
@@ -212,7 +212,7 @@
   width: 160px;
   padding: 10px;
   background-color: #fff;
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .2), 0 4px 20px 0 rgba(0, 0, 0, .19);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
   @media screen and (max-width: 991px) {
     width: 110px;
     right: 45px;
@@ -232,25 +232,24 @@
 
 .blue-nav {
   background-color: $primary-color;
-  transition: background-color .3s linear;
+  transition: background-color 0.3s linear;
 }
 
 .white-nav {
   background-color: $white;
-  transition: background-color .3s linear;
+  transition: background-color 0.3s linear;
 
   .nav-link-text {
     font-size: 14px;
     color: $primary-color !important;
     margin: 0 30px;
-    font-family: Encode Sans Semi Condensed;
     letter-spacing: 0.05em;
     cursor: pointer;
   }
 
   .nav-btns {
     .btn {
-      color: #0E73B9 !important;
+      color: #0e73b9 !important;
     }
 
     .btn-oval {
@@ -292,14 +291,14 @@
     margin-right: 15px;
 
     .nav-btn {
-      background-color: #1894EA;
+      background-color: #1894ea;
       border-radius: 3px;
-      color: #FFFFFF;
+      color: #ffffff;
       padding: 5px 15px;
       font-weight: 500;
       font-size: 13px;
       letter-spacing: 0.05em;
-      border: none
+      border: none;
     }
   }
 
@@ -321,7 +320,7 @@
     margin: 0;
 
     .modal-content {
-      background: #003F6B !important;
+      background: #003f6b !important;
       border: none;
       border-radius: 0;
       padding: 24px;
@@ -333,7 +332,7 @@
           margin-bottom: 25px;
 
           .close-btn {
-            color: #FFFFFF;
+            color: #ffffff;
             font-size: 22px;
 
             &:focus {
@@ -355,10 +354,8 @@
           }
         }
       }
-
     }
   }
-
 }
 
 .active-count-box {
@@ -368,7 +365,7 @@
   font-size: 14px;
   font-weight: 600;
   color: $white;
-  background-color: #46A4E5;
+  background-color: #46a4e5;
   border-radius: 2px;
 }
 
@@ -376,6 +373,3 @@
   -webkit-transform: translate3d(125%, 0, 0);
   transform: translate3d(125%, 0, 0);
 }
-
-
-

@@ -8,6 +8,21 @@
           <app-consultation-card [consultation]="item"></app-consultation-card>
         </div>
       </ng-container>
+
+      <!-- loading-cards -->
+      <ng-container *ngIf="loadingCard">
+        <div class="card-item" *ngFor="let item of [1,2,3]">
+          <div class="loading-card">
+            <div class="loading-wave image-space"></div>
+            <div class="content-space">
+              <div class="loading-wave title-line"></div>
+              <div class="loading-wave title-line small-line"></div>
+              <div class="loading-wave content-line"></div>
+              <div class="loading-wave content-line"></div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
   <div class="closed-list-container">

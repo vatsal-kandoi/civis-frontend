@@ -27,6 +27,7 @@ export class LandingComponent implements OnInit {
   citizenLeaders: any;
   selectedUser: any;
   showLeaderProfileModal: boolean;
+  loadingCard = false;
 
 constructor( private apollo: Apollo, private errorService: ErrorService) { }
 
@@ -39,6 +40,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
   }
 
   getConsultationCard(status, featuredFilter) {
+    this.loadingCard = true;
     const variables = {
       perPage: null,
       page: null,
@@ -55,6 +57,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
       map((res: any) => res.data.consultationList.data)
     )
     .subscribe((item: any) => {
+      this.loadingCard = false;
       if (status === 'published' && featuredFilter) {
         this.coverCardData = this.coverCardData.concat(item);
         if (this.coverCardData && this.coverCardData.length >= 3) {
@@ -93,6 +96,7 @@ constructor( private apollo: Apollo, private errorService: ErrorService) { }
         this.sort(this.coverCardData.slice(0, 3));
       }
     }, err => {
+      this.loadingCard = false;
       console.log('err', err);
       this.errorService.showErrorModal(err);
     });

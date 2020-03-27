@@ -372,7 +372,10 @@
       margin-left: 25px;
     }
   }
-
+  &__inner {
+    height: 500px;
+    overflow: hidden;
+  }
   &__carousel-indicators {
     display: flex;
     justify-content: center;

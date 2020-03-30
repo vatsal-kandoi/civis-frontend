@@ -50,7 +50,7 @@
           <div class="input-block">
             <label for="email">Government Email ID to submit feedback</label>
             <div class="input-block__border">
-                <input type="email" placeholder="Enter Email" name="email" #email="ngModel" id="email" [(ngModel)]="consultationInfo.consultationFeedbackEmail" required email />
+                <input type="email" placeholder="Enter Email" name="email" #email="ngModel" id="email" [(ngModel)]="consultationInfo.consultationFeedbackEmail" email />
             </div>
             <div *ngIf="email.invalid && (email.touched || consultationForm1.submitted)" class="error-msg">
               <div *ngIf="email.errors.required">Email is Required</div>

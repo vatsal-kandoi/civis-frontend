@@ -261,7 +261,7 @@ addMinistry(valid) {
   submit(valid) {
     if (valid) {
       const consultation: any = {...this.consultationInfo, ...this.departmentInfo};
-      consultation.reviewType = 'policy';
+      consultation.reviewType = 'consultation';
       const variables = {
         consultation: consultation
       };

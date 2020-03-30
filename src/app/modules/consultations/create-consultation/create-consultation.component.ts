@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewChild, ElementRef, NgZone, HostListener } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { CreateConsultationMutation,
          MinistryAutocompleteQuery,
@@ -24,7 +24,7 @@ export class CreateConsultationComponent implements OnInit {
     title: '',
     url: '',
     responseDeadline: null,
-    consultationFeedbackEmail: ''
+    consultationFeedbackEmail: null
   };
 
   departmentInfo = {
@@ -76,7 +76,6 @@ export class CreateConsultationComponent implements OnInit {
   constructor(
     private apollo: Apollo,
     private errorService: ErrorService,
-    private _ngZone: NgZone,
     ) {
     this.getCateoriesList();
   }
@@ -232,7 +231,7 @@ onUploadOutput(output: UploadOutput): void {
 @HostListener('document:click', ['$event.target'])
 onClick(targetElement) {
   if (this.showAddMinistryBlock) {
-    if (this.addMinistryElement.nativeElement.contains(targetElement)) {
+    if (this.addMinistryElement && this.addMinistryElement.nativeElement && this.addMinistryElement.nativeElement.contains(targetElement)) {
           this.openAddMinistryModal();
     } else {
       this.showAddMinistryBlock = false;
@@ -261,8 +260,10 @@ addMinistry(valid) {
 
   submit(valid) {
     if (valid) {
+      const consultation: any = {...this.consultationInfo, ...this.departmentInfo};
+      consultation.reviewType = 'consultation';
       const variables = {
-        consultation: {...this.consultationInfo, ...this.departmentInfo}
+        consultation: consultation
       };
       this.apollo.mutate({
         mutation: CreateConsultationMutation,

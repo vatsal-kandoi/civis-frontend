@@ -12,7 +12,7 @@
       <div class="w-50">
         <div class="heading">Your response</div>
       </div>
-      <div class="w-50 row no-gutters justify-content-end align-items-center">
+      <div class="w-50 row no-gutters justify-content-end align-items-center" *ngIf="profileData?.reviewType !== 'policy'">
         <div (click)="scrollToResponses()" class="link mr-3">or, select a public response</div>
         <div class="info-mark"><i class="fa fa-question-circle"></i></div>
       </div>
@@ -23,8 +23,7 @@
       [config]="ckeConfig"
       (change)="enableSubmitResponse($event)"
       (blur)="autoSave(responseText)"
-      debounce="0"
-      >
+      debounce="0">
       </ckeditor>
       <!-- <textarea class="text-space" placeholder="Type your response here..." [(ngModel)]="responseText" (blur)="autoSave(responseText)" (ngModelChange)="enableSubmitResponse($event)"></textarea> -->
     </div>

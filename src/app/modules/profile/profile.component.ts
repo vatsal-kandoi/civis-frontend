@@ -46,13 +46,21 @@ export class ProfileComponent implements OnInit {
 
   getBestRank(rank, rankType) {
     let bestRank = '';
+    let cityName = '';
+    let stateName = '';
+    if (this.currentUser && this.currentUser.city) {
+      cityName = this.currentUser.city.name ? this.currentUser.city.name.toUpperCase() : '';
+      if (this.currentUser.city.parent) {
+        stateName = this.currentUser.city.parent.name ? this.currentUser.city.parent.name.toUpperCase() : '';
+      }
+    }
     if (rankType) {
       switch (rankType) {
         case 'city':
-          bestRank = `#${rank} in ${this.currentUser.city.name.toUppercase()}`;
+          bestRank = `#${rank} in ${cityName}`;
           break;
         case 'state':
-          bestRank = `#${rank} in ${this.currentUser.city.parent.name.toUppercase()}`;
+          bestRank = `#${rank} in ${stateName}`;
           break;
         case 'national':
           bestRank = `#${rank} in INDIA`;

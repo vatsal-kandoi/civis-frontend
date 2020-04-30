@@ -18,16 +18,18 @@ export class DefaultImageDirective implements AfterViewInit, AfterViewChecked {
    }
 
    ngAfterViewChecked(): void {
-     if ((this.ele.src && this.ele.src !== this.graphqlService.host + '/null')
-      || (this.ele.style.backgroundImage && this.ele.style.backgroundImage !== this.graphqlService.host + '/null')) {
+     if ((this.ele.src && this.ele.src !== this.graphqlService.host + '/null' && this.ele.src !== this.graphqlService.host + '/')
+      || (this.ele.style.backgroundImage && this.ele.style.backgroundImage !== this.graphqlService.host + '/null'
+       && this.ele.style.backgroundImage !== this.graphqlService.host + '/')) {
       return;
      }
      this.setDefaultImage();
    }
 
    ngAfterViewInit(): void {
-    if ((this.ele.src && this.ele.src !== this.graphqlService.host + '/null')
-    || (this.ele.style.backgroundImage && this.ele.style.backgroundImage !== this.graphqlService.host + '/null')) {
+    if ((this.ele.src && this.ele.src !== this.graphqlService.host + '/null' && this.ele.src !== this.graphqlService.host + '/')
+    || (this.ele.style.backgroundImage && this.ele.style.backgroundImage !== this.graphqlService.host + '/null'
+    && this.ele.style.backgroundImage !== this.graphqlService.host + '/')) {
       return;
     }
     this.setDefaultImage();

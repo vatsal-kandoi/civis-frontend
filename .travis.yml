@@ -15,19 +15,18 @@ before_deploy:
 - sed -i '/dist/d' .gitignore
 - git add . && git commit -m "latest build"
 deploy:
-- provider: heroku
+  matrix:
+  - provider: heroku
+    app: civis-web
+    on:
+      repo: civis-vote/civis-frontend
+      branch: master
+  - provider: heroku
+    app: civis-web-staging
+    on:
+      repo: civis-vote/civis-frontend
+      branch: staging
   api_key:
-    secure: Hendunvu3qnXjoPMJb7cBALLnQJonfcj3YFBpl+5JaJpm9q4qXQ4VVhpjE487hgU42UJ8z/f/HBR45HgOCTiG11pJYnO3VtKtEjSq4ykMMMbUGtauG4oBZZ2I0utdMvblTKo3B5mkgdD69t6rWPJtvhqpr6FMotIUFhMjo4IyspodiVfjaAKZpiaCkfmsSHHVR9yksF8n3iN8CJVjblQDoCu6MWec1wlXc32oUwSFje51Ka96LItIfr+nhI+qWKDKxuTa4Ge/xXspXM/0JKNtjk52OzUkRLRFbx7USfa9iuWUYysdm8mqqBnJNjwyr+PWuS+OCC6AVv4XM26CBRr/vXCNpTmsycL5hVDoe32ytGd0dup1wQ3rfXtOzutR0Wz3dSHOgR9g18RdYAXLEIoR3xoCDNJ8FVfjRhTh1eo0YJ74NtJjEm9Z2MZSaRNXZrt+mr2m8n16U+gB2vEl/FYlcg2mFJL6m+PjpOT//goH9B+oRwl25y/MO94PeDoHkkMdbGpOXqmPccSLfW0Z1ijCyz3mzKyYduEcKwSr/CORjsYxMqbDP5NxuN3OQa0weNSCt8HtUGrKL+V3JqeHHC3gxvDZsKW66VUcPw5wptjW+hinwEoQr/fabx2PPUU6kxEUAuON2NG89E6gHQmNSKlKVw0t1QTJThUKduha/IV0e8=
-  app: civis-web
-  on:
-    repo: civis-vote/civis-frontend
-    branch: master
-- provider: heroku
-  api_key:
-    secure: Hendunvu3qnXjoPMJb7cBALLnQJonfcj3YFBpl+5JaJpm9q4qXQ4VVhpjE487hgU42UJ8z/f/HBR45HgOCTiG11pJYnO3VtKtEjSq4ykMMMbUGtauG4oBZZ2I0utdMvblTKo3B5mkgdD69t6rWPJtvhqpr6FMotIUFhMjo4IyspodiVfjaAKZpiaCkfmsSHHVR9yksF8n3iN8CJVjblQDoCu6MWec1wlXc32oUwSFje51Ka96LItIfr+nhI+qWKDKxuTa4Ge/xXspXM/0JKNtjk52OzUkRLRFbx7USfa9iuWUYysdm8mqqBnJNjwyr+PWuS+OCC6AVv4XM26CBRr/vXCNpTmsycL5hVDoe32ytGd0dup1wQ3rfXtOzutR0Wz3dSHOgR9g18RdYAXLEIoR3xoCDNJ8FVfjRhTh1eo0YJ74NtJjEm9Z2MZSaRNXZrt+mr2m8n16U+gB2vEl/FYlcg2mFJL6m+PjpOT//goH9B+oRwl25y/MO94PeDoHkkMdbGpOXqmPccSLfW0Z1ijCyz3mzKyYduEcKwSr/CORjsYxMqbDP5NxuN3OQa0weNSCt8HtUGrKL+V3JqeHHC3gxvDZsKW66VUcPw5wptjW+hinwEoQr/fabx2PPUU6kxEUAuON2NG89E6gHQmNSKlKVw0t1QTJThUKduha/IV0e8=
-  app: civis-web-staging
-  on:
-    repo: civis-vote/civis-frontend
-    branch: staging
+    secure: Xl7pmV9xqLCzQUyKmAn5n3c3SLUi3MwuvI/EHQRsonLm49uz/2sgAwvTvG2v+owEv2beZxxGNwXiMMkdBgWfuGGuYULFHgXlHoOGBK11dxMQ0Y/x2DUzkpB0tiIWeNqNM7hQOnHoBrQoLLNjxWBPdbTdiAFCssKZLxJnZFqEtarKUV9portPJ2lHCYHWINvrqDSfqNZN5a+9WfN7qbTmodcIyhPobFi20C9ByWraE4gc918SJj8S3KhRcwMpf/I5R785a5FosWjjuETjWC+BYC6gHbkISXsjR1UyummS2WsVivFXEACVKNbeTL52/KsGyHwbzh43dOmqsRDdlfUIcQtcsOyZPHBU7KzgLvjymCdVaLEvYjlWiuGAnRNBF0jw1NU3SQCSfHeFRKiX257Cm3W+IzY3kYHblPHS8L8KZGm10GgR/xd20uXUNsibG7LaU49+ljdtwHoeO3P1cUF3THtXIwzP5mJ8sEoGKmsFdXTQK7eknqGfMgMqUNd8fLKVsZcJsdNbx0pk0LejPUmCUJjSwlC5AZUG3a5+niQFL8EfX2y0xbaOsF4WuuNnTXJpEvQagYcrak26PQFpfKSxSKV6FCqOjNiDpxwqWTd1jmr/cyliF4qPsf8Ul8vfrHvp64GFtRLdZdx6i1UYiUBqcLKxmoVWQqC727RJy7h2qUk=
 after_deploy:
 - echo "Deployed!"

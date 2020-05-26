@@ -205,6 +205,10 @@ export class NavbarComponent implements OnInit {
   }
 
   routeToConsultation(subRoute: string) {
+    if (!this.currentUser && subRoute === 'discuss') {
+      this.router.navigateByUrl('/auth');
+      return;
+    }
     const urlArray = this.router.url.split('/');
     const consultationIndex = +urlArray.findIndex(i => i === 'consultations') + 1;
     if (consultationIndex > 0) {

@@ -1,7 +1,7 @@
 <section class="read-response-container">
   <div class="paper-effect">
     <p class="heading">
-      Summary
+      <span i18n>Summary</span>
       <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
     </p>
     <p class="summary-content" [innerHTML]="profileData?.summary"></p>
@@ -10,10 +10,10 @@
   <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()" #responseIndex>
     <div class="response-index__nav">
       <div class="w-50">
-        <div class="heading">Your response</div>
+        <div class="heading" i18n>Your response</div>
       </div>
       <div class="w-50 row no-gutters justify-content-end align-items-center" *ngIf="profileData?.reviewType !== 'policy'">
-        <div (click)="scrollToResponses()" class="link mr-3">or, select a public response</div>
+        <div (click)="scrollToResponses()" class="link mr-3" i18n>or, select a public response</div>
         <div class="info-mark"><i class="fa fa-question-circle"></i></div>
       </div>
     </div>
@@ -31,10 +31,10 @@
       <div class="checkbox-area" *ngIf="showPublicResponseOption">
         <div class="input-checbox" >
           <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility"/> 
-          <label class="m-0"> Make my response public </label>
-          <span class="link">What does this mean?</span>
+          <label class="m-0" i18n> Make my response public </label>
+          <span class="link" i18n>What does this mean?</span>
         </div>
-        <p class="auto-save-text" *ngIf="showAutoSaved">Draft autosaved</p>
+        <p class="auto-save-text" *ngIf="showAutoSaved" i18n>Draft autosaved</p>
       </div>
       <div class="draggable-area">
         <span class="drag-bars"></span>
@@ -46,7 +46,7 @@
   <ng-container *ngIf="profileData?.reviewType !== 'policy'">
     <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
       <div class="d-flex justify-content-between">
-        <p class="text-16 m-0 bold-text">Public responses</p>
+        <p class="text-16 m-0 bold-text" i18n>Public responses</p>
         <p 
           class="what-resp-text" 
           tooltip="If you feel passionately about this Consultation, you can make your response public, 
@@ -54,6 +54,7 @@
           If you’re not sure what to write, you can choose other people’s responses to send as your own." 
           placement="left"
           container="body"
+          i18n
           >
             What are public responses?
         </p>
@@ -114,7 +115,7 @@
               </div>
             </div>
             <div>
-              <button class="app-btn response-btn" (click)="useThisResponse(response?.node)" >Use this response</button>
+              <button class="app-btn response-btn" (click)="useThisResponse(response?.node)" i18n>Use this response</button>
             </div>
           </div>
         </div>
@@ -134,13 +135,13 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <p class="heading" *ngIf="!responseSubmitted">How satisfied are you with this draft?</p>
-            <p class="heading" *ngIf="responseSubmitted">Here’re the overall satisfation levels for this draft from people</p>
+            <p class="heading" *ngIf="!responseSubmitted" i18n>How satisfied are you with this draft?</p>
+            <p class="heading" *ngIf="responseSubmitted" i18n>Here’re the overall satisfation levels for this draft from people</p>
           </div>
           <div class="modal-body">
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'dissatisfied'">Dissatisfied</div>
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'dissatisfied'" i18n>Dissatisfied</div>
                 <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.dissatisfied ?
                   satisfactionRatingDistribution?.dissatisfied : 0}}</div>
                 <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'dissatisfied'"
@@ -167,7 +168,7 @@
             </label>
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'somewhat_satisfied'">Somewhat
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'somewhat_satisfied'" i18n>Somewhat
                   Satisfied</div>
                 <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.somewhat_satisfied
                   ? satisfactionRatingDistribution?.somewhat_satisfied : 0}}</div>
@@ -181,7 +182,7 @@
             </label>
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'satisfied'">Satisfied</div>
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'satisfied'" i18n>Satisfied</div>
                 <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.satisfied ?
                   satisfactionRatingDistribution?.satisfied : 0}}</div>
                 <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'satisfied'"
@@ -195,7 +196,7 @@
             <div class="footer-space" [ngClass]="responseSubmitted ? 'justify-content-between' : 'justify-content-end'">
               <div class="footer-space__left" *ngIf="responseSubmitted">
                 <div class="points-text">{{'You get ' + earnedPoints + ' points for submitting this!'}}</div>
-                <div class="link">View Leaderboard</div>
+                <div class="link" i18n>View Leaderboard</div>
               </div>
               <div class="footer-space__right">
                 <button  class="app-btn secondary mt-xs" *ngIf="responseSubmitted" (click)="closeFeedbackModal()">
@@ -207,7 +208,7 @@
                         <img src="assets/images/Vector.jpg" />
                       </picture>
                     </span>
-                    Ok Great
+                    <span i18n>Ok Great</span>
                   </p>
                   <i class="fa fa-angle-right"></i>
                 </button>
@@ -215,7 +216,7 @@
                     <img src="assets/images/loading.svg">
                 </span>
                 <button class="app-btn secondary" *ngIf="!responseSubmitted" (click)="createResponse()">
-                  <p class="m-0">
+                  <p class="m-0" >
                     <span class="submit-logo">
                       <picture class="citizen-logo">
                         <source srcset="assets/images/Vector.webp" type="image/webp">
@@ -223,7 +224,9 @@
                         <img src="assets/images/Vector.jpg" />
                       </picture>
                     </span>
-                    Select and submit
+                    <span i18n>
+                      Select and submit
+                    </span>
                   </p>
                   <i class="fa fa-angle-right"></i>
                 </button>

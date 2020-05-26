@@ -22,27 +22,27 @@
       <div class="modal-body">
         <div class="leader-detail-grid">
           <div class="detail-item">
-            <p>TOTAL POINTS</p>
+            <p i18n>TOTAL POINTS</p>
             <p>{{user?.points}}</p>
           </div>
           <div class="detail-item">
-            <p>RANK IN CITY</p>
+            <p i18n>RANK IN CITY</p>
             <p *ngIf="user?.cityRank">{{user?.cityRank}}</p>
-            <p *ngIf="!user?.cityRank">N/A</p>
+            <p *ngIf="!user?.cityRank" i18n>N/A</p>
           </div>
           <div class="detail-item">
-            <p>RANK IN STATE</p>
+            <p i18n>RANK IN STATE</p>
             <p *ngIf="user?.stateRank">{{user?.stateRank}}</p>
-            <p *ngIf="!user?.stateRank">N/A</p>
+            <p *ngIf="!user?.stateRank" i18n>N/A</p>
           </div>
           <div class="detail-item">
-            <p>BEST SO FAR</p>
-            <p>#{{user?.rank}} in All India</p>
+            <p i18n>BEST SO FAR</p>
+            <p>#{{user?.rank}} <span i18n>in All India</span></p>
           </div>
         </div>
 
         <div class="participated-section">
-          <p class="paticipant-title">Consultations participated in</p>
+          <p class="paticipant-title" i18n>Consultations participated in</p>
           <div class="participation-list-container">
             <div *ngFor="let item of user?.sharedResponses?.edges">
               <div class="paticipant-list">
@@ -51,9 +51,11 @@
                   <p>{{item?.node?.consultation?.title}}</p>
                   <p>{{item?.node?.consultation?.ministry?.name}}</p>
                   <div class="response-cta">
-                    <button class="btn btn-transparent action-btn" (click)="viewResponse(item?.node)" >
+                    <button class="btn btn-transparent action-btn" (click)="viewResponse(item?.node)">
+                      <span i18n>
                         View my response
-                        <span><i class="fa fa-angle-right"></i></span>
+                      </span>
+                      <span><i class="fa fa-angle-right"></i></span>
                     </button>
                   </div>
                 </div>

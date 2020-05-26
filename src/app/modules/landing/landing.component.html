@@ -2,19 +2,19 @@
   <section class="app-landing__cover-section">
     <div class="cover-inner-container">
       <div class="cover-details">
-        <p class="cover-title">Your turn, citizen</p>
-        <p class="cover-subtitle">
+        <p class="cover-title" i18n>Your turn, citizen</p>
+        <p class="cover-subtitle" i18n>
           Simple thing is, the bodies that create laws, rules and regulations seek 
           feedback from us, the citizens, to finalise them. What are we waiting for?
         </p>
         <div class="d-flex align-items-center mt-4 cover-btn-section">
-          <button class="app-btn secondary circular participate-btn" [routerLink]="['/auth', 'sign-up']">Start participating</button>
+          <button class="app-btn secondary circular participate-btn" [routerLink]="['/auth', 'sign-up']" i18n>Start participating</button>
           <p class="civis-works-link pointer" [routerLink]="['/how-civis-works']">How Civis Works</p>
         </div>
       </div>
       <div class="cover-card">
         <div class="card-carousel">
-          <p class="card-carousel__carouse-title">IN FOCUS</p>
+          <p class="card-carousel__carouse-title" i18n>IN FOCUS</p>
           <div class="card-carousel__inner">
             <div *ngIf='coverCardData?.length && coverCardData[current_card_index]'>
               <app-consultation-card [consultation]="coverCardData[current_card_index]"></app-consultation-card> 
@@ -55,7 +55,7 @@
   <section class="app-landing__detail-section">
 
     <div class="latest-response-container">
-      <p class="section-heading">LATEST RESPONSES</p>
+      <p class="section-heading" i18n>LATEST RESPONSES</p>
       <div class="person-carousel">
         <div class="carousel-arrow-left pointer" (click)='previousSlide()'><i class="fa fa-angle-left"></i></div>
         <div @slideInRight class="carousel-inner-container">
@@ -79,12 +79,12 @@
     </div>
 
     <div class="citizen-leader-section">
-      <p class="section-heading">CITIZEN LEADERS ON CIVIS</p>
+      <p class="section-heading" i18n>CITIZEN LEADERS ON CIVIS</p>
       <div class="leaders-list">
         <div class="leader-profile" *ngFor='let item of citizenLeaders'>
           <img class="avatar avatar--60 mb-2 pointer" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
           <p class="text-18 m-0">{{item?.firstName}}</p>
-          <p class="blue-text m-0">{{item?.points}} Points</p>
+          <p class="blue-text m-0">{{item?.points}} <span i18n>Points</span></p>
         </div>
       </div>
       <!-- leaders-list-mobile -->
@@ -100,26 +100,30 @@
         </div>
       </div>
       <button [routerLink]="['/leader-board']" class="app-btn circular blue-light landing-btn">
-        View Leaderboard
+        <span i18n>View Leaderboard</span>
         <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
       </button>
     </div>
 
     <div class="civis-work-section">
-      <p class="section-heading">HOW CIVIS WORKS</p>
+      <p class="section-heading" i18n>HOW CIVIS WORKS</p>
       <div class="d-flex justify-content-center mt-5">
         <button 
           class="app-btn circular landing-btn" 
           [ngClass]="activeTab == 'submit-response' ? 'primary' : 'blue-light'"
           (click)="submitResponse('submit-response')">
-          Submit a Response
+          <span i18n>
+            Submit a Response
+          </span>
           <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
         </button>
         <button 
           class="app-btn circular ml-4 landing-btn"
           [ngClass]="activeTab == 'add-consultation' ? 'primary' : 'blue-light'" 
           (click)="addConsultation('add-consultation')">
-          Add a Consultation
+          <span i18n>
+            Add a Consultation
+          </span>
           <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
         </button>
       </div>
@@ -128,25 +132,25 @@
     <app-how-civis-works-carousel [tab]="activeTab"></app-how-civis-works-carousel>
 
     <div class="impact-section">
-        <p class="section-heading">IMPACT SO FAR</p>
+        <p class="section-heading" i18n>IMPACT SO FAR</p>
       <div class="count-grid">
         <div class="count-item">
-          <p>Consultations Created on Civis</p>
+          <p i18n>Consultations Created on Civis</p>
           <p>{{numberWithCommas(impactStats?.consultation_count + 2)}}</p>
         </div>
         <div class="count-item">
-          <p>Total Number of Responses</p>
+          <p i18n>Total Number of Responses</p>
           <p>{{numberWithCommas(impactStats?.consultation_response_count + 3083)}}</p>
         </div>
         <div class="count-item">
-          <p>Total Number of Citizens Engaged</p>
+          <p i18n>Total Number of Citizens Engaged</p>
           <p>{{numberWithCommas(impactStats?.consultation_response_distinct_users + 3057)}}</p>
         </div>
       </div>
     </div>
 
     <div class="press-section">
-      <p class="section-heading">IN THE PRESS</p>
+      <p class="section-heading" i18n>IN THE PRESS</p>
       <div class="press-logo-grid">
         <a href="https://audioboom.com/posts/6611014-what-is-civis" class="grid-item" target="_blank">
           <picture>

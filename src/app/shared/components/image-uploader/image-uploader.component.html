@@ -5,7 +5,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-          <div class="title">Upload Image</div>
+          <div class="title" i18n>Upload Image</div>
           <div (click)="closeModal()">X</div>
       </div>
       <div class="modal-body pt-0">
@@ -13,13 +13,13 @@
         <div *ngIf="!!base64" class="row">
           <div class="col-12 text-center pt-3">
             <button class="app-btn secondary get-start-btn" (click)="sendData()">
-              <p class="m-0">Save changes</p>
+              <p class="m-0" i18n>Save changes</p>
               <i class="fa fa-angle-right"></i>
             </button>
           </div>
           <div class="col-12 text-center">
             <div class="cancel-btn">
-              <button class="btn btn-transparent cancel-btn" (click)="closeModal()">
+              <button class="btn btn-transparent cancel-btn" (click)="closeModal()" i18n>
                   Cancel
               </button>
             </div>

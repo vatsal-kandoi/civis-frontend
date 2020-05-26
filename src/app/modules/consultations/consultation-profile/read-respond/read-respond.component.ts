@@ -600,4 +600,11 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  getWholeNumber(number) {
+    if (number) {
+        return Math.round(number);
+    }
+    return null;
+  }
+
 }

@@ -194,7 +194,7 @@
             </label>
             <div class="footer-space" [ngClass]="responseSubmitted ? 'justify-content-between' : 'justify-content-end'">
               <div class="footer-space__left" *ngIf="responseSubmitted">
-                <div class="points-text">{{'You get ' + earnedPoints + ' points for submitting this!'}}</div>
+                <div class="points-text">{{'You get ' + getWholeNumber(earnedPoints) + ' points for submitting this!'}}</div>
                 <div class="link">View Leaderboard</div>
               </div>
               <div class="footer-space__right">

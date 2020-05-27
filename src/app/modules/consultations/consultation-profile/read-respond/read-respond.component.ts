@@ -58,6 +58,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     resize_enabled: false,
    };
   usingTemplate: boolean;
+  responseId: any;
 
   constructor(
     private consultationsService: ConsultationsService,
@@ -448,6 +449,27 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
                   `${this.profileData.title}, support me and share your feedback on %23Civis today!`;
     const url = `https://twitter.com/intent/tweet?text=${text}&url=${link}%23${id}`;
     return url;
+  }
+
+  getFbUrl(link) {
+    if (link) {
+      return `https://www.facebook.com/sharer/sharer.php?u=${link}`;
+    }
+    return null;
+  }
+
+  getWhatsappUrl(link) {
+    if (link) {
+      return `whatsapp://send?text=${link}`;
+    }
+    return null;
+  }
+
+  toggleShareBlock(id) {
+    if (id) {
+      this.showShareBlock = !this.showShareBlock;
+      this.responseId = id;
+    }
   }
 
   getResponseText() {

@@ -47,25 +47,27 @@
         <div class="share-block">
           <div class="share-block__position">
             <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">
-                <share-button 
-                [button]="'facebook'"
-                [url]="currentUrl"
-                [autoSetMeta]="false"
-                (closed)="showShareOptions = false"
-                ></share-button>
-                <a  class="tweet-block"
+                <a  class="share-btn"
+                [href]="getFbUrl(currentUrl)"
+                target="_blank">
+                  <span>
+                      <i class="fa fa-facebook"></i>
+                  </span>
+                </a>
+                <a  class="share-btn"
                 [href]="getTwitterUrl(currentUrl)"
                 target="_blank">
                   <span>
                       <i class="fa fa-twitter"></i>
                   </span>
                 </a>
-                <share-button 
-                [button]="'whatsapp'"
-                [url]="currentUrl"
-                [autoSetMeta]="false"
-                (closed)="showShareOptions = false"
-                ></share-button>
+                <a  class="share-btn"
+                [href]="getWhatsappUrl(currentUrl)"
+                target="_blank">
+                  <span>
+                      <i class="fa fa-whatsapp"></i>
+                  </span>
+                </a>
             </div>
           </div>
           <div class="spread-btn">

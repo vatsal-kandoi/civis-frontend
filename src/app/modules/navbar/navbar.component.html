@@ -7,7 +7,7 @@
       </div>
       <div class="left-nav-link" *ngIf="currentUrl !== 'consultations-profile'">
         <p class="nav-link-text bold-text" [routerLink]="['consultations/list']">
-          {{' Active Consultations' | translate}} <span class="active-count-box">{{activeCount}}</span>
+          {{'Active Consultations' | translate}} <span class="active-count-box">{{activeCount}}</span>
         </p>
         <p class="nav-link-text bold-text" [routerLink]="['/leader-board']">{{'Leaderboard' | translate}}</p>
         <p class="nav-link-text" [routerLink]="['/how-civis-works']">{{'How Civis Works' | translate}}</p>
@@ -67,7 +67,7 @@
     <div class="app-navbar__right-item">
       <div class="nav-btns" *ngIf="currentUrl !== 'consultations-profile'">
         <button class="btn btn-oval" (click)="submitConsultation()">
-          {{' Submit a Consultation' | translate}}
+          {{'Submit a Consultation' | translate}}
         </button>
       </div>
       <div class="nav-btns" *ngIf="!currentUser">

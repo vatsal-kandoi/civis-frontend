@@ -27,7 +27,8 @@
             </p>
           </div>
           <div>
-            <p class="count-text m-0">{{'DRAFT MADE PUBLIC ON {{convertDateFormat(profile?.consultation?.updatedAt)}}</p>
+            <p class="count-text m-0">{{'DRAFT MADE PUBLIC ON' | translate}}
+              {{convertDateFormat(profile?.consultation?.updatedAt)}}</p>
           </div>
         </div>
       </div>
@@ -35,7 +36,7 @@
     <section class="response-profile__main-section">
       <div class="response-info">
         <div class="header">
-          <p class="light-text">{{'SENDING IN YOUR RESPONSE TO'}}</p>
+          <p class="light-text">{{'SENDING IN YOUR RESPONSE TO' | translate}}</p>
           <p class="card-title m-0">{{profile?.consultation?.title}}</p>
         </div>
         <div class="response-content" [innerHTML]="profile?.responseText">

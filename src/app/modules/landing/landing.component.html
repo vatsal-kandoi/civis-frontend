@@ -4,7 +4,7 @@
       <div class="cover-details">
         <p class="cover-title">{{'Your turn, citizen' | translate}}</p>
         <p class="cover-subtitle">
-          {{' Simple thing is, the bodies that create laws, rules and regulations seek 
+          {{'Simple thing is, the bodies that create laws, rules and regulations seek 
           feedback from us, the citizens, to finalise them. What are we waiting for?' | translate}}
         </p>
         <div class="d-flex align-items-center mt-4 cover-btn-section">
@@ -84,7 +84,7 @@
         <div class="leader-profile" *ngFor='let item of citizenLeaders'>
           <img class="avatar avatar--60 mb-2 pointer" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
           <p class="text-18 m-0">{{item?.firstName}}</p>
-          <p class="blue-text m-0">{{item?.points}} {{' Points' | translate}</p>
+          <p class="blue-text m-0">{{item?.points}} {{'Points' | translate}}</p>
         </div>
       </div>
       <!-- leaders-list-mobile -->

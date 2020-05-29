@@ -5,7 +5,7 @@
     <div class="cover-detail">
       <button class="back-btn" [routerLink]="['/']">
         <span><i class="fa fa-angle-left back-arrow"></i></span>
-        {{' Back' | translate}}
+        {{'Back' | translate}}
       </button>
       <div class="info-box">
           <p class="info-box__title">
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <p class="logo-heading">{{'Sign up as a Citizen Leader.<br /> {{'Join the movement towards citizen-led governance.' | translate}}</p>
+    <p class="logo-heading">{{'Sign up as a Citizen Leader.' | translate }}<br /> {{'Join the movement towards citizen-led governance.' | translate}}</p>
 
     <div class="form-space row no-gutters mt-md-5 mt-2">
       <div class="form-space__left col-md-5">
@@ -65,7 +65,7 @@
 
             <div class="location-box required-field">
               <label for="locations">
-                {{' City
+                {{'City' | translate }}
               </label>
               <div class="location-box__border">
                 <ng-select id="locations" #city="ngModel" name="city" [loading]="loadingCities"
@@ -109,7 +109,7 @@
             <div class="input-checbox">
                 <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required /> 
                 <label for="agreedForTermsCondition">
-                  {{' I'm good with the Civis' | translate}}<br> 
+                  {{"I'm good with the Civis"| translate}}<br> 
                   <a href="/terms" class="policy-link">{{'Terms of Service,' | translate}}</a>
                   &nbsp;
                   <a href="/privacy" class="policy-link">{{'Privacy Policy' | translate}}</a>
@@ -123,7 +123,7 @@
     
             <div class="input-checbox">
                 <input class="cm-checkbox" type="checkbox"  id="notifyMe" #notifyMe="ngModel"  name="notifyMe" [(ngModel)]="signupObject.notifyForNewConsultation" /> 
-                <label for="notifyMe">{{'Notify me when an open consultation <br> is created on Civis.' | translate}}</label>
+                <label for="notifyMe">{{'Notify me when an open consultation ' | translate }}<br> {{'is created on Civis.' | translate}}</label>
             </div>
     
             <re-captcha #captchaRef="reCaptcha" (resolved)="captchaResolved($event)" [siteKey]="reCAPTCHA_KEY" size="invisible"></re-captcha>

@@ -5,7 +5,7 @@
         {{'  Somebody’s taking initiative!' | translate}}
       </div>
       <div class="heading-tips">
-        {{' Discovered a consultation draft? Tell us and we’ll put it up here for citizens to participate.' | translate}}
+        {{"Discovered a consultation draft? Tell us and we’ll put it up here for citizens to participate." | translate}}
       </div>
 
     </div>
@@ -35,7 +35,7 @@
                 {{'  Url is invalid' | translate}}
               </div>
               <div class="input-block__tips">
-                {{' This is the URL of the PDF or any other document on the department's website' | translate}}
+                {{"This is the URL of the PDF or any other document on the department's website" | translate}}
               </div>
           </div>
           <div class="input-block">
@@ -97,7 +97,7 @@
               </div>
             <div #addMinistryElement>
                 <button class="add-ministry-block w-100 d-flex justify-content-between" *ngIf="searchText && showAddMinistryBlock" (click)="openAddMinistryModal($event)">
-                    <p class="m-0">{{' Add Ministry {{'"' + searchText + '"'}}</p>
+                    <p class="m-0">{{' Add Ministry' | translate}}</p>
                     <span><i class="fa fa-plus"></i></span>
                   </button>
             </div>
@@ -151,7 +151,7 @@
       <div class="space-around">
           <div class="modal-header">
               <p class="subheader-text">
-                {{'  ADD A MINISTRY ' | translate}}
+                {{' ADD A MINISTRY' | translate}}
                   <br>
                   <span class="light-text">{{' Or, ' | translate}}</span>
                   <span class="link-text" (click)="hideAddMinistryModal()"  >{{'Select an existing department' | translate}}</span>

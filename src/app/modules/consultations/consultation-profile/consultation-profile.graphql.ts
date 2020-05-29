@@ -113,6 +113,15 @@ export const ConsultationProfileCurrentUser = gql`
         totalCount
       }
       updatedAt
+      questions {
+        id
+        questionText
+        questionType
+        subQuestions {
+          id
+          questionText
+        }
+      }
     }
   }
 `
@@ -168,6 +177,15 @@ export const SubmitResponseQuery = gql`
             }
           }
           totalCount
+        }
+        questions {
+          id
+          questionText
+          questionType
+          subQuestions {
+            id
+            questionText
+          }
         }
       }
     }

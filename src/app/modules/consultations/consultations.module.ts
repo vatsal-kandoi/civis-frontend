@@ -4,7 +4,7 @@ import { ConsultationListComponent } from './consultation-list/consultation-list
 import { CommonModule } from '@angular/common';
 import { ConsultationsRoutingModule } from './consultations-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directives.module';
 import { ConsultationProfileComponent } from './consultation-profile/consultation-profile.component';
@@ -28,6 +28,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
         CommonModule,
         ConsultationsRoutingModule,
         FormsModule,
+        ReactiveFormsModule,
         SharedComponentsModule,
         SharedDirectivesModule,
         NgSelectModule,

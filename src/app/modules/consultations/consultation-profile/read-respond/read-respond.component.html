@@ -7,6 +7,114 @@
     <p class="summary-content" [innerHTML]="profileData?.summary"></p>
   </div>
 
+  <div class="paper-effect mt-4 m-0-sm">
+    <div class="draft-box">
+      <div class="draft-img">
+        <img src="assets/images/start-drafting-empty-state.svg" />
+      </div>
+      <p class="draft-text">
+        Ready to draft your response? Click <br /> the below button to start
+      </p>
+      <button  class="btn-submit  active" (click)='stepNext()'>
+        <p class="m-0">
+          START DRAFTING
+        </p>
+        <span class="ml-2"><i class="fa fa-angle-right"></i></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="paper-effect mt-4 m-0-sm p-0">
+    <div class="question-box">
+      <p class="heading">
+        Questions
+      </p>
+      <form [formGroup]="questionnaireForm">
+        <div class="questions-container">
+          <div *ngFor="let question of profileData?.questions; let i = index">
+            <div>
+              <div class="question">
+                <p class="question-text">
+                  <span class="question-text__number">{{i+1}}.</span>
+                  {{question.questionText}}
+                </p>
+                <div class="answer" *ngIf="question.questionType === 'multiple_choice'">
+                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
+                    <label>
+                      <input type="radio" class="cm-radio" [formControlName]="question.id" [value]="subQuestion.id">
+                      <span>{{subQuestion.questionText}}</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
+                  <label class="answer__tips">Choose as many as you like</label>
+                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
+                    <label>
+                      <input type="checkbox" class="cm-radio" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
+                      <!-- (click)="toggleCheckbox( questionnaireForm.get(question.id).get(subQuestion.id), !questionnaireForm.get(question.id).get(subQuestion.id).value)"> -->
+                      <span>{{subQuestion.questionText}}</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="answer" *ngIf="question.questionType === 'long_text'">
+                  <div class="text-area">
+                    <textarea placeholder="Type your answer here" [formControlName]="question.id"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="py-3">
+            <button  class="btn-submit active" (click)='stepNext()'>
+              <p class="m-0">
+                SUBMIT RESPONSE
+              </p>
+              <span class="ml-2"><i class="fa fa-angle-right"></i></span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="paper-effect mt-4 m-0-sm">
+    <p class="text-16 m-0 bold-text">All responses</p>
+    <div class="response-block">
+      <div class="d-inline-flex align-items-center">
+        <img 
+        class="avatar avatar--42 pointer"
+        appDefaultImage
+        [type]="'user'"
+        [src]=""
+        />
+        <div>
+          <p class="regular-text bold-text m-0 ml-2">{{'Nishanth'}}</p>
+          <p class="email-text m-0 ml-2">{{'nishanth@gmail.com'}}</p>
+        </div>
+      </div>
+      <div class="answers">
+        <div class="answer">
+            <p class="question-text">
+            <span class="question-text__number">1.</span>
+            What do you think about this consultation idea?
+          </p>
+          <p class="question-answer answer-text">
+            What do you think about this consultation idea?
+          </p>
+        </div>
+        <div class="answer">
+          <p class="question-text">
+          <span class="question-text__number">1.</span>
+          What do you think about this consultation idea?
+        </p>
+        <p class="answer-text">
+          What do you think about this consultation idea?
+        </p>
+      </div>
+      </div>
+    </div>
+  </div>
+
   <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()" #responseIndex>
     <div class="response-index__nav">
       <div class="w-50">

@@ -13,6 +13,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-read-respond',
@@ -58,6 +59,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     resize_enabled: false,
    };
   usingTemplate: boolean;
+  questionnaireForm: FormGroup;
+
 
   constructor(
     private consultationsService: ConsultationsService,
@@ -76,6 +79,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     .subscribe((consulationId: any) => {
       this.consultationId = consulationId;
     });
+    this.questionnaireForm = new FormGroup({});
   }
 
   ngOnInit() {
@@ -87,12 +91,63 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     this.getResponseText();
   }
 
+  makeQuestionnaireModal() {
+    if (this.profileData && this.profileData.questions) {
+      const questions = this.profileData.questions;
+      const form = new FormGroup({});
+
+      questions.forEach(question => {
+        if (question.questionType !== 'checkbox') {
+          form.addControl(question.id, new FormControl(null, Validators.required ));
+        } else if (question.questionType === 'checkbox') {
+          form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
+        }
+      });
+      return form;
+    }
+  }
+
+    makeCheckboxQuestionOptions(question) {
+        const form = new FormGroup({});
+        question.subQuestions.forEach(subQuestion => {
+          form.addControl(subQuestion.id, new FormControl(false));
+        });
+        return form;
+      }
+
+    toggleCheckbox(control, value) {
+      control.patchValue(value);
+    }
+
+    toggle(questionId, subQuestionId) {
+      const control = this.questionnaireForm.get([questionId, subQuestionId]);
+      control.patchValue(!control.value);
+    }
+
   ngAfterViewChecked() {
     if (this.checkForFragments) {
       this.subscribeToFragment();
       this.checkForFragments = false;
     }
     this.editIframe();
+  }
+
+  stepNext() {
+    if (this.questionnaireForm.valid) {
+      const answers = {...this.questionnaireForm.value};
+      for (const item in answers) {
+        if (answers.hasOwnProperty(item)) {
+          if (typeof(answers[item]) === 'object') {
+              const keys = Object.keys(answers[item]);
+              const filtered = keys.filter(function(key) {
+                  return answers[item][key];
+              });
+              answers[item] = filtered;
+          }
+        }
+     }
+      console.log(answers);
+    }
   }
 
   editIframe() {
@@ -149,6 +204,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         this.responseList = data.sharedResponses.edges;
         this.createMetaTags(this.profileData);
         this.checkForFragments = true;
+        this.questionnaireForm = this.makeQuestionnaireModal();
     }, err => {
       this.errorService.showErrorModal(err);
     });

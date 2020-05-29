@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-login',
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
           const callbackUrl = this.cookieService.get('loginCallbackUrl');
           if (callbackUrl) {
             this.router.navigateByUrl(callbackUrl);
-            this.cookieService.set('loginCallbackUrl', '');
+            this.cookieService.put('loginCallbackUrl', '');
           } else {
             this.router.navigateByUrl('/profile');
           }

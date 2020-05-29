@@ -50,6 +50,16 @@
         </div>
       </div>
       <div class="logo-right">
+        <div class="mr-2">
+          <ng-select 
+          [items]="languages" bindLabel="name" dropdownPosition="bottom"
+          bindValue="id"
+          [clearable]="false"
+          [searchable]="false"
+          (change)="setLanguage()"
+          [(ngModel)]="selectedLanguage">
+          </ng-select>
+        </div>
         <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">
           <picture>
             <source srcset="assets/images/footerlogo3.webp" type="image/webp">

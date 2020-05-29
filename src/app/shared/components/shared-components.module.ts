@@ -12,6 +12,9 @@ import { ErrorComponent } from './error-modal/error.component';
 import { FooterComponent } from './footer/footer.component';
 import { ToastComponent } from './toast/toast.component';
 import { SharedDirectivesModule } from '../directives/shared-directives.module';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { CookieModule } from 'ngx-cookie';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import { SharedDirectivesModule } from '../directives/shared-directives.module';
     LinearLoaderModule,
     RouterModule,
     SharedDirectivesModule,
+    FormsModule,
+    NgSelectModule,
+    CookieModule.forRoot()
   ],
   exports: [
     ActionButtonComponent,

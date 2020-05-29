@@ -7,6 +7,7 @@ import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directi
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { ConfirmEmailModule } from 'src/app/shared/confirm-email-modal/confirm-email.module';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 
 
@@ -19,6 +20,7 @@ import { ConfirmEmailModule } from 'src/app/shared/confirm-email-modal/confirm-e
         NgSelectModule,
         FormsModule,
         ConfirmEmailModule,
+        PipesModule
     ],
     exports: [
         NavbarComponent

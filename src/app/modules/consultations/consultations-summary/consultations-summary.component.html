@@ -6,7 +6,7 @@
       <section class="consultation-profile__main-section">
         <div class="paper-effect mb-4">
           <p class="heading">
-            Summary
+            {{'  Summary' | translate}}
             <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
           </p>
           <p class="summary-content" [innerHTML]="profileData?.summary"></p>
@@ -14,7 +14,7 @@
 
         <div class="paper-effect mb-4 inner-space" *ngIf="showKeywordGraph">
           <p class="heading">
-            Overview
+            {{'  Overview' | translate}}
           </p> 
           <div id="highchartContainer" style="width:100%; height:400px;"></div>
         </div>
@@ -22,7 +22,8 @@
 
         <div *ngIf="publicResponses?.length">
           <div class="d-flex justify-content-between align-items-center">
-            <p class="text-18 text-16-sm m-0 bold-text">Public responses</p>
+            <p class="text-18 text-16-sm m-0 bold-text">{{' Public responses' | translate}}
+            </p>
             <p 
               class="what-resp-text" 
               tooltip="If you feel passionately about this Consultation, you can make your response public, 
@@ -31,7 +32,8 @@
               placement="left"
               container="body"
             >
-              What are public responses?
+            {{'  What are public responses?' | translate}}
+
           </p>
           </div>
 
@@ -68,7 +70,8 @@
 
         <div *ngIf="annonymousResponses?.length">
           <div>
-              <p class="text-18 text-16-sm m-0 bold-text">Other responses</p>
+              <p class="text-18 text-16-sm m-0 bold-text">{{'Other responses' | translate}}
+              </p>
           </div>
           
           <div class="paper-effect my-4 m-0-sm" *ngFor="let response of annonymousResponses">

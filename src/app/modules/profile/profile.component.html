@@ -1,12 +1,12 @@
 <div class="profile-index row no-gutters">
   <div class="col-md-2 profile-index__left">
     <div class="heading">
-      My Account
+      {{' My Account' | translate}}
     </div>
 
     <div class="profile-space">
       <div class="header">
-        PROFILE
+        {{'  PROFILE' | translate}}
       </div>
 
       <div class="profile-info">
@@ -21,14 +21,14 @@
             {{currentUser?.firstName + ' ' + currentUser?.lastName}}
           </p>
           <p class="profile-details__active">
-            Citizen Leader since {{currentUser?.createdAt | date}}
+            {{'   Citizen Leader since' | translate}} {{currentUser?.createdAt | date}}
           </p>
         </div>
       </div>
 
       <div class="profile-change-cta">
         <button class="btn btn-transparent p-0 d-flex align-items-center" (click)="openModal() ; updateField = 'name'">
-          Change name
+          {{'  Change name' | translate}}
           <span><i class="fa fa-angle-right ml-2"></i></span>
         </button>
       </div>
@@ -37,7 +37,7 @@
     <!-- toggle-button-for-mobile-layout -->
     <div class="view-more-section">
       <button class="btn btn-transparent view-more-btn" (click)="toggleSettings()">
-        View more
+        {{'  View more' | translate}}
         <span><i class="ml-1" [ngClass]="showSettings === true ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i></span>
       </button>
     </div>
@@ -46,7 +46,7 @@
     <div class="user-setting-section" [ngClass]="showSettings === true ? 'show-section' : 'hide-section'">
       <div class="login-space">
         <div class="header">
-          LOGIN DETAILS • EMAIL & USERNAME
+          {{'  LOGIN DETAILS • EMAIL & USERNAME' | translate}}
         </div>
 
         <div class="login-info">
@@ -59,13 +59,13 @@
 
         <div class="login-change-cta">
           <button class="btn btn-transparent p-0">
-            Change email/username
+            {{'  Change email/username' | translate}}
             <span><i class="fa fa-angle-right ml-2"></i></span>
           </button>
         </div>
 
         <div class="login-change-cta reset-cta" [routerLink]="['/auth', 'forgot-password']">
-          Reset password
+          {{'  Reset password' | translate}}
         </div>
 
       </div>
@@ -73,7 +73,7 @@
       <div class="contact-space">
 
         <div class="header">
-          PHONE
+          {{' PHONE' | translate}}
         </div>
 
         <div class="contact-info">
@@ -86,7 +86,7 @@
 
         <div class="contact-change-cta">
           <button class="btn btn-transparent p-0" (click)="openModal() ; updateField = 'phone number'">
-            Change phone number
+            {{'  Change phone number' | translate}}
             <span><i class="fa fa-angle-right ml-2"></i></span>
           </button>
         </div>
@@ -95,12 +95,12 @@
 
       <div class="delete-space">
         <div class="delete-cta">
-          Delete your account
+          {{'  Delete your account' | translate}}
           <span><i class="fa fa-angle-right ml-2"></i></span>
         </div>
         <div class="tips">
-          Your account information will be erased.
-          The responses submitted will remain.
+          {{' Your account information will be erased.
+          The responses submitted will remain.' | translate}}
         </div>
       </div>
     </div>
@@ -109,16 +109,16 @@
   <div class="offset-md-1 col-md-8 profile-index__right">
     <!-- tab-section-for-mobile -->
     <div class="tab-section">
-      <p [ngClass]="showAchievement === true ? 'active-tab' : 'inactive-tab'" (click)="achievementTab()">Achievements
+      <p [ngClass]="showAchievement === true ? 'active-tab' : 'inactive-tab'" (click)="achievementTab()">{{'Achievements' | translate}}
       </p>
-      <p [ngClass]="showConsultation === true ? 'active-tab' : 'inactive-tab'" (click)="consultationTab()">Consultations
+      <p [ngClass]="showConsultation === true ? 'active-tab' : 'inactive-tab'" (click)="consultationTab()">{{'Consultations' | translate}}
       </p>
     </div>
     <!-- tab-section-for-mobile -->
 
     <div class="achievements-block" [ngClass]="showAchievement === true ? 'show-block' : 'hide-block'">
       <div class="heading">
-        My Achievements
+        {{'  My Achievements' | translate}}
       </div>
       <div class="info-block" *ngIf='currentUser?.points < 500'>
         <div>
@@ -129,8 +129,8 @@
           </picture>
         </div>
         <div>
-          <p class="sm-text">Great! You’re an</p>
-          <p class="lg-text">Active Citizen</p>
+          <p class="sm-text">{{'Great! You’re an' | translate}}</p>
+          <p class="lg-text">{{'Active Citizen' | translate}}</p>
         </div>
       </div>
 
@@ -143,15 +143,15 @@
           </picture>
         </div>
         <div>
-          <p class="sm-text">Wow! You’re a</p>
-          <p class="super-lg-text">Super Citizen</p>
+          <p class="sm-text">{{'Wow! You’re a' | translate}}</p>
+          <p class="super-lg-text">{{'Super Citizen' | translate}}</p>
         </div>
       </div>
 
       <div class="stats-info row no-gutters">
         <div class="col-md-2">
           <div class="stats-info__heading">
-            TOTAL POINTS
+            {{'  TOTAL POINTS' | translate}}
           </div>
           <div class="stats-info__rewards">
             {{ currentUser?.points ? currentUser?.points : '-' }}
@@ -175,7 +175,7 @@
         </div>
         <div class="col-md-2">
           <div class="stats-info__heading">
-            BEST SO FAR
+            {{' BEST SO FAR' | translate}}
           </div>
           <div class="stats-info__rewards">
             {{currentUser?.bestRank ? getBestRank(currentUser?.bestRank, currentUser?.bestRankType) : '-' }}
@@ -186,7 +186,7 @@
     </div>
     <div class="consultations-block" [ngClass]="showConsultation === true ? 'show-block' : 'hide-block'">
       <div class="heading">
-        Consultations I’ve participated in
+        {{'  Consultations I’ve participated in' | translate}}
       </div>
 
       <div *ngIf="currentUser?.responses?.edges?.length" class="consultations-container">
@@ -205,17 +205,17 @@
               <div class="response-cta">
                 <button class="btn btn-transparent action-btn"
                   [routerLink]="['/consultations/response', item?.node?.id]">
-                  View my response
+                  {{'  View my response' | translate}}
                   <span><i class="fa fa-angle-right"></i></span>
                 </button>
               </div>
             </div>
             <div class="consultation-info__right">
               <div class="deadline">
-                Ended on {{item?.node?.consultation?.responseDeadline | date}}
+                {{' Ended on' | translate}}{{item?.node?.consultation?.responseDeadline | date}}
               </div>
               <div class="rewards">
-                {{item?.node?.points}} points earnt
+                {{item?.node?.points}}{{' points earnt' | translate}}
               </div>
             </div>
           </div>
@@ -224,10 +224,10 @@
 
       <div *ngIf="!currentUser?.responses?.edges?.length" class="no-consultations">
         <div class="message">
-          You’ve not participated in any public consultations yet
+          {{'  You’ve not participated in any public consultations yet' | translate}}
         </div>
         <div class="consultations-cta">
-          <button class="btn-transpaent btn-oval" [routerLink]="['/consultations', 'list']">Start participating</button>
+          <button class="btn-transpaent btn-oval" [routerLink]="['/consultations', 'list']">{{'Start participating' | translate}}</button>
         </div>
       </div>
 
@@ -252,73 +252,73 @@
             <form #userForm="ngForm" (ngSubmit)="updateUser(userForm)" autocomplete="off">
               <div *ngIf="updateField == 'name'">
                 <div class="input-box">
-                  <label for="firstName">First name</label>
+                  <label for="firstName">{{'First name' | translate}}</label>
                   <div class="input-box__border">
                     <input placeholder="Siddharth" type="text" id="firstName" #firstName="ngModel" name="firstName"
                       [(ngModel)]="user.firstName" required />
                   </div>
-                  <div *ngIf="firstName?.invalid && (firstName?.touched || userForm.submitted)" class="error-msg">First
-                    name is Required</div>
+                  <div *ngIf="firstName?.invalid && (firstName?.touched || userForm.submitted)" class="error-msg">{{'First
+                    name is Required' | translate}}</div>
                 </div>
 
                 <div class="input-box">
-                  <label for="lastName">Last name</label>
+                  <label for="lastName">{{'Last name' | translate}}</label>
                   <div class="input-box__border">
                     <input placeholder="Gautam" type="text" id="lastName" #lastName="ngModel" name="lastName"
                       [(ngModel)]="user.lastName" required />
                   </div>
-                  <div *ngIf="lastName?.invalid && (lastName?.touched || userForm.submitted)" class="error-msg">Last
-                    name is Required</div>
+                  <div *ngIf="lastName?.invalid && (lastName?.touched || userForm.submitted)" class="error-msg">{{'Last
+                    name is Required' | translate}}</div>
                 </div>
               </div>
               <div *ngIf="updateField == 'email'">
                 <div class="info-tips">
-                  When you change your email, you will be looged out and will need to confirm it when logging into your
-                  account again
+                  {{' When you change your email, you will be looged out and will need to confirm it when logging into your
+                  account again' | translate}}
                 </div>
                 <div class="input-box">
-                  <label>Type your current password</label>
+                  <label>{{'Type your current password' | translate}}</label>
                   <div class="input-box__border">
                     <input placeholder="password" id="password" #password="ngModel" name="password"
                       [(ngModel)]="user.password" required />
                   </div>
                   <div *ngIf="password.invalid && (password.touched || userForm.submitted)" class="error-msg">
-                    <div>Password is required</div>
+                    <div>{{'Password is required' | translate}}</div>
                   </div>
                 </div>
                 <div class="input-box">
-                  <label>Enter your new email</label>
+                  <label>{{'Enter your new email' | translate}}</label>
                   <div class="input-box__border">
                     <input placeholder="email" id="email" #email="ngModel" name="email" [(ngModel)]="user.email"
                       required email />
                   </div>
                   <div *ngIf="email.invalid && (email.touched || userForm.submitted)" class="error-msg">
-                    <div *ngIf="email.errors.required">Email is Required</div>
-                    <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                    <div *ngIf="email.errors.required">{{'Email is Required' | translate}}</div>
+                    <div *ngIf="email.errors.email">{{'Email must be a valid email address' | translate}}</div>
                   </div>
                 </div>
               </div>
               <div *ngIf="updateField == 'phone number'">
                 <div class="input-box">
-                  <label>Phone Number</label>
+                  <label>{{'Phone Number' | translate}}</label>
                   <div class="input-box__border">
                     <input placeholder="+91 9108292413" type="tel" pattern="[+0-9]{13}" id="phoneNumber"
                       #phoneNumber="ngModel" name="phoneNumber" [(ngModel)]="user.phoneNumber" required />
                   </div>
                   <div *ngIf="phoneNumber.invalid && (phoneNumber.touched || userForm.submitted)" class="error-msg">
-                    <div>Phone Number must be a valid number</div>
+                    <div>{{'Phone Number must be a valid number' | translate}}</div>
                   </div>
                 </div>
               </div>
               <div>
                 <button class="app-btn secondary get-start-btn" type="submit">
-                  <p class="m-0">Save changes</p>
+                  <p class="m-0">{{'Save changes' | translate}}</p>
                   <i class="fa fa-angle-right"></i>
                 </button>
               </div>
               <div class="cancel-btn" (click)="closeModal()">
                 <button class="btn btn-transparent cancel-btn">
-                  Cancel
+                  {{'Cancel' | translate}}
                 </button>
               </div>
             </form>

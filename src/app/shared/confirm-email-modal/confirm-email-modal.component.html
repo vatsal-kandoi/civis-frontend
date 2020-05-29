@@ -5,17 +5,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-          <div class="title">Verify your email ID</div>
+          <div class="title">{{'Verify your email ID' | translate}}</div>
           <div class="pointer" (click)="closeModal()">X</div>
       </div>
       <div class="modal-body">
         <p class="text-center">
-            Your email ID {{currentUser?.email}} is not verified yet.
+          {{'Your email ID ' | translate}} {{currentUser?.email}}  {{'is not verified yet.' | translate}}
         </p>
         <div class="d-flex align-items-center justify-content-center">
             <div class="col-10 text-center pt-3" (click)="resendEmail()">
                 <button class="app-btn secondary get-start-btn">
-                    <p class="m-0">Resend confirmation</p>
+                    <p class="m-0">{{'Resend confirmation' | translate}}</p>
                     <i class="fa fa-angle-right"></i>
                 </button>
             </div>

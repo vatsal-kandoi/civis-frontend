@@ -3,13 +3,15 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Update your location</h4>
+        <h4 class="modal-title">
+          {{'Update your location' | translate}}</h4>
       </div>
       <app-linear-loader *ngIf="loading"></app-linear-loader>
       <div class="modal-body">
         <p>
-          We have noticed that your account does not have a city associated with it.
-          To help us serve you better, please select a city from the dropdown below.
+         
+        {{' We have noticed that your account does not have a city associated with it.
+          To help us serve you better, please select a city from the dropdown below.' | translate}}
         </p>
         <div class="d-flex">
             <ng-select class="w-50" id="locations" #city="ngModel" name="city" [loading]="loading" [clearable]="false"

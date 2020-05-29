@@ -22,27 +22,27 @@
       <div class="modal-body">
         <div class="leader-detail-grid">
           <div class="detail-item">
-            <p>TOTAL POINTS</p>
+            <p>{{'TOTAL POINTS' | translate}}</p>
             <p>{{user?.points}}</p>
           </div>
           <div class="detail-item">
-            <p>RANK IN CITY</p>
+            <p>{{'RANK IN CITY' | translate}}</p>
             <p *ngIf="user?.cityRank">{{user?.cityRank}}</p>
-            <p *ngIf="!user?.cityRank">N/A</p>
+            <p *ngIf="!user?.cityRank">{{'N/A' | translate}}</p>
           </div>
           <div class="detail-item">
-            <p>RANK IN STATE</p>
+            <p>{{'RANK IN STATE' | translate}}</p>
             <p *ngIf="user?.stateRank">{{user?.stateRank}}</p>
-            <p *ngIf="!user?.stateRank">N/A</p>
+            <p *ngIf="!user?.stateRank">{{'N/A' | translate}}</p>
           </div>
           <div class="detail-item">
-            <p>BEST SO FAR</p>
-            <p>#{{user?.rank}} in All India</p>
+            <p>{{'BEST SO FAR' | translate}}</p>
+            <p>#{{user?.rank}} {{' in All India' | translate}}</p>
           </div>
         </div>
 
         <div class="participated-section">
-          <p class="paticipant-title">Consultations participated in</p>
+          <p class="paticipant-title">{{'Consultations participated in' | translate}}</p>
           <div class="participation-list-container">
             <div *ngFor="let item of user?.sharedResponses?.edges">
               <div class="paticipant-list">
@@ -52,7 +52,7 @@
                   <p>{{item?.node?.consultation?.ministry?.name}}</p>
                   <div class="response-cta">
                     <button class="btn btn-transparent action-btn" (click)="viewResponse(item?.node)" >
-                        View my response
+                      {{'  View my response' | translate}}
                         <span><i class="fa fa-angle-right"></i></span>
                     </button>
                   </div>

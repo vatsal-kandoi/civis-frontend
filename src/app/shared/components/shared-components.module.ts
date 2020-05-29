@@ -15,6 +15,7 @@ import { SharedDirectivesModule } from '../directives/shared-directives.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CookieModule } from 'ngx-cookie';
     SharedDirectivesModule,
     FormsModule,
     NgSelectModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    PipesModule,
   ],
   exports: [
     ActionButtonComponent,

@@ -1,0 +1,37 @@
+<div class="sign-up-index row no-gutters">
+
+  <div class="sign-up-index__left col-md-4">
+    <div class="overlay"></div>
+    <div class="cover-detail">
+      <button class="back-btn" [routerLink]="['/']">
+        <span><i class="fa fa-angle-left back-arrow"></i></span>
+        Back
+      </button>
+      <div class="info-box">
+        <p class="info-box__title">
+          IN THE PAST
+        </p>
+        <p class="info-box__heading">
+          Bengaluru Revised Master Plan, 2031
+        </p>
+        <p class="info-box__sub-heading">
+          Bengaluru Development Authority
+        </p>
+        <p class="info-box__message mb-4">
+          <span><i class="fa fa-line-chart mr-2"></i></span>1,096 citizen leaders participated
+        </p>
+        <a class="app-btn circular read-case-btn"
+          href="https://medium.com/civis-vote/case-study-bengaluru-master-plan-2031-7131687468f2">READ CASE
+          STUDY</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sign-up-index__right col-md-8 m-auto">
+    <p class="logo-heading text-center ml-3">Check your Mail Box</p>
+    <p class="text-center">We sent you an activation link. Please click on that link<br> to verify your profile.</p>
+    <div class="d-flex justify-content-center">
+      <button class="btn resend-btn" (click)=resendEmailVerification()>Resend email</button>
+    </div>
+  </div>
+</div>

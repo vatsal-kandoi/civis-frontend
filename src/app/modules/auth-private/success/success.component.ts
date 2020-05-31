@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 
 @Component({
   selector: 'app-success',
@@ -20,13 +21,12 @@ export class SuccessComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private cookieService: CookieService,
+    private errorService: ErrorService
   ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params.access_token) {
-        console.log("old success");
-        
         const accessToken = params.access_token;
         this.tokenService.storeToken({
           accessToken
@@ -35,17 +35,13 @@ export class SuccessComponent implements OnInit {
         this.userService.manageUserToken();
         this.userService.userLoaded$.subscribe(data => {
           if (data) {
-            const callbackUrl = this.cookieService.get('loginCallbackUrl');
-            if (callbackUrl) {
-              this.router.navigateByUrl(callbackUrl);
-              this.cookieService.set('loginCallbackUrl', '');
-            } else {
-              this.router.navigateByUrl('/profile');
-            }
+            let id = +localStorage.getItem('privateConsultationId');            
+            this.router.navigate(['/consultations',134]);
           }
         });
       }
-    });
+    },
+    err => {this.errorService.showErrorModal(err);});
   }
 
 }

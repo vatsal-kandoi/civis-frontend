@@ -1,0 +1,125 @@
+@import './src/assets/styles/app';
+
+.sign-up-index {
+    height: 100vh;
+    width: 100%;
+
+    &__left {
+        padding: 70px 80px;
+        background-image: url('../../../../assets/images/featured-case-study.webp'), url('../../../../assets/images/featured-case-study.jpg');
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(180deg, #0E73B9 28.22%, rgba(14, 115, 185, 0) 95.05%);
+        }
+
+        .cover-detail {
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-btn {
+            border: none;
+            padding: 0;
+            color: $white;
+            font-size: 12px;
+            cursor: pointer;
+            background: none;
+
+            &:focus {
+                outline: none;
+            }
+            .back-arrow {
+                font-size: 16px;
+                font-weight: bold;
+                margin-right: 5px;
+                vertical-align: top;
+            }
+        }
+
+        .info-box {
+            margin-top: 95px;
+
+            &__title {
+                font-size: 12px;
+                font-weight: bold;
+                letter-spacing: 0.165em;
+                color: $white;
+                opacity: 0.5;
+                margin-bottom: 10px;
+            }
+
+            &__heading {
+                width: 300px;
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 28px;
+                color: $white;
+                margin-bottom: 5px;
+            }
+
+            &__sub-heading {
+                font-size: 14px;
+                color: $white;
+            }
+
+            &__message {
+                font-size: 14px;
+                font-weight: bold;
+                color: $white;
+                margin: 14px 0;
+            }
+
+            .read-case-btn {
+                font-size: 9px;
+                letter-spacing: 0.1em;
+                color: $white;
+                padding: 7px 20px;
+                background-color: transparent;
+                border: 1px solid $white;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        @media screen and (max-width: 991px) {
+            display: none;
+        }
+    }
+
+    &__right {
+        padding: 50px 200px;
+        @media screen and (max-width: 991px) {
+            padding: 20px;
+        }
+
+        .logo-heading {
+            margin: 15px 0;
+            font-size: 18px;
+            color: #151515;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+            @media screen and (max-width: 991px) {
+                margin: 2rem 0 10px;
+            }
+        }
+        .resend-btn {
+            background-color: transparent;
+            // padding: 3px 15px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #6fbcf2;
+            // border: 1px solid $black;
+        }
+
+    }
+}

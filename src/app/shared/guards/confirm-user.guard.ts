@@ -43,7 +43,14 @@ export class ConfirmUserGuard implements CanActivate {
         .subscribe((tokenObj) => {
             if (tokenObj) {
                 this.tokenService.storeToken(tokenObj);
-                this.router.navigateByUrl('/profile');
+                if(localStorage.getItem('privateConsultationId')){
+                    let id = +localStorage.getItem('privateConsultationId');
+                    localStorage.setItem('privateConsultationId', '');
+                    this.router.navigate(['/consultations', id ]);
+                } else {
+                    this.router.navigateByUrl('/profile');
+                }
+                
                 this.tokenService.tokenHandler();
                 this.userService.manageUserToken();
             }

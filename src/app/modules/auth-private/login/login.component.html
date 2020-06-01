@@ -45,7 +45,7 @@
       <p class="logo-heading ml-3">Log in to your account</p>
   
       <div class="form-space row no-gutters mt-4">
-        <div class="form-space-right m-auto">
+        <div class="form-space-right">
           <button class="app-btn gmail" (click)="redirectTo('google')">
             <div class="social-img">
               <picture>
@@ -54,9 +54,9 @@
                 <img src="assets/images/Gmail.jpg" alt="Gmail logo" />
               </picture>
             </div>
-            <p class="mb-0 ml-3">Sign in with Google</p>
+            <p class="mb-0 ml-2">Sign in with Google</p>
           </button> 
-          <button class="app-btn facebook ml-5" (click)="redirectTo('facebook')">
+          <button class="app-btn facebook ml-3" (click)="redirectTo('facebook')">
             <div class="social-img">
               <picture>
                 <source srcset="assets/images/Facebook.webp" type="image/webp">
@@ -64,18 +64,18 @@
                 <img src="assets/images/Facebook.jpg" alt="Facebook logo" />
               </picture>
             </div>
-            <p class="mb-0 ml-3">Sign in with Facebook</p>
+            <p class="mb-0 ml-1">Sign in with Facebook</p>
           </button>
         </div>
 
-        <div class="form-space-middle col-md-12 pl-3 pr-3">
+        <div class="form-space-middle col-md-12">
           <hr class="horizontal-divider-desktop" data-content="OR">
           <!-- horizontal-divider for mobile -->
           <hr class="horizontal-divider" data-content="OR">  
         </div>
 
 
-        <div class="form-space__left pl-3 pr-3">
+        <div class="form-space__left">
           <form #loginForm="ngForm" (ngSubmit)="submit(loginForm.valid)" autocomplete="off">
             <div class="row">
               <div class="input-box col-12">

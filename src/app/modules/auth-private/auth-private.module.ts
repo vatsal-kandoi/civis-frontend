@@ -7,9 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
-import { SuccessComponent } from './success/success.component';
-import { FailureComponent } from './failure/failure.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SuccessComponent } from '../auth/success/success.component';
+import { FailureComponent } from '../auth/failure/failure.component';
 
 @NgModule({
   imports: [

@@ -48,13 +48,13 @@ export class LoginComponent implements OnInit {
       .subscribe((tokenObject: any) => {
         if (tokenObject) {
           this.tokenService.storeToken(tokenObject);
-          const callbackUrl = this.cookieService.get('loginCallbackUrl');
-          if (callbackUrl) {
-            this.router.navigateByUrl(callbackUrl);
-            this.cookieService.set('loginCallbackUrl', '');
-          } else {
-            this.router.navigateByUrl('/profile');
-          }
+          if(localStorage.getItem('privateConsultationId')){
+            let id = +localStorage.getItem('privateConsultationId');
+            localStorage.setItem('privateConsultationId', '');
+            this.router.navigate(['/consultations', id ]);
+        } else {
+            this.router.navigateByUrl('/');
+        }
           this.onLoggedIn();
         }
       }, (err: any) => {

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
-import { SuccessComponent } from './success/success.component';
-import { FailureComponent } from './failure/failure.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResendVerificationComponent } from './resendVerification/resendVerification.component';
+import { FailureComponent } from '../auth/failure/failure.component';
+import { SuccessComponent } from '../auth/success/success.component';
 
 
 

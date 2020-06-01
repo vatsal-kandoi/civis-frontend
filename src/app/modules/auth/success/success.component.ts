@@ -26,7 +26,7 @@ export class SuccessComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params.access_token) {
         console.log("old success");
-        
+
         const accessToken = params.access_token;
         this.tokenService.storeToken({
           accessToken
@@ -35,12 +35,18 @@ export class SuccessComponent implements OnInit {
         this.userService.manageUserToken();
         this.userService.userLoaded$.subscribe(data => {
           if (data) {
-            const callbackUrl = this.cookieService.get('loginCallbackUrl');
-            if (callbackUrl) {
-              this.router.navigateByUrl(callbackUrl);
-              this.cookieService.set('loginCallbackUrl', '');
+            if (localStorage.getItem('privateConsultationId')) {
+              let id = +localStorage.getItem('privateConsultationId');
+              localStorage.setItem('privateConsultationId', '');
+              this.router.navigate(['/consultations', id]);
             } else {
-              this.router.navigateByUrl('/profile');
+              const callbackUrl = this.cookieService.get('loginCallbackUrl');
+              if (callbackUrl) {
+                this.router.navigateByUrl(callbackUrl);
+                this.cookieService.set('loginCallbackUrl', '');
+              } else {
+                this.router.navigateByUrl('/profile');
+              }
             }
           }
         });

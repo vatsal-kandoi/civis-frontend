@@ -35,6 +35,7 @@ export const ConsultationProfile = gql`
         edges {
           node {
             id
+            answers
             downVoteCount
             responseText
             templatesCount
@@ -92,6 +93,7 @@ export const ConsultationProfileCurrentUser = gql`
         edges {
           node {
             id
+            answers
             downVoteCount
             responseText
             templatesCount
@@ -158,6 +160,7 @@ export const SubmitResponseQuery = gql`
           edges {
             node {
               id
+              answers
               downVoteCount
               responseText
               templatesCount

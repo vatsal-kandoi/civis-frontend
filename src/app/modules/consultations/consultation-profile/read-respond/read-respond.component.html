@@ -7,7 +7,7 @@
     <p class="summary-content" [innerHTML]="profileData?.summary"></p>
   </div>
 
-  <div class="paper-effect mt-4 m-0-sm">
+  <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions">
     <div class="draft-box">
       <div class="draft-img">
         <img src="assets/images/start-drafting-empty-state.svg" />
@@ -15,7 +15,7 @@
       <p class="draft-text">
         Ready to draft your response? Click <br /> the below button to start
       </p>
-      <button  class="btn-submit  active" (click)='stepNext()'>
+      <button  class="btn-submit  active" (click)='showQuestions = true'>
         <p class="m-0">
           START DRAFTING
         </p>
@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="paper-effect mt-4 m-0-sm p-0">
+  <div class="paper-effect mt-4 m-0-sm p-0" *ngIf="showQuestions">
     <div class="question-box">
       <p class="heading">
         Questions
@@ -65,7 +65,7 @@
             </div>
           </div>
           <div class="py-3">
-            <button  class="btn-submit active" (click)='stepNext()'>
+            <button  class="btn-submit active" (click)='submitAnswer()'>
               <p class="m-0">
                 SUBMIT RESPONSE
               </p>
@@ -92,30 +92,32 @@
           <p class="email-text m-0 ml-2">{{'nishanth@gmail.com'}}</p>
         </div>
       </div>
-      <div class="answers">
-        <div class="answer">
+      <div *ngIf="mapAnswers(12, {id: 21}).length">
+        <div class="answers" *ngFor="let responseAnswer of mapAnswers(12, {id: 21}); let i = index">
+          <div class="answer">
             <p class="question-text">
-            <span class="question-text__number">1.</span>
-            What do you think about this consultation idea?
-          </p>
-          <p class="question-answer answer-text">
-            What do you think about this consultation idea?
-          </p>
+              <span class="question-text__number">{{i+1}}.</span>
+              What do you think about this consultation idea?
+            </p>
+            <div *ngIf="responseAnswer.questionType !== 'checkbox'">
+              <p class="answer-text" [ngClass]="{'question-answer' : responseAnswer.questionType === 'multiple_choice' }">
+                {{responseAnswer.answer}}
+              </p>
+            </div>
+            <div *ngIf="responseAnswer.questionType === 'checkbox'">
+              <div *ngFor="let item of responseAnswer.answer">
+                <p class="question-answer answer-text">
+                  {{item}}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="answer">
-          <p class="question-text">
-          <span class="question-text__number">1.</span>
-          What do you think about this consultation idea?
-        </p>
-        <p class="answer-text">
-          What do you think about this consultation idea?
-        </p>
-      </div>
       </div>
     </div>
   </div>
 
-  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()" #responseIndex>
+  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse() && !questionnaireExist()" #responseIndex>
     <div class="response-index__nav">
       <div class="w-50">
         <div class="heading">Your response</div>
@@ -175,8 +177,11 @@
             [type]="'user'"
             [src]="response?.node?.user?.profilePicture?.url"
             (click)="openUserProfile(response?.node?.user)" />
-            <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
-          </div>
+            <div>
+              <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
+              <p class="email-text m-0 ml-2">{{'response?.node.user.email'}}</p>
+            </div>
+          </div>     
           <p class="text-16" [innerHTML]="response.node.responseText"></p>
           <div class="vote-section" *ngIf="currentUser">
             <div class="vote-count">
@@ -342,3 +347,5 @@
       </div>
     </div>
   </div>
+
+  <app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false"></app-confirm-email-modal>

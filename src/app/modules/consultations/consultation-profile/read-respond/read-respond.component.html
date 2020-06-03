@@ -77,45 +77,6 @@
     </div>
   </div>
 
-  <div class="paper-effect mt-4 m-0-sm">
-    <p class="text-16 m-0 bold-text">All responses</p>
-    <div class="response-block">
-      <div class="d-inline-flex align-items-center">
-        <img 
-        class="avatar avatar--42 pointer"
-        appDefaultImage
-        [type]="'user'"
-        [src]=""
-        />
-        <div>
-          <p class="regular-text bold-text m-0 ml-2">{{'Nishanth'}}</p>
-          <p class="email-text m-0 ml-2">{{'nishanth@gmail.com'}}</p>
-        </div>
-      </div>
-      <div *ngIf="mapAnswers(12, {id: 21}).length">
-        <div class="answers" *ngFor="let responseAnswer of mapAnswers(12, {id: 21}); let i = index">
-          <div class="answer">
-            <p class="question-text">
-              <span class="question-text__number">{{i+1}}.</span>
-              What do you think about this consultation idea?
-            </p>
-            <div *ngIf="responseAnswer.questionType !== 'checkbox'">
-              <p class="answer-text" [ngClass]="{'question-answer' : responseAnswer.questionType === 'multiple_choice' }">
-                {{responseAnswer.answer}}
-              </p>
-            </div>
-            <div *ngIf="responseAnswer.questionType === 'checkbox'">
-              <div *ngFor="let item of responseAnswer.answer">
-                <p class="question-answer answer-text">
-                  {{item}}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse() && !questionnaireExist()" #responseIndex>
     <div class="response-index__nav">
@@ -156,7 +117,7 @@
   <ng-container *ngIf="profileData?.reviewType !== 'policy'">
     <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
       <div class="d-flex justify-content-between">
-        <p class="text-16 m-0 bold-text">Public responses</p>
+        <p class="text-16 m-0 bold-text">All responses</p>
         <p 
           class="what-resp-text" 
           tooltip="If you feel passionately about this Consultation, you can make your response public, 
@@ -178,23 +139,45 @@
             [src]="response?.node?.user?.profilePicture?.url"
             (click)="openUserProfile(response?.node?.user)" />
             <div>
-              <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
-              <p class="email-text m-0 ml-2">{{'response?.node.user.email'}}</p>
+              <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
+              <p class="email-text m-0 ml-2">{{response?.node?.user?.email}}</p>
             </div>
           </div>     
-          <p class="text-16" [innerHTML]="response.node.responseText"></p>
-          <div class="vote-section" *ngIf="currentUser">
+          <p class="text-16" [innerHTML]="response.node?.responseText"></p>
+          <div class="response-block" *ngIf="response.node?.answers && mapAnswers(response?.node?.id, response?.node?.answers).length">
+            <div class="answers" *ngFor="let responseAnswer of mapAnswers(response?.node?.id, response?.node?.answers); let i = index">
+              <div class="answer">
+                <p class="question-text">
+                  <span class="question-text__number">{{i+1}}.</span>
+                  What do you think about this consultation idea?
+                </p>
+                <div *ngIf="responseAnswer.questionType !== 'checkbox'">
+                  <p class="answer-text" [ngClass]="{'question-answer' : responseAnswer.questionType === 'multiple_choice' }">
+                    {{responseAnswer.answer}}
+                  </p>
+                </div>
+                <div *ngIf="responseAnswer.questionType === 'checkbox'">
+                  <div *ngFor="let item of responseAnswer.answer">
+                    <p class="question-answer answer-text">
+                      {{item}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vote-section" *ngIf="currentUser && !response.node?.answers?.length">
             <div class="vote-count">
-              <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">
+              <div [ngClass]="response?.node?.votedAs?.voteDirection === 'up'  ? 'active' : ''">
                   <span (click)="vote('up', response?.node)"
                     tooltip="{{'Upvote'}}"
-                  [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
+                  [ngClass]="response?.node?.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
                   <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
               </div>
-              <div [ngClass]="response?.node.votedAs?.voteDirection === 'down'  ? 'active' : ''">
+              <div [ngClass]="response?.node?.votedAs?.voteDirection === 'down'  ? 'active' : ''">
                   <span (click)="vote('down', response?.node)" 
                   tooltip="{{'Downvote'}}"
-                  class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
+                  class="ml-4" [ngClass]="response?.node?.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
                   <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
               </div>
               <div class="share-block">

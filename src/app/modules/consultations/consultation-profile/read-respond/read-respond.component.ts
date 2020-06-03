@@ -213,10 +213,9 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   }
 
   mapAnswers(responseId, answers) {
-    if (responseId && !isObjectEmpty(answers)) {
-      const arr = [{question_id: 1, answer: 2}, {question_id: 6, answer: ['7']}, {question_id: 9, answer: 'Testing'}];
+    if (responseId && answers.length) {
       const responseAnswers = [];
-      arr.map((item) => {
+      answers.map((item) => {
         let answer = {};
         if (this.responseQuestions && this.responseQuestions.length) {
           const responseQuestion = this.responseQuestions.find((question) => +question.id === +item.question_id);
@@ -281,11 +280,10 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     .subscribe((data: any) => {
         this.profileData = data;
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
-        this.responseList = data.sharedResponses.edges;
+        this.responseList = [...data.sharedResponses.edges, ...data.anonymousResponses.edges];
         this.createMetaTags(this.profileData);
         this.checkForFragments = true;
         this.questionnaireForm = this.makeQuestionnaireModal();
-        this.mapAnswers(12, {id: 12});
     }, err => {
       this.errorService.showErrorModal(err);
     });

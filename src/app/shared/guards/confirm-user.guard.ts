@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
-import {UserService} from '../services/user.service';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from '../services/user.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { ErrorService } from '../components/error-modal/error.service';
@@ -20,7 +20,7 @@ const ConfirmEmailMutation = gql`
 @Injectable()
 export class ConfirmUserGuard implements CanActivate {
 
-    currentUser: any;
+  currentUser: any;
 
   constructor(
     private router: Router,
@@ -34,41 +34,41 @@ export class ConfirmUserGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
     : any {
     return Observable.create((observer) => {
-        const token = route.queryParams.token;
-        const variables = {
-            confirmationToken: token
-        };
-        this.apollo.mutate({mutation: ConfirmEmailMutation, variables: variables})
+      const token = route.queryParams.token;
+      const variables = {
+        confirmationToken: token
+      };
+      this.apollo.mutate({ mutation: ConfirmEmailMutation, variables: variables })
         .pipe(
-            map((res: any) => res.data.authConfirmEmail)
+          map((res: any) => res.data.authConfirmEmail)
         )
         .subscribe((tokenObj) => {
-            if (tokenObj) {
-                this.tokenService.storeToken(tokenObj);
-                this.getCurrentUser();
-                if(this.currentUser.callbackUrl){
-                    this.router.navigateByUrl(this.currentUser.callbackUrl);
-                } else {
-                    this.router.navigateByUrl('/profile');
-                }
-                
-                this.tokenService.tokenHandler();
-                this.userService.manageUserToken();
-            }
+          if (tokenObj) {
+            this.tokenService.storeToken(tokenObj);
+            this.navigateTo();
+            this.tokenService.tokenHandler();
+            this.userService.manageUserToken();
+          }
         }, err => {
-            this.errorService.showErrorModal(err);
+          this.errorService.showErrorModal(err);
         });
     });
   }
-  getCurrentUser(){
+
+  navigateTo() {
     this.userService.userLoaded$
-    .subscribe((exists: boolean) => {
-      if (exists) {
-        this.currentUser = this.userService.currentUser;
-      }
-    },
-    err => {
-      this.errorService.showErrorModal(err);
-    });
+      .subscribe((exists: boolean) => {
+        if (exists) {
+          this.currentUser = this.userService.currentUser;
+          if (this.currentUser.callbackUrl) {
+            this.router.navigateByUrl(this.currentUser.callbackUrl);
+          } else {
+            this.router.navigateByUrl('/profile');
+          }
+        }
+      },
+        err => {
+          this.errorService.showErrorModal(err);
+        });
   }
 }

@@ -6,7 +6,6 @@ export const ConsultationList = gql`
       data {
         id
         title
-        visibility
         createdAt
         consultationResponsesCount
         updatedAt

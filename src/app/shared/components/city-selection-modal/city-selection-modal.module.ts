@@ -5,6 +5,7 @@ import { ModalModule } from 'ngx-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { LinearLoaderModule } from '../linear-loader/linear-loader.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [CitySelectionModalComponent],
@@ -14,6 +15,7 @@ import { LinearLoaderModule } from '../linear-loader/linear-loader.module';
     NgSelectModule,
     FormsModule,
     LinearLoaderModule,
+    PipesModule,
   ],
   exports: [
     CitySelectionModalComponent,

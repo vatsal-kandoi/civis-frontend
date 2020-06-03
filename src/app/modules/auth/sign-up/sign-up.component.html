@@ -5,24 +5,23 @@
     <div class="cover-detail">
       <button class="back-btn" [routerLink]="['/']">
         <span><i class="fa fa-angle-left back-arrow"></i></span>
-        Back
+        {{'Back' | translate}}
       </button>
       <div class="info-box">
           <p class="info-box__title">
-            IN THE PAST
+            {{'IN THE PAST' | translate}}
           </p>
           <p class="info-box__heading">
-            Bengaluru Revised Master Plan, 2031
+            {{'Bengaluru Revised Master Plan, 2031' | translate}}
           </p>
           <p class="info-box__sub-heading">
-            Bengaluru Development Authority
+            {{'Bengaluru Development Authority' | translate}}
           </p>
           <p class="info-box__message mb-4">
-            <span><i class="fa fa-line-chart mr-2"></i></span>1,096 citizen leaders participated
+            <span><i class="fa fa-line-chart mr-2"></i></span>{{'1,096 citizen leaders participated' | translate}}
           </p>
           <a class="app-btn circular read-case-btn"
-            href="https://medium.com/civis-vote/case-study-bengaluru-master-plan-2031-7131687468f2">READ CASE
-            STUDY</a>
+            href="https://medium.com/civis-vote/case-study-bengaluru-master-plan-2031-7131687468f2">{{'READ CASE STUDY' | translate}}</a>
       </div>
     </div>
   </div>
@@ -34,31 +33,31 @@
       </div>
       <div class="login-container">
         <p class="auth-text"> 
-          Already have an account with Civis?
+          {{'Already have an account with Civis?' | translate}}
         </p>
-        <button class="app-btn circular auth-btn" [routerLink]="['/auth', 'login']">Sign In</button>
+        <button class="app-btn circular auth-btn" [routerLink]="['/auth', 'login']">{{'Sign In' | translate}}</button>
       </div>
       <div class="login-mobile-container">
         <div>
-          <button class="app-btn primary sign-in-btn" [routerLink]="['/auth', 'login']">Sign In</button>
+          <button class="app-btn primary sign-in-btn" [routerLink]="['/auth', 'login']">{{'Sign In' | translate}}</button>
         </div>
       </div>
     </div>
-    <p class="logo-heading">Sign up as a Citizen Leader.<br /> Join the movement towards citizen-led governance.</p>
+    <p class="logo-heading">{{'Sign up as a Citizen Leader.' | translate }}<br /> {{'Join the movement towards citizen-led governance.' | translate}}</p>
 
     <div class="form-space row no-gutters mt-md-5 mt-2">
       <div class="form-space__left col-md-5">
         <form #signupForm="ngForm" autocomplete="off">
             <div class="input-box required-field">
-                <label for="fname">First name</label>
+                <label for="fname">{{'First name' | translate}}</label>
                 <div class="input-box__border">
                     <input placeholder="First Name" type="text" id="fname" #fname="ngModel" name="fname" [(ngModel)]="signupObject.firstName" required />   
                 </div>
-                <div *ngIf="fname.invalid && (fname.touched || signupForm.submitted)" class="error-msg">First name is Required</div>
+                <div *ngIf="fname.invalid && (fname.touched || signupForm.submitted)" class="error-msg">{{'First name is Required' | translate}}</div>
             </div>
     
             <div class="input-box">
-                <label for="fname">Last name</label>
+                <label for="fname">{{'Last name' | translate}}</label>
                 <div class="input-box__border">
                     <input placeholder="Last Name" type="text" id="lname" #lname="ngModel" name="lname" [(ngModel)]="signupObject.lastName"  />
                 </div>
@@ -66,7 +65,7 @@
 
             <div class="location-box required-field">
               <label for="locations">
-                  City
+                {{'City' | translate }}
               </label>
               <div class="location-box__border">
                 <ng-select id="locations" #city="ngModel" name="city" [loading]="loadingCities"
@@ -75,62 +74,62 @@
                 (search)="onSearch($event)" (open)="loadCities()" [(ngModel)]="signupObject.cityId" placeholder="City" required>
                 </ng-select>  
               </div>
-              <div *ngIf="city.invalid && (city.touched || signupForm.submitted)" class="error-msg">Location is Required</div>
+              <div *ngIf="city.invalid && (city.touched || signupForm.submitted)" class="error-msg">{{'Location is Required' | translate}}</div>
             </div>
     
             <div class="input-box required-field">
-                <label for="efname">Email</label>
+                <label for="efname">{{'Email' | translate}}</label>
                 <div class="input-box__border">
                     <input placeholder="Email" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="signupObject.email" required email />
                 </div>
                 <div *ngIf="email.invalid && (email.touched || signupForm.submitted)" class="error-msg">
-                  <div *ngIf="email.errors.required">Email is Required</div>
-                  <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                  <div *ngIf="email.errors.required">{{'Email is Required' | translate}}</div>
+                  <div *ngIf="email.errors.email">{{'Email must be a valid email address' | translate}}</div>
                 </div>
             </div>
 
             <div class="input-box">
-                <label for="phone">Phone</label>
+                <label for="phone">{{'Phone' | translate}}</label>
                 <div class="input-box__border">
                     <input placeholder="+919223386370" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"/>
                 </div>
                 <div *ngIf="phone.invalid && (phone.touched || signupForm.submitted)" class="error-msg">
-                  <div>Phone Number must be a valid number</div>
+                  <div>{{'Phone Number must be a valid number' | translate}}</div>
                 </div>
             </div>
     
             <div class="input-box required-field">
-                <label for="password">Password</label>
+                <label for="password">{{'Password' | translate}}</label>
                 <div class="input-box__border">
                     <input placeholder="At least 6 characters" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="signupObject.password" required />
                 </div>
-                <div *ngIf="password.invalid && (password.touched || signupForm.submitted)" class="error-msg">Password is Required</div>
+                <div *ngIf="password.invalid && (password.touched || signupForm.submitted)" class="error-msg">{{'Password is Required' | translate}}</div>
             </div>
 
             <div class="input-checbox">
                 <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required /> 
                 <label for="agreedForTermsCondition">
-                  I'm good with the Civis'<br> 
-                  <a href="/terms" class="policy-link">Terms of Service,</a>
+                  {{"I'm good with the Civis"| translate}}<br> 
+                  <a href="/terms" class="policy-link">{{'Terms of Service,' | translate}}</a>
                   &nbsp;
-                  <a href="/privacy" class="policy-link">Privacy Policy</a>
+                  <a href="/privacy" class="policy-link">{{'Privacy Policy' | translate}}</a>
                   & 
-                  <a href="/content-policy" class="policy-link">Content Policy.</a>
+                  <a href="/content-policy" class="policy-link">{{'Content Policy.' | translate}}</a>
                 </label>
             </div>
             <div class="error-msg"  *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)">
-              Please accept our Terms of Service & Privacy Policy to continue.
+              {{'Please accept our Terms of Service & Privacy Policy to continue.' | translate}}
             </div>
     
             <div class="input-checbox">
                 <input class="cm-checkbox" type="checkbox"  id="notifyMe" #notifyMe="ngModel"  name="notifyMe" [(ngModel)]="signupObject.notifyForNewConsultation" /> 
-                <label for="notifyMe">Notify me when an open consultation <br> is created on Civis.</label>
+                <label for="notifyMe">{{'Notify me when an open consultation' | translate }}<br>&nbsp; {{'is created on Civis.' | translate}}</label>
             </div>
     
             <re-captcha #captchaRef="reCaptcha" (resolved)="captchaResolved($event)" [siteKey]="reCAPTCHA_KEY" size="invisible"></re-captcha>
             <div>
               <button class="app-btn secondary get-start-btn" (click)="checkForCaptcha()">
-                <p class="m-0">GET WORKING</p>
+                <p class="m-0">{{'GET WORKING' | translate}}</p>
                 <i class="fa fa-angle-right"></i>
               </button>
             </div>
@@ -138,7 +137,7 @@
       </div>
       <div class="form-space-middle col-md-1">
         <div class="vertical-divider">
-          <div class="center-element">OR</div>
+          <div class="center-element">{{'OR' | translate}}</div>
         </div>
         
         <!-- horizontal-divider for mobile -->
@@ -153,7 +152,7 @@
               <img src="assets/images/Gmail.jpg" alt="Gmail logo" />
             </picture>
           </div>
-          <p class="mb-0 ml-4">Sign up with Google</p>
+          <p class="mb-0 ml-4">{{'Sign up with Google' | translate}}</p>
         </button> 
         <button class="app-btn facebook" (click)="redirectTo('facebook')">
           <div class="social-img">
@@ -163,7 +162,7 @@
               <img src="assets/images/Facebook.jpg" alt="Facebook logo" />
             </picture>
           </div>
-          <p class="mb-0 ml-4">Sign up with Facebook</p>
+          <p class="mb-0 ml-4">{{'Sign up with Facebook' | translate}}</p>
         </button>
       </div>
     </div>

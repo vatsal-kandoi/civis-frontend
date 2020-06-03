@@ -83,14 +83,8 @@
             </div>
           </div>
           <div class="mt-3">
-            <button *ngIf="item?.visibility?.toString() === 'public_consultation'" class="app-btn view-btn pointer"
+            <button class="app-btn view-btn pointer"
               [routerLink]="['/consultations', item.id]">VIEW DISCUSSION</button>
-            <div *ngIf="item?.visibility?.toString() === 'private_consultation'">
-              <button *ngIf="!currentUser" class="app-btn view-btn pointer"
-                [routerLink]="['/auth-private', 'sign up']">VIEW DISCUSSION</button>
-              <button *ngIf="currentUser" class="app-btn view-btn pointer"
-                [routerLink]="['/consultations', item.id]">VIEW DISCUSSION</button>
-            </div>
           </div>
         </div>
       </ng-container>

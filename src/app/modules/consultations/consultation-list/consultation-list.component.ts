@@ -59,10 +59,7 @@ export class ConsultationListComponent implements OnInit {
       this.errorService.showErrorModal(err);
     });
   }
-  
-  storeId(id: number){
-    localStorage.setItem('privateConsultationId', id.toLocaleString());
-  }
+
   fetchActiveConsultationList() {
     this.loadingCard = true;
     this.consultationListQuery = this.getQuery('published');

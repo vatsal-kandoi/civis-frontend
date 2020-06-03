@@ -1,0 +1,214 @@
+<div class="sign-up-index row no-gutters">
+
+  <div class="sign-up-index__left col-md-4">
+    <div class="overlay"></div>
+    <div class="cover-detail">
+      <button class="back-btn" [routerLink]="['/']">
+        <span><i class="fa fa-angle-left back-arrow"></i></span>
+        Back
+      </button>
+      <div class="info-box">
+        <p class="info-box__title">
+          IN THE PAST
+        </p>
+        <p class="info-box__heading">
+          Bengaluru Revised Master Plan, 2031
+        </p>
+        <p class="info-box__sub-heading">
+          Bengaluru Development Authority
+        </p>
+        <p class="info-box__message mb-4">
+          <span><i class="fa fa-line-chart mr-2"></i></span>1,096 citizen leaders participated
+        </p>
+        <a class="app-btn circular read-case-btn"
+          href="https://medium.com/civis-vote/case-study-bengaluru-master-plan-2031-7131687468f2">READ CASE
+          STUDY</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sign-up-index__right col-md-8 m-auto">
+      <div *ngIf="!nextScreen" class="header">
+        <div class="logo-container ml-3">
+          <img class="logo" [routerLink]="['/']" src='assets/images/brand-logo/brand-logo.svg' />
+        </div>
+        <div class="login-container">
+          <p class="auth-text">
+            Already have an account?
+          </p>
+          <button class="app-btn circular auth-btn" [routerLink]="['/auth-private', 'login']">Sign In</button>
+        </div>
+        <div class="login-mobile-container">
+          <div>
+            <button class="app-btn primary sign-in-btn" [routerLink]="['/auth-private', 'login']">Sign In</button>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="!nextScreen" class="logo-heading text-left ml-3">To read this private consultation, <br> Please create
+        an
+        account</p>
+
+      <p *ngIf="nextScreen" class="logo-heading text-left ml-3">Tell us more about yourself</p>
+
+
+      <div class="form-space row no-gutters mt-4">
+        <div *ngIf="!nextScreen" class="form-space-right m-auto">
+          <button class="app-btn gmail" (click)="redirectTo('google')">
+            <div class="social-img">
+              <picture>
+                <source srcset="assets/images/Gmail.webp" type="image/webp">
+                <source srcset="assets/images/Gmail.jpg" type="image/jpeg">
+                <img src="assets/images/Gmail.jpg" alt="Gmail logo" />
+              </picture>
+            </div>
+            <p class="mb-0 ml-2">Sign up with Google</p>
+          </button>
+          <button class="app-btn facebook ml-2" (click)="redirectTo('facebook')">
+            <div class="social-img">
+              <picture>
+                <source srcset="assets/images/Facebook.webp" type="image/webp">
+                <source srcset="assets/images/Facebook.jpg" type="image/jpeg">
+                <img src="assets/images/Facebook.jpg" alt="Facebook logo" />
+              </picture>
+            </div>
+            <p class="mb-0 ml-1">Sign up with Facebook</p>
+          </button>
+        </div>
+
+        <div *ngIf="!nextScreen" class="form-space-middle col-md-12">
+          <hr class="horizontal-divider-desktop" data-content="OR">
+          <!-- horizontal-divider for mobile -->
+          <hr class="horizontal-divider" data-content="OR">
+        </div>
+
+        <div class="form-space__left">
+          <form #signupForm="ngForm" autocomplete="off">
+            <div *ngIf="!nextScreen" class="row">
+              <div class="input-box required-field col-6">
+                <label for="fname">First name</label>
+                <div class="input-box__border">
+                  <input placeholder="First Name" type="text" id="fname" #fname="ngModel" name="fname"
+                    [(ngModel)]="signupObject.firstName" required />
+                </div>
+                <div *ngIf="fname.invalid && (fname.touched || signupForm.submitted)" class="error-msg">First name is
+                  Required</div>
+              </div>
+
+              <div class="input-box col-6">
+                <label for="fname">Last name</label>
+                <div class="input-box__border">
+                  <input placeholder="Last Name" type="text" id="lname" #lname="ngModel" name="lname"
+                    [(ngModel)]="signupObject.lastName" />
+                </div>
+              </div>
+
+              <div class="location-box required-field col-12">
+                <label for="locations">
+                  City
+                </label>
+                <div class="location-box__border">
+                  <ng-select id="locations" #city="ngModel" name="city" [loading]="loadingCities" [items]="cities"
+                    bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" bindValue="id"
+                    [notFoundText]="dropdownText" [clearable]="true" loadingText="Searching..."
+                    (search)="onSearch($event)" (open)="loadCities()" [(ngModel)]="signupObject.cityId"
+                    placeholder="City" required>
+                  </ng-select>
+                </div>
+                <div *ngIf="city.invalid && (city.touched || signupForm.submitted)" class="error-msg">Location is
+                  Required
+                </div>
+              </div>
+
+              <div class="input-box required-field col-12">
+                <label for="efname">Email</label>
+                <div class="input-box__border">
+                  <input placeholder="Email" type="email" id="email" #email="ngModel" name="email"
+                    [(ngModel)]="signupObject.email" required email />
+                </div>
+                <div *ngIf="email.invalid && (email.touched || signupForm.submitted)" class="error-msg">
+                  <div *ngIf="email.errors.required">Email is Required</div>
+                  <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                </div>
+              </div>
+
+              <div class="input-box required-field col-12">
+                <label for="password">Password</label>
+                <div class="input-box__border">
+                  <input placeholder="At least 6 characters" type="password" id="password" #password="ngModel"
+                    name="password" [(ngModel)]="signupObject.password" required />
+                </div>
+                <div *ngIf="password.invalid && (password.touched || signupForm.submitted)" class="error-msg">Password
+                  is
+                  Required</div>
+              </div>
+
+              <div class="input-checbox col-12">
+                <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel"
+                  id="agreedForTermsCondition" name="agreedForTermsCondition"
+                  [(ngModel)]="signupObject.agreedForTermsCondition" required />
+                <label for="agreedForTermsCondition">
+                  I'm good with the Civis'
+                  <a href="/terms" class="policy-link">Terms of Service,</a>
+                  &nbsp;
+                  <a href="/privacy" class="policy-link">Privacy Policy</a>
+                  &
+                  <a href="/content-policy" class="policy-link">Content Policy.</a>
+                </label>
+              </div>
+              <div class="error-msg  col-12"
+                *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)">
+                Please accept our Terms of Service & Privacy Policy to continue.
+              </div>
+
+              <div class="col-12">
+                <button class="app-btn secondary get-start-btn" (click)="nextPage()">
+                  <p class="m-auto">Create account</p>
+                </button>
+              </div>
+            </div>
+            <div *ngIf="nextScreen" class="row">
+              <div class="input-box col-12">
+                <label for="phone">Phone Number</label>
+                <div class="input-box__border">
+                  <input placeholder="+919223386370" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel"
+                    name="phone" [(ngModel)]="signupObject.phoneNumber" />
+                </div>
+                <div *ngIf="phone.invalid && (phone.touched || signupForm.submitted)" class="error-msg">
+                  <div>Phone Number must be a valid number</div>
+                </div>
+              </div>
+              <div class="input-box col-12">
+                <label for="company">Company</label>
+                <div class="input-box__border">
+                  <input placeholder="Company Name" type="text" id="company" #company="ngModel" name="company"
+                    [(ngModel)]="signupObject.company" />
+                </div>
+                <div *ngIf="company.invalid && (company.touched || signupForm.submitted)" class="error-msg">
+                  <div>Invalid Company</div>
+                </div>
+              </div>
+
+              <div class="input-box col-12">
+                <label for="designation">Designation</label>
+                <div class="input-box__border">
+                  <input placeholder="Designation" type="text" id="designation" #designation="ngModel"
+                    name="designation" [(ngModel)]="signupObject.designation" />
+                </div>
+                <div *ngIf="designation.invalid && (designation.touched || signupForm.submitted)" class="error-msg">
+                  <div>Invalid designation</div>
+                </div>
+              </div>
+              <re-captcha #captchaRef="reCaptcha" (resolved)="captchaResolved($event)" [siteKey]="reCAPTCHA_KEY"
+                size="invisible"></re-captcha>
+              <div class="col-12">
+                <button class="app-btn secondary get-start-btn" (click)="checkForCaptcha()">
+                  <p class="m-auto">Finish Setup</p>
+                </button>
+                <!-- <button (click) = "boom()">go corono go</button> -->
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>

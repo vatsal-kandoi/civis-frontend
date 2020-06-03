@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="paper-effect mt-4 m-0-sm p-0" *ngIf="showQuestions">
+  <div class="paper-effect mt-4 m-0-sm p-0" *ngIf="showCreateResponse() && questionnaireExist() && showQuestions">
     <div class="question-box">
       <p class="heading">
         Questions

@@ -420,6 +420,11 @@
         padding: 4px;
       }
     }
+    &:last-child {
+      .answer {
+        border-bottom: none;
+      }
+    }
   }
 }
 .feedback-index {

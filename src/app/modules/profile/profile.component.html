@@ -1,12 +1,12 @@
 <div class="profile-index row no-gutters">
   <div class="col-md-2 profile-index__left">
     <div class="heading">
-      {{' My Account' | translate}}
+      {{'My Account' | translate}}
     </div>
 
     <div class="profile-space">
       <div class="header">
-        {{'  PROFILE' | translate}}
+        {{'PROFILE' | translate}}
       </div>
 
       <div class="profile-info">
@@ -21,14 +21,14 @@
             {{currentUser?.firstName + ' ' + currentUser?.lastName}}
           </p>
           <p class="profile-details__active">
-            {{'   Citizen Leader since' | translate}} {{currentUser?.createdAt | date}}
+            {{'Citizen Leader since' | translate}} {{currentUser?.createdAt | date}}
           </p>
         </div>
       </div>
 
       <div class="profile-change-cta">
         <button class="btn btn-transparent p-0 d-flex align-items-center" (click)="openModal() ; updateField = 'name'">
-          {{'  Change name' | translate}}
+          {{'Change name' | translate}}
           <span><i class="fa fa-angle-right ml-2"></i></span>
         </button>
       </div>
@@ -37,7 +37,7 @@
     <!-- toggle-button-for-mobile-layout -->
     <div class="view-more-section">
       <button class="btn btn-transparent view-more-btn" (click)="toggleSettings()">
-        {{'  View more' | translate}}
+        {{'View more' | translate}}
         <span><i class="ml-1" [ngClass]="showSettings === true ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i></span>
       </button>
     </div>
@@ -46,7 +46,7 @@
     <div class="user-setting-section" [ngClass]="showSettings === true ? 'show-section' : 'hide-section'">
       <div class="login-space">
         <div class="header">
-          {{'  LOGIN DETAILS • EMAIL & USERNAME' | translate}}
+          {{'LOGIN DETAILS • EMAIL & USERNAME' | translate}}
         </div>
 
         <div class="login-info">
@@ -59,13 +59,13 @@
 
         <div class="login-change-cta">
           <button class="btn btn-transparent p-0">
-            {{'  Change email/username' | translate}}
+            {{'Change email/username' | translate}}
             <span><i class="fa fa-angle-right ml-2"></i></span>
           </button>
         </div>
 
         <div class="login-change-cta reset-cta" [routerLink]="['/auth', 'forgot-password']">
-          {{'  Reset password' | translate}}
+          {{'Reset password' | translate}}
         </div>
 
       </div>
@@ -73,7 +73,7 @@
       <div class="contact-space">
 
         <div class="header">
-          {{' PHONE' | translate}}
+          {{'PHONE' | translate}}
         </div>
 
         <div class="contact-info">
@@ -86,7 +86,7 @@
 
         <div class="contact-change-cta">
           <button class="btn btn-transparent p-0" (click)="openModal() ; updateField = 'phone number'">
-            {{'  Change phone number' | translate}}
+            {{'Change phone number' | translate}}
             <span><i class="fa fa-angle-right ml-2"></i></span>
           </button>
         </div>
@@ -95,11 +95,11 @@
 
       <div class="delete-space">
         <div class="delete-cta">
-          {{'  Delete your account' | translate}}
+          {{'Delete your account' | translate}}
           <span><i class="fa fa-angle-right ml-2"></i></span>
         </div>
         <div class="tips">
-          {{' Your account information will be erased.
+          {{'Your account information will be erased.
           The responses submitted will remain.' | translate}}
         </div>
       </div>
@@ -118,7 +118,7 @@
 
     <div class="achievements-block" [ngClass]="showAchievement === true ? 'show-block' : 'hide-block'">
       <div class="heading">
-        {{'  My Achievements' | translate}}
+        {{'My Achievements' | translate}}
       </div>
       <div class="info-block" *ngIf='currentUser?.points < 500'>
         <div>
@@ -151,7 +151,7 @@
       <div class="stats-info row no-gutters">
         <div class="col-md-2">
           <div class="stats-info__heading">
-            {{'  TOTAL POINTS' | translate}}
+            {{'TOTAL POINTS' | translate}}
           </div>
           <div class="stats-info__rewards">
             {{ currentUser?.points ? currentUser?.points : '-' }}
@@ -175,7 +175,7 @@
         </div>
         <div class="col-md-2">
           <div class="stats-info__heading">
-            {{' BEST SO FAR' | translate}}
+            {{'BEST SO FAR' | translate}}
           </div>
           <div class="stats-info__rewards">
             {{currentUser?.bestRank ? getBestRank(currentUser?.bestRank, currentUser?.bestRankType) : '-' }}
@@ -186,7 +186,7 @@
     </div>
     <div class="consultations-block" [ngClass]="showConsultation === true ? 'show-block' : 'hide-block'">
       <div class="heading">
-        {{'  Consultations I’ve participated in' | translate}}
+        {{'Consultations I’ve participated in' | translate}}
       </div>
 
       <div *ngIf="currentUser?.responses?.edges?.length" class="consultations-container">
@@ -205,17 +205,17 @@
               <div class="response-cta">
                 <button class="btn btn-transparent action-btn"
                   [routerLink]="['/consultations/response', item?.node?.id]">
-                  {{'  View my response' | translate}}
+                  {{'View my response' | translate}}
                   <span><i class="fa fa-angle-right"></i></span>
                 </button>
               </div>
             </div>
             <div class="consultation-info__right">
               <div class="deadline">
-                {{' Ended on' | translate}}{{item?.node?.consultation?.responseDeadline | date}}
+                {{'Ended on' | translate}}{{item?.node?.consultation?.responseDeadline | date}}
               </div>
               <div class="rewards">
-                {{item?.node?.points}}{{' points earnt' | translate}}
+                {{item?.node?.points}} &nbsp;{{'points earnt' | translate}}
               </div>
             </div>
           </div>
@@ -224,7 +224,7 @@
 
       <div *ngIf="!currentUser?.responses?.edges?.length" class="no-consultations">
         <div class="message">
-          {{'  You’ve not participated in any public consultations yet' | translate}}
+          {{'You’ve not participated in any public consultations yet' | translate}}
         </div>
         <div class="consultations-cta">
           <button class="btn-transpaent btn-oval" [routerLink]="['/consultations', 'list']">{{'Start participating' | translate}}</button>
@@ -273,7 +273,7 @@
               </div>
               <div *ngIf="updateField == 'email'">
                 <div class="info-tips">
-                  {{' When you change your email, you will be looged out and will need to confirm it when logging into your
+                  {{'When you change your email, you will be looged out and will need to confirm it when logging into your
                   account again' | translate}}
                 </div>
                 <div class="input-box">

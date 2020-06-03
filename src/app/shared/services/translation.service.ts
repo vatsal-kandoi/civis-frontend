@@ -20,7 +20,6 @@ translation: string;
     providedIn: 'root'
 })
 export class TranslationService implements Resolve<any>, CanActivate {
-translateUrl = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyBvMWJrCycleLrwQS-ceeeYC61K0fGbsE0';
 loading: AsyncSubject<boolean> = new AsyncSubject();
 
 currentLanguage: string;
@@ -35,10 +34,8 @@ constructor(
 ) {
 
     const currentLanguage = this._cookieService.get('civisLang');
-    // const version = this.storage.retrieve('lang_version');
 
     if (currentLanguage) {
-        console.log(currentLanguage, 'afafa');
         this.currentLanguage = currentLanguage;
 
         if (this.storage.retrieve('lang')) {
@@ -47,7 +44,6 @@ constructor(
         } else {
             this.dictionary.next(HindiLang);
             this.storage.store('lang', HindiLang);
-            // this.storage.store('lang_version', data.translation);
             this.setIndex();
         }
     } else {
@@ -66,58 +62,13 @@ resolve(route: ActivatedRouteSnapshot): Observable<any> {
     return this.loading;
 }
 
-// getVersion() {
-//     return this.http.get(`versions.json`);
-// }
-
-
-getLangJson(lang: string) {
-    return this.http.get(
-            `https://s3-eu-west-1.amazonaws.com/cdn.expa.aiesec.org/translations/${lang}.json`
-    );
-}
-
-setLanguage(key: string) {
-    let obs = Observable.create(observer => {
-        this.getLangJson(key).subscribe(
-                (res: any) => {
-                    this.storage.store('lang', res);
-                    this.setIndex();
-                    observer.next(res);
-                    observer.complete();
-                },
-                error => {
-                    observer.error(error);
-                    observer.complete();
-                }
-        );
-    });
-    return obs;
-}
 
 setIndex() {
     this.loading.next(true);
     this.loading.complete();
 }
 
-translateUserData(userData: any) {
-    if (this.currentLanguage !== 'en') {
-        userData.profile.backgorunds = this.translateArrays(
-                userData.profile.backgrounds,
-                'name'
-        );
-        userData.profile.languages = this.translateArrays(
-                userData.profile.languages,
-                'name'
-        );
-        userData.profile.skills = this.translateArrays(
-                userData.profile.skills,
-                'name'
-        );
-        return userData;
-    }
-    return userData;
-}
+
 
 translate(text: string) {
     if (typeof text !== 'string') {
@@ -181,12 +132,4 @@ translateArrays(values: any, args: string) {
     }
 }
 
-translateGoogle(string, array) {
-    let qString = string;
-    let lang = this.currentLanguage;
-    for (let item of array) {
-        qString += '&q=' + item;
-    }
-    return this.http.get(`${this.translateUrl}&target=${lang}&q=${qString}`);
-}
 }

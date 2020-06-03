@@ -1,7 +1,7 @@
 <section class="read-response-container">
   <div class="paper-effect">
     <p class="heading">
-      {{' Summary' | translate}}
+      {{'Summary' | translate}}
       <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
     </p>
     <p class="summary-content" [innerHTML]="profileData?.summary"></p>
@@ -31,8 +31,8 @@
       <div class="checkbox-area" *ngIf="showPublicResponseOption">
         <div class="input-checbox" >
           <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility"/> 
-          <label class="m-0">{{' Make my response public ' | translate}}</label>
-          <span class="link">{{' What does this mean?' | translate}}</span>
+          <label class="m-0">{{'Make my response public ' | translate}}</label>
+          <span class="link">{{'What does this mean?' | translate}}</span>
         </div>
         <p class="auto-save-text" *ngIf="showAutoSaved">{{'Draft autosaved' | translate}}</p>
       </div>
@@ -55,7 +55,7 @@
           placement="left"
           container="body"
           >
-          {{' What are public responses?' | translate}}
+          {{'What are public responses?' | translate}}
         </p>
       </div>
       <ng-container *ngFor="let response of responseList">
@@ -205,7 +205,7 @@
                         <img src="assets/images/Vector.jpg" />
                       </picture>
                     </span>
-                    {{' Ok Great' | translate}}
+                    {{'Ok Great' | translate}}
                   </p>
                   <i class="fa fa-angle-right"></i>
                 </button>
@@ -221,7 +221,7 @@
                         <img src="assets/images/Vector.jpg" />
                       </picture>
                     </span>
-                    {{' Select and submit' | translate}}
+                    {{'Select and submit' | translate}}
                   </p>
                   <i class="fa fa-angle-right"></i>
                 </button>

@@ -112,6 +112,31 @@ export const ConsultationProfileCurrentUser = gql`
         }
         totalCount
       }
+      anonymousResponses {
+        edges {
+          node {
+            id
+            answers
+            downVoteCount
+            responseText
+            templatesCount
+            upVoteCount
+            user {
+              id
+              firstName
+              profilePicture(resolution: "") {
+                id
+                url
+              }
+            }
+            votedAs {
+              id
+              voteDirection
+            }
+          }
+        }
+        totalCount
+      }
       updatedAt
     }
   }

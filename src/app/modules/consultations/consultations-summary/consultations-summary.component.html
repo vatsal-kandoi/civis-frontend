@@ -6,7 +6,7 @@
       <section class="consultation-profile__main-section">
         <div class="paper-effect mb-4">
           <p class="heading">
-            {{'  Summary' | translate}}
+            {{'Summary' | translate}}
             <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
           </p>
           <p class="summary-content" [innerHTML]="profileData?.summary"></p>
@@ -14,7 +14,7 @@
 
         <div class="paper-effect mb-4 inner-space" *ngIf="showKeywordGraph">
           <p class="heading">
-            {{'  Overview' | translate}}
+            {{'Overview' | translate}}
           </p> 
           <div id="highchartContainer" style="width:100%; height:400px;"></div>
         </div>
@@ -22,7 +22,7 @@
 
         <div *ngIf="publicResponses?.length">
           <div class="d-flex justify-content-between align-items-center">
-            <p class="text-18 text-16-sm m-0 bold-text">{{' Public responses' | translate}}
+            <p class="text-18 text-16-sm m-0 bold-text">{{'Public responses' | translate}}
             </p>
             <p 
               class="what-resp-text" 
@@ -32,7 +32,7 @@
               placement="left"
               container="body"
             >
-            {{'  What are public responses?' | translate}}
+            {{'What are public responses?' | translate}}
 
           </p>
           </div>
@@ -84,7 +84,7 @@
                     [src]="'null'" />
                   </div>
                   <p class="regular-text bold-text m-0 ml-2">
-                    {{'Citizen Leader [Name undisclosed]'}}
+                    {{'Citizen Leader [Name undisclosed]' | translate}}
                   </p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>

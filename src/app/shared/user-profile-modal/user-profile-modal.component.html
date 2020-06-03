@@ -37,7 +37,7 @@
           </div>
           <div class="detail-item">
             <p>{{'BEST SO FAR' | translate}}</p>
-            <p>#{{user?.rank}} {{' in All India' | translate}}</p>
+            <p>#{{user?.rank}} &nbsp; {{'in All India' | translate}}</p>
           </div>
         </div>
 
@@ -52,7 +52,7 @@
                   <p>{{item?.node?.consultation?.ministry?.name}}</p>
                   <div class="response-cta">
                     <button class="btn btn-transparent action-btn" (click)="viewResponse(item?.node)" >
-                      {{'  View my response' | translate}}
+                      {{'View my response' | translate}}
                         <span><i class="fa fa-angle-right"></i></span>
                     </button>
                   </div>

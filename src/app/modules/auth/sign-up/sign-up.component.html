@@ -9,13 +9,13 @@
       </button>
       <div class="info-box">
           <p class="info-box__title">
-            {{'  IN THE PAST' | translate}}
+            {{'IN THE PAST' | translate}}
           </p>
           <p class="info-box__heading">
-            {{'   Bengaluru Revised Master Plan, 2031' | translate}}
+            {{'Bengaluru Revised Master Plan, 2031' | translate}}
           </p>
           <p class="info-box__sub-heading">
-            {{' Bengaluru Development Authority' | translate}}
+            {{'Bengaluru Development Authority' | translate}}
           </p>
           <p class="info-box__message mb-4">
             <span><i class="fa fa-line-chart mr-2"></i></span>{{'1,096 citizen leaders participated' | translate}}
@@ -33,7 +33,7 @@
       </div>
       <div class="login-container">
         <p class="auth-text"> 
-          {{' Already have an account with Civis?' | translate}}
+          {{'Already have an account with Civis?' | translate}}
         </p>
         <button class="app-btn circular auth-btn" [routerLink]="['/auth', 'login']">{{'Sign In' | translate}}</button>
       </div>
@@ -118,12 +118,12 @@
                 </label>
             </div>
             <div class="error-msg"  *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)">
-              {{' Please accept our Terms of Service & Privacy Policy to continue.' | translate}}
+              {{'Please accept our Terms of Service & Privacy Policy to continue.' | translate}}
             </div>
     
             <div class="input-checbox">
                 <input class="cm-checkbox" type="checkbox"  id="notifyMe" #notifyMe="ngModel"  name="notifyMe" [(ngModel)]="signupObject.notifyForNewConsultation" /> 
-                <label for="notifyMe">{{'Notify me when an open consultation ' | translate }}<br> {{'is created on Civis.' | translate}}</label>
+                <label for="notifyMe">{{'Notify me when an open consultation' | translate }}<br>&nbsp; {{'is created on Civis.' | translate}}</label>
             </div>
     
             <re-captcha #captchaRef="reCaptcha" (resolved)="captchaResolved($event)" [siteKey]="reCAPTCHA_KEY" size="invisible"></re-captcha>

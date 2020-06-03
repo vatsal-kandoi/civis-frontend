@@ -4,8 +4,7 @@
       <div class="cover-details">
         <p class="cover-title">{{'Your turn, citizen' | translate}}</p>
         <p class="cover-subtitle">
-          {{'Simple thing is, the bodies that create laws, rules and regulations seek 
-          feedback from us, the citizens, to finalise them. What are we waiting for?' | translate}}
+          {{'Simple thing is, the bodies that create laws, rules and regulations seek feedback from us, the citizens, to finalise them. What are we waiting for?' | translate}}
         </p>
         <div class="d-flex align-items-center mt-4 cover-btn-section">
           <button class="app-btn secondary circular participate-btn" [routerLink]="['/auth', 'sign-up']">{{'Start participating' | translate}}</button>
@@ -84,7 +83,7 @@
         <div class="leader-profile" *ngFor='let item of citizenLeaders'>
           <img class="avatar avatar--60 mb-2 pointer" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
           <p class="text-18 m-0">{{item?.firstName}}</p>
-          <p class="blue-text m-0">{{item?.points}} {{'Points' | translate}}</p>
+          <p class="blue-text m-0">{{item?.points}} &nbsp; {{'Points' | translate}}</p>
         </div>
       </div>
       <!-- leaders-list-mobile -->
@@ -100,7 +99,7 @@
         </div>
       </div>
       <button [routerLink]="['/leader-board']" class="app-btn circular blue-light landing-btn">
-        {{' View Leaderboard' | translate}}
+        {{'View Leaderboard' | translate}}
         <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
       </button>
     </div>
@@ -112,14 +111,14 @@
           class="app-btn circular landing-btn" 
           [ngClass]="activeTab == 'submit-response' ? 'primary' : 'blue-light'"
           (click)="submitResponse('submit-response')">
-          {{' Submit a Response' | translate}}
+          {{'Submit a Response' | translate}}
           <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
         </button>
         <button 
           class="app-btn circular ml-4 landing-btn"
           [ngClass]="activeTab == 'add-consultation' ? 'primary' : 'blue-light'" 
           (click)="addConsultation('add-consultation')">
-          {{'  Add a Consultation' | translate}}
+          {{'Add a Consultation' | translate}}
           <span class="btn-arrow"><i class="fa fa-angle-right"></i></span>
         </button>
       </div>

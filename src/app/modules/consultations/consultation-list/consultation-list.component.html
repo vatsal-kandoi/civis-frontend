@@ -1,6 +1,6 @@
 <div class="bg-color-wrapper">
   <div class="consultation-listing-container">
-    <p class="list-heading"> {{consultationListData?.paging?.totalItems}} {{' Active Consultations ' | translate}}</p>
+    <p class="list-heading"> {{consultationListData?.paging?.totalItems}} {{'Active Consultations' | translate}}</p>
     <p class="list-subheading mb-5">{{'These are open consultatons which are still seeking feedback from citizens like yourself' | translate}}</p>
     <div class="card-listing-grid">
       <ng-container *ngFor="let item of consultationListArray">
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="closed-list-container">
-    <p class="list-heading">{{closedConsultationPaging?.totalItems}} {{' Closed Consultations' | translate}}</p>
+    <p class="list-heading">{{closedConsultationPaging?.totalItems}} {{'Closed Consultations' | translate}}</p>
     <p class="list-subheading mb-5">{{'These consultations are closed for public feedback but you can still participate in the discussions.' | translate}}</p>
     <div class="closed-list-table">
       <div class="table-header">

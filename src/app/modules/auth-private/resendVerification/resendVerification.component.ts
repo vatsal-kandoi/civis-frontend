@@ -3,6 +3,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 
 const ResendEmailConfirmationMutation = gql`
 mutation resendEmail($email: String!) {
@@ -21,7 +22,8 @@ export class ResendVerificationComponent implements OnInit {
   constructor(
     private userService: UserService,
     private apollo: Apollo,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private toastService: ToastService
     ) { }
 
   ngOnInit() {
@@ -34,7 +36,7 @@ export class ResendVerificationComponent implements OnInit {
     this.apollo.mutate({mutation: ResendEmailConfirmationMutation, variables: variables})
     .subscribe ((res) => {
       if (res) {
-        // alert("Verification mail has been sent again!");
+          this.toastService.displayToast("success","Email has been sent again!!");
       }
     }, err => {
       this.errorService.showErrorModal(err);

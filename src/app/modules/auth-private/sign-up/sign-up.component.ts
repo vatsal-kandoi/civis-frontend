@@ -35,7 +35,8 @@ export class SignUpComponent implements OnInit {
     cityId: null,
     agreedForTermsCondition: false,
     company: '',
-    designation: ''
+    designation: '',
+    callbackUrl: ''
   };
   searchEmitter: EventEmitter<any> = new EventEmitter();
   loadingCities: boolean;
@@ -61,13 +62,14 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
     this.subscribeToSearch();
   }
+
   nextPage(){
     if (!this.signupForm.valid) {
       return;
     } else {
+      this.signupObject.callbackUrl = this.cookieService.get('loginCallbackUrl');
       this.nextScreen = true;
-    }
-    
+    } 
   }
   subscribeToSearch() {
     this.searchEmitter
@@ -90,6 +92,7 @@ export class SignUpComponent implements OnInit {
         }
       }, (err: any) => this.loadingCities = false);
   }
+
   getCurrentUser(){
     this.userService.userLoaded$
     .subscribe((exists: boolean) => {
@@ -135,6 +138,8 @@ export class SignUpComponent implements OnInit {
       delete signupObject['agreedForTermsCondition'];
       delete signupObject['designation'];
       delete signupObject['company'];
+      // signupObject['callbackUrl'] = this.cookieService.get('loginCallbackUrl');
+      // console.log(this.signupObject.callbackUrl);
       const variables = {
         auth: signupObject
       };
@@ -146,8 +151,17 @@ export class SignUpComponent implements OnInit {
         if (token) {
           this.tokenService.storeToken(token);
           this.getCurrentUser();
-          this.sendEmailVerification();
           this.onSignUp();
+          this.userService.userLoaded$
+          .subscribe((exists: boolean) => {
+            if (exists) {
+              this.currentUser = this.userService.currentUser;
+              this.sendEmailVerification();
+            }
+          },
+          err => {
+            this.errorService.showErrorModal(err);
+          });
         }
       }, err => {
         this.errorService.showErrorModal(err);

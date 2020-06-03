@@ -35,18 +35,12 @@ export class SuccessComponent implements OnInit {
         this.userService.manageUserToken();
         this.userService.userLoaded$.subscribe(data => {
           if (data) {
-            if (localStorage.getItem('privateConsultationId')) {
-              let id = +localStorage.getItem('privateConsultationId');
-              localStorage.setItem('privateConsultationId', '');
-              this.router.navigate(['/consultations', id]);
+            const callbackUrl = this.cookieService.get('loginCallbackUrl');
+            if (callbackUrl) {
+              this.router.navigateByUrl(callbackUrl);
+              this.cookieService.set('loginCallbackUrl', '');
             } else {
-              const callbackUrl = this.cookieService.get('loginCallbackUrl');
-              if (callbackUrl) {
-                this.router.navigateByUrl(callbackUrl);
-                this.cookieService.set('loginCallbackUrl', '');
-              } else {
-                this.router.navigateByUrl('/profile');
-              }
+              this.router.navigateByUrl('/profile');
             }
           }
         });

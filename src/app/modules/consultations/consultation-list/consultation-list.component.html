@@ -62,14 +62,8 @@
             <p class="closed-date">{{convertDateType(item?.responseDeadline)}}</p>
           </div>
           <div class="cell-4 text-center">
-            <button *ngIf="item?.visibility?.toString() === 'public_consultation'" class="app-btn view-btn pointer"
+            <button class="app-btn view-btn pointer"
               [routerLink]="['/consultations', item.id]">VIEW DISCUSSION</button>
-            <div *ngIf="item?.visibility?.toString() === 'private_consultation'">
-              <button *ngIf="!currentUser" class="app-btn view-btn pointer" (click) = "storeId(item.id)"
-                [routerLink]="['/auth-private', 'sign up']">VIEW DISCUSSION NL</button>
-              <button *ngIf="currentUser" class="app-btn view-btn pointer"
-                [routerLink]="['/consultations', item.id]">VIEW DISCUSSION L</button>
-            </div>
           </div>
         </div>
         <!-- list-mobile-layout -->

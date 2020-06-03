@@ -20,6 +20,8 @@ const ConfirmEmailMutation = gql`
 @Injectable()
 export class ConfirmUserGuard implements CanActivate {
 
+    currentUser: any;
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -43,10 +45,9 @@ export class ConfirmUserGuard implements CanActivate {
         .subscribe((tokenObj) => {
             if (tokenObj) {
                 this.tokenService.storeToken(tokenObj);
-                if(localStorage.getItem('privateConsultationId')){
-                    let id = +localStorage.getItem('privateConsultationId');
-                    localStorage.setItem('privateConsultationId', '');
-                    this.router.navigate(['/consultations', id ]);
+                this.getCurrentUser();
+                if(this.currentUser.callbackUrl){
+                    this.router.navigateByUrl(this.currentUser.callbackUrl);
                 } else {
                     this.router.navigateByUrl('/profile');
                 }
@@ -57,6 +58,17 @@ export class ConfirmUserGuard implements CanActivate {
         }, err => {
             this.errorService.showErrorModal(err);
         });
+    });
+  }
+  getCurrentUser(){
+    this.userService.userLoaded$
+    .subscribe((exists: boolean) => {
+      if (exists) {
+        this.currentUser = this.userService.currentUser;
+      }
+    },
+    err => {
+      this.errorService.showErrorModal(err);
     });
   }
 }

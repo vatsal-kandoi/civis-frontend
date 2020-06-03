@@ -34,7 +34,7 @@ export class ResendVerificationComponent implements OnInit {
     this.apollo.mutate({mutation: ResendEmailConfirmationMutation, variables: variables})
     .subscribe ((res) => {
       if (res) {
-        alert("Verification mail has been sent again!");
+        // alert("Verification mail has been sent again!");
       }
     }, err => {
       this.errorService.showErrorModal(err);

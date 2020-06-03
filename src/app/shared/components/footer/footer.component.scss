@@ -115,6 +115,7 @@
       }
     }
     .logo-right {
+      display: flex;
       @media screen and (max-width: 991px) and (min-width: 450px) {
         width: 100%;
         text-align: left; 

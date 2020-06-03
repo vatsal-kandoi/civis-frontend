@@ -5,23 +5,23 @@
       <div class="cover-detail">
         <button class="back-btn" [routerLink]="['/']">
           <span><i class="fa fa-angle-left back-arrow"></i></span>
-          Back
+          {{'Back' | translate}}
         </button>
     
         <div class="info-box">
           <p class="info-box__title">
-            IN THE PAST
+            {{'IN THE PAST' | translate}}
           </p>
           <p class="info-box__heading">
-            National Urban Policy Framework, 2018
+            {{'National Urban Policy Framework, 2018' | translate}}
           </p>
           <p class="info-box__sub-heading">
-            Ministry of Housing and Urban Affairs
+            {{'Ministry of Housing and Urban Affairs' | translate}}
           </p>
           <p class="info-box__message mb-4">
-            <span><i class="fa fa-line-chart mr-2"></i></span>3251 citizen leaders participated
+            <span><i class="fa fa-line-chart mr-2"></i></span>{{'3251 citizen leaders participated' | translate}}
           </p>
-          <button class="app-btn circular read-case-btn">READ CASE STUDY</button>
+          <button class="app-btn circular read-case-btn">{{'READ CASE STUDY' | translate}}</button>
         </div>
       </div>
     </div>
@@ -32,38 +32,38 @@
         </div>
         <div class="sign-up-container">
           <p class="auth-text"> 
-            Don't have an account with Civis?
+            {{"Don't have an account with Civis?" | translate}}
           </p>
-          <button class="app-btn circular auth-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
+          <button class="app-btn circular auth-btn" [routerLink]="['/auth', 'sign-up']">{{'Sign Up' | translate}}</button>
         </div>
         <div class="sign-up-mobile-container">
             <div>
-              <button class="app-btn primary sign-up-btn" [routerLink]="['/auth', 'sign-up']">Sign Up</button>
+              <button class="app-btn primary sign-up-btn" [routerLink]="['/auth', 'sign-up']">{{'Sign Up' | translate}}</button>
             </div>
           </div>
       </div>
-      <p class="logo-heading">Sign in to your Citizen Leader account</p>
+      <p class="logo-heading">{{'Sign in to your Citizen Leader account' | translate}}</p>
   
       <div class="form-space row no-gutters mt-md-5 mt-2">
         <div class="form-space__left col-md-5">
           <form #loginForm="ngForm" (ngSubmit)="submit(loginForm.valid)" autocomplete="off">
               <div class="input-box">
-                  <label for="email">Email</label>
+                  <label for="email">{{'Email' | translate}}</label>
                   <div class="input-box__border">
                       <input placeholder="Email" type="email" id="email" #email="ngModel" name="email" [(ngModel)]="loginObject.email" required email />
                   </div>
                   <div *ngIf="email.invalid && (email.touched || loginForm.submitted)" class="error-msg">
-                      <div *ngIf="email.errors.required">Email is Required</div>
-                      <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                      <div *ngIf="email.errors.required">{{'Email is Required' | translate}}</div>
+                      <div *ngIf="email.errors.email">{{'Email must be a valid email address' | translate}}</div>
                     </div>
               </div>
       
               <div class="input-box">
-                  <label for="password">Password</label>
+                  <label for="password">{{'Password' | translate}}</label>
                   <div class="input-box__border">
                       <input placeholder="Password" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="loginObject.password" required />
                   </div>
-                  <div *ngIf="password.invalid && (password.touched || loginForm.submitted)" class="error-msg">Password is Required</div>
+                  <div *ngIf="password.invalid && (password.touched || loginForm.submitted)" class="error-msg">{{'Password is Required' | translate}}</div>
               </div>
               
               <div>
@@ -72,7 +72,7 @@
       
               <div>
                 <button class="app-btn secondary get-start-btn" type="submit">
-                    <p class="m-0">SIGN IN TO MY ACCOUNT</p>
+                    <p class="m-0">{{'SIGN IN TO MY ACCOUNT' | translate}}</p>
                     <i class="fa fa-angle-right"></i>
                 </button>
               </div>
@@ -81,7 +81,7 @@
 
         <div class="form-space-middle col-md-1">
           <div class="vertical-divider">
-            <div class="center-element">OR</div>
+            <div class="center-element">{{'OR' | translate}}</div>
           </div>
           
           <!-- horizontal-divider for mobile -->
@@ -97,7 +97,7 @@
                 <img src="assets/images/Gmail.jpg" alt="Gmail logo" />
               </picture>
             </div>
-            <p class="mb-0 ml-4">Sign in with Google</p>
+            <p class="mb-0 ml-4">{{'Sign in with Google' | translate}}</p>
           </button> 
           <button class="app-btn facebook" (click)="redirectTo('facebook')">
             <div class="social-img">
@@ -107,7 +107,7 @@
                 <img src="assets/images/Facebook.jpg" alt="Facebook logo" />
               </picture>
             </div>
-            <p class="mb-0 ml-4">Sign in with Facebook</p>
+            <p class="mb-0 ml-4">{{'Sign in with Facebook' | translate}}</p>
           </button>
         </div>
         

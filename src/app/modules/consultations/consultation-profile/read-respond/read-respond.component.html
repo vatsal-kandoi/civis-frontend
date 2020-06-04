@@ -154,7 +154,7 @@
               <div class="answer">
                 <p class="question-text">
                   <span class="question-text__number">{{i+1}}.</span>
-                  What do you think about this consultation idea?
+                  {{responseAnswer.questionText}
                 </p>
                 <div *ngIf="responseAnswer.questionType !== 'checkbox'">
                   <p class="answer-text" [ngClass]="{'question-answer' : responseAnswer.questionType === 'multiple_choice' }">

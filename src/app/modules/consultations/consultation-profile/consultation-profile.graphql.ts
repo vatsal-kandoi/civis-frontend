@@ -31,31 +31,6 @@ export const ConsultationProfile = gql`
       reviewType
       satisfactionRatingDistribution
       status
-      anonymousResponses {
-        edges {
-          node {
-            id
-            answers
-            downVoteCount
-            responseText
-            templatesCount
-            upVoteCount
-            user {
-              id
-              firstName
-              profilePicture(resolution: "") {
-                id
-                url
-              }
-            }
-            votedAs {
-              id
-              voteDirection
-            }
-          }
-        }
-        totalCount
-      }
       sharedResponses(sort: created_at, sortDirection: desc) {
         edges {
           node {
@@ -114,31 +89,6 @@ export const ConsultationProfileCurrentUser = gql`
       satisfactionRatingDistribution
       status
       respondedOn
-      anonymousResponses {
-        edges {
-          node {
-            id
-            answers
-            downVoteCount
-            responseText
-            templatesCount
-            upVoteCount
-            user {
-              id
-              firstName
-              profilePicture(resolution: "") {
-                id
-                url
-              }
-            }
-            votedAs {
-              id
-              voteDirection
-            }
-          }
-        }
-        totalCount
-      }
       sharedResponses(sort: templates_count, sortDirection: desc) {
         edges {
           node {
@@ -206,31 +156,6 @@ export const SubmitResponseQuery = gql`
         id
         title
         respondedOn
-        anonymousResponses {
-          edges {
-            node {
-              id
-              answers
-              downVoteCount
-              responseText
-              templatesCount
-              upVoteCount
-              user {
-                id
-                firstName
-                profilePicture(resolution: "") {
-                  id
-                  url
-                }
-              }
-              votedAs {
-                id
-                voteDirection
-              }
-            }
-          }
-          totalCount
-        }
         sharedResponses(sort: templates_count, sortDirection: desc) {
           edges {
             node {

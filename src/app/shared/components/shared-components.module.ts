@@ -16,6 +16,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
 import { PipesModule } from '../pipes/pipes.module';
+import { PageContentRendererComponent } from './page-content-renderer/page-content-renderer.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PipesModule } from '../pipes/pipes.module';
     ConsultationCardComponent,
     ErrorComponent,
     FooterComponent,
-    ToastComponent
+    ToastComponent,
+    PageContentRendererComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import { PipesModule } from '../pipes/pipes.module';
     ConsultationCardComponent,
     LinearLoaderComponent,
     FooterComponent,
-    ToastComponent
+    ToastComponent,
+    PageContentRendererComponent
   ],
   providers: [
     LinearLoaderService

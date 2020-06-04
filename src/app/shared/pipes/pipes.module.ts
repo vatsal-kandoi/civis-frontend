@@ -16,7 +16,8 @@ import { TranslatePipe } from './translate.pipe';
     CommonModule
   ],
   exports: [
-    TranslatePipe
+    TranslatePipe,
+    SafeHtmlPipe
   ]
 })
 export class PipesModule { }

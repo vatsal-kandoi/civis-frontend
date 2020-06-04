@@ -13,6 +13,8 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { isObjectEmpty } from '../../../../shared/functions/modular.functions';
 
 @Component({
   selector: 'app-read-respond',
@@ -58,6 +60,12 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     resize_enabled: false,
    };
   usingTemplate: boolean;
+  questionnaireForm: FormGroup;
+  showQuestions = false;
+  responseQuestions: any;
+  responseAnswers: any;
+  showConfirmEmailModal: boolean;
+
 
   constructor(
     private consultationsService: ConsultationsService,
@@ -76,6 +84,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     .subscribe((consulationId: any) => {
       this.consultationId = consulationId;
     });
+    this.questionnaireForm = new FormGroup({});
   }
 
   ngOnInit() {
@@ -87,12 +96,82 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     this.getResponseText();
   }
 
+  makeQuestionnaireModal() {
+    if (this.profileData && this.profileData.questions) {
+      const questions =  this.responseQuestions = this.profileData.questions;
+      const form = new FormGroup({});
+
+      questions.forEach(question => {
+        if (question.questionType !== 'checkbox') {
+          form.addControl(question.id, new FormControl(null, Validators.required ));
+        } else if (question.questionType === 'checkbox') {
+          form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
+        }
+      });
+      return form;
+    }
+  }
+
+    makeCheckboxQuestionOptions(question) {
+        const form = new FormGroup({});
+        question.subQuestions.forEach(subQuestion => {
+          form.addControl(subQuestion.id, new FormControl(false));
+        });
+        return form;
+      }
+
+    toggleCheckbox(control, value) {
+      control.patchValue(value);
+    }
+
+    toggle(questionId, subQuestionId) {
+      const control = this.questionnaireForm.get([questionId, subQuestionId]);
+      control.patchValue(!control.value);
+    }
+
   ngAfterViewChecked() {
     if (this.checkForFragments) {
       this.subscribeToFragment();
       this.checkForFragments = false;
     }
     this.editIframe();
+  }
+
+  submitAnswer() {
+    if (this.questionnaireForm.valid) {
+      const answers = {...this.questionnaireForm.value};
+      const value = [];
+      for (const item in answers) {
+        if (answers.hasOwnProperty(item)) {
+          if (typeof(answers[item]) === 'object') {
+              const keys = Object.keys(answers[item]);
+              const filtered = keys.filter(function(key) {
+                  return answers[item][key];
+              });
+              answers[item] = filtered;
+          }
+          value.push({
+            question_id: item,
+            answer: answers[item]
+          });
+        }
+     }
+      this.responseAnswers = value;
+      this.stepNext(this.profileData.respondedOn);
+    }
+  }
+
+  stepNext(hasResponseSubmited) {
+    if (!this.currentUser || hasResponseSubmited) {
+      return;
+    }
+
+    if (this.currentUser && !this.currentUser.confirmedAt) {
+      this.showConfirmEmailModal = true;
+      return;
+    }
+
+    this.consultationsService.openFeedbackModal.next(true);
   }
 
   editIframe() {
@@ -133,6 +212,61 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  mapAnswers(responseId, answers) {
+    if (responseId && answers.length) {
+      const responseAnswers = [];
+      answers.map((item) => {
+        let answer = {};
+        if (this.responseQuestions && this.responseQuestions.length) {
+          const responseQuestion = this.responseQuestions.find((question) => +question.id === +item.question_id);
+          if (responseQuestion.questionType === 'multiple_choice') {
+            answer = this.getMultiChoiceAnswer(responseQuestion, item.answer);
+          } else  if (responseQuestion.questionType === 'checkbox') {
+            answer = this.getCheckboxAnswer(responseQuestion, item.answer);
+          } else {
+            answer = {
+              id: responseQuestion.id,
+              questionType: responseQuestion.questionType,
+              questionText: responseQuestion.questionText,
+              answer: item.answer
+            };
+          }
+        }
+        responseAnswers.push(answer);
+      });
+      return responseAnswers;
+    }
+    return;
+  }
+
+  getCheckboxAnswer(responseQuestion, answers) {
+    const checkboxAnswers = [];
+    answers.map((id) => {
+      responseQuestion.subQuestions.map((question) => {
+        if (+id === +question.id) {
+          checkboxAnswers.push(question.questionText);
+        }
+      });
+    });
+    return {
+      id: responseQuestion.id,
+      questionType: responseQuestion.questionType,
+      questionText: responseQuestion.questionText,
+      answer: checkboxAnswers
+    };
+  }
+
+
+  getMultiChoiceAnswer(responseQuestion, subQuestionId) {
+    const subQuestion = responseQuestion.subQuestions.find((question) => +question.id === +subQuestionId);
+    return {
+      id: responseQuestion.id,
+      questionType: responseQuestion.questionType,
+      questionText: responseQuestion.questionText,
+      answer: subQuestion.questionText
+    };
+  }
+
   getConsultationProfile() {
     const query = ConsultationProfileCurrentUser;
     this.apollo.watchQuery({
@@ -149,6 +283,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         this.responseList = data.sharedResponses.edges;
         this.createMetaTags(this.profileData);
         this.checkForFragments = true;
+        this.questionnaireForm = this.makeQuestionnaireModal();
     }, err => {
       this.errorService.showErrorModal(err);
     });
@@ -205,7 +340,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   }
 
   openFeedbackModal() {
-    if (this.responseText) {
+    if (this.responseText || this.responseAnswers) {
       this.checkUserPresent();
     }
   }
@@ -238,12 +373,16 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   createResponse() {
     const consultationResponse =  {
       consultationId: this.consultationId,
-      responseText : this.responseText,
       satisfactionRating : this.responseFeedback,
       visibility: this.responseVisibility ? 'shared' : 'anonymous',
     };
     if (this.checkProperties(consultationResponse)) {
+      if (!this.questionnaireExist() && !this.responseText) {
+        return;
+      }
       consultationResponse['templateId'] = this.templateId;
+      consultationResponse['answers'] = this.responseAnswers;
+      consultationResponse['responseText'] = this.responseText;
       this.submitResponse(consultationResponse);
     }
   }
@@ -534,6 +673,17 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         return false;
     }
     return true;
+  }
+
+  questionnaireExist() {
+    if (this.profileData && this.profileData.questions) {
+      const questions = this.profileData.questions; {
+        if (questions.length) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   checkClosed(deadline) {

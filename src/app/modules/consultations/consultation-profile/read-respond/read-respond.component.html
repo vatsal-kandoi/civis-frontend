@@ -4,7 +4,7 @@
       {{'Summary' | translate}}
       <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
     </p>
-    <p class="summary-content" [innerHTML]="profileData?.summary"></p>
+    <app-page-content-renderer [page]="profileData?.page"></app-page-content-renderer>
   </div>
 
   <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions">
@@ -93,7 +93,7 @@
         <div class="info-mark"><i class="fa fa-question-circle"></i></div>
       </div>
     </div>
-    <div class="response-index__content">
+    <div class="response-index__content" id="editor-container">
       <ckeditor
       [(ngModel)]="responseText"
       [config]="ckeConfig"

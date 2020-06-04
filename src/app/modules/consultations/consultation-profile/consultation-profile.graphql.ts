@@ -6,6 +6,10 @@ export const ConsultationProfile = gql`
       id
       title
       summary
+      page {
+        id
+        components
+      }
       responseDeadline
       readingTime
       responsesReadingTimes
@@ -63,6 +67,10 @@ export const ConsultationProfileCurrentUser = gql`
       id
       title
       summary
+      page {
+        id
+        components
+      }
       responseDeadline
       readingTime
       responsesReadingTimes

@@ -4,7 +4,7 @@
       {{'Summary' | translate}}
       <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
     </p>
-    <p class="summary-content" [innerHTML]="profileData?.summary"></p>
+    <app-page-content-renderer [page]="profileData?.page"></app-page-content-renderer>
   </div>
 
   <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()" #responseIndex>
@@ -17,7 +17,7 @@
         <div class="info-mark"><i class="fa fa-question-circle"></i></div>
       </div>
     </div>
-    <div class="response-index__content">
+    <div class="response-index__content" id="editor-container">
       <ckeditor
       [(ngModel)]="responseText"
       [config]="ckeConfig"

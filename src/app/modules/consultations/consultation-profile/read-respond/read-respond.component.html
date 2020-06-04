@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="paper-effect mt-4 m-0-sm p-0" *ngIf="showCreateResponse() && questionnaireExist() && showQuestions">
+  <div class="paper-effect mt-4 m-0-sm p-0"   *ngIf="showCreateResponse() && questionnaireExist() && showQuestions">
     <div class="question-box">
       <p class="heading">
         Questions
@@ -154,7 +154,7 @@
               <div class="answer">
                 <p class="question-text">
                   <span class="question-text__number">{{i+1}}.</span>
-                  {{responseAnswer.questionText}
+                  {{responseAnswer.questionText}}
                 </p>
                 <div *ngIf="responseAnswer.questionType !== 'checkbox'">
                   <p class="answer-text" [ngClass]="{'question-answer' : responseAnswer.questionType === 'multiple_choice' }">

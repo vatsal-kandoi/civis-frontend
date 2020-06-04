@@ -69,14 +69,13 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
         this.responseList = data.sharedResponses.edges;
     }, err => {
-      const e =new Error(err);
-      if(e.message.includes("Invalid Access Token")){
+      const e = new Error(err);
+      if (e.message.includes('Invalid Access Token')) {
         this.cookieService.set('loginCallbackUrl', this.router.url);
-        this.router.navigate(["/auth-private"]);
+        this.router.navigate(['/auth-private']);
       } else {
         this.errorService.showErrorModal(err);
-        
-      }  
+      }
     });
   }
 

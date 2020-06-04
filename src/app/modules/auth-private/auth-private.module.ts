@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SuccessComponent } from '../auth/success/success.component';
 import { FailureComponent } from '../auth/failure/failure.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { FailureComponent } from '../auth/failure/failure.component';
     SuccessComponent,
     FailureComponent,
     ForgotPasswordComponent
-  ]
+  ],
+  providers: [CookieService]
 })
 export class AuthPrivateModule { }

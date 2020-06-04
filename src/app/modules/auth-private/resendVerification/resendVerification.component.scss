@@ -18,6 +18,8 @@
             right: 0;
             bottom: 0;
             left: 0;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(28.22%, #0E73B9), color-stop(95.05%, rgba(14, 115, 185, 0)));
+            background: -o-linear-gradient(top, #0E73B9 28.22%, rgba(14, 115, 185, 0) 95.05%);
             background: linear-gradient(180deg, #0E73B9 28.22%, rgba(14, 115, 185, 0) 95.05%);
         }
 
@@ -114,11 +116,9 @@
         }
         .resend-btn {
             background-color: transparent;
-            // padding: 3px 15px;
             font-size: 12px;
             font-weight: 500;
             color: #6fbcf2;
-            // border: 1px solid $black;
         }
 
     }

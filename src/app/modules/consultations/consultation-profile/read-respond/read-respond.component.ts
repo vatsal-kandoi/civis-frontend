@@ -150,7 +150,10 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         this.createMetaTags(this.profileData);
         this.checkForFragments = true;
     }, err => {
-      this.errorService.showErrorModal(err);
+      const e = new Error(err);
+      if (!e.message.includes('Invalid Access Token')) {
+        this.errorService.showErrorModal(err);
+      }
     });
   }
 

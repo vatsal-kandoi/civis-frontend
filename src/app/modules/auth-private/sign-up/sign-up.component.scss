@@ -18,6 +18,8 @@
             right: 0;
             bottom: 0;
             left: 0;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(28.22%, #0E73B9), color-stop(95.05%, rgba(14, 115, 185, 0)));
+            background: -o-linear-gradient(top, #0E73B9 28.22%, rgba(14, 115, 185, 0) 95.05%);
             background: linear-gradient(180deg, #0E73B9 28.22%, rgba(14, 115, 185, 0) 95.05%);
         }
 
@@ -98,14 +100,21 @@
 
     &__right {
         padding: 50px 200px;
+        margin: 0 auto;
         @media screen and (max-width: 991px) {
             padding: 20px;
         }
 
         .header {
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                    justify-content: space-between;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
             .logo-container {
                 img {
                     @media screen and (max-width: 991px) {
@@ -114,8 +123,12 @@
                 }
             }
             .login-container {
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
-                align-items: center;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
                 position: absolute;
                 right: 50px;
                 top: 50px;
@@ -127,11 +140,9 @@
                 
                 .auth-btn {
                     background-color: transparent;
-                    // padding: 3px 15px;
                     font-size: 12px;
                     font-weight: 500;
                     color: #6fbcf2;
-                    // border: 1px solid $black;
                 }
 
                 @media screen and (max-width: 991px) {
@@ -143,9 +154,15 @@
                 display: none;
 
                 @media screen and (max-width: 991px) {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
                     display: flex;
-                    justify-content: space-between;
-                    align-items: center;
+                    -webkit-box-pack: justify;
+                        -ms-flex-pack: justify;
+                            justify-content: space-between;
+                    -webkit-box-align: center;
+                        -ms-flex-align: center;
+                            align-items: center;
 
                     .sign-in-btn {
                         font-weight: normal;
@@ -173,8 +190,8 @@
 
                     &__border {
                         width: 100%;
-                        // border: 1px solid $input-border;
-                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                                box-sizing: border-box;
                         border-radius: 3px;
 
                         input { 
@@ -212,6 +229,8 @@
                 }
 
                 .input-checbox {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
                     display: flex;
                     margin-bottom: 15px;
 
@@ -248,9 +267,15 @@
                 }
 
                 .get-start-btn {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
                     display: flex;
-                    justify-content: space-between;
-                    align-items: center;
+                    -webkit-box-pack: justify;
+                        -ms-flex-pack: justify;
+                            justify-content: space-between;
+                    -webkit-box-align: center;
+                        -ms-flex-align: center;
+                            align-items: center;
                     width: 100%; 
                     padding: 12px 20px;
 
@@ -270,84 +295,96 @@
                 }
             }
 
-            .horizontal-divider-desktop {
-                display: block;
-                @media screen and (max-width: 991px) {
-                    display: none;
-                }
-                line-height: 1em;
-                position: relative;
-                outline: 0;
-                border: 0;
-                color: black;
-                text-align: center;
-                height: 1.5em;
-                opacity: .5;
-                &:before {
-                  content: '';
-                  background: #DFDFDF;
-                  position: absolute;
-                  left: 0;
-                  top: 50%;
-                  width: 100%;
-                  height: 1px;
-                }
-                &:after {
-                  content: attr(data-content);
-                  position: relative;
-                  display: inline-block;
-                  color: black;
-                  padding: 0 .5em;
-                  line-height: 1.5em;
-                  color: #C0C0C0;
-                  background-color: $white;
-                }
-              }
+            // .horizontal-divider-desktop {
+            //     display: block;
+            //     @media screen and (max-width: 991px) {
+            //         display: none;
+            //     }
+            //     line-height: 1em;
+            //     position: relative;
+            //     outline: 0;
+            //     border: 0;
+            //     color: black;
+            //     text-align: center;
+            //     height: 1.5em;
+            //     opacity: .5;
+            //     &:before {
+            //       content: '';
+            //       background: #DFDFDF;
+            //       position: absolute;
+            //       left: 0;
+            //       top: 50%;
+            //       width: 100%;
+            //       height: 1px;
+            //     }
+            //     &:after {
+            //       content: attr(data-content);
+            //       position: relative;
+            //       display: inline-block;
+            //       color: black;
+            //       padding: 0 .5em;
+            //       line-height: 1.5em;
+            //       color: #C0C0C0;
+            //       background-color: $white;
+            //     }
+            //   }
 
-            .horizontal-divider {
-                display: none;
-                @media screen and (max-width: 991px) {
-                    display: block;
-                }
-                line-height: 1em;
-                position: relative;
-                outline: 0;
-                border: 0;
-                color: black;
-                text-align: center;
-                height: 1.5em;
-                opacity: .5;
-                &:before {
-                  content: '';
-                  background: #DFDFDF;
-                  position: absolute;
-                  left: 0;
-                  top: 50%;
-                  width: 100%;
-                  height: 1px;
-                }
-                &:after {
-                  content: attr(data-content);
-                  position: relative;
-                  display: inline-block;
-                  color: black;
-                  padding: 0 .5em;
-                  line-height: 1.5em;
-                  color: #C0C0C0;
-                  background-color: $white;
-                }
-              }
+            // .horizontal-divider {
+            //     display: none;
+            //     @media screen and (max-width: 991px) {
+            //         display: block;
+            //     }
+            //     line-height: 1em;
+            //     position: relative;
+            //     outline: 0;
+            //     border: 0;
+            //     color: black;
+            //     text-align: center;
+            //     height: 1.5em;
+            //     opacity: .5;
+            //     &:before {
+            //       content: '';
+            //       background: #DFDFDF;
+            //       position: absolute;
+            //       left: 0;
+            //       top: 50%;
+            //       width: 100%;
+            //       height: 1px;
+            //     }
+            //     &:after {
+            //       content: attr(data-content);
+            //       position: relative;
+            //       display: inline-block;
+            //       color: black;
+            //       padding: 0 .5em;
+            //       line-height: 1.5em;
+            //       color: #C0C0C0;
+            //       background-color: $white;
+            //     }
+            //   }
 
               .form-space-right {
                 width: inherit;
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
-                flex-direction: row;
-                justify-content: space-between;
+                -webkit-box-orient: horizontal;
+                -webkit-box-direction: normal;
+                    -ms-flex-direction: row;
+                        flex-direction: row;
+                -webkit-box-pack: justify;
+                    -ms-flex-pack: justify;
+                        justify-content: space-between;
                 @media screen and (max-width: 991px) {
-                    flex-direction: column;
-                    justify-content: center;
+                    -webkit-box-orient: vertical;
+                    -webkit-box-direction: normal;
+                        -ms-flex-direction: column;
+                            flex-direction: column;
+                    -webkit-box-pack: center;
+                        -ms-flex-pack: center;
+                            justify-content: center;
                     width: 100%;
-                    // padding: 0 20px;
+                    
                     .facebook {
                         margin-left: 0 !important;
                     }

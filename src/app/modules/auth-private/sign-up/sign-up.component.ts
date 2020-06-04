@@ -174,16 +174,16 @@ export class SignUpComponent implements OnInit {
     this.userService.manageUserToken();
   }
 
-  redirectTo(socialPlatform) {
-    switch (socialPlatform) {
-      case 'google':
-        window.location.href = `${this.graphqlService.environment.api}/signin_google`;
-        break;
-      case 'facebook':
-        window.location.href = `${this.graphqlService.environment.api}/signin_facebook`;
-        break;
-    }
-  }
+  // redirectTo(socialPlatform) {
+  //   switch (socialPlatform) {
+  //     case 'google':
+  //       window.location.href = `${this.graphqlService.environment.api}/signin_google`;
+  //       break;
+  //     case 'facebook':
+  //       window.location.href = `${this.graphqlService.environment.api}/signin_facebook`;
+  //       break;
+  //   }
+  // }
 
   checkForCaptcha() {
     if (this.isCaptchaResolved) {

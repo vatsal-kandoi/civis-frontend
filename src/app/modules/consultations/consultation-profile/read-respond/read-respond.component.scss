@@ -330,6 +330,13 @@
     border-radius: 5px;
   }
   .questions-container {
+    .question-index {
+      &:last-child {
+        .question {
+          border-bottom: none !important;
+        }
+      }
+    }
     .question {
       margin: 0 24px;
       padding: 24px 0;

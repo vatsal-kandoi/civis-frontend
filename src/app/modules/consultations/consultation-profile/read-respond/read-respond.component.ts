@@ -280,7 +280,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     .subscribe((data: any) => {
         this.profileData = data;
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
-        this.responseList = [...data.sharedResponses.edges, ...data.anonymousResponses.edges];
+        this.responseList = data.sharedResponses.edges;
         this.createMetaTags(this.profileData);
         this.checkForFragments = true;
         this.questionnaireForm = this.makeQuestionnaireModal();

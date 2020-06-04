@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-success',
@@ -36,7 +36,7 @@ export class SuccessComponent implements OnInit {
             const callbackUrl = this.cookieService.get('loginCallbackUrl');
             if (callbackUrl) {
               this.router.navigateByUrl(callbackUrl);
-              this.cookieService.set('loginCallbackUrl', '');
+              this.cookieService.put('loginCallbackUrl', '');
             } else {
               this.router.navigateByUrl('/profile');
             }

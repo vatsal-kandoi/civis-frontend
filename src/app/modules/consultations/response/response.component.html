@@ -11,23 +11,24 @@
           </div>
         </div>
         <div class="c-profile-card__middle-section">
-          <p class="m-0 deadline">THE DEADLINE FOR THE CONSULTATION WAS
+          <p class="m-0 deadline">{{'THE DEADLINE FOR THE CONSULTATION WAS' | translate}}
             {{profile?.consultation?.responseDeadline | date}}</p>
         </div>
 
         <div class="c-profile-card__bottom-section">
           <div class="d-flex justify-content-between mb-2">
-            <p class="count-text m-0">TOTAL RESPONSES</p>
+            <p class="count-text m-0">{{'TOTAL RESPONSES' | translate}}</p>
             <p class="count-text bold-text text-right m-0">{{profile?.consultation?.consultationResponsesCount}}</p>
           </div>
           <div class="d-flex justify-content-between mb-4">
-            <p class="count-text m-0">TOTAL PUBLIC RESPONSES</p>
+            <p class="count-text m-0">{{'TOTAL PUBLIC RESPONSES' | translate}}</p>
             <p class="count-text bold-text text-right m-0">
               {{ profile?.consultation?.sharedResponses?.totalCount }}
             </p>
           </div>
           <div>
-            <p class="count-text m-0">DRAFT MADE PUBLIC ON {{convertDateFormat(profile?.consultation?.updatedAt)}}</p>
+            <p class="count-text m-0">{{'DRAFT MADE PUBLIC ON' | translate}}
+              {{convertDateFormat(profile?.consultation?.updatedAt)}}</p>
           </div>
         </div>
       </div>
@@ -35,7 +36,7 @@
     <section class="response-profile__main-section">
       <div class="response-info">
         <div class="header">
-          <p class="light-text">{{'SENDING IN YOUR RESPONSE TO'}}</p>
+          <p class="light-text">{{'SENDING IN YOUR RESPONSE TO' | translate}}</p>
           <p class="card-title m-0">{{profile?.consultation?.title}}</p>
         </div>
         <div class="response-content" [innerHTML]="profile?.responseText">
@@ -50,13 +51,13 @@
       </div>
       <div class="draft-btn mx-4" [routerLink]="'/consultations/' + profile?.consultation?.id">
         <span><i class="fa fa-file"></i></span>
-        <span class="mx-3">READ THE FULL DRAFT</span>
+        <span class="mx-3">{{'READ THE FULL DRAFT' | translate}}</span>
         <span><i class="fa fa-external-link"></i></span>
       </div>
     </div>
     <div class="right-space">
       <span class="mr-1"><i class="fa fa-check"></i></span>
-      <span>You sent in your response on {{convertDateFormat(profile?.updatedAt)}}</span>
+      <span>{{'You sent in your response on' | translate}}&nbsp; {{convertDateFormat(profile?.updatedAt)}}</span>
     </div>
   </div>
 </div>

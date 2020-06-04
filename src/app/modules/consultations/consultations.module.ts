@@ -22,6 +22,7 @@ import { ShareButtonModule } from '@ngx-share/button';
 import { ConfirmEmailModule } from 'src/app/shared/confirm-email-modal/confirm-email.module';
 import { UserProfileModalModule } from 'src/app/shared/user-profile-modal/user-profile-modal.module';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
     imports: [
@@ -42,6 +43,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
         ConfirmEmailModule,
         UserProfileModalModule,
         CKEditorModule,
+        PipesModule
     ],
     exports: [TooltipModule],
     declarations: [

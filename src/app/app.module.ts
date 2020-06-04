@@ -16,7 +16,8 @@ import { PolicyModule } from './modules/policy/policy.module';
 import { CitySelectionModalModule } from './shared/components/city-selection-modal/city-selection-modal.module';
 import { ConfirmUserGuard } from './shared/guards/confirm-user.guard';
 import { UnsubscribeUserGuard } from './shared/guards/unsubscribe-user.guard';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieModule, CookieService } from 'ngx-cookie';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,8 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserAnimationsModule,
     PolicyModule,
     CitySelectionModalModule,
+    CookieModule.forRoot(),
+    NgxWebstorageModule.forRoot(),
   ],
   providers: [
     LandingGuard,

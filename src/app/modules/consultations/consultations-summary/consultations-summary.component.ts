@@ -73,6 +73,7 @@ export class ConsultationsSummaryComponent implements OnInit {
   annonymousResponses: any;
   summaryData: any;
   showKeywordGraph = true;
+  responseQuestions: any;
 
   constructor(private activatedRoute: ActivatedRoute, private apollo: Apollo, private errorService: ErrorService) {
     this.activatedRoute.params.subscribe((param: any) => {
@@ -102,6 +103,7 @@ export class ConsultationsSummaryComponent implements OnInit {
       )
       .subscribe((data: any) => {
           this.profileData = data;
+          this.responseQuestions = this.profileData.questions;
           this.responseList = data.responses.edges;
           this.splitResponses(this.responseList);
       }, err => {
@@ -151,5 +153,60 @@ export class ConsultationsSummaryComponent implements OnInit {
         title: 'RESPONSES TO'
       };
     }
+  }
+
+  mapAnswers(responseId, answers) {
+    if (responseId && answers.length) {
+      const responseAnswers = [];
+      answers.map((item) => {
+        let answer = {};
+        if (this.responseQuestions && this.responseQuestions.length) {
+          const responseQuestion = this.responseQuestions.find((question) => +question.id === +item.question_id);
+          if (responseQuestion.questionType === 'multiple_choice') {
+            answer = this.getMultiChoiceAnswer(responseQuestion, item.answer);
+          } else  if (responseQuestion.questionType === 'checkbox') {
+            answer = this.getCheckboxAnswer(responseQuestion, item.answer);
+          } else {
+            answer = {
+              id: responseQuestion.id,
+              questionType: responseQuestion.questionType,
+              questionText: responseQuestion.questionText,
+              answer: item.answer
+            };
+          }
+        }
+        responseAnswers.push(answer);
+      });
+      return responseAnswers;
+    }
+    return;
+  }
+
+  getCheckboxAnswer(responseQuestion, answers) {
+    const checkboxAnswers = [];
+    answers.map((id) => {
+      responseQuestion.subQuestions.map((question) => {
+        if (+id === +question.id) {
+          checkboxAnswers.push(question.questionText);
+        }
+      });
+    });
+    return {
+      id: responseQuestion.id,
+      questionType: responseQuestion.questionType,
+      questionText: responseQuestion.questionText,
+      answer: checkboxAnswers
+    };
+  }
+
+
+  getMultiChoiceAnswer(responseQuestion, subQuestionId) {
+    const subQuestion = responseQuestion.subQuestions.find((question) => +question.id === +subQuestionId);
+    return {
+      id: responseQuestion.id,
+      questionType: responseQuestion.questionType,
+      questionText: responseQuestion.questionText,
+      answer: subQuestion.questionText
+    };
   }
 }

@@ -4,7 +4,7 @@
       {{'Summary' | translate}}
       <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
     </p>
-    <app-page-content-renderer [page]="profileData?.page"></app-page-content-renderer>
+    <app-page-content-renderer *ngIf="profileData?.page" [page]="profileData?.page"></app-page-content-renderer>
   </div>
 
   <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()" #responseIndex>

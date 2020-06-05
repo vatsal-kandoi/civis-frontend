@@ -32,7 +32,7 @@
         </ng-container>
   
         <ng-container *ngSwitchCase="'Embed'">
-          <iframe class="video-frame" allowfullscreen frameborder="0" [src]="urlSanitizer(component.content)"></iframe>
+          <iframe class="video-frame" allowfullscreen frameborder="0" [src]="component.sanitized_url"></iframe>
         </ng-container>
   
         <ng-container *ngSwitchCase="'Upload'">

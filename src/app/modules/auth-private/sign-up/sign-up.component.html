@@ -29,7 +29,7 @@
 
   <div class="sign-up-index__right col-md-8 m-auto">
       <div *ngIf="!nextScreen" class="header">
-        <div class="logo-container ml-3">
+        <div class="logo-container">
           <img class="logo" [routerLink]="['/']" src='assets/images/brand-logo/brand-logo.svg' />
         </div>
         <div class="login-container">
@@ -44,15 +44,15 @@
           </div>
         </div>
       </div>
-      <p *ngIf="!nextScreen" class="logo-heading text-left ml-3">To read this private consultation, <br> Please create
+      <p *ngIf="!nextScreen" class="logo-heading text-left">To read this private consultation, <br> Please create
         an
         account</p>
 
-      <p *ngIf="nextScreen" class="logo-heading text-left ml-3">Tell us more about yourself</p>
+      <p *ngIf="nextScreen" class="logo-heading text-left">Tell us more about yourself</p>
 
 
       <div class="form-space row no-gutters mt-4">
-        <div *ngIf="!nextScreen" class="form-space-right m-auto">
+        <!-- <div *ngIf="!nextScreen" class="form-space-right m-auto">
           <button class="app-btn gmail" (click)="redirectTo('google')">
             <div class="social-img">
               <picture>
@@ -73,13 +73,13 @@
             </div>
             <p class="mb-0 ml-1">Sign up with Facebook</p>
           </button>
-        </div>
+        </div> -->
 
-        <div *ngIf="!nextScreen" class="form-space-middle col-md-12">
-          <hr class="horizontal-divider-desktop" data-content="OR">
+        <!-- <div *ngIf="!nextScreen" class="form-space-middle col-md-12">
+          <hr class="horizontal-divider-desktop" data-content="OR"> -->
           <!-- horizontal-divider for mobile -->
-          <hr class="horizontal-divider" data-content="OR">
-        </div>
+          <!-- <hr class="horizontal-divider" data-content="OR">
+        </div> -->
 
         <div class="form-space__left">
           <form #signupForm="ngForm" autocomplete="off">

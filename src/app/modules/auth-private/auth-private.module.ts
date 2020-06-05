@@ -8,9 +8,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { SuccessComponent } from '../auth/success/success.component';
-import { FailureComponent } from '../auth/failure/failure.component';
 import { CookieService } from 'ngx-cookie-service';
+import { ResendVerificationComponent } from './resendVerification/resendVerification.component';
 
 @NgModule({
   imports: [
@@ -24,9 +23,8 @@ import { CookieService } from 'ngx-cookie-service';
   declarations: [
     SignUpComponent,
     LoginComponent,
-    SuccessComponent,
-    FailureComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResendVerificationComponent
   ],
   providers: [CookieService]
 })

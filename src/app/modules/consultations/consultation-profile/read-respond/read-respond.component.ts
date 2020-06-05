@@ -288,7 +288,10 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         this.checkForFragments = true;
         this.questionnaireForm = this.makeQuestionnaireModal();
     }, err => {
-      this.errorService.showErrorModal(err);
+      const e = new Error(err);
+      if (!e.message.includes('Invalid Access Token')) {
+        this.errorService.showErrorModal(err);
+      }
     });
   }
 

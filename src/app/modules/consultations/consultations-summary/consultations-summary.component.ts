@@ -105,7 +105,10 @@ export class ConsultationsSummaryComponent implements OnInit {
           this.responseList = data.responses.edges;
           this.splitResponses(this.responseList);
       }, err => {
+        const e = new Error(err);
+      if (!e.message.includes('Invalid Access Token')) {
         this.errorService.showErrorModal(err);
+      }
       });
     }
   }

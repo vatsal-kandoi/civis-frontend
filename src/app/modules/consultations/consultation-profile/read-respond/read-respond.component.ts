@@ -15,6 +15,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { isObjectEmpty } from '../../../../shared/functions/modular.functions';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-read-respond',
@@ -65,6 +66,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   responseQuestions: any;
   responseAnswers: any;
   showConfirmEmailModal: boolean;
+  currentLanguage: any;
+  useSummaryHindi: boolean;
 
 
   constructor(
@@ -76,6 +79,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     private errorService: ErrorService,
     private consultationService: ConsultationsService,
     private title: Title,
+    private _cookieService: CookieService,
   ) {
     this.consultationService.consultationId$
     .pipe(
@@ -287,9 +291,27 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         this.createMetaTags(this.profileData);
         this.checkForFragments = true;
         this.questionnaireForm = this.makeQuestionnaireModal();
+        this.getProfileSummary();
     }, err => {
-      this.errorService.showErrorModal(err);
+      const e = new Error(err);
+      if (!e.message.includes('Invalid Access Token')) {
+        this.errorService.showErrorModal(err);
+      }
     });
+  }
+
+  getProfileSummary() {
+    this.currentLanguage = this._cookieService.get('civisLang');
+    if (this.currentLanguage === 'hi') {
+      const summaryHindi = this.profileData.summaryHindi;
+      if (summaryHindi && summaryHindi.components.length) {
+        this.useSummaryHindi = true;
+      } else {
+        this.useSummaryHindi = false;
+      }
+    } else {
+      this.useSummaryHindi = false;
+    }
   }
 
   createMetaTags(consultationProfile) {

@@ -23,6 +23,7 @@ import { ConfirmEmailModule } from 'src/app/shared/confirm-email-modal/confirm-e
 import { UserProfileModalModule } from 'src/app/shared/user-profile-modal/user-profile-modal.module';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     imports: [
@@ -43,7 +44,7 @@ import { PipesModule } from 'src/app/shared/pipes/pipes.module';
         ConfirmEmailModule,
         UserProfileModalModule,
         CKEditorModule,
-        PipesModule
+        PipesModule,
     ],
     exports: [TooltipModule],
     declarations: [
@@ -56,6 +57,6 @@ import { PipesModule } from 'src/app/shared/pipes/pipes.module';
         ReadRespondComponent,
         DiscussEngageComponent,
     ],
-    providers: []
+    providers: [CookieService]
 })
 export class ConsultationsModule { }

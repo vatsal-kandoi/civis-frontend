@@ -6,6 +6,10 @@ export const ConsultationProfile = gql`
       id
       title
       summary
+      summaryHindi {
+        id
+        components
+      }
       page {
         id
         components
@@ -67,6 +71,10 @@ export const ConsultationProfileCurrentUser = gql`
       id
       title
       summary
+      summaryHindi {
+        id
+        components
+      }
       page {
         id
         components

@@ -4,7 +4,9 @@
       {{'Summary' | translate}}
       <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
     </p>
-    <app-page-content-renderer [page]="profileData?.page"></app-page-content-renderer>
+    <div *ngIf="profileData?.page || profileData?.summaryHindi">
+      <app-page-content-renderer [page]="useSummaryHindi ? profileData?.summaryHindi : profileData?.page"></app-page-content-renderer>
+    </div>
   </div>
 
   <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions">

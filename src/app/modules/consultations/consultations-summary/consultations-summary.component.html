@@ -9,7 +9,9 @@
             {{'Summary' | translate}}
             <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
           </p>
-          <app-page-content-renderer *ngIf="profileData?.page" [page]="profileData?.page"></app-page-content-renderer>
+          <div *ngIf="profileData?.page || profileData?.summaryHindi">
+            <app-page-content-renderer [page]="useSummaryHindi ? profileData?.summaryHindi : profileData?.page"></app-page-content-renderer>
+          </div>
         </div>
 
         <div class="paper-effect mb-4 inner-space" *ngIf="showKeywordGraph">

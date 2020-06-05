@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
 import { PipesModule } from '../pipes/pipes.module';
 import { PageContentRendererComponent } from './page-content-renderer/page-content-renderer.component';
+import { ResponseAnswersComponent } from './response-answers/response-answers.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { PageContentRendererComponent } from './page-content-renderer/page-conte
     ErrorComponent,
     FooterComponent,
     ToastComponent,
-    PageContentRendererComponent
+    PageContentRendererComponent,
+    ResponseAnswersComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { PageContentRendererComponent } from './page-content-renderer/page-conte
     LinearLoaderComponent,
     FooterComponent,
     ToastComponent,
-    PageContentRendererComponent
+    PageContentRendererComponent,
+    ResponseAnswersComponent
   ],
   providers: [
     LinearLoaderService

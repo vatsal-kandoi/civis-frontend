@@ -47,27 +47,8 @@
                   <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
-                <div class="response-block" *ngIf="response.node?.answers && mapAnswers(response?.node?.id, response?.node?.answers).length">
-                  <div class="answers" *ngFor="let responseAnswer of mapAnswers(response?.node?.id, response?.node?.answers); let i = index">
-                    <div class="answer">
-                      <p class="question-text">
-                        <span class="question-text__number">{{i+1}}.</span>
-                        {{responseAnswer.questionText}}
-                      </p>
-                      <div *ngIf="responseAnswer.questionType !== 'checkbox'">
-                        <p class="answer-text" [ngClass]="{'question-answer' : responseAnswer.questionType === 'multiple_choice' }">
-                          {{responseAnswer.answer}}
-                        </p>
-                      </div>
-                      <div *ngIf="responseAnswer.questionType === 'checkbox'">
-                        <div *ngFor="let item of responseAnswer.answer">
-                          <p class="question-answer answer-text">
-                            {{item}}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div *ngIf="responseQuestions && response?.node?.answers">
+                  <app-response-answers [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
                 </div>
                 <div class="vote-section">
                   <div class="vote-count">
@@ -110,27 +91,8 @@
                   </p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
-                <div class="response-block" *ngIf="response.node?.answers && mapAnswers(response?.node?.id, response?.node?.answers).length">
-                  <div class="answers" *ngFor="let responseAnswer of mapAnswers(response?.node?.id, response?.node?.answers); let i = index">
-                    <div class="answer">
-                      <p class="question-text">
-                        <span class="question-text__number">{{i+1}}.</span>
-                        {{responseAnswer.questionText}}
-                      </p>
-                      <div *ngIf="responseAnswer.questionType !== 'checkbox'">
-                        <p class="answer-text" [ngClass]="{'question-answer' : responseAnswer.questionType === 'multiple_choice' }">
-                          {{responseAnswer.answer}}
-                        </p>
-                      </div>
-                      <div *ngIf="responseAnswer.questionType === 'checkbox'">
-                        <div *ngFor="let item of responseAnswer.answer">
-                          <p class="question-answer answer-text">
-                            {{item}}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div *ngIf="responseQuestions && response?.node?.answers">
+                  <app-response-answers [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
                 </div>
               </div>
             </ng-container>

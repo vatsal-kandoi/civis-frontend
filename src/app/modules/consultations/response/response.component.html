@@ -39,7 +39,9 @@
           <p class="light-text">{{'SENDING IN YOUR RESPONSE TO' | translate}}</p>
           <p class="card-title m-0">{{profile?.consultation?.title}}</p>
         </div>
-        <div class="response-content" [innerHTML]="profile?.responseText">
+        <div class="response-content" [innerHTML]="profile?.responseText"></div>
+        <div *ngIf="profile?.consultation?.questions && profile?.answers">
+          <app-response-answers [questions]="profile?.consultation?.questions" [answers]="profile?.answers"></app-response-answers>
         </div>
       </div>
     </section>

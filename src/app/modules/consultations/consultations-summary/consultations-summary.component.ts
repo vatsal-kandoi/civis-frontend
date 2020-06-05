@@ -73,6 +73,7 @@ export class ConsultationsSummaryComponent implements OnInit {
   annonymousResponses: any;
   summaryData: any;
   showKeywordGraph = true;
+  responseQuestions: any;
 
   constructor(private activatedRoute: ActivatedRoute, private apollo: Apollo, private errorService: ErrorService) {
     this.activatedRoute.params.subscribe((param: any) => {
@@ -102,6 +103,7 @@ export class ConsultationsSummaryComponent implements OnInit {
       )
       .subscribe((data: any) => {
           this.profileData = data;
+          this.responseQuestions = this.profileData.questions;
           this.responseList = data.responses.edges;
           this.splitResponses(this.responseList);
       }, err => {
@@ -152,4 +154,5 @@ export class ConsultationsSummaryComponent implements OnInit {
       };
     }
   }
+
 }

@@ -9,7 +9,7 @@
             {{'Summary' | translate}}
             <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
           </p>
-          <p class="summary-content" [innerHTML]="profileData?.summary"></p>
+          <app-page-content-renderer *ngIf="profileData?.page" [page]="profileData?.page"></app-page-content-renderer>
         </div>
 
         <div class="paper-effect mb-4 inner-space" *ngIf="showKeywordGraph">
@@ -91,6 +91,28 @@
                   </p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
+                <div class="response-block" *ngIf="response.node?.answers && mapAnswers(response?.node?.id, response?.node?.answers).length">
+                  <div class="answers" *ngFor="let responseAnswer of mapAnswers(response?.node?.id, response?.node?.answers); let i = index">
+                    <div class="answer">
+                      <p class="question-text">
+                        <span class="question-text__number">{{i+1}}.</span>
+                        {{responseAnswer.questionText}}
+                      </p>
+                      <div *ngIf="responseAnswer.questionType !== 'checkbox'">
+                        <p class="answer-text" [ngClass]="{'question-answer' : responseAnswer.questionType === 'multiple_choice' }">
+                          {{responseAnswer.answer}}
+                        </p>
+                      </div>
+                      <div *ngIf="responseAnswer.questionType === 'checkbox'">
+                        <div *ngFor="let item of responseAnswer.answer">
+                          <p class="question-answer answer-text">
+                            {{item}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </ng-container>
           </div>  

@@ -117,7 +117,7 @@
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
-            max-width: 700px;
+            max-width: 600px;
             -webkit-box-pack: justify;
                 -ms-flex-pack: justify;
                     justify-content: space-between;
@@ -184,7 +184,7 @@
 
         .logo-heading {
             margin: 15px auto;
-            max-width: 700px;
+            max-width: 600px;
             font-size: 16px;
             color: #151515;
             font-weight: 600;
@@ -197,10 +197,10 @@
 
         .form-space {
             
-            max-width: 750px;
+            max-width: 600px;
             margin: 0 auto;
             &__left {
-                
+                margin: 0 auto;
                 .input-box {
                     margin-bottom: 15px;
 

@@ -397,43 +397,6 @@
   }
 }
 
-.response-block {
-  .answers {
-    .answer {
-      margin: 0 24px;
-      padding: 24px 0;
-      border-bottom: 1px solid rgba(213, 219, 226, 0.5);
-
-      .question-text {
-        font-size: 14px;
-        color: #878787;
-        &__number {
-          width: 15px;
-          margin-right: 5px;
-        }
-      }
-
-      .answer-text {
-        font-size: 14px;
-        line-height: 22px;
-        letter-spacing: 0.06em;
-        color: #151515;
-        margin: 16px 20px 0;
-      }
-
-      .question-answer {
-        background: #F2F2F2;
-        border-radius: 4px;
-        padding: 4px;
-      }
-    }
-    &:last-child {
-      .answer {
-        border-bottom: none;
-      }
-    }
-  }
-}
 .feedback-index {
   .align-center {
     display: flex !important;

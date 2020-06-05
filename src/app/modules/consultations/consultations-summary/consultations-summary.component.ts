@@ -6,6 +6,7 @@ import { ConsultationProfileQuery } from './consultations-summary.graphql';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import * as Highcharts from 'highcharts';
 import { ConsultationAnalysisQuery } from '../consultation-profile/consultation-profile.graphql';
+import { CookieService } from 'ngx-cookie';
 
 declare var require: any;
 const Boost = require('highcharts/modules/boost');
@@ -74,8 +75,14 @@ export class ConsultationsSummaryComponent implements OnInit {
   summaryData: any;
   showKeywordGraph = true;
   responseQuestions: any;
+  currentLanguage: any;
+  useSummaryHindi: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private apollo: Apollo, private errorService: ErrorService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private apollo: Apollo,
+              private errorService: ErrorService,
+              private _cookieService: CookieService,
+              ) {
     this.activatedRoute.params.subscribe((param: any) => {
       this.consultationId = +param['id'];
     });
@@ -92,6 +99,20 @@ export class ConsultationsSummaryComponent implements OnInit {
     this.drawVenterGraph();
   }
 
+  getProfileSummary() {
+    this.currentLanguage = this._cookieService.get('civisLang');
+    if (this.currentLanguage === 'hi') {
+      const summaryHindi = this.profileData.summaryHindi;
+      if (summaryHindi && summaryHindi.components.length) {
+        this.useSummaryHindi = true;
+      } else {
+        this.useSummaryHindi = false;
+      }
+    } else {
+      this.useSummaryHindi = false;
+    }
+  }
+
   getConsultationProfile() {
     if (this.consultationId && this.responseToken) {
       this.apollo.query({
@@ -104,6 +125,7 @@ export class ConsultationsSummaryComponent implements OnInit {
       .subscribe((data: any) => {
           this.profileData = data;
           this.responseQuestions = this.profileData.questions;
+          this.getProfileSummary();
           this.responseList = data.responses.edges;
           this.splitResponses(this.responseList);
       }, err => {
@@ -158,58 +180,4 @@ export class ConsultationsSummaryComponent implements OnInit {
     }
   }
 
-  mapAnswers(responseId, answers) {
-    if (responseId && answers.length) {
-      const responseAnswers = [];
-      answers.map((item) => {
-        let answer = {};
-        if (this.responseQuestions && this.responseQuestions.length) {
-          const responseQuestion = this.responseQuestions.find((question) => +question.id === +item.question_id);
-          if (responseQuestion.questionType === 'multiple_choice') {
-            answer = this.getMultiChoiceAnswer(responseQuestion, item.answer);
-          } else  if (responseQuestion.questionType === 'checkbox') {
-            answer = this.getCheckboxAnswer(responseQuestion, item.answer);
-          } else {
-            answer = {
-              id: responseQuestion.id,
-              questionType: responseQuestion.questionType,
-              questionText: responseQuestion.questionText,
-              answer: item.answer
-            };
-          }
-        }
-        responseAnswers.push(answer);
-      });
-      return responseAnswers;
-    }
-    return;
-  }
-
-  getCheckboxAnswer(responseQuestion, answers) {
-    const checkboxAnswers = [];
-    answers.map((id) => {
-      responseQuestion.subQuestions.map((question) => {
-        if (+id === +question.id) {
-          checkboxAnswers.push(question.questionText);
-        }
-      });
-    });
-    return {
-      id: responseQuestion.id,
-      questionType: responseQuestion.questionType,
-      questionText: responseQuestion.questionText,
-      answer: checkboxAnswers
-    };
-  }
-
-
-  getMultiChoiceAnswer(responseQuestion, subQuestionId) {
-    const subQuestion = responseQuestion.subQuestions.find((question) => +question.id === +subQuestionId);
-    return {
-      id: responseQuestion.id,
-      questionType: responseQuestion.questionType,
-      questionText: responseQuestion.questionText,
-      answer: subQuestion.questionText
-    };
-  }
 }

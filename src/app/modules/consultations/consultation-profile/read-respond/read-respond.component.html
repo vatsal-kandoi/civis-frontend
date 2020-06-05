@@ -7,7 +7,83 @@
     <app-page-content-renderer *ngIf="profileData?.page" [page]="profileData?.page"></app-page-content-renderer>
   </div>
 
-  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()" #responseIndex>
+  <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions">
+    <div class="draft-box">
+      <div class="draft-img">
+        <img src="assets/images/start-drafting-empty-state.svg" />
+      </div>
+      <p class="draft-text">
+        Ready to draft your response? Click <br /> the below button to start
+      </p>
+      <button  class="btn-submit  active" (click)='showQuestions = true'>
+        <p class="m-0">
+          START DRAFTING
+        </p>
+        <span class="ml-2"><i class="fa fa-angle-right"></i></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="paper-effect mt-4 m-0-sm p-0"   *ngIf="showCreateResponse() && questionnaireExist() && showQuestions">
+    <div class="question-box">
+      <p class="heading">
+        Questions
+      </p>
+      <form [formGroup]="questionnaireForm">
+        <div class="questions-container">
+          <div class="question-index" *ngFor="let question of profileData?.questions; let i = index">
+              <div class="question">
+                <p class="question-text">
+                  <span class="question-text__number">{{i+1}}.</span>
+                  {{question.questionText}}
+                </p>
+                <div class="answer" *ngIf="question.questionType === 'multiple_choice'">
+                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
+                    <label>
+                      <input type="radio" class="cm-radio" [formControlName]="question.id" [value]="subQuestion.id">
+                      <span>{{subQuestion.questionText}}</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
+                  <label class="answer__tips">Choose as many as you like</label>
+                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
+                    <label>
+                      <input type="checkbox" class="cm-radio" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
+                      <!-- (click)="toggleCheckbox( questionnaireForm.get(question.id).get(subQuestion.id), !questionnaireForm.get(question.id).get(subQuestion.id).value)"> -->
+                      <span>{{subQuestion.questionText}}</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="answer" *ngIf="question.questionType === 'long_text'">
+                  <div class="text-area">
+                    <textarea placeholder="Type your answer here" [formControlName]="question.id"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checkbox-area">
+            <div class="input-checbox" >
+              <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" [ngModelOptions]="{standalone: true}"/> 
+              <label class="m-0">{{'Make my response public' | translate}}</label>
+              <span class="link">{{'What does this mean?' | translate}}</span>
+            </div>
+          </div>
+          <div class="py-3">
+            <button  class="btn-submit active" (click)='submitAnswer()'>
+              <p class="m-0">
+                SUBMIT RESPONSE
+              </p>
+              <span class="ml-2"><i class="fa fa-angle-right"></i></span>
+            </button>
+          </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse() && !questionnaireExist()" #responseIndex>
     <div class="response-index__nav">
       <div class="w-50">
         <div class="heading">{{'Your response' | translate}}</div>
@@ -31,7 +107,7 @@
       <div class="checkbox-area" *ngIf="showPublicResponseOption">
         <div class="input-checbox" >
           <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility"/> 
-          <label class="m-0">{{'Make my response public ' | translate}}</label>
+          <label class="m-0">{{'Make my response public' | translate}}</label>
           <span class="link">{{'What does this mean?' | translate}}</span>
         </div>
         <p class="auto-save-text" *ngIf="showAutoSaved">{{'Draft autosaved' | translate}}</p>
@@ -67,21 +143,46 @@
             [type]="'user'"
             [src]="response?.node?.user?.profilePicture?.url"
             (click)="openUserProfile(response?.node?.user)" />
-            <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
+            <div>
+              <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
+              <p class="email-text m-0 ml-2">{{response?.node?.user?.email}}</p>
+            </div>
+          </div>     
+          <p class="text-16" [innerHTML]="response.node?.responseText"></p>
+          <div class="response-block" *ngIf="response.node?.answers && mapAnswers(response?.node?.id, response?.node?.answers).length">
+            <div class="answers" *ngFor="let responseAnswer of mapAnswers(response?.node?.id, response?.node?.answers); let i = index">
+              <div class="answer">
+                <p class="question-text">
+                  <span class="question-text__number">{{i+1}}.</span>
+                  {{responseAnswer.questionText}}
+                </p>
+                <div *ngIf="responseAnswer.questionType !== 'checkbox'">
+                  <p class="answer-text" [ngClass]="{'question-answer' : responseAnswer.questionType === 'multiple_choice' }">
+                    {{responseAnswer.answer}}
+                  </p>
+                </div>
+                <div *ngIf="responseAnswer.questionType === 'checkbox'">
+                  <div *ngFor="let item of responseAnswer.answer">
+                    <p class="question-answer answer-text">
+                      {{item}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <p class="text-16" [innerHTML]="response.node.responseText"></p>
-          <div class="vote-section" *ngIf="currentUser">
+          <div class="vote-section" *ngIf="currentUser && !response.node?.answers?.length">
             <div class="vote-count">
-              <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">
+              <div [ngClass]="response?.node?.votedAs?.voteDirection === 'up'  ? 'active' : ''">
                   <span (click)="vote('up', response?.node)"
                     tooltip="{{'Upvote'}}"
-                  [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
+                  [ngClass]="response?.node?.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
                   <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
               </div>
-              <div [ngClass]="response?.node.votedAs?.voteDirection === 'down'  ? 'active' : ''">
+              <div [ngClass]="response?.node?.votedAs?.voteDirection === 'down'  ? 'active' : ''">
                   <span (click)="vote('down', response?.node)" 
                   tooltip="{{'Downvote'}}"
-                  class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
+                  class="ml-4" [ngClass]="response?.node?.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
                   <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
               </div>
               <div class="share-block">
@@ -232,3 +333,5 @@
       </div>
     </div>
   </div>
+
+  <app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false"></app-confirm-email-modal>

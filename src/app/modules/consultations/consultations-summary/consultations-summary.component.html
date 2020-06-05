@@ -47,6 +47,9 @@
                   <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
+                <div *ngIf="responseQuestions && response?.node?.answers">
+                  <app-response-answers [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
+                </div>
                 <div class="vote-section">
                   <div class="vote-count">
                     <div>

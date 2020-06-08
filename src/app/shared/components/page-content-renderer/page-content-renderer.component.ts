@@ -21,6 +21,15 @@ export class PageContentRendererComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.addAttribute();
+    this.sanitizeUrl();
+  }
+
+  sanitizeUrl() {
+    this.page.components.forEach(component => {
+      if (component.componentType === 'Embed') {
+        component.sanitized_url = this.urlSanitizer(component.content);
+      }
+    });
   }
 
   urlSanitizer(url: string) {

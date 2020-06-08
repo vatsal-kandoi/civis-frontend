@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -12,15 +12,28 @@ export class PageContentRendererComponent implements OnInit, AfterViewChecked {
   finalHtml = '';
 
   constructor(
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private cdRef: ChangeDetectorRef,
   ) {
   }
 
   ngOnInit() {
+    this.sanitizeUrl();
   }
 
   ngAfterViewChecked() {
     this.addAttribute();
+  }
+
+  sanitizeUrl() {
+    if (this.page.components.length) {
+      this.page.components.forEach(component => {
+        if (component.componentType === 'Embed') {
+          component.sanitized_url = this.urlSanitizer(component.content);
+          this.cdRef.detectChanges();
+        }
+      });
+    }
   }
 
   urlSanitizer(url: string) {

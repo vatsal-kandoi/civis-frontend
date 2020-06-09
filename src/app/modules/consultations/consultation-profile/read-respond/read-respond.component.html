@@ -1,23 +1,101 @@
 <section class="read-response-container">
   <div class="paper-effect">
     <p class="heading">
-      Summary
+      {{'Summary' | translate}}
       <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
     </p>
-    <p class="summary-content" [innerHTML]="profileData?.summary"></p>
+    <div *ngIf="profileData?.page || profileData?.summaryHindi">
+      <app-page-content-renderer [page]="useSummaryHindi ? profileData?.summaryHindi : profileData?.page"></app-page-content-renderer>
+    </div>
   </div>
 
-  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse()" #responseIndex>
+  <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions">
+    <div class="draft-box">
+      <div class="draft-img">
+        <img src="assets/images/start-drafting-empty-state.svg" />
+      </div>
+      <p class="draft-text">
+        Ready to draft your response? Click <br /> the below button to start
+      </p>
+      <button  class="btn-submit  active" (click)='showQuestions = true'>
+        <p class="m-0">
+          START DRAFTING
+        </p>
+        <span class="ml-2"><i class="fa fa-angle-right"></i></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="paper-effect mt-4 m-0-sm p-0"   *ngIf="showCreateResponse() && questionnaireExist() && showQuestions">
+    <div class="question-box">
+      <p class="heading">
+        Questions
+      </p>
+      <form [formGroup]="questionnaireForm">
+        <div class="questions-container">
+          <div class="question-index" *ngFor="let question of profileData?.questions; let i = index">
+              <div class="question">
+                <p class="question-text">
+                  <span class="question-text__number">{{i+1}}.</span>
+                  {{question.questionText}}
+                </p>
+                <div class="answer" *ngIf="question.questionType === 'multiple_choice'">
+                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
+                    <label>
+                      <input type="radio" class="cm-radio" [formControlName]="question.id" [value]="subQuestion.id">
+                      <span>{{subQuestion.questionText}}</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
+                  <label class="answer__tips">Choose as many as you like</label>
+                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
+                    <label>
+                      <input type="checkbox" class="cm-radio" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
+                      <!-- (click)="toggleCheckbox( questionnaireForm.get(question.id).get(subQuestion.id), !questionnaireForm.get(question.id).get(subQuestion.id).value)"> -->
+                      <span>{{subQuestion.questionText}}</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="answer" *ngIf="question.questionType === 'long_text'">
+                  <div class="text-area">
+                    <textarea placeholder="Type your answer here" [formControlName]="question.id"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="checkbox-area">
+            <div class="input-checbox" >
+              <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" [ngModelOptions]="{standalone: true}"/> 
+              <label class="m-0">{{'Make my response public' | translate}}</label>
+              <span class="link">{{'What does this mean?' | translate}}</span>
+            </div>
+          </div>
+          <div class="py-3">
+            <button  class="btn-submit active" (click)='submitAnswer()'>
+              <p class="m-0">
+                SUBMIT RESPONSE
+              </p>
+              <span class="ml-2"><i class="fa fa-angle-right"></i></span>
+            </button>
+          </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse() && !questionnaireExist()" #responseIndex>
     <div class="response-index__nav">
       <div class="w-50">
-        <div class="heading">Your response</div>
+        <div class="heading">{{'Your response' | translate}}</div>
       </div>
       <div class="w-50 row no-gutters justify-content-end align-items-center" *ngIf="profileData?.reviewType !== 'policy'">
-        <div (click)="scrollToResponses()" class="link mr-3">or, select a public response</div>
+        <div (click)="scrollToResponses()" class="link mr-3">{{'or, select a public response' | translate}}</div>
         <div class="info-mark"><i class="fa fa-question-circle"></i></div>
       </div>
     </div>
-    <div class="response-index__content">
+    <div class="response-index__content" id="editor-container">
       <ckeditor
       [(ngModel)]="responseText"
       [config]="ckeConfig"
@@ -31,10 +109,10 @@
       <div class="checkbox-area" *ngIf="showPublicResponseOption">
         <div class="input-checbox" >
           <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility"/> 
-          <label class="m-0"> Make my response public </label>
-          <span class="link">What does this mean?</span>
+          <label class="m-0">{{'Make my response public' | translate}}</label>
+          <span class="link">{{'What does this mean?' | translate}}</span>
         </div>
-        <p class="auto-save-text" *ngIf="showAutoSaved">Draft autosaved</p>
+        <p class="auto-save-text" *ngIf="showAutoSaved">{{'Draft autosaved' | translate}}</p>
       </div>
       <div class="draggable-area">
         <span class="drag-bars"></span>
@@ -46,7 +124,7 @@
   <ng-container *ngIf="profileData?.reviewType !== 'policy'">
     <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
       <div class="d-flex justify-content-between">
-        <p class="text-16 m-0 bold-text">Public responses</p>
+        <p class="text-16 m-0 bold-text">{{'Public responses' | translate}}</p>
         <p 
           class="what-resp-text" 
           tooltip="If you feel passionately about this Consultation, you can make your response public, 
@@ -55,7 +133,7 @@
           placement="left"
           container="body"
           >
-            What are public responses?
+          {{'What are public responses?' | translate}}
         </p>
       </div>
       <ng-container *ngFor="let response of responseList">
@@ -67,21 +145,27 @@
             [type]="'user'"
             [src]="response?.node?.user?.profilePicture?.url"
             (click)="openUserProfile(response?.node?.user)" />
-            <p class="regular-text bold-text m-0 ml-2">{{response?.node.user.firstName}}</p>
+            <div>
+              <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
+              <p class="email-text m-0 ml-2">{{response?.node?.user?.email}}</p>
+            </div>
+          </div>     
+          <p class="text-16" [innerHTML]="response.node?.responseText"></p>
+          <div *ngIf="responseQuestions && response?.node?.answers">
+            <app-response-answers [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
           </div>
-          <p class="text-16" [innerHTML]="response.node.responseText"></p>
-          <div class="vote-section" *ngIf="currentUser">
+          <div class="vote-section" *ngIf="currentUser && !response.node?.answers?.length">
             <div class="vote-count">
-              <div [ngClass]="response?.node.votedAs?.voteDirection === 'up'  ? 'active' : ''">
+              <div [ngClass]="response?.node?.votedAs?.voteDirection === 'up'  ? 'active' : ''">
                   <span (click)="vote('up', response?.node)"
                     tooltip="{{'Upvote'}}"
-                  [ngClass]="response?.node.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
+                  [ngClass]="response?.node?.votedAs?.voteDirection === 'up' ? 'active__btn' : ''"><i class="fa fa-thumbs-up"></i></span>
                   <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
               </div>
-              <div [ngClass]="response?.node.votedAs?.voteDirection === 'down'  ? 'active' : ''">
+              <div [ngClass]="response?.node?.votedAs?.voteDirection === 'down'  ? 'active' : ''">
                   <span (click)="vote('down', response?.node)" 
                   tooltip="{{'Downvote'}}"
-                  class="ml-4" [ngClass]="response?.node.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
+                  class="ml-4" [ngClass]="response?.node?.votedAs?.voteDirection === 'down' ? 'active__btn' : ''"><i class="fa fa-thumbs-down"></i></span>
                   <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
               </div>
               <div class="share-block">
@@ -114,7 +198,7 @@
               </div>
             </div>
             <div>
-              <button class="app-btn response-btn" (click)="useThisResponse(response?.node)" >Use this response</button>
+              <button class="app-btn response-btn" (click)="useThisResponse(response?.node)" >{{'Use this response' | translate}}</button>
             </div>
           </div>
         </div>
@@ -134,13 +218,13 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <p class="heading" *ngIf="!responseSubmitted">How satisfied are you with this draft?</p>
-            <p class="heading" *ngIf="responseSubmitted">Here’re the overall satisfation levels for this draft from people</p>
+            <p class="heading" *ngIf="!responseSubmitted">{{'How satisfied are you with this draft?' | translate}}</p>
+            <p class="heading" *ngIf="responseSubmitted">{{'Here’re the overall satisfation levels for this draft from people' | translate}}</p>
           </div>
           <div class="modal-body">
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'dissatisfied'">Dissatisfied</div>
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'dissatisfied'">{{'Dissatisfied' | translate}}</div>
                 <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.dissatisfied ?
                   satisfactionRatingDistribution?.dissatisfied : 0}}</div>
                 <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'dissatisfied'"
@@ -153,8 +237,7 @@
             </label>
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'somewhat_dissatisfied'">Somewhat
-                  Dissatisfied</div>
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'somewhat_dissatisfied'">{{'Somewhat Dissatisfied' | translate}}</div>
                 <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.somewhat_dissatisfied
                   ? satisfactionRatingDistribution?.somewhat_dissatisfied : 0}}</div>
                 <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'somewhat_dissatisfied'"
@@ -167,8 +250,7 @@
             </label>
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'somewhat_satisfied'">Somewhat
-                  Satisfied</div>
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'somewhat_satisfied'">{{'Somewhat Satisfied' | translate}}</div>
                 <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.somewhat_satisfied
                   ? satisfactionRatingDistribution?.somewhat_satisfied : 0}}</div>
                 <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'somewhat_satisfied'"
@@ -181,7 +263,7 @@
             </label>
             <label class="radio-block">
               <div class="radio-btn">
-                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'satisfied'">Satisfied</div>
+                <div class="radio-text" [class.active-text]="responseSubmitted && responseFeedback === 'satisfied'">{{'Satisfied' | translate}}</div>
                 <div class="mx-2 count-text" *ngIf="responseFeedback && responseSubmitted">{{satisfactionRatingDistribution?.satisfied ?
                   satisfactionRatingDistribution?.satisfied : 0}}</div>
                 <div *ngIf="responseFeedback" class="progress-color" [class.active-progress]="responseSubmitted && responseFeedback === 'satisfied'"
@@ -195,7 +277,7 @@
             <div class="footer-space" [ngClass]="responseSubmitted ? 'justify-content-between' : 'justify-content-end'">
               <div class="footer-space__left" *ngIf="responseSubmitted">
                 <div class="points-text">{{'You get ' + earnedPoints + ' points for submitting this!'}}</div>
-                <div class="link">View Leaderboard</div>
+                <div class="link">{{'View Leaderboard' | translate}}</div>
               </div>
               <div class="footer-space__right">
                 <button  class="app-btn secondary mt-xs" *ngIf="responseSubmitted" (click)="closeFeedbackModal()">
@@ -207,7 +289,7 @@
                         <img src="assets/images/Vector.jpg" />
                       </picture>
                     </span>
-                    Ok Great
+                    {{'Ok Great' | translate}}
                   </p>
                   <i class="fa fa-angle-right"></i>
                 </button>
@@ -223,7 +305,7 @@
                         <img src="assets/images/Vector.jpg" />
                       </picture>
                     </span>
-                    Select and submit
+                    {{'Select and submit' | translate}}
                   </p>
                   <i class="fa fa-angle-right"></i>
                 </button>
@@ -234,3 +316,5 @@
       </div>
     </div>
   </div>
+
+  <app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false"></app-confirm-email-modal>

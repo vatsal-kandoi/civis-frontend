@@ -10,7 +10,7 @@ import { SuccessComponent } from './success/success.component';
 import { FailureComponent } from './failure/failure.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
     declarations: [
@@ -18,7 +18,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
         LoginComponent,
         SuccessComponent,
         FailureComponent,
-        ForgotPasswordComponent
+        ForgotPasswordComponent,
     ],
     imports: [
         CommonModule,
@@ -27,6 +27,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
         NgSelectModule,
         FormsModule,
         RecaptchaModule,
+        PipesModule,
     ],
     exports: []
 })

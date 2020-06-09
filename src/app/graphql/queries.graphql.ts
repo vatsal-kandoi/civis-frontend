@@ -7,6 +7,7 @@ query{
     bestRank
     bestRankType
     points
+    callbackUrl
     city {
       id
       name

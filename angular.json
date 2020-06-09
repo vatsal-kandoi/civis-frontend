@@ -154,5 +154,8 @@
       }
     }
   },
-  "defaultProject": "civis"
+  "defaultProject": "civis",
+  "cli": {
+    "analytics": "399e69e2-f95b-459c-8176-7903c20092bd"
+  }
 }

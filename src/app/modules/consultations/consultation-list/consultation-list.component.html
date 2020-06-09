@@ -1,7 +1,7 @@
 <div class="bg-color-wrapper">
   <div class="consultation-listing-container">
-    <p class="list-heading"> {{consultationListData?.paging?.totalItems}} Active Consultations </p>
-    <p class="list-subheading mb-5">These are open consultatons which are still seeking feedback from citizens like yourself</p>
+    <p class="list-heading"> {{consultationListData?.paging?.totalItems}} {{'Active Consultations' | translate}}</p>
+    <p class="list-subheading mb-5">{{'These are open consultatons which are still seeking feedback from citizens like yourself' | translate}}</p>
     <div class="card-listing-grid">
       <ng-container *ngFor="let item of consultationListArray">
         <div class="card-item">
@@ -26,19 +26,20 @@
     </div>
   </div>
   <div class="closed-list-container">
-    <p class="list-heading">{{closedConsultationPaging?.totalItems}} Closed Consultations</p>
-    <p class="list-subheading mb-5">These consultations are closed for public feedback but you can still participate in the discussions.</p>
+    <p class="list-heading">{{closedConsultationPaging?.totalItems}} {{'Closed Consultations' | translate}}</p>
+    <p class="list-subheading mb-5">{{'These consultations are closed for public feedback but you can still participate in the discussions.' | translate}}</p>
     <div class="closed-list-table">
       <div class="table-header">
-        <div class="cell-1"><p class="header-title">CONSULTATION</p></div>
-        <div class="cell-2"><p class="header-title">NO. OF RESPONSES</p></div>
-        <div class="cell-3"><p class="header-title">CLOSED ON</p></div>
+        <div class="cell-1"><p class="header-title">{{'CONSULTATION' | translate}}</p></div>
+        <div class="cell-2"><p class="header-title">{{'NO. OF RESPONSES' | translate}}</p></div>
+        <div class="cell-3"><p class="header-title">{{'CLOSED ON' | translate}}</p></div>
         <div class="cell-4"></div>
       </div>
       <ng-container *ngFor="let item of closedConsultationList">
         <div class="table-body">
           <div class="cell-1 consultation-cell">
-            <img appDefaultImage [type]="'consultation-cover'" [src]="item.ministry?.category?.coverPhoto?.url" class="avatar avatar--64 fit-cover" />
+            <img appDefaultImage [type]="'consultation-cover'" [src]="item.ministry?.category?.coverPhoto?.url"
+              class="avatar avatar--64 fit-cover" />
             <div class="c-profile-data">
               <p>{{item?.title}}</p>
               <p>{{item?.ministry?.name}}</p>
@@ -53,13 +54,14 @@
             <p class="closed-date">{{convertDateType(item?.responseDeadline)}}</p>
           </div>
           <div class="cell-4 text-center">
-            <button class="app-btn view-btn pointer" [routerLink]="['/consultations', item.id]">VIEW DISCUSSION</button>
+            <button class="app-btn view-btn pointer" [routerLink]="['/consultations', item.id]">{{'VIEW DISCUSSION' | translate}}</button>
           </div>
         </div>
         <!-- list-mobile-layout -->
         <div class="table-list">
           <div class="list-grid">
-            <img appDefaultImage [type]="'consultation-cover'" [src]="item.ministry?.category?.coverPhoto?.url" class="avatar avatar--42 fit-cover" />
+            <img appDefaultImage [type]="'consultation-cover'" [src]="item.ministry?.category?.coverPhoto?.url"
+              class="avatar avatar--42 fit-cover" />
             <div class="list-detail">
               <div class="c-profile-data">
                 <p>{{item?.title}}</p>
@@ -72,7 +74,7 @@
             </div>
           </div>
           <div class="mt-3">
-            <button class="app-btn view-btn pointer" [routerLink]="['/consultations', item.id]">VIEW DISCUSSION</button>
+            <button class="app-btn view-btn pointer" [routerLink]="['/consultations', item.id]">{{'VIEW DISCUSSION' | translate}}</button>
           </div>
         </div>
       </ng-container>
@@ -80,5 +82,3 @@
   </div>
 </div>
 <app-footer></app-footer>
-
-

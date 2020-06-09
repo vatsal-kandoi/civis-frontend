@@ -4,13 +4,15 @@ import { ModalModule } from 'ngx-bootstrap';
 import { UserProfileModalComponent } from './user-profile-modal.component';
 import { SharedDirectivesModule } from '../directives/shared-directives.module';
 import { RouterModule } from '@angular/router';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
     imports: [
         CommonModule,
         ModalModule,
         SharedDirectivesModule,
-        RouterModule
+        RouterModule,
+        PipesModule,
     ],
     exports: [
         UserProfileModalComponent

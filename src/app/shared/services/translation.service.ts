@@ -42,14 +42,30 @@ constructor(
             this.dictionary.next(this.storage.retrieve('lang'));
             this.setIndex();
         } else {
-            this.dictionary.next(HindiLang);
-            this.storage.store('lang', HindiLang);
+            const lang = HindiLang.sort(this.compare_text);
+            this.dictionary.next(lang);
+            this.storage.store('lang', lang);
             this.setIndex();
         }
     } else {
         this.currentLanguage = 'en';
         this.loading.next(true);
         this.loading.complete();
+    }
+}
+
+
+
+compare_text(a, b) {
+    // a should come before b in the sorted order
+    if (a.text < b.text) {
+            return -1;
+    // a should come after b in the sorted order
+    } else if (a.text > b.text) {
+            return 1;
+    // and and b are the same
+    } else {
+            return 0;
     }
 }
 
@@ -77,11 +93,12 @@ translate(text: string) {
 
     const length = this.dictionary.value.length;
 
-    return this.binarySearch(this.dictionary.value, text.toLowerCase(), 0, length) || text;
+    return this.binarySearch(this.dictionary.value, text, 0, length) || text;
 
 }
 
 binarySearch(arr: Array<Dictionary>, text: string, start: number, end: number) {
+    console.log(arr, 'Aray');
 
     const mid = Math.floor((start + end) / 2);
 
@@ -90,26 +107,26 @@ binarySearch(arr: Array<Dictionary>, text: string, start: number, end: number) {
     }
 
     if (start === end) {
-        if (arr[start] && arr[start].text.toLowerCase() === text) {
+        if (arr[start] && arr[start].text === text) {
             return arr[start].translation;
         } else {
             return null;
         }
     }
 
-    if (arr[start] && arr[start].text.toLowerCase() === text) {
+    if (arr[start] && arr[start].text === text) {
         return arr[start].translation;
     }
 
-    if (arr[end] && arr[end].text.toLowerCase() === text) {
+    if (arr[end] && arr[end].text === text) {
         return arr[end].translation;
     }
 
-    if (arr[mid] && arr[mid].text.toLowerCase() === text) {
+    if (arr[mid] && arr[mid].text === text) {
         return arr[mid].translation;
     }
 
-    if (arr[mid].text.toLowerCase() > text) {
+    if (arr[mid].text > text) {
         return this.binarySearch(arr, text, start, mid - 1);
     } else {
         return this.binarySearch(arr, text, mid + 1, end);

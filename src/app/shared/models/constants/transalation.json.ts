@@ -1,11 +1,11 @@
 export const HindiLang=[
     {
-      "text": "Responses so far",
-      "translation": "जवाब अब तक"
-    },
-    {
       "text": "Response so far",
       "translation": "प्रतिक्रिया अब तक"
+    },
+    {
+      "text": "Responses so far",
+      "translation": "जवाब अब तक"
     },
     {
       "text": "Closed",
@@ -16,6 +16,42 @@ export const HindiLang=[
       "translation": "ब्लॉग"
     },
     {
+      "text": "SENDING IN YOUR RESPONSE TO",
+      "translation": "अपना जवाब भेजने के लिए"
+    },
+    {
+      "text": "BOARD OF ADVISORS",
+      "translation": "सलाहकारों का बोर्ड"
+    },
+    {
+      "text": "RANK IN",
+      "translation": "में रैंकड"
+    },
+    {
+      "text": "The Privacy Policy is deemed to form a part of these Terms.",
+      "translation": "गोपनीयता नीति को इन नियमों का एक हिस्सा बनाने के लिए समझा जाता है।"
+    },
+    {
+      "text": "“Site”",
+      "translation": "“साइट”"
+    },
+    {
+      "text": "“Services”",
+      "translation": "“सेवाएं”"
+    },
+    {
+      "text": "Actions you take:",
+      "translation": "आपके द्वारा लिया गया कार्य:"
+    },
+    {
+      "text": "- “Cookies” are data files that are placed on your device or computer and often include an anonymous unique identifier. For more information about cookies, and how to disable cookies, visit ",
+      "translation": '- "कुकीज़" डेटा फाइलें हैं जो आपके डिवाइस या कंप्यूटर पर रखी जाती हैं और अक्सर एक अनाम विशिष्ट पहचानकर्ता शामिल होती हैं। कुकीज़ के बारे में अधिक जानकारी के लिए, और कुकीज़ को अक्षम कैसे करें, पर जाएँ '
+    },
+    {
+      "text": "We do not share, sell, or give away your Information to third parties otherwise than for the purposes described above.",
+      "translation": 'हम ऊपर वर्णित उद्देश्यों के लिए अन्यथा आपकी जानकारी को तीसरे पक्ष को साझा नहीं करते, बेचते हैं, या दूर नहीं करते हैं।'
+    },
+    {
       "text": "(Effective 2nd September 2018. Last Revised 13th August 2019)",
       "translation": "(प्रभावी 2 सितंबर 2018। अंतिम संशोधित 13 अगस्त 2019)"
     },
@@ -24,7 +60,7 @@ export const HindiLang=[
       "translation": ") या जब आप अन्यथा हमारे साथ बातचीत करते हैं या हमसे कोई संवाद प्राप्त करते हैं।"
     },
     {
-      "text": "), when you use the Site, our mobile application and other online services (collectively, the ",
+      "text": "), when you use the Site, our mobile application and other online services (collectively, the",
       "translation": "), जब आप साइट, हमारे मोबाइल एप्लिकेशन और अन्य ऑनलाइन सेवाओं का उपयोग करते हैं (सामूहिक रूप से,"
     },
     {
@@ -40,15 +76,15 @@ export const HindiLang=[
       "translation": "- किसी खाते की स्थायी समाप्ति।"
     },
     {
-      "text": "- Removal of content and not sharing data with our government and non",
-      "translation": "- सामग्री को हटाना और हमारी सरकार और गैर के साथ डेटा साझा नहीं करना"
+      "text": "- Removal of content and not sharing data with our government and non-governmental partners.",
+      "translation": "- हमारे सरकारी और गैर-सरकारी भागीदारों के साथ सामग्री का हटाया जाना और डेटा साझा नहीं करना।"
     },
     {
       "text": "- Requesting that content guidelines be followed.",
       "translation": "- अनुरोध है कि सामग्री दिशानिर्देशों का पालन किया जाए।"
     },
     {
-      "text": "- Temporary or permanent suspension of accounts. ",
+      "text": "- Temporary or permanent suspension of accounts.",
       "translation": "- खातों का अस्थायी या स्थायी निलंबन।"
     },
     {
@@ -56,7 +92,7 @@ export const HindiLang=[
       "translation": "- व्यक्तिगत लाभ के लिए प्रतिक्रिया में हेरफेर करने के लिए कई खातों या मतदान सॉफ्टवेयर का उपयोग करना।"
     },
     {
-      "text": "- “Log files” track actions occurring on the Site, and collect data including your IP address,browser type, Internet service provider, referring/exit pages, and date/time stamps.",
+      "text": "- “Log files” track actions occurring on the Site, and collect data including your IP address, browser type, Internet service provider, referring/exit pages, and date/time stamps.",
       "translation": "- \"लॉग फाइलें\"साइट पर होने वाली कार्रवाइयों को ट्रैक करें, और अपने आईपी पते, ब्राउज़र प्रकार, इंटरनेट सेवा प्रदाता, पृष्ठों का हवाला देते हुए और दिनांक / समय टिकटों सहित डेटा एकत्र करें।"
     },
     {
@@ -124,7 +160,7 @@ export const HindiLang=[
       "translation": "एक परामर्श जोड़ें"
     },
     {
-      "text": "Add a Consultation  ",
+      "text": "Add a Consultation",
       "translation": "एक परामर्श जोड़ें"
     },
     {
@@ -144,8 +180,8 @@ export const HindiLang=[
       "translation": "मंत्रालय जोड़ें"
     },
     {
-      "text": "Additionally, you can opt out of some of these services by visiting the Digital Advertising Alliance’s opt-out portal at:",
-      "translation": "इसके अतिरिक्त, आप डिजिटल विज्ञापन एलायंस के ऑप्ट-आउट पोर्टल पर जाकर इनमें से कुछ सेवाओं से बाहर निकल सकते हैं:"
+      "text": "Additionally, you can opt out of some of these services by visiting the Digital Advertising Alliance’s opt-out portal at: ",
+      "translation": "इसके अतिरिक्त, आप डिजिटल विज्ञापन एलायंस के ऑप्ट-आउट पोर्टल पर जाकर इनमें से कुछ सेवाओं से बाहर निकल सकते हैं: "
     },
     {
       "text": "Already have an account with Civis?",
@@ -156,7 +192,7 @@ export const HindiLang=[
       "translation": "सेवा की इन शर्तों की व्याख्या में किसी भी अस्पष्टता को मसौदा तैयार करने वाली पार्टी के खिलाफ नहीं माना जाएगा।"
     },
     {
-      "text": "Any media that is pornographic and/or may be intended to cause sexual arousal is prohibited. ",
+      "text": "Any media that is pornographic and/or may be intended to cause sexual arousal is prohibited.",
       "translation": "कोई भी मीडिया जो अश्लील है और / या यौन उत्तेजना का कारण बन सकता है, निषिद्ध है।"
     },
     {
@@ -172,7 +208,7 @@ export const HindiLang=[
       "translation": "आपके द्वारा साइट के माध्यम से पेश किए गए वैकल्पिक उपकरणों का कोई भी उपयोग पूरी तरह से आपके स्वयं के जोखिम और विवेक पर है और आपको यह सुनिश्चित करना चाहिए कि आप संबंधित तृतीय-पक्ष प्रदाता (ओं) द्वारा प्रदान की जाने वाली शर्तों से परिचित हों और स्वीकृत करें।"
     },
     {
-      "text": "As described above, we use your Information to provide you with targeted advertisements or marketing communications we believe may be of interest to you.  For more information about how targeted advertising works, you can visit the Network Advertising Initiative’s (“NAI”) educational page at",
+      "text": "As described above, we use your Information to provide you with targeted advertisements or marketing communications we believe may be of interest to you. For more information about how targeted advertising works, you can visit the Network Advertising Initiative’s (“NAI”) educational page at",
       "translation": "जैसा कि ऊपर वर्णित है, हम आपकी जानकारी का उपयोग आपको लक्षित विज्ञापनों या विपणन संचार प्रदान करने के लिए करते हैं, हमारा मानना है कि यह आपके लिए रुचि का हो सकता है। लक्षित विज्ञापन कैसे काम करता है, इसके बारे में अधिक जानकारी के लिए, आप नेटवर्क विज्ञापन पहल (\"NAI\") शैक्षिक पृष्ठ पर जा सकते हैं"
     },
     {
@@ -189,10 +225,10 @@ export const HindiLang=[
     },
     {
       "text": "BEHAVIOURAL ADVERTISING",
-      "translation": "BEHAVIORAL विज्ञापन"
+      "translation": "व्यवहार विज्ञापन"
     },
     {
-      "text": "Bengaluru Development Authority  ",
+      "text": "Bengaluru Development Authority",
       "translation": "बेंगलुरु विकास प्राधिकरण"
     },
     {
@@ -464,7 +500,7 @@ export const HindiLang=[
       "translation": "पर समाप्त हुआ"
     },
     {
-      "text": "ENFORCEMENT ",
+      "text": "ENFORCEMENT",
       "translation": "प्रवर्तन"
     },
     {
@@ -496,7 +532,7 @@ export const HindiLang=[
       "translation": "प्रतिक्रिया हेरफेर:"
     },
     {
-      "text": "Finally, we may also share your Information to comply with applicable laws and regulations,to respond to a subpoena, search warrant or other lawful request for information we receive,or to otherwise protect our rights. We may also, in other instances,share information with your express consent or at your direction. ",
+      "text": "Finally, we may also share your Information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights. We may also, in other instances,share information with your express consent or at your direction.",
       "translation": "अंत में, हम लागू कानूनों और नियमों का पालन करने के लिए आपकी जानकारी साझा कर सकते हैं, जो कि हमें प्राप्त होने वाली जानकारी के लिए, या फिर अपने अधिकारों की रक्षा करने के लिए, किसी सबपोना, खोज वारंट या अन्य वैध अनुरोध का जवाब देने के लिए हो सकता है। हम अन्य उदाहरणों में भी, आपकी सहमति या आपके निर्देश पर जानकारी साझा कर सकते हैं।"
     },
     {
@@ -533,7 +569,7 @@ export const HindiLang=[
     },
     {
       "text": "FullStory to analyze your use of our products, services, or applications – you can read more about how FullStory uses your information here:",
-      "translation": "FullStory हमारे उत्पादों, सेवाओं, या अनुप्रयोगों के आपके उपयोग का विश्लेषण करने के लिए - आप और अधिक पढ़ सकते हैं कि FullStory आपकी जानकारी का उपयोग यहाँ कैसे करता है:"
+      "translation": "पूरी कहानी हमारे उत्पादों, सेवाओं, या अनुप्रयोगों के आपके उपयोग का विश्लेषण करने के लिए - आप और अधिक पढ़ सकते हैं कि पूरी कहानी आपकी जानकारी का उपयोग यहाँ कैसे करता है:"
     },
     {
       "text": "Get in touch",
@@ -557,7 +593,7 @@ export const HindiLang=[
     },
     {
       "text": "Google Analytics to help us understand how our users use the Site--you can read more about how Google uses your Information here:",
-      "translation": "Google Analytics यह समझने में हमारी मदद करता है कि हमारे उपयोगकर्ता साइट का उपयोग कैसे करते हैं - आप Google के बारे में अधिक जानकारी यहाँ पढ़ सकते हैं:"
+      "translation": "Google एनालिटिक्स यह समझने में हमारी मदद करता है कि हमारे उपयोगकर्ता साइट का उपयोग कैसे करते हैं - आप Google के बारे में अधिक जानकारी यहाँ पढ़ सकते हैं:"
     },
     {
       "text": "Government Email ID to submit feedback",
@@ -612,7 +648,7 @@ export const HindiLang=[
       "translation": "यदि हमारे एकमात्र निर्णय में आप विफल होते हैं, या हमें संदेह है कि आप विफल रहे हैं, तो सेवा की इन शर्तों के किसी भी शब्द या प्रावधान का पालन करने के लिए, हम बिना किसी नोटिस के किसी भी समय इस समझौते को समाप्त कर सकते हैं और / या तदनुसार आप तक पहुंच से इनकार कर सकते हैं सेवा (या उसका कोई भाग)।"
     },
     {
-      "text": "If you are an Indian resident, you have the right to access personal information we hold about you and to ask that your personal information be corrected, updated, or deleted.If you would like to exercise this right, please contact us through the contact information below. ",
+      "text": "If you are an Indian resident, you have the right to access personal information we hold about you and to ask that your personal information be corrected, updated, or deleted.If you would like to exercise this right, please contact us through the contact information below.",
       "translation": "यदि आप एक भारतीय निवासी हैं, तो हमारे पास आपके पास मौजूद व्यक्तिगत जानकारी को एक्सेस करने और यह पूछने का अधिकार है कि आपकी व्यक्तिगत जानकारी को सही, अपडेट या डिलीट किया जाए। यदि आप इस अधिकार का प्रयोग करना चाहते हैं, तो कृपया नीचे दी गई संपर्क जानकारी के माध्यम से हमसे संपर्क करें।"
     },
     {
@@ -636,7 +672,7 @@ export const HindiLang=[
       "translation": "हमारी साइट में सुधार और अनुकूलन करें (उदाहरण के लिए, हमारे ग्राहकों द्वारा साइट के साथ ब्राउज़ और इंटरैक्ट कैसे करें, और हमारे मार्केटिंग अभियानों की सफलता का आकलन करने के बारे में विश्लेषण करके); तथा"
     },
     {
-      "text": "In addition to other prohibitions as set forth in the Terms of Service, you are prohibited from using the site or its content: (a) for any unlawful purpose;(b) to solicit others to perform or participate in any unlawful acts; (c) to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances;(d) to infringe upon or violate our intellectual property rights or the intellectual property rights of others;(e) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability;(f) to submit false or misleading information; (g) to upload or transmit viruses or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the Service or of any related website, other websites, or the Internet;(h) to collect or track the personal information of others; (i) to spam, phish, pharm, pretext, spider, crawl, or scrape;(j) for any obscene or immoral purpose; or (k) to interfere with or circumvent the security features of the Service or any related website, other websites, or the Internet. We reserve the right to terminate your use of the Service or any related website for violating any of the prohibited uses.",
+      "text": "In addition to other prohibitions as set forth in the Terms of Service, you are prohibited from using the site or its content: (a) for any unlawful purpose; (b) to solicit others to perform or participate in any unlawful acts; (c) to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances; (d) to infringe upon or violate our intellectual property rights or the intellectual property rights of others; (e) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability; (f) to submit false or misleading information; (g) to upload or transmit viruses or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the Service or of any related website, other websites, or the Internet; (h) to collect or track the personal information of others; (i) to spam, phish, pharm, pretext, spider, crawl, or scrape; (j) for any obscene or immoral purpose; or (k) to interfere with or circumvent the security features of the Service or any related website, other websites, or the Internet. We reserve the right to terminate your use of the Service or any related website for violating any of the prohibited uses.",
       "translation": "सेवा की शर्तों में उल्लिखित अन्य निषेधों के अलावा, आपको साइट या इसकी सामग्री का उपयोग करने से प्रतिबंधित किया जाता है: (क) किसी गैरकानूनी उद्देश्य के लिए; (ख) किसी गैरकानूनी कार्य में भाग लेने या भाग लेने के लिए दूसरों को याचना करना; (ग) किसी भी अंतर्राष्ट्रीय, संघीय, प्रांतीय या राज्य के नियमों, नियमों, कानूनों या स्थानीय अध्यादेशों का उल्लंघन करने के लिए; (डी) हमारे बौद्धिक संपदा अधिकारों या दूसरों के बौद्धिक संपदा अधिकारों का उल्लंघन या उल्लंघन करने के लिए; (ई) लिंग, यौन अभिविन्यास, धर्म, जातीयता, नस्ल, आयु, राष्ट्रीय मूल, या विकलांगता के आधार पर उत्पीड़न, दुर्व्यवहार, अपमान, हानि, बदनामी, बदनामी, डराना, धमकाना या भेदभाव करना; (च) गलत या भ्रामक जानकारी जमा करना; (छ) वायरस या किसी अन्य प्रकार के दुर्भावनापूर्ण कोड को अपलोड या प्रसारित करने के लिए जो किसी भी तरह से या किसी भी संबंधित वेबसाइट, अन्य वेबसाइटों, या इंटरनेट की सेवा या संचालन की कार्यक्षमता को प्रभावित करेगा या किया जा सकता है; (ज) दूसरों की व्यक्तिगत जानकारी एकत्र या ट्रैक करना; (i) स्पैम, फिश, फार्मा, प्रीटेक्स्ट, स्पाइडर, क्रॉल या स्क्रैप; (जे) किसी भी अश्लील या अनैतिक उद्देश्य के लिए; या (के) सेवा या किसी भी संबंधित वेबसाइट, अन्य वेबसाइटों, या इंटरनेट की सुरक्षा सुविधाओं के साथ हस्तक्षेप करने या उन्हें रोकने के लिए। हम किसी भी निषिद्ध उपयोग के उल्लंघन के लिए सेवा या किसी भी संबंधित वेबसाइट के आपके उपयोग को समाप्त करने का अधिकार सुरक्षित रखते हैं।"
     },
     {
@@ -660,7 +696,7 @@ export const HindiLang=[
       "translation": "किसी भी स्थिति में, हमारे निदेशक, अधिकारी, कर्मचारी, सहयोगी, एजेंट, ठेकेदार, प्रशिक्षु, आपूर्तिकर्ता, सेवा प्रदाता या लाइसेंसकर्ता किसी भी चोट, नुकसान, दावे या किसी प्रत्यक्ष, अप्रत्यक्ष, आकस्मिक, दंडात्मक, विशेष, या के लिए उत्तरदायी नहीं होंगे। बिना किसी नुकसान के, बिना लाभ गंवाए राजस्व, खोई हुई बचत, डेटा की हानि, प्रतिस्थापन लागत, या किसी भी तरह के नुकसान सहित, किसी भी तरह का परिणामी नुकसान, चाहे अनुबंध में आधारित हो, यातना (लापरवाही सहित), सख्त देयता या अन्यथा, आपके द्वारा उत्पन्न होने वाली सेवा का उपयोग करके खरीदी गई किसी भी सेवा या किसी भी उत्पाद का उपयोग, या किसी भी तरह से संबंधित किसी भी तरह से आपके सेवा या किसी भी उत्पाद के उपयोग से संबंधित दावे के लिए, लेकिन किसी भी सामग्री में किसी भी त्रुटि या चूक तक सीमित नहीं है, या किसी भी सेवा के उपयोग के परिणामस्वरूप होने वाली किसी भी तरह की हानि या क्षति या पोस्ट की गई, प्रसारित, या अन्यथा सेवा के माध्यम से उपलब्ध कराई गई किसी भी सामग्री (या उत्पाद) के परिणामस्वरूप, भले ही उनकी संभावना की सलाह दी गई हो। क्योंकि कुछ राज्य या क्षेत्राधिकार परिणामी या आकस्मिक क्षति के लिए बहिष्करण या दायित्व की सीमा की अनुमति नहीं देते हैं, ऐसे राज्यों या न्यायालयों में, हमारा दायित्व कानून द्वारा अनुमत अधिकतम सीमा तक सीमित होगा।"
     },
     {
-      "text": "In the event that any provision of these Terms of Service is determined to be unlawful, void or unenforceable,such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law,and the unenforceable portion shall be deemed to be severed from these Terms of Service,such determination shall not affect the validity and enforceability of any other remaining provisions.",
+      "text": "In the event that any provision of these Terms of Service is determined to be unlawful, void or unenforceable, such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law, and the unenforceable portion shall be deemed to be severed from these Terms of Service,such determination shall not affect the validity and enforceability of any other remaining provisions.",
       "translation": "ऐसी स्थिति में कि सेवा की इन शर्तों का कोई भी प्रावधान गैरकानूनी, शून्य या अप्राप्य होने के लिए निर्धारित किया जाता है, इस तरह के प्रावधान को लागू कानून द्वारा अनुमत पूर्ण सीमा तक लागू किया जा सकता है, और अप्रवर्तनीय हिस्से को इन शर्तों से अलग माना जाएगा सेवा, इस तरह के दृढ़ संकल्प किसी अन्य शेष प्रावधानों की वैधता और प्रवर्तनीयता को प्रभावित नहीं करेगा।"
     },
     {
@@ -928,11 +964,11 @@ export const HindiLang=[
       "translation": "जारी रखने के लिए कृपया हमारी सेवा की शर्तें और गोपनीयता नीति स्वीकार करें।"
     },
     {
-      "text": "Please note that we do not alter our Site’s data collection and use practices when we see a Do Not Track signal from your browser.Instead, we offer the choices described in this policy to manage the collection and use of the Information about you.",
+      "text": "Please note that we do not alter our Site’s data collection and use practices when we see a Do Not Track signal from your browser. Instead, we offer the choices described in this policy to manage the collection and use of the Information about you.",
       "translation": "कृपया ध्यान दें कि जब हम अपने ब्राउज़र से Do Not Track सिग्नल देखते हैं तो हम अपनी साइट के डेटा संग्रह में परिवर्तन नहीं करते हैं और प्रथाओं का उपयोग नहीं करते हैं। इसके बजाय, हम आपके बारे में जानकारी के संग्रह और उपयोग को प्रबंधित करने के लिए इस नीति में वर्णित विकल्पों की पेशकश करते हैं।"
     },
     {
-      "text": "Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service.If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service.",
+      "text": "Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service.",
       "translation": "हमारी वेबसाइट तक पहुँचने या उपयोग करने से पहले कृपया इन सेवा की शर्तों को ध्यान से पढ़ें। साइट के किसी भी भाग तक पहुँचने या उपयोग करने से, आप इन सेवा की शर्तों से बंधे होने के लिए सहमत होते हैं। यदि आप इस समझौते के सभी नियमों और शर्तों से सहमत नहीं हैं, तो आप वेबसाइट तक नहीं पहुंच सकते हैं और न ही किसी सेवा का उपयोग कर सकते हैं। यदि सेवा की इन शर्तों को एक प्रस्ताव माना जाता है, तो स्वीकृति सेवा की इन शर्तों तक सीमित है।"
     },
     {
@@ -981,7 +1017,7 @@ export const HindiLang=[
     },
     {
       "text": "PROHIBITED BEHAVIOUR ",
-      "translation": "प्रोहिबैक्ट BEHAVIOR"
+      "translation": "प्रोहिबैक्ट व्यवहार"
     },
     {
       "text": "Provide you with information or advertising relating to the Services.",
@@ -1288,7 +1324,7 @@ export const HindiLang=[
       "translation": "एक प्रतिक्रिया सबमिट करें"
     },
     {
-      "text": "Submit a Response  ",
+      "text": "Submit a Response",
       "translation": "एक प्रतिक्रिया भेजें"
     },
     {
@@ -1548,7 +1584,7 @@ export const HindiLang=[
       "translation": "हम निम्नलिखित तकनीकों का उपयोग कर डिवाइस जानकारी एकत्र करते हैं:"
     },
     {
-      "text": "We collect information about the actions you take when using the Services.This includes your interactions with content like voting, posting, saving and reporting content.It also includes your interactions with other users.",
+      "text": "We collect information about the actions you take when using the Services. This includes your interactions with content like voting, posting, saving and reporting content. It also includes your interactions with other users.",
       "translation": "हम सेवाओं का उपयोग करते समय आपके द्वारा किए जाने वाले कार्यों के बारे में जानकारी एकत्र करते हैं। इसमें सामग्री, मतदान, पोस्टिंग, बचत और रिपोर्टिंग सामग्री जैसी आपकी सहभागिता शामिल है। इसमें अन्य उपयोगकर्ताओं के साथ आपकी सहभागिता भी शामिल है।"
     },
     {
@@ -1560,7 +1596,7 @@ export const HindiLang=[
       "translation": "जब आप सेवाओं का उपयोग करते हैं तो हम आपको हमारे द्वारा प्रदान की गई जानकारी को सीधे एकत्र करते हैं। यह भी शामिल है:"
     },
     {
-      "text": "We collect the content you submit to the Services.This includes your posts and comments, your messages to other users of the Site, moderators and to us.Your content may include text, links, images, gifs and videos.",
+      "text": "We collect the content you submit to the Services. This includes your posts and comments, your messages to other users of the Site, moderators and to us. Your content may include text, links, images, gifs and videos.",
       "translation": "हम आपके द्वारा सबमिट की गई सामग्री को सेवाओं में एकत्रित करते हैं। इसमें आपकी पोस्ट और टिप्पणियां, साइट के अन्य उपयोगकर्ताओं, मध्यस्थों और हमारे लिए आपके संदेश शामिल हैं। आपकी सामग्री में पाठ, लिंक, चित्र, gif और वीडियो शामिल हो सकते हैं।"
     },
     {
@@ -1596,7 +1632,7 @@ export const HindiLang=[
       "translation": "हम आपको तृतीय-पक्ष टूल तक पहुंच प्रदान कर सकते हैं, जिस पर हम न तो निगरानी करते हैं और न ही कोई नियंत्रण है और न ही इनपुट।"
     },
     {
-      "text": "We may update this privacy policy from time to time in order to reflect,for example, changes to our practices or for other operational, legal or regulatory reasons.We encourage you to review the Privacy Policy whenever you access or use the Services or otherwiseinteract with us to stay informed about our information practices and the ways you can help protect your privacy.By continuing to use the Services after Privacy Policy changes go into effect, you agree to be bound bythe revised policy.",
+      "text": "We may update this privacy policy from time to time in order to reflect, for example, changes to our practices or for other operational, legal or regulatory reasons. We encourage you to review the Privacy Policy whenever you access or use the Services or otherwise interact with us to stay informed about our information practices and the ways you can help protect your privacy. By continuing to use the Services after Privacy Policy changes go into effect, you agree to be bound bythe revised policy.",
       "translation": "उदाहरण के लिए, हमारी प्रथाओं में परिवर्तन या अन्य परिचालन, कानूनी या नियामक कारणों से हम इस गोपनीयता नीति को समय-समय पर अपडेट कर सकते हैं। जब भी आप सेवाओं तक पहुँचते हैं या उनका उपयोग करते हैं या हमारी जानकारी प्रथाओं के बारे में सूचित रहने के लिए और हमारी गोपनीयता की रक्षा करने में आपकी मदद कर सकते हैं, तो हम आपको गोपनीयता नीति की समीक्षा करने के लिए प्रोत्साहित करते हैं। गोपनीयता नीति परिवर्तन प्रभावी होने के बाद सेवाओं का उपयोग जारी रखने से, आप संशोधित नीति से बाध्य होने के लिए सहमत होते हैं।"
     },
     {
@@ -1636,7 +1672,7 @@ export const HindiLang=[
       "translation": "सेवा के किसी भी संशोधन, मूल्य परिवर्तन, निलंबन या विघटन के लिए हम आपके या किसी तीसरे पक्ष के प्रति उत्तरदायी नहीं होंगे।"
     },
     {
-      "text": "We share your Information with third parties when required for the purposes described above.For example, we use Disqus on our web application --you can read more about how Disqus uses your Information here:",
+      "text": "We share your Information with third parties when required for the purposes described above. For example, we use Disqus on our web application --you can read more about how Disqus uses your Information here:",
       "translation": "उपरोक्त वर्णित उद्देश्यों के लिए आवश्यक होने पर हम आपकी जानकारी तृतीय पक्षों के साथ साझा करते हैं। उदाहरण के लिए, हम अपने वेब एप्लिकेशन पर Disqus का उपयोग करते हैं - आप इस बारे में अधिक पढ़ सकते हैं कि Disqus आपकी जानकारी का यहां कैसे उपयोग करता है:"
     },
     {
@@ -1712,7 +1748,7 @@ export const HindiLang=[
       "translation": "जबकि Civis सामग्री में काफी उत्तोलन प्रदान करता है, इसे स्वीकार्य मानता है, कुछ विशेष प्रकार की सामग्री अवांछित होती है।"
     },
     {
-      "text": "Why Participate, You Ask? ",
+      "text": "Why Participate, You Ask?",
       "translation": "क्यों भाग लेते हैं, आप पूछते हैं?"
     },
     {
@@ -1744,12 +1780,12 @@ export const HindiLang=[
       "translation": "आप सहमत हैं कि आपकी टिप्पणियां कॉपीराइट, ट्रेडमार्क, गोपनीयता, व्यक्तित्व या अन्य व्यक्तिगत या मालिकाना अधिकार सहित किसी भी तृतीय-पक्ष के किसी भी अधिकार का उल्लंघन नहीं करेंगी। आप आगे सहमत हैं कि आपकी टिप्पणियों में अपमानजनक या अन्यथा गैरकानूनी, अपमानजनक या अश्लील सामग्री नहीं होगी, या किसी भी कंप्यूटर वायरस या अन्य मैलवेयर शामिल होंगे जो किसी भी तरह से सेवा या किसी संबंधित वेबसाइट के संचालन को प्रभावित कर सकते हैं। आप किसी गलत ई-मेल पते का उपयोग नहीं कर सकते हैं, खुद के अलावा किसी और के होने का दिखावा कर सकते हैं, या किसी भी टिप्पणी के मूल के रूप में हमें या तीसरे पक्ष को भ्रमित कर सकते हैं। आपके द्वारा की जाने वाली किसी भी टिप्पणी और उनकी सटीकता के लिए आप पूरी तरह से जिम्मेदार हैं। हम कोई जिम्मेदारी नहीं लेते हैं और आपके या किसी तीसरे पक्ष द्वारा पोस्ट की गई टिप्पणियों के लिए कोई दायित्व नहीं मानते हैं।"
     },
     {
-      "text": "You agree to indemnify, defend and hold harmless Civis and our parent, subsidiaries, affiliates, partners, officers,directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns and employees,harmless from any claim or demand, including reasonable attorneys’ fees, made by any third-party due to or arisingout of your breach of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party. ",
+      "text": "You agree to indemnify, defend and hold harmless Civis and our parent, subsidiaries, affiliates, partners, officers,directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns and employees,harmless from any claim or demand, including reasonable attorneys’ fees, made by any third-party due to or arisingout of your breach of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party.",
       "translation": "आप हानिरहित सिविस और हमारे माता-पिता, सहायक, सहयोगी, साझेदार, अधिकारी, निदेशक, एजेंट, ठेकेदार, लाइसेंसकर्ता, सेवा प्रदाता, उपठेकेदार, आपूर्तिकर्ता, प्रशिक्षु और कर्मचारी, किसी भी दावे या मांग से हानिरहित, उचित सहित सहित, क्षतिपूर्ति, बचाव और पकड़ के लिए सहमत हैं। वकीलों की फीस, किसी भी तृतीय-पक्ष द्वारा बनाई गई, या सेवा की इन शर्तों के उल्लंघन के कारण उत्पन्न होती है या वे दस्तावेज जो वे संदर्भ द्वारा शामिल करते हैं, या किसी कानून के उल्लंघन या किसी तीसरे पक्ष के अधिकारों का उल्लंघन करते हैं।"
     },
     {
       "text": "You can also opt-out of Google Analytics here: ",
-      "translation": "आप यहां Google Analytics से ऑप्ट-आउट भी कर सकते हैं:"
+      "translation": "आप यहां Google एनालिटिक्स से ऑप्ट-आउट भी कर सकते हैं: "
     },
     {
       "text": "You can opt out of targeted advertising by visiting:",
@@ -1768,7 +1804,7 @@ export const HindiLang=[
       "translation": "आप सजा से बचने या प्रतिबंधों से बचने के लिए कई खाते नहीं बना सकते हैं।"
     },
     {
-      "text": "You may not post your own personal information or personal information of any other individual in the feedback section of Civis.   Posting such information is not permitted, even if consent is granted to post confidential information on the platform. ",
+      "text": "You may not post your own personal information or personal information of any other individual in the feedback section of Civis. Posting such information is not permitted, even if consent is granted to post confidential information on the platform.",
       "translation": "आप सिविस के फीडबैक सेक्शन में अपनी निजी जानकारी या किसी अन्य व्यक्ति की व्यक्तिगत जानकारी पोस्ट नहीं कर सकते। ऐसी जानकारी पोस्ट करने की अनुमति नहीं है, भले ही प्लेटफॉर्म पर गोपनीय जानकारी पोस्ट करने के लिए सहमति दी गई हो।"
     },
     {

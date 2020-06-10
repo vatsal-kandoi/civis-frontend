@@ -159,7 +159,9 @@
         </div>
         <div class="col-md-2">
           <div class="stats-info__heading">
-            {{'Rank in ' + currentUser?.city?.name | uppercase}}
+            {{'RANK IN' | translate}} 
+            &nbsp;
+            {{ currentUser?.city?.name | uppercase}}
           </div>
           <div class="stats-info__rewards">
             {{currentUser?.cityRank ? currentUser?.cityRank : '-'}}
@@ -167,7 +169,9 @@
         </div>
         <div class="col-md-2">
           <div class="stats-info__heading">
-            {{'Rank in ' + currentUser?.city?.parent?.name | uppercase}}
+            {{'RANK IN' | translate}} 
+            &nbsp;
+            {{ currentUser?.city?.parent?.name | uppercase}}
           </div>
           <div class="stats-info__rewards">
             {{currentUser?.stateRank ? currentUser?.stateRank : '-'}}

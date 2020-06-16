@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: 'auth-private',
+    loadChildren: () => import('./modules/auth-private/auth-private.module').then(m => m.AuthPrivateModule)
+  },
+  {
     path: 'consultations',
     loadChildren: () => import('./modules/consultations/consultations.module').then(m => m.ConsultationsModule)
   },

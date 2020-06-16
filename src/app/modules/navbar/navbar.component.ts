@@ -140,7 +140,10 @@ export class NavbarComponent implements OnInit {
     .subscribe((data: any) => {
         this.reviewType  = data.reviewType;
     }, err => {
-      this.errorService.showErrorModal(err);
+      const e = new Error(err);
+      if (!e.message.includes('Invalid Access Token')) {
+        this.errorService.showErrorModal(err);
+      }
     });
   }
 

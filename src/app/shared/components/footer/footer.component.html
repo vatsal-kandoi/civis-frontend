@@ -3,15 +3,15 @@
     <div class="footer-wrapper__top-section">
       <div class="left-item">
         <ul class="item-list">
-          <li [routerLink]="['/about-us']">About Us</li>
+          <li [routerLink]="['/about-us']">{{'About Us' | translate}}</li>
           <a href="https://medium.com/civis-vote" target="_blank" class="text-decoration-none">
-            <li>Blog</li>
+            <li>{{'Blog' | translate}}</li>
           </a>
         </ul>
         <ul class="item-list">
-          <li [routerLink]="['/terms']">Terms of Service</li>
-          <li [routerLink]="['/privacy']">Privacy Policy </li>
-          <li [routerLink]="['/content-policy']">Content Policy</li>
+          <li [routerLink]="['/terms']">{{'Terms of Service' | translate}}</li>
+          <li [routerLink]="['/privacy']">{{'Privacy Policy' | translate}} </li>
+          <li [routerLink]="['/content-policy']">{{'Content Policy' | translate}}</li>
         </ul>
       </div>
       <div class="right-item">
@@ -29,7 +29,7 @@
             <span><i class="fa fa-twitter-square"></i></span>
           </a>
         </div>
-        <p class="help-text">We’re here to help. <b><a href="mailto:info@civis.vote">Get in touch</a></b></p>
+        <p class="help-text">{{'We’re here to help.' | translate}} <b><a href="mailto:info@civis.vote">{{'Get in touch' | translate}}</a></b></p>
       </div>
     </div>
     <div class="footer-wrapper__bottom-section">
@@ -45,11 +45,21 @@
           <img src="assets/images/footerlogo-1.jpg" alt="footer logo" />
         </picture>
         <div class="policy-text">
-          Civic Innovation Foundation 2019. Unless otherwise mentioned,
-          all content is licensed under <br /> a creative commons Attibution-No Derivates 4.0 International License
+          {{'Civic Innovation Foundation 2019. Unless otherwise mentioned,
+          all content is licensed under' | translate}} <br />&nbsp;{{'a creative commons Attibution-No Derivates 4.0 International License' | translate}}
         </div>
       </div>
       <div class="logo-right">
+        <div class="mr-2 language-box">
+          <ng-select 
+          [items]="languages" bindLabel="name" dropdownPosition="bottom"
+          bindValue="id"
+          [clearable]="false"
+          [searchable]="false"
+          (change)="setLanguage()"
+          [(ngModel)]="selectedLanguage">
+          </ng-select>
+        </div>
         <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">
           <picture>
             <source srcset="assets/images/footerlogo3.webp" type="image/webp">

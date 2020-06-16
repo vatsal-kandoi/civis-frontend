@@ -5,6 +5,7 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
 import { Routes, RouterModule } from '@angular/router';
 import { ContentPolicyComponent } from './content-policy/content-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedComponentsModule
+    SharedComponentsModule,
+    PipesModule
   ],
   exports: [
     TermsOfServiceComponent

@@ -4,7 +4,7 @@ import { ConsultationListComponent } from './consultation-list/consultation-list
 import { CommonModule } from '@angular/common';
 import { ConsultationsRoutingModule } from './consultations-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { SharedDirectivesModule } from 'src/app/shared/directives/shared-directives.module';
 import { ConsultationProfileComponent } from './consultation-profile/consultation-profile.component';
@@ -22,12 +22,15 @@ import { ShareButtonModule } from '@ngx-share/button';
 import { ConfirmEmailModule } from 'src/app/shared/confirm-email-modal/confirm-email.module';
 import { UserProfileModalModule } from 'src/app/shared/user-profile-modal/user-profile-modal.module';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     imports: [
         CommonModule,
         ConsultationsRoutingModule,
         FormsModule,
+        ReactiveFormsModule,
         SharedComponentsModule,
         SharedDirectivesModule,
         NgSelectModule,
@@ -41,6 +44,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
         ConfirmEmailModule,
         UserProfileModalModule,
         CKEditorModule,
+        PipesModule,
     ],
     exports: [TooltipModule],
     declarations: [
@@ -53,6 +57,6 @@ import { CKEditorModule } from 'ng2-ckeditor';
         ReadRespondComponent,
         DiscussEngageComponent,
     ],
-    providers: []
+    providers: [CookieService]
 })
 export class ConsultationsModule { }

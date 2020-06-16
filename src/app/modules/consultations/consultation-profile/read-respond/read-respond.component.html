@@ -112,7 +112,10 @@
           <label class="m-0">{{'Make my response public' | translate}}</label>
           <span class="link">{{'What does this mean?' | translate}}</span>
         </div>
-        <p class="auto-save-text" *ngIf="showAutoSaved">{{'Draft autosaved' | translate}}</p>
+        <div class="d-flex">
+            <p class="auto-save-text mr-2" *ngIf="showAutoSaved">{{'Draft autosaved' | translate}}</p>
+            <p class="auto-save-text pointer" (click)="autoSave(responseText)">{{'Save as Draft' | translate}}</p>
+        </div>
       </div>
       <div class="draggable-area">
         <span class="drag-bars"></span>

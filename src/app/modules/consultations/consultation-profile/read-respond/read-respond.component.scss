@@ -60,6 +60,7 @@
 
         .active {
           color: $primary-color !important;
+          background-color: #fff;
 
           &__btn {
             border: 1px solid $primary-color;

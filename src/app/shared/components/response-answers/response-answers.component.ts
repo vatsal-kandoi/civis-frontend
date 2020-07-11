@@ -21,6 +21,7 @@ export class ResponseAnswersComponent implements OnInit {
         let answer = {};
         if (this.questions && this.questions.length) {
           const responseQuestion = this.questions.find((question) => +question.id === +item.question_id);
+          if (responseQuestion) {
           if (responseQuestion.questionType === 'multiple_choice') {
             answer = this.getMultiChoiceAnswer(responseQuestion, item.answer);
           } else  if (responseQuestion.questionType === 'checkbox') {
@@ -33,6 +34,7 @@ export class ResponseAnswersComponent implements OnInit {
               answer: item.answer
             };
           }
+        }
         }
         responseAnswers.push(answer);
       });

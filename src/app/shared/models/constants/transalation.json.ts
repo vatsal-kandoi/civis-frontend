@@ -68,16 +68,16 @@ export const HindiLang = [
     "translation": "3251 नागरिक नेताओं ने भाग लिया"
   },
   {
-    "text": "A Public Consultation is the process through which the Government asks for your feedback on policies that impact you.",
-    "translation": "एक सार्वजनिक परामर्श वह प्रक्रिया है जिसके माध्यम से सरकार उन नीतियों पर आपकी प्रतिक्रिया मांगती है जो आपको प्रभावित करती हैं।"
-  },
-  {
     "text": "A breach or violation of any of the Terms will result in an immediate termination of your Services.",
     "translation": "किसी भी नियम का उल्लंघन या उल्लंघन करने पर आपकी सेवाओं की तत्काल समाप्ति हो जाएगी।"
   },
   {
-    "text": "ADD A MINISTRY",
-    "translation": "एक मिनट जोड़ें"
+    "text": "a creative commons Attibution-No Derivates 4.0 International License",
+    "translation": "क्रिएटिव कॉमन्स एटिब्यूशन-नो डेरिवेट्स 4.0 इंटरनेशनल लाइसेंस"
+  },
+  {
+    "text": "A Public Consultation is the process through which the Government asks for your feedback on policies that impact you.",
+    "translation": "एक सार्वजनिक परामर्श वह प्रक्रिया है जिसके माध्यम से सरकार उन नीतियों पर आपकी प्रतिक्रिया मांगती है जो आपको प्रभावित करती हैं।"
   },
   {
     "text": "About Us",
@@ -96,6 +96,10 @@ export const HindiLang = [
     "translation": "उपलब्धियां"
   },
   {
+    "text": "action-button works!",
+    "translation": "कार्रवाई बटन काम करता है!"
+  },
+  {
     "text": "Actions you take:",
     "translation": "आपके द्वारा लिया गया कार्य:"
   },
@@ -112,10 +116,6 @@ export const HindiLang = [
     "translation": "एक परामर्श जोड़ें"
   },
   {
-    "text": "Add Ministry",
-    "translation": "मंत्रालय जोड़ें"
-  },
-  {
     "text": "Add a Consultation",
     "translation": "एक परामर्श जोड़ें"
   },
@@ -126,6 +126,14 @@ export const HindiLang = [
   {
     "text": "Add a few details about the consultation, our moderators will take a look and make it public!",
     "translation": "परामर्श के बारे में कुछ विवरण जोड़ें, हमारे मध्यस्थ एक नज़र रखेंगे और इसे सार्वजनिक करेंगे!"
+  },
+  {
+    "text": "ADD A MINISTRY",
+    "translation": "एक मिनट जोड़ें"
+  },
+  {
+    "text": "Add Ministry",
+    "translation": "मंत्रालय जोड़ें"
   },
   {
     "text": "Additionally, you can opt out of some of these services by visiting the Digital Advertising Alliance’s opt-out portal at: ",
@@ -164,12 +172,24 @@ export const HindiLang = [
     "translation": "सिविस में, हम मानते हैं कि यह आप ही हैं जो जानते हैं कि आपके समुदाय के लिए सबसे अच्छा क्या है। हम नागरिकों और सरकारों के बीच एक सेतु का निर्माण कर रहे हैं, ताकि यह सुनिश्चित किया जा सके कि लोगों की आवाज को न केवल सुना जाए बल्कि स्वीकार किया जाए और उन पर कार्रवाई की जाए।"
   },
   {
+    "text": "Back",
+    "translation": "वापस"
+  },
+  {
     "text": "BACK TO CONSULTATION INFO  ",
     "translation": "वापसी जानकारी के लिए"
   },
   {
     "text": "BEHAVIOURAL ADVERTISING",
     "translation": "व्यवहार विज्ञापन"
+  },
+  {
+    "text": "Bengaluru Development Authority",
+    "translation": "बेंगलुरु विकास प्राधिकरण"
+  },
+  {
+    "text": "Bengaluru Revised Master Plan, 2031",
+    "translation": "बेंगलुरु संशोधित मास्टर प्लान, 2031"
   },
   {
     "text": "BEST SO FAR",
@@ -184,24 +204,12 @@ export const HindiLang = [
     "translation": "बिंग -"
   },
   {
-    "text": "BOARD OF ADVISORS",
-    "translation": "सलाहकारों का बोर्ड"
-  },
-  {
-    "text": "Back",
-    "translation": "वापस"
-  },
-  {
-    "text": "Bengaluru Development Authority",
-    "translation": "बेंगलुरु विकास प्राधिकरण"
-  },
-  {
-    "text": "Bengaluru Revised Master Plan, 2031",
-    "translation": "बेंगलुरु संशोधित मास्टर प्लान, 2031"
-  },
-  {
     "text": "Blog",
     "translation": "ब्लॉग"
+  },
+  {
+    "text": "BOARD OF ADVISORS",
+    "translation": "सलाहकारों का बोर्ड"
   },
   {
     "text": "By agreeing to these Terms of Service, you represent that you are at least the age ofmajority in your state or province of residence, or that you are the age of majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use this site.",
@@ -218,26 +226,6 @@ export const HindiLang = [
   {
     "text": "By visiting our site and/ or purchasing something from us and/ or otherwise using our site, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply to all users of the site, including without limitation users who are browsers and/ or contributors of content.",
     "translation": "हमारी साइट पर जाने और / या हमसे कुछ खरीदने और / या अन्यथा हमारी साइट का उपयोग करके, आप हमारी \"सेवा\" में संलग्न हैं और निम्नलिखित नियमों और शर्तों (\"सेवा की शर्तें\", \"शर्तें\") से बाध्य होने के लिए सहमत हैं, सहित उन अतिरिक्त नियमों और शर्तों और नीतियों का उल्लेख किया गया है और / या हाइपरलिंक द्वारा उपलब्ध हैं। सेवा की ये शर्तें साइट के सभी उपयोगकर्ताओं पर लागू होती हैं, जिसमें बिना सीमा के उपयोगकर्ता शामिल हैं जो ब्राउज़र और / या सामग्री के योगदानकर्ता हैं।"
-  },
-  {
-    "text": "CHANGES",
-    "translation": "परिवर्तन"
-  },
-  {
-    "text": "CITIZEN LEADERS ON CIVIS",
-    "translation": "CIVIS पर CITIZEN लीडर्स"
-  },
-  {
-    "text": "CLOSED ON",
-    "translation": "बंद किया हुआ"
-  },
-  {
-    "text": "CONSULTATION",
-    "translation": "परामर्श"
-  },
-  {
-    "text": "CONTACT US",
-    "translation": "संपर्क करें"
   },
   {
     "text": "Cancel",
@@ -280,8 +268,16 @@ export const HindiLang = [
     "translation": "फ़ोन नंबर बदलें"
   },
   {
+    "text": "CHANGES",
+    "translation": "परिवर्तन"
+  },
+  {
     "text": "Citizen Leader since ",
     "translation": "के बाद से नागरिक नेता"
+  },
+  {
+    "text": "CITIZEN LEADERS ON CIVIS",
+    "translation": "CIVIS पर CITIZEN लीडर्स"
   },
   {
     "text": "City",
@@ -308,10 +304,6 @@ export const HindiLang = [
     "translation": "नागरिक नागरिक नेता"
   },
   {
-    "text": "Civis Under construction",
-    "translation": "निर्माणाधीन सिविस"
-  },
-  {
     "text": "Civis contains graphics, text, photographs, images, video, audio, software, code, website compilation, and advertisements supplied by us or our affiliates (“Civis Content”). Civis Content is protected by intellectual property laws including copyright and other proprietary rights of India and licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License.",
     "translation": "सिविस में ग्राफिक्स, टेक्स्ट, फोटोग्राफ, चित्र, वीडियो, ऑडियो, सॉफ्टवेयर, कोड, वेबसाइट संकलन, और हमारे या हमारे सहयोगियों (\"सिविस कंटेंट\") द्वारा दिए गए विज्ञापन शामिल हैं। Civis Content को भारत के कॉपीराइट और अन्य स्वामित्व अधिकारों सहित बौद्धिक संपदा कानूनों द्वारा संरक्षित किया गया है और एक क्रिएटिव कॉमन्स एट्रिब्यूशन-NoDeratives 4.0 अंतर्राष्ट्रीय लाइसेंस के तहत लाइसेंस प्राप्त किया गया है।"
   },
@@ -322,6 +314,10 @@ export const HindiLang = [
   {
     "text": "Civis is a community driven platform, which is built and maintained by Civic Innovation Foundation.",
     "translation": "सिविस एक समुदाय संचालित मंच है, जिसे सिविक इनोवेशन फाउंडेशन द्वारा बनाया और बनाए रखा गया है।"
+  },
+  {
+    "text": "Civis Under construction",
+    "translation": "निर्माणाधीन सिविस"
   },
   {
     "text": "Civis, c/o Jai Hind Building, Ist Floor, 106, Nagindas Master Road, Fort, Mumbai, Maharashtra-400001.",
@@ -336,6 +332,10 @@ export const HindiLang = [
     "translation": "बन्द है परामर्"
   },
   {
+    "text": "CLOSED ON",
+    "translation": "बंद किया हुआ"
+  },
+  {
     "text": "Communicate with you; and",
     "translation": "आप के साथ संवाद; तथा"
   },
@@ -346,6 +346,14 @@ export const HindiLang = [
   {
     "text": "Confirm Password",
     "translation": "पासवर्ड की पुष्टि कीजिये"
+  },
+  {
+    "text": "confirmation-modal works!",
+    "translation": "पुष्टि-मोडल काम करता है!"
+  },
+  {
+    "text": "CONSULTATION",
+    "translation": "परामर्श"
   },
   {
     "text": "Consultations",
@@ -364,6 +372,10 @@ export const HindiLang = [
     "translation": "परामर्श में भाग लिया"
   },
   {
+    "text": "CONTACT US",
+    "translation": "संपर्क करें"
+  },
+  {
     "text": "Content Policy",
     "translation": "सामग्री नीति"
   },
@@ -378,14 +390,6 @@ export const HindiLang = [
   {
     "text": "DATA RETENTION",
     "translation": "डेटा प्रतिधारण"
-  },
-  {
-    "text": "DO NOT TRACK",
-    "translation": "ट्रैक न करें"
-  },
-  {
-    "text": "DRAFT MADE PUBLIC ON",
-    "translation": "DRAFT मैड पब्लिक ऑन"
   },
   {
     "text": "Deadline is Required",
@@ -416,6 +420,10 @@ export const HindiLang = [
     "translation": "असंतुष्ट"
   },
   {
+    "text": "DO NOT TRACK",
+    "translation": "ट्रैक न करें"
+  },
+  {
     "text": "Don't have an account with Civis?",
     "translation": "Civis के साथ कोई खाता नहीं है?"
   },
@@ -436,8 +444,8 @@ export const HindiLang = [
     "translation": "ड्राफ्ट स्वत: सहेजा गया"
   },
   {
-    "text": "ENFORCEMENT",
-    "translation": "प्रवर्तन"
+    "text": "DRAFT MADE PUBLIC ON",
+    "translation": "DRAFT मैड पब्लिक ऑन"
   },
   {
     "text": "Email",
@@ -446,10 +454,6 @@ export const HindiLang = [
   {
     "text": "Email",
     "translation": "ईमेल"
-  },
-  {
-    "text": "Email Sent",
-    "translation": "ईमेल भेजा"
   },
   {
     "text": "Email is Required",
@@ -460,8 +464,16 @@ export const HindiLang = [
     "translation": "ईमेल एक मान्य ईमेल पता होना चाहिए"
   },
   {
+    "text": "Email Sent",
+    "translation": "ईमेल भेजा"
+  },
+  {
     "text": "Ended on ",
     "translation": "पर समाप्त हुआ"
+  },
+  {
+    "text": "ENFORCEMENT",
+    "translation": "प्रवर्तन"
   },
   {
     "text": "Enter your email address below and we'll email you a link to reset your password.",
@@ -484,12 +496,12 @@ export const HindiLang = [
     "translation": "फेसबुक -"
   },
   {
-    "text": "Feedback Manipulation:",
-    "translation": "प्रतिक्रिया हेरफेर:"
-  },
-  {
     "text": "Feedback manipulation will result in immediate termination of your account. Feedback manipulation includes: ",
     "translation": "प्रतिक्रिया हेरफेर से आपके खाते की तत्काल समाप्ति हो जाएगी। प्रतिक्रिया हेरफेर में शामिल हैं:"
+  },
+  {
+    "text": "Feedback Manipulation:",
+    "translation": "प्रतिक्रिया हेरफेर:"
   },
   {
     "text": "Finally, we may also share your Information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights. We may also, in other instances,share information with your express consent or at your direction.",
@@ -532,20 +544,24 @@ export const HindiLang = [
     "translation": "पूरी कहानी हमारे उत्पादों, सेवाओं, या अनुप्रयोगों के आपके उपयोग का विश्लेषण करने के लिए - आप और अधिक पढ़ सकते हैं कि पूरी कहानी आपकी जानकारी का उपयोग यहाँ कैसे करता है:"
   },
   {
-    "text": "GET WORKING",
-    "translation": "काम कर रहा है"
+    "text": "Get in touch",
+    "translation": "संपर्क में रहो"
   },
   {
-    "text": "GOOGLE - ",
-    "translation": "गूगल -"
+    "text": "get in touch",
+    "translation": "संपर्क में रहो"
   },
   {
     "text": "Get Queries?",
     "translation": "प्रश्न प्राप्त करें?"
   },
   {
-    "text": "Get in touch",
-    "translation": "संपर्क में रहो"
+    "text": "GET WORKING",
+    "translation": "काम कर रहा है"
+  },
+  {
+    "text": "GOOGLE - ",
+    "translation": "गूगल -"
   },
   {
     "text": "Google Analytics to help us understand how our users use the Site--you can read more about how Google uses your Information here:",
@@ -558,18 +574,6 @@ export const HindiLang = [
   {
     "text": "Great! You’re an",
     "translation": "महान! आप ए"
-  },
-  {
-    "text": "HOW CIVIS WORKS",
-    "translation": "कैसे काम करता है"
-  },
-  {
-    "text": "HOW WE USE YOUR INFORMATION",
-    "translation": "हम आपकी सूचना का किस प्रकार प्रयोग करते हैं"
-  },
-  {
-    "text": "HOW YOUR INFORMATION IS SHARED",
-    "translation": "आपकी जानकारी कैसे साझा की जाती है"
   },
   {
     "text": "Hateful Conduct:",
@@ -588,6 +592,10 @@ export const HindiLang = [
     "translation": "Hooraah!"
   },
   {
+    "text": "HOW CIVIS WORKS",
+    "translation": "कैसे काम करता है"
+  },
+  {
     "text": "How Civis Works",
     "translation": "सिविस कैसे काम करता है"
   },
@@ -600,32 +608,12 @@ export const HindiLang = [
     "translation": "आप इस मसौदे से कितने संतुष्ट हैं?"
   },
   {
-    "text": "IMPACT SO FAR",
-    "translation": "प्रभाव तो दूर"
+    "text": "HOW WE USE YOUR INFORMATION",
+    "translation": "हम आपकी सूचना का किस प्रकार प्रयोग करते हैं"
   },
   {
-    "text": "IN FOCUS",
-    "translation": "चर्चा में"
-  },
-  {
-    "text": "IN THE PAST",
-    "translation": "भूतकाल में"
-  },
-  {
-    "text": "IN THE PAST  ",
-    "translation": "भूतकाल में"
-  },
-  {
-    "text": "IN THE PRESS",
-    "translation": "प्रेस में"
-  },
-  {
-    "text": "INFORMATION WE COLLECT",
-    "translation": "जानकारी हम एकत्र करते हैं"
-  },
-  {
-    "text": "INFORMATION YOU PROVIDE TO US",
-    "translation": "जानकारी आप हमें प्रदान करते हैं"
+    "text": "HOW YOUR INFORMATION IS SHARED",
+    "translation": "आपकी जानकारी कैसे साझा की जाती है"
   },
   {
     "text": "If in our sole judgment you fail, or we suspect that you have failed, to comply with any term or provision of these Terms of Service, we also may terminate this agreement at any time without notice and /or accordingly may deny you access to the Service (or any part thereof).",
@@ -648,12 +636,12 @@ export const HindiLang = [
     "translation": "यदि, हमारे अनुरोध पर, आप कुछ विशिष्ट प्रस्तुतियाँ (उदाहरण के लिए प्रतियोगिता प्रविष्टियाँ) भेजते हैं या हमसे अनुरोध के बिना आप रचनात्मक विचार, सुझाव, प्रस्ताव, योजना, या अन्य सामग्री, चाहे ऑनलाइन, डाक से, डाक से डाक द्वारा भेजते हैं, या अन्यथा (सामूहिक रूप से, 'टिप्पणियां'), आप इस बात से सहमत हैं कि हम किसी भी समय, बिना किसी प्रतिबंध, संपादित, प्रतिलिपि, प्रकाशित, वितरित, अनुवाद और अन्यथा किसी भी टिप्पणी का उपयोग कर सकते हैं, जो आप हमारे लिए आगे करते हैं। हम विश्वास में किसी भी टिप्पणी को बनाए रखने के लिए किसी भी दायित्व (1) के तहत हैं और नहीं होंगे; (2) किसी भी टिप्पणी के लिए मुआवजे का भुगतान करने के लिए; या (3) किसी भी टिप्पणी का जवाब देने के लिए।"
   },
   {
-    "text": "Improve and optimize our Site (for example, by generating analytics about how our customers browse and interact with the Site, and to assess the success of our marketing campaigns); and",
-    "translation": "हमारी साइट में सुधार और अनुकूलन करें (उदाहरण के लिए, हमारे ग्राहकों द्वारा साइट के साथ ब्राउज़ और इंटरैक्ट कैसे करें, और हमारे मार्केटिंग अभियानों की सफलता का आकलन करने के बारे में विश्लेषण करके); तथा"
+    "text": "IMPACT SO FAR",
+    "translation": "प्रभाव तो दूर"
   },
   {
-    "text": "In India, you are the superhero of the country, and the guardian of our destiny.",
-    "translation": "भारत में, आप देश के महानायक हैं, और हमारे भाग्य के संरक्षक हैं।"
+    "text": "Improve and optimize our Site (for example, by generating analytics about how our customers browse and interact with the Site, and to assess the success of our marketing campaigns); and",
+    "translation": "हमारी साइट में सुधार और अनुकूलन करें (उदाहरण के लिए, हमारे ग्राहकों द्वारा साइट के साथ ब्राउज़ और इंटरैक्ट कैसे करें, और हमारे मार्केटिंग अभियानों की सफलता का आकलन करने के बारे में विश्लेषण करके); तथा"
   },
   {
     "text": "In addition to other prohibitions as set forth in the Terms of Service, you are prohibited from using the site or its content: (a) for any unlawful purpose; (b) to solicit others to perform or participate in any unlawful acts; (c) to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances; (d) to infringe upon or violate our intellectual property rights or the intellectual property rights of others; (e) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability; (f) to submit false or misleading information; (g) to upload or transmit viruses or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the Service or of any related website, other websites, or the Internet; (h) to collect or track the personal information of others; (i) to spam, phish, pharm, pretext, spider, crawl, or scrape; (j) for any obscene or immoral purpose; or (k) to interfere with or circumvent the security features of the Service or any related website, other websites, or the Internet. We reserve the right to terminate your use of the Service or any related website for violating any of the prohibited uses.",
@@ -664,6 +652,18 @@ export const HindiLang = [
     "translation": "अवांछित सामग्री पोस्ट करने के अलावा, सिविस पर निम्नलिखित व्यवहार निषिद्ध है:"
   },
   {
+    "text": "in All India",
+    "translation": "ऑल इंडिया में"
+  },
+  {
+    "text": "IN FOCUS",
+    "translation": "चर्चा में"
+  },
+  {
+    "text": "In India, you are the superhero of the country, and the guardian of our destiny.",
+    "translation": "भारत में, आप देश के महानायक हैं, और हमारे भाग्य के संरक्षक हैं।"
+  },
+  {
     "text": "In no case shall Civis, our directors, officers, employees, affiliates, agents, contractors, interns, suppliers, service providers or licensors be liable for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without limitation lost profits, lost revenue, lost savings, loss of data, replacement costs, or any similar damages, whether based in contract, tort (including negligence), strict liability or otherwise, arising from your use of any of the service or any products procured using the service, or for any other claim related in any way to your use of the service or any product, including, but not limited to, any errors or omissions in any content, or any loss or damage of any kind incurred as a result of the use of the Service or any content (or product) posted, transmitted, or otherwise made available via the Service, even if advised of their possibility. Because some states or jurisdictions do not allow the exclusion or the limitation of liability for consequential or incidental damages, in such states or jurisdictions, our liability shall be limited to the maximum extent permitted by law.",
     "translation": "किसी भी स्थिति में, हमारे निदेशक, अधिकारी, कर्मचारी, सहयोगी, एजेंट, ठेकेदार, प्रशिक्षु, आपूर्तिकर्ता, सेवा प्रदाता या लाइसेंसकर्ता किसी भी चोट, नुकसान, दावे या किसी प्रत्यक्ष, अप्रत्यक्ष, आकस्मिक, दंडात्मक, विशेष, या के लिए उत्तरदायी नहीं होंगे। बिना किसी नुकसान के, बिना लाभ गंवाए राजस्व, खोई हुई बचत, डेटा की हानि, प्रतिस्थापन लागत, या किसी भी तरह के नुकसान सहित, किसी भी तरह का परिणामी नुकसान, चाहे अनुबंध में आधारित हो, यातना (लापरवाही सहित), सख्त देयता या अन्यथा, आपके द्वारा उत्पन्न होने वाली सेवा का उपयोग करके खरीदी गई किसी भी सेवा या किसी भी उत्पाद का उपयोग, या किसी भी तरह से संबंधित किसी भी तरह से आपके सेवा या किसी भी उत्पाद के उपयोग से संबंधित दावे के लिए, लेकिन किसी भी सामग्री में किसी भी त्रुटि या चूक तक सीमित नहीं है, या किसी भी सेवा के उपयोग के परिणामस्वरूप होने वाली किसी भी तरह की हानि या क्षति या पोस्ट की गई, प्रसारित, या अन्यथा सेवा के माध्यम से उपलब्ध कराई गई किसी भी सामग्री (या उत्पाद) के परिणामस्वरूप, भले ही उनकी संभावना की सलाह दी गई हो। क्योंकि कुछ राज्य या क्षेत्राधिकार परिणामी या आकस्मिक क्षति के लिए बहिष्करण या दायित्व की सीमा की अनुमति नहीं देते हैं, ऐसे राज्यों या न्यायालयों में, हमारा दायित्व कानून द्वारा अनुमत अधिकतम सीमा तक सीमित होगा।"
   },
@@ -672,8 +672,36 @@ export const HindiLang = [
     "translation": "ऐसी स्थिति में कि सेवा की इन शर्तों का कोई भी प्रावधान गैरकानूनी, शून्य या अप्राप्य होने के लिए निर्धारित किया जाता है, इस तरह के प्रावधान को लागू कानून द्वारा अनुमत पूर्ण सीमा तक लागू किया जा सकता है, और अप्रवर्तनीय हिस्से को इन शर्तों से अलग माना जाएगा सेवा, इस तरह के दृढ़ संकल्प किसी अन्य शेष प्रावधानों की वैधता और प्रवर्तनीयता को प्रभावित नहीं करेगा।"
   },
   {
+    "text": "IN THE PAST",
+    "translation": "भूतकाल में"
+  },
+  {
+    "text": "IN THE PAST  ",
+    "translation": "भूतकाल में"
+  },
+  {
+    "text": "IN THE PRESS",
+    "translation": "प्रेस में"
+  },
+  {
     "text": "India has a population of 1.2 billion, and each one of us has an opinion. We argue about them over cups of chai, in our family Whatsapp groups, at our parlours and our barber's, on the news and in our living rooms, we scream them and we whisper them, we type them and we recite them. It's all a bit of chaos, really.",
     "translation": "भारत की जनसंख्या 1.2 बिलियन है, और हम में से प्रत्येक की एक राय है। हम उनके बारे में बहस करते हैं, हमारे परिवार के व्हाट्सएप ग्रुपों में, हमारे पार्लरों में और हमारे नाई के कमरे में, चाय पर कप के बारे में बहस करते हैं, और हमारे रहने वाले कमरों में, हम उन्हें चिल्लाते हैं और हम उन्हें फुसफुसाते हैं, हम उन्हें टाइप करते हैं और हम उन्हें पढ़ते हैं। यह सब अराजकता का एक सा है, वास्तव में।"
+  },
+  {
+    "text": "info@civis.vote",
+    "translation": "info@civis.vote"
+  },
+  {
+    "text": "INFORMATION WE COLLECT",
+    "translation": "जानकारी हम एकत्र करते हैं"
+  },
+  {
+    "text": "INFORMATION YOU PROVIDE TO US",
+    "translation": "जानकारी आप हमें प्रदान करते हैं"
+  },
+  {
+    "text": "is created on Civis.",
+    "translation": "Civis पर बनाया गया है।"
   },
   {
     "text": "Join the movement towards citizen-led governance.",
@@ -684,20 +712,16 @@ export const HindiLang = [
     "translation": "अपने देश में सिविस को लागू करने के इच्छुक हैं?"
   },
   {
-    "text": "LATEST RESPONSES",
-    "translation": "नवीनतम परिणाम"
-  },
-  {
-    "text": "LOGIN DETAILS • EMAIL & USERNAME",
-    "translation": "लॉगिन विवरण • ईमेल और USERNAME"
-  },
-  {
     "text": "Last name",
     "translation": "उपनाम"
   },
   {
     "text": "Lastname is Required",
     "translation": "अंतिम नाम आवश्यक है"
+  },
+  {
+    "text": "LATEST RESPONSES",
+    "translation": "नवीनतम परिणाम"
   },
   {
     "text": "Laws meant for you and I can be shaped by people like you and I.",
@@ -732,6 +756,10 @@ export const HindiLang = [
     "translation": "साइन अप करने के लिए लॉग इन करें"
   },
   {
+    "text": "LOGIN DETAILS • EMAIL & USERNAME",
+    "translation": "लॉगिन विवरण • ईमेल और USERNAME"
+  },
+  {
     "text": "Logout",
     "translation": "लॉग आउट"
   },
@@ -744,12 +772,12 @@ export const HindiLang = [
     "translation": "हिंसा के विशिष्ट खतरे या गंभीर शारीरिक नुकसान की इच्छा करना, किसी व्यक्ति या लोगों के समूह की मृत्यु या बीमारी निषिद्ध है। ऐसी सामग्री जो हिंसा को महिमामंडित करती है या पीड़ा को महिमामंडित करती है, निषिद्ध है।"
   },
   {
-    "text": "Ministry Name is Required",
-    "translation": "मंत्रालय का नाम आवश्यक है"
-  },
-  {
     "text": "Ministry is Required",
     "translation": "मंत्रालय आवश्यक है"
+  },
+  {
+    "text": "Ministry Name is Required",
+    "translation": "मंत्रालय का नाम आवश्यक है"
   },
   {
     "text": "Ministry of Housing and Urban Affairs",
@@ -788,22 +816,6 @@ export const HindiLang = [
     "translation": "एन / ए"
   },
   {
-    "text": "NEXT",
-    "translation": "आगे"
-  },
-  {
-    "text": "NEXT  ",
-    "translation": "आगे"
-  },
-  {
-    "text": "NEXT:  DEPARTMENT INFO",
-    "translation": "अगला: DEPARTMENT INFO"
-  },
-  {
-    "text": "NO. OF RESPONSES",
-    "translation": "नहीं। परिणामों की"
-  },
-  {
     "text": "National Urban Policy Framework, 2018",
     "translation": "नेशनल अर्बन पॉलिसी फ्रेमवर्क, 2018"
   },
@@ -820,20 +832,28 @@ export const HindiLang = [
     "translation": "नया पासवर्ड"
   },
   {
+    "text": "NEXT",
+    "translation": "आगे"
+  },
+  {
+    "text": "NEXT  ",
+    "translation": "आगे"
+  },
+  {
+    "text": "NEXT:  DEPARTMENT INFO",
+    "translation": "अगला: DEPARTMENT INFO"
+  },
+  {
+    "text": "NO. OF RESPONSES",
+    "translation": "नहीं। परिणामों की"
+  },
+  {
     "text": "Notify me when an open consultation",
     "translation": "एक खुला परामर्श जब मुझे सूचित करें"
   },
   {
     "text": "Now, imagine a space that could filter out all of that noise, and give shape and direction to the countless conversations going on at any given time all over the country - imagine a space that could be a platform for you, the citizen's, voice to emerge front and center.",
     "translation": "अब, एक ऐसे स्थान की कल्पना करें, जो उस शोर के सभी को छान सके, और पूरे देश में किसी भी समय चल रही अनगिनत बातचीत को आकार और दिशा दे सके - एक ऐसे स्थान की कल्पना करें जो आपके लिए, नागरिक के लिए, आवाज के लिए एक मंच हो सकता है। सामने और केंद्र में उभरें।"
-  },
-  {
-    "text": "OR",
-    "translation": "या"
-  },
-  {
-    "text": "OVERVIEW",
-    "translation": "अवलोकन"
   },
   {
     "text": "Occasionally there may be information on our site or in the Service that contains typographical errors, inaccuracies or omissions. We reserve the right to correct any errors, inaccuracies or omissions, and to change or update information if any information in the Service or on any related website is inaccurate at any time without prior notice (including after you have submitted your order).",
@@ -856,6 +876,18 @@ export const HindiLang = [
     "translation": "एक बार आपके सभी सवालों के जवाब देने के बाद, 'रीड एंड रिस्पोंड' टैब के माध्यम से अपनी प्रतिक्रिया दें। यदि आप किसी दस्तावेज़ के बारे में भावुक महसूस करते हैं, तो आप अपनी प्रतिक्रिया को सार्वजनिक प्रतिक्रिया दे सकते हैं, दूसरों के लिए भी उपयोग कर सकते हैं। यदि आप बहुत निश्चित नहीं हैं कि क्या लिखना है, तो आप अपने खुद के रूप में उपयोग करने के लिए अन्य लोगों की प्रतिक्रियाओं का चयन कर सकते हैं!"
   },
   {
+    "text": "OR",
+    "translation": "या"
+  },
+  {
+    "text": "or by mail using the details provided below:",
+    "translation": "या नीचे दिए गए विवरण का उपयोग करके मेल द्वारा:"
+  },
+  {
+    "text": "or, select a public response",
+    "translation": "या, सार्वजनिक प्रतिक्रिया का चयन करें"
+  },
+  {
     "text": "Other information:",
     "translation": "अन्य सूचना:"
   },
@@ -864,20 +896,12 @@ export const HindiLang = [
     "translation": "अन्य प्रतिक्रियाएँ"
   },
   {
-    "text": "Overview  ",
+    "text": "OVERVIEW",
     "translation": "अवलोकन"
   },
   {
-    "text": "PHONE",
-    "translation": "फ़ोन"
-  },
-  {
-    "text": "PROFILE",
-    "translation": "शख्सियत"
-  },
-  {
-    "text": "PROHIBITED BEHAVIOUR ",
-    "translation": "प्रोहिबैक्ट व्यवहार"
+    "text": "Overview  ",
+    "translation": "अवलोकन"
   },
   {
     "text": "Password",
@@ -898,6 +922,10 @@ export const HindiLang = [
   {
     "text": "Paste URL of consultation PDF",
     "translation": "परामर्श पीडीएफ का URL चिपकाएँ"
+  },
+  {
+    "text": "PHONE",
+    "translation": "फ़ोन"
   },
   {
     "text": "Phone Number",
@@ -928,8 +956,16 @@ export const HindiLang = [
     "translation": "अंक"
   },
   {
+    "text": "points earnt",
+    "translation": "अंक कमाते हैं"
+  },
+  {
     "text": "Pornographic or Sexually Explicit Content:",
     "translation": "अश्लील या अश्लील सामग्री"
+  },
+  {
+    "text": "Primary email address of the ministry POC",
+    "translation": "मंत्रालय का प्राथमिक ईमेल पता POC"
   },
   {
     "text": "Primary Email is Required",
@@ -940,20 +976,24 @@ export const HindiLang = [
     "translation": "प्राथमिक ईमेल एक मान्य ईमेल पता होना चाहिए"
   },
   {
-    "text": "Primary email address of the ministry POC",
-    "translation": "मंत्रालय का प्राथमिक ईमेल पता POC"
-  },
-  {
     "text": "Privacy Policy",
     "translation": "गोपनीयता नीति"
   },
   {
     "text": "Privacy Policy",
     "translation": "गोपनीयता नीति"
+  },
+  {
+    "text": "PROFILE",
+    "translation": "शख्सियत"
   },
   {
     "text": "Profile",
     "translation": "प्रोफ़ाइल"
+  },
+  {
+    "text": "PROHIBITED BEHAVIOUR ",
+    "translation": "प्रोहिबैक्ट व्यवहार"
   },
   {
     "text": "Provide you with information or advertising relating to the Services.",
@@ -984,24 +1024,16 @@ export const HindiLang = [
     "translation": "राज्य में शासन"
   },
   {
+    "text": "Read & Respond",
+    "translation": "पढ़ें और जवाब दें"
+  },
+  {
     "text": "READ CASE STUDY",
     "translation": "केस स्टडी पढ़ें"
   },
   {
     "text": "READ THE FULL DRAFT",
     "translation": "पूरी कहानी पढ़ें"
-  },
-  {
-    "text": "RESPOND",
-    "translation": "प्रतिक्रिया"
-  },
-  {
-    "text": "RESPONSE SUBMITTED",
-    "translation": "जवाब प्रस्तुत किया"
-  },
-  {
-    "text": "Read & Respond",
-    "translation": "पढ़ें और जवाब दें"
   },
   {
     "text": "Resend confirmation",
@@ -1016,6 +1048,10 @@ export const HindiLang = [
     "translation": "पासवर्ड रीसेट"
   },
   {
+    "text": "RESPOND",
+    "translation": "प्रतिक्रिया"
+  },
+  {
     "text": "Response so far",
     "translation": "प्रतिक्रिया अब तक"
   },
@@ -1024,8 +1060,24 @@ export const HindiLang = [
     "translation": "प्रतिक्रिया प्रस्तुत करने की समय सीमा"
   },
   {
+    "text": "RESPONSE SUBMITTED",
+    "translation": "जवाब प्रस्तुत किया"
+  },
+  {
     "text": "Responses so far",
     "translation": "जवाब अब तक"
+  },
+  {
+    "text": "Satisfied",
+    "translation": "संतुष्ट"
+  },
+  {
+    "text": "Save changes",
+    "translation": "परिवर्तनों को सुरक्षित करें"
+  },
+  {
+    "text": "Secondary email address of the ministry POC",
+    "translation": "मंत्रालय का द्वितीय ईमेल पता POC"
   },
   {
     "text": "SECTION 1 – WEB APPLICATION TERMS",
@@ -1108,52 +1160,20 @@ export const HindiLang = [
     "translation": "खंड 9 - उपयोगकर्ता टिप्पणियाँ, फ़ीडबैक और अन्य सूचनाएं"
   },
   {
-    "text": "SEND EMAIL",
-    "translation": "ईमेल भेजें"
-  },
-  {
-    "text": "SENDING IN YOUR RESPONSE TO",
-    "translation": "अपना जवाब भेजने के लिए"
-  },
-  {
-    "text": "SIGN IN TO MY ACCOUNT",
-    "translation": "मेरे खाते में साइन इन करें"
-  },
-  {
-    "text": "STEP 1",
-    "translation": "चरण 1"
-  },
-  {
-    "text": "STEP 2",
-    "translation": "चरण 2"
-  },
-  {
-    "text": "SUBMIT CONSULTATION ",
-    "translation": "SUBMIT परामर्श"
-  },
-  {
-    "text": "SUBMIT RESPONSE",
-    "translation": "SUBMIT परिणाम"
-  },
-  {
-    "text": "Satisfied",
-    "translation": "संतुष्ट"
-  },
-  {
-    "text": "Save changes",
-    "translation": "परिवर्तनों को सुरक्षित करें"
-  },
-  {
-    "text": "Secondary email address of the ministry POC",
-    "translation": "मंत्रालय का द्वितीय ईमेल पता POC"
-  },
-  {
     "text": "Select an existing department",
     "translation": "किसी मौजूदा विभाग का चयन करें"
   },
   {
     "text": "Select and submit",
     "translation": "चयन करें और सबमिट करें"
+  },
+  {
+    "text": "SEND EMAIL",
+    "translation": "ईमेल भेजें"
+  },
+  {
+    "text": "SENDING IN YOUR RESPONSE TO",
+    "translation": "अपना जवाब भेजने के लिए"
   },
   {
     "text": "Sharing the following types of content on Civis is prohibited:",
@@ -1164,8 +1184,8 @@ export const HindiLang = [
     "translation": "साइन इन करें"
   },
   {
-    "text": "Sign Up",
-    "translation": "साइन अप करें"
+    "text": "SIGN IN TO MY ACCOUNT",
+    "translation": "मेरे खाते में साइन इन करें"
   },
   {
     "text": "Sign in to your Citizen Leader account",
@@ -1178,6 +1198,10 @@ export const HindiLang = [
   {
     "text": "Sign in with Google",
     "translation": "Google के साथ साइन इन करें"
+  },
+  {
+    "text": "Sign Up",
+    "translation": "साइन अप करें"
   },
   {
     "text": "Sign up as a Citizen Leader.",
@@ -1204,6 +1228,10 @@ export const HindiLang = [
     "translation": "कुछ हद तक संतुष्ट"
   },
   {
+    "text": "source",
+    "translation": "स्रोत"
+  },
+  {
     "text": "Spam, defined as any bulk or aggressive activity that attempts to manipulate or disrupt Civis or the experience of users on Civis, is prohibited.",
     "translation": "स्पैम, को किसी भी थोक या आक्रामक गतिविधि के रूप में परिभाषित किया गया है जो सिविस को छेड़छाड़ या बाधित करने का प्रयास करता है या सिविस पर उपयोगकर्ताओं के अनुभव को निषिद्ध है।"
   },
@@ -1222,6 +1250,14 @@ export const HindiLang = [
   {
     "text": "Start participating",
     "translation": "भाग लेना शुरू करें"
+  },
+  {
+    "text": "STEP 1",
+    "translation": "चरण 1"
+  },
+  {
+    "text": "STEP 2",
+    "translation": "चरण 2"
   },
   {
     "text": "Step Five: Submit The Consultation",
@@ -1268,20 +1304,28 @@ export const HindiLang = [
     "translation": "दो चरण: सारांश पढ़ें"
   },
   {
+    "text": "Submit a Consultation",
+    "translation": "एक परामर्श प्रस्तुत करें"
+  },
+  {
+    "text": "Submit a Consultation",
+    "translation": "एक परामर्श प्रस्तुत करें"
+  },
+  {
     "text": "Submit A Response",
     "translation": "एक प्रतिक्रिया सबमिट करें"
   },
   {
-    "text": "Submit a Consultation",
-    "translation": "एक परामर्श प्रस्तुत करें"
-  },
-  {
-    "text": "Submit a Consultation",
-    "translation": "एक परामर्श प्रस्तुत करें"
-  },
-  {
     "text": "Submit a Response",
     "translation": "एक प्रतिक्रिया भेजें"
+  },
+  {
+    "text": "SUBMIT CONSULTATION ",
+    "translation": "SUBMIT परामर्श"
+  },
+  {
+    "text": "SUBMIT RESPONSE",
+    "translation": "SUBMIT परिणाम"
   },
   {
     "text": "Submit your feedback",
@@ -1298,30 +1342,6 @@ export const HindiLang = [
   {
     "text": "Super Citizen",
     "translation": "सुपर सिटीजन"
-  },
-  {
-    "text": "THE DEADLINE FOR THE CONSULTATION WAS",
-    "translation": "परामर्श के लिए आधार ऑनलाइन था"
-  },
-  {
-    "text": "THE TEAM",
-    "translation": "दल"
-  },
-  {
-    "text": "TOTAL POINTS",
-    "translation": "कुल अंक"
-  },
-  {
-    "text": "TOTAL POINTS  ",
-    "translation": "कुल अंक"
-  },
-  {
-    "text": "TOTAL PUBLIC RESPONSES",
-    "translation": "कुल सार्वजनिक परिणाम"
-  },
-  {
-    "text": "TOTAL RESPONSES",
-    "translation": "कुल परिणाम"
   },
   {
     "text": "Talk to the community",
@@ -1348,20 +1368,20 @@ export const HindiLang = [
     "translation": "परामर्श प्रस्तुत करने के लिए धन्यवाद।"
   },
   {
+    "text": "THE DEADLINE FOR THE CONSULTATION WAS",
+    "translation": "परामर्श के लिए आधार ऑनलाइन था"
+  },
+  {
     "text": "The Foundation has worked in partnership with non-profit organisations and Government bodies to facilitate citizen’s participation in the law making process at a ward, city and state level.",
     "translation": "फाउंडेशन ने एक वार्ड, शहर और राज्य स्तर पर कानून बनाने की प्रक्रिया में नागरिकों की भागीदारी को सुविधाजनक बनाने के लिए गैर-लाभकारी संगठनों और सरकारी निकायों के साथ साझेदारी में काम किया है।"
   },
   {
-    "text": "The Information you submit and that is automatically collected by us is governed by our Privacy Policy. To view our Privacy Policy click here:",
-    "translation": "आपके द्वारा सबमिट की गई जानकारी और वह हमारे द्वारा एकत्र की गई स्वचालित रूप से हमारी गोपनीयता नीति द्वारा शासित होती है। हमारी गोपनीयता नीति को देखने के लिए यहां क्लिक करें:"
-  },
-  {
-    "text": "The Privacy Policy is deemed to form a part of these Terms.",
-    "translation": "गोपनीयता नीति को इन नियमों का एक हिस्सा बनाने के लिए समझा जाता है।"
-  },
-  {
     "text": "The headings used in this agreement are included for convenience only and will not limit or otherwise affect these Terms.",
     "translation": "इस समझौते में उपयोग किए जाने वाले शीर्षक केवल सुविधा के लिए शामिल किए गए हैं और इन शर्तों को सीमित या अन्यथा प्रभावित नहीं करेंगे।"
+  },
+  {
+    "text": "The Information you submit and that is automatically collected by us is governed by our Privacy Policy. To view our Privacy Policy click here:",
+    "translation": "आपके द्वारा सबमिट की गई जानकारी और वह हमारे द्वारा एकत्र की गई स्वचालित रूप से हमारी गोपनीयता नीति द्वारा शासित होती है। हमारी गोपनीयता नीति को देखने के लिए यहां क्लिक करें:"
   },
   {
     "text": "The obligations and liabilities of the parties incurred prior to the termination date shall survive the termination of this agreement for all purposes.",
@@ -1372,8 +1392,16 @@ export const HindiLang = [
     "translation": "सिविस के पीछे लोग"
   },
   {
+    "text": "The Privacy Policy is deemed to form a part of these Terms.",
+    "translation": "गोपनीयता नीति को इन नियमों का एक हिस्सा बनाने के लिए समझा जाता है।"
+  },
+  {
     "text": "The process where you share feedback with the government on how a policy may impact you and your community, is known as a public consultation.",
     "translation": "वह प्रक्रिया जहां आप सरकार के साथ प्रतिक्रिया साझा करते हैं कि कोई नीति आपको और आपके समुदाय को कैसे प्रभावित कर सकती है, एक सार्वजनिक परामर्श के रूप में जाना जाता है।"
+  },
+  {
+    "text": "THE TEAM",
+    "translation": "दल"
   },
   {
     "text": "The title has to match the title of the consultation as used by the department",
@@ -1382,6 +1410,14 @@ export const HindiLang = [
   {
     "text": "The use of harsh or coarsely insulting language is prohibited.",
     "translation": "कठोर या अपमानजनक भाषा का उपयोग निषिद्ध है।"
+  },
+  {
+    "text": "These are open consultatons which are still seeking feedback from citizens like yourself",
+    "translation": "ये खुले परामर्शदाता हैं जो अभी भी अपने जैसे नागरिकों से प्रतिक्रिया मांग रहे हैं"
+  },
+  {
+    "text": "These consultations are closed for public feedback but you can still participate in the discussions.",
+    "translation": "ये परामर्श सार्वजनिक प्रतिक्रिया के लिए बंद हैं लेकिन आप अभी भी चर्चाओं में भाग ले सकते हैं।"
   },
   {
     "text": "These Terms of Service and any policies or operating rules posted by us on this site or in respect to the Service including the terms of documents incorporated herein by reference constitutes the entire agreement and understanding between you and us and govern your use of the Service, superseding any prior or contemporaneous agreements, communications and proposals, whether oral or written, between you and us (including, but not limited to, any prior versions of the Terms of Service).",
@@ -1396,14 +1432,6 @@ export const HindiLang = [
     "translation": "ये सेवा की शर्तें तब तक प्रभावी होती हैं जब तक कि आप या हमारे द्वारा समाप्त नहीं की जाती हैं। आप किसी भी समय हमें यह सूचित करके सेवा की इन शर्तों को समाप्त कर सकते हैं कि आप इस सेवा का उपयोग नहीं करना चाहते हैं, या जब आप इस साइट का उपयोग करना बंद कर देते हैं।"
   },
   {
-    "text": "These are open consultatons which are still seeking feedback from citizens like yourself",
-    "translation": "ये खुले परामर्शदाता हैं जो अभी भी अपने जैसे नागरिकों से प्रतिक्रिया मांग रहे हैं"
-  },
-  {
-    "text": "These consultations are closed for public feedback but you can still participate in the discussions.",
-    "translation": "ये परामर्श सार्वजनिक प्रतिक्रिया के लिए बंद हैं लेकिन आप अभी भी चर्चाओं में भाग ले सकते हैं।"
-  },
-  {
     "text": "Third-party links on this site may direct you to third-party websites that are not affiliated with us. We are not responsible for examining or evaluating the content or accuracy and we do not warrant and will not have any liability or responsibility for any third-party materials or websites, or for any other materials, products, or services of third-parties.",
     "translation": "इस साइट पर तृतीय-पक्ष लिंक आपको तृतीय-पक्ष वेबसाइटों पर निर्देशित कर सकते हैं जो हमारे साथ संबद्ध नहीं हैं। हम सामग्री या सटीकता की जांच या मूल्यांकन के लिए ज़िम्मेदार नहीं हैं और हम वारंट नहीं करते हैं और किसी भी तृतीय-पक्ष सामग्री या वेबसाइटों के लिए, या किसी अन्य सामग्री, उत्पादों, या तृतीय-पक्ष की सेवाओं के लिए कोई दायित्व या जिम्मेदारी नहीं होगी।"
   },
@@ -1412,16 +1440,16 @@ export const HindiLang = [
     "translation": "यह कंटेंट पॉलिसी बताती है कि आप सिविस पर किस तरह का कंटेंट शेयर कर सकते हैं। सिविस में, हम खुले संवाद और अभिव्यक्ति की स्वतंत्रता में विश्वास करते हैं, हालांकि, हम घृणा को बढ़ावा देने वाले दुरुपयोग या व्यवहार को बर्दाश्त नहीं करते हैं।"
   },
   {
-    "text": "This Privacy Policy describes how your personal information is collected, used, and sharedwhen you visit or share your views on www.civis.vote (the ",
-    "translation": "यह गोपनीयता नीति बताती है कि जब आप www.civis.vote पर अपने विचारों को देखते हैं, उपयोग करते हैं और साझा करते हैं, तो आपकी व्यक्तिगत जानकारी कैसे एकत्र, उपयोग और साझा की जाती है ("
+    "text": "This is the point-of-contact or person who will be sent the responses",
+    "translation": "यह वह बिंदु-संपर्क या व्यक्ति है जिसे प्रतिक्रियाएं भेजी जाएंगी"
   },
   {
     "text": "This is the URL of the PDF or any other document on the department's website",
     "translation": "यह विभाग की वेबसाइट पर पीडीएफ या किसी अन्य दस्तावेज का URL है"
   },
   {
-    "text": "This is the point-of-contact or person who will be sent the responses",
-    "translation": "यह वह बिंदु-संपर्क या व्यक्ति है जिसे प्रतिक्रियाएं भेजी जाएंगी"
+    "text": "This Privacy Policy describes how your personal information is collected, used, and sharedwhen you visit or share your views on www.civis.vote (the ",
+    "translation": "यह गोपनीयता नीति बताती है कि जब आप www.civis.vote पर अपने विचारों को देखते हैं, उपयोग करते हैं और साझा करते हैं, तो आपकी व्यक्तिगत जानकारी कैसे एकत्र, उपयोग और साझा की जाती है ("
   },
   {
     "text": "This site may contain certain historical information. Historical information, necessarily, is not current and is provided for your reference only. We reserve the right to modify the contents of this site at any time, but we have no obligation to update any information on our site. You agree that it is your responsibility to monitor changes to our site.",
@@ -1460,12 +1488,24 @@ export const HindiLang = [
     "translation": "प्रतिक्रियाओं की कुल संख्या"
   },
   {
-    "text": "Type your current password",
-    "translation": "अपना वर्तमान पासवर्ड टाइप करें"
+    "text": "TOTAL POINTS",
+    "translation": "कुल अंक"
   },
   {
-    "text": "UNWELCOME CONTENT",
-    "translation": "UNWELCOME सामग्री"
+    "text": "TOTAL POINTS  ",
+    "translation": "कुल अंक"
+  },
+  {
+    "text": "TOTAL PUBLIC RESPONSES",
+    "translation": "कुल सार्वजनिक परिणाम"
+  },
+  {
+    "text": "TOTAL RESPONSES",
+    "translation": "कुल परिणाम"
+  },
+  {
+    "text": "Type your current password",
+    "translation": "अपना वर्तमान पासवर्ड टाइप करें"
   },
   {
     "text": "Understand and analyze demographic trends derived by us from the content you submit and the actions you take. We share this information with governmental and non-governmental organizations with whom we partner. The demographic trends, the content you submit and the actions you take, when submitted, are anonymized and never linked with your account information unless you choose to make your content public;",
@@ -1474,6 +1514,10 @@ export const HindiLang = [
   {
     "text": "Unlawful Use:",
     "translation": "गैरकानूनी उपयोग:"
+  },
+  {
+    "text": "UNWELCOME CONTENT",
+    "translation": "UNWELCOME सामग्री"
   },
   {
     "text": "Update your location",
@@ -1492,12 +1536,12 @@ export const HindiLang = [
     "translation": "इस प्रतिक्रिया का उपयोग करें"
   },
   {
-    "text": "VIEW DISCUSSION",
-    "translation": "देखें डिसकशन"
-  },
-  {
     "text": "Verify your email ID",
     "translation": "अपनी ईमेल आईडी सत्यापित करें"
+  },
+  {
+    "text": "VIEW DISCUSSION",
+    "translation": "देखें डिसकशन"
   },
   {
     "text": "View Leaderboard",
@@ -1708,12 +1752,16 @@ export const HindiLang = [
     "translation": "क्यों भाग लेते हैं, आप पूछते हैं?"
   },
   {
-    "text": "Wow! You’re a",
-    "translation": "वाह! आप हैं एक"
+    "text": "with us.",
+    "translation": "हमारे साथ।"
   },
   {
-    "text": "YOUR RIGHTS",
-    "translation": "तुम्हारा हक"
+    "text": "with us.",
+    "translation": "हमारे साथ।"
+  },
+  {
+    "text": "Wow! You’re a",
+    "translation": "वाह! आप हैं एक"
   },
   {
     "text": "You acknowledge and agree that we provide access to such tools ”as is” and “as available” without any warranties, representations or conditions of any kind and without any endorsement. We shall have no liability whatsoever arising from or relating to your use of optional third-party tools.",
@@ -1800,6 +1848,10 @@ export const HindiLang = [
     "translation": "तुम्हारा जवाब"
   },
   {
+    "text": "YOUR RIGHTS",
+    "translation": "तुम्हारा हक"
+  },
+  {
     "text": "Your turn, citizen",
     "translation": "आपकी बारी, नागरिक"
   },
@@ -1810,58 +1862,6 @@ export const HindiLang = [
   {
     "text": "You’ve not participated in any public consultations yet",
     "translation": "आपने अभी तक किसी भी सार्वजनिक परामर्श में भाग नहीं लिया है"
-  },
-  {
-    "text": "a creative commons Attibution-No Derivates 4.0 International License",
-    "translation": "क्रिएटिव कॉमन्स एटिब्यूशन-नो डेरिवेट्स 4.0 इंटरनेशनल लाइसेंस"
-  },
-  {
-    "text": "action-button works!",
-    "translation": "कार्रवाई बटन काम करता है!"
-  },
-  {
-    "text": "confirmation-modal works!",
-    "translation": "पुष्टि-मोडल काम करता है!"
-  },
-  {
-    "text": "get in touch",
-    "translation": "संपर्क में रहो"
-  },
-  {
-    "text": "in All India",
-    "translation": "ऑल इंडिया में"
-  },
-  {
-    "text": "info@civis.vote",
-    "translation": "info@civis.vote"
-  },
-  {
-    "text": "is created on Civis.",
-    "translation": "Civis पर बनाया गया है।"
-  },
-  {
-    "text": "or by mail using the details provided below:",
-    "translation": "या नीचे दिए गए विवरण का उपयोग करके मेल द्वारा:"
-  },
-  {
-    "text": "or, select a public response",
-    "translation": "या, सार्वजनिक प्रतिक्रिया का चयन करें"
-  },
-  {
-    "text": "points earnt",
-    "translation": "अंक कमाते हैं"
-  },
-  {
-    "text": "source",
-    "translation": "स्रोत"
-  },
-  {
-    "text": "with us.",
-    "translation": "हमारे साथ।"
-  },
-  {
-    "text": "with us.",
-    "translation": "हमारे साथ।"
   },
   {
     "text": "“No Office in this land is more important than that of being a citizen”",

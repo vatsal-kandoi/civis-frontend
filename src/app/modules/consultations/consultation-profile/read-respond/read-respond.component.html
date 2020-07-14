@@ -208,7 +208,7 @@
                   <span>{{response.node?.templatesCount ? response.node?.templatesCount : '' }}</span>
               </div>
             </div>
-            <div>
+            <div *ngIf="showCreateResponse()">
               <button class="app-btn response-btn" (click)="useThisResponse(response?.node)" >{{'Use this response' | translate}}</button>
             </div>
           </div>

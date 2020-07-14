@@ -117,7 +117,16 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
 
   getWhatsappUrl(link) {
     if (link) {
-      return `whatsapp://send?text=${link}`;
+      return `https://api.whatsapp.com/send?text=${link}`;
+    }
+    return null;
+  }
+
+  getLinkedinUrl(link) {
+    if (link) {
+
+      return `https://www.linkedin.com/shareArticle?mini=true&url=${link}`;
+
     }
     return null;
   }

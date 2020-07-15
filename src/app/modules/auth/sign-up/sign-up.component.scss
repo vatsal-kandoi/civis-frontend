@@ -267,6 +267,31 @@
                     color: #F0653A;
                     font-size: 14px;
                 }
+
+                .phone {
+                    position: relative;
+
+                    input {
+                        padding-left: 35px !important;
+
+                        &:focus {
+                            padding-top: 9px !important;
+                        }
+                    }
+                }
+
+                .country-code {
+                    position: absolute;
+                    top:0;
+                    left:0;
+                    font-weight: 500;
+                    font-size: 15px;
+                    background: $white;
+                    padding: 9px 0  9px 9px;
+                    border: none;
+                    border-radius: 3px;
+                    margin: 1px;
+                }
             }
 
             .vertical-divider {

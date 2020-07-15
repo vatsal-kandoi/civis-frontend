@@ -108,6 +108,29 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
       return url;
   }
 
+  getFbUrl(link) {
+    if (link) {
+      return `https://www.facebook.com/sharer/sharer.php?u=${link}`;
+    }
+    return null;
+  }
+
+  getWhatsappUrl(link) {
+    if (link) {
+      return `https://api.whatsapp.com/send?text=${link}`;
+    }
+    return null;
+  }
+
+  getLinkedinUrl(link) {
+    if (link) {
+
+      return `https://www.linkedin.com/shareArticle?mini=true&url=${link}`;
+
+    }
+    return null;
+  }
+
   createCalendarEvent() {
     if (this.profile && this.profile.title && this.profile.responseDeadline) {
       let startDate: any =  new Date(this.profile.responseDeadline).setHours(0, 0, 0);

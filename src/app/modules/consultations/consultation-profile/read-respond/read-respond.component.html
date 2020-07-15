@@ -9,7 +9,8 @@
     </div>
   </div>
 
-  <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions">
+  <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions"
+    #startDraftingSection>
     <div class="draft-box">
       <div class="draft-img">
         <img src="assets/images/start-drafting-empty-state.svg" />
@@ -112,7 +113,10 @@
           <label class="m-0">{{'Make my response public' | translate}}</label>
           <span class="link">{{'What does this mean?' | translate}}</span>
         </div>
-        <p class="auto-save-text" *ngIf="showAutoSaved">{{'Draft autosaved' | translate}}</p>
+        <div class="d-flex">
+            <p class="auto-save-text mr-2" *ngIf="showAutoSaved">{{'Draft autosaved' | translate}}</p>
+            <p class="auto-save-text pointer" (click)="autoSave(responseText)">{{'Save as Draft' | translate}}</p>
+        </div>
       </div>
       <div class="draggable-area">
         <span class="drag-bars"></span>
@@ -170,34 +174,45 @@
               </div>
               <div class="share-block">
                   <div class="share-block__position">
-                    <div #shareBlockElement *ngIf="showShareBlock" class="share-pop-up">
-                        <share-button 
-                        [button]="'facebook'"
-                        [url]="getSharingUrl(response?.node?.id)"
-                        [autoSetMeta]="false"
-                        (closed)="showShareOptions = false"
-                        ></share-button>
-                        <a  class="tweet-block"
+                    <div #shareBlockElement *ngIf="showShareBlock && (responseId && responseId == response?.node?.id)" class="share-pop-up">
+                        <a  class="share-btn"
+                        [href]="getFbUrl(currentUrl)"
+                        target="_blank">
+                          <span>
+                              <i class="fa fa-facebook"></i>
+                          </span>
+                        </a>
+                        <a  class="share-btn"
                         [href]="getTwitterUrl(currentUrl, response?.node?.id)"
                         target="_blank">
                           <span>
                               <i class="fa fa-twitter"></i>
                           </span>
                         </a>
-                        <share-button 
-                        [button]="'whatsapp'"
-                        [url]="getSharingUrl(response?.node?.id)"
-                        [autoSetMeta]="false"
-                        (closed)="showShareOptions = false"
-                        ></share-button>
+                        <a  class="share-btn"
+                        [href]="getWhatsappUrl(currentUrl)"
+                        target="_blank">
+                          <span>
+                              <i class="fa fa-whatsapp"></i>
+                          </span>
+                        </a>
+                        <a  class="share-btn"
+                        [href]="getLinkedinUrl(currentUrl)"
+                        target="_blank">
+                          <span>
+                              <i class="fa fa-linkedin"></i>
+                          </span>
+                        </a>
                     </div>
                   </div>
-                  <span #shareButtonElement (click)="showShareBlock = !showShareBlock"
-                  class="ml-4 mr-2 fs-20 pointer" tooltip="{{'Share'}}"><i class="fa fa-share"></i></span>
+                  <span  
+                  class="ml-4 mr-2 fs-20" >
+                  <i class="fa fa-share pointer" (click)="toggleShareBlock(response?.node?.id)" tooltip="{{'Share'}}" #shareButtonElement></i>
+                </span>
                   <span>{{response.node?.templatesCount ? response.node?.templatesCount : '' }}</span>
               </div>
             </div>
-            <div>
+            <div *ngIf="showCreateResponse()">
               <button class="app-btn response-btn" (click)="useThisResponse(response?.node)" >{{'Use this response' | translate}}</button>
             </div>
           </div>

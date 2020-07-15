@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
     phoneNumber: null,
     password: '',
     cityId: null,
-    notifyForNewConsultation: false,
+    notifyForNewConsultation: true,
     agreedForTermsCondition: false,
   };
   searchEmitter: EventEmitter<any> = new EventEmitter();

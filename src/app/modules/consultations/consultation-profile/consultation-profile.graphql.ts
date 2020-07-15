@@ -70,6 +70,15 @@ export const ConsultationProfile = gql`
         totalCount
       }
       updatedAt
+      questions {
+        id
+        questionText
+        questionType
+        subQuestions {
+          id
+          questionText
+        }
+      }
     }
   }
 `

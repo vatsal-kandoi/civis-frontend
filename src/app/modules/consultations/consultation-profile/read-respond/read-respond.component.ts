@@ -61,6 +61,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     resize_enabled: false,
    };
   usingTemplate: boolean;
+  responseId: any;
   questionnaireForm: FormGroup;
   showQuestions = false;
   responseQuestions: any;
@@ -614,6 +615,36 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     return url;
   }
 
+  getFbUrl(link) {
+    if (link) {
+      return `https://www.facebook.com/sharer/sharer.php?u=${link}`;
+    }
+    return null;
+  }
+
+  getWhatsappUrl(link) {
+    if (link) {
+      return `https://api.whatsapp.com/send?text=${link}`;
+    }
+    return null;
+  }
+
+  getLinkedinUrl(link) {
+    if (link) {
+
+      return `https://www.linkedin.com/shareArticle?mini=true&url=${link}`;
+
+    }
+    return null;
+  }
+
+  toggleShareBlock(id) {
+    if (id) {
+      this.showShareBlock = !this.showShareBlock;
+      this.responseId = id;
+    }
+  }
+
   getResponseText() {
     let draftObj: any = localStorage.getItem('responseDraft');
     if (draftObj && this.currentUser) {
@@ -773,6 +804,13 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       this.customStyleAdded = false;
       this.editIframe();
     }
+  }
+
+  getWholeNumber(number) {
+    if (number) {
+        return Math.round(number);
+    }
+    return null;
   }
 
 }

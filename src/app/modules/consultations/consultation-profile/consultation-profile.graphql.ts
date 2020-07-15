@@ -14,6 +14,15 @@ export const ConsultationProfile = gql`
         id
         components
       }
+      questions {
+        id
+        questionText
+        questionType
+        subQuestions {
+          id
+          questionText
+        }
+      }
       responseDeadline
       readingTime
       responsesReadingTimes

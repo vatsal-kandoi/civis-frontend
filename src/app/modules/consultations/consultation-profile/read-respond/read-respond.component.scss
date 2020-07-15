@@ -60,6 +60,7 @@
 
         .active {
           color: $primary-color !important;
+          background-color: transparent;
 
           &__btn {
             border: 1px solid $primary-color;
@@ -99,15 +100,15 @@
                 border-left: 10px solid transparent;
                 border-right: 10px solid transparent;
               }
-              .tweet-block {
+              .share-btn {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 margin: 0.3125em;
                 border: none;
                 border-radius: 5px;
-                background-color: #00acee;
-                min-width: 3.8em;
+                width: 57px;
+                height: 35px;
 
                 &:visited {
                   color: transparent;
@@ -122,6 +123,19 @@
                 i {
                   color: $white;
                   font-size: 18px;
+                }
+
+                &:nth-child(1) {
+                  background-color: #4267b2
+                }
+                &:nth-child(2) {
+                  background-color: #00acee;
+                }
+                &:nth-child(3) {
+                  background-color: #25D366;
+                }
+                &:nth-child(4) {
+                  background-color: #0e76a8;
                 }
               }
             }

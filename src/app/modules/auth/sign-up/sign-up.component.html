@@ -90,8 +90,9 @@
 
             <div class="input-box">
                 <label for="phone">{{'Phone' | translate}}</label>
-                <div class="input-box__border">
-                    <input placeholder="+919223386370" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"/>
+                <div class="input-box__border phone">
+                    <input placeholder="9223386370" type="tel" pattern="[+0-9]{10}" id="phone" #phone="ngModel" name="phone" [(ngModel)]="signupObject.phoneNumber"/>
+                    <span class="country-code">+91</span>
                 </div>
                 <div *ngIf="phone.invalid && (phone.touched || signupForm.submitted)" class="error-msg">
                   <div>{{'Phone Number must be a valid number' | translate}}</div>

@@ -10,7 +10,6 @@ import {HttpClient} from '@angular/common/http';
 import {Resolve, ActivatedRouteSnapshot, CanActivate} from '@angular/router';
 import { HindiLang } from '../../shared/models/constants/transalation.json';
 
-
 interface Dictionary {
 text: string;
 translation: string;
@@ -30,7 +29,6 @@ constructor(
         private _cookieService: CookieService,
         private storage: LocalStorageService,
         private http: HttpClient,
-
 ) {
 
     const currentLanguage = this._cookieService.get('civisLang');
@@ -42,8 +40,9 @@ constructor(
             this.dictionary.next(this.storage.retrieve('lang'));
             this.setIndex();
         } else {
-            this.dictionary.next(HindiLang);
-            this.storage.store('lang', HindiLang);
+            const lang = HindiLang;
+            this.dictionary.next(lang);
+            this.storage.store('lang', lang);
             this.setIndex();
         }
     } else {
@@ -68,8 +67,6 @@ setIndex() {
     this.loading.complete();
 }
 
-
-
 translate(text: string) {
     if (typeof text !== 'string') {
         return text;
@@ -81,6 +78,8 @@ translate(text: string) {
 
 }
 
+
+
 binarySearch(arr: Array<Dictionary>, text: string, start: number, end: number) {
 
     const mid = Math.floor((start + end) / 2);
@@ -89,27 +88,31 @@ binarySearch(arr: Array<Dictionary>, text: string, start: number, end: number) {
         return null;
     }
 
+    const startText = arr[start] && arr[start].text.toLowerCase();
+    const midText = arr[mid] && arr[mid].text.toLowerCase();
+    const endText = arr[end] && arr[end].text.toLowerCase();
+
     if (start === end) {
-        if (arr[start] && arr[start].text.toLowerCase() === text) {
+        if (startText === text) {
             return arr[start].translation;
         } else {
             return null;
         }
     }
 
-    if (arr[start] && arr[start].text.toLowerCase() === text) {
+    if (startText === text) {
         return arr[start].translation;
     }
 
-    if (arr[end] && arr[end].text.toLowerCase() === text) {
+    if (endText === text) {
         return arr[end].translation;
     }
 
-    if (arr[mid] && arr[mid].text.toLowerCase() === text) {
+    if (midText === text) {
         return arr[mid].translation;
     }
 
-    if (arr[mid].text.toLowerCase() > text) {
+    if (midText > text) {
         return this.binarySearch(arr, text, start, mid - 1);
     } else {
         return this.binarySearch(arr, text, mid + 1, end);

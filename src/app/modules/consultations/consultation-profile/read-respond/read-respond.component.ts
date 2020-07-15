@@ -27,7 +27,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
 
 
   @ViewChild('feedbackModal', { static: false }) feedbackModal: ModalDirective;
-  @ViewChild('responseIndex', { read: ElementRef , static: false }) panel: ElementRef<any>;
+  @ViewChild('responseIndex', { read: ElementRef, static: false }) responseIndex: ElementRef<any>;
+  @ViewChild('startDraftingSection', { read: ElementRef, static: false }) startDraftingSection: ElementRef<any>;
   @ViewChild('responsesListContainer', { read: ElementRef , static: false }) responsesListContainer: ElementRef<any>;
   @ViewChild('shareBlockElement', { static: false }) shareBlockElement: ElementRef;
   @ViewChild('shareButtonElement', { static: false }) shareButtonElement: ElementRef;
@@ -760,7 +761,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     .subscribe((scrollTo) => {
       if (scrollTo) {
         window.scrollTo({
-          top: this.panel.nativeElement.offsetTop,
+          top: this.responseIndex ? this.responseIndex.nativeElement.offsetTop : this.startDraftingSection.nativeElement.offsetTop,
           behavior: 'smooth',
         });
         this.consultationService.scrollToCreateResponse.next(false);
@@ -795,7 +796,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       this.responseText =  this.templateText = response.responseText;
       this.templateId = response.id;
       window.scrollTo({
-        top: this.panel.nativeElement.offsetTop,
+        top: this.responseIndex.nativeElement.offsetTop,
         behavior: 'smooth',
       });
       if (this.responseText) {

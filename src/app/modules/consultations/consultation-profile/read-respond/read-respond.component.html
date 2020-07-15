@@ -9,7 +9,8 @@
     </div>
   </div>
 
-  <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions">
+  <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions"
+    #startDraftingSection>
     <div class="draft-box">
       <div class="draft-img">
         <img src="assets/images/start-drafting-empty-state.svg" />

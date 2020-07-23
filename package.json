@@ -4,9 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "serve": "ng serve --configuration=dev",
-    "start:staging": "gulp set --env=staging && concurrently --kill-others \"node server.js\" \"npm run serve\"",
-    "start:prod": "gulp set --env=prod && concurrently --kill-others \"node server.js\" \"npm run serve\"",
+    "start:staging": "gulp set --env=staging && concurrently --kill-others \"node server.js\" \"npm run serve:staging\"",
+    "start:prod": "gulp set --env=prod && concurrently --kill-others \"node server.js\" \"npm run serve:prod\"",
+    "serve:staging": "ng serve --configuration=dev-staging --port 3400",
+    "serve:production": "ng serve --configuration=dev-production --port 4000",
     "build": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",

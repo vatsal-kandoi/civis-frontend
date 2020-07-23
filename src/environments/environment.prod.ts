@@ -2,21 +2,9 @@
 
 export const environment = {
   hmr: false,
-  production: true
+  development: false,
+  staging: false,
+  production: true,
+  api: 'https://api.civis.vote'
 };
 
-// Staging API environment
-export const staging = {
-  ... environment,
-  ... {
-    api: 'https://api-staging.civis.vote'
-  },
-};
-
-// Prod API environment
-export const prod = {
-  ... environment,
-  ... {
-    api: 'https://api.civis.vote'
-  }
-};

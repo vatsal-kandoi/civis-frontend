@@ -3,7 +3,7 @@ import {Apollo} from 'apollo-angular';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpLink} from 'apollo-angular-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import {prod, staging} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { ApolloLink, concat } from 'apollo-link';
 
 @Injectable({
@@ -24,13 +24,11 @@ export class GraphqlService {
 
   async initializeApollo(): Promise<any> {
 
-    this.environment = await this.getEnvironment().catch(e => {
+    const env: any = await this.getEnvironment().catch(e => {
       console.error('Error fetching environment');
     });
 
-    const localEnvironment = this.environment && this.environment.APP_ENVIRONMENT === 'staging' ? staging : prod;
-
-    this.environment = {...localEnvironment, ...this.environment};
+    this.environment = {...environment, ...env};
 
     const http = this.httpLink.create({uri: `${this.environment.api}/graphql`});
 

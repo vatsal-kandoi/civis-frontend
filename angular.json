@@ -61,11 +61,27 @@
                 }
               ]
             },
-            "dev": {
+            "staging": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "dev-staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.staging.ts"
+                }
+              ]
+            },
+            "dev-prod": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.prod.ts"
                 }
               ]
             }
@@ -81,9 +97,14 @@
             "production": {
               "browserTarget": "civis:build:production"
             },
-            "dev": {
-              "hmr": true,
-              "browserTarget": "civis:build:dev"
+            "staging": {
+              "browserTarget": "civis:build:staging"
+            },
+            "dev-staging": {
+              "browserTarget": "civis:build:dev-staging"
+            },
+            "dev-production": {
+              "browserTarget": "civis:build:dev-production"
             }
           }
         },

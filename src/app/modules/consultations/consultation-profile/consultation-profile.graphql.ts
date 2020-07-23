@@ -6,6 +6,23 @@ export const ConsultationProfile = gql`
       id
       title
       summary
+      summaryHindi {
+        id
+        components
+      }
+      page {
+        id
+        components
+      }
+      questions {
+        id
+        questionText
+        questionType
+        subQuestions {
+          id
+          questionText
+        }
+      }
       responseDeadline
       readingTime
       responsesReadingTimes
@@ -35,6 +52,7 @@ export const ConsultationProfile = gql`
         edges {
           node {
             id
+            answers
             downVoteCount
             responseText
             templatesCount
@@ -52,6 +70,15 @@ export const ConsultationProfile = gql`
         totalCount
       }
       updatedAt
+      questions {
+        id
+        questionText
+        questionType
+        subQuestions {
+          id
+          questionText
+        }
+      }
     }
   }
 `
@@ -62,6 +89,14 @@ export const ConsultationProfileCurrentUser = gql`
       id
       title
       summary
+      summaryHindi {
+        id
+        components
+      }
+      page {
+        id
+        components
+      }
       responseDeadline
       readingTime
       responsesReadingTimes
@@ -92,6 +127,7 @@ export const ConsultationProfileCurrentUser = gql`
         edges {
           node {
             id
+            answers
             downVoteCount
             responseText
             templatesCount
@@ -113,6 +149,15 @@ export const ConsultationProfileCurrentUser = gql`
         totalCount
       }
       updatedAt
+      questions {
+        id
+        questionText
+        questionType
+        subQuestions {
+          id
+          questionText
+        }
+      }
     }
   }
 `
@@ -149,6 +194,7 @@ export const SubmitResponseQuery = gql`
           edges {
             node {
               id
+              answers
               downVoteCount
               responseText
               templatesCount
@@ -168,6 +214,15 @@ export const SubmitResponseQuery = gql`
             }
           }
           totalCount
+        }
+        questions {
+          id
+          questionText
+          questionType
+          subQuestions {
+            id
+            questionText
+          }
         }
       }
     }

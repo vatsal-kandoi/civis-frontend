@@ -6,15 +6,17 @@
       <section class="consultation-profile__main-section">
         <div class="paper-effect mb-4">
           <p class="heading">
-            Summary
+            {{'Summary' | translate}}
             <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
           </p>
-          <p class="summary-content" [innerHTML]="profileData?.summary"></p>
+          <div *ngIf="profileData?.page || profileData?.summaryHindi">
+            <app-page-content-renderer [page]="useSummaryHindi ? profileData?.summaryHindi : profileData?.page"></app-page-content-renderer>
+          </div>
         </div>
 
         <div class="paper-effect mb-4 inner-space" *ngIf="showKeywordGraph">
           <p class="heading">
-            Overview
+            {{'Overview' | translate}}
           </p> 
           <div id="highchartContainer" style="width:100%; height:400px;"></div>
         </div>
@@ -22,7 +24,8 @@
 
         <div *ngIf="publicResponses?.length">
           <div class="d-flex justify-content-between align-items-center">
-            <p class="text-18 text-16-sm m-0 bold-text">Public responses</p>
+            <p class="text-18 text-16-sm m-0 bold-text">{{'Public responses' | translate}}
+            </p>
             <p 
               class="what-resp-text" 
               tooltip="If you feel passionately about this Consultation, you can make your response public, 
@@ -31,7 +34,8 @@
               placement="left"
               container="body"
             >
-              What are public responses?
+            {{'What are public responses?' | translate}}
+
           </p>
           </div>
 
@@ -45,6 +49,9 @@
                   <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
+                <div *ngIf="responseQuestions && response?.node?.answers">
+                  <app-response-answers [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
+                </div>
                 <div class="vote-section">
                   <div class="vote-count">
                     <div>
@@ -68,7 +75,8 @@
 
         <div *ngIf="annonymousResponses?.length">
           <div>
-              <p class="text-18 text-16-sm m-0 bold-text">Other responses</p>
+              <p class="text-18 text-16-sm m-0 bold-text">{{'Other responses' | translate}}
+              </p>
           </div>
           
           <div class="paper-effect my-4 m-0-sm" *ngFor="let response of annonymousResponses">
@@ -81,10 +89,13 @@
                     [src]="'null'" />
                   </div>
                   <p class="regular-text bold-text m-0 ml-2">
-                    {{'Citizen Leader [Name undisclosed]'}}
+                    {{'Citizen Leader [Name undisclosed]' | translate}}
                   </p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
+                <div *ngIf="responseQuestions && response?.node?.answers">
+                  <app-response-answers [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
+                </div>
               </div>
             </ng-container>
           </div>  

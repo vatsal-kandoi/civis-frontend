@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { NgForm } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
     phoneNumber: null,
     password: '',
     cityId: null,
-    notifyForNewConsultation: false,
+    notifyForNewConsultation: true,
     agreedForTermsCondition: false,
   };
   searchEmitter: EventEmitter<any> = new EventEmitter();
@@ -118,7 +118,7 @@ export class SignUpComponent implements OnInit {
           const callbackUrl = this.cookieService.get('loginCallbackUrl');
           if (callbackUrl) {
             this.router.navigateByUrl(callbackUrl);
-            this.cookieService.set('loginCallbackUrl', '');
+            this.cookieService.put('loginCallbackUrl', '');
           } else {
             this.router.navigateByUrl('/profile');
           }

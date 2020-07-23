@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DisqusComponent } from './disqus.component';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { DisqusComponent } from './disqus.component';
   ],
   imports: [
     CommonModule,
+    PipesModule,
   ],
   exports: [
     DisqusComponent,

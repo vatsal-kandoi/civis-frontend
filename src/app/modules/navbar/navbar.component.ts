@@ -140,7 +140,10 @@ export class NavbarComponent implements OnInit {
     .subscribe((data: any) => {
         this.reviewType  = data.reviewType;
     }, err => {
-      this.errorService.showErrorModal(err);
+      const e = new Error(err);
+      if (!e.message.includes('Invalid Access Token')) {
+        this.errorService.showErrorModal(err);
+      }
     });
   }
 
@@ -205,6 +208,10 @@ export class NavbarComponent implements OnInit {
   }
 
   routeToConsultation(subRoute: string) {
+    if (!this.currentUser && subRoute === 'discuss') {
+      this.router.navigateByUrl('/auth');
+      return;
+    }
     const urlArray = this.router.url.split('/');
     const consultationIndex = +urlArray.findIndex(i => i === 'consultations') + 1;
     if (consultationIndex > 0) {

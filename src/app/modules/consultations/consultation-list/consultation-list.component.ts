@@ -5,6 +5,7 @@ import { ConsultationList } from './consultation-list.graphql';
 import { LinearLoaderService } from '../../../shared/components/linear-loader/linear-loader.service';
 import * as moment from 'moment';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-consultation-list',
@@ -25,6 +26,7 @@ export class ConsultationListComponent implements OnInit {
   closedConsultationPaging: any;
   loadClosedConsultation = false;
   loadingCard = false;
+  currentUser: any;
   
   @HostListener('document:scroll', ['$event'])
   onScroll(event: any) {
@@ -34,12 +36,30 @@ export class ConsultationListComponent implements OnInit {
     }
   }
 
-  constructor(private apollo: Apollo, private loader: LinearLoaderService, private errorService: ErrorService) { }
+  constructor(
+    private apollo: Apollo, 
+    private loader: LinearLoaderService, 
+    private errorService: ErrorService,
+    private userService: UserService
+    ) { }
 
   ngOnInit() {
+    this.checkUserSignedIn();
     this.fetchActiveConsultationList();
   }
-  
+
+  checkUserSignedIn(){
+    this.userService.userLoaded$
+    .subscribe((exists: boolean) => {
+      if (exists) {
+        this.currentUser = this.userService.currentUser;
+      }
+    },
+    err => {
+      this.errorService.showErrorModal(err);
+    });
+  }
+
   fetchActiveConsultationList() {
     this.loadingCard = true;
     this.consultationListQuery = this.getQuery('published');

@@ -6,6 +6,7 @@ import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ImageUploaderModule } from 'src/app/shared/components/image-uploader/image-uploader.module';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
         ModalModule,
         FormsModule,
         ImageUploaderModule,
-        SharedComponentsModule
+        SharedComponentsModule,
+        PipesModule
     ],
     exports: [],
     declarations: [ProfileComponent],

@@ -12,6 +12,12 @@ import { ErrorComponent } from './error-modal/error.component';
 import { FooterComponent } from './footer/footer.component';
 import { ToastComponent } from './toast/toast.component';
 import { SharedDirectivesModule } from '../directives/shared-directives.module';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { CookieModule } from 'ngx-cookie';
+import { PipesModule } from '../pipes/pipes.module';
+import { PageContentRendererComponent } from './page-content-renderer/page-content-renderer.component';
+import { ResponseAnswersComponent } from './response-answers/response-answers.component';
 
 
 @NgModule({
@@ -22,13 +28,19 @@ import { SharedDirectivesModule } from '../directives/shared-directives.module';
     ConsultationCardComponent,
     ErrorComponent,
     FooterComponent,
-    ToastComponent
+    ToastComponent,
+    PageContentRendererComponent,
+    ResponseAnswersComponent
   ],
   imports: [
     CommonModule,
     LinearLoaderModule,
     RouterModule,
     SharedDirectivesModule,
+    FormsModule,
+    NgSelectModule,
+    CookieModule.forRoot(),
+    PipesModule,
   ],
   exports: [
     ActionButtonComponent,
@@ -39,7 +51,9 @@ import { SharedDirectivesModule } from '../directives/shared-directives.module';
     ConsultationCardComponent,
     LinearLoaderComponent,
     FooterComponent,
-    ToastComponent
+    ToastComponent,
+    PageContentRendererComponent,
+    ResponseAnswersComponent
   ],
   providers: [
     LinearLoaderService

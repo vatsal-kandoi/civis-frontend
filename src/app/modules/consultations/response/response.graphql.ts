@@ -4,6 +4,7 @@ export const ResponseProfileQuery = gql`
     query consultationResponseProfile($id: Int!){
         consultationResponseProfile(id: $id){
             id
+            answers
             responseText
             createdAt
             updatedAt
@@ -36,6 +37,15 @@ export const ResponseProfileQuery = gql`
                   totalCount
                 }
                 updatedAt
+                questions {
+                  id
+                  questionText
+                  questionType
+                  subQuestions {
+                    id
+                    questionText
+                  }
+                }
             }
         }
     }

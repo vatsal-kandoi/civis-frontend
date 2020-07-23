@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-profile-card',
@@ -108,6 +108,29 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
       return url;
   }
 
+  getFbUrl(link) {
+    if (link) {
+      return `https://www.facebook.com/sharer/sharer.php?u=${link}`;
+    }
+    return null;
+  }
+
+  getWhatsappUrl(link) {
+    if (link) {
+      return `https://api.whatsapp.com/send?text=${link}`;
+    }
+    return null;
+  }
+
+  getLinkedinUrl(link) {
+    if (link) {
+
+      return `https://www.linkedin.com/shareArticle?mini=true&url=${link}`;
+
+    }
+    return null;
+  }
+
   createCalendarEvent() {
     if (this.profile && this.profile.title && this.profile.responseDeadline) {
       let startDate: any =  new Date(this.profile.responseDeadline).setHours(0, 0, 0);
@@ -138,7 +161,7 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
   stepNext(hasResponseSubmited) {
     if (!this.currentUser) {
       this.router.navigateByUrl('/auth');
-      this.cookieService.set('loginCallbackUrl', this.router.url);
+      this.cookieService.put('loginCallbackUrl', this.router.url);
       return;
     }
 

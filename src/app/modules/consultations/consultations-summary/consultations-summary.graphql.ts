@@ -6,9 +6,26 @@ export const ConsultationProfileQuery = gql`
       id
       title
       summary
+      summaryHindi {
+        id
+        components
+      }
+      page {
+        id
+        components
+      }
       responseDeadline
       url
       consultationResponsesCount
+      questions {
+        id
+        questionText
+        questionType
+        subQuestions {
+          id
+          questionText
+        }
+      }
       ministry {
         id
         name
@@ -31,6 +48,7 @@ export const ConsultationProfileQuery = gql`
         edges {
           node {
             id
+            answers
             downVoteCount
             responseText
             templatesCount

@@ -2,8 +2,8 @@
   <div class="leader-wrapper__inner-container">
     <section class="container-header">
       <div class="header-left">
-        <p>Civis Citizen Leaders</p>
-        <p>Everyday citizens who’re taking initiative and making sure our voices reach the government</p>
+        <p>{{'Civis Citizen Leaders' | translate}}</p>
+        <p>{{'Everyday citizens who’re taking initiative and making sure our voices reach the government' | translate}}</p>
       </div>
       <div class="header-right">
         <form #locationForm="ngForm">
@@ -27,7 +27,7 @@
           />
           <p class="profile-name">{{item?.firstName}}</p>
         </div>
-        <p class="row-right-item mb-0">{{item?.points}}<span> Points</span></p>
+        <p class="row-right-item mb-0">{{item?.points}}&nbsp;<span>{{'Points' | translate}}</span></p>
       </div>
 
       <!-- data-row-mobile-layout -->
@@ -41,7 +41,7 @@
           />
         <div class="leader-detail">
           <p>{{item?.firstName}}</p>
-          <p><span class="bold-text">{{item?.points}}</span> Points</p>
+          <p><span class="bold-text">{{item?.points}}</span>&nbsp;{{'Points' | translate}}</p>
         </div>
       </div>
     </section>

@@ -56,6 +56,8 @@
         text-align: left;
       }
       .social-icons {
+        display: flex;
+        align-items: center;
         span {
           font-size: 38px;
           margin-right: 14px;
@@ -83,6 +85,32 @@
           color: inherit;
           text-decoration: underline;
         }
+      }
+
+      .instagram-icon {
+        width: 33px;
+        height: 33px;
+        border-radius: 6px;
+        background-color: black;
+        opacity: .2;
+        margin-top: 2px;
+        cursor: pointer;
+    
+        i {
+          font-weight: bold;
+          font-size: 25px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          color: white;
+          margin-top: 1px;
+        }
+    
+        &:hover {
+          background-color: $primary-color;
+          opacity: 1;
+        }  
       }
     }
   }
@@ -115,10 +143,14 @@
       }
     }
     .logo-right {
+      display: flex;
       @media screen and (max-width: 991px) and (min-width: 450px) {
         width: 100%;
         text-align: left; 
       }
+    }
+    .language-box {
+      z-index: 99;
     }
   }
 }

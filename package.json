@@ -8,6 +8,7 @@
     "start:prod": "gulp set --env=prod && concurrently --kill-others \"node server.js\" \"npm run serve:prod\"",
     "serve:staging": "ng serve --configuration=dev-staging --port 3400",
     "serve:production": "ng serve --configuration=dev-production --port 4000",
+    "build": "ng build --configuration=production",
     "build:production": "ng build --configuration=production",
     "build:staging": "ng build --configuration=staging",
     "test": "ng test",

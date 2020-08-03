@@ -77,7 +77,7 @@
                 }
               ]
             },
-            "dev-prod": {
+            "dev-production": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

@@ -28,7 +28,7 @@ export class GraphqlService {
     //   console.error('Error fetching environment');
     // });
 
-    this.environment = {...environment};
+    this.environment = environment;
 
     const http = this.httpLink.create({uri: `${this.environment.api}/graphql`});
 

@@ -27,6 +27,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
 
 
   @ViewChild('feedbackModal', { static: false }) feedbackModal: ModalDirective;
+  @ViewChild('thankyouModal', { static: false }) thankyouModal: ModalDirective;
   @ViewChild('responseIndex', { read: ElementRef, static: false }) responseIndex: ElementRef<any>;
   @ViewChild('startDraftingSection', { read: ElementRef, static: false }) startDraftingSection: ElementRef<any>;
   @ViewChild('responsesListContainer', { read: ElementRef , static: false }) responsesListContainer: ElementRef<any>;

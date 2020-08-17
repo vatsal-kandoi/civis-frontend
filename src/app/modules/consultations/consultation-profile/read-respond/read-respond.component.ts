@@ -411,6 +411,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   closeFeedbackModal() {
     this.step = null;
     this.feedbackModal.hide();
+    this.thankyouModal.show();
     this.consultationService.openFeedbackModal.next(false);
   }
 
@@ -500,6 +501,9 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       this.responseSubmitLoading = false;
       this.earnedPoints = response.points;
       this.consultationService.enableSubmitResponse.next(false);
+      if (this.longTextResponse) {
+        this.thankyouModal.show();
+      }
     }, err => {
       this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);

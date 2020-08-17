@@ -86,15 +86,6 @@
               <span class="ml-2"><i class="fa fa-angle-right"></i></span>
             </button>
           </div>
-        </div>
-        <div class="py-3">
-          <button class="btn-submit active" (click)='submitAnswer()'>
-            <p class="m-0">
-              SUBMIT RESPONSE
-            </p>
-            <span class="ml-2"><i class="fa fa-angle-right"></i></span>
-          </button>
-        </div>
       </form>
     </div>
   </div>
@@ -154,7 +145,7 @@
         </p>
       </div>
       <ng-container *ngFor="let response of responseList">
-        <div class="response-container" [id]="response?.node?.id">
+        <div class="response-container pb-0" [id]="response?.node?.id">
           <div class="d-inline-flex align-items-center">
             <img class="avatar avatar--42 pointer" appDefaultImage [type]="'user'"
               [src]="response?.node?.user?.profilePicture?.url" (click)="openUserProfile(response?.node?.user)" />
@@ -181,7 +172,7 @@
                   {{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}
                 </span>
               </div>
-              <div class="share-block">
+              <div class="share-block"  (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true" tooltip="{{'Share'}}">
                   <div class="share-block__position">
                     <div #shareBlockElement *ngIf="showShareBlock && (responseId && responseId === response?.node?.id)" class="share-pop-up">
                         <a  class="share-btn"
@@ -215,8 +206,8 @@
                     </div>
                   </div>
                   <span  
-                  class="ml-4 mr-2 fs-20">
-                  <i class="fa fa-share pointer" (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true" tooltip="{{'Share'}}"></i>
+                  class="fs-20">
+                  <i class="fa fa-share"></i>
                 </span>
                 <span *ngIf="response.node?.templatesCount">
                   {{response.node?.templatesCount ? response.node?.templatesCount : '' }}
@@ -368,30 +359,43 @@
 
 
 <!-- Thanks modal  -->
-<!-- <div class="thankyou-modal">
+<div class="thankyou-modal">
   <div bsModal #thankyouModal="bs-modal" class="modal fade" tabindex="-1"
-    [config]="{show: true, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}" role="dialog"
+    [config]="{show: false, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}" role="dialog"
     aria-labelledby="thankyouModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
           <div class="thankyou-inner">
-            <button class="close-btn"><img src="assets/images/close.png" /></button>
+            <button class="close-btn" (click)="thankyouModal.hide()"><img src="assets/images/close.png" /></button>
             <div class="thankyou-inner__top">
               <img class="thankyou-img" src="assets/images/thankyou.png" />
               <div class="thankyou-content">
                 <p>Thank you for your response</p>
-                <p>This will be the subtext entered while creating a consultaion form the Admin panel.</p>
+                <p>
+                  We appreciate you taking the time to submit your response. 
+                  Please consider sharing this Consultation on Social Media to help spread the word. 
+                  Together, we can make our voices heard and action real change!
+                </p>
               </div>
-             
             </div> 
             <div class="thankyou-inner__bottom">
               <div class="social-list">
-                <div class="social-item"><img src="assets/images/whatsapp.svg" alt="whatsapp logo" /></div>
-                <div class="social-item"><img src="assets/images/twitter.svg" alt="twitter logo" /></div>
-                <div class="social-item"><img src="assets/images/facebook.svg" alt="facebook logo" /></div>
-                <div class="social-item"><img src="assets/images/linkedin.svg" alt="linkedin logo" /></div>
-                <div class="social-item"><img src="assets/images/link.svg" alt="link logo" /></div>
+                <a class="social-item" [href]="getWhatsappUrl(currentUrl)" target="_blank">
+                  <img src="assets/images/whatsapp.svg" alt="whatsapp logo" />
+                </a>
+                <a class="social-item"  target="_blank">
+                  <img src="assets/images/twitter.svg" alt="twitter logo" />
+                </a>
+                <a class="social-item" [href]="getFbUrl(currentUrl)" target="_blank">
+                  <img src="assets/images/facebook.svg" alt="facebook logo" />
+                </a>
+                <a class="social-item" [href]="getLinkedinUrl(currentUrl)" target="_blank">
+                  <img src="assets/images/linkedin.svg" alt="linkedin logo" />
+                </a>
+                <a class="social-item" [href]="currentUrl" target="_blank">
+                  <img src="assets/images/link.svg" alt="link logo" />
+                </a>
               </div>
             </div> 
           </div>
@@ -400,4 +404,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>

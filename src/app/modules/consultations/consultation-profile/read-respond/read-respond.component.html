@@ -10,7 +10,6 @@
     </div>
   </div>
 
-<<<<<<< Updated upstream
   <div class="paper-effect  mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist()">
     <p class="satisfactory-heading">
       {{'How satisfied are you with this Consultation' | translate}}
@@ -68,66 +67,10 @@
                   <div class="text-area">
                     <textarea (input)="responseText = $event.target.value; onChange()" placeholder="Type your answer here" [formControlName]="question.id"></textarea>
                   </div>
-=======
-  <div class="paper-effect mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist() && !showQuestions"
-    #startDraftingSection>
-    <div class="draft-box">
-      <div class="draft-img">
-        <img src="assets/images/start-drafting-empty-state.svg" />
-      </div>
-      <p class="draft-text">
-        Ready to draft your response? Click <br /> the below button to start
-      </p>
-      <button class="btn-submit  active" (click)='showQuestions = true'>
-        <p class="m-0">
-          START DRAFTING
-        </p>
-        <span class="ml-2"><i class="fa fa-angle-right"></i></span>
-      </button>
-    </div>
-  </div>
-
-  <div class="paper-effect mt-4 m-0-sm p-0" *ngIf="showCreateResponse() && questionnaireExist() && showQuestions">
-    <div class="question-box">
-      <p class="heading">
-        Questions
-      </p>
-      <form [formGroup]="questionnaireForm">
-        <div class="questions-container">
-          <div class="question-index" *ngFor="let question of profileData?.questions; let i = index">
-            <div class="question">
-              <p class="question-text">
-                <span class="question-text__number">{{i+1}}.</span>
-                {{question.questionText}}
-              </p>
-              <div class="answer" *ngIf="question.questionType === 'multiple_choice'">
-                <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
-                  <label>
-                    <input type="radio" class="cm-radio" [formControlName]="question.id" [value]="subQuestion.id">
-                    <span>{{subQuestion.questionText}}</span>
-                  </label>
-                </div>
-              </div>
-              <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
-                <label class="answer__tips">Choose as many as you like</label>
-                <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
-                  <label>
-                    <input type="checkbox" class="cm-radio" [formControlName]="subQuestion.id"
-                      (click)="toggle(question.id, subQuestion.id)">
-                    <!-- (click)="toggleCheckbox( questionnaireForm.get(question.id).get(subQuestion.id), !questionnaireForm.get(question.id).get(subQuestion.id).value)"> -->
-                    <span>{{subQuestion.questionText}}</span>
-                  </label>
-                </div>
-              </div>
-              <div class="answer" *ngIf="question.questionType === 'long_text'">
-                <div class="text-area">
-                  <textarea placeholder="Type your answer here" [formControlName]="question.id"></textarea>
->>>>>>> Stashed changes
                 </div>
               </div>
             </div>
           </div>
-<<<<<<< Updated upstream
           <div class="checkbox-area" *ngIf="responseText !== templateText">
             <div class="input-checbox" >
               <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" [ngModelOptions]="{standalone: true}"/> 
@@ -142,15 +85,6 @@
               </p>
               <span class="ml-2"><i class="fa fa-angle-right"></i></span>
             </button>
-=======
-        </div>
-        <div class="checkbox-area">
-          <div class="input-checbox">
-            <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility"
-              [ngModelOptions]="{standalone: true}" />
-            <label class="m-0">{{'Make my response public' | translate}}</label>
-            <span class="link">{{'What does this mean?' | translate}}</span>
->>>>>>> Stashed changes
           </div>
         </div>
         <div class="py-3">
@@ -165,13 +99,9 @@
     </div>
   </div>
 
-<<<<<<< Updated upstream
-  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse() && !questionnaireExist()" #responseIndex>
-=======
 
   <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse() && !questionnaireExist()"
     #responseIndex>
->>>>>>> Stashed changes
     <div class="response-index__nav">
       <div class="w-50">
         <div class="heading">{{'Your response' | translate}}</div>
@@ -183,7 +113,6 @@
       </div>
     </div>
     <div class="response-index__content" id="editor-container">
-<<<<<<< Updated upstream
       <ckeditor
       *ngIf="enableCkEditor"
       [(ngModel)]="responseText"
@@ -191,10 +120,6 @@
       (change)="enableSubmitResponse($event)"
       (blur)="autoSave(responseText)"
       debounce="0">
-=======
-      <ckeditor [(ngModel)]="responseText" [config]="ckeConfig" (change)="enableSubmitResponse($event)"
-        (blur)="autoSave(responseText)" debounce="0">
->>>>>>> Stashed changes
       </ckeditor>
       <!-- <textarea class="text-space" placeholder="Type your response here..." [(ngModel)]="responseText" (blur)="autoSave(responseText)" (ngModelChange)="enableSubmitResponse($event)"></textarea> -->
     </div>
@@ -216,15 +141,9 @@
       </div>
     </div>
   </div>
-<<<<<<< Updated upstream
   
   <div *ngIf="profileData?.reviewType !== 'policy'">
     <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
-=======
-
-  <ng-container *ngIf="profileData?.reviewType !== 'policy'">
-    <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length" #responsesListContainer>
->>>>>>> Stashed changes
       <div class="d-flex justify-content-between">
         <p class="text-16 m-0 bold-text">{{'Public responses' | translate}}</p>
         <p class="what-resp-text" tooltip="If you feel passionately about this Consultation, you can make your response public, 
@@ -243,18 +162,10 @@
               <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
               <p class="email-text m-0 ml-2">{{response?.node?.user?.email}}</p>
             </div>
-<<<<<<< Updated upstream
           </div>     
           <p class="text-16" *ngIf="!response?.node?.answers" [innerHTML]="response.node?.responseText"></p>
           <div *ngIf="responseQuestions && response?.node?.answers">
             <app-response-answers [showOnlyLongTextAnswer]="true" [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
-=======
-          </div>
-          <p class="text-16" [innerHTML]="response.node?.responseText"></p>
-          <div *ngIf="responseQuestions && response?.node?.answers">
-            <app-response-answers [questions]="responseQuestions" [answers]="response?.node?.answers">
-            </app-response-answers>
->>>>>>> Stashed changes
           </div>
           <div class="vote-section" *ngIf="currentUser">
             <div class="vote-count">
@@ -271,7 +182,6 @@
                 </span>
               </div>
               <div class="share-block">
-<<<<<<< Updated upstream
                   <div class="share-block__position">
                     <div #shareBlockElement *ngIf="showShareBlock && (responseId && responseId === response?.node?.id)" class="share-pop-up">
                         <a  class="share-btn"
@@ -307,35 +217,6 @@
                   <span  
                   class="ml-4 mr-2 fs-20">
                   <i class="fa fa-share pointer" (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true" tooltip="{{'Share'}}"></i>
-=======
-                <div class="share-block__position">
-                  <div #shareBlockElement *ngIf="showShareBlock && (responseId && responseId == response?.node?.id)"
-                    class="share-pop-up">
-                    <a class="share-btn" [href]="getFbUrl(currentUrl)" target="_blank">
-                      <span>
-                        <i class="fa fa-facebook"></i>
-                      </span>
-                    </a>
-                    <a class="share-btn" [href]="getTwitterUrl(currentUrl, response?.node?.id)" target="_blank">
-                      <span>
-                        <i class="fa fa-twitter"></i>
-                      </span>
-                    </a>
-                    <a class="share-btn" [href]="getWhatsappUrl(currentUrl)" target="_blank">
-                      <span>
-                        <i class="fa fa-whatsapp"></i>
-                      </span>
-                    </a>
-                    <a class="share-btn" [href]="getLinkedinUrl(currentUrl)" target="_blank">
-                      <span>
-                        <i class="fa fa-linkedin"></i>
-                      </span>
-                    </a>
-                  </div>
-                </div>
-                <span>
-                  <i class="fa fa-share pointer" (click)="toggleShareBlock(response?.node?.id)" tooltip="{{'Share'}}" #shareButtonElement></i>
->>>>>>> Stashed changes
                 </span>
                 <span *ngIf="response.node?.templatesCount">
                   {{response.node?.templatesCount ? response.node?.templatesCount : '' }}
@@ -349,13 +230,8 @@
           </div>
         </div>
       </ng-container>
-<<<<<<< Updated upstream
     </div>   
   </div>   
-=======
-    </div>
-  </ng-container>
->>>>>>> Stashed changes
 </section>
 <div *ngIf="selectedUser && showLeaderProfileModal">
   <app-user-profile-modal (close)="closeModal($event)" [userId]="selectedUser"></app-user-profile-modal>

@@ -13,7 +13,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { isObjectEmpty } from '../../../../shared/functions/modular.functions';
 import { CookieService } from 'ngx-cookie';
 
@@ -49,7 +49,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   earnedPoints: any;
   fragment: string;
   currentUrl: string;
-  showShareBlock: any;
+  showShareBlock = false;
   checkForFragments: boolean;
   showAutoSaved: boolean;
   selectedUser: any;
@@ -63,14 +63,17 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
    };
   usingTemplate: boolean;
   responseId: any;
-  questionnaireForm: FormGroup;
+  questionnaireForm: any;
   showQuestions = false;
   responseQuestions: any;
   responseAnswers: any;
   showConfirmEmailModal: boolean;
   currentLanguage: any;
   useSummaryHindi: boolean;
-
+  shareBtnClicked: boolean;
+  longTextResponse: {};
+  showError: boolean;
+  enableCkEditor = false;
 
   constructor(
     private consultationsService: ConsultationsService,
@@ -82,6 +85,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     private consultationService: ConsultationsService,
     private title: Title,
     private _cookieService: CookieService,
+    private _fb: FormBuilder,
   ) {
     this.consultationService.consultationId$
     .pipe(
@@ -90,7 +94,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     .subscribe((consulationId: any) => {
       this.consultationId = consulationId;
     });
-    this.questionnaireForm = new FormGroup({});
+    this.questionnaireForm = this._fb.group({});
   }
 
   ngOnInit() {
@@ -144,7 +148,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   }
 
   submitAnswer() {
-    if (this.questionnaireForm.valid) {
+    if (this.questionnaireForm.valid && this.responseFeedback) {
       const answers = {...this.questionnaireForm.value};
       const value = [];
       for (const item in answers) {
@@ -164,6 +168,28 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
      }
       this.responseAnswers = value;
       this.stepNext(this.profileData.respondedOn);
+    } else {
+      this.showError = true;
+    }
+  }
+
+  scrollToError() {
+      const elements = document.getElementsByClassName('error-msg');
+      if (elements.length) {
+        const top = elements[0].getBoundingClientRect().y;
+        if (top) {
+          window.scrollTo({
+            top: top,
+            behavior: 'smooth',
+          });
+        }
+      }
+  }
+
+  onChange() {
+    if (this.questionnaireForm.valid && this.responseFeedback) {
+      this.consultationService.enableSubmitResponse.next(true);
+      this.showError = false;
     }
   }
 
@@ -212,8 +238,11 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   @HostListener('document:click', ['$event.target'])
   onClick(targetElement) {
     if (this.showShareBlock) {
-      if (this.shareBlockElement.nativeElement.contains(targetElement) ||
-          this.shareButtonElement.nativeElement.contains(targetElement)) {
+      if (this.shareBtnClicked) {
+        this.shareBtnClicked = false;
+        return;
+      }
+      if (this.shareBlockElement.nativeElement.contains(targetElement)) {
             return;
       } else {
         this.showShareBlock = false;
@@ -367,7 +396,13 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   }
 
   openFeedbackModal() {
-    if (this.responseText || this.responseAnswers) {
+    if (this.responseAnswers) {
+      if (this.questionnaireForm && this.responseFeedback && this.currentUser) {
+        this.createResponse();
+      }
+      return;
+    }
+    if (this.responseText) {
       this.checkUserPresent();
     }
   }
@@ -577,7 +612,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     }
   }
 
-
   getCurrentUser() {
     this.userService.userLoaded$
     .subscribe((data) => {
@@ -641,8 +675,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
 
   toggleShareBlock(id) {
     if (id) {
-      this.showShareBlock = !this.showShareBlock;
       this.responseId = id;
+      this.showShareBlock = !this.showShareBlock;
     }
   }
 
@@ -729,7 +763,16 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         || !this.currentUser || (this.profileData && this.profileData.respondedOn)) {
         return false;
     }
+    this.enableCkEditor = true;
     return true;
+  }
+
+  setSatisfactoryRating(value) {
+    if (this.responseFeedback) {
+      return;
+    }
+    this.responseFeedback = value;
+    this.showQuestions = true;
   }
 
   questionnaireExist() {
@@ -760,10 +803,10 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     this.consultationService.scrollToCreateResponse
     .subscribe((scrollTo) => {
       if (scrollTo) {
-        window.scrollTo({
-          top: this.responseIndex ? this.responseIndex.nativeElement.offsetTop : this.startDraftingSection.nativeElement.offsetTop,
-          behavior: 'smooth',
-        });
+        // window.scrollTo({
+        //   top: this.responseIndex ? this.responseIndex.nativeElement.offsetTop : this.startDraftingSection.nativeElement.offsetTop,
+        //   behavior: 'smooth',
+        // });
         this.consultationService.scrollToCreateResponse.next(false);
       }
     });
@@ -771,7 +814,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
 
   scrollToResponses() {
     window.scrollTo({
-      top: this.responsesListContainer.nativeElement.getBoundingClientRect().top - 80,
+      top: this.responsesListContainer.nativeElement.offsetTop - 80,
       behavior: 'smooth',
     });
   }
@@ -793,15 +836,35 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     }
     if (response) {
       this.usingTemplate = true;
-      this.responseText =  this.templateText = response.responseText;
-      this.templateId = response.id;
-      window.scrollTo({
-        top: this.responseIndex.nativeElement.offsetTop,
-        behavior: 'smooth',
-      });
-      if (this.responseText) {
-        this.consultationsService.enableSubmitResponse.next(true);
+      this.longTextResponse = this.getLongTextAnswer(response);
+      if (!isObjectEmpty(this.longTextResponse)) {
+        this.responseText =  this.templateText = this.longTextResponse['answer'];
+        const controlName = this.longTextResponse['id'].toString();
+        if (this.showCreateResponse() && this.questionnaireExist()) {
+          this.showQuestions = true;
+          const checkTextAreaElementExist = setInterval(() => {
+            const textAreaElement = document.getElementById(`text-area-${controlName}`);
+            if (textAreaElement) {
+              clearInterval(checkTextAreaElementExist);
+              window.scrollTo({
+                top: textAreaElement.offsetTop,
+                behavior: 'smooth',
+              });
+              this.questionnaireForm.get(controlName).patchValue(this.responseText);
+            }
+          }, 100);
+        }
+      } else {
+        this.responseText =  this.templateText = response.responseText;
+        window.scrollTo({
+          top: this.responseIndex.nativeElement.offsetTop,
+          behavior: 'smooth',
+        });
+        if (this.responseText) {
+          this.consultationsService.enableSubmitResponse.next(true);
+        }
       }
+      this.templateId = response.id;
       this.customStyleAdded = false;
       this.editIframe();
     }
@@ -812,6 +875,28 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         return Math.round(number);
     }
     return null;
+  }
+
+  getLongTextAnswer(response) {
+    const answers = response && response.answers;
+    let answer = {};
+    if (answers && answers.length) {
+      answers.map((item) => {
+        if (this.responseQuestions && this.responseQuestions.length) {
+          const responseQuestion = this.responseQuestions.find((question) => +question.id === +item.question_id);
+          if (responseQuestion.questionType === 'long_text') {
+            answer = {
+              id: responseQuestion.id,
+              questionType: responseQuestion.questionType,
+              questionText: responseQuestion.questionText,
+              answer: item.answer
+            };
+          }
+        }
+      });
+      return answer;
+    }
+    return;
   }
 
 }

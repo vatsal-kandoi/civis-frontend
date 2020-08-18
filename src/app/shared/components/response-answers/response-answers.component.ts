@@ -9,6 +9,7 @@ export class ResponseAnswersComponent implements OnInit {
 
   @Input() questions;
   @Input() answers;
+  @Input() showOnlyLongTextAnswer: boolean;
   constructor() { }
 
   ngOnInit(): void {
@@ -36,7 +37,13 @@ export class ResponseAnswersComponent implements OnInit {
           }
         }
         }
-        responseAnswers.push(answer);
+        if (this.showOnlyLongTextAnswer) {
+          if (answer['questionType'] === 'long_text') {
+            responseAnswers.push(answer);
+          }
+        } else {
+          responseAnswers.push(answer);
+        }
       });
       return responseAnswers;
     }

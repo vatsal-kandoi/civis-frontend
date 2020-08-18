@@ -172,7 +172,7 @@
                   {{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}
                 </span>
               </div>
-              <div class="share-block"  (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true" tooltip="{{'Share'}}">
+              <div class="share-block"  (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true">
                   <div class="share-block__position">
                     <div #shareBlockElement *ngIf="showShareBlock && (responseId && responseId === response?.node?.id)" class="share-pop-up">
                         <a  class="share-btn"

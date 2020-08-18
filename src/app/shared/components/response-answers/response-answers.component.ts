@@ -9,6 +9,7 @@ export class ResponseAnswersComponent implements OnInit {
 
   @Input() questions;
   @Input() answers;
+  @Input() showOnlyLongTextAnswer: boolean;
   constructor() { }
 
   ngOnInit(): void {
@@ -21,6 +22,7 @@ export class ResponseAnswersComponent implements OnInit {
         let answer = {};
         if (this.questions && this.questions.length) {
           const responseQuestion = this.questions.find((question) => +question.id === +item.question_id);
+          if (responseQuestion) {
           if (responseQuestion.questionType === 'multiple_choice') {
             answer = this.getMultiChoiceAnswer(responseQuestion, item.answer);
           } else  if (responseQuestion.questionType === 'checkbox') {
@@ -34,7 +36,14 @@ export class ResponseAnswersComponent implements OnInit {
             };
           }
         }
-        responseAnswers.push(answer);
+        }
+        if (this.showOnlyLongTextAnswer) {
+          if (answer['questionType'] === 'long_text') {
+            responseAnswers.push(answer);
+          }
+        } else {
+          responseAnswers.push(answer);
+        }
       });
       return responseAnswers;
     }

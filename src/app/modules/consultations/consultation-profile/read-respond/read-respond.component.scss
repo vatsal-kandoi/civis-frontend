@@ -616,6 +616,11 @@
 // Thankyou modal styles
 .thankyou-modal  {
 
+  .align-center {
+    display: flex !important;
+    align-items: center;
+  }
+  
   .modal {
     background: rgba(14, 115, 185, 0.6);
     .modal-dialog {

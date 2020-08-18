@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewChecked, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewChecked, ViewEncapsulation, Renderer2} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import * as moment from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -31,6 +31,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   @ViewChild('responseIndex', { read: ElementRef, static: false }) responseIndex: ElementRef<any>;
   @ViewChild('startDraftingSection', { read: ElementRef, static: false }) startDraftingSection: ElementRef<any>;
   @ViewChild('responsesListContainer', { read: ElementRef , static: false }) responsesListContainer: ElementRef<any>;
+  @ViewChild('questionnaireContainer', { read: ElementRef , static: false }) questionnaireContainer: ElementRef<any>;
   @ViewChild('shareBlockElement', { static: false }) shareBlockElement: ElementRef;
   @ViewChild('shareButtonElement', { static: false }) shareButtonElement: ElementRef;
 
@@ -75,6 +76,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   longTextResponse: {};
   showError: boolean;
   enableCkEditor = false;
+  showThankYouModal = false;
+  copyStatus: boolean;
 
   constructor(
     private consultationsService: ConsultationsService,
@@ -87,6 +90,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     private title: Title,
     private _cookieService: CookieService,
     private _fb: FormBuilder,
+    private renderer: Renderer2,
+    private elRef: ElementRef,
   ) {
     this.consultationService.consultationId$
     .pipe(
@@ -172,19 +177,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     } else {
       this.showError = true;
     }
-  }
-
-  scrollToError() {
-      const elements = document.getElementsByClassName('error-msg');
-      if (elements.length) {
-        const top = elements[0].getBoundingClientRect().y;
-        if (top) {
-          window.scrollTo({
-            top: top,
-            behavior: 'smooth',
-          });
-        }
-      }
   }
 
   onChange() {
@@ -411,7 +403,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   closeFeedbackModal() {
     this.step = null;
     this.feedbackModal.hide();
-    this.thankyouModal.show();
+    this.showThankYouModal = true;
     this.consultationService.openFeedbackModal.next(false);
   }
 
@@ -501,8 +493,8 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       this.responseSubmitLoading = false;
       this.earnedPoints = response.points;
       this.consultationService.enableSubmitResponse.next(false);
-      if (this.longTextResponse) {
-        this.thankyouModal.show();
+      if (this.responseAnswers) {
+        this.showThankYouModal = true;
       }
     }, err => {
       this.responseSubmitLoading = false;
@@ -648,11 +640,27 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     return 0;
   }
 
-  getTwitterUrl(link, id) {
+  getTwitterUrl(link, id?) {
     const text  = `I shared my feedback on ` +
                   `${this.profileData.title}, support me and share your feedback on %23Civis today!`;
-    const url = `https://twitter.com/intent/tweet?text=${text}&url=${link}%23${id}`;
+    let url = `https://twitter.com/intent/tweet?text=${text}&url=${link}`;
+    url = id ? url + `%23${id}` : url;
     return url;
+  }
+
+  copyMessage(val: string) {
+    const selBox = this.renderer.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    this.renderer.appendChild(this.elRef.nativeElement, selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    this.renderer.removeChild(this.elRef.nativeElement, selBox);
+    this.copyStatus = true;
   }
 
   getFbUrl(link) {
@@ -852,7 +860,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
             if (textAreaElement) {
               clearInterval(checkTextAreaElementExist);
               window.scrollTo({
-                top: textAreaElement.offsetTop,
+                top: this.questionnaireContainer.nativeElement.offsetTop - 80,
                 behavior: 'smooth',
               });
               this.questionnaireForm.get(controlName).patchValue(this.responseText);

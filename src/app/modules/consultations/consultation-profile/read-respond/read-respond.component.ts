@@ -179,19 +179,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  scrollToError() {
-      const elements = document.getElementsByClassName('error-msg');
-      if (elements.length) {
-        const top = elements[0].getBoundingClientRect().y;
-        if (top) {
-          window.scrollTo({
-            top: top,
-            behavior: 'smooth',
-          });
-        }
-      }
-  }
-
   onChange() {
     if (this.questionnaireForm.valid && this.responseFeedback) {
       this.consultationService.enableSubmitResponse.next(true);
@@ -506,7 +493,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       this.responseSubmitLoading = false;
       this.earnedPoints = response.points;
       this.consultationService.enableSubmitResponse.next(false);
-      if (this.longTextResponse) {
+      if (this.responseAnswers) {
         this.showThankYouModal = true;
       }
     }, err => {

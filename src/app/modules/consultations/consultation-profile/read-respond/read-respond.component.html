@@ -22,19 +22,39 @@
       <button 
         class="dis-satisfied-bg"
         [ngClass]="{'active': (showQuestions && responseFeedback === 'dissatisfied'), 'grey-bg': showQuestions}"
-        (click)="setSatisfactoryRating('dissatisfied') ; onChange()">Dissatisfied</button>
+        (click)="setSatisfactoryRating('dissatisfied') ; onChange()">
+        <span>
+          <img src="../../../../../assets/images/dissatisfied.svg" />
+          Dissatisfied
+        </span>
+      </button>
       <button 
         class="dis-satisfied-bg"
         [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_dissatisfied'), 'grey-bg': showQuestions}"
-        (click)="setSatisfactoryRating('somewhat_dissatisfied') ; onChange()">Somewhat Dissatisfied</button>
+        (click)="setSatisfactoryRating('somewhat_dissatisfied') ; onChange()">
+        <span>
+          <img src="../../../../../assets/images/somewhat_dissatisfied.svg" />
+          Somewhat Dissatisfied
+        </span>
+      </button>
       <button 
         class="satisfied-bg"
         [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_satisfied'), 'grey-bg': showQuestions}"
-        (click)="setSatisfactoryRating('somewhat_satisfied') ; onChange()">Somewhat Satisfied</button>
+        (click)="setSatisfactoryRating('somewhat_satisfied') ; onChange()">
+        <span>
+          <img src="../../../../../assets/images/somewhat_satisfied.svg" />
+          Somewhat Satisfied
+        </span>
+      </button>
       <button 
         class="satisfied-bg"
         [ngClass]="{'active': (showQuestions && responseFeedback === 'satisfied'), 'grey-bg': showQuestions}"
-        (click)="setSatisfactoryRating('satisfied') ; onChange()">Satisfied</button>
+        (click)="setSatisfactoryRating('satisfied') ; onChange()">
+        <span>
+          <img src="../../../../../assets/images/satisfied.svg" />
+          Satisfied
+        </span>
+      </button>
     </div>
     <p class="error-msg" *ngIf="showError && !responseFeedback">Please select a Satisfaction Rating to submit the response</p>
     <div [ngClass]="showQuestions ? 'hr-line': ''"></div>
@@ -379,14 +399,24 @@
               <img class="thankyou-img" src="assets/images/thankyou.png" />
               <div class="thankyou-content">
                 <p>Thank you for your response</p>
-                <p>
-                  We appreciate you taking the time to submit your response. 
-                  Please consider sharing this Consultation on Social Media to help spread the word. 
-                  Together, we can make our voices heard and action real change!
-                </p>
+                <p *ngIf="profileData?.responseSubmissionMessage ; else defaultContent"
+                 [innerHTML]="profileData?.responseSubmissionMessage"></p>
+                <ng-template #defaultContent>
+                  <p *ngIf="profileData?.visibility === 'public_consultation'; else privateContent" >
+                    We appreciate you taking the time to submit your response. 
+                    Please consider sharing this Consultation on Social Media to help spread the word. 
+                    Together, we can make our voices heard and action real change!
+                  </p>
+                  <ng-template #privateContent>
+                    <p>
+                      We appreciate you taking the time to submit your response. 
+                      You can browse through our other open Consultations to give your feedback.
+                    </p>
+                  </ng-template>
+                </ng-template>
               </div>
             </div> 
-            <div class="thankyou-inner__bottom">
+            <div class="thankyou-inner__bottom" *ngIf="profileData?.visibility === 'public_consultation'">
               <div class="social-list">
                 <a class="social-item" [href]="getWhatsappUrl(currentUrl)" target="_blank">
                   <img src="assets/images/whatsapp.svg" alt="whatsapp logo" />

@@ -64,7 +64,16 @@
       line-height: 22px;
       text-align: center;
       color: #151515;
-      padding: 8px 16px 8px 46px;
+      padding: 8px 16px;
+
+      span {
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-right: 8px;
+        }
+      }
     }
 
     .dis-satisfied-bg {
@@ -620,7 +629,7 @@
     display: flex !important;
     align-items: center;
   }
-  
+
   .modal {
     background: rgba(14, 115, 185, 0.6);
     .modal-dialog {

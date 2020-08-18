@@ -79,9 +79,10 @@ export const ConsultationProfile = gql`
           questionText
         }
       }
+      visibility
     }
   }
-`
+`;
 
 export const ConsultationProfileCurrentUser = gql`
   query consultationProfileCurrentUser($id: Int!) {
@@ -100,6 +101,7 @@ export const ConsultationProfileCurrentUser = gql`
       responseDeadline
       readingTime
       responsesReadingTimes
+      responseSubmissionMessage
       url
       consultationResponsesCount
       ministry {
@@ -158,9 +160,10 @@ export const ConsultationProfileCurrentUser = gql`
           questionText
         }
       }
+      visibility
     }
   }
-`
+`;
 
 export const VoteCreateQuery = gql `
   mutation voteCreate($consultationResponseVote: VoteCreateInput!) {
@@ -190,6 +193,7 @@ export const SubmitResponseQuery = gql`
         id
         title
         respondedOn
+        responseSubmissionMessage
         sharedResponses(sort: templates_count, sortDirection: desc) {
           edges {
             node {
@@ -224,6 +228,7 @@ export const SubmitResponseQuery = gql`
             questionText
           }
         }
+        visibility
       }
     }
   }

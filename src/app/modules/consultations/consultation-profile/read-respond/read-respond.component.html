@@ -57,8 +57,8 @@
       </button>
     </div>
     <p class="error-msg" *ngIf="showError && !responseFeedback">Please select a Satisfaction Rating to submit the response</p>
-    <div [ngClass]="showQuestions ? 'hr-line': ''"></div>
-    <div class="question-box" *ngIf="showQuestions">
+    <div class="hr-line"></div>
+    <div class="question-box">
       <form [formGroup]="questionnaireForm">
         <div class="questions-container">
           <div class="question-index" *ngFor="let question of profileData?.questions; let i = index">

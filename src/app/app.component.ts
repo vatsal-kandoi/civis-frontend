@@ -2,23 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from './shared/services/user.service';
 import { filter } from 'rxjs/operators';
+declare let gtag;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
 
+export class AppComponent implements OnInit {
   title = 'civis';
   showCitySelection: boolean;
-  
   constructor(
     private userService: UserService,
     private router: Router
   ) {
-
-
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        gtag('config', 'GTM-5SHVQF8',
+        {
+          'page_path': event.urlAfterRedirects
+        }
+        );
+      }
+    });
   }
 
   ngOnInit() {

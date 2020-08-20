@@ -1,6 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google Tag Manager -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5SHVQF8');
+  </script>
+  <!-- End Google Tag Manager -->
   <meta charset="utf-8">
   <title>Civis | Get your voice heard by lawmakers</title>
   <base href="/">
@@ -31,6 +50,12 @@
   <link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SHVQF8" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!--Crisp chat-->
   <script type="text/javascript">
     window.$crisp = [];
     window.CRISP_WEBSITE_ID = "695b36de-3653-4b42-8731-0e99d78a2769";
@@ -42,6 +67,9 @@
       d.getElementsByTagName("head")[0].appendChild(s);
     })();
   </script>
+  <!-- End Crisp chat -->
+
+  <!-- Fullstory -->
   <script>
     window['_fs_debug'] = false;
     window['_fs_host'] = 'fullstory.com';
@@ -59,17 +87,18 @@
         g.clearUserCookie=function(){};
     })(window,document,window['_fs_namespace'],'script','user');
   </script>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114435812-1"></script>
+  <!-- End Fullstory -->
   <!-- <script async src="//civis-1.disqus.com/embed.js" type="text/javascript"></script> -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114435812-1"></script>
+  
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-114435812-1');
-  </script>
+  </script> -->
 
   <!-- Facebook Pixel Code -->
   <script>

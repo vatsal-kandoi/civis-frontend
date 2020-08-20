@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from './shared/services/user.service';
 import { filter } from 'rxjs/operators';
-declare let gtag: Function;
+declare let gtag;
 
 @Component({
   selector: 'app-root',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from './shared/services/user.service';
 import { filter } from 'rxjs/operators';
-declare let gtag;
+declare let dataLayer;
 
 @Component({
   selector: 'app-root',
@@ -19,11 +19,7 @@ export class AppComponent implements OnInit {
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        gtag('config', 'GTM-5SHVQF8',
-        {
-          'page_path': event.urlAfterRedirects
-        }
-        );
+        dataLayer.push({ event: 'pageview' });
       }
     });
   }

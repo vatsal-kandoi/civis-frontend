@@ -78,7 +78,8 @@
             </div>
           </div>
           <div class="spread-btn">
-            <button #spreadButtonElement  class="btn-circular" (click)="showShareOptions = !showShareOptions">
+            <button data-event="click-sidebar-share" #spreadButtonElement class="btn-circular"
+              (click)="showShareOptions = !showShareOptions">
               <span class="mr-2 clr-blue"><i class="fa fa-share"></i></span>
               <span class="blue-text bold-text">{{'Spread the word' | translate}}</span>
             </button>

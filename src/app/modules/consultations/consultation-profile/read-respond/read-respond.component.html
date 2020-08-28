@@ -199,7 +199,7 @@
                   {{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}
                 </span>
               </div>
-              <div class="share-block"  (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true">
+              <div data-event="click-share-response" class="share-block"  (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true">
                   <div class="share-block__position">
                     <div #shareBlockElement *ngIf="showShareBlock && (responseId && responseId === response?.node?.id)" class="share-pop-up">
                         <a  class="share-btn"
@@ -242,7 +242,7 @@
               </div>
             </div>
             <div *ngIf="showCreateResponse()">
-              <button class="app-btn response-btn"
+              <button class="app-btn response-btn" data-event="click-use-response"
                 (click)="useThisResponse(response?.node)">{{'Use this response' | translate}}</button>
             </div>
           </div>
@@ -386,7 +386,7 @@
 
 
 <!-- Thanks modal  -->
-<div class="thankyou-modal" *ngIf="showThankYouModal">
+<div data-event="thank-you-modal-appear" class="thankyou-modal" *ngIf="showThankYouModal">
   <div bsModal #thankyouModal="bs-modal" class="modal fade" tabindex="-1" [ngClass]="showThankYouModal? 'align-center' : ''"
     [config]="{show: true, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}" role="dialog"
     aria-labelledby="thankyouModal">

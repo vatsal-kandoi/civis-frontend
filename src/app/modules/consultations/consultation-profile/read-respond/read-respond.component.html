@@ -386,12 +386,12 @@
 
 
 <!-- Thanks modal  -->
-<div data-event="thank-you-modal-appear" class="thankyou-modal" *ngIf="showThankYouModal">
+<div class="thankyou-modal" *ngIf="showThankYouModal">
   <div bsModal #thankyouModal="bs-modal" class="modal fade" tabindex="-1" [ngClass]="showThankYouModal? 'align-center' : ''"
     [config]="{show: true, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}" role="dialog"
     aria-labelledby="thankyouModal">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div data-event="thank-you-modal-appear" class="modal-content">
         <div class="modal-body">
           <div class="thankyou-inner">
             <button class="close-btn" (click)="showThankYouModal = false"><img src="assets/images/close.png" /></button>

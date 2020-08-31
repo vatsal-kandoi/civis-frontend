@@ -76,17 +76,11 @@
                   </div>
                 </div>
                 <div class="answer" *ngIf="question.questionType === 'dropdown'">
-                  <!-- <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
-                    <label>
-                      <input type="radio" class="cm-radio" (input)="onChange()" [formControlName]="question.id" [value]="subQuestion.id">
-                      <span>{{subQuestion.questionText}}</span>
-                    </label> -->
                     <ng-select 
                     [items]="question.subQuestions" bindLabel="questionText" [virtualScroll]="true" dropdownPosition="bottom" 
                     bindValue="id"  [clearable]="false" loadingText="Searching..." [searchable]="false" (change)="onChange();onAnswerChange(question, $event)"
                     placeholder="Select" [formControlName]="question.id" required> 
                     </ng-select>  
-                  <!-- </div> -->
                 </div>
                 <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
                   <label class="answer__tips">Choose as many as you like</label>

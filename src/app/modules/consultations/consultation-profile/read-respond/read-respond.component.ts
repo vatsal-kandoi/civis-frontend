@@ -78,7 +78,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   enableCkEditor = false;
   showThankYouModal = false;
   copyStatus: boolean;
-  extraNote: any;
 
   constructor(
     private consultationsService: ConsultationsService,

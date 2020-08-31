@@ -78,6 +78,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
   enableCkEditor = false;
   showThankYouModal = false;
   copyStatus: boolean;
+  extraNote: any;
 
   constructor(
     private consultationsService: ConsultationsService,
@@ -123,6 +124,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         } else if (question.questionType === 'checkbox') {
           form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
         }
+        form.addControl('other_answer-' + question.id, new FormControl(null));
       });
       return form;
     }
@@ -158,20 +160,42 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       const answers = {...this.questionnaireForm.value};
       const value = [];
       for (const item in answers) {
-        if (answers.hasOwnProperty(item)) {
+        if (answers.hasOwnProperty(item) && answers[item] !== null) {
           if (typeof(answers[item]) === 'object') {
               const keys = Object.keys(answers[item]);
               const filtered = keys.filter(function(key) {
                   return answers[item][key];
               });
               answers[item] = filtered;
+              answers[item].forEach(ele => {
+                if (ele === 'other') {
+                  value.push({
+                    question_id: item,
+                    is_other: true,
+                    other_option_answer: answers['other_answer-' + item],
+                    answer: answers[item].filter(val => {
+                      return val !== 'other';
+                    })
+                  });
+                }
+              });
           }
-          value.push({
-            question_id: item,
-            answer: answers[item]
-          });
+          if (answers[item] === 'other') {
+            value.push({
+              question_id: item,
+              is_other: true,
+              other_option_answer: answers['other_answer-' + item],
+            });
+          } else if (!(item.includes('other'))) {
+            value.push({
+              question_id: item,
+              answer: answers[item]
+            });
+          }
+
         }
      }
+
       this.responseAnswers = value;
       this.stepNext(this.profileData.respondedOn);
     } else {
@@ -183,6 +207,25 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     if (this.questionnaireForm.valid && this.responseFeedback) {
       this.consultationService.enableSubmitResponse.next(true);
       this.showError = false;
+    }
+  }
+
+  onAnswerChange(question?, value?) {
+    if (question && value.id === 'other') {
+      for (let i = 0; i < this.profileData.questions.length; i++) {
+        if (this.profileData.questions[i].id === question.id) {
+          this.profileData.questions[i].is_other = true;
+          break;
+        }
+      }
+    } else {
+      if (question.questionType !== 'checkbox') {
+        this.profileData.questions.forEach(ques => {
+          if (question.id === ques.id) {
+            ques.is_other = false;
+          }
+        });
+      }
     }
   }
 
@@ -310,6 +353,12 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     )
     .subscribe((data: any) => {
         this.profileData = data;
+        if (this.profileData.questions && this.profileData.questions.length > 0) {
+          this.profileData.questions.forEach(question => {
+            question.subQuestions.push({id: 'other', questionText: 'Other'});
+            question.other_answer = 'other_answer-' + question.id;
+          });
+        }
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
         this.responseList = data.sharedResponses.edges;
         this.createMetaTags(this.profileData);

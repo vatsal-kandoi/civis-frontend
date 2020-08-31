@@ -477,6 +477,41 @@
       }
 
     }
+    .input-box {
+      margin-bottom: 15px;
+      width: 50%;
+
+      &__border {
+          width: 100%;
+          -webkit-box-sizing: border-box;
+                  box-sizing: border-box;
+          border-radius: 3px;
+          border: 1px solid #AEAEAE;
+          margin-left: 20px;
+          margin-top: 16px;
+
+          input { 
+              width: 100%;
+              font-weight: 500;
+              font-size: 15px;
+              padding: 10px;
+              border: none;
+              border-radius: 3px;
+          }
+
+          @media screen and (max-width: 991px) {
+              width: 100%;
+          }
+      }
+
+      label {
+          display: block;
+          font-weight: 600;
+          font-size: 14px;
+          color: $black;
+          margin-bottom: 10px;
+      }
+    }
   }
   .checkbox-area {
     margin: 0 -32px;

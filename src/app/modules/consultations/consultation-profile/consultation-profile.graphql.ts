@@ -155,6 +155,7 @@ export const ConsultationProfileCurrentUser = gql`
         id
         questionText
         questionType
+        supportsOther
         subQuestions {
           id
           questionText

@@ -354,8 +354,10 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         this.profileData = data;
         if (this.profileData.questions && this.profileData.questions.length > 0) {
           this.profileData.questions.forEach(question => {
-            question.subQuestions.push({id: 'other', questionText: 'Other'});
-            question.other_answer = 'other_answer-' + question.id;
+            if (question.supportsOther) {
+              question.subQuestions.push({id: 'other', questionText: 'Other'});
+              question.other_answer = 'other_answer-' + question.id;
+            }
           });
         }
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;

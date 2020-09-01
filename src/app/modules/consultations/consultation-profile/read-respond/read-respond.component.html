@@ -79,7 +79,7 @@
                     <ng-select 
                     [items]="question.subQuestions" bindLabel="questionText" [virtualScroll]="true" dropdownPosition="bottom" 
                     bindValue="id"  [clearable]="false" loadingText="Searching..." [searchable]="false" (change)="onChange();onAnswerChange(question, $event)"
-                    placeholder="Select" [formControlName]="question.id" required> 
+                    placeholder="Select an option" [formControlName]="question.id" required> 
                     </ng-select>  
                 </div>
                 <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">

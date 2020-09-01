@@ -168,14 +168,23 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
               answers[item] = filtered;
               answers[item].forEach(ele => {
                 if (ele === 'other') {
-                  value.push({
-                    question_id: item,
-                    is_other: true,
-                    other_option_answer: answers['other_answer-' + item],
-                    answer: answers[item].filter(val => {
-                      return val !== 'other';
-                    })
+                  const filteredAnswers = answers[item].filter(val => {
+                    return val !== 'other';
                   });
+                  if (filteredAnswers.length > 0) {
+                    value.push({
+                      question_id: item,
+                      is_other: true,
+                      other_option_answer: answers['other_answer-' + item],
+                      answer: filteredAnswers
+                    });
+                  } else {
+                    value.push({
+                      question_id: item,
+                      is_other: true,
+                      other_option_answer: answers['other_answer-' + item]
+                    });
+                  }
                 }
               });
           }
@@ -185,7 +194,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
               is_other: true,
               other_option_answer: answers['other_answer-' + item],
             });
-          } else if (!(item.includes('other'))) {
+          } else if (!(item.includes('other')) && !Array.isArray(answers[item])) {
             value.push({
               question_id: item,
               answer: answers[item]

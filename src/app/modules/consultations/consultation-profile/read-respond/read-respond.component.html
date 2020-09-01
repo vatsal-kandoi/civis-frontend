@@ -86,7 +86,7 @@
                   <label class="answer__tips">Choose as many as you like</label>
                   <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
                     <label>
-                      <input type="checkbox" class="cm-radio" (input)="onChange(); onAnswerChange(question,subQuestion)" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
+                      <input type="checkbox" class="cm-radio" (input)="onChange(); onAnswerChange(question,subQuestion, $event.target.checked)" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
                       <span>{{subQuestion.questionText}}</span>
                     </label>
                   </div>

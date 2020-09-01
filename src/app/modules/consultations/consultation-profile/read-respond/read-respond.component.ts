@@ -166,18 +166,37 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
                   return answers[item][key];
               });
               answers[item] = filtered;
-              answers[item].forEach(ele => {
-                if (ele === 'other') {
+              let otherElement = false;
+              for (let i = 0 ; i < answers[item].length; i++) {
+                if (answers[item][i] === 'other') {
+                  otherElement = true;
+                  break;
+                }
+              }
+              if (otherElement) {
+                const filteredAnswers = answers[item].filter(val => {
+                  return val !== 'other';
+                });
+                if (filteredAnswers.length > 0) {
                   value.push({
                     question_id: item,
                     is_other: true,
                     other_option_answer: answers['other_answer-' + item],
-                    answer: answers[item].filter(val => {
-                      return val !== 'other';
-                    })
+                    answer: filteredAnswers
+                  });
+                } else {
+                  value.push({
+                    question_id: item,
+                    is_other: true,
+                    other_option_answer: answers['other_answer-' + item]
                   });
                 }
-              });
+              } else {
+                value.push({
+                  question_id: item,
+                  answer: answers[item]
+                });
+              }
           }
           if (answers[item] === 'other') {
             value.push({
@@ -185,7 +204,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
               is_other: true,
               other_option_answer: answers['other_answer-' + item],
             });
-          } else if (!(item.includes('other'))) {
+          } else if (!(item.includes('other')) && !Array.isArray(answers[item])) {
             value.push({
               question_id: item,
               answer: answers[item]
@@ -209,11 +228,15 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  onAnswerChange(question?, value?) {
+  onAnswerChange(question?, value?, checkboxValue?) {
     if (question && value.id === 'other') {
+      let otherValue = true;
+      if (question.questionType === 'checkbox' && value.id === 'other' && !checkboxValue) {
+         otherValue = false;
+      }
       for (let i = 0; i < this.profileData.questions.length; i++) {
         if (this.profileData.questions[i].id === question.id) {
-          this.profileData.questions[i].is_other = true;
+          this.profileData.questions[i].is_other = otherValue;
           break;
         }
       }

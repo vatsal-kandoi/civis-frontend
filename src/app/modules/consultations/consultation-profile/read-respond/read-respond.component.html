@@ -70,16 +70,23 @@
                 <div class="answer" *ngIf="question.questionType === 'multiple_choice'">
                   <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
                     <label>
-                      <input type="radio" class="cm-radio" (input)="onChange()" [formControlName]="question.id" [value]="subQuestion.id">
+                      <input type="radio" class="cm-radio" (input)="onChange(); onAnswerChange(question,subQuestion)" [formControlName]="question.id" [value]="subQuestion.id">
                       <span>{{subQuestion.questionText}}</span>
                     </label>
                   </div>
+                </div>
+                <div class="answer" *ngIf="question.questionType === 'dropdown'">
+                    <ng-select 
+                    [items]="question.subQuestions" bindLabel="questionText" [virtualScroll]="true" dropdownPosition="bottom" 
+                    bindValue="id"  [clearable]="false" loadingText="Searching..." [searchable]="false" (change)="onChange();onAnswerChange(question, $event)"
+                    placeholder="Select an option" [formControlName]="question.id" required> 
+                    </ng-select>  
                 </div>
                 <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
                   <label class="answer__tips">Choose as many as you like</label>
                   <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
                     <label>
-                      <input type="checkbox" class="cm-radio" (input)="onChange()" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
+                      <input type="checkbox" class="cm-radio" (input)="onChange(); onAnswerChange(question,subQuestion, $event.target.checked)" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
                       <span>{{subQuestion.questionText}}</span>
                     </label>
                   </div>
@@ -89,6 +96,14 @@
                     <textarea (input)="responseText = $event.target.value; onChange()" placeholder="Type your answer here" [formControlName]="question.id"></textarea>
                   </div>
                 </div>
+                <div class="input-box" *ngIf="question.is_other">
+                  <div class="input-box__border">
+                    <input placeholder="Type answer here" type="text"
+                    [formControlName]="question.other_answer" />
+                  </div>
+                </div>
+
+
               </div>
             </div>
           </div>

@@ -434,6 +434,10 @@
     }
     .answer {
       padding: 0 20px;
+      
+      ng-select {
+        max-width: 400px;
+      }
 
       &__tips {
         font-style: normal;

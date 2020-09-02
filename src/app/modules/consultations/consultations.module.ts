@@ -24,6 +24,8 @@ import { UserProfileModalModule } from 'src/app/shared/user-profile-modal/user-p
 import { CKEditorModule } from 'ng2-ckeditor';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { CookieService } from 'ngx-cookie-service';
+import { ConsultationQuestionnaireComponent } from './consultation-profile/consultation-questionnaire/consultation-questionnaire.component';
+import { ResponseFooterComponent } from './consultation-profile/response-footer/response-footer.component';
 
 @NgModule({
     imports: [
@@ -56,6 +58,8 @@ import { CookieService } from 'ngx-cookie-service';
         ResponseComponent,
         ReadRespondComponent,
         DiscussEngageComponent,
+        ConsultationQuestionnaireComponent,
+        ResponseFooterComponent,
     ],
     providers: [CookieService]
 })

@@ -171,8 +171,12 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     }
 
     if (!hasResponseSubmited) {
+      if (this.profile && this.profile.questions) {
+        this.consultationsService.validateAnswers.next(true);
+      }
       this.consultationsService.scrollToCreateResponse.next(true);
     }
+
     if (this.enableSubmitResponse) {
       this.consultationsService.openFeedbackModal.next(true);
     }

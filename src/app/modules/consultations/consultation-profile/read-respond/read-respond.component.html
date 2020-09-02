@@ -11,108 +11,10 @@
   </div>
 
 <section #questionnaireContainer>
-  <div class="paper-effect  mt-4 m-0-sm" *ngIf="showCreateResponse() && questionnaireExist()">
-    <p class="satisfactory-heading">
-      {{'How satisfied are you with this Consultation' | translate}}
-    </p>
-    <p class="satisfactory-tip">
-      {{'Choose an option to submit your feedback' | translate}}
-    </p>
-    <div class="options-block">
-      <button 
-        class="dis-satisfied-bg"
-        [ngClass]="{'active': (showQuestions && responseFeedback === 'dissatisfied'), 'grey-bg': showQuestions}"
-        (click)="setSatisfactoryRating('dissatisfied') ; onChange()">
-        <span>
-          <img src="../../../../../assets/images/dissatisfied.svg" />
-          Dissatisfied
-        </span>
-      </button>
-      <button 
-        class="dis-satisfied-bg"
-        [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_dissatisfied'), 'grey-bg': showQuestions}"
-        (click)="setSatisfactoryRating('somewhat_dissatisfied') ; onChange()">
-        <span>
-          <img src="../../../../../assets/images/somewhat_dissatisfied.svg" />
-          Somewhat Dissatisfied
-        </span>
-      </button>
-      <button 
-        class="satisfied-bg"
-        [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_satisfied'), 'grey-bg': showQuestions}"
-        (click)="setSatisfactoryRating('somewhat_satisfied') ; onChange()">
-        <span>
-          <img src="../../../../../assets/images/somewhat_satisfied.svg" />
-          Somewhat Satisfied
-        </span>
-      </button>
-      <button 
-        class="satisfied-bg"
-        [ngClass]="{'active': (showQuestions && responseFeedback === 'satisfied'), 'grey-bg': showQuestions}"
-        (click)="setSatisfactoryRating('satisfied') ; onChange()">
-        <span>
-          <img src="../../../../../assets/images/satisfied.svg" />
-          Satisfied
-        </span>
-      </button>
-    </div>
-    <p class="error-msg" *ngIf="showError && !responseFeedback">Please select a Satisfaction Rating to submit the response</p>
-    <div [ngClass]="showQuestions ? 'hr-line': ''"></div>
-    <div class="question-box" *ngIf="showQuestions">
-      <form [formGroup]="questionnaireForm">
-        <div class="questions-container">
-          <div class="question-index" *ngFor="let question of profileData?.questions; let i = index">
-              <div class="question">
-                <p class="question-text">
-                  <span class="question-text__number">{{i+1}}.</span>
-                  {{question.questionText}}
-                </p>
-                <div class="answer" *ngIf="question.questionType === 'multiple_choice'">
-                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
-                    <label>
-                      <input type="radio" class="cm-radio" (input)="onChange()" [formControlName]="question.id" [value]="subQuestion.id">
-                      <span>{{subQuestion.questionText}}</span>
-                    </label>
-                  </div>
-                </div>
-                <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
-                  <label class="answer__tips">Choose as many as you like</label>
-                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
-                    <label>
-                      <input type="checkbox" class="cm-radio" (input)="onChange()" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
-                      <span>{{subQuestion.questionText}}</span>
-                    </label>
-                  </div>
-                </div>
-                <div class="answer" [id]="'text-area-' + question.id" *ngIf="question.questionType === 'long_text'">
-                  <div class="text-area">
-                    <textarea (input)="responseText = $event.target.value; onChange()" placeholder="Type your answer here" [formControlName]="question.id"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="checkbox-area" *ngIf="responseText !== templateText">
-            <div class="input-checbox" >
-              <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" [ngModelOptions]="{standalone: true}"/> 
-              <label class="m-0">{{'Make my response public' | translate}}</label>
-              <span class="link">{{'What does this mean?' | translate}}</span>
-            </div>
-          </div>
-          <div class="py-3">
-            <button  class="btn-submit active" (click)='submitAnswer()' [tooltip]="showError ? 'Please fill all the answers to submit response.' : ''">
-              <p class="m-0">
-                SUBMIT RESPONSE
-              </p>
-              <span class="ml-2"><i class="fa fa-angle-right"></i></span>
-            </button>
-          </div>
-      </form>
-    </div>
-  </div>
+  <app-consultation-questionnaire [profileData]="profileData"></app-consultation-questionnaire>
 </section>
 
-  <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse() && !questionnaireExist()"
+  <!-- <div class="response-index mt-4" ngResizable [rzHandles]="'s'" *ngIf="showCreateResponse() && !questionnaireExist()"
     #responseIndex>
     <div class="response-index__nav">
       <div class="w-50">
@@ -133,7 +35,6 @@
       (blur)="autoSave(responseText)"
       debounce="0">
       </ckeditor>
-      <!-- <textarea class="text-space" placeholder="Type your response here..." [(ngModel)]="responseText" (blur)="autoSave(responseText)" (ngModelChange)="enableSubmitResponse($event)"></textarea> -->
     </div>
     <div class="response-index__footer" *ngIf="profileData?.reviewType !== 'policy'">
       <div class="checkbox-area" *ngIf="showPublicResponseOption">
@@ -152,7 +53,7 @@
         <span class="drag-bars"></span>
       </div>
     </div>
-  </div>
+  </div> -->
   
   <div *ngIf="profileData?.reviewType !== 'policy'">
     <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
@@ -179,73 +80,7 @@
           <div *ngIf="responseQuestions && response?.node?.answers">
             <app-response-answers [showOnlyLongTextAnswer]="true" [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
           </div>
-          <div class="vote-section" *ngIf="currentUser">
-            <div class="vote-count">
-              <div class="vote-item"  
-              (click)="vote('up', response?.node)" 
-              tooltip="{{'Upvote'}}" 
-              [ngClass]="response?.node?.votedAs?.voteDirection === 'up'  ? 'vote-item-active' : ''">
-                <span><i class="fa fa-thumbs-up"></i></span>
-                <span>
-                  {{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}
-                </span>
-              </div>
-              <div class="vote-item" 
-              (click)="vote('down', response?.node)" 
-              tooltip="{{'Downvote'}}"
-              [ngClass]="response?.node?.votedAs?.voteDirection === 'down'  ? 'vote-item-active' : ''">
-                <span><i class="fa fa-thumbs-down"></i></span>
-                <span>
-                  {{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}
-                </span>
-              </div>
-              <div class="share-block"  (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true">
-                  <div class="share-block__position">
-                    <div #shareBlockElement *ngIf="showShareBlock && (responseId && responseId === response?.node?.id)" class="share-pop-up">
-                        <a  class="share-btn"
-                        [href]="getFbUrl(currentUrl)"
-                        target="_blank">
-                          <span>
-                              <i class="fa fa-facebook"></i>
-                          </span>
-                        </a>
-                        <a  class="share-btn"
-                        [href]="getTwitterUrl(currentUrl, response?.node?.id)"
-                        target="_blank">
-                          <span>
-                              <i class="fa fa-twitter"></i>
-                          </span>
-                        </a>
-                        <a  class="share-btn"
-                        [href]="getWhatsappUrl(currentUrl)"
-                        target="_blank">
-                          <span>
-                              <i class="fa fa-whatsapp"></i>
-                          </span>
-                        </a>
-                        <a  class="share-btn"
-                        [href]="getLinkedinUrl(currentUrl)"
-                        target="_blank">
-                          <span>
-                              <i class="fa fa-linkedin"></i>
-                          </span>
-                        </a>
-                    </div>
-                  </div>
-                  <span  
-                  class="fs-20">
-                  <i class="fa fa-share"></i>
-                </span>
-                <span *ngIf="response.node?.templatesCount">
-                  {{response.node?.templatesCount ? response.node?.templatesCount : '' }}
-                </span>
-              </div>
-            </div>
-            <div *ngIf="showCreateResponse()">
-              <button class="app-btn response-btn"
-                (click)="useThisResponse(response?.node)">{{'Use this response' | translate}}</button>
-            </div>
-          </div>
+          <app-response-footer [response]="response"></app-response-footer>
         </div>
       </ng-container>
     </div>   

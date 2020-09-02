@@ -14,15 +14,6 @@ export const ConsultationProfile = gql`
         id
         components
       }
-      questions {
-        id
-        questionText
-        questionType
-        subQuestions {
-          id
-          questionText
-        }
-      }
       responseDeadline
       readingTime
       responsesReadingTimes
@@ -72,6 +63,7 @@ export const ConsultationProfile = gql`
       updatedAt
       questions {
         id
+        isOptional
         questionText
         questionType
         subQuestions {
@@ -153,6 +145,7 @@ export const ConsultationProfileCurrentUser = gql`
       updatedAt
       questions {
         id
+        isOptional
         questionText
         questionType
         subQuestions {
@@ -178,7 +171,7 @@ export const VoteDeleteQuery = gql `
   mutation voteDelete($consultationResponseId : Int!) {
     voteDelete(consultationResponseId : $consultationResponseId )
   }
-`
+`;
 
 export const SubmitResponseQuery = gql`
   mutation consultationResponseCreate($consultationResponse: ConsultationResponseCreateInput!){
@@ -221,6 +214,7 @@ export const SubmitResponseQuery = gql`
         }
         questions {
           id
+          isOptional
           questionText
           questionType
           subQuestions {

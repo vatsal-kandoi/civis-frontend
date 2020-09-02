@@ -100,7 +100,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     .subscribe((consulationId: any) => {
       this.consultationId = consulationId;
     });
-    this.questionnaireForm = this._fb.group({});
   }
 
   ngOnInit() {
@@ -112,39 +111,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     this.getResponseText();
   }
 
-  makeQuestionnaireModal() {
-    if (this.profileData && this.profileData.questions) {
-      const questions =  this.responseQuestions = this.profileData.questions;
-      const form = new FormGroup({});
-
-      questions.forEach(question => {
-        if (question.questionType !== 'checkbox') {
-          form.addControl(question.id, new FormControl(null, Validators.required ));
-        } else if (question.questionType === 'checkbox') {
-          form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
-        }
-      });
-      return form;
-    }
-  }
-
-    makeCheckboxQuestionOptions(question) {
-        const form = new FormGroup({});
-        question.subQuestions.forEach(subQuestion => {
-          form.addControl(subQuestion.id, new FormControl(false));
-        });
-        return form;
-      }
-
-    toggleCheckbox(control, value) {
-      control.patchValue(value);
-    }
-
-    toggle(questionId, subQuestionId) {
-      const control = this.questionnaireForm.get([questionId, subQuestionId]);
-      control.patchValue(!control.value);
-    }
-
   ngAfterViewChecked() {
     if (this.checkForFragments) {
       this.subscribeToFragment();
@@ -153,38 +119,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     this.editIframe();
   }
 
-  submitAnswer() {
-    if (this.questionnaireForm.valid && this.responseFeedback) {
-      const answers = {...this.questionnaireForm.value};
-      const value = [];
-      for (const item in answers) {
-        if (answers.hasOwnProperty(item)) {
-          if (typeof(answers[item]) === 'object') {
-              const keys = Object.keys(answers[item]);
-              const filtered = keys.filter(function(key) {
-                  return answers[item][key];
-              });
-              answers[item] = filtered;
-          }
-          value.push({
-            question_id: item,
-            answer: answers[item]
-          });
-        }
-     }
-      this.responseAnswers = value;
-      this.stepNext(this.profileData.respondedOn);
-    } else {
-      this.showError = true;
-    }
-  }
 
-  onChange() {
-    if (this.questionnaireForm.valid && this.responseFeedback) {
-      this.consultationService.enableSubmitResponse.next(true);
-      this.showError = false;
-    }
-  }
 
   stepNext(hasResponseSubmited) {
     if (!this.currentUser || hasResponseSubmited) {
@@ -310,11 +245,12 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     )
     .subscribe((data: any) => {
         this.profileData = data;
+        this.consultationService.consultationProfileData.next(data);
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
         this.responseList = data.sharedResponses.edges;
         this.createMetaTags(this.profileData);
         this.checkForFragments = true;
-        this.questionnaireForm = this.makeQuestionnaireModal();
+        // this.questionnaireForm = this.makeQuestionnaireModal();
         this.getProfileSummary();
     }, err => {
       const e = new Error(err);
@@ -502,87 +438,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  vote(direction, response) {
-    if (response.votedAs) {
-      if (response.votedAs.voteDirection === direction) {
-        this.undoVote(response, direction);
-      } else {
-        this.undoVote(response, direction, true);
-      }
-    } else {
-      this.createVote(response, direction);
-    }
-  }
-
-  undoVote(response, direction, createVote?) {
-    if (response.id) {
-      this.apollo.mutate({
-        mutation: VoteDeleteQuery,
-        variables: {
-          consultationResponseId: response.id
-        },
-        update: (store, {data: res}) => {
-          const variables = {id: this.consultationId};
-          const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
-          if (res) {
-            for (const value of resp['consultationProfile'].sharedResponses.edges) {
-              if (value.node.id ===  response['id']) {
-                if (response.votedAs) {
-                  value.node[response.votedAs.voteDirection + 'VoteCount'] -= 1;
-                }
-                value.node.votedAs = null;
-                break;
-              }
-            }
-          }
-          store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
-        }
-      })
-      .subscribe((res) => {
-        if (createVote) {
-          this.createVote(response, direction);
-        }
-      }, err => {
-        this.errorService.showErrorModal(err);
-      });
-    }
-  }
-
-  createVote(response, direction) {
-    const vote = {
-      consultationResponseVote: {
-        consultationResponseId: response.id,
-        voteDirection: direction
-      }
-    };
-    this.apollo.mutate({
-      mutation: VoteCreateQuery,
-      variables: vote,
-      update: (store, {data: res}) => {
-        const variables = {id: this.consultationId};
-        const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
-        if (res) {
-          for (const value of resp['consultationProfile'].sharedResponses.edges) {
-            if (value.node.id ===  response['id']) {
-              if (value.node[res.voteCreate.voteDirection + 'VoteCount']) {
-                value.node[res.voteCreate.voteDirection + 'VoteCount'] += 1;
-              } else {
-                value.node[res.voteCreate.voteDirection + 'VoteCount'] = 1;
-              }
-              value.node.votedAs = res.voteCreate;
-              break;
-            }
-          }
-        }
-        store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
-      }
-    })
-    .subscribe((data) => {
-    }, err => {
-      this.errorService.showErrorModal(err);
-    });
-  }
-
   choose(value) {
     if (!this.responseFeedback && !this.responseSubmitted) {
       this.responseFeedback = value;
@@ -684,13 +539,6 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
 
     }
     return null;
-  }
-
-  toggleShareBlock(id) {
-    if (id) {
-      this.responseId = id;
-      this.showShareBlock = !this.showShareBlock;
-    }
   }
 
   getResponseText() {
@@ -816,10 +664,10 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     this.consultationService.scrollToCreateResponse
     .subscribe((scrollTo) => {
       if (scrollTo) {
-        // window.scrollTo({
-        //   top: this.responseIndex ? this.responseIndex.nativeElement.offsetTop : this.startDraftingSection.nativeElement.offsetTop,
-        //   behavior: 'smooth',
-        // });
+        window.scrollTo({
+          top: this.responseIndex ? this.responseIndex.nativeElement.offsetTop : this.questionnaireContainer.nativeElement.offsetTop - 80,
+          behavior: 'smooth',
+        });
         this.consultationService.scrollToCreateResponse.next(false);
       }
     });

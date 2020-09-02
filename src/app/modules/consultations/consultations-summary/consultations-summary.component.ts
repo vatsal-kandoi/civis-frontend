@@ -76,6 +76,7 @@ export class ConsultationsSummaryComponent implements OnInit {
   showKeywordGraph = true;
   responseQuestions: any;
   currentLanguage: any;
+  satisfactionRatingDistribution: any;
   useSummaryHindi: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -125,6 +126,7 @@ export class ConsultationsSummaryComponent implements OnInit {
       .subscribe((data: any) => {
           this.profileData = data;
           this.responseQuestions = this.profileData.questions;
+          this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
           this.getProfileSummary();
           this.responseList = data.responses.edges;
           this.splitResponses(this.responseList);

@@ -24,7 +24,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'dissatisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('dissatisfied') ; onChange()">
         <span>
-          <img src="../../../../../assets/images/dissatisfied.svg" />
+          <img src="assets/images/dissatisfied.svg" />
           Dissatisfied
         </span>
       </button>
@@ -33,7 +33,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_dissatisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('somewhat_dissatisfied') ; onChange()">
         <span>
-          <img src="../../../../../assets/images/somewhat_dissatisfied.svg" />
+          <img src="assets/images/somewhat_dissatisfied.svg" />
           Somewhat Dissatisfied
         </span>
       </button>
@@ -42,7 +42,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_satisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('somewhat_satisfied') ; onChange()">
         <span>
-          <img src="../../../../../assets/images/somewhat_satisfied.svg" />
+          <img src="assets/images/somewhat_satisfied.svg" />
           Somewhat Satisfied
         </span>
       </button>
@@ -51,7 +51,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'satisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('satisfied') ; onChange()">
         <span>
-          <img src="../../../../../assets/images/satisfied.svg" />
+          <img src="assets/images/satisfied.svg" />
           Satisfied
         </span>
       </button>
@@ -179,20 +179,20 @@
         <p class="text-16 m-0 bold-text">{{'Consultation satisfication' | translate}}</p>
         <div class="d-flex mt-3 mb-3">
             <div class="satisfication-response">
-                <img src="../../../../../assets/images/dissatisfied.svg" />
-                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.dissatisfied}}</p>
+                <img src="assets/images/dissatisfied.svg" />
+                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : '0'}}</p>
             </div>
             <div class="satisfication-response">
-                <img src="../../../../../assets/images/somewhat_dissatisfied.svg" />
-                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_dissatisfied}}</p>
+                <img src="assets/images/somewhat_dissatisfied.svg" />
+                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : '0'}}</p>
             </div>
             <div class="satisfication-response">
-                <img src="../../../../../assets/images/somewhat_satisfied.svg" />
-                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_satisfied}}</p>
+                <img src="assets/images/somewhat_satisfied.svg" />
+                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : '0'}}</p>
             </div>
             <div class="satisfication-response">
-                <img src="../../../../../assets/images/satisfied.svg" />
-                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.satisfied}}</p>
+                <img src="assets/images/satisfied.svg" />
+                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}</p>
             </div>
         </div>
 

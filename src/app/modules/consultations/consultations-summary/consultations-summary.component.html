@@ -20,6 +20,30 @@
           </p> 
           <div id="highchartContainer" style="width:100%; height:400px;"></div>
         </div> -->
+        <div class="satisfication-container">
+          <div *ngIf="satisfactionRatingDistribution">
+            <p class="text-16 m-0 bold-text">{{'Consultation satisfication' | translate}}</p>
+            <div class="d-flex mt-3 mb-3">
+                <div class="satisfication-response">
+                    <img src="assets/images/dissatisfied.svg" />
+                    <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : '0'}}</p>
+                </div>
+                <div class="satisfication-response">
+                    <img src="assets/images/somewhat_dissatisfied.svg" />
+                    <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : '0'}}</p>
+                </div>
+                <div class="satisfication-response">
+                    <img src="assets/images/somewhat_satisfied.svg" />
+                    <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : '0'}}</p>
+                </div>
+                <div class="satisfication-response">
+                    <img src="assets/images/satisfied.svg" />
+                    <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}</p>
+                </div>
+            </div>
+    
+          </div>
+        </div>
 
 
         <div *ngIf="publicResponses?.length">

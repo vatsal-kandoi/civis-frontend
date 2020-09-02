@@ -16,6 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { isObjectEmpty } from '../../../../shared/functions/modular.functions';
 import { CookieService } from 'ngx-cookie';
+import { atLeastOneCheckboxCheckedValidator } from 'src/app/shared/validators/checkbox-validator';
 
 @Component({
   selector: 'app-read-respond',
@@ -116,26 +117,39 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     if (this.profileData && this.profileData.questions) {
       const questions =  this.responseQuestions = this.profileData.questions;
       const form = new FormGroup({});
-
       questions.forEach(question => {
         if (question.questionType !== 'checkbox') {
-          form.addControl(question.id, new FormControl(null, Validators.required ));
+          if (question.isOptional) {
+            form.addControl(question.id, new FormControl(null));
+          } else {
+            form.addControl(question.id, new FormControl(null, Validators.required ));
+          }
         } else if (question.questionType === 'checkbox') {
           form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
         }
-        form.addControl('other_answer-' + question.id, new FormControl(null));
+        if (question.is_other) {
+          if (question.isOptional) {
+            form.addControl('other_answer-' + question.id, new FormControl(null));
+          } else {
+            form.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
+          }
+        }
+
       });
       return form;
     }
   }
 
     makeCheckboxQuestionOptions(question) {
-        const form = new FormGroup({});
+    let form: any;
+    form = question.isOptional ? new FormGroup({}) : new FormGroup({}, {
+      validators: atLeastOneCheckboxCheckedValidator()
+    });
         question.subQuestions.forEach(subQuestion => {
           form.addControl(subQuestion.id, new FormControl(false));
         });
         return form;
-      }
+    }
 
     toggleCheckbox(control, value) {
       control.patchValue(value);
@@ -237,6 +251,11 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       for (let i = 0; i < this.profileData.questions.length; i++) {
         if (this.profileData.questions[i].id === question.id) {
           this.profileData.questions[i].is_other = otherValue;
+          if (question.isOptional) {
+            this.questionnaireForm.addControl('other_answer-' + question.id, new FormControl(null));
+          } else {
+            this.questionnaireForm.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
+          }
           break;
         }
       }

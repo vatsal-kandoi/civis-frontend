@@ -18,6 +18,8 @@ export const ConsultationProfile = gql`
         id
         questionText
         questionType
+        supportsOther
+        isOptional
         subQuestions {
           id
           questionText
@@ -74,6 +76,8 @@ export const ConsultationProfile = gql`
         id
         questionText
         questionType
+        supportsOther
+        isOptional
         subQuestions {
           id
           questionText
@@ -155,6 +159,7 @@ export const ConsultationProfileCurrentUser = gql`
         id
         questionText
         questionType
+        isOptional
         supportsOther
         subQuestions {
           id
@@ -224,6 +229,8 @@ export const SubmitResponseQuery = gql`
           id
           questionText
           questionType
+          isOptional
+          supportsOther
           subQuestions {
             id
             questionText

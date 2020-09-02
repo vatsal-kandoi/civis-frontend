@@ -119,22 +119,15 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       const form = new FormGroup({});
       questions.forEach(question => {
         if (question.questionType !== 'checkbox') {
-          if (question.isOptional) {
-            form.addControl(question.id, new FormControl(null));
-          } else {
-            form.addControl(question.id, new FormControl(null, Validators.required ));
-          }
+          question.isOptional ? form.addControl(question.id, new FormControl(null)) :
+          form.addControl(question.id, new FormControl(null, Validators.required ));
         } else if (question.questionType === 'checkbox') {
           form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
         }
         if (question.is_other) {
-          if (question.isOptional) {
-            form.addControl('other_answer-' + question.id, new FormControl(null));
-          } else {
-            form.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
-          }
+          question.isOptional ? form.addControl('other_answer-' + question.id, new FormControl(null)) :
+           form.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
         }
-
       });
       return form;
     }

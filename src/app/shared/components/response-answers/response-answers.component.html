@@ -1,5 +1,5 @@
 <div class="response-block" *ngIf="answers.length">
-  <div class="answers" *ngFor="let responseAnswer of mapAnswers(answers); let i = index">
+  <div class="answers" *ngFor="let responseAnswer of alignedData; let i = index">
       <div *ngIf="responseAnswer.questionType === 'checkbox' && !showOnlyLongTextAnswer">
         <div class="answer" >
           <p class="question-text">
@@ -24,6 +24,17 @@
           </p>
         </div>
       </div>
+      <div *ngIf="responseAnswer.questionType === 'dropdown' && !showOnlyLongTextAnswer">
+          <div class="answer" >
+            <p class="question-text">
+              <span class="question-text__number">{{i+1}}.</span>
+              {{responseAnswer.questionText}}
+            </p>
+            <p class="answer-text question-answer">
+              {{responseAnswer.answer}}
+            </p>
+          </div>
+        </div>
       <div *ngIf="responseAnswer.questionType === 'long_text'">
         <div class="answer">
           <p class="question-text">

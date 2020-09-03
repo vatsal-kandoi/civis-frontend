@@ -24,7 +24,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'dissatisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('dissatisfied') ; onChange()">
         <span>
-          <img src="../../../../../assets/images/dissatisfied.svg" />
+          <img src="assets/images/dissatisfied.svg" />
           Dissatisfied
         </span>
       </button>
@@ -33,7 +33,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_dissatisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('somewhat_dissatisfied') ; onChange()">
         <span>
-          <img src="../../../../../assets/images/somewhat_dissatisfied.svg" />
+          <img src="assets/images/somewhat_dissatisfied.svg" />
           Somewhat Dissatisfied
         </span>
       </button>
@@ -42,7 +42,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_satisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('somewhat_satisfied') ; onChange()">
         <span>
-          <img src="../../../../../assets/images/somewhat_satisfied.svg" />
+          <img src="assets/images/somewhat_satisfied.svg" />
           Somewhat Satisfied
         </span>
       </button>
@@ -51,7 +51,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'satisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('satisfied') ; onChange()">
         <span>
-          <img src="../../../../../assets/images/satisfied.svg" />
+          <img src="assets/images/satisfied.svg" />
           Satisfied
         </span>
       </button>
@@ -65,7 +65,8 @@
               <div class="question">
                 <p class="question-text">
                   <span class="question-text__number">{{i+1}}.</span>
-                  {{question.questionText}}
+                  {{question.questionText}} 
+                  <span *ngIf="!question.isOptional" class="required-text pl-1"> *</span>
                 </p>
                 <div class="answer" *ngIf="question.questionType === 'multiple_choice'">
                   <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
@@ -74,13 +75,15 @@
                       <span>{{subQuestion.questionText}}</span>
                     </label>
                   </div>
+                  <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>
                 </div>
                 <div class="answer" *ngIf="question.questionType === 'dropdown'">
                     <ng-select 
                     [items]="question.subQuestions" bindLabel="questionText" [virtualScroll]="true" dropdownPosition="bottom" 
                     bindValue="id"  [clearable]="false" loadingText="Searching..." [searchable]="false" (change)="onChange();onAnswerChange(question, $event)"
-                    placeholder="Select an option" [formControlName]="question.id" required> 
-                    </ng-select>  
+                    placeholder="Select an option" [formControlName]="question.id"> 
+                    </ng-select>
+                    <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>  
                 </div>
                 <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
                   <label class="answer__tips">Choose as many as you like</label>
@@ -90,11 +93,13 @@
                       <span>{{subQuestion.questionText}}</span>
                     </label>
                   </div>
+                  <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>
                 </div>
                 <div class="answer" [id]="'text-area-' + question.id" *ngIf="question.questionType === 'long_text'">
                   <div class="text-area">
                     <textarea (input)="responseText = $event.target.value; onChange()" placeholder="Type your answer here" [formControlName]="question.id"></textarea>
                   </div>
+                  <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div> 
                 </div>
                 <div class="input-box" *ngIf="question.is_other">
                   <div class="input-box__border">
@@ -102,8 +107,7 @@
                     [formControlName]="question.other_answer" />
                   </div>
                 </div>
-
-
+                <div *ngIf="showError && questionnaireForm.controls[question.other_answer]?.errors && question.is_other" class="error-msg text-left ml-3">This is a mandatory question and your response is required</div> 
               </div>
             </div>
           </div>
@@ -170,7 +174,37 @@
   </div>
   
   <div *ngIf="profileData?.reviewType !== 'policy'">
-    <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
+    <div class="paper-effect mt-4 m-0-sm">
+          <div *ngIf="satisfactionRatingDistribution">
+            <p class="text-16 m-0 bold-text">{{'Consultation satisfication' | translate}}</p>
+            <div class="d-flex mt-3 mb-3">
+              <div class="satisfication-response">
+                <img src="assets/images/dissatisfied.svg" />
+                <p class="text-16 m-0 bold-text pl-2">
+                  {{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : '0'}}
+                </p>
+              </div>
+              <div class="satisfication-response">
+                <img src="assets/images/somewhat_dissatisfied.svg" />
+                <p class="text-16 m-0 bold-text pl-2">
+                  {{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : '0'}}
+                </p>
+              </div>
+              <div class="satisfication-response">
+                <img src="assets/images/somewhat_satisfied.svg" />
+                <p class="text-16 m-0 bold-text pl-2">
+                  {{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : '0'}}
+                </p>
+              </div>
+              <div class="satisfication-response">
+                <img src="assets/images/satisfied.svg" />
+                <p class="text-16 m-0 bold-text pl-2">
+                  {{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}</p>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="paper-effect mt-4 m-0-sm" *ngIf="responseList?.length"  #responsesListContainer>
       <div class="d-flex justify-content-between">
         <p class="text-16 m-0 bold-text">{{'Public responses' | translate}}</p>
         <p class="what-resp-text" tooltip="If you feel passionately about this Consultation, you can make your response public, 

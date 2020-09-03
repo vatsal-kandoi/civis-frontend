@@ -165,13 +165,28 @@
             }
         }
 
+
+
+        .or-text {
+            text-align: center;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: #C0C0C0;
+            font-weight: bold;
+
+            @media screen and (max-width: 991px) {
+                display: none;
+            }
+
+        }
+
         .form-space {
             &__left {
                 .input-box {
                     margin-bottom: 15px;
 
                     &__border {
-                        width: 90%;
+                        width: 100%;
                         border: 1px solid $input-border;
                         box-sizing: border-box;
                         border-radius: 3px;

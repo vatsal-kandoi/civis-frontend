@@ -174,29 +174,37 @@
   </div>
   
   <div *ngIf="profileData?.reviewType !== 'policy'">
-    <div class="paper-effect mt-4 m-0-sm " *ngIf="responseList?.length"  #responsesListContainer>
-      <div *ngIf="satisfactionRatingDistribution">
-        <p class="text-16 m-0 bold-text">{{'Consultation satisfication' | translate}}</p>
-        <div class="d-flex mt-3 mb-3">
-            <div class="satisfication-response">
+    <div class="paper-effect mt-4 m-0-sm">
+          <div *ngIf="satisfactionRatingDistribution">
+            <p class="text-16 m-0 bold-text">{{'Consultation satisfication' | translate}}</p>
+            <div class="d-flex mt-3 mb-3">
+              <div class="satisfication-response">
                 <img src="assets/images/dissatisfied.svg" />
-                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : '0'}}</p>
-            </div>
-            <div class="satisfication-response">
+                <p class="text-16 m-0 bold-text pl-2">
+                  {{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : '0'}}
+                </p>
+              </div>
+              <div class="satisfication-response">
                 <img src="assets/images/somewhat_dissatisfied.svg" />
-                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : '0'}}</p>
-            </div>
-            <div class="satisfication-response">
+                <p class="text-16 m-0 bold-text pl-2">
+                  {{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : '0'}}
+                </p>
+              </div>
+              <div class="satisfication-response">
                 <img src="assets/images/somewhat_satisfied.svg" />
-                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : '0'}}</p>
-            </div>
-            <div class="satisfication-response">
+                <p class="text-16 m-0 bold-text pl-2">
+                  {{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : '0'}}
+                </p>
+              </div>
+              <div class="satisfication-response">
                 <img src="assets/images/satisfied.svg" />
-                <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}</p>
+                <p class="text-16 m-0 bold-text pl-2">
+                  {{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}</p>
+              </div>
             </div>
-        </div>
-
-      </div>
+          </div>
+    </div>
+    <div class="paper-effect mt-4 m-0-sm" *ngIf="responseList?.length"  #responsesListContainer>
       <div class="d-flex justify-content-between">
         <p class="text-16 m-0 bold-text">{{'Public responses' | translate}}</p>
         <p class="what-resp-text" tooltip="If you feel passionately about this Consultation, you can make your response public, 

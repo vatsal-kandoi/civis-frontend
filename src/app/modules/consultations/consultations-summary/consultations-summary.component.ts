@@ -151,7 +151,10 @@ export class ConsultationsSummaryComponent implements OnInit {
           this.showKeywordGraph = false;
           return;
         }
-        const title = Object.keys(consultationAnalyis)[0];
+        let title: any;
+        if (consultationAnalyis) {
+          title = Object.keys(consultationAnalyis)[0];
+        }
         if (consultationAnalyis && consultationAnalyis[title]) {
           for (const key in consultationAnalyis[title]) {
             if (consultationAnalyis[title].hasOwnProperty(key)

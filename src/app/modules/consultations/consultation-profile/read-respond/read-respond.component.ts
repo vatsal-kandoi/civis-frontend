@@ -16,6 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { isObjectEmpty } from '../../../../shared/functions/modular.functions';
 import { CookieService } from 'ngx-cookie';
+import { atLeastOneCheckboxCheckedValidator } from 'src/app/shared/validators/checkbox-validator';
 
 @Component({
   selector: 'app-read-respond',
@@ -116,25 +117,32 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     if (this.profileData && this.profileData.questions) {
       const questions =  this.responseQuestions = this.profileData.questions;
       const form = new FormGroup({});
-
       questions.forEach(question => {
         if (question.questionType !== 'checkbox') {
-          form.addControl(question.id, new FormControl(null, Validators.required ));
+          question.isOptional ? form.addControl(question.id, new FormControl(null)) :
+          form.addControl(question.id, new FormControl(null, Validators.required ));
         } else if (question.questionType === 'checkbox') {
           form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
         }
+        if (question.is_other) {
+          question.isOptional ? form.addControl('other_answer-' + question.id, new FormControl(null)) :
+           form.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
+        }
       });
       return form;
     }
   }
 
     makeCheckboxQuestionOptions(question) {
-        const form = new FormGroup({});
+    let form: any;
+    form = question.isOptional ? new FormGroup({}) : new FormGroup({}, {
+      validators: atLeastOneCheckboxCheckedValidator()
+    });
         question.subQuestions.forEach(subQuestion => {
           form.addControl(subQuestion.id, new FormControl(false));
         });
         return form;
-      }
+    }
 
     toggleCheckbox(control, value) {
       control.patchValue(value);
@@ -158,20 +166,65 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       const answers = {...this.questionnaireForm.value};
       const value = [];
       for (const item in answers) {
-        if (answers.hasOwnProperty(item)) {
+        if (answers.hasOwnProperty(item) && answers[item] !== null) {
           if (typeof(answers[item]) === 'object') {
               const keys = Object.keys(answers[item]);
               const filtered = keys.filter(function(key) {
                   return answers[item][key];
               });
               answers[item] = filtered;
+              let otherElement = false;
+              for (let i = 0 ; i < answers[item].length; i++) {
+                if (answers[item][i] === 'other') {
+                  otherElement = true;
+                  break;
+                }
+              }
+              if (otherElement) {
+                const filteredAnswers = answers[item].filter(val => {
+                  return val !== 'other';
+                });
+                if (filteredAnswers.length > 0) {
+                  value.push({
+                    question_id: item,
+                    is_other: true,
+                    other_option_answer: answers['other_answer-' + item],
+                    answer: filteredAnswers
+                  });
+                } else {
+                  value.push({
+                    question_id: item,
+                    is_other: true,
+                    other_option_answer: answers['other_answer-' + item]
+                  });
+                }
+              } else {
+                if (answers[item].length > 0) {
+                  value.push({
+                    question_id: item,
+                    answer: answers[item]
+                  });
+                }
+              }
           }
-          value.push({
-            question_id: item,
-            answer: answers[item]
-          });
+          if (answers[item] === 'other') {
+            value.push({
+              question_id: item,
+              is_other: true,
+              other_option_answer: answers['other_answer-' + item],
+            });
+          } else if (!(item.includes('other')) && !Array.isArray(answers[item])) {
+            if (answers[item].length > 0 || typeof answers[item] !== 'string') {
+              value.push({
+                question_id: item,
+                answer: answers[item]
+              });
+            }
+          }
+
         }
      }
+
       this.responseAnswers = value;
       this.stepNext(this.profileData.respondedOn);
     } else {
@@ -183,6 +236,34 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     if (this.questionnaireForm.valid && this.responseFeedback) {
       this.consultationService.enableSubmitResponse.next(true);
       this.showError = false;
+    }
+  }
+
+  onAnswerChange(question?, value?, checkboxValue?) {
+    if (question && value.id === 'other') {
+      let otherValue = true;
+      if (question.questionType === 'checkbox' && value.id === 'other' && !checkboxValue) {
+         otherValue = false;
+      }
+      for (let i = 0; i < this.profileData.questions.length; i++) {
+        if (this.profileData.questions[i].id === question.id) {
+          this.profileData.questions[i].is_other = otherValue;
+          if (question.isOptional) {
+            this.questionnaireForm.addControl('other_answer-' + question.id, new FormControl(null));
+          } else {
+            this.questionnaireForm.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
+          }
+          break;
+        }
+      }
+    } else {
+      if (question.questionType !== 'checkbox') {
+        this.profileData.questions.forEach(ques => {
+          if (question.id === ques.id) {
+            ques.is_other = false;
+          }
+        });
+      }
     }
   }
 
@@ -310,6 +391,14 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     )
     .subscribe((data: any) => {
         this.profileData = data;
+        if (this.profileData.questions && this.profileData.questions.length > 0) {
+          this.profileData.questions.forEach(question => {
+            if (question.supportsOther) {
+              question.subQuestions.push({id: 'other', questionText: 'Other'});
+              question.other_answer = 'other_answer-' + question.id;
+            }
+          });
+        }
         this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
         this.responseList = data.sharedResponses.edges;
         this.createMetaTags(this.profileData);
@@ -438,7 +527,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       }
       consultationResponse['templateId'] = this.templateId;
       consultationResponse['answers'] = this.responseAnswers;
-      consultationResponse['responseText'] = this.responseText;
+      consultationResponse['responseText'] = this.questionnaireExist() ? null : this.responseText;
       this.submitResponse(consultationResponse);
     }
   }

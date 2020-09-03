@@ -511,7 +511,7 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
       }
       consultationResponse['templateId'] = this.templateId;
       consultationResponse['answers'] = this.responseAnswers;
-      consultationResponse['responseText'] = this.responseText;
+      consultationResponse['responseText'] = this.questionnaireExist() ? null : this.responseText;
       this.submitResponse(consultationResponse);
     }
   }

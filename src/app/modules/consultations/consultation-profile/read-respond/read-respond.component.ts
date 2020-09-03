@@ -199,10 +199,12 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
                   });
                 }
               } else {
-                value.push({
-                  question_id: item,
-                  answer: answers[item]
-                });
+                if (answers[item].length > 0) {
+                  value.push({
+                    question_id: item,
+                    answer: answers[item]
+                  });
+                }
               }
           }
           if (answers[item] === 'other') {
@@ -212,10 +214,12 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
               other_option_answer: answers['other_answer-' + item],
             });
           } else if (!(item.includes('other')) && !Array.isArray(answers[item])) {
-            value.push({
-              question_id: item,
-              answer: answers[item]
-            });
+            if (answers[item].length > 0 || typeof answers[item] !== 'string') {
+              value.push({
+                question_id: item,
+                answer: answers[item]
+              });
+            }
           }
 
         }

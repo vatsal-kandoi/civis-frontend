@@ -29,7 +29,7 @@ export class ResponseAnswersComponent implements OnInit {
             answer = item.is_other ? this.getMultiChoiceAnswer(responseQuestion, item) :
              this.getMultiChoiceAnswer(responseQuestion, item.answer);
           } else  if (responseQuestion.questionType === 'checkbox') {
-            answer = item.is_other ? this.getCheckboxAnswer(responseQuestion, item) : this.getCheckboxAnswer(responseQuestion, item.answer);
+            answer =  this.getCheckboxAnswer(responseQuestion, item);
           } else {
             if (item.is_other) {
               answer = {
@@ -68,11 +68,16 @@ export class ResponseAnswersComponent implements OnInit {
     const checkboxAnswers = [];
     if (item.answer && item.answer.length > 0) {
       item.answer.map((id) => {
+        let answerText = false;
         responseQuestion.subQuestions.map((question) => {
           if (+id === +question.id) {
+            answerText = true;
             checkboxAnswers.push(question.questionText);
           }
         });
+        if (!answerText) {
+          checkboxAnswers.push('Question not answered');
+        }
       });
     }
     if (item && item.is_other) {

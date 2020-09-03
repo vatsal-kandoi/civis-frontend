@@ -10,9 +10,11 @@ export class ResponseAnswersComponent implements OnInit {
   @Input() questions;
   @Input() answers;
   @Input() showOnlyLongTextAnswer: boolean;
+  alignedData: any;
   constructor() { }
 
   ngOnInit(): void {
+    this.alignedData = this.mapAnswers();
   }
 
   mapAnswers() {
@@ -23,17 +25,28 @@ export class ResponseAnswersComponent implements OnInit {
         if (this.questions && this.questions.length) {
           const responseQuestion = this.questions.find((question) => +question.id === +item.question_id);
           if (responseQuestion) {
-          if (responseQuestion.questionType === 'multiple_choice') {
-            answer = this.getMultiChoiceAnswer(responseQuestion, item.answer);
+          if (responseQuestion.questionType === 'multiple_choice' || responseQuestion.questionType === 'dropdown') {
+            answer = item.is_other ? this.getMultiChoiceAnswer(responseQuestion, item) :
+             this.getMultiChoiceAnswer(responseQuestion, item.answer);
           } else  if (responseQuestion.questionType === 'checkbox') {
-            answer = this.getCheckboxAnswer(responseQuestion, item.answer);
+            answer =  this.getCheckboxAnswer(responseQuestion, item);
           } else {
-            answer = {
-              id: responseQuestion.id,
-              questionType: responseQuestion.questionType,
-              questionText: responseQuestion.questionText,
-              answer: item.answer
-            };
+            if (item.is_other) {
+              answer = {
+                id: responseQuestion.id,
+                questionType: responseQuestion.questionType,
+                questionText: responseQuestion.questionText,
+                answer: item.other_option_answer
+              };
+            } else {
+              answer = {
+                id: responseQuestion.id,
+                questionType: responseQuestion.questionType,
+                questionText: responseQuestion.questionText,
+                answer: item.answer
+              };
+            }
+
           }
         }
         }
@@ -50,15 +63,26 @@ export class ResponseAnswersComponent implements OnInit {
     return;
   }
 
-  getCheckboxAnswer(responseQuestion, answers) {
+  getCheckboxAnswer(responseQuestion, item) {
+
     const checkboxAnswers = [];
-    answers.map((id) => {
-      responseQuestion.subQuestions.map((question) => {
-        if (+id === +question.id) {
-          checkboxAnswers.push(question.questionText);
+    if (item.answer && item.answer.length > 0) {
+      item.answer.map((id) => {
+        let answerText = false;
+        responseQuestion.subQuestions.map((question) => {
+          if (+id === +question.id) {
+            answerText = true;
+            checkboxAnswers.push(question.questionText);
+          }
+        });
+        if (!answerText) {
+          checkboxAnswers.push('Question not answered');
         }
       });
-    });
+    }
+    if (item && item.is_other) {
+      checkboxAnswers.push(item.other_option_answer);
+    }
     return {
       id: responseQuestion.id,
       questionType: responseQuestion.questionType,
@@ -68,14 +92,24 @@ export class ResponseAnswersComponent implements OnInit {
   }
 
 
-  getMultiChoiceAnswer(responseQuestion, subQuestionId) {
-    const subQuestion = responseQuestion.subQuestions.find((question) => +question.id === +subQuestionId);
-    return {
-      id: responseQuestion.id,
-      questionType: responseQuestion.questionType,
-      questionText: responseQuestion.questionText,
-      answer: subQuestion.questionText
-    };
+  getMultiChoiceAnswer(responseQuestion, item) {
+    if (item && item.is_other) {
+      return {
+        id: responseQuestion.id,
+        questionType: responseQuestion.questionType,
+        questionText: responseQuestion.questionText,
+        answer: item.other_option_answer
+      };
+    } else {
+      const subQuestion = responseQuestion.subQuestions.find((question) => +question.id === +item);
+      return {
+        id: responseQuestion.id,
+        questionType: responseQuestion.questionType,
+        questionText: responseQuestion.questionText,
+        answer: subQuestion.questionText
+      };
+    }
+
   }
 
 }

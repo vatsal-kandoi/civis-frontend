@@ -53,7 +53,7 @@
     "hmr-enabled": "^0.1.4",
     "moment": "^2.24.0",
     "ng-recaptcha": "^5.0.0",
-    "ng2-ckeditor": "^1.2.9",
+    "ng2-ckeditor": "^1.2.6",
     "ngx-bootstrap": "^5.1.0",
     "ngx-cookie": "^4.1.2",
     "ngx-cookie-service": "^2.3.0",

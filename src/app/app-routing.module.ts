@@ -68,7 +68,11 @@ const routes: Routes = [
     path: 'emails/unsubscribe',
     loadChildren: () => import('./modules/landing/landing.module').then(m => m.LandingModule),
     canActivate: [UnsubscribeUserGuard]
-  }
+  },
+  {
+    path: 'citizens-report-on-mumbai-open-spaces',
+    loadChildren: () => import('./modules/mumbai-open-spaces/mumbai-open-spaces.module').then(m => m.MumbaiOpenSpacesModule)
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,11 @@
+@import './src/assets/styles/app';
+
+.open-spaces-wrapper {
+    margin-top: 77px;
+    padding-top: 60px;
+    background-color: $blue-bg-light;
+    @media screen and (max-width: 991px) {
+      margin-top: 58px;
+      padding-top: 30px;
+    }
+}

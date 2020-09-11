@@ -22,28 +22,28 @@
           <div class="share-block__position">
             <div #shareBlockElement *ngIf="showShareBlock && (responseId && responseId === response?.node?.id)" class="share-pop-up">
                 <a  class="share-btn"
-                [href]="getFbUrl(currentUrl)"
+                [href]="getSocialLink('facebook', currentUrl, profileData?.title)"
                 target="_blank">
                   <span>
                       <i class="fa fa-facebook"></i>
                   </span>
                 </a>
                 <a  class="share-btn"
-                [href]="getTwitterUrl(currentUrl, response?.node?.id)"
+                [href]="getSocialLink('twitter', currentUrl, profileData?.title,  response?.node?.id)"
                 target="_blank">
                   <span>
                       <i class="fa fa-twitter"></i>
                   </span>
                 </a>
                 <a  class="share-btn"
-                [href]="getWhatsappUrl(currentUrl)"
+                [href]="getSocialLink('whatsapp', currentUrl, profileData?.title)"
                 target="_blank">
                   <span>
                       <i class="fa fa-whatsapp"></i>
                   </span>
                 </a>
                 <a  class="share-btn"
-                [href]="getLinkedinUrl(currentUrl)"
+                [href]="getSocialLink('linkedin', currentUrl, profileData?.title)"
                 target="_blank">
                   <span>
                       <i class="fa fa-linkedin"></i>

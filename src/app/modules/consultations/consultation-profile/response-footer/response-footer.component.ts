@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { Apollo } from 'apollo-angular';
@@ -6,7 +6,7 @@ import { VoteDeleteQuery, ConsultationProfileCurrentUser, VoteCreateQuery } from
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { filter } from 'rxjs/operators';
 import * as moment from 'moment';
-import { isObjectEmpty } from '../../../../shared/functions/modular.functions';
+import { getSocialLink } from '../../consultation-profile/socialLink.function';
 
 
 @Component({
@@ -15,6 +15,10 @@ import { isObjectEmpty } from '../../../../shared/functions/modular.functions';
   styleUrls: ['./response-footer.component.scss']
 })
 export class ResponseFooterComponent implements OnInit {
+
+  @ViewChild('shareBlockElement', { static: false }) shareBlockElement: ElementRef;
+  @ViewChild('shareButtonElement', { static: false }) shareButtonElement: ElementRef;
+
   @Input() response;
   currentUser: any;
   profileData: any;
@@ -23,7 +27,10 @@ export class ResponseFooterComponent implements OnInit {
   showShareBlock = false;
   usingTemplate: boolean;
   responseQuestions: any;
-  longTextResponse: {};
+  longTextResponses: any;
+  shareBtnClicked: any;
+  getSocialLink  = getSocialLink;
+  currentUrl: string;
 
   constructor(private userService: UserService,
               private errorService: ErrorService,
@@ -39,8 +46,24 @@ export class ResponseFooterComponent implements OnInit {
                }
 
   ngOnInit(): void {
+    this.currentUrl = window.location.href;
     this.getCurrentUser();
     this.subscribeProfileData();
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  onClick(targetElement) {
+    if (this.showShareBlock) {
+      if (this.shareBtnClicked) {
+        this.shareBtnClicked = false;
+        return;
+      }
+      if (this.shareBlockElement.nativeElement.contains(targetElement)) {
+            return;
+      } else {
+        this.showShareBlock = false;
+      }
+    }
   }
 
   getCurrentUser() {
@@ -156,7 +179,6 @@ export class ResponseFooterComponent implements OnInit {
         || !this.currentUser || (this.profileData && this.profileData.respondedOn)) {
         return false;
     }
-    // this.enableCkEditor = true;
     return true;
   }
 
@@ -190,64 +212,41 @@ export class ResponseFooterComponent implements OnInit {
     }
     if (response) {
       this.usingTemplate = true;
-      this.longTextResponse = this.getLongTextAnswer(response);
-      if (!isObjectEmpty(this.longTextResponse)) {
+      this.longTextResponses = this.getLongTextAnswer(response);
+      if (this.longTextResponses && this.longTextResponses.length) {
         const obj = {
-          responseText: this.longTextResponse['answer'],
-          controlName: this.longTextResponse['id'].toString(),
+          longTextResponses: this.longTextResponses,
           templateId: response.id
         };
         this.consultationService.useThisResponseAnswer.next(obj);
-        // this.responseText =  this.templateText = this.longTextResponse['answer'];
-        // const controlName = this.longTextResponse['id'].toString();
-        // if (this.showCreateResponse() && this.questionnaireExist()) {
-        //   this.showQuestions = true;
-        //   const checkTextAreaElementExist = setInterval(() => {
-        //     const textAreaElement = document.getElementById(`text-area-${controlName}`);
-        //     if (textAreaElement) {
-        //       clearInterval(checkTextAreaElementExist);
-        //       window.scrollTo({
-        //         top: this.questionnaireContainer.nativeElement.offsetTop - 80,
-        //         behavior: 'smooth',
-        //       });
-        //       this.questionnaireForm.get(controlName).patchValue(this.responseText);
-        //     }
-        //   }, 100);
-        // }
       } else {
-        // this.responseText =  this.templateText = response.responseText;
-        // window.scrollTo({
-        //   top: this.responseIndex.nativeElement.offsetTop,
-        //   behavior: 'smooth',
-        // });
-        // if (this.responseText) {
-        //   this.consultationsService.enableSubmitResponse.next(true);
-        // }
+        const obj = {
+          responseText: response.responseText,
+          templateId: response.id
+        };
+        this.consultationService.useThisResponseText.next(obj);
       }
-      // this.templateId = response.id;
-      // this.customStyleAdded = false;
-      // this.editIframe();
     }
   }
 
   getLongTextAnswer(response) {
-    const answers = response && response.answers;
-    let answer = {};
-    if (answers && answers.length) {
-      answers.map((item) => {
+    const responseAnswers = response && response.answers;
+    const answers = [];
+    if (responseAnswers && responseAnswers.length) {
+      responseAnswers.map((item) => {
         if (this.responseQuestions && this.responseQuestions.length) {
           const responseQuestion = this.responseQuestions.find((question) => +question.id === +item.question_id);
           if (responseQuestion.questionType === 'long_text') {
-            answer = {
+            answers.push({
               id: responseQuestion.id,
               questionType: responseQuestion.questionType,
               questionText: responseQuestion.questionText,
               answer: item.answer
-            };
+            });
           }
         }
       });
-      return answer;
+      return answers;
     }
     return;
   }

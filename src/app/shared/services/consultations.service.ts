@@ -14,6 +14,8 @@ export class ConsultationsService {
     validateAnswers = new BehaviorSubject (null);
     consultationProfileData = new BehaviorSubject (null);
     useThisResponseAnswer = new BehaviorSubject(null);
+    useThisResponseText = new BehaviorSubject(null);
+    scrollToPublicResponse = new BehaviorSubject(null);
 
   constructor() {
   }

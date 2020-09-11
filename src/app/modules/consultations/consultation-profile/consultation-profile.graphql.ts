@@ -14,6 +14,17 @@ export const ConsultationProfile = gql`
         id
         components
       }
+      questions {
+        id
+        questionText
+        questionType
+        supportsOther
+        isOptional
+        subQuestions {
+          id
+          questionText
+        }
+      }
       responseDeadline
       readingTime
       responsesReadingTimes
@@ -66,6 +77,8 @@ export const ConsultationProfile = gql`
         isOptional
         questionText
         questionType
+        supportsOther
+        isOptional
         subQuestions {
           id
           questionText
@@ -148,6 +161,8 @@ export const ConsultationProfileCurrentUser = gql`
         isOptional
         questionText
         questionType
+        isOptional
+        supportsOther
         subQuestions {
           id
           questionText
@@ -187,6 +202,7 @@ export const SubmitResponseQuery = gql`
         title
         respondedOn
         responseSubmissionMessage
+        satisfactionRatingDistribution
         sharedResponses(sort: templates_count, sortDirection: desc) {
           edges {
             node {
@@ -217,6 +233,8 @@ export const SubmitResponseQuery = gql`
           isOptional
           questionText
           questionType
+          isOptional
+          supportsOther
           subQuestions {
             id
             questionText

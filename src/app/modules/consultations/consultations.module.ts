@@ -26,6 +26,11 @@ import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { CookieService } from 'ngx-cookie-service';
 import { ConsultationQuestionnaireComponent } from './consultation-profile/consultation-questionnaire/consultation-questionnaire.component';
 import { ResponseFooterComponent } from './consultation-profile/response-footer/response-footer.component';
+import { ThankYouModalComponent } from './consultation-profile/thank-you-modal/thank-you-modal.component';
+import { ConsultationResponseTextComponent } from './consultation-profile/consultation-response-text/consultation-response-text.component';
+import { FeedbackModalComponent } from './consultation-profile/feedback-modal/feedback-modal.component';
+import { ConsultationPublicResponsesComponent } from './consultation-profile/consultation-public-responses/consultation-public-responses.component';
+import { SatisfactionRatingDistributionComponent } from './consultation-profile/satisfaction-rating-distribution/satisfaction-rating-distribution.component';
 
 @NgModule({
     imports: [
@@ -60,6 +65,11 @@ import { ResponseFooterComponent } from './consultation-profile/response-footer/
         DiscussEngageComponent,
         ConsultationQuestionnaireComponent,
         ResponseFooterComponent,
+        ThankYouModalComponent,
+        ConsultationResponseTextComponent,
+        FeedbackModalComponent,
+        ConsultationPublicResponsesComponent,
+        SatisfactionRatingDistributionComponent,
     ],
     providers: [CookieService]
 })

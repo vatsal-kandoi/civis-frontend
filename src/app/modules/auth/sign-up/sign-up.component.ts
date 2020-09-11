@@ -21,11 +21,8 @@ export class SignUpComponent implements OnInit {
   @ViewChild('captchaRef', {static: false}) captchaRef;
   signupObject = {
     firstName: '',
-    lastName: '',
     email: '',
-    phoneNumber: null,
     password: '',
-    cityId: null,
     notifyForNewConsultation: true,
     agreedForTermsCondition: false,
   };

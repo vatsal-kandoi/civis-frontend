@@ -1,5 +1,5 @@
-<!-- *ngIf="showCreateResponse() && questionnaireExist()" -->
-<div class="paper-effect  mt-4 m-0-sm">
+<div class="paper-effect  mt-4 m-0-sm" #questionnaireContainer>
+  <p class="satisfactory-heading">
     <p class="satisfactory-heading">
       {{'How satisfied are you with this Consultation' | translate}}
     </p>
@@ -12,7 +12,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'dissatisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('dissatisfied')">
         <span>
-          <img src="../../../../../assets/images/dissatisfied.svg" />
+          <img src="assets/images/dissatisfied.svg" />
           Dissatisfied
         </span>
       </button>
@@ -21,7 +21,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_dissatisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('somewhat_dissatisfied')">
         <span>
-          <img src="../../../../../assets/images/somewhat_dissatisfied.svg" />
+          <img src="assets/images/somewhat_dissatisfied.svg" />
           Somewhat Dissatisfied
         </span>
       </button>
@@ -30,7 +30,7 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_satisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('somewhat_satisfied')">
         <span>
-          <img src="../../../../../assets/images/somewhat_satisfied.svg" />
+          <img src="assets/images/somewhat_satisfied.svg" />
           Somewhat Satisfied
         </span>
       </button>
@@ -39,44 +39,63 @@
         [ngClass]="{'active': (showQuestions && responseFeedback === 'satisfied'), 'grey-bg': showQuestions}"
         (click)="setSatisfactoryRating('satisfied')">
         <span>
-          <img src="../../../../../assets/images/satisfied.svg" />
+          <img src="assets/images/satisfied.svg" />
           Satisfied
         </span>
       </button>
     </div>
     <p class="error-msg" *ngIf="showError && !responseFeedback">Please select a Satisfaction Rating to submit the response</p>
-    <div [ngClass]="showQuestions ? 'hr-line': ''"></div>
-    <div class="question-box" *ngIf="showQuestions">
+    <div class="hr-line"></div>
+    <div class="question-box">
       <form [formGroup]="questionnaireForm">
         <div class="questions-container">
           <div class="question-index" *ngFor="let question of profileData?.questions; let i = index">
               <div class="question">
                 <p class="question-text">
                   <span class="question-text__number">{{i+1}}.</span>
-                  {{question.questionText}}
+                  {{question.questionText}} 
+                  <span *ngIf="!question.isOptional" class="required-text pl-1"> *</span>
                 </p>
                 <div class="answer" *ngIf="question.questionType === 'multiple_choice'">
                   <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
                     <label>
-                      <input type="radio" class="cm-radio" [formControlName]="question.id" [value]="subQuestion.id">
+                      <input type="radio" class="cm-radio" (input)="onAnswerChange(question,subQuestion)" [formControlName]="question.id" [value]="subQuestion.id">
                       <span>{{subQuestion.questionText}}</span>
                     </label>
                   </div>
+                  <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>
+                </div>
+                <div class="answer" *ngIf="question.questionType === 'dropdown'">
+                    <ng-select 
+                    [items]="question.subQuestions" bindLabel="questionText" [virtualScroll]="true" dropdownPosition="bottom" 
+                    bindValue="id"  [clearable]="false" loadingText="Searching..." [searchable]="false" (change)="onAnswerChange(question, $event)"
+                    placeholder="Select an option" [formControlName]="question.id"> 
+                    </ng-select>
+                    <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>  
                 </div>
                 <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
                   <label class="answer__tips">Choose as many as you like</label>
                   <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
                     <label>
-                      <input type="checkbox" class="cm-radio" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
+                      <input type="checkbox" class="cm-radio" (input)="onAnswerChange(question,subQuestion, $event.target.checked)" [formControlName]="subQuestion.id" (click)="toggle(question.id, subQuestion.id)">
                       <span>{{subQuestion.questionText}}</span>
                     </label>
                   </div>
+                  <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>
                 </div>
                 <div class="answer" [id]="'text-area-' + question.id" *ngIf="question.questionType === 'long_text'">
                   <div class="text-area">
                     <textarea (input)="responseText = $event.target.value" placeholder="Type your answer here" [formControlName]="question.id"></textarea>
                   </div>
+                  <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div> 
                 </div>
+                <div class="input-box" *ngIf="question.is_other">
+                  <div class="input-box__border">
+                    <input placeholder="Type answer here" type="text"
+                    [formControlName]="question.other_answer" />
+                  </div>
+                </div>
+                <div *ngIf="showError && questionnaireForm.controls[question.other_answer]?.errors && question.is_other" class="error-msg text-left ml-3">This is a mandatory question and your response is required</div> 
               </div>
             </div>
           </div>
@@ -88,7 +107,7 @@
             </div>
           </div>
           <div class="py-3">
-            <button  class="btn-submit active" (click)='submitAnswer()' [tooltip]="showError ? 'Please fill all the answers to submit response.' : ''">
+            <button  class="btn-submit active" (click)='submitAnswer()' [tooltip]="showError ? 'Please fill all the answers to submit response.' : ''" data-event="purchase">
               <p class="m-0">
                 SUBMIT RESPONSE
               </p>
@@ -98,3 +117,5 @@
       </form>
     </div>
   </div>
+  <app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false">
+  </app-confirm-email-modal>

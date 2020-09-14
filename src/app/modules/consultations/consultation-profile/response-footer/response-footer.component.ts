@@ -212,13 +212,15 @@ export class ResponseFooterComponent implements OnInit {
     }
     if (response) {
       this.usingTemplate = true;
-      this.longTextResponses = this.getLongTextAnswer(response);
-      if (this.longTextResponses && this.longTextResponses.length) {
-        const obj = {
-          longTextResponses: this.longTextResponses,
-          templateId: response.id
-        };
-        this.consultationService.useThisResponseAnswer.next(obj);
+      if (this.questionnaireExist()) {
+        this.longTextResponses = this.getLongTextAnswer(response);
+        if (this.longTextResponses && this.longTextResponses.length) {
+          const obj = {
+            longTextResponses: this.longTextResponses,
+            templateId: response.id
+          };
+          this.consultationService.useThisResponseAnswer.next(obj);
+        }
       } else {
         const obj = {
           responseText: response.responseText,

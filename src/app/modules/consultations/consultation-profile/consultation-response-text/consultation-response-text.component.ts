@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter, AfterViewChecked } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
-import { filter, map } from 'rxjs/operators';
-import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
+import { filter } from 'rxjs/operators';
+import { isObjectEmpty, checkPropertiesPresence } from 'src/app/shared/functions/modular.functions';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,7 +32,6 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   templateId: any;
   usingTemplate: boolean;
   responseVisibility: any;
-  responseSubmitLoading: boolean;
   customStyleAdded: any;
 
   constructor(
@@ -89,20 +88,11 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
       visibility: this.responseVisibility ? 'shared' : 'anonymous',
       responseText: this.responseText
     };
-    if (this.checkProperties(consultationResponse)) {
+    if (checkPropertiesPresence(consultationResponse)) {
       consultationResponse['templateId'] = this.templateId ? this.templateId : null;
       return consultationResponse;
     }
     return;
-  }
-
-  checkProperties(obj) {
-    for (const key in obj) {
-      if (obj[key] === null ||  obj[key] === '' || obj[key] === undefined) {
-        return false;
-      }
-    }
-    return true;
   }
 
   getCurrentUser() {

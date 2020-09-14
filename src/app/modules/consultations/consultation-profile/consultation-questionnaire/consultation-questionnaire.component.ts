@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
-import { isObjectEmpty } from '../../../../shared/functions/modular.functions';
+import { isObjectEmpty, checkPropertiesPresence } from '../../../../shared/functions/modular.functions';
 import { atLeastOneCheckboxCheckedValidator } from 'src/app/shared/validators/checkbox-validator';
 import { Apollo } from 'apollo-angular';
 import { SubmitResponseQuery, ConsultationProfileCurrentUser } from '../consultation-profile.graphql';
@@ -15,21 +15,19 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
   templateUrl: './consultation-questionnaire.component.html',
   styleUrls: ['./consultation-questionnaire.component.scss']
 })
-export class ConsultationQuestionnaireComponent implements OnInit {
+export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit {
 
   @Input() profileData;
   @Output() openThankYouModal: EventEmitter<any> = new EventEmitter();
   @ViewChild('questionnaireContainer', { read: ElementRef , static: false }) questionnaireContainer: ElementRef<any>;
 
   responseFeedback: string;
-  showQuestions: boolean;
   questionnaireForm: FormGroup;
   currentUser: any;
-  responseQuestions: any;
   responseAnswers: any[];
   showError: boolean;
   responseVisibility: any;
-  responseText: any;
+  longTextAnswer: any;
   templateText: any;
   templateId: any;
   responseSubmitLoading: boolean;
@@ -54,8 +52,11 @@ export class ConsultationQuestionnaireComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentUser();
     this.subscribeProfileData();
-    this.subscribeUseTheResponseAnswer();
     this.validateAnswers();
+  }
+
+  ngAfterViewInit() {
+    this.subscribeUseTheResponseAnswer();
   }
 
   setSatisfactoryRating(value) {
@@ -63,7 +64,6 @@ export class ConsultationQuestionnaireComponent implements OnInit {
       return;
     }
     this.responseFeedback = value;
-    this.showQuestions = true;
   }
 
   getCurrentUser() {
@@ -86,7 +86,7 @@ export class ConsultationQuestionnaireComponent implements OnInit {
 
   makeQuestionnaireModal() {
     if (this.profileData && this.profileData.questions) {
-      const questions =  this.responseQuestions = this.profileData.questions;
+      const questions =  this.profileData.questions;
       const form = new FormGroup({});
       questions.forEach(question => {
         if (question.questionType !== 'checkbox') {
@@ -227,21 +227,12 @@ export class ConsultationQuestionnaireComponent implements OnInit {
       satisfactionRating : this.responseFeedback,
       visibility: this.responseVisibility ? 'shared' : 'anonymous',
     };
-    if (this.checkProperties(consultationResponse)) {
+    if (checkPropertiesPresence(consultationResponse)) {
       consultationResponse['templateId'] = this.templateId;
       consultationResponse['answers'] = this.responseAnswers;
       return consultationResponse;
     }
     return;
-  }
-
-  checkProperties(obj) {
-    for (const key in obj) {
-      if (obj[key] === null ||  obj[key] === '' || obj[key] === undefined) {
-        return false;
-      }
-    }
-    return true;
   }
 
   onAnswerChange(question?, value?, checkboxValue?) {
@@ -279,18 +270,15 @@ export class ConsultationQuestionnaireComponent implements OnInit {
         this.templateId = templateId;
         longTextResponses.map((response) => {
           const controlName = response.id.toString();
-          this.responseText = this.templateText = response.answer;
-          const checkTextAreaElementExist = setInterval(() => {
+          this.longTextAnswer = this.templateText = response.answer;
             const textAreaElement = document.getElementById(`text-area-${controlName}`);
             if (textAreaElement) {
-              clearInterval(checkTextAreaElementExist);
               window.scrollTo({
                 top: this.questionnaireContainer.nativeElement.offsetTop - 80,
                 behavior: 'smooth',
               });
-              this.questionnaireForm.get(controlName).patchValue(this.responseText);
+              this.questionnaireForm.get(controlName).patchValue(this.longTextAnswer);
             }
-          }, 100);
         });
 
       }

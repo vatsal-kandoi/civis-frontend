@@ -15,11 +15,9 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
   responseList: any;
   responseQuestions: any;
   selectedUser: any;
-  showLeaderProfileModal: boolean;
+  showUserProfileModal: boolean;
   fragment: any;
   checkForFragments: any;
-  showShareBlock: any;
-  shareBtnClicked: any;
 
   constructor(private consultationService: ConsultationsService, private route: ActivatedRoute) { }
 
@@ -48,7 +46,7 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
 
   openUserProfile(data) {
     this.selectedUser = data.id;
-    this.showLeaderProfileModal = true;
+    this.showUserProfileModal = true;
   }
 
   subscribeToFragment() {

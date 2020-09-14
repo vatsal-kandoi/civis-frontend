@@ -110,13 +110,5 @@ export class FeedbackModalComponent implements OnInit, OnDestroy {
     return 0;
   }
 
-  checkProperties(obj) {
-    for (const key in obj) {
-      if (obj[key] === null ||  obj[key] === '' || obj[key] === undefined) {
-        return false;
-      }
-    }
-    return true;
-  }
 
 }

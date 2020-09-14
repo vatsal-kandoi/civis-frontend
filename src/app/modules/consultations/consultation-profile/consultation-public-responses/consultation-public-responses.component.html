@@ -13,10 +13,6 @@
         <div class="d-inline-flex align-items-center">
           <img class="avatar avatar--42 pointer" appDefaultImage [type]="'user'"
             [src]="response?.node?.user?.profilePicture?.url" (click)="openUserProfile(response?.node?.user)" />
-          <div>
-            <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
-            <p class="email-text m-0 ml-2">{{response?.node?.user?.email}}</p>
-          </div>
         </div>     
         <p class="text-16" *ngIf="!response?.node?.answers" [innerHTML]="response.node?.responseText"></p>
         <div *ngIf="responseQuestions && response?.node?.answers">
@@ -26,6 +22,6 @@
       </div>
     </ng-container>
 </div> 
-<div *ngIf="selectedUser && showLeaderProfileModal">
-  <app-user-profile-modal (close)="showLeaderProfileModal = false" [userId]="selectedUser"></app-user-profile-modal>
+<div *ngIf="selectedUser && showUserProfileModal">
+  <app-user-profile-modal (close)="showUserProfileModal = false" [userId]="selectedUser"></app-user-profile-modal>
 </div>

@@ -8,8 +8,8 @@
     </p>
     <div class="options-block">
       <button 
-        class="dis-satisfied-bg"
-        [ngClass]="{'active': (showQuestions && responseFeedback === 'dissatisfied'), 'grey-bg': showQuestions}"
+        class="grey-bg"
+        [ngClass]="{'active': (responseFeedback === 'dissatisfied')}"
         (click)="setSatisfactoryRating('dissatisfied')">
         <span>
           <img src="assets/images/dissatisfied.svg" />
@@ -17,8 +17,8 @@
         </span>
       </button>
       <button 
-        class="dis-satisfied-bg"
-        [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_dissatisfied'), 'grey-bg': showQuestions}"
+        class="grey-bg"
+        [ngClass]="{'active': (responseFeedback === 'somewhat_dissatisfied')}"
         (click)="setSatisfactoryRating('somewhat_dissatisfied')">
         <span>
           <img src="assets/images/somewhat_dissatisfied.svg" />
@@ -26,8 +26,8 @@
         </span>
       </button>
       <button 
-        class="satisfied-bg"
-        [ngClass]="{'active': (showQuestions && responseFeedback === 'somewhat_satisfied'), 'grey-bg': showQuestions}"
+        class="grey-bg"
+        [ngClass]="{'active': (responseFeedback === 'somewhat_satisfied')}"
         (click)="setSatisfactoryRating('somewhat_satisfied')">
         <span>
           <img src="assets/images/somewhat_satisfied.svg" />
@@ -35,8 +35,8 @@
         </span>
       </button>
       <button 
-        class="satisfied-bg"
-        [ngClass]="{'active': (showQuestions && responseFeedback === 'satisfied'), 'grey-bg': showQuestions}"
+        class="grey-bg"
+        [ngClass]="{'active': (responseFeedback === 'satisfied')}"
         (click)="setSatisfactoryRating('satisfied')">
         <span>
           <img src="assets/images/satisfied.svg" />
@@ -85,7 +85,7 @@
                 </div>
                 <div class="answer" [id]="'text-area-' + question.id" *ngIf="question.questionType === 'long_text'">
                   <div class="text-area">
-                    <textarea (input)="responseText = $event.target.value" placeholder="Type your answer here" [formControlName]="question.id"></textarea>
+                    <textarea (input)="longTextAnswer = $event.target.value" placeholder="Type your answer here" [formControlName]="question.id"></textarea>
                   </div>
                   <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div> 
                 </div>
@@ -99,7 +99,7 @@
               </div>
             </div>
           </div>
-          <div class="checkbox-area" *ngIf="responseText !== templateText">
+          <div class="checkbox-area" *ngIf="longTextAnswer !== templateText">
             <div class="input-checbox" >
               <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" [ngModelOptions]="{standalone: true}"/> 
               <label class="m-0">{{'Make my response public' | translate}}</label>

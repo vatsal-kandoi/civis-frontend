@@ -60,9 +60,6 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   }
 
   setSatisfactoryRating(value) {
-    if (this.responseFeedback) {
-      return;
-    }
     this.responseFeedback = value;
   }
 
@@ -115,11 +112,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
     return form;
   }
 
-  toggleCheckbox(control, value) {
-    control.patchValue(value);
-  }
-
-  toggle(questionId, subQuestionId) {
+  toggleCheckbox(questionId, subQuestionId) {
     const control = this.questionnaireForm.get([questionId, subQuestionId]);
     control.patchValue(!control.value);
   }

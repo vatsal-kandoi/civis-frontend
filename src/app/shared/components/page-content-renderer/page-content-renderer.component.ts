@@ -45,7 +45,7 @@ export class PageContentRendererComponent implements OnInit, AfterViewChecked {
     if (!items) {
       return;
     }
-    const el = `<li class="ff-lato">${items[index].content}</li>`;
+    const el = `<li>${items[index].content}</li>`;
     this.finalHtml += el;
 
     if (items[index + 1] && items[index + 1].componentType === type) {

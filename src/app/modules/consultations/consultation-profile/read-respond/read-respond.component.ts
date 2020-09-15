@@ -239,6 +239,15 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  removeTags(str) {
+    if ((str === null) || (str === '')) {
+      return false;
+    } else {
+      str = str.toString();
+    }
+    return str.replace( /(<([^>]+)>)/ig, '').replace(/\s\s/g, '');
+  }
+
   onAnswerChange(question?, value?, checkboxValue?) {
     if (question && value.id === 'other') {
       let otherValue = true;

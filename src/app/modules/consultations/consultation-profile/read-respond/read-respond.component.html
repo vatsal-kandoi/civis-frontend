@@ -224,7 +224,7 @@
               <p class="email-text m-0 ml-2">{{response?.node?.user?.email}}</p>
             </div>
           </div>     
-          <p class="text-16" *ngIf="!response?.node?.answers" [innerHTML]="response.node?.responseText"></p>
+          <p class="text-16 trix-container" *ngIf="!response?.node?.answers">{{removeTags(response.node?.responseText)}}</p>
           <div *ngIf="responseQuestions && response?.node?.answers">
             <app-response-answers [showOnlyLongTextAnswer]="true" [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
           </div>

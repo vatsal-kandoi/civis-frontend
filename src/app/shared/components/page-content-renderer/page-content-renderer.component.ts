@@ -45,7 +45,8 @@ export class PageContentRendererComponent implements OnInit, AfterViewChecked {
     if (!items) {
       return;
     }
-    const el = `<li>${items[index].content}</li>`;
+    const content = this.getHtmlContent(items[index].content);
+    const el = `<li>${content}</li>`;
     this.finalHtml += el;
 
     if (items[index + 1] && items[index + 1].componentType === type) {
@@ -55,6 +56,12 @@ export class PageContentRendererComponent implements OnInit, AfterViewChecked {
       this.finalHtml = '';
       return result;
     }
+  }
+
+  getHtmlContent(htmlString) {
+    const divElement = document.createElement('div');
+    divElement.innerHTML = htmlString;
+    return divElement.textContent || divElement.innerText;
   }
 
   trackByFn(index, item) {

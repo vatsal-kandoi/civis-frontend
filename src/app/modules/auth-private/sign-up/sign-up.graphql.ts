@@ -28,6 +28,23 @@ export const LocationListQuery = gql`
 	}
 `;
 
+export const ConsultationDeadlineQuery = gql`
+	query onsultationProfile($id: Int!) {
+		consultationProfile(id: $id) {
+			id
+			responseDeadline
+		}
+	}
+`;
+
+export const AuhtAcceptInviteMutation = gql`
+	mutation authAcceptInvite($auth: AcceptInvite!){
+		authAcceptInvite(auth: $auth){
+      		accessToken
+   		}
+  	}
+`;
+
 
 
 

@@ -12,6 +12,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { CookieService } from 'ngx-cookie-service';
 import { ResendVerificationComponent } from './resendVerification/resendVerification.component';
 import { LogoutConfirmationComponent } from './logout-confirmation/logout-confirmation.component';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { LogoutConfirmationComponent } from './logout-confirmation/logout-confir
     NgSelectModule,
     FormsModule,
     RecaptchaModule,
-    ModalModule
+    ModalModule,
+    PipesModule,
   ],
   declarations: [
     SignUpComponent,

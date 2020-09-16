@@ -24,12 +24,11 @@ export class ErrorComponent implements OnInit {
       .subscribe(data => {
         if (data) {
           if (this.errorService.customMessage) {
-            this.error = {message: this.errorService.customMessage};
-            this.showModal = true;
-            this.shouldReload = this.errorService.shouldReload;
-            return;
+            this.customMessage = this.errorService.customMessage;
           }
           this.error = this.errorService.error;
+          this.showModal = true;
+          this.shouldReload = this.errorService.shouldReload;
         } else {
           this.showModal = false;
           this.error = null;

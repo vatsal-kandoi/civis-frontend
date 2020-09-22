@@ -923,10 +923,11 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     this.consultationService.scrollToCreateResponse
     .subscribe((scrollTo) => {
       if (scrollTo) {
-        // window.scrollTo({
-        //   top: this.responseIndex ? this.responseIndex.nativeElement.offsetTop : this.startDraftingSection.nativeElement.offsetTop,
-        //   behavior: 'smooth',
-        // });
+        window.scrollTo({
+          top: this.responseIndex ?
+            this.responseIndex.nativeElement.offsetTop - 80 : this.questionnaireContainer.nativeElement.offsetTop - 80,
+          behavior: 'smooth',
+        });
         this.consultationService.scrollToCreateResponse.next(false);
       }
     });

@@ -1,0 +1,27 @@
+<div class="paper-effect mt-4 m-0-sm" *ngIf="responseList?.length"  #responsesListContainer>
+    <div class="d-flex justify-content-between">
+      <p class="text-16 m-0 bold-text">{{'Public responses' | translate}}</p>
+      <p class="what-resp-text" tooltip="If you feel passionately about this Consultation, you can make your response public, 
+        for others to use as a template. Your first name is shared with the Government if you make your response public.
+        If you’re not sure what to write, you can choose other people’s responses to send as your own."
+        placement="left" container="body">
+        {{'What are public responses?' | translate}}
+      </p>
+    </div>
+    <ng-container *ngFor="let response of responseList">
+      <div class="response-container pb-0" [id]="response?.node?.id">
+        <div class="d-inline-flex align-items-center">
+          <img class="avatar avatar--42 pointer" appDefaultImage [type]="'user'"
+            [src]="response?.node?.user?.profilePicture?.url" (click)="openUserProfile(response?.node?.user)" />
+        </div>     
+        <p class="text-16" *ngIf="!response?.node?.answers" [innerHTML]="response.node?.responseText"></p>
+        <div *ngIf="responseQuestions && response?.node?.answers">
+          <app-response-answers [showOnlyLongTextAnswer]="true" [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
+        </div>
+        <app-response-footer [response]="response"></app-response-footer>
+      </div>
+    </ng-container>
+</div> 
+<div *ngIf="selectedUser && showUserProfileModal">
+  <app-user-profile-modal (close)="showUserProfileModal = false" [userId]="selectedUser"></app-user-profile-modal>
+</div>

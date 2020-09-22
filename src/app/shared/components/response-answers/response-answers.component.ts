@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-response-answers',
@@ -11,10 +11,12 @@ export class ResponseAnswersComponent implements OnInit {
   @Input() answers;
   @Input() showOnlyLongTextAnswer: boolean;
   alignedData: any;
-  constructor() { }
+
+  constructor(private _cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.alignedData = this.mapAnswers();
+    this._cdRef.detectChanges();
   }
 
   mapAnswers() {

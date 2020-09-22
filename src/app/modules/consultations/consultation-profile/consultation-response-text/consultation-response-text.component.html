@@ -1,0 +1,39 @@
+<div class="response-index mt-4" ngResizable [rzHandles]="'s'"
+#responseIndex>
+    <div class="response-index__nav">
+        <div class="w-50">
+        <div class="heading">{{'Your response' | translate}}</div>
+        </div>
+        <div class="w-50 row no-gutters justify-content-end align-items-center"
+        *ngIf="profileData?.reviewType !== 'policy'">
+        <div (click)="scrollToResponses()" class="link mr-3">{{'or, select a public response' | translate}}</div>
+        <div class="info-mark"><i class="fa fa-question-circle"></i></div>
+        </div>
+    </div>
+    <div class="response-index__content" id="editor-container" #responseContainer>
+        <ckeditor
+        [(ngModel)]="responseText"
+        [config]="ckeConfig"
+        (change)="enableSubmitResponse($event)"
+        (blur)="autoSave(responseText)"
+        debounce="0">
+        </ckeditor>
+    </div>
+    <div class="response-index__footer" *ngIf="profileData?.reviewType !== 'policy'">
+        <div class="checkbox-area" *ngIf="showPublicResponseOption">
+        <div class="input-checbox">
+            <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" />
+            <label class="m-0">{{'Make my response public' | translate}}</label>
+            <span class="link">{{'What does this mean?' | translate}}</span>
+        </div>
+        <div class="d-flex">
+            <p class="auto-save-text mr-2" *ngIf="showAutoSaved">{{'Draft autosaved' | translate}}</p>
+            <p class="auto-save-text pointer" (click)="autoSave(responseText)">{{'Save as Draft' | translate}}</p>
+        </div>
+        </div>
+        <div class="draggable-area">
+        <span class="drag-bars"></span>
+        <span class="drag-bars"></span>
+        </div>
+    </div>
+</div>

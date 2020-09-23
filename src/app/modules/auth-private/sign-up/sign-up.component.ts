@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { SignUpMutation, CitiesSearchQuery, LocationListQuery, ConsultationDeadlineQuery, AuhtAcceptInviteMutation } from './sign-up.graphql';
+import { SignUpMutation, CitiesSearchQuery, LocationListQuery,
+  AuhtAcceptInviteMutation } from './sign-up.graphql';
 import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from 'rxjs/operators';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
@@ -10,7 +11,6 @@ import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import gql from 'graphql-tag';
-import * as moment from 'moment';
 import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
 
 const ResendEmailConfirmationMutation = gql`
@@ -80,7 +80,7 @@ export class SignUpComponent implements OnInit {
       }
       this.signupObject.callbackUrl = this.cookieService.get('loginCallbackUrl');
       this.nextScreen = true;
-    } 
+    }
   }
 
   subscribeToSearch() {
@@ -162,7 +162,8 @@ export class SignUpComponent implements OnInit {
         .subscribe((exists: boolean) => {
           if (exists) {
             this.currentUser = this.userService.currentUser;
-            this.sendEmailVerification();
+            const url = `consultations/${this.consultationId}/read`;
+            this.router.navigateByUrl(url);
           }
         },
         err => {
@@ -287,53 +288,22 @@ export class SignUpComponent implements OnInit {
     .subscribe(async (params) =>  {
       if (!isObjectEmpty(params)) {
         const {email, first_name, last_name, consultation_id, invitation_token} = params;
-        const isActiveConsultation = await this.checkActiveConsultation(consultation_id);
-        if (isActiveConsultation) {
-          this.consultationId = consultation_id;
-          this.signupObject.firstName = first_name;
-          this.signupObject.lastName = last_name;
-          this.signupObject.email = email;
-          this.invitationToken = invitation_token;
-        }
+        this.consultationId = consultation_id;
+        this.signupObject.firstName = first_name;
+        this.signupObject.lastName = last_name;
+        this.signupObject.email = email;
+        this.invitationToken = invitation_token;
       }
     });
-  }
-
- checkActiveConsultation(consultation_id) {
-    if (consultation_id) {
-      return new Promise((resolve) => {
-        this.apollo.query({query: ConsultationDeadlineQuery, variables: {id: +consultation_id}})
-        .pipe (
-          map((res: any) => res.data.consultationProfile)
-        ).subscribe((consultation) => {
-          const deadline =  consultation.responseDeadline;
-          const consultationStatus = this.checkClosed(deadline);
-          if (consultationStatus === 'Closed') {
-            this.errorService.showErrorModal({}, 'Consultation which you have been invited is closed');
-            resolve(false);
-          }
-          resolve(true);
-        });
-      });
-    }
-  }
-
-  checkClosed(deadline) {
-    if (deadline) {
-      const today = moment();
-      const lastDate = moment(deadline);
-      const difference = lastDate.diff(today, 'days');
-      if (difference <= 0) {
-        return difference === 0 ? 'Last day to respond' : 'Closed';
-      } else {
-        return `Active`;
-      }
-    }
   }
 
   logoutInvitedUser() {
     this.showLogoutModal = false;
     this.invitationToken = null;
+    localStorage.removeItem('civis-token');
+    this.userService.currentUser = null;
+    this.userService.userLoaded$.next(false);
     this.router.navigateByUrl('/auth-private');
   }
+
 }

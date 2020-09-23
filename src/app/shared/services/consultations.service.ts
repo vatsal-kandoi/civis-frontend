@@ -11,6 +11,11 @@ export class ConsultationsService {
     openFeedbackModal = new BehaviorSubject (null);
     scrollToCreateResponse = new BehaviorSubject (null);
     activeTab = new BehaviorSubject (null);
+    validateAnswers = new BehaviorSubject (null);
+    consultationProfileData = new BehaviorSubject (null);
+    useThisResponseAnswer = new BehaviorSubject(null);
+    useThisResponseText = new BehaviorSubject(null);
+    scrollToPublicResponse = new BehaviorSubject(null);
 
   constructor() {
   }

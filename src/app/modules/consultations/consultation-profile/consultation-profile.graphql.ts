@@ -74,6 +74,7 @@ export const ConsultationProfile = gql`
       updatedAt
       questions {
         id
+        isOptional
         questionText
         questionType
         supportsOther
@@ -157,6 +158,7 @@ export const ConsultationProfileCurrentUser = gql`
       updatedAt
       questions {
         id
+        isOptional
         questionText
         questionType
         isOptional
@@ -184,7 +186,7 @@ export const VoteDeleteQuery = gql `
   mutation voteDelete($consultationResponseId : Int!) {
     voteDelete(consultationResponseId : $consultationResponseId )
   }
-`
+`;
 
 export const SubmitResponseQuery = gql`
   mutation consultationResponseCreate($consultationResponse: ConsultationResponseCreateInput!){
@@ -200,6 +202,7 @@ export const SubmitResponseQuery = gql`
         title
         respondedOn
         responseSubmissionMessage
+        satisfactionRatingDistribution
         sharedResponses(sort: templates_count, sortDirection: desc) {
           edges {
             node {
@@ -227,6 +230,7 @@ export const SubmitResponseQuery = gql`
         }
         questions {
           id
+          isOptional
           questionText
           questionType
           isOptional

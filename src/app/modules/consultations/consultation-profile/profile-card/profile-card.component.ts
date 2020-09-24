@@ -4,6 +4,7 @@ import { ConsultationsService } from 'src/app/shared/services/consultations.serv
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
+import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
 
 @Component({
   selector: 'app-profile-card',
@@ -171,7 +172,8 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     }
 
     if (!hasResponseSubmited) {
-      if (this.profile && this.profile.questions && this.profile.questions.length) {
+      const questions = this.consultationsService.getQuestions(this.profile);
+      if (questions && questions.length) {
         this.consultationsService.validateAnswers.next(true);
         return;
       }
@@ -182,4 +184,5 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
       this.consultationsService.openFeedbackModal.next(true);
     }
   }
+
 }

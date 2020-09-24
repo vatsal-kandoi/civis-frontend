@@ -80,7 +80,6 @@ export class ResponseFooterComponent implements OnInit {
   subscribeProfileData() {
     this.consultationService.consultationProfileData.subscribe((data) => {
       this.profileData = data;
-      this.responseQuestions = this.profileData.questions;
     });
   }
 
@@ -195,24 +194,14 @@ export class ResponseFooterComponent implements OnInit {
     }
   }
 
-  questionnaireExist() {
-    if (this.profileData && this.profileData.questions) {
-      const questions = this.profileData.questions; {
-        if (questions.length) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
   useThisResponse(response) {
     if (this.profileData.respondedOn) {
       return;
     }
     if (response) {
       this.usingTemplate = true;
-      if (this.questionnaireExist()) {
+      this.responseQuestions = this.consultationService.getQuestions(this.profileData, response.roundNumber);
+      if (this.responseQuestions && this.responseQuestions.length) {
         this.longTextResponses = this.getLongTextAnswer(response);
         if (this.longTextResponses && this.longTextResponses.length) {
           const obj = {

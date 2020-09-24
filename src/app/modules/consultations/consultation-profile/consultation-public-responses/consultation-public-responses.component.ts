@@ -13,7 +13,6 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
 
   profileData: any;
   responseList: any;
-  responseQuestions: any;
   selectedUser: any;
   showUserProfileModal: boolean;
   fragment: any;
@@ -37,7 +36,6 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
     this.consultationService.consultationProfileData.subscribe((data) => {
       if (data) {
         this.profileData = data;
-        this.responseQuestions = data.questions;
         this.responseList = data.sharedResponses.edges;
         this.checkForFragments = true;
       }

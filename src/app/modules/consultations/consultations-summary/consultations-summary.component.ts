@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { ConsultationProfileQuery } from './consultations-summary.graphql';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { CookieService } from 'ngx-cookie';
+import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
+import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 
 
 @Component({
@@ -26,11 +28,14 @@ export class ConsultationsSummaryComponent implements OnInit {
   currentLanguage: any;
   satisfactionRatingDistribution: any;
   useSummaryHindi: boolean;
+  roundNumber: any;
+  responseRounds: any;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apollo: Apollo,
               private errorService: ErrorService,
               private _cookieService: CookieService,
+              private consultationService: ConsultationsService,
               ) {
     this.activatedRoute.params.subscribe((param: any) => {
       this.consultationId = +param['id'];
@@ -73,7 +78,8 @@ export class ConsultationsSummaryComponent implements OnInit {
       )
       .subscribe((data: any) => {
           this.profileData = data;
-          this.responseQuestions = this.profileData.questions;
+          this.roundNumber = this.getActiveRound(data);
+          this.responseRounds = this.profileData.responseRounds;
           this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
           this.getProfileSummary();
           this.responseList = data.responses.edges;
@@ -96,6 +102,24 @@ export class ConsultationsSummaryComponent implements OnInit {
         title: 'RESPONSES TO'
       };
     }
+  }
+
+  getActiveRound(profileData) {
+    if (profileData && profileData.responseRounds) {
+      const responseRounds = profileData.responseRounds;
+      if (responseRounds && responseRounds.length) {
+        const activeRound  = responseRounds.find((round) => round.active);
+        if (!isObjectEmpty(activeRound)) {
+          return activeRound.roundNumber;
+        }
+      }
+    }
+    return;
+  }
+
+  setActiveRound(roundNumber) {
+    this.roundNumber = roundNumber;
+    this.consultationService.activeRoundNumber.next(roundNumber);
   }
 
 }

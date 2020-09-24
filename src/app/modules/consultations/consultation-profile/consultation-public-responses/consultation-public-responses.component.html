@@ -15,10 +15,10 @@
             [src]="response?.node?.user?.profilePicture?.url" (click)="openUserProfile(response?.node?.user)" />
             <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
         </div>     
-        <p class="text-16" *ngIf="!response?.node?.answers" [innerHTML]="response.node?.responseText"></p>
-        <div *ngIf="responseQuestions && response?.node?.answers">
-          <app-response-answers [showOnlyLongTextAnswer]="true" [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
-        </div>
+        <p class="text-16" *ngIf="!response?.node?.answers ; else responseAnswers" [innerHTML]="response.node?.responseText"></p>
+        <ng-template #responseAnswers>
+          <app-response-answers [showOnlyLongTextAnswer]="true" [response]="response?.node"></app-response-answers>
+        </ng-template>
         <app-response-footer [response]="response"></app-response-footer>
       </div>
     </ng-container>

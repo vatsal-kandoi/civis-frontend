@@ -33,6 +33,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   responseSubmitLoading: boolean;
   consultationId: any;
   showConfirmEmailModal: boolean;
+  questions: any;
 
   constructor(private _fb: FormBuilder,
     private userService: UserService,
@@ -82,22 +83,28 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   }
 
   makeQuestionnaireModal() {
-    if (this.profileData && this.profileData.questions) {
-      const questions =  this.profileData.questions;
-      const form = new FormGroup({});
-      questions.forEach(question => {
-        if (question.questionType !== 'checkbox') {
-          question.isOptional ? form.addControl(question.id, new FormControl(null)) :
-          form.addControl(question.id, new FormControl(null, Validators.required ));
-        } else if (question.questionType === 'checkbox') {
-          form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
-        }
-        if (question.is_other) {
-          question.isOptional ? form.addControl('other_answer-' + question.id, new FormControl(null)) :
-           form.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
-        }
-      });
-      return form;
+    const responseRounds = this.profileData.responseRounds;
+    if (responseRounds && responseRounds.length) {
+      const activeRound  = responseRounds.find((round) => round.active);
+      if (!isObjectEmpty(activeRound)) {
+         this.questions = activeRound.questions;
+          if (this.questions.length) {
+            const form = new FormGroup({});
+            this.questions.forEach(question => {
+              if (question.questionType !== 'checkbox') {
+                question.isOptional ? form.addControl(question.id, new FormControl(null)) :
+                form.addControl(question.id, new FormControl(null, Validators.required ));
+              } else if (question.questionType === 'checkbox') {
+                form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
+              }
+              if (question.is_other) {
+                question.isOptional ? form.addControl('other_answer-' + question.id, new FormControl(null)) :
+                  form.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
+              }
+            });
+            return form;
+          }
+      }
     }
   }
 

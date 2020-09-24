@@ -9,41 +9,40 @@
             {{'Summary' | translate}}
             <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
           </p>
-          <div *ngIf="profileData?.page || profileData?.summaryHindi">
+          <div class="tabs-block">
+            <p *ngFor="let round of responseRounds" 
+              (click)="setActiveRound(round.roundNumber)"
+              [ngClass]="{'active': (roundNumber === round?.roundNumber)}">
+              {{'Round ' + round.roundNumber}}
+            </p>
+          </div>
+          <div *ngIf="profileData?.page || profileData?.summaryHindi" class="mb-4">
             <app-page-content-renderer [page]="useSummaryHindi ? profileData?.summaryHindi : profileData?.page"></app-page-content-renderer>
           </div>
-        </div>
-
-        <!-- <div class="paper-effect mb-4 inner-space" *ngIf="showKeywordGraph">
-          <p class="heading">
-            {{'Overview' | translate}}
-          </p> 
-          <div id="highchartContainer" style="width:100%; height:400px;"></div>
-        </div> -->
-        <div *ngIf="satisfactionRatingDistribution">
-          <p class="text-18 text-16-sm m-0 bold-text">{{'Consultation satisfication' | translate}}
-          <div class="satisfication-container my-4 m-0-sm">
-              <!-- <p class="text-16 m-0 bold-text">{{'Consultation satisfication' | translate}}</p> -->
-              <div class="d-flex mt-3 mb-3">
-                  <div class="satisfication-response">
-                      <img src="assets/images/dissatisfied.svg" />
-                      <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : '0'}}</p>
-                  </div>
-                  <div class="satisfication-response">
-                      <img src="assets/images/somewhat_dissatisfied.svg" />
-                      <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : '0'}}</p>
-                  </div>
-                  <div class="satisfication-response">
-                      <img src="assets/images/somewhat_satisfied.svg" />
-                      <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : '0'}}</p>
-                  </div>
-                  <div class="satisfication-response">
-                      <img src="assets/images/satisfied.svg" />
-                      <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}</p>
-                  </div>
-              </div>
+          <div *ngIf="satisfactionRatingDistribution" class="mb-4">
+            <p class="text-18 text-16-sm m-0 bold-text">{{'Consultation satisfication' | translate}}
+            <div class="satisfication-container my-4 m-0-sm">
+                <!-- <p class="text-16 m-0 bold-text">{{'Consultation satisfication' | translate}}</p> -->
+                <div class="d-flex mt-3 mb-3">
+                    <div class="satisfication-response">
+                        <img src="assets/images/dissatisfied.svg" />
+                        <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : '0'}}</p>
+                    </div>
+                    <div class="satisfication-response">
+                        <img src="assets/images/somewhat_dissatisfied.svg" />
+                        <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : '0'}}</p>
+                    </div>
+                    <div class="satisfication-response">
+                        <img src="assets/images/somewhat_satisfied.svg" />
+                        <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : '0'}}</p>
+                    </div>
+                    <div class="satisfication-response">
+                        <img src="assets/images/satisfied.svg" />
+                        <p class="text-16 m-0 bold-text pl-2">{{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}</p>
+                    </div>
+                </div>
+            </div>
           </div>
-        </div>
 
         <div *ngIf="publicResponses?.length">
           <div class="d-flex justify-content-between align-items-center">
@@ -58,8 +57,7 @@
               container="body"
             >
             {{'What are public responses?' | translate}}
-
-          </p>
+            </p>
           </div>
 
           <div class="paper-effect my-4 m-0-sm ">
@@ -72,8 +70,8 @@
                   <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
-                <div *ngIf="responseQuestions && response?.node?.answers">
-                  <app-response-answers [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
+                <div *ngIf="response?.node?.answers && roundNumber === response.roundNumber">
+                  <app-response-answers [response]="response?.node" [roundNumber]="roundNumber"></app-response-answers>
                 </div>
                 <div class="vote-section">
                   <div class="vote-count">
@@ -116,13 +114,21 @@
                   </p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
-                <div *ngIf="responseQuestions && response?.node?.answers">
-                  <app-response-answers [questions]="responseQuestions" [answers]="response?.node?.answers"></app-response-answers>
+                <div *ngIf="response?.node?.answers && roundNumber === response.roundNumber">
+                  <app-response-answers [response]="response?.node" [roundNumber]="roundNumber"></app-response-answers>
                 </div>
               </div>
             </ng-container>
           </div>  
         </div>
+        </div>
+
+        <!-- <div class="paper-effect mb-4 inner-space" *ngIf="showKeywordGraph">
+          <p class="heading">
+            {{'Overview' | translate}}
+          </p> 
+          <div id="highchartContainer" style="width:100%; height:400px;"></div>
+        </div> -->
       </section>
   </div>
 </div>

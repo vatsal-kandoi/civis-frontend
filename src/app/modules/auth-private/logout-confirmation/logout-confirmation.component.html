@@ -1,0 +1,15 @@
+<div bsModal #logoutConfirmationModal="bs-modal" class="modal fade logout-confirm-modal" tabindex="-1"
+  [config]="{show: true, backdrop: false, ignoreBackdropClick: true, keyboard: false}" role="dialog"
+  aria-labelledby="logoutConfirmationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p class="confirm-text">Are you sure want to log out from this account?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+        <button class="logout-btn" (click)="logoutUser()">Log out</button>
+      </div>
+    </div>
+  </div>
+</div>

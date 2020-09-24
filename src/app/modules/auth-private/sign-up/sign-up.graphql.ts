@@ -29,5 +29,14 @@ export const LocationListQuery = gql`
 `;
 
 
+export const AuhtAcceptInviteMutation = gql`
+	mutation authAcceptInvite($auth: AcceptInvite!){
+		authAcceptInvite(auth: $auth){
+      		accessToken
+   		}
+  	}
+`;
+
+
 
 

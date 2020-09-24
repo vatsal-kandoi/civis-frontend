@@ -17,7 +17,6 @@ export class ConsultationsService {
     useThisResponseAnswer = new BehaviorSubject(null);
     useThisResponseText = new BehaviorSubject(null);
     scrollToPublicResponse = new BehaviorSubject(null);
-    activeRoundNumber = new BehaviorSubject(null);
 
   constructor() {
   }

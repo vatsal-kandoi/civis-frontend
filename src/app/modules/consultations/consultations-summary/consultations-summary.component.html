@@ -44,7 +44,7 @@
             </div>
           </div>
 
-        <div *ngIf="publicResponses?.length">
+        <div *ngIf="publicResponsesLength">
           <div class="d-flex justify-content-between align-items-center">
             <p class="text-18 text-16-sm m-0 bold-text">{{'Public responses' | translate}}
             </p>
@@ -62,7 +62,7 @@
 
           <div class="paper-effect my-4 m-0-sm ">
             <ng-container *ngFor="let response of publicResponses">
-              <div class="response-container">
+              <div class="response-container" *ngIf="roundNumber === response?.node?.roundNumber">
                 <div class="d-inline-flex align-items-center">
                     <img class="avatar avatar--42" 
                     appDefaultImage [type]="'user'"
@@ -70,7 +70,7 @@
                   <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
-                <div *ngIf="response?.node?.answers && roundNumber === response.roundNumber">
+                <div *ngIf="response?.node?.answers">
                   <app-response-answers [response]="response?.node" [roundNumber]="roundNumber"></app-response-answers>
                 </div>
                 <div class="vote-section">
@@ -94,7 +94,7 @@
           </div>  
         </div>
 
-        <div *ngIf="annonymousResponses?.length">
+        <div *ngIf="annonymousResponsesLength">
           <div>
               <p class="text-18 text-16-sm m-0 bold-text">{{'Other responses' | translate}}
               </p>
@@ -102,7 +102,7 @@
           
           <div class="paper-effect my-4 m-0-sm" *ngFor="let response of annonymousResponses">
             <ng-container>
-              <div class="response-container">
+              <div class="response-container" *ngIf="roundNumber === response?.node?.roundNumber">
                 <div class="d-inline-flex align-items-center">
                   <div>
                     <img class="avatar avatar--42" 
@@ -114,7 +114,7 @@
                   </p>
                 </div>
                 <p class="text-16" [innerHTML]="response.node?.responseText"></p>
-                <div *ngIf="response?.node?.answers && roundNumber === response.roundNumber">
+                <div *ngIf="response?.node?.answers">
                   <app-response-answers [response]="response?.node" [roundNumber]="roundNumber"></app-response-answers>
                 </div>
               </div>

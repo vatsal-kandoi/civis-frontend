@@ -23,7 +23,6 @@ export class ResponseAnswersComponent implements OnInit {
   ngOnInit(): void {
     this.alignedData = this.mapAnswers();
     this._cdRef.detectChanges();
-    this.watchRoundNumber();
   }
 
   mapAnswers() {
@@ -139,15 +138,5 @@ export class ResponseAnswersComponent implements OnInit {
 
   }
 
-  watchRoundNumber () {
-    this.consultationService.activeRoundNumber
-    .subscribe((roundNumber) => {
-      if (roundNumber) {
-        this.roundNumber = roundNumber;
-        this.questions = this.getQuestions();
-        this.answers = this.response.answers;
-      }
-    });
-  }
 
 }

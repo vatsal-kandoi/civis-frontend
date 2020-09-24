@@ -30,6 +30,8 @@ export class ConsultationsSummaryComponent implements OnInit {
   useSummaryHindi: boolean;
   roundNumber: any;
   responseRounds: any;
+  publicResponsesLength: any;
+  annonymousResponsesLength: any;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apollo: Apollo,
@@ -97,6 +99,8 @@ export class ConsultationsSummaryComponent implements OnInit {
     if (responsesList.length) {
       this.annonymousResponses = responsesList.filter(response => (response.node.user === null || response.node.user === undefined));
       this.publicResponses = responsesList.filter(response => response.node.user !== null);
+      this.publicResponsesLength = this.publicResponses.filter((response) => response.node.roundNumber === this.roundNumber).length;
+      this.annonymousResponsesLength = this.annonymousResponses.filter((response) => response.node.roundNumber === this.roundNumber).length;
       this.summaryData = {
         publicResponseCount : this.publicResponses.length,
         title: 'RESPONSES TO'
@@ -119,7 +123,8 @@ export class ConsultationsSummaryComponent implements OnInit {
 
   setActiveRound(roundNumber) {
     this.roundNumber = roundNumber;
-    this.consultationService.activeRoundNumber.next(roundNumber);
+    this.publicResponsesLength = this.publicResponses.filter((response) => response.node.roundNumber === this.roundNumber).length;
+    this.annonymousResponsesLength = this.annonymousResponses.filter((response) => response.node.roundNumber === this.roundNumber).length;
   }
 
 }

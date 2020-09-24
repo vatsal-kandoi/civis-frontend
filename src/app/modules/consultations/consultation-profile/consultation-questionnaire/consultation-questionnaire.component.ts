@@ -241,9 +241,9 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       if (question.questionType === 'checkbox' && value.id === 'other' && !checkboxValue) {
          otherValue = false;
       }
-      for (let i = 0; i < this.profileData.questions.length; i++) {
-        if (this.profileData.questions[i].id === question.id) {
-          this.profileData.questions[i].is_other = otherValue;
+      for (let i = 0; i < this.questions.length; i++) {
+        if (this.questions[i].id === question.id) {
+          this.questions[i].is_other = otherValue;
           if (question.isOptional) {
             this.questionnaireForm.addControl('other_answer-' + question.id, new FormControl(null));
           } else {
@@ -254,7 +254,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       }
     } else {
       if (question.questionType !== 'checkbox') {
-        this.profileData.questions.forEach(ques => {
+        this.questions.forEach(ques => {
           if (question.id === ques.id) {
             ques.is_other = false;
           }

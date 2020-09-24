@@ -183,6 +183,23 @@
             @media screen and (max-width: 991px) {
                 margin: 2rem 0 10px;
             }
+
+            .invitation-block {
+                width: 400px;
+                background: #E7F3FF;
+                border-radius: 4px;
+                padding: 16px 24px;
+                font-size: 14px;
+                line-height: 22px;
+                font-weight: normal;
+                color: #151515;
+                span {
+                    &:last-child {
+                        color: red;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
 
         .form-space {

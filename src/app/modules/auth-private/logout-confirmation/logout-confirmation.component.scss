@@ -1,0 +1,40 @@
+@import "./src/assets/styles/app";
+
+.logout-confirm-modal {
+  background: rgba(14, 115, 185, 0.6);
+  .modal-dialog {
+    .modal-content {
+      border: 1px solid #EBECF0;
+      border-radius: 4px;
+      .modal-body {
+        padding: 30px 20px;
+        .confirm-text {
+          margin: 0;
+          font-size: 16px;
+          line-height: 24px;
+          color: #172B4D;
+        }
+      }
+      .modal-footer {
+        border-top: 1px solid #D5DBE2;
+          .cancel-btn {
+            margin-right: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #979797;
+            background-color: transparent;
+            border: none;
+          }
+          .logout-btn {
+            padding: 5px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: $white;
+            background: #BF2600;
+            border: none;
+            border-radius: 4px;
+          }
+      }
+    }
+  }
+}

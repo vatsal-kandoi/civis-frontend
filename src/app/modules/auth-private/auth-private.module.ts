@@ -5,11 +5,14 @@ import { AuthPrivateRoutingModule } from './auth-private-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { ModalModule } from 'ngx-bootstrap';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { CookieService } from 'ngx-cookie-service';
 import { ResendVerificationComponent } from './resendVerification/resendVerification.component';
+import { LogoutConfirmationComponent } from './logout-confirmation/logout-confirmation.component';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -18,13 +21,16 @@ import { ResendVerificationComponent } from './resendVerification/resendVerifica
     AuthPrivateRoutingModule,
     NgSelectModule,
     FormsModule,
-    RecaptchaModule
+    RecaptchaModule,
+    ModalModule,
+    PipesModule,
   ],
   declarations: [
     SignUpComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResendVerificationComponent
+    ResendVerificationComponent,
+    LogoutConfirmationComponent
   ],
   providers: [CookieService]
 })

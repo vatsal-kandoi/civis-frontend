@@ -18,10 +18,10 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
   showUserProfileModal: boolean;
   fragment: any;
   checkForFragments: any;
-  roundNumber: any;
   responseRounds: any;
   publicResponsesLength: any;
   roundNumberExist: any;
+  activeRoundNumber: any;
 
   constructor(private consultationService: ConsultationsService, private route: ActivatedRoute) { }
 
@@ -41,10 +41,10 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
     this.consultationService.consultationProfileData.subscribe((data) => {
       if (data) {
         this.profileData = data;
-        this.roundNumber = this.getActiveRound(data);
         this.responseRounds = this.profileData.responseRounds;
+        this.activeRoundNumber = this.getActiveRound(this.responseRounds);
         this.responseList = data.sharedResponses.edges;
-        this.publicResponsesLength = this.responseList.filter((response) => response.node.roundNumber === this.roundNumber).length;
+        this.publicResponsesLength = this.responseList.filter((response) => response.node.roundNumber === this.activeRoundNumber).length;
         this.roundNumberExist = this.responseList.filter((response) => response.node.roundNumber).length;
         this.checkForFragments = true;
       }
@@ -84,22 +84,19 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
     });
   }
 
-  getActiveRound(profileData) {
-    if (profileData && profileData.responseRounds) {
-      const responseRounds = profileData.responseRounds;
+  getActiveRound(responseRounds) {
       if (responseRounds && responseRounds.length) {
         const activeRound  = responseRounds.find((round) => round.active);
         if (!isObjectEmpty(activeRound)) {
           return activeRound.roundNumber;
         }
       }
-    }
     return;
   }
 
   setActiveRound(roundNumber) {
-    this.roundNumber = roundNumber;
-    this.publicResponsesLength = this.responseList.filter((response) => response.node.roundNumber === this.roundNumber).length;
+    this.activeRoundNumber = roundNumber;
+    this.publicResponsesLength = this.responseList.filter((response) => response.node.roundNumber === this.activeRoundNumber).length;
   }
 
 }

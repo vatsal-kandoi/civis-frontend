@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SummaryResponseContainerComponent implements OnInit {
 
   @Input() response;
-  @Input() roundNumber;
+  @Input() activeRoundNumber;
   @Input() type;
 
   constructor() { }

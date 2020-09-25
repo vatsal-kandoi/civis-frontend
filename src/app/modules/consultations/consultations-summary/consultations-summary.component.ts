@@ -28,7 +28,7 @@ export class ConsultationsSummaryComponent implements OnInit {
   currentLanguage: any;
   satisfactionRatingDistribution: any;
   useSummaryHindi: boolean;
-  roundNumber: any;
+  activeRoundNumber: any;
   responseRounds: any;
   publicResponsesLength: any;
   annonymousResponsesLength: any;
@@ -81,7 +81,7 @@ export class ConsultationsSummaryComponent implements OnInit {
       )
       .subscribe((data: any) => {
           this.profileData = data;
-          this.roundNumber = this.getActiveRound(data);
+          this.activeRoundNumber = this.getActiveRound(data);
           this.responseRounds = this.profileData.responseRounds;
           this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
           this.getProfileSummary();
@@ -101,8 +101,9 @@ export class ConsultationsSummaryComponent implements OnInit {
     if (responsesList.length) {
       this.annonymousResponses = responsesList.filter(response => (response.node.user === null || response.node.user === undefined));
       this.publicResponses = responsesList.filter(response => response.node.user !== null);
-      this.publicResponsesLength = this.publicResponses.filter((response) => response.node.roundNumber === this.roundNumber).length;
-      this.annonymousResponsesLength = this.annonymousResponses.filter((response) => response.node.roundNumber === this.roundNumber).length;
+      this.publicResponsesLength = this.publicResponses.filter((response) => response.node.roundNumber === this.activeRoundNumber).length;
+      this.annonymousResponsesLength =
+      this.annonymousResponses.filter((response) => response.node.roundNumber === this.activeRoundNumber).length;
       this.summaryData = {
         publicResponseCount : this.publicResponses.length,
         title: 'RESPONSES TO'
@@ -124,9 +125,9 @@ export class ConsultationsSummaryComponent implements OnInit {
   }
 
   setActiveRound(roundNumber) {
-    this.roundNumber = roundNumber;
-    this.publicResponsesLength = this.publicResponses.filter((response) => response.node.roundNumber === this.roundNumber).length;
-    this.annonymousResponsesLength = this.annonymousResponses.filter((response) => response.node.roundNumber === this.roundNumber).length;
+    this.activeRoundNumber = roundNumber;
+    this.publicResponsesLength = this.publicResponses.filter((response) => response.node.roundNumber === roundNumber).length;
+    this.annonymousResponsesLength = this.annonymousResponses.filter((response) => response.node.roundNumber === roundNumber).length;
   }
 
 }

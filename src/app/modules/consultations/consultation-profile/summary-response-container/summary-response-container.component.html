@@ -19,7 +19,7 @@
     </ng-template>
     <p class="text-16" *ngIf="!response?.node?.answers" [innerHTML]="response.node?.responseText"></p>
     <div *ngIf="response?.node?.answers">
-      <app-response-answers [response]="response?.node" [roundNumber]="roundNumber"></app-response-answers>
+      <app-response-answers [response]="response?.node" [activeRoundNumber]="activeRoundNumber"></app-response-answers>
     </div>
     <div class="vote-section" *ngIf="type === 'public'">
       <div class="vote-count">

@@ -11,7 +11,7 @@ export class ResponseAnswersComponent implements OnInit {
 
   @Input() response;
   @Input() showOnlyLongTextAnswer: boolean;
-  @Input() roundNumber;
+  @Input() activeRoundNumber;
   alignedData: any;
   activeRound: any;
   questions;
@@ -76,17 +76,13 @@ export class ResponseAnswersComponent implements OnInit {
 
   getQuestions() {
     let questions;
-    if (this.showOnlyLongTextAnswer) {
-       questions =
-        this.consultationService.getQuestions(this.response.consultation, this.response.roundNumber);
-        return questions;
+    if (this.activeRoundNumber) {
+      questions =
+      this.consultationService.getQuestions(this.response.consultation, this.activeRoundNumber);
     } else {
-      if (this.roundNumber) {
-        questions = this.consultationService.getQuestions(this.response.consultation, this.roundNumber);
-        return questions;
-      }
-      return this.consultationService.getQuestions(this.response.consultation);
+      questions = this.consultationService.getQuestions(this.response.consultation);
     }
+    return questions;
   }
 
   getCheckboxAnswer(responseQuestion, item) {

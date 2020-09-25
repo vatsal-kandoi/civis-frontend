@@ -11,16 +11,14 @@
     <div class="tabs-block" *ngIf="responseRounds.length > 1">
       <p *ngFor="let round of responseRounds" 
         (click)="setActiveRound(round.roundNumber)"
-        [ngClass]="{'active-tab': (roundNumber === round?.roundNumber)}">
+        [ngClass]="{'active-tab': (activeRoundNumber === round?.roundNumber)}">
         {{'Round ' + round.roundNumber}}
       </p>
     </div>
     <div *ngIf="roundNumberExist; else allResponses">
       <div *ngIf="publicResponsesLength ; else noResponses">
         <ng-container *ngFor="let response of responseList">
-          <div *ngIf="roundNumber; else allResponses">
-            <app-response-container [response]="response" *ngIf="response?.node?.roundNumber === roundNumber"></app-response-container>
-          </div>
+            <app-response-container [response]="response" [activeRoundNumber]="activeRoundNumber" *ngIf="response?.node?.roundNumber === activeRoundNumber"></app-response-container>
         </ng-container>
       </div> 
       <ng-template #noResponses>

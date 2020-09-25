@@ -6,7 +6,7 @@
     </div>     
     <p class="text-16" *ngIf="!response?.node?.answers ; else responseAnswers" [innerHTML]="response.node?.responseText"></p>
     <ng-template #responseAnswers>
-      <app-response-answers [showOnlyLongTextAnswer]="true" [response]="response?.node"></app-response-answers>
+      <app-response-answers [showOnlyLongTextAnswer]="true" [activeRoundNumber]="activeRoundNumber" [response]="response?.node"></app-response-answers>
     </ng-template>
     <app-response-footer [response]="response"></app-response-footer>
   </div>

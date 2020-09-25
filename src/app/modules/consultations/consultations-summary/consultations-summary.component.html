@@ -12,7 +12,7 @@
           <div class="tabs-block" *ngIf="responseRounds && responseRounds.length > 1">
             <p *ngFor="let round of responseRounds" 
               (click)="setActiveRound(round.roundNumber)"
-              [ngClass]="{'active': (roundNumber === round?.roundNumber)}">
+              [ngClass]="{'active': (activeRoundNumber === round?.roundNumber)}">
               {{'Round ' + round.roundNumber}}
             </p>
           </div>
@@ -64,10 +64,10 @@
               <div *ngIf="publicResponsesLength; else noPublicResponses">
                 <ng-container *ngFor="let response of publicResponses">
                   <app-summary-response-container
-                    [roundNumber]="roundNumber"
+                    [activeRoundNumber]="activeRoundNumber"
                     [type]="'public'" 
                     [response]="response"
-                    *ngIf="roundNumber === response?.node?.roundNumber">
+                    *ngIf="activeRoundNumber === response?.node?.roundNumber">
                   </app-summary-response-container>
                 </ng-container>
               </div>
@@ -98,10 +98,10 @@
               <div *ngIf="annonymousResponsesLength; else noAnnonymousResponses">
                 <ng-container>
                   <app-summary-response-container 
-                  [roundNumber]="roundNumber" 
+                  [activeRoundNumber]="activeRoundNumber" 
                   [response]="response" 
                   [type]="'other'" 
-                  *ngIf="roundNumber === response?.node?.roundNumber">
+                  *ngIf="activeRoundNumber === response?.node?.roundNumber">
                   </app-summary-response-container>
                 </ng-container>
               </div>

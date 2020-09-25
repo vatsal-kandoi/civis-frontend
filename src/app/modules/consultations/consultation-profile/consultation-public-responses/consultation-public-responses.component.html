@@ -18,7 +18,10 @@
     <div *ngIf="roundNumberExist; else allResponses">
       <div *ngIf="publicResponsesLength ; else noResponses">
         <ng-container *ngFor="let response of responseList">
-            <app-response-container [response]="response" [activeRoundNumber]="activeRoundNumber" *ngIf="response?.node?.roundNumber === activeRoundNumber"></app-response-container>
+            <app-response-container [response]="response" 
+            [activeRoundNumber]="activeRoundNumber" 
+            *ngIf="response?.node?.roundNumber === activeRoundNumber"
+            (openProfile)="openUserProfile($event)"></app-response-container>
         </ng-container>
       </div> 
       <ng-template #noResponses>
@@ -29,7 +32,7 @@
     </div>
     <ng-template #allResponses>
       <ng-container *ngFor="let response of responseList">
-        <app-response-container [response]="response"></app-response-container>
+        <app-response-container [response]="response" (openProfile)="openUserProfile($event)"></app-response-container>
       </ng-container>
     </ng-template>   
 </div> 

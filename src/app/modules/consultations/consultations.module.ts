@@ -31,6 +31,8 @@ import { ConsultationResponseTextComponent } from './consultation-profile/consul
 import { FeedbackModalComponent } from './consultation-profile/feedback-modal/feedback-modal.component';
 import { ConsultationPublicResponsesComponent } from './consultation-profile/consultation-public-responses/consultation-public-responses.component';
 import { SatisfactionRatingDistributionComponent } from './consultation-profile/satisfaction-rating-distribution/satisfaction-rating-distribution.component';
+import { ResponseContainerComponent } from './consultation-profile/response-container/response-container.component';
+import { SummaryResponseContainerComponent } from './consultation-profile/summary-response-container/summary-response-container.component';
 
 @NgModule({
     imports: [
@@ -70,6 +72,8 @@ import { SatisfactionRatingDistributionComponent } from './consultation-profile/
         FeedbackModalComponent,
         ConsultationPublicResponsesComponent,
         SatisfactionRatingDistributionComponent,
+        ResponseContainerComponent,
+        SummaryResponseContainerComponent,
     ],
     providers: [CookieService]
 })

@@ -14,20 +14,26 @@
         [ngClass]="{'active-tab': (roundNumber === round?.roundNumber)}">
         {{'Round ' + round.roundNumber}}
       </p>
-    </div>    <ng-container *ngFor="let response of responseList" >
-      <div class="response-container pb-0" [id]="response?.node?.id" *ngIf="publicResponsesLength && response?.node?.roundNumber == roundNumber">
-        <div class="d-inline-flex align-items-center">
-          <img class="avatar avatar--42 pointer" appDefaultImage [type]="'user'"
-            [src]="response?.node?.user?.profilePicture?.url" (click)="openUserProfile(response?.node?.user)" />
-            <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
-        </div>     
-        <p class="text-16" *ngIf="!response?.node?.answers ; else responseAnswers" [innerHTML]="response.node?.responseText"></p>
-        <ng-template #responseAnswers>
-          <app-response-answers [showOnlyLongTextAnswer]="true" [response]="response?.node"></app-response-answers>
-        </ng-template>
-        <app-response-footer [response]="response"></app-response-footer>
-      </div>
-    </ng-container>
+    </div>
+    <div *ngIf="roundNumberExist; else allResponses">
+      <div *ngIf="publicResponsesLength ; else noResponses">
+        <ng-container *ngFor="let response of responseList">
+          <div *ngIf="roundNumber; else allResponses">
+            <app-response-container [response]="response" *ngIf="response?.node?.roundNumber === roundNumber"></app-response-container>
+          </div>
+        </ng-container>
+      </div> 
+      <ng-template #noResponses>
+        <div class="no-responses-text">
+          No public response yet
+        </div>
+      </ng-template>
+    </div>
+    <ng-template #allResponses>
+      <ng-container *ngFor="let response of responseList">
+        <app-response-container [response]="response"></app-response-container>
+      </ng-container>
+    </ng-template>   
 </div> 
 <div *ngIf="selectedUser && showUserProfileModal">
   <app-user-profile-modal (close)="showUserProfileModal = false" [userId]="selectedUser"></app-user-profile-modal>

@@ -57,6 +57,11 @@
         }
       }
 
+    .no-responses-text {
+      text-align: center;
+      opacity: 0.6;
+    }
+
       .heading {
         @include general-text($font-size: 16px, $weight: bold);
       }

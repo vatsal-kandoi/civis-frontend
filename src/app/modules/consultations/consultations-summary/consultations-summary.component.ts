@@ -32,6 +32,7 @@ export class ConsultationsSummaryComponent implements OnInit {
   responseRounds: any;
   publicResponsesLength: any;
   annonymousResponsesLength: any;
+  roundNumberExist: any;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apollo: Apollo,
@@ -85,6 +86,7 @@ export class ConsultationsSummaryComponent implements OnInit {
           this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
           this.getProfileSummary();
           this.responseList = data.responses.edges;
+          this.roundNumberExist = this.responseList.filter((response) => response.node.roundNumber).length;
           this.splitResponses(this.responseList);
       }, err => {
         const e = new Error(err);

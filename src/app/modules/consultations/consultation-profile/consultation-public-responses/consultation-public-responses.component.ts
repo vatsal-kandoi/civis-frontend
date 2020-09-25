@@ -21,6 +21,7 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
   roundNumber: any;
   responseRounds: any;
   publicResponsesLength: any;
+  roundNumberExist: any;
 
   constructor(private consultationService: ConsultationsService, private route: ActivatedRoute) { }
 
@@ -44,6 +45,7 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
         this.responseRounds = this.profileData.responseRounds;
         this.responseList = data.sharedResponses.edges;
         this.publicResponsesLength = this.responseList.filter((response) => response.node.roundNumber === this.roundNumber).length;
+        this.roundNumberExist = this.responseList.filter((response) => response.node.roundNumber).length;
         this.checkForFragments = true;
       }
     });

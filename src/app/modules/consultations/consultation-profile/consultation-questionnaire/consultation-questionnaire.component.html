@@ -49,7 +49,7 @@
     <div class="question-box">
       <form [formGroup]="questionnaireForm">
         <div class="questions-container">
-          <div class="question-index" *ngFor="let question of profileData?.questions; let i = index">
+          <div class="question-index" *ngFor="let question of questions; let i = index">
               <div class="question">
                 <p class="question-text">
                   <span class="question-text__number">{{i+1}}.</span>

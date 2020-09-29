@@ -9,6 +9,7 @@ import { map, filter } from 'rxjs/operators';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { CookieService } from 'ngx-cookie';
+import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
 
 @Component({
   selector: 'app-read-respond',
@@ -28,6 +29,7 @@ export class ReadRespondComponent implements OnInit {
   consultationResponse: any;
   satisfactionRatingDistribution: any;
   loading: boolean;
+  questionnaireExist: boolean;
 
   constructor(
     private userService: UserService,
@@ -71,8 +73,10 @@ export class ReadRespondComponent implements OnInit {
     )
     .subscribe((data: any) => {
         this.profileData = data;
-        if (this.profileData.questions && this.profileData.questions.length > 0) {
-          this.profileData.questions.forEach(question => {
+        const questions = this.consultationService.getQuestions(data);
+        if (questions && questions.length > 0) {
+          this.questionnaireExist = true;
+          questions.forEach(question => {
             if (question.supportsOther) {
               question.subQuestions.push({id: 'other', questionText: 'Other'});
               question.other_answer = 'other_answer-' + question.id;
@@ -185,17 +189,6 @@ export class ReadRespondComponent implements OnInit {
         return false;
     }
     return true;
-  }
-
-  questionnaireExist() {
-    if (this.profileData && this.profileData.questions) {
-      const questions = this.profileData.questions; {
-        if (questions.length) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   checkClosed(deadline) {

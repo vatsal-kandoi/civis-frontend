@@ -33,6 +33,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   responseSubmitLoading: boolean;
   consultationId: any;
   showConfirmEmailModal: boolean;
+  questions: any;
 
   constructor(private _fb: FormBuilder,
     private userService: UserService,
@@ -82,22 +83,28 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   }
 
   makeQuestionnaireModal() {
-    if (this.profileData && this.profileData.questions) {
-      const questions =  this.profileData.questions;
-      const form = new FormGroup({});
-      questions.forEach(question => {
-        if (question.questionType !== 'checkbox') {
-          question.isOptional ? form.addControl(question.id, new FormControl(null)) :
-          form.addControl(question.id, new FormControl(null, Validators.required ));
-        } else if (question.questionType === 'checkbox') {
-          form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
-        }
-        if (question.is_other) {
-          question.isOptional ? form.addControl('other_answer-' + question.id, new FormControl(null)) :
-           form.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
-        }
-      });
-      return form;
+    const responseRounds = this.profileData.responseRounds;
+    if (responseRounds && responseRounds.length) {
+      const activeRound  = responseRounds.find((round) => round.active);
+      if (!isObjectEmpty(activeRound)) {
+         this.questions = activeRound.questions;
+          if (this.questions.length) {
+            const form = new FormGroup({});
+            this.questions.forEach(question => {
+              if (question.questionType !== 'checkbox') {
+                question.isOptional ? form.addControl(question.id, new FormControl(null)) :
+                form.addControl(question.id, new FormControl(null, Validators.required ));
+              } else if (question.questionType === 'checkbox') {
+                form.addControl(question.id, this.makeCheckboxQuestionOptions(question));
+              }
+              if (question.is_other) {
+                question.isOptional ? form.addControl('other_answer-' + question.id, new FormControl(null)) :
+                  form.addControl('other_answer-' + question.id, new FormControl(null, Validators.required));
+              }
+            });
+            return form;
+          }
+      }
     }
   }
 
@@ -234,9 +241,9 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       if (question.questionType === 'checkbox' && value.id === 'other' && !checkboxValue) {
          otherValue = false;
       }
-      for (let i = 0; i < this.profileData.questions.length; i++) {
-        if (this.profileData.questions[i].id === question.id) {
-          this.profileData.questions[i].is_other = otherValue;
+      for (let i = 0; i < this.questions.length; i++) {
+        if (this.questions[i].id === question.id) {
+          this.questions[i].is_other = otherValue;
           if (question.isOptional) {
             this.questionnaireForm.addControl('other_answer-' + question.id, new FormControl(null));
           } else {
@@ -247,7 +254,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       }
     } else {
       if (question.questionType !== 'checkbox') {
-        this.profileData.questions.forEach(ques => {
+        this.questions.forEach(ques => {
           if (question.id === ques.id) {
             ques.is_other = false;
           }

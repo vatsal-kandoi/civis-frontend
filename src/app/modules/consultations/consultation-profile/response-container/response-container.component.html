@@ -1,0 +1,12 @@
+<div class="response-container pb-0" [id]="response?.node?.id">
+    <div class="d-inline-flex align-items-center">
+      <img class="avatar avatar--42 pointer" appDefaultImage [type]="'user'"
+        [src]="response?.node?.user?.profilePicture?.url" (click)="openUserProfile(response?.node?.user)" />
+        <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
+    </div>     
+    <p class="text-16" *ngIf="!response?.node?.answers ; else responseAnswers" [innerHTML]="response.node?.responseText"></p>
+    <ng-template #responseAnswers>
+      <app-response-answers [showOnlyLongTextAnswer]="true" [activeRoundNumber]="activeRoundNumber" [response]="response?.node"></app-response-answers>
+    </ng-template>
+    <app-response-footer [response]="response"></app-response-footer>
+  </div>

@@ -179,13 +179,13 @@
                 </div>
               </div>
               <div class="input-box col-12">
-                <label for="company">Company</label>
+                <label for="company">Organsisation/Department</label>
                 <div class="input-box__border">
                   <input placeholder="Company Name" type="text" id="company" #company="ngModel" name="company"
                     [(ngModel)]="signupObject.company" />
                 </div>
                 <div *ngIf="company.invalid && (company.touched || signupForm.submitted)" class="error-msg">
-                  <div>Invalid Company</div>
+                  <div>Invalid Organsisation/Department</div>
                 </div>
               </div>
 

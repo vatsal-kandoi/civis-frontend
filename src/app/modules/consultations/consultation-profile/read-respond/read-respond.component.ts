@@ -239,6 +239,15 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  removeTags(str) {
+    if ((str === null) || (str === '')) {
+      return false;
+    } else {
+      str = str.toString();
+    }
+    return str.replace( /(<([^>]+)>)/ig, '').replace(/\s\s/g, '');
+  }
+
   onAnswerChange(question?, value?, checkboxValue?) {
     if (question && value.id === 'other') {
       let otherValue = true;
@@ -394,8 +403,17 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
         if (this.profileData.questions && this.profileData.questions.length > 0) {
           this.profileData.questions.forEach(question => {
             if (question.supportsOther) {
-              question.subQuestions.push({id: 'other', questionText: 'Other'});
-              question.other_answer = 'other_answer-' + question.id;
+              let otherData = false;
+              for (let i = 0; i < question.subQuestions.length ; i++) {
+                if (question.subQuestions[i].id === 'other') {
+                  otherData = true;
+                  break;
+                }
+              }
+              if (!otherData) {
+                question.subQuestions.push({id: 'other', questionText: 'Other'});
+                question.other_answer = 'other_answer-' + question.id;
+              }
             }
           });
         }
@@ -905,10 +923,11 @@ export class ReadRespondComponent implements OnInit, AfterViewChecked {
     this.consultationService.scrollToCreateResponse
     .subscribe((scrollTo) => {
       if (scrollTo) {
-        // window.scrollTo({
-        //   top: this.responseIndex ? this.responseIndex.nativeElement.offsetTop : this.startDraftingSection.nativeElement.offsetTop,
-        //   behavior: 'smooth',
-        // });
+        window.scrollTo({
+          top: this.responseIndex ?
+            this.responseIndex.nativeElement.offsetTop - 80 : this.questionnaireContainer.nativeElement.offsetTop - 80,
+          behavior: 'smooth',
+        });
         this.consultationService.scrollToCreateResponse.next(false);
       }
     });

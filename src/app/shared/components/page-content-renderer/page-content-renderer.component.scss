@@ -1,13 +1,6 @@
 .content-container {
-    h1, h2, h3, .para {
-      @extend .ff-lato;
-    }
-  
-    .para {
-      font-size: 14px;
-    }
-  
-    .ordered-list,
+
+  .ordered-list,
     .unordered-list {
       padding-left: 24px;
     }
@@ -24,19 +17,5 @@
       height: 339px;
       border-radius: 10px;
       margin-bottom: 1rem;
-    }
-  }
-
-  .ff-lato {
-    font-family: 'Lato', sans-serif;
-  }
-  
-  @media only screen and (min-width: 768px) {
-    .content-container {
-      .para,
-      .ordered-list li,
-      .unordered-list li {
-        font-size: 16px;
-      }
     }
   }

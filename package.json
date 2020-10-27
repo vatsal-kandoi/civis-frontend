@@ -4,14 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "serve": "ng serve --configuration=dev",
-    "start:staging": "gulp set --env=staging && concurrently --kill-others \"node server.js\" \"npm run serve\"",
-    "start:prod": "gulp set --env=prod && concurrently --kill-others \"node server.js\" \"npm run serve\"",
+    "start:staging": "gulp set --env=staging && concurrently --kill-others \"node server.js\" \"ng serve --configuration=dev-staging\"",
+    "start:prod": "gulp set --env=prod && concurrently --kill-others \"node server.js\" \"ng serve --configuration=dev-production\"",
     "build": "ng build --configuration=production",
+    "build:production": "ng build --configuration=production",
+    "build:staging": "ng build --configuration=staging",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "npm run build"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

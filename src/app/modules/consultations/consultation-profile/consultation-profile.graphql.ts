@@ -18,6 +18,8 @@ export const ConsultationProfile = gql`
         id
         questionText
         questionType
+        supportsOther
+        isOptional
         subQuestions {
           id
           questionText
@@ -70,9 +72,21 @@ export const ConsultationProfile = gql`
         totalCount
       }
       updatedAt
+      questions {
+        id
+        questionText
+        questionType
+        supportsOther
+        isOptional
+        subQuestions {
+          id
+          questionText
+        }
+      }
+      visibility
     }
   }
-`
+`;
 
 export const ConsultationProfileCurrentUser = gql`
   query consultationProfileCurrentUser($id: Int!) {
@@ -91,6 +105,7 @@ export const ConsultationProfileCurrentUser = gql`
       responseDeadline
       readingTime
       responsesReadingTimes
+      responseSubmissionMessage
       url
       consultationResponsesCount
       ministry {
@@ -144,14 +159,17 @@ export const ConsultationProfileCurrentUser = gql`
         id
         questionText
         questionType
+        isOptional
+        supportsOther
         subQuestions {
           id
           questionText
         }
       }
+      visibility
     }
   }
-`
+`;
 
 export const VoteCreateQuery = gql `
   mutation voteCreate($consultationResponseVote: VoteCreateInput!) {
@@ -181,6 +199,7 @@ export const SubmitResponseQuery = gql`
         id
         title
         respondedOn
+        responseSubmissionMessage
         sharedResponses(sort: templates_count, sortDirection: desc) {
           edges {
             node {
@@ -210,11 +229,14 @@ export const SubmitResponseQuery = gql`
           id
           questionText
           questionType
+          isOptional
+          supportsOther
           subQuestions {
             id
             questionText
           }
         }
+        visibility
       }
     }
   }

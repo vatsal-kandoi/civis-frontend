@@ -9,7 +9,8 @@
         <p class="nav-link-text bold-text" [routerLink]="['consultations/list']">
           {{'Active Consultations' | translate}} <span class="active-count-box">{{activeCount}}</span>
         </p>
-        <p class="nav-link-text bold-text" [routerLink]="['/leader-board']">{{'Leaderboard' | translate}}</p>
+        <p data-event="click-navbar-leaderboard" class="nav-link-text bold-text" [routerLink]="['/leader-board']">
+          {{'Leaderboard' | translate}}</p>
         <p class="nav-link-text" [routerLink]="['/how-civis-works']">{{'How Civis Works' | translate}}</p>
       </div>
     </div>

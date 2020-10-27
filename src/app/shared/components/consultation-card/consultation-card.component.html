@@ -8,12 +8,15 @@
         <div>
           <p class="days-remaining-text">{{getRemainigDays(consultation?.responseDeadline) | translate}}</p>
           <p class="responses-text">
-            {{consultation?.consultationResponsesCount ? consultation?.consultationResponsesCount : '--'}}
-            <span  *ngIf="consultation?.consultationResponsesCount <= 1">
+            {{consultation?.consultationResponsesCount ? consultation?.consultationResponsesCount : ''}}
+            <span  *ngIf="consultation?.consultationResponsesCount == 1">
               {{'Response so far' | translate}}
             </span>
-            <span  *ngIf="consultation?.consultationResponsesCount >= 1">
+            <span  *ngIf="consultation?.consultationResponsesCount > 1">
               {{'Responses so far' | translate}}
+            </span>
+            <span *ngIf="consultation?.consultationResponsesCount < 1">
+              {{'No responses so far' | translate}}
             </span>
           </p>
         </div>

@@ -14,16 +14,22 @@ export const ConsultationProfile = gql`
         id
         components
       }
-      questions {
+      responseRounds{
+        active
         id
-        questionText
-        questionType
-        supportsOther
-        isOptional
-        subQuestions {
+        questions {
           id
+          isOptional
           questionText
+          questionType
+          supportsOther
+          isOptional
+          subQuestions {
+            id
+            questionText
+          }
         }
+        roundNumber
       }
       responseDeadline
       readingTime
@@ -55,8 +61,29 @@ export const ConsultationProfile = gql`
           node {
             id
             answers
+            consultation {
+              id
+              responseRounds{
+                active
+                id
+                questions {
+                  id
+                  isOptional
+                  questionText
+                  questionType
+                  supportsOther
+                  isOptional
+                  subQuestions {
+                    id
+                    questionText
+                  }
+                }
+                roundNumber
+              }
+            }
             downVoteCount
             responseText
+            roundNumber
             templatesCount
             upVoteCount
             user {
@@ -72,17 +99,6 @@ export const ConsultationProfile = gql`
         totalCount
       }
       updatedAt
-      questions {
-        id
-        questionText
-        questionType
-        supportsOther
-        isOptional
-        subQuestions {
-          id
-          questionText
-        }
-      }
       visibility
     }
   }
@@ -105,6 +121,23 @@ export const ConsultationProfileCurrentUser = gql`
       responseDeadline
       readingTime
       responsesReadingTimes
+      responseRounds{
+        active
+        id
+        questions {
+          id
+          isOptional
+          questionText
+          questionType
+          supportsOther
+          isOptional
+          subQuestions {
+            id
+            questionText
+          }
+        }
+        roundNumber
+      }
       responseSubmissionMessage
       url
       consultationResponsesCount
@@ -134,8 +167,29 @@ export const ConsultationProfileCurrentUser = gql`
           node {
             id
             answers
+            consultation {
+              id
+              responseRounds{
+                active
+                id
+                questions {
+                  id
+                  isOptional
+                  questionText
+                  questionType
+                  supportsOther
+                  isOptional
+                  subQuestions {
+                    id
+                    questionText
+                  }
+                }
+                roundNumber
+              }
+            }
             downVoteCount
             responseText
+            roundNumber
             templatesCount
             upVoteCount
             user {
@@ -155,17 +209,6 @@ export const ConsultationProfileCurrentUser = gql`
         totalCount
       }
       updatedAt
-      questions {
-        id
-        questionText
-        questionType
-        isOptional
-        supportsOther
-        subQuestions {
-          id
-          questionText
-        }
-      }
       visibility
     }
   }
@@ -184,7 +227,7 @@ export const VoteDeleteQuery = gql `
   mutation voteDelete($consultationResponseId : Int!) {
     voteDelete(consultationResponseId : $consultationResponseId )
   }
-`
+`;
 
 export const SubmitResponseQuery = gql`
   mutation consultationResponseCreate($consultationResponse: ConsultationResponseCreateInput!){
@@ -200,13 +243,52 @@ export const SubmitResponseQuery = gql`
         title
         respondedOn
         responseSubmissionMessage
+        responseRounds{
+          active
+          id
+          questions {
+            id
+            isOptional
+            questionText
+            questionType
+            supportsOther
+            isOptional
+            subQuestions {
+              id
+              questionText
+            }
+          }
+          roundNumber
+        }
+        satisfactionRatingDistribution
         sharedResponses(sort: templates_count, sortDirection: desc) {
           edges {
             node {
               id
               answers
+              consultation {
+                id
+                responseRounds{
+                  active
+                  id
+                  questions {
+                    id
+                    isOptional
+                    questionText
+                    questionType
+                    supportsOther
+                    isOptional
+                    subQuestions {
+                      id
+                      questionText
+                    }
+                  }
+                  roundNumber
+                }
+              }
               downVoteCount
               responseText
+              roundNumber
               templatesCount
               upVoteCount
               user {
@@ -224,17 +306,6 @@ export const SubmitResponseQuery = gql`
             }
           }
           totalCount
-        }
-        questions {
-          id
-          questionText
-          questionType
-          isOptional
-          supportsOther
-          subQuestions {
-            id
-            questionText
-          }
         }
         visibility
       }

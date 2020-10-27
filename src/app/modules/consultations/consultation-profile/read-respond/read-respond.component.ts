@@ -78,8 +78,17 @@ export class ReadRespondComponent implements OnInit {
           this.questionnaireExist = true;
           questions.forEach(question => {
             if (question.supportsOther) {
-              question.subQuestions.push({id: 'other', questionText: 'Other'});
-              question.other_answer = 'other_answer-' + question.id;
+              let otherData = false;
+              for (let i = 0; i < question.subQuestions.length ; i++) {
+                if (question.subQuestions[i].id === 'other') {
+                  otherData = true;
+                  break;
+                }
+              }
+              if (!otherData) {
+                question.subQuestions.push({id: 'other', questionText: 'Other'});
+                question.other_answer = 'other_answer-' + question.id;
+              }
             }
           });
         }
@@ -203,5 +212,4 @@ export class ReadRespondComponent implements OnInit {
       }
     }
   }
-
 }

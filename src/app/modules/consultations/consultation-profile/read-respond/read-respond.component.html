@@ -19,7 +19,6 @@
       <app-consultation-response-text [profileData]="profileData" (openFeedbackModal)="openFeedbackModal($event)"></app-consultation-response-text>
     </ng-template>
   </div>
-
   <div *ngIf="profileData?.reviewType !== 'policy'">
     <app-satisfaction-rating-distribution [satisfactionRatingDistribution]="satisfactionRatingDistribution"></app-satisfaction-rating-distribution>
     <app-consultation-public-responses></app-consultation-public-responses>

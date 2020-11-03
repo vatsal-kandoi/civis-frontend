@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation,
+   OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -13,7 +14,7 @@ import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
   encapsulation: ViewEncapsulation.None,
 
 })
-export class ProfileCardComponent implements OnInit, OnDestroy {
+export class ProfileCardComponent implements OnInit, OnDestroy, OnChanges {
 
   @ViewChild('shareOptionsElement', { static: false }) shareOptionsElement: ElementRef;
   @ViewChild('spreadButtonElement', { static: false }) spreadButtonElement: ElementRef;
@@ -36,6 +37,20 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
       this.currentUrl = window.location.href;
       this.CheckSubmitResponseEnabled();
       this.getCurrentUser();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'profile': {
+            if (changes[propName].currentValue) {
+              this.profile = changes[propName].currentValue;
+            }
+          }
+        }
+      }
+    }
   }
 
   ngOnDestroy() {

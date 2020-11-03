@@ -233,7 +233,6 @@ export const VoteDeleteQuery = gql `
 export const SubmitResponseQuery = gql`
   mutation consultationResponseCreate($consultationResponse: ConsultationResponseCreateInput!){
     consultationResponseCreate(consultationResponse: $consultationResponse){
-      enforcePrivateResponse
       id
       points
       user {
@@ -241,6 +240,7 @@ export const SubmitResponseQuery = gql`
         firstName
       }
       consultation {
+        enforcePrivateResponse
         id
         title
         respondedOn

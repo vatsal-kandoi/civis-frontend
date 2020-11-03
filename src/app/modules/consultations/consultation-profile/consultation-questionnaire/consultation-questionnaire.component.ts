@@ -39,7 +39,8 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
     private userService: UserService,
     private consultationService: ConsultationsService,
     private apollo: Apollo,
-    private errorService: ErrorService) {
+    private errorService: ErrorService,
+    private el: ElementRef) {
     this.questionnaireForm = this._fb.group({});
     this.consultationService.consultationId$
     .pipe(
@@ -145,6 +146,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       }
     } else {
       this.showError = true;
+      this.scrollToFirstInvalidControl();
     }
   }
 
@@ -314,6 +316,34 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);
     });
+  }
+
+  scrollToFirstInvalidControl() {
+    let errorElementFound;
+    const checkErrorElementExist = setInterval(() => {
+      if (!errorElementFound) {
+        const firstErrorElement: HTMLElement = this.el.nativeElement.querySelector(
+          '.error-msg'
+        );
+        if (firstErrorElement) {
+          errorElementFound = true;
+          firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }, 100);
+    if (errorElementFound) {
+      clearInterval(checkErrorElementExist);
+    }
+  }
+
+  showPublicResponseOption() {
+    if (this.profileData && this.profileData.enforcePrivateResponse) {
+      return false;
+    }
+    if (this.longTextAnswer && this.templateText) {
+      return this.longTextAnswer !== this.templateText;
+    }
+    return true;
   }
 
 }

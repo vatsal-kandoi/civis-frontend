@@ -9,6 +9,9 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
+import { CaseStudiesListQuery } from '../auth.graphql';
+import { interval } from 'rxjs';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -32,6 +35,8 @@ export class SignUpComponent implements OnInit {
   dropdownText = 'Begin Typing';
   reCAPTCHA_KEY: string;
   isCaptchaResolved: boolean;
+  caseStudyList = [];
+  activeCaseStudy = 0;
 
 
   constructor(private apollo: Apollo,
@@ -47,6 +52,25 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeToSearch();
+    this.makeCaseStudiesList();
+    this.rotateFeature();
+  }
+
+  makeCaseStudiesList() {
+    const variables = {
+      sort: 'created_at',
+      sortDirection: 'desc'
+    };
+    this.apollo.query({
+      query: CaseStudiesListQuery,
+      variables: variables
+    })
+    .pipe(
+      map((res: any) => res.data.caseStudyList)
+    )
+    .subscribe((res: any) => {
+      this.caseStudyList = res.data;
+    });
   }
 
   subscribeToSearch() {
@@ -178,6 +202,16 @@ export class SignUpComponent implements OnInit {
     if (this.signupForm.valid) {
       this.submit();
     }
+  }
+
+  rotateFeature() {
+    interval(5000).subscribe(() => {
+      if (this.activeCaseStudy === 2) {
+        this.activeCaseStudy = 0;
+      } else {
+        this.activeCaseStudy++;
+      }
+    });
   }
 
 }

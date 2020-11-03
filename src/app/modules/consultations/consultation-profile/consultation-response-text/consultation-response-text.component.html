@@ -20,7 +20,7 @@
         </ckeditor>
     </div>
     <div class="response-index__footer" *ngIf="profileData?.reviewType !== 'policy'">
-        <div class="checkbox-area" *ngIf="showPublicResponseOption">
+        <div class="checkbox-area" *ngIf="showPublicResponseOption && !profileData?.enforcePrivateResponse">
         <div class="input-checbox">
             <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" />
             <label class="m-0">{{'Make my response public' | translate}}</label>

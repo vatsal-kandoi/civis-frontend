@@ -107,6 +107,7 @@ export const ConsultationProfile = gql`
 export const ConsultationProfileCurrentUser = gql`
   query consultationProfileCurrentUser($id: Int!) {
     consultationProfile(id: $id) {
+      enforcePrivateResponse
       id
       title
       summary
@@ -232,6 +233,7 @@ export const VoteDeleteQuery = gql `
 export const SubmitResponseQuery = gql`
   mutation consultationResponseCreate($consultationResponse: ConsultationResponseCreateInput!){
     consultationResponseCreate(consultationResponse: $consultationResponse){
+      enforcePrivateResponse
       id
       points
       user {

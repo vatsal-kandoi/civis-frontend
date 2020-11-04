@@ -2,7 +2,8 @@
 
 export const environment = {
   hmr: false,
-  production: true
+  production: true,
+  RECAPTCHA_SITE_KEY: '6Ld8GLUUAAAAAH5CZbqDdQDwl-s5ZC2ZqHz5TWyj'
 };
 
 // Staging API environment

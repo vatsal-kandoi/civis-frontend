@@ -197,3 +197,20 @@ export function isMobile() {
         return false;
     }
 }
+
+export const scrollToFirstError = (selector, element) => {
+    let errorElementFound;
+    const checkErrorElementExist = setInterval(() => {
+      if (!errorElementFound) {
+        const firstErrorElement: HTMLElement = element.querySelector(selector);
+        if (firstErrorElement) {
+          errorElementFound = true;
+          firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }, 100);
+    if (errorElementFound) {
+      clearInterval(checkErrorElementExist);
+    }
+};
+

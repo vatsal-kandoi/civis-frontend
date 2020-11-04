@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef, Out
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { filter } from 'rxjs/operators';
-import { isObjectEmpty, checkPropertiesPresence } from 'src/app/shared/functions/modular.functions';
+import { isObjectEmpty, checkPropertiesPresence, scrollToFirstError } from 'src/app/shared/functions/modular.functions';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,11 +33,15 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   usingTemplate: boolean;
   responseVisibility: any;
   customStyleAdded: any;
+  responseFeedback: any;
+  showConfirmEmailModal: boolean;
+  showError: boolean;
 
   constructor(
     private userService: UserService,
     private consultationService: ConsultationsService,
-    private router: Router) {
+    private router: Router,
+    private el: ElementRef) {
       this.consultationService.consultationId$
       .pipe(
         filter(i => i !== null)
@@ -64,6 +68,14 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     .subscribe((status) => {
       if (status) {
         this.openFeedbackRatingModal();
+      }
+    });
+  }
+
+  subscribeProfileData() {
+    this.consultationService.consultationProfileData.subscribe((data) => {
+      if (data) {
+        this.profileData = data;
       }
     });
   }
@@ -253,6 +265,31 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
 
   scrollToResponses() {
     this.consultationService.scrollToPublicResponse.next(true);
+  }
+
+  validCurrentUser() {
+    if (this.currentUser && !this.currentUser.confirmedAt) {
+      this.showConfirmEmailModal = true;
+      return false;
+    }
+    return true;
+  }
+
+  submitAnswer() {
+    if (!this.validCurrentUser()) {
+      return;
+    }
+    if (this.responseText && this.responseFeedback) {
+      // this.responseAnswers = this.getResponseAnswers();
+      // const consultationResponse = this.getConsultationResponse();
+      // if (!isObjectEmpty(consultationResponse)) {
+      //   this.submitResponse(consultationResponse);
+      //   this.showError = false;
+      // }
+    } else {
+      this.showError = true;
+      scrollToFirstError('.error-msg', this.el.nativeElement);
+    }
   }
 
 }

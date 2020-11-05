@@ -88,7 +88,7 @@
         </div>
     </div>
     </div>
-    <p class="error-msg" *ngIf="showError && !responseText">Please enter response text</p>
+    <p class="error-msg" *ngIf="showError && !responseText">Please enter a Response Text to submit the response</p>
     <div class="hr-line"></div>
     <div class="py-3">
         <button  class="btn-submit active" (click)="submitAnswer()" [tooltip]="showError ? 'Please fill all the answers to submit response.' : ''" data-event="purchase">
@@ -99,3 +99,5 @@
         </button>
       </div>
 </div>
+<app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false">
+</app-confirm-email-modal>

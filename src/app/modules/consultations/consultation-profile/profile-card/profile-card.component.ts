@@ -1,12 +1,10 @@
 import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation,
-   OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+  OnChanges, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
-import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
-
 @Component({
   selector: 'app-profile-card',
   templateUrl: './profile-card.component.html',
@@ -14,7 +12,7 @@ import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
   encapsulation: ViewEncapsulation.None,
 
 })
-export class ProfileCardComponent implements OnInit, OnDestroy, OnChanges {
+export class ProfileCardComponent implements OnInit, OnChanges {
 
   @ViewChild('shareOptionsElement', { static: false }) shareOptionsElement: ElementRef;
   @ViewChild('spreadButtonElement', { static: false }) spreadButtonElement: ElementRef;
@@ -22,7 +20,6 @@ export class ProfileCardComponent implements OnInit, OnDestroy, OnChanges {
   @Input() profile: any;
   @Input() summaryData: any;
 
-  enableSubmitResponse: boolean;
   currentUser: any;
   showShareOptions: boolean;
   currentUrl = '';
@@ -35,7 +32,6 @@ export class ProfileCardComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit() {
       this.currentUrl = window.location.href;
-      this.CheckSubmitResponseEnabled();
       this.getCurrentUser();
   }
 
@@ -51,10 +47,6 @@ export class ProfileCardComponent implements OnInit, OnDestroy, OnChanges {
         }
       }
     }
-  }
-
-  ngOnDestroy() {
-    this.consultationsService.enableSubmitResponse.next(false);
   }
 
   downloadReport() {
@@ -163,17 +155,6 @@ export class ProfileCardComponent implements OnInit, OnDestroy, OnChanges {
     return '';
   }
 
-  CheckSubmitResponseEnabled() {
-    this.consultationsService.enableSubmitResponse
-    .subscribe((value) => {
-      if (value) {
-        this.enableSubmitResponse = true;
-      } else {
-        this.enableSubmitResponse = false;
-      }
-    });
-  }
-
   stepNext(hasResponseSubmited) {
     if (!this.currentUser) {
       this.router.navigateByUrl('/auth');
@@ -192,12 +173,8 @@ export class ProfileCardComponent implements OnInit, OnDestroy, OnChanges {
         this.consultationsService.validateAnswers.next(true);
         return;
       }
-      this.consultationsService.scrollToCreateResponse.next(true);
     }
-
-    if (this.enableSubmitResponse) {
-      this.consultationsService.openFeedbackModal.next(true);
-    }
+    this.consultationsService.submitResponseText.next(true);
   }
 
 }

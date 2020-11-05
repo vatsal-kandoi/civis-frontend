@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { filter, map } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
   templateUrl: './feedback-modal.component.html',
   styleUrls: ['./feedback-modal.component.scss']
 })
-export class FeedbackModalComponent implements OnInit, OnDestroy {
+export class FeedbackModalComponent implements OnInit {
   @ViewChild('feedbackModal', { static: false }) feedbackModal: ModalDirective;
   @Output() closeFeedbackModal: EventEmitter<any> = new EventEmitter();
   @Input() consultationResponse;
@@ -41,10 +41,6 @@ export class FeedbackModalComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy() {
-    this.consultationService.openFeedbackModal.next(false);
   }
 
   closeModal() {
@@ -88,7 +84,7 @@ export class FeedbackModalComponent implements OnInit, OnDestroy {
         this.responseSubmitLoading = false;
         this.earnedPoints = response.points;
         this.satisfactionRatingDistribution = response.consultation.satisfactionRatingDistribution;
-        this.consultationService.enableSubmitResponse.next(false);
+        // this.consultationService.enableSubmitResponse.next(false);
       }, err => {
         this.responseSubmitLoading = false;
         this.errorService.showErrorModal(err);

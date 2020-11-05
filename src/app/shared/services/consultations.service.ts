@@ -7,16 +7,14 @@ import { isObjectEmpty } from '../functions/modular.functions';
 })
 export class ConsultationsService {
 
-    enableSubmitResponse =  new BehaviorSubject(null);
     consultationId$ = new BehaviorSubject(null);
-    openFeedbackModal = new BehaviorSubject (null);
-    scrollToCreateResponse = new BehaviorSubject (null);
     activeTab = new BehaviorSubject (null);
     validateAnswers = new BehaviorSubject (null);
     consultationProfileData = new BehaviorSubject (null);
     useThisResponseAnswer = new BehaviorSubject(null);
     useThisResponseText = new BehaviorSubject(null);
     scrollToPublicResponse = new BehaviorSubject(null);
+    submitResponseText = new BehaviorSubject(null);
 
   constructor() {
   }

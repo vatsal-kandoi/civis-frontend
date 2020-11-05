@@ -134,7 +134,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   }
 
   submitAnswer() {
-    if (!this.validCurrentUser()) {
+    if (!this.validCurrentUser() || this.responseSubmitLoading) {
       return;
     }
     if (this.questionnaireForm.valid && this.responseFeedback) {

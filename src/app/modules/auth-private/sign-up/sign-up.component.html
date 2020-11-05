@@ -46,7 +46,7 @@
       </div>
       <div *ngIf="!nextScreen" class="logo-heading text-left mx-auto">
         <span *ngIf="!invitationToken; else invitationMessage">
-          To read this private consultation, <br> Please create an account
+          To participate in this Consultation, <br> Please create an account
         </span>
         <ng-template #invitationMessage>
           <div>
@@ -142,14 +142,14 @@
               </div>
 
               <div class="input-box required-field col-12" *ngIf="!invitationToken">
-                <label for="efname">Email</label>
+                <label for="efname">Official email</label>
                 <div class="input-box__border">
                   <input placeholder="Email" type="email" id="email" #email="ngModel" name="email"
                     [(ngModel)]="signupObject.email" required email />
                 </div>
                 <div *ngIf="email.invalid && (email.touched || signupForm.submitted)" class="error-msg">
-                  <div *ngIf="email.errors.required">Email is Required</div>
-                  <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                  <div *ngIf="email.errors.required">Official email is Required</div>
+                  <div *ngIf="email.errors.email">Official email must be a valid email address</div>
                 </div>
               </div>
 
@@ -169,11 +169,11 @@
                   id="agreedForTermsCondition" name="agreedForTermsCondition"
                   [(ngModel)]="signupObject.agreedForTermsCondition" required />
                 <label for="agreedForTermsCondition">
-                  I'm good with the Civis'
+                  I agree to the
                   <a href="/terms" class="policy-link">Terms of Service,</a>
                   &nbsp;
                   <a href="/privacy" class="policy-link">Privacy Policy</a>
-                  &
+                  and
                   <a href="/content-policy" class="policy-link">Content Policy.</a>
                 </label>
               </div>
@@ -192,7 +192,7 @@
               <div class="input-box col-12">
                 <label for="phone">Phone Number</label>
                 <div class="input-box__border">
-                  <input placeholder="+919223386370" type="tel" pattern="[+0-9]{13}" id="phone" #phone="ngModel"
+                  <input placeholder="9223386370" type="tel" pattern="[0-9]{10}" id="phone" #phone="ngModel"
                     name="phone" [(ngModel)]="signupObject.phoneNumber" />
                 </div>
                 <div *ngIf="phone.invalid && (phone.touched || signupForm.submitted)" class="error-msg">
@@ -200,13 +200,13 @@
                 </div>
               </div>
               <div class="input-box col-12">
-                <label for="company">Company</label>
+                <label for="company">Organsisation/Department</label>
                 <div class="input-box__border">
                   <input placeholder="Company Name" type="text" id="company" #company="ngModel" name="company"
                     [(ngModel)]="signupObject.company" />
                 </div>
                 <div *ngIf="company.invalid && (company.touched || signupForm.submitted)" class="error-msg">
-                  <div>Invalid Company</div>
+                  <div>Invalid Organsisation/Department</div>
                 </div>
               </div>
 

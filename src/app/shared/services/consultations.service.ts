@@ -15,6 +15,7 @@ export class ConsultationsService {
     useThisResponseText = new BehaviorSubject(null);
     scrollToPublicResponse = new BehaviorSubject(null);
     submitResponseText = new BehaviorSubject(null);
+    satisfactionRatingError = new BehaviorSubject(null);
 
   constructor() {
   }

@@ -1,54 +1,5 @@
 <div class="paper-effect  mt-4 m-0-sm">
-      <p class="satisfactory-heading">
-        {{'How satisfied are you with this ' | translate}}
-        {{profileData?.visibility === 'public_consultation' ? 'Consultation' : 'Document' | translate }}
-      </p>
-      <p class="satisfactory-tip">
-        {{'Choose an option to submit your feedback' | translate}}
-      </p>
-      <div class="options-block">
-        <button 
-          class="grey-bg"
-          [ngClass]="{'active': (responseFeedback === 'dissatisfied')}"
-          (click)="responseFeedback = 'dissatisfied'">
-          <span>
-            <img src="assets/images/dissatisfied.svg" />
-            Dissatisfied
-          </span>
-        </button>
-        <button 
-          class="grey-bg"
-          [ngClass]="{'active': (responseFeedback === 'somewhat_dissatisfied')}"
-          (click)="responseFeedback = 'somewhat_dissatisfied'">
-          <span>
-            <img src="assets/images/somewhat_dissatisfied.svg" />
-            Somewhat Dissatisfied
-          </span>
-        </button>
-        <button 
-          class="grey-bg"
-          [ngClass]="{'active': (responseFeedback === 'somewhat_satisfied')}"
-          (click)="responseFeedback = 'somewhat_satisfied'">
-          <span>
-            <img src="assets/images/somewhat_satisfied.svg" />
-            Somewhat Satisfied
-          </span>
-        </button>
-        <button 
-          class="grey-bg"
-          [ngClass]="{'active': (responseFeedback === 'satisfied')}"
-          (click)="responseFeedback = 'satisfied'">
-          <span>
-            <img src="assets/images/satisfied.svg" />
-            Satisfied
-          </span>
-        </button>
-      </div>
-      <p class="error-msg" *ngIf="showError && !responseFeedback">Please select a Satisfaction Rating to submit the response</p>
-      <div class="hr-line"></div>
-
-
-
+    <app-satisfaction-rating-selection (selectSatisfaction)="responseFeedback = $event"></app-satisfaction-rating-selection>
     <div class="response-index mt-4" ngResizable [rzHandles]="'s'"
     #responseIndex>
     <div class="response-index__nav">

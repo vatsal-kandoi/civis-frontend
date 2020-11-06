@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
-import { isObjectEmpty, checkPropertiesPresence } from '../../../../shared/functions/modular.functions';
+import { isObjectEmpty, checkPropertiesPresence, scrollToFirstError } from '../../../../shared/functions/modular.functions';
 import { atLeastOneCheckboxCheckedValidator } from 'src/app/shared/validators/checkbox-validator';
 import { Apollo } from 'apollo-angular';
 import { SubmitResponseQuery, ConsultationProfileCurrentUser } from '../consultation-profile.graphql';
@@ -15,7 +15,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
   templateUrl: './consultation-questionnaire.component.html',
   styleUrls: ['./consultation-questionnaire.component.scss']
 })
-export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit {
+export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @Input() profileData;
   @Output() openThankYouModal: EventEmitter<any> = new EventEmitter();
@@ -34,6 +34,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   consultationId: any;
   showConfirmEmailModal: boolean;
   questions: any;
+  scrollToError: boolean;
 
   constructor(private _fb: FormBuilder,
     private userService: UserService,
@@ -59,6 +60,13 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
 
   ngAfterViewInit() {
     this.subscribeUseTheResponseAnswer();
+  }
+
+  ngAfterViewChecked() {
+    if (this.scrollToError) {
+      scrollToFirstError('.error-msg', this.el.nativeElement);
+      this.scrollToError = false;
+    }
   }
 
   setSatisfactoryRating(value) {
@@ -145,8 +153,11 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
         this.showError = false;
       }
     } else {
+      if (!this.responseFeedback) {
+        this.consultationService.satisfactionRatingError.next(true);
+      }
       this.showError = true;
-      this.scrollToFirstInvalidControl();
+      this.scrollToError = true;
     }
   }
 
@@ -316,24 +327,6 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);
     });
-  }
-
-  scrollToFirstInvalidControl() {
-    let errorElementFound;
-    const checkErrorElementExist = setInterval(() => {
-      if (!errorElementFound) {
-        const firstErrorElement: HTMLElement = this.el.nativeElement.querySelector(
-          '.error-msg'
-        );
-        if (firstErrorElement) {
-          errorElementFound = true;
-          firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }
-    }, 100);
-    if (errorElementFound) {
-      clearInterval(checkErrorElementExist);
-    }
   }
 
   showPublicResponseOption() {

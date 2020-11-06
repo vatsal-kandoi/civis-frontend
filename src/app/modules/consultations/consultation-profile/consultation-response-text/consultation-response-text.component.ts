@@ -40,6 +40,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   showConfirmEmailModal: boolean;
   showError: boolean;
   responseSubmitLoading: boolean;
+  scrollToError: any;
 
   constructor(
     private userService: UserService,
@@ -66,6 +67,10 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
 
   ngAfterViewChecked() {
     this.editIframe();
+    if (this.scrollToError) {
+      scrollToFirstError('.error-msg', this.el.nativeElement);
+      this.scrollToError = false;
+    }
   }
 
   createSatisfactionRating() {
@@ -263,8 +268,11 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
         this.showError = false;
       }
     } else {
+      if (!this.responseFeedback) {
+        this.consultationService.satisfactionRatingError.next(true);
+      }
       this.showError = true;
-      scrollToFirstError('.error-msg', this.el.nativeElement);
+      this.scrollToError = true;
     }
   }
 

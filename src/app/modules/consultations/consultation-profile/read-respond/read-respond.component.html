@@ -25,9 +25,5 @@
   </div>   
 </section>
 
-<app-feedback-modal *ngIf="showFeedbackModal" 
-[consultationResponse]="consultationResponse" (closeFeedbackModal)="showThankYouModal = true ; showFeedbackModal = false">
-</app-feedback-modal>
-
 <app-thank-you-modal *ngIf="showThankYouModal" [profileData]="profileData" (closeThankYouModal)="showThankYouModal = false">
 </app-thank-you-modal>

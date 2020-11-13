@@ -28,7 +28,6 @@ import { ConsultationQuestionnaireComponent } from './consultation-profile/consu
 import { ResponseFooterComponent } from './consultation-profile/response-footer/response-footer.component';
 import { ThankYouModalComponent } from './consultation-profile/thank-you-modal/thank-you-modal.component';
 import { ConsultationResponseTextComponent } from './consultation-profile/consultation-response-text/consultation-response-text.component';
-import { FeedbackModalComponent } from './consultation-profile/feedback-modal/feedback-modal.component';
 import {
     ConsultationPublicResponsesComponent
  } from './consultation-profile/consultation-public-responses/consultation-public-responses.component';
@@ -76,7 +75,6 @@ import {
         ResponseFooterComponent,
         ThankYouModalComponent,
         ConsultationResponseTextComponent,
-        FeedbackModalComponent,
         ConsultationPublicResponsesComponent,
         SatisfactionRatingDistributionComponent,
         ResponseContainerComponent,

@@ -62,7 +62,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     this.getCurrentUser();
     this.subscribeUseTheResponseText();
     this.getResponseText();
-    this.createSatisfactionRating();
+    this.createResponse();
   }
 
   ngAfterViewChecked() {
@@ -73,7 +73,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     }
   }
 
-  createSatisfactionRating() {
+  createResponse() {
     this.consultationService.submitResponseText
     .subscribe((status) => {
       if (status) {
@@ -154,7 +154,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     }
   }
 
-  enableSubmitResponse(value) {
+  onResponseTextChange(value) {
     if (!value) {
       return;
     } else {

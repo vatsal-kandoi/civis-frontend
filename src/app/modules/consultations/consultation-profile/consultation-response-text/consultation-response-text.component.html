@@ -16,7 +16,7 @@
         <ckeditor
         [(ngModel)]="responseText"
         [config]="ckeConfig"
-        (change)="enableSubmitResponse($event)"
+        (change)="onResponseTextChange($event)"
         (blur)="autoSave(responseText)"
         debounce="0">
         </ckeditor>

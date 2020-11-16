@@ -7,6 +7,7 @@ import { ConsultationsService } from 'src/app/shared/services/consultations.serv
 import { filter } from 'rxjs/operators';
 import * as moment from 'moment';
 import { getSocialLink } from '../../consultation-profile/socialLink.function';
+import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
 
 
 @Component({
@@ -31,6 +32,8 @@ export class ResponseFooterComponent implements OnInit {
   shareBtnClicked: any;
   getSocialLink  = getSocialLink;
   currentUrl: string;
+  activeRoundNumber: any;
+  responseRounds: any;
 
   constructor(private userService: UserService,
               private errorService: ErrorService,
@@ -80,6 +83,8 @@ export class ResponseFooterComponent implements OnInit {
   subscribeProfileData() {
     this.consultationService.consultationProfileData.subscribe((data) => {
       this.profileData = data;
+      this.responseRounds = this.profileData.responseRounds;
+      this.activeRoundNumber = this.getActiveRound(this.responseRounds);
     });
   }
 
@@ -241,6 +246,16 @@ export class ResponseFooterComponent implements OnInit {
     }
     return;
   }
+
+  getActiveRound(responseRounds) {
+    if (responseRounds && responseRounds.length) {
+      const activeRound  = responseRounds.find((round) => round.active);
+      if (!isObjectEmpty(activeRound)) {
+        return activeRound.roundNumber;
+      }
+    }
+  return;
+}
 
 }
 

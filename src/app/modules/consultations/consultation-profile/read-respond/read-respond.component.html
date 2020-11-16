@@ -16,7 +16,7 @@
       </app-consultation-questionnaire>
     </div>
     <ng-template #responseTextContainer>
-      <app-consultation-response-text [profileData]="profileData" (openFeedbackModal)="openFeedbackModal($event)"></app-consultation-response-text>
+      <app-consultation-response-text [profileData]="profileData" (openThankYouModal)="showThankYouModal = true"></app-consultation-response-text>
     </ng-template>
   </div>
   <div *ngIf="profileData?.reviewType !== 'policy'">
@@ -24,10 +24,6 @@
     <app-consultation-public-responses></app-consultation-public-responses>
   </div>   
 </section>
-
-<app-feedback-modal *ngIf="showFeedbackModal" 
-[consultationResponse]="consultationResponse" (closeFeedbackModal)="showThankYouModal = true ; showFeedbackModal = false">
-</app-feedback-modal>
 
 <app-thank-you-modal *ngIf="showThankYouModal" [profileData]="profileData" (closeThankYouModal)="showThankYouModal = false">
 </app-thank-you-modal>

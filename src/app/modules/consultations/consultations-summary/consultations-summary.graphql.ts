@@ -26,7 +26,7 @@ const fragments = {
 
 export const ConsultationProfileQuery = gql`
   query consultationProfile($id: Int!, $responseToken: String!) {
-    consultationProfile(id: $id) {
+    consultationProfile(id: $id, responseToken: $responseToken) {
       id
       title
       summary

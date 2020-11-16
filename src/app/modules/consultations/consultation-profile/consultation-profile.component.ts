@@ -9,7 +9,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie';
 
 
 
@@ -60,7 +60,7 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
     }, err => {
       const e = new Error(err);
       if (e.message.includes('Invalid Access Token')) {
-        this.cookieService.set('loginCallbackUrl', this.router.url);
+        this.cookieService.put('loginCallbackUrl', this.router.url);
         this.router.navigate(['/auth-private']);
       } else {
         this.errorService.showErrorModal(err);

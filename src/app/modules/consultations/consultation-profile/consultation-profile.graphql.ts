@@ -107,6 +107,7 @@ export const ConsultationProfile = gql`
 export const ConsultationProfileCurrentUser = gql`
   query consultationProfileCurrentUser($id: Int!) {
     consultationProfile(id: $id) {
+      enforcePrivateResponse
       id
       title
       summary
@@ -239,6 +240,7 @@ export const SubmitResponseQuery = gql`
         firstName
       }
       consultation {
+        enforcePrivateResponse
         id
         title
         respondedOn

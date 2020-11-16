@@ -18,7 +18,7 @@
           {{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}
         </span>
       </div>
-      <div class="share-block"  (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true">
+      <div class="share-block"  (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true" *ngIf="profileData?.visibility === 'public_consultation'">
           <div class="share-block__position">
             <div #shareBlockElement *ngIf="showShareBlock && (responseId && responseId === response?.node?.id)" class="share-pop-up">
                 <a  class="share-btn"
@@ -60,7 +60,7 @@
         </span>
       </div>
     </div>
-    <div *ngIf="showCreateResponse()">
+    <div *ngIf="showCreateResponse() && activeRoundNumber === response?.node?.roundNumber">
       <button class="app-btn response-btn"
         (click)="useThisResponse(response?.node)">{{'Use this response' | translate}}</button>
     </div>

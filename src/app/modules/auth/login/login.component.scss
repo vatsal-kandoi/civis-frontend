@@ -66,11 +66,13 @@
                 line-height: 28px;
                 color: $white;
                 margin-bottom: 5px;
+                text-transform: capitalize;
             }
 
             &__sub-heading {
                 font-size: 14px;
                 color: $white;
+                text-transform: capitalize;
             }
 
             &__message {

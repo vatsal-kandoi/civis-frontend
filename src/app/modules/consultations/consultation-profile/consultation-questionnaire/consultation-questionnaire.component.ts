@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
-import { isObjectEmpty, checkPropertiesPresence } from '../../../../shared/functions/modular.functions';
+import { isObjectEmpty, checkPropertiesPresence, scrollToFirstError } from '../../../../shared/functions/modular.functions';
 import { atLeastOneCheckboxCheckedValidator } from 'src/app/shared/validators/checkbox-validator';
 import { Apollo } from 'apollo-angular';
 import { SubmitResponseQuery, ConsultationProfileCurrentUser } from '../consultation-profile.graphql';
@@ -15,7 +15,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
   templateUrl: './consultation-questionnaire.component.html',
   styleUrls: ['./consultation-questionnaire.component.scss']
 })
-export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit {
+export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @Input() profileData;
   @Output() openThankYouModal: EventEmitter<any> = new EventEmitter();
@@ -34,12 +34,14 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   consultationId: any;
   showConfirmEmailModal: boolean;
   questions: any;
+  scrollToError: boolean;
 
   constructor(private _fb: FormBuilder,
     private userService: UserService,
     private consultationService: ConsultationsService,
     private apollo: Apollo,
-    private errorService: ErrorService) {
+    private errorService: ErrorService,
+    private el: ElementRef) {
     this.questionnaireForm = this._fb.group({});
     this.consultationService.consultationId$
     .pipe(
@@ -58,6 +60,13 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
 
   ngAfterViewInit() {
     this.subscribeUseTheResponseAnswer();
+  }
+
+  ngAfterViewChecked() {
+    if (this.scrollToError) {
+      scrollToFirstError('.error-msg', this.el.nativeElement);
+      this.scrollToError = false;
+    }
   }
 
   setSatisfactoryRating(value) {
@@ -133,7 +142,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   }
 
   submitAnswer() {
-    if (!this.validCurrentUser()) {
+    if (!this.validCurrentUser() || this.responseSubmitLoading) {
       return;
     }
     if (this.questionnaireForm.valid && this.responseFeedback) {
@@ -144,7 +153,11 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
         this.showError = false;
       }
     } else {
+      if (!this.responseFeedback) {
+        this.consultationService.satisfactionRatingError.next(true);
+      }
       this.showError = true;
+      this.scrollToError = true;
     }
   }
 
@@ -314,6 +327,16 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);
     });
+  }
+
+  showPublicResponseOption() {
+    if (this.profileData && this.profileData.enforcePrivateResponse) {
+      return false;
+    }
+    if (this.longTextAnswer && this.templateText) {
+      return this.longTextAnswer !== this.templateText;
+    }
+    return true;
   }
 
 }

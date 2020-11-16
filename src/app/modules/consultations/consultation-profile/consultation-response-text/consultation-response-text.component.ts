@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter, AfterViewChecked } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
-import { filter } from 'rxjs/operators';
-import { isObjectEmpty, checkPropertiesPresence } from 'src/app/shared/functions/modular.functions';
+import { filter, map } from 'rxjs/operators';
+import { isObjectEmpty, checkPropertiesPresence, scrollToFirstError } from 'src/app/shared/functions/modular.functions';
 import { Router } from '@angular/router';
+import { Apollo } from 'apollo-angular';
+import { ConsultationProfileCurrentUser, SubmitResponseQuery } from '../consultation-profile.graphql';
+import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 
 @Component({
   selector: 'app-consultation-response-text',
@@ -15,7 +18,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   @Input() profileData;
   @ViewChild('responseIndex', { read: ElementRef, static: false }) responseIndex: ElementRef<any>;
   @ViewChild('responseContainer', { read: ElementRef, static: false }) responseContainer: ElementRef<any>;
-  @Output() openFeedbackModal: EventEmitter<any> = new EventEmitter();
+  @Output() openThankYouModal: EventEmitter<any> = new EventEmitter();
 
 
 
@@ -33,11 +36,19 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   usingTemplate: boolean;
   responseVisibility: any;
   customStyleAdded: any;
+  responseFeedback: any;
+  showConfirmEmailModal: boolean;
+  showError: boolean;
+  responseSubmitLoading: boolean;
+  scrollToError: any;
 
   constructor(
     private userService: UserService,
     private consultationService: ConsultationsService,
-    private router: Router) {
+    private router: Router,
+    private el: ElementRef,
+    private apollo: Apollo,
+    private errorService: ErrorService) {
       this.consultationService.consultationId$
       .pipe(
         filter(i => i !== null)
@@ -51,42 +62,41 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     this.getCurrentUser();
     this.subscribeUseTheResponseText();
     this.getResponseText();
-    this.scrollToCreateResponse();
-    this.createSatisfactionRating();
+    this.createResponse();
   }
 
   ngAfterViewChecked() {
     this.editIframe();
+    if (this.scrollToError) {
+      scrollToFirstError('.error-msg', this.el.nativeElement);
+      this.scrollToError = false;
+    }
   }
 
-  createSatisfactionRating() {
-    this.consultationService.openFeedbackModal
+  createResponse() {
+    this.consultationService.submitResponseText
     .subscribe((status) => {
       if (status) {
-        this.openFeedbackRatingModal();
+        this.submitAnswer();
       }
     });
   }
 
-  openFeedbackRatingModal() {
-    if (this.currentUser) {
-      if (this.responseText) {
-        const consultationResposne = this.getConsultationResponse();
-        if (!isObjectEmpty(consultationResposne)) {
-          this.openFeedbackModal.emit(consultationResposne);
-        }
+  subscribeProfileData() {
+    this.consultationService.consultationProfileData.subscribe((data) => {
+      if (data) {
+        this.profileData = data;
       }
-    } else {
-      this.router.navigateByUrl('/auth');
-      this.consultationService.enableSubmitResponse.next(false);
-    }
+    });
   }
+
 
   getConsultationResponse() {
     const consultationResponse =  {
       consultationId: this.consultationId,
       visibility: this.responseVisibility ? 'shared' : 'anonymous',
-      responseText: this.responseText
+      responseText: this.responseText,
+      satisfactionRating: this.responseFeedback,
     };
     if (checkPropertiesPresence(consultationResponse)) {
       consultationResponse['templateId'] = this.templateId ? this.templateId : null;
@@ -118,7 +128,6 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
           if (consultation.templatesText) {
             this.showPublicResponseOption = false;
           }
-          this.consultationService.enableSubmitResponse.next(true);
         }
       }
     }
@@ -145,9 +154,8 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     }
   }
 
-  enableSubmitResponse(value) {
+  onResponseTextChange(value) {
     if (!value) {
-      this.consultationService.enableSubmitResponse.next(false);
       return;
     } else {
       if (this.usingTemplate) {
@@ -160,7 +168,6 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
       } else {
         this.showPublicResponseOption = true;
       }
-      this.consultationService.enableSubmitResponse.next(true);
       return;
     }
   }
@@ -238,21 +245,66 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     });
   }
 
-  scrollToCreateResponse() {
-    this.consultationService.scrollToCreateResponse
-    .subscribe((scrollTo) => {
-      if (scrollTo) {
-        window.scrollTo({
-          top: this.responseIndex.nativeElement.offsetTop - 80,
-          behavior: 'smooth',
-        });
-        this.consultationService.scrollToCreateResponse.next(false);
-      }
-    });
-  }
-
   scrollToResponses() {
     this.consultationService.scrollToPublicResponse.next(true);
+  }
+
+  validCurrentUser() {
+    if (this.currentUser && !this.currentUser.confirmedAt) {
+      this.showConfirmEmailModal = true;
+      return false;
+    }
+    return true;
+  }
+
+  submitAnswer() {
+    if (!this.validCurrentUser() || this.responseSubmitLoading) {
+      return;
+    }
+    if (this.responseText && this.responseFeedback) {
+      const consultationResponse = this.getConsultationResponse();
+      if (!isObjectEmpty(consultationResponse)) {
+        this.submitResponse(consultationResponse);
+        this.showError = false;
+      }
+    } else {
+      if (!this.responseFeedback) {
+        this.consultationService.satisfactionRatingError.next(true);
+      }
+      this.showError = true;
+      this.scrollToError = true;
+    }
+  }
+
+  submitResponse(consultationResponse) {
+    this.responseSubmitLoading = true;
+    this.apollo.mutate({
+      mutation: SubmitResponseQuery,
+      variables: {
+        consultationResponse: consultationResponse
+      },
+      update: (store, {data: res}) => {
+        const variables = {id: this.consultationId};
+        const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
+        if (res) {
+          resp.consultationProfile.respondedOn = res.consultationResponseCreate.consultation.respondedOn;
+          resp.consultationProfile.sharedResponses = res.consultationResponseCreate.consultation.sharedResponses;
+          resp.consultationProfile.responseSubmissionMessage = res.consultationResponseCreate.consultation.responseSubmissionMessage;
+          resp.consultationProfile.satisfactionRatingDistribution =
+            res.consultationResponseCreate.consultation.satisfactionRatingDistribution;
+        }
+        store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
+      }
+    })
+    .pipe (
+      map((res: any) => res.data.consultationResponseCreate)
+    )
+    .subscribe(() => {
+      this.openThankYouModal.emit();
+    }, err => {
+      this.responseSubmitLoading = false;
+      this.errorService.showErrorModal(err);
+    });
   }
 
 }

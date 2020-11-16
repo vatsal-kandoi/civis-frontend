@@ -44,7 +44,7 @@
             <p class="success-date m-0">{{convertDateFormat(profile?.respondedOn)}}</p>
           </div>
         </div>
-        <div class="share-block">
+        <div class="share-block" *ngIf="profile?.visibility === 'public_consultation'">
           <div class="share-block__position">
             <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">
                 <a  class="share-btn"
@@ -120,7 +120,7 @@
       </ng-template>
     </div>
     <div class="d-flex justify-content-between">
-      <p class="count-text m-0">{{'DRAFT MADE PUBLIC ON' | translate}}</p>
+      <p class="count-text m-0">{{profile?.visibility === 'public_consultation' ?  'DRAFT MADE PUBLIC ON'  : 'CONSULTATION PUBLISHED ON' | translate}}</p>
       <p class="count-number bold-text text-right m-0">{{convertDateFormat(profile?.updatedAt)}}</p>
     </div>
   </div>

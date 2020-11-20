@@ -8,6 +8,7 @@ export const ResponseProfileQuery = gql`
             responseText
             createdAt
             updatedAt
+            publishedAt
             consultation {
                 id
                 title
@@ -37,6 +38,7 @@ export const ResponseProfileQuery = gql`
                   totalCount
                 }
                 updatedAt
+                publishedAt
                 questions {
                   id
                   questionText

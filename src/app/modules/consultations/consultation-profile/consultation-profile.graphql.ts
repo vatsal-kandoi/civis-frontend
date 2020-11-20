@@ -72,6 +72,7 @@ export const ConsultationProfile = gql`
         totalCount
       }
       updatedAt
+      publishedAt
       questions {
         id
         questionText
@@ -155,6 +156,7 @@ export const ConsultationProfileCurrentUser = gql`
         totalCount
       }
       updatedAt
+      publishedAt
       questions {
         id
         questionText

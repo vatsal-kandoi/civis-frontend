@@ -200,13 +200,13 @@
                 </div>
               </div>
               <div class="input-box col-12">
-                <label for="company">Organsisation/Department</label>
+                <label for="company">Organisation/Department</label>
                 <div class="input-box__border">
                   <input placeholder="Company Name" type="text" id="company" #company="ngModel" name="company"
                     [(ngModel)]="signupObject.company" />
                 </div>
                 <div *ngIf="company.invalid && (company.touched || signupForm.submitted)" class="error-msg">
-                  <div>Invalid Organsisation/Department</div>
+                  <div>Invalid Organisation/Department</div>
                 </div>
               </div>
 
@@ -224,7 +224,7 @@
                 size="invisible"></re-captcha>
               <div class="col-12">
                 <button class="app-btn secondary get-start-btn" (click)="checkForCaptcha()">
-                  <p class="m-auto">Finish Setup</p>
+                  <p class="m-auto">Complete Sign Up</p>
                 </button>
               </div>
             </div>

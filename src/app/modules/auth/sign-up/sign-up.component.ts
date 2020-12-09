@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { CaseStudiesListQuery } from '../auth.graphql';
 import { interval } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class SignUpComponent implements OnInit {
 
 
   constructor(private apollo: Apollo,
+              private authService: AuthService,
               private tokenService: TokenService,
               private errorService: ErrorService,
               private userService: UserService,
@@ -57,18 +59,7 @@ export class SignUpComponent implements OnInit {
   }
 
   makeCaseStudiesList() {
-    const variables = {
-      sort: 'created_at',
-      sortDirection: 'desc'
-    };
-    this.apollo.query({
-      query: CaseStudiesListQuery,
-      variables: variables
-    })
-    .pipe(
-      map((res: any) => res.data.caseStudyList)
-    )
-    .subscribe((res: any) => {
+    this.authService.getCaseStudiesList().subscribe((res: any) => {
       this.caseStudyList = res.data;
     });
   }

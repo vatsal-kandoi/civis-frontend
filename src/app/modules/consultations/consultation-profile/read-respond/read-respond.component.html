@@ -12,11 +12,11 @@
 
   <div *ngIf="showCreateResponse()">
     <div *ngIf="questionnaireExist ; else responseTextContainer">
-      <app-consultation-questionnaire [profileData]="profileData" (openThankYouModal)="showThankYouModal = true">
+      <app-consultation-questionnaire [profileData]="profileData" (openThankYouModal)="showThankYouModal = true; earnedPoints = $event">
       </app-consultation-questionnaire>
     </div>
     <ng-template #responseTextContainer>
-      <app-consultation-response-text [profileData]="profileData" (openThankYouModal)="showThankYouModal = true"></app-consultation-response-text>
+      <app-consultation-response-text [profileData]="profileData" (openThankYouModal)="showThankYouModal = true; earnedPoints = $event"></app-consultation-response-text>
     </ng-template>
   </div>
   <div *ngIf="profileData?.reviewType !== 'policy'">
@@ -25,5 +25,5 @@
   </div>   
 </section>
 
-<app-thank-you-modal *ngIf="showThankYouModal" [profileData]="profileData" (closeThankYouModal)="showThankYouModal = false">
+<app-thank-you-modal *ngIf="showThankYouModal" [points]="earnedPoints" [profileData]="profileData" (closeThankYouModal)="showThankYouModal = false">
 </app-thank-you-modal>

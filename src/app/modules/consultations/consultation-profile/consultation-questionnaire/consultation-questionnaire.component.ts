@@ -321,8 +321,8 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
     .pipe (
       map((res: any) => res.data.consultationResponseCreate)
     )
-    .subscribe(() => {
-      this.openThankYouModal.emit();
+    .subscribe((res) => {
+      this.openThankYouModal.emit(res.points);
     }, err => {
       this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);

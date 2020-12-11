@@ -8,6 +8,8 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +22,11 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   };
+  caseStudyList = [];
+  activeCaseStudy = 0;
 
   constructor(private apollo: Apollo,
+              private authService: AuthService,
               private userService: UserService,
               private tokenService: TokenService,
               private errorService: ErrorService,
@@ -31,6 +36,14 @@ export class LoginComponent implements OnInit {
               ) { }
 
   ngOnInit() {
+    this.makeCaseStudiesList();
+    this.rotateFeature();
+  }
+
+  makeCaseStudiesList() {
+    this.authService.getCaseStudiesList().subscribe((res: any) => {
+      this.caseStudyList = res.data;
+    });
   }
 
   submit(isValid: boolean) {
@@ -65,6 +78,16 @@ export class LoginComponent implements OnInit {
   onLoggedIn() {
     this.tokenService.tokenHandler();
     this.userService.manageUserToken();
+  }
+
+  rotateFeature() {
+    interval(5000).subscribe(() => {
+      if (this.activeCaseStudy === 2) {
+        this.activeCaseStudy = 0;
+      } else {
+        this.activeCaseStudy++;
+      }
+    });
   }
 
   // redirectTo(socialPlatform) {

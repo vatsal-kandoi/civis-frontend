@@ -9,6 +9,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { CookieService } from 'ngx-cookie';
 import { CaseStudiesListQuery } from '../auth.graphql';
+import { interval } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
   activeCaseStudy = 0;
 
   constructor(private apollo: Apollo,
+              private authService: AuthService,
               private userService: UserService,
               private tokenService: TokenService,
               private errorService: ErrorService,
@@ -35,21 +38,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.makeCaseStudiesList();
+    this.rotateFeature();
   }
 
   makeCaseStudiesList() {
-    const variables = {
-      sort: 'created_at',
-      sortDirection: 'desc'
-    };
-    this.apollo.query({
-      query: CaseStudiesListQuery,
-      variables: variables
-    })
-    .pipe(
-      map((res: any) => res.data.caseStudyList)
-    )
-    .subscribe((res: any) => {
+    this.authService.getCaseStudiesList().subscribe((res: any) => {
       this.caseStudyList = res.data;
     });
   }
@@ -97,6 +90,16 @@ export class LoginComponent implements OnInit {
         window.location.href = `${this.graphqlService.environment.api}/signin_facebook`;
         break;
     }
+  }
+
+  rotateFeature() {
+    interval(5000).subscribe(() => {
+      if (this.activeCaseStudy === 2) {
+        this.activeCaseStudy = 0;
+      } else {
+        this.activeCaseStudy++;
+      }
+    });
   }
 
 }

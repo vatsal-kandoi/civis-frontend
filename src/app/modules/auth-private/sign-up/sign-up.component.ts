@@ -12,6 +12,8 @@ import { NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import gql from 'graphql-tag';
 import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { interval } from 'rxjs';
 
 const ResendEmailConfirmationMutation = gql`
   mutation resendEmail($email: String!) {
@@ -51,9 +53,11 @@ export class SignUpComponent implements OnInit {
   consultationId: any;
   invitationToken: any;
   showLogoutModal: boolean;
-
+  caseStudyList = [];
+  activeCaseStudy = 0;
 
   constructor(private apollo: Apollo,
+              private authService: AuthService,
               private tokenService: TokenService,
               private errorService: ErrorService,
               private userService: UserService,
@@ -68,6 +72,14 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
     this.subscribeToSearch();
     this.onInvitationSignup();
+    this.makeCaseStudiesList();
+    this.rotateFeature();
+  }
+
+  makeCaseStudiesList() {
+    this.authService.getCaseStudiesList().subscribe((res: any) => {
+      this.caseStudyList = res.data;
+    });
   }
 
   nextPage(){
@@ -304,6 +316,16 @@ export class SignUpComponent implements OnInit {
     this.userService.currentUser = null;
     this.userService.userLoaded$.next(false);
     this.router.navigateByUrl('/auth-private');
+  }
+
+  rotateFeature() {
+    interval(5000).subscribe(() => {
+      if (this.activeCaseStudy === 2) {
+        this.activeCaseStudy = 0;
+      } else {
+        this.activeCaseStudy++;
+      }
+    });
   }
 
 }

@@ -299,8 +299,8 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     .pipe (
       map((res: any) => res.data.consultationResponseCreate)
     )
-    .subscribe(() => {
-      this.openThankYouModal.emit();
+    .subscribe((res) => {
+      this.openThankYouModal.emit(res.points);
     }, err => {
       this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);

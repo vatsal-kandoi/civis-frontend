@@ -10,7 +10,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { CookieService } from 'ngx-cookie-service';
-import { ResendVerificationComponent } from './resendVerification/resendVerification.component';
 import { LogoutConfirmationComponent } from './logout-confirmation/logout-confirmation.component';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
@@ -29,7 +28,6 @@ import { PipesModule } from 'src/app/shared/pipes/pipes.module';
     SignUpComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResendVerificationComponent,
     LogoutConfirmationComponent
   ],
   providers: [CookieService]

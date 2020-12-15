@@ -9,10 +9,9 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-import { CaseStudiesListQuery } from '../auth.graphql';
+import { ResendEmailConfirmationMutation } from '../auth.graphql';
 import { interval } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
-
 
 @Component({
   selector: 'app-sign-up',
@@ -38,6 +37,7 @@ export class SignUpComponent implements OnInit {
   isCaptchaResolved: boolean;
   caseStudyList = [];
   activeCaseStudy = 0;
+  currentUser: any;
 
 
   constructor(private apollo: Apollo,
@@ -132,7 +132,16 @@ export class SignUpComponent implements OnInit {
             this.router.navigateByUrl(callbackUrl);
             this.cookieService.put('loginCallbackUrl', '');
           } else {
-            this.router.navigateByUrl('/profile');
+            this.userService.userLoaded$
+            .subscribe((exists: boolean) => {
+              if (exists) {
+                this.currentUser = this.userService.currentUser;
+                this.sendEmailVerification();
+              }
+            },
+            err => {
+              this.errorService.showErrorModal(err);
+            });
           }
           this.onSignUp();
         }
@@ -166,6 +175,20 @@ export class SignUpComponent implements OnInit {
         this.captchaRef.execute();
       }
     }
+  }
+
+  sendEmailVerification() {
+    const variables = {
+      email: this.currentUser.email
+    };
+    this.apollo.mutate({mutation: ResendEmailConfirmationMutation, variables: variables})
+    .subscribe ((res) => {
+      if (res) {
+        this.router.navigate(['/auth', 'verify-email']);
+      }
+    }, err => {
+      this.errorService.showErrorModal(err);
+    });
   }
 
   loadCities() {

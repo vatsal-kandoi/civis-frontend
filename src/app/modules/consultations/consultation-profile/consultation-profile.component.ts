@@ -71,7 +71,8 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
 
   updateConsultationStatus() {
     if ((this.consultationsService.checkClosed(this.profileData ? this.profileData.responseDeadline : null) === 'Closed')) {
-        this.consultationsService.consultationStatus.next('closed');
+      this.consultationsService.consultationStatus.next('closed');
+      return;
     }
     this.consultationsService.consultationStatus.next('active');
   }

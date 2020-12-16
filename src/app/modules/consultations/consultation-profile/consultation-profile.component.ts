@@ -56,7 +56,8 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
       map((res: any) => res.data.consultationProfile)
     )
     .subscribe((data: any) => {
-        this.profileData = data;
+      this.profileData = data;
+      this.updateConsultationStatus();
     }, err => {
       const e = new Error(err);
       if (e.message.includes('Invalid Access Token')) {
@@ -66,6 +67,13 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
         this.errorService.showErrorModal(err);
       }
     });
+  }
+
+  updateConsultationStatus() {
+    if ((this.consultationsService.checkClosed(this.profileData ? this.profileData.responseDeadline : null) === 'Closed')) {
+        this.consultationsService.consultationStatus.next('closed');
+    }
+    this.consultationsService.consultationStatus.next('active');
   }
 
   getCurrentUser() {

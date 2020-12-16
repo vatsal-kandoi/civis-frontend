@@ -19,7 +19,7 @@
               <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
             </a>
           </div>
-          <button class="btn-submit mt-3 mb-3 active" (click)='stepNext(profile?.respondedOn)' data-event="lead">
+          <button *ngIf="consultationStatus === 'active'" class="btn-submit mt-3 active" (click)='stepNext(profile?.respondedOn)' data-event="lead">
             <p class="m-0">
               <span>
                 <picture class="citizen-logo">
@@ -77,7 +77,7 @@
                 </a>
             </div>
           </div>
-          <div class="spread-btn">
+          <div class="spread-btn mt-3">
             <button data-event="click-sidebar-share" #spreadButtonElement class="btn-circular"
               (click)="showShareOptions = !showShareOptions">
               <span class="mr-2 clr-blue"><i class="fa fa-share"></i></span>

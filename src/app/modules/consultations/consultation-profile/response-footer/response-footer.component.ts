@@ -179,24 +179,11 @@ export class ResponseFooterComponent implements OnInit {
   }
 
   showCreateResponse() {
-    if ((this.checkClosed(this.profileData ? this.profileData.responseDeadline : null) === 'Closed')
+    if ((this.consultationService.checkClosed(this.profileData ? this.profileData.responseDeadline : null) === 'Closed')
         || !this.currentUser || (this.profileData && this.profileData.respondedOn)) {
         return false;
     }
     return true;
-  }
-
-  checkClosed(deadline) {
-    if (deadline) {
-      const today = moment();
-      const lastDate = moment(deadline);
-      const difference = lastDate.diff(today, 'days');
-      if (difference <= 0) {
-        return difference === 0 ? 'Last day to respond' : 'Closed';
-      } else {
-        return `Active`;
-      }
-    }
   }
 
   useThisResponse(response) {

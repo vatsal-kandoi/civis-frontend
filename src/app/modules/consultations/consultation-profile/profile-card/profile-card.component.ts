@@ -24,6 +24,7 @@ export class ProfileCardComponent implements OnInit, OnChanges {
   showShareOptions: boolean;
   currentUrl = '';
   showConfirmEmailModal: boolean;
+  consultationStatus: any;
 
   constructor(private consultationsService: ConsultationsService,
               private userService: UserService,
@@ -33,6 +34,7 @@ export class ProfileCardComponent implements OnInit, OnChanges {
   ngOnInit() {
       this.currentUrl = window.location.href;
       this.getCurrentUser();
+      this.watchConsultationStatus();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -175,6 +177,12 @@ export class ProfileCardComponent implements OnInit, OnChanges {
       }
     }
     this.consultationsService.submitResponseText.next(true);
+  }
+
+  watchConsultationStatus() {
+    this.consultationsService.consultationStatus.subscribe((status) => {
+      this.consultationStatus = status;
+    });
   }
 
 }

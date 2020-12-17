@@ -10,8 +10,6 @@ import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
 import { ResendEmailConfirmationMutation } from '../auth.graphql';
-import { interval } from 'rxjs';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -35,13 +33,10 @@ export class SignUpComponent implements OnInit {
   dropdownText = 'Begin Typing';
   reCAPTCHA_KEY: string;
   isCaptchaResolved: boolean;
-  caseStudyList = [];
-  activeCaseStudy = 0;
   currentUser: any;
 
 
   constructor(private apollo: Apollo,
-              private authService: AuthService,
               private tokenService: TokenService,
               private errorService: ErrorService,
               private userService: UserService,
@@ -54,14 +49,6 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeToSearch();
-    this.makeCaseStudiesList();
-    this.rotateFeature();
-  }
-
-  makeCaseStudiesList() {
-    this.authService.getCaseStudiesList().subscribe((res: any) => {
-      this.caseStudyList = res.data;
-    });
   }
 
   subscribeToSearch() {
@@ -216,16 +203,6 @@ export class SignUpComponent implements OnInit {
     if (this.signupForm.valid) {
       this.submit();
     }
-  }
-
-  rotateFeature() {
-    interval(5000).subscribe(() => {
-      if (this.activeCaseStudy === 2) {
-        this.activeCaseStudy = 0;
-      } else {
-        this.activeCaseStudy++;
-      }
-    });
   }
 
 }

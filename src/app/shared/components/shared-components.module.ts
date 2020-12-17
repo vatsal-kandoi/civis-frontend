@@ -18,7 +18,7 @@ import { CookieModule } from 'ngx-cookie';
 import { PipesModule } from '../pipes/pipes.module';
 import { PageContentRendererComponent } from './page-content-renderer/page-content-renderer.component';
 import { ResponseAnswersComponent } from './response-answers/response-answers.component';
-
+import { ResendVerificationComponent } from './resendVerification/resendVerification.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { ResponseAnswersComponent } from './response-answers/response-answers.co
     FooterComponent,
     ToastComponent,
     PageContentRendererComponent,
-    ResponseAnswersComponent
+    ResponseAnswersComponent,
+    ResendVerificationComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +54,8 @@ import { ResponseAnswersComponent } from './response-answers/response-answers.co
     FooterComponent,
     ToastComponent,
     PageContentRendererComponent,
-    ResponseAnswersComponent
+    ResponseAnswersComponent,
+    ResendVerificationComponent
   ],
   providers: [
     LinearLoaderService

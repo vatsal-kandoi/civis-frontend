@@ -21,3 +21,9 @@ export const CaseStudiesListQuery = gql`
         }
     }
 `;
+
+export const ResendEmailConfirmationMutation = gql`
+mutation resendEmail($email: String!) {
+  authResendVerificationEmail(email: $email)
+}
+`;

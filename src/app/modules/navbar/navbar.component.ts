@@ -44,6 +44,8 @@ export class NavbarComponent implements OnInit {
   ];
   activeTab: string;
   showConfirmEmailModal: boolean;
+  consultationStatus: any;
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -73,6 +75,7 @@ export class NavbarComponent implements OnInit {
     this.getCurrentUser();
     this.getActiveConsulationCount();
     this.getActiveTab();
+    this.watchConsultationStatus();
   }
 
   openMenu() {
@@ -236,15 +239,21 @@ export class NavbarComponent implements OnInit {
 
 
   changeMenu(event) {
-      switch (event.name) {
-        case 'Read & Respond':
-            this.routeToConsultation('read');
-          break;
-        case 'Discuss & Engage':
-            this.routeToConsultation('discuss');
-          break;
-        default:
-          break;
-      }
+    switch (event.name) {
+      case 'Read & Respond':
+          this.routeToConsultation('read');
+        break;
+      case 'Discuss & Engage':
+          this.routeToConsultation('discuss');
+        break;
+      default:
+        break;
     }
+  }
+
+  watchConsultationStatus() {
+    this.consultationService.consultationStatus.subscribe((status) => {
+      this.consultationStatus = status;
+    });
+  }
 }

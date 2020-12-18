@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   };
-  caseStudyList = [];
-  activeCaseStudy = 0;
 
   constructor(private apollo: Apollo,
               private authService: AuthService,
@@ -35,16 +33,7 @@ export class LoginComponent implements OnInit {
               private graphqlService: GraphqlService,
               ) { }
 
-  ngOnInit() {
-    this.makeCaseStudiesList();
-    this.rotateFeature();
-  }
-
-  makeCaseStudiesList() {
-    this.authService.getCaseStudiesList().subscribe((res: any) => {
-      this.caseStudyList = res.data;
-    });
-  }
+  ngOnInit() {}
 
   submit(isValid: boolean) {
     if (!isValid) {
@@ -78,16 +67,6 @@ export class LoginComponent implements OnInit {
   onLoggedIn() {
     this.tokenService.tokenHandler();
     this.userService.manageUserToken();
-  }
-
-  rotateFeature() {
-    interval(5000).subscribe(() => {
-      if (this.activeCaseStudy === 2) {
-        this.activeCaseStudy = 0;
-      } else {
-        this.activeCaseStudy++;
-      }
-    });
   }
 
   // redirectTo(socialPlatform) {

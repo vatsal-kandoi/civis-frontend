@@ -13,7 +13,7 @@
                   <p>
                     Thank you for your response.
                     <span *ngIf="profileData?.visibility === 'public_consultation'">
-                    You have scored {{points.toFixed(2)}} points for your response!
+                    You have scored {{points | number:'1.0-0'}} points for your response!
                     </span>
                   </p>
                   <p *ngIf="profileData?.responseSubmissionMessage ; else defaultContent"

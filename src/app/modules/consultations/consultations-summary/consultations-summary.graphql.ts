@@ -1,5 +1,29 @@
 import gql from 'graphql-tag';
 
+const fragments = {
+  responseRounds: gql`
+    fragment responseRounds on BaseConsultationType {
+        responseRounds {
+          active
+          id
+          questions {
+            id
+            isOptional
+            questionText
+            questionType
+            supportsOther
+            isOptional
+            subQuestions {
+              id
+              questionText
+            }
+          }
+          roundNumber
+        }
+    }
+  `,
+};
+
 export const ConsultationProfileQuery = gql`
   query consultationProfile($id: Int!, $responseToken: String!) {
     consultationProfile(id: $id, responseToken: $responseToken) {
@@ -17,15 +41,6 @@ export const ConsultationProfileQuery = gql`
       responseDeadline
       url
       consultationResponsesCount
-      questions {
-        id
-        questionText
-        questionType
-        subQuestions {
-          id
-          questionText
-        }
-      }
       ministry {
         id
         name
@@ -51,6 +66,11 @@ export const ConsultationProfileQuery = gql`
             answers
             downVoteCount
             responseText
+            roundNumber
+            consultation {
+              id
+              ... responseRounds
+            }
             templatesCount
             upVoteCount
             user {
@@ -66,6 +86,8 @@ export const ConsultationProfileQuery = gql`
         totalCount
       }
       updatedAt
+      ... responseRounds
     }
   }
-`
+  ${fragments.responseRounds}
+`;

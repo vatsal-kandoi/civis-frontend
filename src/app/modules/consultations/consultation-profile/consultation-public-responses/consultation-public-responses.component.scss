@@ -1,0 +1,24 @@
+.tabs-block {
+    display: flex;
+    p {
+      margin: 0 24px 0 0;
+      padding: 8px;
+      font-weight: normal;
+      font-size: 14px;
+      color: #172B4D;
+      cursor: pointer;
+    }
+    border-bottom: 1px solid #DFDFDF;
+    margin-bottom: 1rem;
+
+    .active-tab {
+      color: #E16D47;
+      border-bottom: 2px solid #E16D47;
+    }
+  }
+
+.no-responses-text {
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0.6;
+}

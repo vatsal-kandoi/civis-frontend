@@ -1,0 +1,40 @@
+<div class="response-container">
+    <div class="d-inline-flex align-items-center" *ngIf="type === 'public' ; else otherUser">
+        <img class="avatar avatar--42" 
+        appDefaultImage [type]="'user'"
+        [src]="'null'" />
+      <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
+    </div>
+    <ng-template #otherUser>
+        <div class="d-inline-flex align-items-center">
+            <div>
+              <img class="avatar avatar--42" 
+              appDefaultImage [type]="'user'"
+              [src]="'null'" />
+            </div>
+            <p class="regular-text bold-text m-0 ml-2">
+              {{'Citizen Leader [Name undisclosed]' | translate}}
+            </p>
+          </div>
+    </ng-template>
+    <p class="text-16" *ngIf="!response?.node?.answers" [innerHTML]="response.node?.responseText"></p>
+    <div *ngIf="response?.node?.answers">
+      <app-response-answers [response]="response?.node" [activeRoundNumber]="activeRoundNumber"></app-response-answers>
+    </div>
+    <div class="vote-section" *ngIf="type === 'public'">
+      <div class="vote-count">
+        <div>
+            <span><i class="fa fa-thumbs-up"></i></span>
+            <span>{{response.node?.upVoteCount ? response.node?.upVoteCount : '' }}</span>
+        </div>
+        <div>
+            <span class="ml-4"><i class="fa fa-thumbs-down"></i></span>
+            <span>{{ response.node?.downVoteCount ? response.node?.downVoteCount : ''}}</span>
+        </div>
+        <div>
+            <span class="ml-4 mr-2"><i class="fa fa-refresh"></i></span>
+            <span>{{response.node?.templatesCount ? response.node?.templatesCount : ''}}</span>
+        </div>
+      </div>
+    </div>
+  </div>

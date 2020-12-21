@@ -160,7 +160,7 @@ export class ProfileCardComponent implements OnInit, OnChanges {
   stepNext(hasResponseSubmited) {
     if (!this.currentUser) {
       this.router.navigateByUrl('/auth');
-      this.cookieService.put('loginCallbackUrl', this.router.url);
+      this.cookieService.put('loginCallbackUrl', this.router.url === '/' ? '' : this.router.url);
       return;
     }
 

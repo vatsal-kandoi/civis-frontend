@@ -35,6 +35,8 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   showConfirmEmailModal: boolean;
   questions: any;
   scrollToError: boolean;
+  responseRounds: any;
+  activeRoundNumber: any;
 
   constructor(private _fb: FormBuilder,
     private userService: UserService,
@@ -87,7 +89,9 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   subscribeProfileData() {
     this.consultationService.consultationProfileData.subscribe((data) => {
       this.profileData = data;
-      this.questionnaireForm = this.makeQuestionnaireModal();
+      this.questionnaireForm = this.makeQuestionnaireModal();
+      this.responseRounds = this.profileData.responseRounds;
+      this.activeRoundNumber = this.getActiveRound(this.responseRounds);
     });
   }
 
@@ -338,5 +342,15 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
     }
     return true;
   }
+
+  getActiveRound(responseRounds) {
+    if (responseRounds && responseRounds.length) {
+      const activeRound  = responseRounds.find((round) => round.active);
+      if (!isObjectEmpty(activeRound)) {
+        return activeRound.roundNumber;
+      }
+    }
+  return;
+}
 
 }

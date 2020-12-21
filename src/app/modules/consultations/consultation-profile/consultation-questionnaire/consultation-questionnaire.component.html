@@ -1,4 +1,11 @@
 <div class="paper-effect  mt-4 m-0-sm" #questionnaireContainer>
+    <div class="tabs-block" *ngIf="responseRounds.length > 1">
+      <p *ngFor="let round of responseRounds" 
+        (click)="setActiveRound(round.roundNumber)"
+        [ngClass]="{'active-tab': (activeRoundNumber === round?.roundNumber)}">
+        {{'Round ' + round.roundNumber}}
+      </p>
+    </div>
     <app-satisfaction-rating-selection (selectSatisfaction)="responseFeedback = $event"></app-satisfaction-rating-selection>
     <div class="question-box">
       <form [formGroup]="questionnaireForm">

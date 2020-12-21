@@ -1,0 +1,85 @@
+// Thankyou modal styles
+.thankyou-modal  {
+
+    .align-center {
+      display: flex !important;
+      align-items: center;
+    }
+  
+    .modal {
+      background: rgba(14, 115, 185, 0.6);
+      .modal-dialog {
+        max-width: 528px;
+        .modal-content {
+          .modal-body {
+            padding: 24px 20px 0;
+            border: 1px solid #EBECF0;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  
+    .thankyou-inner {
+  
+      .close-btn {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        background-color: transparent;
+        border: none;
+      }
+  
+      &__top {
+       text-align: center; 
+       padding-bottom: 24px;
+       .thankyou-img {
+         width: 64px;
+         height: 64px;
+       }
+       .thankyou-content {
+         margin-top: 24px;
+         p:nth-child(1) {
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 28px;
+          color: #151515;
+          margin-bottom: 8px;
+         }
+         p:nth-child(2) {
+          font-size: 16px;
+          color: rgba(21, 21, 21, 0.5);
+          line-height: 24px;
+          margin: 0;
+        }
+       }
+      }
+  
+      &__bottom {
+        padding-bottom: 24px;
+        border-top: 1px solid #D5DBE2;
+        .social-list {
+          display: grid;
+          grid-template-columns: repeat(5, 36px);
+          grid-gap: 24px;
+          justify-content: center;
+          margin-top: 24px;
+          .social-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all .2s linear;
+            cursor: pointer;
+            &:hover {
+              background-color: #F4F5F7;
+            }
+            img {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }

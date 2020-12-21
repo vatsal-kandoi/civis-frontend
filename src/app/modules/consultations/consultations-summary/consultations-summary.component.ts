@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { ConsultationProfileQuery } from './consultations-summary.graphql';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { CookieService } from 'ngx-cookie';
+import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
+import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 
 
 @Component({
@@ -26,11 +28,17 @@ export class ConsultationsSummaryComponent implements OnInit {
   currentLanguage: any;
   satisfactionRatingDistribution: any;
   useSummaryHindi: boolean;
+  activeRoundNumber: any;
+  responseRounds: any;
+  publicResponsesLength: any;
+  annonymousResponsesLength: any;
+  roundNumberExist: any;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apollo: Apollo,
               private errorService: ErrorService,
               private _cookieService: CookieService,
+              private consultationService: ConsultationsService,
               ) {
     this.activatedRoute.params.subscribe((param: any) => {
       this.consultationId = +param['id'];
@@ -73,10 +81,12 @@ export class ConsultationsSummaryComponent implements OnInit {
       )
       .subscribe((data: any) => {
           this.profileData = data;
-          this.responseQuestions = this.profileData.questions;
+          this.activeRoundNumber = this.getActiveRound(data);
+          this.responseRounds = this.profileData.responseRounds;
           this.satisfactionRatingDistribution = data.satisfactionRatingDistribution;
           this.getProfileSummary();
           this.responseList = data.responses.edges;
+          this.roundNumberExist = this.responseList.filter((response) => response.node.roundNumber).length;
           this.splitResponses(this.responseList);
       }, err => {
         const e = new Error(err);
@@ -91,11 +101,33 @@ export class ConsultationsSummaryComponent implements OnInit {
     if (responsesList.length) {
       this.annonymousResponses = responsesList.filter(response => (response.node.user === null || response.node.user === undefined));
       this.publicResponses = responsesList.filter(response => response.node.user !== null);
+      this.publicResponsesLength = this.publicResponses.filter((response) => response.node.roundNumber === this.activeRoundNumber).length;
+      this.annonymousResponsesLength =
+      this.annonymousResponses.filter((response) => response.node.roundNumber === this.activeRoundNumber).length;
       this.summaryData = {
         publicResponseCount : this.publicResponses.length,
         title: 'RESPONSES TO'
       };
     }
+  }
+
+  getActiveRound(profileData) {
+    if (profileData && profileData.responseRounds) {
+      const responseRounds = profileData.responseRounds;
+      if (responseRounds && responseRounds.length) {
+        const activeRound  = responseRounds.find((round) => round.active);
+        if (!isObjectEmpty(activeRound)) {
+          return activeRound.roundNumber;
+        }
+      }
+    }
+    return;
+  }
+
+  setActiveRound(roundNumber) {
+    this.activeRoundNumber = roundNumber;
+    this.publicResponsesLength = this.publicResponses.filter((response) => response.node.roundNumber === roundNumber).length;
+    this.annonymousResponsesLength = this.annonymousResponses.filter((response) => response.node.roundNumber === roundNumber).length;
   }
 
 }

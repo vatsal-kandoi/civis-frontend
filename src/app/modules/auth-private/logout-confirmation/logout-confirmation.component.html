@@ -4,11 +4,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <p class="confirm-text">Are you sure want to Log out from this account?</p>
+        <p class="confirm-text">Are you sure want to log out from this account?</p>
       </div>
       <div class="modal-footer">
-        <button class="cancel-btn" (click)="logoutConfirmationModal.hide()">Cancel</button>
-        <button class="logout-btn">Log out</button>
+        <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+        <button class="logout-btn" (click)="logoutUser()">Log out</button>
       </div>
     </div>
   </div>

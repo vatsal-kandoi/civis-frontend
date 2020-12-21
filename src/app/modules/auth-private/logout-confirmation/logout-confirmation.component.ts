@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
@@ -9,10 +9,22 @@ import { ModalDirective } from 'ngx-bootstrap';
 export class LogoutConfirmationComponent implements OnInit {
 
   @ViewChild('logoutConfirmationModal', { static: false }) logoutConfirmationModal: ModalDirective;
-  
+  @Output() logout: EventEmitter<any> = new EventEmitter();
+  @Output() close: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  logoutUser() {
+    this.logout.emit();
+    this.logoutConfirmationModal.hide();
+  }
+
+  closeModal() {
+    this.close.emit();
+    this.logoutConfirmationModal.hide();
   }
 
 }

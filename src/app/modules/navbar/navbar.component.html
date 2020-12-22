@@ -74,7 +74,7 @@
         </button>
       </div>
       <div class="nav-btns" *ngIf="!currentUser">
-        <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">{{'Log In / Sign Up' | translate}}</button>
+        <button class="btn btn-transparent auth-btn" (click)="onSignUp()">{{'Log In / Sign Up' | translate}}</button>
       </div>
       <div class="nav-btns profile-item pointer" *ngIf="currentUser"
         (click)="$event.preventDefault();$event.stopPropagation(); showProfilePopup()">
@@ -89,7 +89,7 @@
       
       <div class="mobile-space">
         <div class="mobile-space__auth" *ngIf="!currentUser">
-          <button class="nav-btn" [routerLink]="['/auth', 'sign-up']">{{'Sign Up' | translate}}</button>
+          <button class="nav-btn" (click)="onSignUp()">{{'Sign Up' | translate}}</button>
         </div>
         <div *ngIf="currentUser">
           <img class="avatar avatar--32" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
@@ -142,7 +142,7 @@
             <button class="btn-oval" (click)="closeMenu(); submitConsultation()">{{'Submit a Consultation' | translate}}</button>
           </div>
           <div class="nav-btn" *ngIf="!currentUser">
-            <button class="close-btn btn btn-transparent" (click)="closeMenu()" [routerLink]="['/auth', 'sign-up']">
+            <button class="close-btn btn btn-transparent" (click)="closeMenu(); onSignUp()">
               {{'Log In / Sign Up' | translate}}
             </button>
           </div>

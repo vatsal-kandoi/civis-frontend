@@ -60,8 +60,8 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
       this.updateConsultationStatus();
     }, err => {
       const e = new Error(err);
-      if (e.message.includes('Invalid Access Token')) {
-        this.cookieService.put('loginCallbackUrl', this.router.url);
+        if (e.message.includes('Invalid Access Token')) {
+        this.cookieService.put('loginCallbackUrl', this.router.url === '/' ? '' : this.router.url);
         this.router.navigate(['/auth-private']);
       } else {
         this.errorService.showErrorModal(err);

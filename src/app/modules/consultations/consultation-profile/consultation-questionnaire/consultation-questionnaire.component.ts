@@ -37,6 +37,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   scrollToError: boolean;
   responseRounds: any;
   activeRoundNumber: any;
+  respondedRounds = [];
 
   constructor(private _fb: FormBuilder,
     private userService: UserService,
@@ -92,13 +93,44 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       this.questionnaireForm = this.makeQuestionnaireModal();
       this.responseRounds = this.profileData.responseRounds;
       this.activeRoundNumber = this.getActiveRound(this.responseRounds);
+      this.respondedRounds = this.getRespondedRounds();
     });
   }
 
-  makeQuestionnaireModal() {
+  getRespondedRounds() {
+    const respondedRounds = [];
+    if (this.profileData) {
+      const anonymousResponses = this.profileData.anonymousResponses && this.profileData.anonymousResponses.edges;
+      const sharedResponses = this.profileData.sharedResponses  && this.profileData.sharedResponses.edges;
+      if (anonymousResponses && anonymousResponses.length) {
+        anonymousResponses.map((response: any) => {
+          if (response && response.node && response.node.user) {
+            respondedRounds.push(response.node.roundNumber);
+          }
+        });
+      }
+      if (sharedResponses && sharedResponses.length) {
+        sharedResponses.map((response: any) => {
+          if (response && response.node && response.node.user) {
+            if (this.currentUser && (this.currentUser.id === response.node.user.id)) {
+              respondedRounds.push(response.node.roundNumber);
+            }
+          }
+        });
+      }
+    }
+    return respondedRounds;
+  }
+
+  makeQuestionnaireModal(roundNumber?) {
     const responseRounds = this.profileData.responseRounds;
     if (responseRounds && responseRounds.length) {
-      const activeRound  = responseRounds.find((round) => round.active);
+      let activeRound;
+      if (roundNumber) {
+        activeRound  = responseRounds.find((round) => +round.roundNumber === +roundNumber);
+      } else {
+        activeRound  = responseRounds.find((round) => round.active);
+      }
       if (!isObjectEmpty(activeRound)) {
          this.questions = activeRound.questions;
           if (this.questions.length) {
@@ -351,6 +383,11 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       }
     }
   return;
-}
+  }
+
+  setActiveRound(roundNumber) {
+    this.activeRoundNumber = roundNumber;
+    this.questionnaireForm = this.makeQuestionnaireModal(this.activeRoundNumber);
+  }
 
 }

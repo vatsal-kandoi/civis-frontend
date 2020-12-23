@@ -107,6 +107,52 @@ export const ConsultationProfile = gql`
 export const ConsultationProfileCurrentUser = gql`
   query consultationProfileCurrentUser($id: Int!) {
     consultationProfile(id: $id) {
+      anonymousResponses {
+        edges {
+          node {
+            id
+            answers
+            consultation {
+              id
+              responseRounds{
+                active
+                id
+                questions {
+                  id
+                  isOptional
+                  questionText
+                  questionType
+                  supportsOther
+                  isOptional
+                  subQuestions {
+                    id
+                    questionText
+                  }
+                }
+                roundNumber
+              }
+            }
+            downVoteCount
+            responseText
+            roundNumber
+            templatesCount
+            upVoteCount
+            user {
+              id
+              firstName
+              profilePicture(resolution: "") {
+                id
+                url
+              }
+            }
+            votedAs {
+              id
+              voteDirection
+            }
+          }
+        }
+        totalCount
+      }
       enforcePrivateResponse
       id
       title

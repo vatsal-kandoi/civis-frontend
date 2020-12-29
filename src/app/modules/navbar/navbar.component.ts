@@ -7,6 +7,7 @@ import { ConsultationList } from './navbar.graphql';
 import { ConsultationProfileCurrentUser, ConsultationProfile } from '../consultations/consultation-profile/consultation-profile.graphql';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-navbar',
@@ -44,6 +45,8 @@ export class NavbarComponent implements OnInit {
   ];
   activeTab: string;
   showConfirmEmailModal: boolean;
+  consultationStatus: any;
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -51,6 +54,7 @@ export class NavbarComponent implements OnInit {
     private route: ActivatedRoute,
     private consultationService: ConsultationsService,
     private errorService: ErrorService,
+    private cookieService: CookieService,
     ) {
         this.consultationService.consultationId$
         .pipe(
@@ -73,6 +77,7 @@ export class NavbarComponent implements OnInit {
     this.getCurrentUser();
     this.getActiveConsulationCount();
     this.getActiveTab();
+    this.watchConsultationStatus();
   }
 
   openMenu() {
@@ -233,18 +238,32 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  onSignUp() {
+    if (this.currentUrl === 'consultations-profile') {
+      this.cookieService.put('loginCallbackUrl', this.router.url === '/' ? '' : this.router.url);
+      this.router.navigateByUrl('/auth');
+      return;
+    }
+    this.router.navigateByUrl('/auth');
+  }
 
 
   changeMenu(event) {
-      switch (event.name) {
-        case 'Read & Respond':
-            this.routeToConsultation('read');
-          break;
-        case 'Discuss & Engage':
-            this.routeToConsultation('discuss');
-          break;
-        default:
-          break;
-      }
+    switch (event.name) {
+      case 'Read & Respond':
+          this.routeToConsultation('read');
+        break;
+      case 'Discuss & Engage':
+          this.routeToConsultation('discuss');
+        break;
+      default:
+        break;
     }
+  }
+
+  watchConsultationStatus() {
+    this.consultationService.consultationStatus.subscribe((status) => {
+      this.consultationStatus = status;
+    });
+  }
 }

@@ -1,15 +1,17 @@
 import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { SignUpMutation, CitiesSearchQuery, LocationListQuery } from './sign-up.graphql';
+import { SignUpMutation, CitiesSearchQuery, LocationListQuery,
+  AuhtAcceptInviteMutation } from './sign-up.graphql';
 import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from 'rxjs/operators';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import gql from 'graphql-tag';
+import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
 
 const ResendEmailConfirmationMutation = gql`
   mutation resendEmail($email: String!) {
@@ -46,7 +48,9 @@ export class SignUpComponent implements OnInit {
   isCaptchaResolved: boolean;
   nextScreen:boolean = false;
   currentUser:any;
-  
+  consultationId: any;
+  invitationToken: any;
+  showLogoutModal: boolean;
 
   constructor(private apollo: Apollo,
               private tokenService: TokenService,
@@ -55,22 +59,29 @@ export class SignUpComponent implements OnInit {
               private router: Router,
               private graphqlService: GraphqlService,
               private cookieService: CookieService,
+              private route: ActivatedRoute,
               ) {
   this.reCAPTCHA_KEY = this.graphqlService.environment.RECAPTCHA_SITE_KEY;
   }
 
   ngOnInit() {
     this.subscribeToSearch();
+    this.onInvitationSignup();
   }
 
   nextPage(){
     if (!this.signupForm.valid) {
       return;
     } else {
+      if (this.invitationToken) {
+        this.submitAuthAcceptInvite();
+        return;
+      }
       this.signupObject.callbackUrl = this.cookieService.get('loginCallbackUrl');
       this.nextScreen = true;
-    } 
+    }
   }
+
   subscribeToSearch() {
     this.searchEmitter
       .pipe(
@@ -129,11 +140,46 @@ export class SignUpComponent implements OnInit {
     }
   }
 
+  submitAuthAcceptInvite() {
+    const {firstName, lastName, password} = this.signupObject;
+    const authVariables = {
+      firstName: firstName,
+      lastName: lastName,
+      password: password,
+      invitationToken: this.invitationToken,
+      consultationId: +this.consultationId
+    };
+    this.apollo.mutate({mutation: AuhtAcceptInviteMutation, variables: {auth: authVariables}})
+    .pipe(
+      map((res: any) => res.data.authAcceptInvite)
+    ).subscribe((token) => {
+      if (token) {
+        this.tokenService.storeToken(token);
+        this.getCurrentUser();
+        this.onSignUp();
+        this.userService.userLoaded$
+        .subscribe((exists: boolean) => {
+          if (exists) {
+            this.currentUser = this.userService.currentUser;
+            const url = `consultations/${this.consultationId}/read`;
+            this.router.navigateByUrl(url);
+          }
+        },
+        err => {
+          this.errorService.showErrorModal(err);
+        });
+      }
+    }, err => {
+      this.errorService.showErrorModal(err);
+    });
+  }
 
   submit() {
+
     if (!this.signupForm.valid || !this.isCaptchaResolved) {
       return;
     } else {
+
       const signupObject = {...this.signupObject};
       delete signupObject['agreedForTermsCondition'];
       delete signupObject['designation'];
@@ -234,6 +280,29 @@ export class SignUpComponent implements OnInit {
     if (this.signupForm.valid) {
       this.submit();
     }
+  }
+
+  onInvitationSignup() {
+    this.route.queryParams
+    .subscribe(async (params) =>  {
+      if (!isObjectEmpty(params)) {
+        const {email, first_name, last_name, consultation_id, invitation_token} = params;
+        this.consultationId = consultation_id;
+        this.signupObject.firstName = first_name;
+        this.signupObject.lastName = last_name;
+        this.signupObject.email = email;
+        this.invitationToken = invitation_token;
+      }
+    });
+  }
+
+  logoutInvitedUser() {
+    this.showLogoutModal = false;
+    this.invitationToken = null;
+    localStorage.removeItem('civis-token');
+    this.userService.currentUser = null;
+    this.userService.userLoaded$.next(false);
+    this.router.navigateByUrl('/auth-private');
   }
 
 }

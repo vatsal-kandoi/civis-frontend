@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { isObjectEmpty } from '../../functions/modular.functions';
+import { ConsultationsService } from '../../services/consultations.service';
 
 @Component({
   selector: 'app-response-answers',
@@ -7,60 +9,80 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ResponseAnswersComponent implements OnInit {
 
-  @Input() questions;
-  @Input() answers;
+  @Input() response;
   @Input() showOnlyLongTextAnswer: boolean;
+  @Input() activeRoundNumber;
   alignedData: any;
-  constructor() { }
+  activeRound: any;
+  questions;
+  answers;
+
+  constructor(private _cdRef: ChangeDetectorRef,
+      private consultationService: ConsultationsService) { }
 
   ngOnInit(): void {
     this.alignedData = this.mapAnswers();
+    this._cdRef.detectChanges();
   }
 
   mapAnswers() {
-    if (this.answers && this.answers.length) {
-      const responseAnswers = [];
-      this.answers.map((item) => {
-        let answer = {};
-        if (this.questions && this.questions.length) {
-          const responseQuestion = this.questions.find((question) => +question.id === +item.question_id);
-          if (responseQuestion) {
-          if (responseQuestion.questionType === 'multiple_choice' || responseQuestion.questionType === 'dropdown') {
-            answer = item.is_other ? this.getMultiChoiceAnswer(responseQuestion, item) :
-             this.getMultiChoiceAnswer(responseQuestion, item.answer);
-          } else  if (responseQuestion.questionType === 'checkbox') {
-            answer =  this.getCheckboxAnswer(responseQuestion, item);
-          } else {
-            if (item.is_other) {
-              answer = {
-                id: responseQuestion.id,
-                questionType: responseQuestion.questionType,
-                questionText: responseQuestion.questionText,
-                answer: item.other_option_answer
-              };
+    if (!isObjectEmpty(this.response)) {
+      this.answers = this.response.answers;
+      if (this.answers && this.answers.length) {
+        this.questions = this.getQuestions();
+        const responseAnswers = [];
+        this.answers.map((item) => {
+          let answer = {};
+          if (this.questions && this.questions.length) {
+            const responseQuestion = this.questions.find((question) => +question.id === +item.question_id);
+            if (responseQuestion) {
+            if (responseQuestion.questionType === 'multiple_choice' || responseQuestion.questionType === 'dropdown') {
+              answer = item.is_other ? this.getMultiChoiceAnswer(responseQuestion, item) :
+               this.getMultiChoiceAnswer(responseQuestion, item.answer);
+            } else  if (responseQuestion.questionType === 'checkbox') {
+              answer =  this.getCheckboxAnswer(responseQuestion, item);
             } else {
-              answer = {
-                id: responseQuestion.id,
-                questionType: responseQuestion.questionType,
-                questionText: responseQuestion.questionText,
-                answer: item.answer
-              };
+              if (item.is_other) {
+                answer = {
+                  id: responseQuestion.id,
+                  questionType: responseQuestion.questionType,
+                  questionText: responseQuestion.questionText,
+                  answer: item.other_option_answer
+                };
+              } else {
+                answer = {
+                  id: responseQuestion.id,
+                  questionType: responseQuestion.questionType,
+                  questionText: responseQuestion.questionText,
+                  answer: item.answer
+                };
+              }
             }
-
           }
-        }
-        }
-        if (this.showOnlyLongTextAnswer) {
-          if (answer['questionType'] === 'long_text') {
+          }
+          if (this.showOnlyLongTextAnswer) {
+            if (answer['questionType'] === 'long_text') {
+              responseAnswers.push(answer);
+            }
+          } else {
             responseAnswers.push(answer);
           }
-        } else {
-          responseAnswers.push(answer);
-        }
-      });
-      return responseAnswers;
+        });
+        return responseAnswers;
+      }
     }
     return;
+  }
+
+  getQuestions() {
+    let questions;
+    if (this.activeRoundNumber) {
+      questions =
+      this.consultationService.getQuestions(this.response.consultation, this.activeRoundNumber);
+    } else {
+      questions = this.consultationService.getQuestions(this.response.consultation);
+    }
+    return questions;
   }
 
   getCheckboxAnswer(responseQuestion, item) {
@@ -111,5 +133,6 @@ export class ResponseAnswersComponent implements OnInit {
     }
 
   }
+
 
 }

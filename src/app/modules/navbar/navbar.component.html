@@ -17,11 +17,13 @@
 
     <div class="app-navbar__center-item" *ngIf="currentUrl === 'consultations-profile'">
       <div class="profile-tab-wrapper">
-        <a class="profile-tab px-3" [ngClass]="activeTab === 'read & respond' ? 'active-tab' : ''"
+        <!-- <ng-container *ngIf="consultationStatus === 'active'"> // To Toggle Read and Respond based on consultation status uncomment it.--> 
+          <a class="profile-tab px-3" [ngClass]="activeTab === 'read & respond' ? 'active-tab' : ''"
           (click)="routeToConsultation('read')">
           <p>{{'Read & Respond' | translate}}</p>
           <p>{{'Submit your feedback' | translate}}</p>
         </a>
+        <!-- </ng-container> -->
         <ng-container *ngIf="reviewType !== 'policy'">
           <a class="profile-tab px-3" [ngClass]="activeTab === 'discuss & engage' ? 'active-tab' : ''"
             (click)="routeToConsultation('discuss')">
@@ -72,7 +74,7 @@
         </button>
       </div>
       <div class="nav-btns" *ngIf="!currentUser">
-        <button class="btn btn-transparent auth-btn" [routerLink]="['/auth', 'sign-up']">{{'Log In / Sign Up' | translate}}</button>
+        <button class="btn btn-transparent auth-btn" (click)="onSignUp()">{{'Log In / Sign Up' | translate}}</button>
       </div>
       <div class="nav-btns profile-item pointer" *ngIf="currentUser"
         (click)="$event.preventDefault();$event.stopPropagation(); showProfilePopup()">
@@ -87,7 +89,7 @@
       
       <div class="mobile-space">
         <div class="mobile-space__auth" *ngIf="!currentUser">
-          <button class="nav-btn" [routerLink]="['/auth', 'sign-up']">{{'Sign Up' | translate}}</button>
+          <button class="nav-btn" (click)="onSignUp()">{{'Sign Up' | translate}}</button>
         </div>
         <div *ngIf="currentUser">
           <img class="avatar avatar--32" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
@@ -140,7 +142,7 @@
             <button class="btn-oval" (click)="closeMenu(); submitConsultation()">{{'Submit a Consultation' | translate}}</button>
           </div>
           <div class="nav-btn" *ngIf="!currentUser">
-            <button class="close-btn btn btn-transparent" (click)="closeMenu()" [routerLink]="['/auth', 'sign-up']">
+            <button class="close-btn btn btn-transparent" (click)="closeMenu(); onSignUp()">
               {{'Log In / Sign Up' | translate}}
             </button>
           </div>

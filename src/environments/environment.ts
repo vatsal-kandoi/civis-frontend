@@ -5,21 +5,10 @@
 
 export const environment = {
   hmr: true,
-  production: false
-};
-
-export const staging = {
-  ... environment,
-  // ... {
-  //   api: 'YOURAPIURL'
-  // },
-};
-
-export const prod = {
-  ... environment,
-  // ... {
-  //   api: 'YOURAPIURL'
-  // }
+  development: true,
+  staging: false,
+  production: false,
+  api: ''
 };
 
 

@@ -44,7 +44,7 @@ export class DisqusComponent implements OnInit {
   }
 
   getSSO() {
-    this.http.post(`${this.graphqlService.appApiEndpoint}/disqus/sso`,
+    this.http.post(`https://4o9df1qcg8.execute-api.ap-south-1.amazonaws.com/dev/disqus/sso`,
       {
         userId: this.currentUser.id,
         username: `${this.currentUser.firstName} ${this.currentUser.lastName}`,

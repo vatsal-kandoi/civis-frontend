@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation,
+  OnChanges, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
-
 @Component({
   selector: 'app-profile-card',
   templateUrl: './profile-card.component.html',
@@ -12,7 +12,7 @@ import { CookieService } from 'ngx-cookie';
   encapsulation: ViewEncapsulation.None,
 
 })
-export class ProfileCardComponent implements OnInit, OnDestroy {
+export class ProfileCardComponent implements OnInit, OnChanges {
 
   @ViewChild('shareOptionsElement', { static: false }) shareOptionsElement: ElementRef;
   @ViewChild('spreadButtonElement', { static: false }) spreadButtonElement: ElementRef;
@@ -20,11 +20,11 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
   @Input() profile: any;
   @Input() summaryData: any;
 
-  enableSubmitResponse: boolean;
   currentUser: any;
   showShareOptions: boolean;
   currentUrl = '';
   showConfirmEmailModal: boolean;
+  consultationStatus: any;
 
   constructor(private consultationsService: ConsultationsService,
               private userService: UserService,
@@ -33,12 +33,22 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
       this.currentUrl = window.location.href;
-      this.CheckSubmitResponseEnabled();
       this.getCurrentUser();
+      this.watchConsultationStatus();
   }
 
-  ngOnDestroy() {
-    this.consultationsService.enableSubmitResponse.next(false);
+  ngOnChanges(changes: SimpleChanges) {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'profile': {
+            if (changes[propName].currentValue) {
+              this.profile = changes[propName].currentValue;
+            }
+          }
+        }
+      }
+    }
   }
 
   downloadReport() {
@@ -147,21 +157,10 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  CheckSubmitResponseEnabled() {
-    this.consultationsService.enableSubmitResponse
-    .subscribe((value) => {
-      if (value) {
-        this.enableSubmitResponse = true;
-      } else {
-        this.enableSubmitResponse = false;
-      }
-    });
-  }
-
   stepNext(hasResponseSubmited) {
     if (!this.currentUser) {
+      this.cookieService.put('loginCallbackUrl', this.router.url === '/' ? '' : this.router.url);
       this.router.navigateByUrl('/auth');
-      this.cookieService.put('loginCallbackUrl', this.router.url);
       return;
     }
 
@@ -171,10 +170,19 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     }
 
     if (!hasResponseSubmited) {
-      this.consultationsService.scrollToCreateResponse.next(true);
+      const questions = this.consultationsService.getQuestions(this.profile);
+      if (questions && questions.length) {
+        this.consultationsService.validateAnswers.next(true);
+        return;
+      }
     }
-    if (this.enableSubmitResponse) {
-      this.consultationsService.openFeedbackModal.next(true);
-    }
+    this.consultationsService.submitResponseText.next(true);
   }
+
+  watchConsultationStatus() {
+    this.consultationsService.consultationStatus.subscribe((status) => {
+      this.consultationStatus = status;
+    });
+  }
+
 }

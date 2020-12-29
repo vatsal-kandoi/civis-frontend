@@ -125,6 +125,15 @@ export const isObjectEmpty = obj => {
     return true;
 };
 
+export const checkPropertiesPresence = obj => {
+    for (const key in obj) {
+        if (obj[key] === null ||  obj[key] === '' || obj[key] === undefined) {
+          return false;
+        }
+      }
+      return true;
+};
+
 // Miscellaneous
 
 export function makeErrorText(
@@ -188,3 +197,11 @@ export function isMobile() {
         return false;
     }
 }
+
+export const scrollToFirstError = (selector, element) => {
+    const firstErrorElement: HTMLElement = element.querySelector(selector);
+    if (firstErrorElement) {
+        firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+};
+

@@ -23,6 +23,9 @@ export class ErrorComponent implements OnInit {
     this.errorService.showModal
       .subscribe(data => {
         if (data) {
+          if (this.errorService.customMessage) {
+            this.customMessage = this.errorService.customMessage;
+          }
           this.error = this.errorService.error;
           this.showModal = true;
           this.shouldReload = this.errorService.shouldReload;

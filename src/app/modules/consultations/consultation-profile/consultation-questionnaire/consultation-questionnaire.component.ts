@@ -97,6 +97,10 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       if (this.respondedRounds.includes(this.activeRoundNumber)) {
         this.responseCreated = true;
         return;
+      } else {
+        if (this.profileData && this.profileData.respondedOn) {
+          this.consultationService.submitResponseActiveRoundEnabled.next(true);
+        }
       }
       this.questionnaireForm = this.makeQuestionnaireModal();
     });
@@ -362,6 +366,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       this.openThankYouModal.emit(res.points);
       this.responseSubmitLoading = false;
       this.responseCreated = true;
+      this.consultationService.submitResponseActiveRoundEnabled.next(false);
     }, err => {
       this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);

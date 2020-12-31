@@ -112,14 +112,6 @@ export const ConsultationProfileCurrentUser = gql`
         edges {
           node {
             id
-            consultation {
-              id
-              responseRounds{
-                active
-                id
-                roundNumber
-              }
-            }
             roundNumber
             user {
               id

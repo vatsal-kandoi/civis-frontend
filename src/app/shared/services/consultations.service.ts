@@ -18,6 +18,7 @@ export class ConsultationsService {
     submitResponseText = new BehaviorSubject(null);
     satisfactionRatingError = new BehaviorSubject(null);
     consultationStatus = new BehaviorSubject(null);
+    submitResponseActiveRoundEnabled = new BehaviorSubject(null);
 
   constructor() {
   }

@@ -1,4 +1,4 @@
-<div class="paper-effect  mt-4 m-0-sm">
+<div class="paper-effect  mt-4 m-0-sm" *ngIf="profileData && !profileData.respondedOn">
     <app-satisfaction-rating-selection (selectSatisfaction)="responseFeedback = $event"></app-satisfaction-rating-selection>
     <div class="response-index mt-4" ngResizable [rzHandles]="'s'"
     #responseIndex>

@@ -35,7 +35,6 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   showConfirmEmailModal: boolean;
   questions: any;
   scrollToError: boolean;
-  responseRounds: any;
   activeRoundNumber: any;
   respondedRounds = [];
   responseCreated: boolean;
@@ -91,8 +90,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   subscribeProfileData() {
     this.consultationService.consultationProfileData.subscribe((data) => {
       this.profileData = data;
-      this.responseRounds = this.profileData.responseRounds;
-      this.activeRoundNumber = this.getActiveRound(this.responseRounds);
+      this.activeRoundNumber = this.getActiveRound(this.profileData.responseRounds);
       this.respondedRounds = this.getRespondedRounds();
       if (this.respondedRounds.includes(this.activeRoundNumber)) {
         this.responseCreated = true;

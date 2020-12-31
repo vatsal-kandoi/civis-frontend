@@ -9,9 +9,8 @@
       </app-page-content-renderer>
     </div>
   </div>
-  <!-- *ngIf="showCreateResponse()" -->
 
-  <div >
+  <div *ngIf="showCreateResponse()">
     <div *ngIf="questionnaireExist ; else responseTextContainer">
       <app-consultation-questionnaire [profileData]="profileData" (openThankYouModal)="showThankYouModal = true; earnedPoints = $event">
       </app-consultation-questionnaire>

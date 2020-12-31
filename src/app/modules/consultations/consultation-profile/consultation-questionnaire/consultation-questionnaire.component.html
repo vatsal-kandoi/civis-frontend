@@ -1,12 +1,6 @@
-<div class="paper-effect  mt-4 m-0-sm" #questionnaireContainer>
+<div #questionnaireContainer>
+  <div class="paper-effect  mt-4 m-0-sm" *ngIf="!responseCreated">
     <app-satisfaction-rating-selection (selectSatisfaction)="responseFeedback = $event"></app-satisfaction-rating-selection>
-    <div class="tabs-block" *ngIf="responseRounds.length > 1">
-      <p *ngFor="let round of responseRounds" 
-        (click)="setActiveRound(round.roundNumber)"
-        [ngClass]="{'active-tab': (activeRoundNumber === round?.roundNumber)}">
-        {{'Round ' + round.roundNumber}}
-      </p>
-    </div>
     <div class="question-box">
       <form [formGroup]="questionnaireForm">
         <div class="questions-container">
@@ -78,5 +72,6 @@
       </form>
     </div>
   </div>
-  <app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false">
-  </app-confirm-email-modal>
+</div>
+<app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false">
+</app-confirm-email-modal>

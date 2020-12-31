@@ -38,6 +38,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   responseRounds: any;
   activeRoundNumber: any;
   respondedRounds = [];
+  responseCreated: boolean;
 
   constructor(private _fb: FormBuilder,
     private userService: UserService,
@@ -90,10 +91,14 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   subscribeProfileData() {
     this.consultationService.consultationProfileData.subscribe((data) => {
       this.profileData = data;
-      this.questionnaireForm = this.makeQuestionnaireModal();
       this.responseRounds = this.profileData.responseRounds;
       this.activeRoundNumber = this.getActiveRound(this.responseRounds);
       this.respondedRounds = this.getRespondedRounds();
+      if (this.respondedRounds.includes(this.activeRoundNumber)) {
+        this.responseCreated = true;
+        return;
+      }
+      this.questionnaireForm = this.makeQuestionnaireModal();
     });
   }
 
@@ -126,11 +131,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
     const responseRounds = this.profileData.responseRounds;
     if (responseRounds && responseRounds.length) {
       let activeRound;
-      if (roundNumber) {
-        activeRound  = responseRounds.find((round) => +round.roundNumber === +roundNumber);
-      } else {
-        activeRound  = responseRounds.find((round) => round.active);
-      }
+      activeRound  = responseRounds.find((round) => round.active);
       if (!isObjectEmpty(activeRound)) {
          this.questions = activeRound.questions;
           if (this.questions.length) {
@@ -359,6 +360,8 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
     )
     .subscribe((res) => {
       this.openThankYouModal.emit(res.points);
+      this.responseSubmitLoading = false;
+      this.responseCreated = true;
     }, err => {
       this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);
@@ -385,9 +388,5 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   return;
   }
 
-  setActiveRound(roundNumber) {
-    this.activeRoundNumber = roundNumber;
-    this.questionnaireForm = this.makeQuestionnaireModal(this.activeRoundNumber);
-  }
 
 }

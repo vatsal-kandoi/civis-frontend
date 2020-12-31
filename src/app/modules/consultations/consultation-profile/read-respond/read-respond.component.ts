@@ -194,7 +194,7 @@ export class ReadRespondComponent implements OnInit {
 
   showCreateResponse() {
     if ((this.consultationService.checkClosed(this.profileData ? this.profileData.responseDeadline : null) === 'Closed')
-        || !this.currentUser || (this.profileData && this.profileData.respondedOn)) {
+        || !this.currentUser) {
         return false;
     }
     return true;

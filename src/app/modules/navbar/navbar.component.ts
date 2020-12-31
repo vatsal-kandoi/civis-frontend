@@ -7,6 +7,7 @@ import { ConsultationList } from './navbar.graphql';
 import { ConsultationProfileCurrentUser, ConsultationProfile } from '../consultations/consultation-profile/consultation-profile.graphql';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-navbar',
@@ -53,6 +54,7 @@ export class NavbarComponent implements OnInit {
     private route: ActivatedRoute,
     private consultationService: ConsultationsService,
     private errorService: ErrorService,
+    private cookieService: CookieService,
     ) {
         this.consultationService.consultationId$
         .pipe(
@@ -236,6 +238,14 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  onSignUp() {
+    if (this.currentUrl === 'consultations-profile') {
+      this.cookieService.put('loginCallbackUrl', this.router.url === '/' ? '' : this.router.url);
+      this.router.navigateByUrl('/auth');
+      return;
+    }
+    this.router.navigateByUrl('/auth');
+  }
 
 
   changeMenu(event) {

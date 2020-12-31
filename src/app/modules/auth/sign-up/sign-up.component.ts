@@ -114,11 +114,6 @@ export class SignUpComponent implements OnInit {
       .subscribe((token) => {
         if (token) {
           this.tokenService.storeToken(token);
-          const callbackUrl = this.cookieService.get('loginCallbackUrl');
-          if (callbackUrl) {
-            this.router.navigateByUrl(callbackUrl);
-            this.cookieService.put('loginCallbackUrl', '');
-          } else {
             this.userService.userLoaded$
             .subscribe((exists: boolean) => {
               if (exists) {
@@ -129,7 +124,6 @@ export class SignUpComponent implements OnInit {
             err => {
               this.errorService.showErrorModal(err);
             });
-          }
           this.onSignUp();
         }
       }, err => {

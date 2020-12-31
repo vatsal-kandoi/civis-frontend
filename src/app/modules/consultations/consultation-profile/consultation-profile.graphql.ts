@@ -99,6 +99,7 @@ export const ConsultationProfile = gql`
         totalCount
       }
       updatedAt
+      publishedAt
       visibility
     }
   }
@@ -256,6 +257,7 @@ export const ConsultationProfileCurrentUser = gql`
         totalCount
       }
       updatedAt
+      publishedAt
       visibility
     }
   }

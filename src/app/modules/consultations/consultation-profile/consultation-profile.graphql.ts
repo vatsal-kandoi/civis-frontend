@@ -112,47 +112,20 @@ export const ConsultationProfileCurrentUser = gql`
         edges {
           node {
             id
-            answers
             consultation {
               id
               responseRounds{
                 active
                 id
-                questions {
-                  id
-                  isOptional
-                  questionText
-                  questionType
-                  supportsOther
-                  isOptional
-                  subQuestions {
-                    id
-                    questionText
-                  }
-                }
                 roundNumber
               }
             }
-            downVoteCount
-            responseText
             roundNumber
-            templatesCount
-            upVoteCount
             user {
               id
-              firstName
-              profilePicture(resolution: "") {
-                id
-                url
-              }
-            }
-            votedAs {
-              id
-              voteDirection
             }
           }
         }
-        totalCount
       }
       enforcePrivateResponse
       id

@@ -132,8 +132,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   makeQuestionnaireModal(roundNumber?) {
     const responseRounds = this.profileData.responseRounds;
     if (responseRounds && responseRounds.length) {
-      let activeRound;
-      activeRound  = responseRounds.find((round) => round.active);
+      const activeRound  = responseRounds.find((round) => round.active);
       if (!isObjectEmpty(activeRound)) {
          this.questions = activeRound.questions;
           if (this.questions.length) {

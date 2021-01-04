@@ -25,6 +25,7 @@ export class ProfileCardComponent implements OnInit, OnChanges {
   currentUrl = '';
   showConfirmEmailModal: boolean;
   consultationStatus: any;
+  showResponseCreation: boolean;
 
   constructor(private consultationsService: ConsultationsService,
               private userService: UserService,
@@ -35,6 +36,7 @@ export class ProfileCardComponent implements OnInit, OnChanges {
       this.currentUrl = window.location.href;
       this.getCurrentUser();
       this.watchConsultationStatus();
+      this.enableSubmitResponse();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -64,6 +66,17 @@ export class ProfileCardComponent implements OnInit, OnChanges {
         this.currentUser = null;
       }
     });
+  }
+
+  enableSubmitResponse() {
+    this.consultationsService.submitResponseActiveRoundEnabled
+      .subscribe((value) => {
+        if (value) {
+          this.showResponseCreation = true;
+        } else {
+          this.showResponseCreation = false;
+        }
+      });
   }
 
   @HostListener('document:click', ['$event.target'])
@@ -169,7 +182,7 @@ export class ProfileCardComponent implements OnInit, OnChanges {
       return;
     }
 
-    if (!hasResponseSubmited) {
+    if (!hasResponseSubmited || this.showResponseCreation) {
       const questions = this.consultationsService.getQuestions(this.profile);
       if (questions && questions.length) {
         this.consultationsService.validateAnswers.next(true);

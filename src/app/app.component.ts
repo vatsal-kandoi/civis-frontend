@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from './shared/services/user.service';
 import { filter } from 'rxjs/operators';
-declare let dataLayer;
-
+import { StarterService } from './shared/services/starter.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,13 +14,10 @@ export class AppComponent implements OnInit {
   showCitySelection: boolean;
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private starterService: StarterService,
   ) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        dataLayer.push({ event: 'pageview' });
-      }
-    });
+    this.starterService.loadGoogleAnalyticsSupport();
   }
 
   ngOnInit() {

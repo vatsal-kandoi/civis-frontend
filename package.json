@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "start:staging": "gulp set --env=staging && concurrently --kill-others \"node server.js\" \"ng serve --configuration=dev-staging\"",
-    "start:prod": "gulp set --env=prod && concurrently --kill-others \"node server.js\" \"ng serve --configuration=dev-production\"",
+    "serve:staging": "ng serve --configuration=dev-staging",
+    "serve:prod": "ng serve --configuration=dev-production",
     "build": "ng build --configuration=production",
     "build:production": "ng build --configuration=production",
     "build:staging": "ng build --configuration=staging",

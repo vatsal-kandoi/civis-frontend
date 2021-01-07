@@ -24,7 +24,6 @@
     <app-consultation-public-responses></app-consultation-public-responses>
   </div>   
 </section>
-<button (click)="showThankYouModal = !showThankYouModal">Check</button>
 <app-thank-you-modal *ngIf="showThankYouModal" [points]="earnedPoints" [profileData]="profileData" (closeThankYouModal)="onCloseThanksModal()">
 </app-thank-you-modal>
 

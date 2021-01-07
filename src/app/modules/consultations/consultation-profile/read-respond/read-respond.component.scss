@@ -450,3 +450,37 @@
     white-space: pre-wrap;
     word-break: break-all;
 }
+
+.close-btn {
+  position: absolute;
+  right: 24px;
+  background-color: transparent;
+  border: none;
+}
+
+.email-modal {
+  margin: 30px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  .modal-img {
+      width: 64px;
+      height: 64px;
+  }
+  .heading-text {
+    font-family: Encode Sans;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .sub-heading-text {
+      font-family: Encode Sans;
+      font-size: 16px;
+      color: rgba(21, 21, 21, 0.5);
+  }
+}
+.modal-content {
+  border: 1px solid #EBECF0;
+  border-radius: 4px;
+}

@@ -6,6 +6,7 @@ export const ResponseProfileQuery = gql`
             id
             answers
             responseText
+            isVerified
             createdAt
             updatedAt
             publishedAt

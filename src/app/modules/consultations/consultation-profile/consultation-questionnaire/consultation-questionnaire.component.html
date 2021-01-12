@@ -2,7 +2,7 @@
   <div class="paper-effect  mt-4 m-0-sm" *ngIf="!responseCreated">
     <app-satisfaction-rating-selection (selectSatisfaction)="responseFeedback = $event"></app-satisfaction-rating-selection>
     <div class="question-box">
-      <form [formGroup]="questionnaireForm">
+      <form [formGroup]="questionnaireForm"  #f="ngForm">
         <div class="questions-container">
           <div class="question-index" *ngFor="let question of questions; let i = index">
               <div class="question">
@@ -62,7 +62,7 @@
             </div>
           </div>
           <div class="py-3">
-            <button  class="btn-submit active" (click)='submitAnswer()' [tooltip]="showError ? 'Please fill all the answers to submit response.' : ''" data-event="purchase">
+            <button  class="btn-submit active" (click)='submitAnswer()' [tooltip]="(showError && !f.valid)  ? 'Please fill all the answers to submit response.' : ''" data-event="purchase">
               <p class="m-0">
                 SUBMIT RESPONSE
               </p>

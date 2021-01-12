@@ -53,6 +53,23 @@
                   </div>
                   <div *ngIf="password.invalid && (password.touched || signupForm.submitted)" class="error-msg">{{'Password is Required' | translate}}</div>
               </div>
+
+              <div class="location-box required-field col-12" *ngIf="!invitationToken">
+                <label for="locations">
+                  City
+                </label>
+                <div class="location-box__border">
+                  <ng-select id="locations" #city="ngModel" name="city" [loading]="loadingCities" [items]="cities"
+                    bindLabel="name" [virtualScroll]="true" dropdownPosition="bottom" bindValue="id"
+                    [notFoundText]="dropdownText" [clearable]="true" loadingText="Searching..."
+                    (search)="onSearch($event)" (open)="loadCities()" [(ngModel)]="signupObject.cityId"
+                    placeholder="City" required>
+                  </ng-select>
+                </div>
+                <div *ngIf="city.invalid && (city.touched || signupForm.submitted)" class="error-msg">Location is
+                  Required
+                </div>
+              </div>
   
               <div class="input-checbox">
                   <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required /> 

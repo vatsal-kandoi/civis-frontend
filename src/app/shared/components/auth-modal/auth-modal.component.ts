@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { NgForm } from '@angular/forms';
-import { SignUpMutation } from 'src/app/modules/auth-private/sign-up/sign-up.graphql';
+import { SignUpMutation, LocationListQuery } from 'src/app/modules/auth-private/sign-up/sign-up.graphql';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { TokenService } from '../../services/token.service';
@@ -9,6 +9,7 @@ import { ErrorService } from '../error-modal/error.service';
 import { UserService } from '../../services/user.service';
 import { LoginMutation } from 'src/app/modules/auth-private/login/login.graphql';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-auth-modal',
@@ -28,6 +29,7 @@ export class AuthModalComponent implements OnInit {
     password: '',
     notifyForNewConsultation: true,
     agreedForTermsCondition: false,
+    cityId: null
   };
   signup = false;
   signin = false;
@@ -36,6 +38,9 @@ export class AuthModalComponent implements OnInit {
     email: '',
     password: ''
   };
+  loadingCities: boolean;
+  cities: any;
+
 
   constructor(
     private apollo: Apollo,
@@ -77,6 +82,26 @@ export class AuthModalComponent implements OnInit {
         this.errorService.showErrorModal(err);
       });
     }
+  }
+
+  loadCities() {
+    this.loadingCities = true;
+    this.apollo.query({
+      query: LocationListQuery,
+      variables: {
+        type: 'city'
+      }
+    })
+    .pipe(
+      map((res: any) => res.data.locationList)
+    )
+    .subscribe((cities) => {
+      this.loadingCities = false;
+      this.cities = cities;
+    }, err => {
+      this.loadingCities = false;
+      this.errorService.showErrorModal(err);
+    });
   }
 
   submitLogin(isValid: boolean) {

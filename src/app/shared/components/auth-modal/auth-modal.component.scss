@@ -243,4 +243,39 @@
         padding: 0px 1em;
     }
 }
+
+
+.location-box {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 0;
+
+    label {
+        display: block;
+        font-weight: 500;
+        font-size: 15px;
+        color: #151515;
+        margin-bottom: 5px;
+
+    }
+    &__border {
+        .ng-select {
+            .ng-input {
+                input {
+                    &:focus {
+                        box-shadow: none !important;
+                        border: none !important;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+    @media screen and (max-width: 991px) {
+        width: 100%;
+    }
+}
   

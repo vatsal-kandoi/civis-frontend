@@ -171,16 +171,6 @@ export class ProfileCardComponent implements OnInit, OnChanges {
   }
 
   stepNext(hasResponseSubmited) {
-    if (!this.currentUser) {
-      this.cookieService.put('loginCallbackUrl', this.router.url === '/' ? '' : this.router.url);
-      this.router.navigateByUrl('/auth');
-      return;
-    }
-
-    if (this.currentUser && !this.currentUser.confirmedAt) {
-      this.showConfirmEmailModal = true;
-      return;
-    }
 
     if (!hasResponseSubmited || this.showResponseCreation) {
       const questions = this.consultationsService.getQuestions(this.profile);

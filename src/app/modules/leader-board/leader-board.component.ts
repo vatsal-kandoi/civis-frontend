@@ -122,7 +122,6 @@ export class LeaderBoardComponent implements OnInit {
           this.userListData = item;
         }, err => {
           this.errorService.showErrorModal(err);
-          console.log('error', err);
         });
   }
 

@@ -240,7 +240,6 @@ export class NavbarComponent implements OnInit {
 
   onSignUp() {
     if (this.currentUrl === 'consultations-profile') {
-      this.cookieService.put('loginCallbackUrl', this.router.url === '/' ? '' : this.router.url);
       this.router.navigateByUrl('/auth');
       return;
     }

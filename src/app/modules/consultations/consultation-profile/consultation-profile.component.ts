@@ -43,7 +43,6 @@ export class ConsultationProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getCurrentUser();
-    this.cookieService.put('loginCallbackUrl', this.router.url === '/' ? '' : this.router.url);
   }
 
   getConsultationProfile() {

@@ -193,6 +193,9 @@ export class ReadRespondComponent implements OnInit {
         }
         if (consultationResponseData) {
           const resData = JSON.parse(consultationResponseData);
+          if (!this.currentUser.confirmedAt) {
+            resData.visibility = 'anonymous';
+          }
           this.submitResponse(resData);
         }
       } else {

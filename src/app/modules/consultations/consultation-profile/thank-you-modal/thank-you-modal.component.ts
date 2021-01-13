@@ -25,6 +25,7 @@ export class ThankYouModalComponent implements OnInit {
   }
 
   closeModal() {
+    this.thankyouModal.hide();
     this.closeThankYouModal.emit();
     this.showThankYouModal = false;
   }

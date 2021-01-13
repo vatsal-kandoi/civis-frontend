@@ -83,6 +83,7 @@ export const ConsultationProfile = gql`
             }
             downVoteCount
             responseText
+            isVerified
             roundNumber
             templatesCount
             upVoteCount
@@ -202,6 +203,7 @@ export const ConsultationProfileCurrentUser = gql`
             }
             downVoteCount
             responseText
+            isVerified
             roundNumber
             templatesCount
             upVoteCount
@@ -303,6 +305,7 @@ export const SubmitResponseQuery = gql`
               }
               downVoteCount
               responseText
+              isVerified
               roundNumber
               templatesCount
               upVoteCount

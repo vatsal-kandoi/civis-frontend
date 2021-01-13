@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { filter, map } from 'rxjs/operators';
@@ -41,6 +41,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   showError: boolean;
   responseSubmitLoading: boolean;
   scrollToError: any;
+  authModal = false;
 
   constructor(
     private userService: UserService,
@@ -120,7 +121,10 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     let draftObj: any = localStorage.getItem('responseDraft');
     if (draftObj && this.currentUser) {
       draftObj = JSON.parse(draftObj);
-      const currentUser = draftObj.users.find(user => user.id === this.currentUser.id);
+      let currentUser: any;
+      if ( draftObj.users && draftObj.users.length > 0) {
+        currentUser = draftObj.users.find(user => user.id === this.currentUser.id);
+      }
       if (currentUser) {
         const consultation = currentUser.consultations.find(item => item.id === this.consultationId);
         if (consultation) {
@@ -178,17 +182,22 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
       let draftObj: any = localStorage.getItem('responseDraft');
       if (!draftObj) {
         draftObj = {};
-        draftObj['users'] = [{
-          id: this.currentUser.id,
-          consultations: [{
-            id: this.consultationId,
-            responseText: text,
-            templatesText: this.showPublicResponseOption ? false : true
-          }]
-        }];
+        if (this.currentUser) {
+          draftObj['users'] = [{
+            id: this.currentUser.id,
+            consultations: [{
+              id: this.consultationId,
+              responseText: text,
+              templatesText: this.showPublicResponseOption ? false : true
+            }]
+          }];
+        }
       } else {
         draftObj = JSON.parse(draftObj);
-        const currentUser = draftObj.users.find(user => user.id === this.currentUser.id);
+        let currentUser: any;
+        if (draftObj.users) {
+          currentUser = draftObj.users.find(user => user.id === this.currentUser.id);
+        }
         if (currentUser) {
           const consultation = currentUser.consultations.find(item => item.id === this.consultationId);
           if (consultation) {
@@ -211,14 +220,17 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
             }
           });
         } else {
-          draftObj.users.push({
-            id: this.currentUser.id,
-            consultations: [{
-              id: this.consultationId,
-              responseText: text,
-              templatesText: this.showPublicResponseOption ? false : true
-            }]
-          });
+          if (this.currentUser && draftObj.users) {
+            draftObj.users.push({
+              id: this.currentUser.id,
+              consultations: [{
+                id: this.consultationId,
+                responseText: text,
+                templatesText: this.showPublicResponseOption ? false : true
+              }]
+            });
+          }
+
         }
       }
       localStorage.setItem('responseDraft', JSON.stringify(draftObj));
@@ -258,14 +270,19 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   }
 
   submitAnswer() {
-    if (!this.validCurrentUser() || this.responseSubmitLoading) {
+    if (this.responseSubmitLoading) {
       return;
     }
     if (this.responseText && this.responseFeedback) {
       const consultationResponse = this.getConsultationResponse();
       if (!isObjectEmpty(consultationResponse)) {
-        this.submitResponse(consultationResponse);
-        this.showError = false;
+        if (this.currentUser) {
+          this.submitResponse(consultationResponse);
+          this.showError = false;
+        } else {
+          this.authModal = true;
+          localStorage.setItem('consultationResponse', JSON.stringify(consultationResponse));
+        }
       }
     } else {
       if (!this.responseFeedback) {
@@ -300,7 +317,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
       map((res: any) => res.data.consultationResponseCreate)
     )
     .subscribe((res) => {
-      this.openThankYouModal.emit(res.points);
+        this.openThankYouModal.emit(res.points);
     }, err => {
       this.responseSubmitLoading = false;
       this.errorService.showErrorModal(err);

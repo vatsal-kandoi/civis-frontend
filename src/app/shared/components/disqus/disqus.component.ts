@@ -55,7 +55,6 @@ export class DisqusComponent implements OnInit {
       this.ssoAuth = res.auth;
       this.setupDisqus();
     }, err => {
-      console.log('error is: ', err);
       this.errorService.showErrorModal(err);
     });
   }

@@ -38,7 +38,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   activeRoundNumber: any;
   respondedRounds = [];
   responseCreated: boolean;
-
+  authModal = false;
   constructor(private _fb: FormBuilder,
     private userService: UserService,
     private consultationService: ConsultationsService,
@@ -180,15 +180,20 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   }
 
   submitAnswer() {
-    if (!this.validCurrentUser() || this.responseSubmitLoading) {
+    if (this.responseSubmitLoading) {
       return;
     }
     if (this.questionnaireForm.valid && this.responseFeedback) {
       this.responseAnswers = this.getResponseAnswers();
       const consultationResponse = this.getConsultationResponse();
       if (!isObjectEmpty(consultationResponse)) {
-        this.submitResponse(consultationResponse);
-        this.showError = false;
+        if (this.currentUser) {
+          this.submitResponse(consultationResponse);
+          this.showError = false;
+        } else {
+          this.authModal = true;
+          localStorage.setItem('consultationResponse', JSON.stringify(consultationResponse));
+        }
       }
     } else {
       if (!this.responseFeedback) {

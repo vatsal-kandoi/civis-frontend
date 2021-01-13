@@ -20,6 +20,8 @@ import { PageContentRendererComponent } from './page-content-renderer/page-conte
 import { ResponseAnswersComponent } from './response-answers/response-answers.component';
 import { ResendVerificationComponent } from './resendVerification/resendVerification.component';
 import { CaseStudiesListComponent } from './case-studies-list/case-studies-list.component';
+import { AuthModalComponent } from './auth-modal/auth-modal.component';
+import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { CaseStudiesListComponent } from './case-studies-list/case-studies-list.
     PageContentRendererComponent,
     ResponseAnswersComponent,
     ResendVerificationComponent,
-    CaseStudiesListComponent
+    CaseStudiesListComponent,
+    AuthModalComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +47,7 @@ import { CaseStudiesListComponent } from './case-studies-list/case-studies-list.
     NgSelectModule,
     CookieModule.forRoot(),
     PipesModule,
+    ModalModule
   ],
   exports: [
     ActionButtonComponent,
@@ -59,6 +63,7 @@ import { CaseStudiesListComponent } from './case-studies-list/case-studies-list.
     ResponseAnswersComponent,
     ResendVerificationComponent,
     CaseStudiesListComponent,
+    AuthModalComponent
   ],
   providers: [
     LinearLoaderService

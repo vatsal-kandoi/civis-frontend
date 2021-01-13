@@ -66,6 +66,7 @@ export const ConsultationProfileQuery = gql`
             answers
             downVoteCount
             responseText
+            isVerified
             roundNumber
             consultation {
               id

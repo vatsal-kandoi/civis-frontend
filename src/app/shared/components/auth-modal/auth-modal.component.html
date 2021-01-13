@@ -132,7 +132,7 @@
             </form>
           <div class="app-hr"></div>
           <div class="d-flex">
-            <p class="normal-text mb-2">Already have an account?</p>
+            <p class="normal-text mb-2">{{signin ? 'Don\'\t have an existing account?' : 'Already have an account?'}}</p>
             <p class="normal-text normal-text-link mb-2" *ngIf="(!signin && signup) || (!signup && !signin)" (click)="signup = false; signin = true">Sign in</p>
             <p class="normal-text normal-text-link mb-2" *ngIf="signin" (click)="signup = false; signin = false">Sign Up</p>
           </div>

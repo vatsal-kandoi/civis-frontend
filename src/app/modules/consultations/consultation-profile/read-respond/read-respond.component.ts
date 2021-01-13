@@ -250,7 +250,9 @@ export class ReadRespondComponent implements OnInit {
 
   onCloseThanksModal() {
     this.showThankYouModal = false;
-    this.emailVerification = true;
+    if (!this.currentUser.confirmedAt) {
+      this.emailVerification = true;
+    }
   }
 
   onCloseEmailModal() {

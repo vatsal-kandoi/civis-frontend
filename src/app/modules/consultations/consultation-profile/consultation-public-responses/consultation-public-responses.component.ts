@@ -43,12 +43,38 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
         this.profileData = data;
         this.responseRounds = this.profileData.responseRounds;
         this.activeRoundNumber = this.getActiveRound(this.responseRounds);
-        this.responseList = data.sharedResponses.edges;
+        this.responseList = this.filterResponseData(data);
         this.publicResponsesLength = this.responseList.filter((response) => response.node.roundNumber === this.activeRoundNumber).length;
         this.roundNumberExist = this.responseList.filter((response) => response.node.roundNumber).length;
         this.checkForFragments = true;
       }
     });
+  }
+
+
+  filterResponseData(data) {
+    return data.sharedResponses.edges.filter((res) => {
+      const questions = this.getQuestions(res);
+      const longTextQue = questions.find((ques) => ques.questionType === 'long_text');
+      if (res.node.answers) {
+        const answers = res.node.answers.map(ans =>  +ans.question_id);
+        if (answers.includes(longTextQue.id)) {
+          return true;
+        }
+      }
+    });
+  }
+
+
+  getQuestions(res) {
+    let questions;
+    if (this.activeRoundNumber) {
+      questions =
+      this.consultationService.getQuestions(res.node.consultation, this.activeRoundNumber);
+    } else {
+      questions = this.consultationService.getQuestions(res.node.consultation);
+    }
+    return questions;
   }
 
   openUserProfile(data) {

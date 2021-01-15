@@ -61,6 +61,8 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
         if (answers.includes(longTextQue.id)) {
           return true;
         }
+      } else {
+        return true;
       }
     });
   }

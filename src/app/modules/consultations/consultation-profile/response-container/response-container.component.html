@@ -5,7 +5,7 @@
         <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user ? response?.node?.user?.firstName : 'Anonymous'}}</p>
         <p class="unverified-text" tooltip="The person who made this response has not verified their email address yet." *ngIf="!response?.node?.isVerified">(Unverified)</p>
     </div>     
-    <p class="text-16" *ngIf="!response?.node?.answers ; else responseAnswers" [innerHTML]="response.node?.responseText"></p>
+    <p class="text-16" *ngIf="!response?.node?.answers && response?.node?.responseText ; else responseAnswers" [innerHTML]="response.node?.responseText"></p>
     <ng-template #responseAnswers>
       <app-response-answers [showOnlyLongTextAnswer]="true" [activeRoundNumber]="activeRoundNumber" [response]="response?.node"></app-response-answers>
     </ng-template>

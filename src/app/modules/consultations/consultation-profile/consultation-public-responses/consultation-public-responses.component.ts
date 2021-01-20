@@ -55,7 +55,10 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
   filterResponseData(data) {
     return data.sharedResponses.edges.filter((res) => {
       const questions = this.getQuestions(res, res.node.roundNumber);
-      const longTextQue = questions.find((ques) => ques.questionType === 'long_text');
+      let longTextQue: any;
+      if (questions && questions.length > 0) {
+        longTextQue = questions.find((ques) => ques.questionType === 'long_text');
+      }
       if (res.node.answers) {
         const answers = res.node.answers.map(ans =>  +ans.question_id);
         if (answers.includes(longTextQue.id)) {

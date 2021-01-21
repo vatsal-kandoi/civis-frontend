@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { NgForm } from '@angular/forms';
 import { SignUpMutation, LocationListQuery } from 'src/app/modules/auth-private/sign-up/sign-up.graphql';
@@ -40,6 +40,7 @@ export class AuthModalComponent implements OnInit {
   };
   loadingCities: boolean;
   cities: any;
+  @Input() consultationId;
 
 
   constructor(
@@ -63,9 +64,10 @@ export class AuthModalComponent implements OnInit {
       delete signupObject['agreedForTermsCondition'];
       delete signupObject['designation'];
       delete signupObject['company'];
-      const variables = {
+      const variables: any = {
         auth: signupObject
       };
+      variables.auth.referringConsultationId  = this.consultationId;
       this.apollo.mutate({mutation: SignUpMutation, variables: variables})
       .pipe(
         map((res: any) => res.data.authSignUp)

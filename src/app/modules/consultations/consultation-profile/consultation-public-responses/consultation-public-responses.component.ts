@@ -61,7 +61,7 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
       }
       if (res.node.answers) {
         const answers = res.node.answers.map(ans =>  +ans.question_id);
-        if (answers.includes(longTextQue.id)) {
+        if (answers.includes(longTextQue.id) && res.node.isVerified) {
           return true;
         }
       } else {

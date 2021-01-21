@@ -1,5 +1,5 @@
 import { CookieService } from 'ngx-cookie';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from './shared/services/user.service';
 import { filter } from 'rxjs/operators';
@@ -10,11 +10,27 @@ import { Subscription } from 'rxjs';
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = "civis";
   showCitySelection: boolean;
   paramsSubscription: Subscription;
-  selectedLanguage = 'en';
+  selectedLanguage = "en";
+  confirmMessage = {};
+  language = {
+    id: null,
+    name: null
+  };
+  isConfirmModal = false;
+  languages = [
+    {
+      id: "en",
+      name: "English",
+    },
+    {
+      id: "hi",
+      name: "Hindi",
+    },
+  ];
   constructor(
     private userService: UserService,
     private router: Router,
@@ -39,14 +55,24 @@ export class AppComponent implements OnInit {
     this.checkLang();
   }
 
+  confirmed(event: any) {
+    event ?
+      ((this.selectedLanguage = this.language.id), this.setLanguage()) : console.log('Good for you');
+    this.isConfirmModal = false;
+
+  }
+
   checkLang() {
     this.paramsSubscription = this.route.queryParams.subscribe((params) => {
       if (params.lang) {
         const langReq = params["lang"];
+        this.language = this.languages.find(lang => lang.id === langReq);
         if (this.selectedLanguage !== langReq) {
-          confirm(`Are you sure you want to change the language to ${langReq === 'en' ? 'English' : 'Hindi'}`)
-            ? ((this.selectedLanguage = langReq), this.setLanguage())
-            : console.log("good for you");
+          this.isConfirmModal = true;
+          this.confirmMessage = {
+            title: "Translate",
+            msg: `Are you sure you want to change the language to ${this.language.name}?`,
+          };
         }
       }
     });
@@ -66,5 +92,9 @@ export class AppComponent implements OnInit {
           this.showCitySelection = true;
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
   }
 }

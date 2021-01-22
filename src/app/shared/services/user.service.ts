@@ -40,12 +40,11 @@ constructor(
   }
 
   getCurrentUser() {
-    this.apollo.watchQuery({
+    this.apollo.query({
         query: CurrentUser,
         variables: {},
         fetchPolicy: 'network-only'
       })
-      .valueChanges
       .pipe(
         map((res: any) => res.data.userCurrent)
       )

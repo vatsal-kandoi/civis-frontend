@@ -1,3 +1,4 @@
+<app-confirmation-modal *ngIf="isConfirmModal" [message]='confirmMessage' (close)='confirmed($event)'></app-confirmation-modal>
 <app-toast></app-toast>
 <app-navbar></app-navbar>
 <app-error></app-error>

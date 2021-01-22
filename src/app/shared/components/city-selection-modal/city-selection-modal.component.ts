@@ -5,6 +5,7 @@ import { CitiesSearchQuery, UpdateCity } from './city-selection-modal.graphql';
 import { Apollo } from 'apollo-angular';
 import { UserService } from '../../services/user.service';
 import { ErrorService } from '../error-modal/error.service';
+import { CurrentUser } from 'src/app/graphql/queries.graphql';
 
 @Component({
   selector: 'app-city-selection-modal',
@@ -85,11 +86,18 @@ export class CitySelectionModalComponent implements OnInit {
     const variables = {
       user
     };
-    this.apollo.mutate({ mutation: UpdateCity, variables })
+    this.apollo.mutate({ mutation: UpdateCity, variables,
+      update: (store, {data: currentUserUpdate}) => {
+        const data: any = store.readQuery({query: CurrentUser, variables: {}});
+        data.userCurrent = currentUserUpdate;
+        this.userService.currentUser = currentUserUpdate;
+        store.writeQuery({query: CurrentUser, variables: {}, data});
+      } })
       .pipe(
         map((res: any) => res.data.currentUserUpdate)
       )
       .subscribe((res) => {
+        this.userService.userLoaded$.next(true);
         this.close();
       }, err => {
         this.close();

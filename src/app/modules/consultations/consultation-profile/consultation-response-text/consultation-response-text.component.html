@@ -26,7 +26,9 @@
         <div class="input-checbox">
             <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" />
             <label class="m-0">{{'Make my response public' | translate}}</label>
-            <span class="link">{{'What does this mean?' | translate}}</span>
+            <span class="link"               tooltip="If you feel passionately about this Consultation, you can make your response public, 
+            for others to use as a template. Your first name is shared with the Government if you make your response public.
+            If you’re not sure what to write, you can choose other people’s responses to send as your own."  >{{'What does this mean?' | translate}}</span>
         </div>
         <div class="d-flex">
             <p class="auto-save-text mr-2" *ngIf="showAutoSaved">{{'Draft autosaved' | translate}}</p>

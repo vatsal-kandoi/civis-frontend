@@ -86,6 +86,12 @@
                 {{'Please accept our Terms of Service & Privacy Policy to continue.' | translate}}
               </div>
     
+              <div class="input-checbox">
+                <input class="cm-checkbox" type="checkbox"  id="notifyMe" #notifyMe="ngModel"  name="notifyMe" [(ngModel)]="signupObject.notifyForNewConsultation" /> 
+                <label for="notifyMe">{{'Notify me when an open consultation' | translate }}<br>&nbsp; {{'is created on Civis.' | translate}}</label>
+              </div>
+
+              
               <div>
                 <button class="app-btn secondary get-start-btn" (click)="submit()">
                   <p class="m-0">Create my account</p>

@@ -68,11 +68,12 @@ export class AppComponent implements OnInit, OnDestroy {
         const langReq = params["lang"];
         this.language = this.languages.find(lang => lang.id === langReq);
         if (this.selectedLanguage !== langReq) {
-          this.confirmModalOpen = true;
-          this.confirmMessage = {
-            title: "Website Language",
-            msg: `Are you sure you want to change the language to ${this.language.name}?`,
-          };
+          this.optionTranslate(true);
+          // this.confirmModalOpen = true;
+          // this.confirmMessage = {
+          //   title: "Website Language",
+          //   msg: `Are you sure you want to change the language to ${this.language.name}?`,
+          // };
         }
       }
     });

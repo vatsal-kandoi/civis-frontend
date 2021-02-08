@@ -56,10 +56,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   translate(selected: boolean) {
-    selected ?
-      ((this.selectedLanguage = this.language.id), this.setLanguage()) : console.log('Good for you');
-    this.confirmModalOpen = false;
-
+    if (selected) {
+      this.selectedLanguage = this.language.id;
+      this.setLanguage();
+    }
   }
 
   checkLang() {

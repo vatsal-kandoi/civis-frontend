@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.checkLang();
   }
 
-  optionTranslate(selected: boolean) {
+  translate(selected: boolean) {
     selected ?
       ((this.selectedLanguage = this.language.id), this.setLanguage()) : console.log('Good for you');
     this.confirmModalOpen = false;
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit, OnDestroy {
         const langReq = params["lang"];
         this.language = this.languages.find(lang => lang.id === langReq);
         if (this.selectedLanguage !== langReq) {
-          this.optionTranslate(true);
+          this.translate(true);
           // this.confirmModalOpen = true;
           // this.confirmMessage = {
           //   title: "Website Language",

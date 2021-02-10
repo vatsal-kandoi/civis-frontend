@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
     id: null,
     name: null
   };
-  isConfirmModal = false;
+  confirmModalOpen = false;
   languages = [
     {
       id: "en",
@@ -55,11 +55,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.checkLang();
   }
 
-  confirmed(event: any) {
-    event ?
-      ((this.selectedLanguage = this.language.id), this.setLanguage()) : console.log('Good for you');
-    this.isConfirmModal = false;
-
+  translate(selected: boolean) {
+    if (selected) {
+      this.selectedLanguage = this.language.id;
+      this.setLanguage();
+    }
   }
 
   checkLang() {
@@ -68,11 +68,12 @@ export class AppComponent implements OnInit, OnDestroy {
         const langReq = params["lang"];
         this.language = this.languages.find(lang => lang.id === langReq);
         if (this.selectedLanguage !== langReq) {
-          this.isConfirmModal = true;
-          this.confirmMessage = {
-            title: "Translate",
-            msg: `Are you sure you want to change the language to ${this.language.name}?`,
-          };
+          this.translate(true);
+          // this.confirmModalOpen = true;
+          // this.confirmMessage = {
+          //   title: "Website Language",
+          //   msg: `Are you sure you want to change the language to ${this.language.name}?`,
+          // };
         }
       }
     });

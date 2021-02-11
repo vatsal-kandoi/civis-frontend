@@ -1,3 +1,4 @@
+<app-confirmation-modal *ngIf="confirmModalOpen" [message]='confirmMessage' (close)='optionTranslate($event)'></app-confirmation-modal>
 <app-toast></app-toast>
 <app-navbar></app-navbar>
 <app-error></app-error>

@@ -191,7 +191,7 @@ export class ReadRespondComponent implements OnInit {
         if (this.consultationId) {
           this.getConsultationProfile();
         }
-        if (consultationResponseData) {
+        if (consultationResponseData && this.currentUser.city && this.currentUser.city.id) {
           const resData = JSON.parse(consultationResponseData);
           if (!this.currentUser.confirmedAt) {
             resData.visibility = 'anonymous';

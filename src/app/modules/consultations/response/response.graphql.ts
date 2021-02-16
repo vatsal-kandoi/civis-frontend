@@ -9,7 +9,6 @@ export const ResponseProfileQuery = gql`
             isVerified
             createdAt
             updatedAt
-            publishedAt
             consultation {
                 id
                 title
@@ -40,15 +39,6 @@ export const ResponseProfileQuery = gql`
                 }
                 updatedAt
                 publishedAt
-                questions {
-                  id
-                  questionText
-                  questionType
-                  subQuestions {
-                    id
-                    questionText
-                  }
-                }
             }
         }
     }

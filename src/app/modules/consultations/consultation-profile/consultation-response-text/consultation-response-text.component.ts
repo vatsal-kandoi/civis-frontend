@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { ConsultationProfileCurrentUser, SubmitResponseQuery } from '../consultation-profile.graphql';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-consultation-response-text',
@@ -49,6 +50,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     private router: Router,
     private el: ElementRef,
     private apollo: Apollo,
+    private sanitizer: DomSanitizer,
     private errorService: ErrorService) {
       this.consultationService.consultationId$
       .pipe(
@@ -269,8 +271,21 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     return true;
   }
 
+  urlToText(text: string): string {
+    const str: any =  text.replace(/<\/?[^>]+(>|$)/g, '');
+    return str.replaceAll('&nbsp;', '').trim();
+  }
+
+
   submitAnswer() {
     if (this.responseSubmitLoading) {
+      return;
+    }
+    let responseTextString: any = this.sanitizer.bypassSecurityTrustHtml(this.responseText);
+    responseTextString = responseTextString.changingThisBreaksApplicationSecurity;
+    if (this.urlToText(responseTextString).length <= 0) {
+      this.responseText = null;
+      this.showError = true;
       return;
     }
     if (this.responseText && this.responseFeedback) {

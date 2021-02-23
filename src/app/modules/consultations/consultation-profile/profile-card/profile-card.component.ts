@@ -103,7 +103,9 @@ export class ProfileCardComponent implements OnInit, OnChanges {
   }
 
   convertDateFormat(date) {
-    return moment(date).format('Do MMM YY');
+    if (date) {
+      return moment(date).format('Do MMM YY');
+    }
   }
 
   getDifferenceInDays(deadline) {

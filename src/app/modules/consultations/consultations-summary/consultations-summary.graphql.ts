@@ -40,6 +40,7 @@ export const ConsultationProfileQuery = gql`
       }
       responseDeadline
       url
+      visibility
       consultationResponsesCount
       ministry {
         id

@@ -67,7 +67,7 @@ export class AuthModalComponent implements OnInit {
       const variables: any = {
         auth: signupObject
       };
-      variables.auth.referring_consultation_id  = this.consultationId;
+      variables.auth.referringConsultationId = this.consultationId;
       this.apollo.mutate({mutation: SignUpMutation, variables: variables})
       .pipe(
         map((res: any) => res.data.authSignUp)

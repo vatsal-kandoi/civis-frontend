@@ -74,6 +74,8 @@ export class AppComponent implements OnInit, OnDestroy {
           //   title: "Website Language",
           //   msg: `Are you sure you want to change the language to ${this.language.name}?`,
           // };
+        } else {
+          this.router.navigate([], { relativeTo: this.route });
         }
       }
     });

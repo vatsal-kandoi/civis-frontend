@@ -20,7 +20,7 @@
     </ng-template>
   </div>
   <div *ngIf="profileData?.reviewType !== 'policy'">
-    <app-satisfaction-rating-distribution [satisfactionRatingDistribution]="satisfactionRatingDistribution"></app-satisfaction-rating-distribution>
+    <app-satisfaction-rating-distribution [satisfactionRatingDistribution]="satisfactionRatingDistribution" [profileData]="profileData"></app-satisfaction-rating-distribution>
     <app-consultation-public-responses></app-consultation-public-responses>
   </div>   
 </section>

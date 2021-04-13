@@ -124,7 +124,7 @@
       .vote-count {
         display: flex;
         align-items: center;
-        
+
         .vote-item {
           margin-right: 24px;
           padding: 8px 16px;
@@ -351,7 +351,7 @@
     }
     .answer {
       padding: 0 20px;
-      
+
       ng-select {
         max-width: 400px;
       }
@@ -365,7 +365,7 @@
         color: rgba(21, 21, 21, 0.5);
       }
 
-      .option-box { 
+      .option-box {
         background: #F2F2F2;
         border-radius: 4px;
         padding: 10px;
@@ -411,7 +411,7 @@
           margin-left: 20px;
           margin-top: 16px;
 
-          input { 
+          input {
               width: 100%;
               font-weight: 500;
               font-size: 15px;
@@ -451,7 +451,7 @@
     word-break: break-all;
 }
 
-.close-btn {
+.cls-btn {
   position: absolute;
   right: 24px;
   background-color: transparent;

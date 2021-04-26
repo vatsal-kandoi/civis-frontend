@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { distinctUntilChanged, debounceTime, takeWhile, switchMap, map, tap } from 'rxjs/operators';
 import { CitiesSearchQuery, UpdateCity } from './city-selection-modal.graphql';
@@ -10,7 +10,8 @@ import { CurrentUser } from 'src/app/graphql/queries.graphql';
 @Component({
   selector: 'app-city-selection-modal',
   templateUrl: './city-selection-modal.component.html',
-  styleUrls: ['./city-selection-modal.component.scss']
+  styleUrls: ['./city-selection-modal.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CitySelectionModalComponent implements OnInit {
 

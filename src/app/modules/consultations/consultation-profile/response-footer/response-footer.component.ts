@@ -34,6 +34,7 @@ export class ResponseFooterComponent implements OnInit {
   currentUrl: string;
   activeRoundNumber: any;
   responseRounds: any;
+  loading = false;
 
   constructor(private userService: UserService,
               private errorService: ErrorService,
@@ -89,19 +90,22 @@ export class ResponseFooterComponent implements OnInit {
   }
 
   vote(direction, response) {
-    if (response.votedAs) {
-      if (response.votedAs.voteDirection === direction) {
-        this.undoVote(response, direction);
+    if (!this.loading) {
+      if (response.votedAs) {
+        if (response.votedAs.voteDirection === direction) {
+          this.undoVote(response, direction);
+        } else {
+          this.undoVote(response, direction, true);
+        }
       } else {
-        this.undoVote(response, direction, true);
+        this.createVote(response, direction);
       }
-    } else {
-      this.createVote(response, direction);
     }
   }
 
   undoVote(response, direction, createVote?) {
     if (response.id) {
+      this.loading = true;
       this.apollo.mutate({
         mutation: VoteDeleteQuery,
         variables: {
@@ -126,6 +130,7 @@ export class ResponseFooterComponent implements OnInit {
         }
       })
       .subscribe((res) => {
+        this.loading = false;
         if (createVote) {
           this.createVote(response, direction);
         }
@@ -142,6 +147,7 @@ export class ResponseFooterComponent implements OnInit {
         voteDirection: direction
       }
     };
+    this.loading = true;
     this.apollo.mutate({
       mutation: VoteCreateQuery,
       variables: vote,
@@ -166,7 +172,9 @@ export class ResponseFooterComponent implements OnInit {
       }
     })
     .subscribe((data) => {
+      this.loading = false;
     }, err => {
+      this.loading = false;
       this.errorService.showErrorModal(err);
     });
   }

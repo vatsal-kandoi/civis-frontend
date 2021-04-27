@@ -167,18 +167,18 @@ export class ConsultationResponseTextComponent
     if (editorElement) {
       const iFrameElements = editorElement.getElementsByTagName('iframe');
       if (iFrameElements.length) {
-        const doc = iFrameElements[0].contentDocument;
-        const checkElementExist = setInterval(() => {
-          if (!this.customStyleAdded) {
-            if (doc.body) {
-              this.customStyleAdded = true;
-              doc.body.setAttribute('style', 'margin: 0; font-size: 16px');
-            }
+       const doc = iFrameElements[0].contentDocument;
+       const checkElementExist = setInterval(() => {
+         if (!this.customStyleAdded) {
+          if (doc.body) {
+            this.customStyleAdded = true;
+            doc.body.setAttribute('style', 'margin: 0; font-size: 16px');
           }
-        }, 100);
-        if (this.customStyleAdded) {
-          clearInterval(checkElementExist);
-        }
+         }
+       }, 100);
+       if (this.customStyleAdded) {
+         clearInterval(checkElementExist);
+       }
       }
     }
   }

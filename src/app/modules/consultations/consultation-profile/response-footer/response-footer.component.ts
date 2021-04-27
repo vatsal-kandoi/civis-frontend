@@ -45,6 +45,7 @@ export class ResponseFooterComponent implements OnInit {
   currentUrl: string;
   activeRoundNumber: any;
   responseRounds: any;
+  loading = false;
 
   constructor(
     private userService: UserService,
@@ -99,14 +100,16 @@ export class ResponseFooterComponent implements OnInit {
   }
 
   vote(direction, response) {
-    if (response.votedAs) {
-      if (response.votedAs.voteDirection === direction) {
-        this.undoVote(response, direction);
+    if (!this.loading) {
+      if (response.votedAs) {
+        if (response.votedAs.voteDirection === direction) {
+          this.undoVote(response, direction);
+        } else {
+          this.undoVote(response, direction, true);
+        }
       } else {
-        this.undoVote(response, direction, true);
+        this.createVote(response, direction);
       }
-    } else {
-      this.createVote(response, direction);
     }
   }
 

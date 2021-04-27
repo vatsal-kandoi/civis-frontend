@@ -56,7 +56,7 @@ export const ConsultationProfile = gql`
       reviewType
       satisfactionRatingDistribution
       status
-      sharedResponses(sort: created_at, sortDirection: desc) {
+      sharedResponses(sort: templates_count, sortDirection: desc) {
         edges {
           node {
             id

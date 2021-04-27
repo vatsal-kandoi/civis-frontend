@@ -48,6 +48,7 @@ export class ConsultationResponseTextComponent
   };
   currentUser: any;
   consultationId: any;
+  isMobile = window.innerWidth <= 768;
   responseText: any;
   showPublicResponseOption: boolean;
   showAutoSaved: boolean;
@@ -209,18 +210,18 @@ export class ConsultationResponseTextComponent
 
       if (!draftObj && isObjectEmpty(draftObj)) {
         draftObj = {};
-          draftObj['users'] = [
-            {
-              id: this.currentUser ? this.currentUser.id : 'guest',
-              consultations: [
-                {
-                  id: this.consultationId,
-                  responseText: text,
-                  templatesText: this.showPublicResponseOption ? false : true,
-                },
-              ],
-            },
-          ];
+        draftObj['users'] = [
+          {
+            id: this.currentUser ? this.currentUser.id : 'guest',
+            consultations: [
+              {
+                id: this.consultationId,
+                responseText: text,
+                templatesText: this.showPublicResponseOption ? false : true,
+              },
+            ],
+          },
+        ];
       } else {
         draftObj = JSON.parse(draftObj);
         let currentUser: any;
@@ -251,7 +252,9 @@ export class ConsultationResponseTextComponent
             });
           }
           draftObj.users.forEach((item) => {
-            if (item.id === (this.currentUser ? this.currentUser.id : 'guest')) {
+            if (
+              item.id === (this.currentUser ? this.currentUser.id : 'guest')
+            ) {
               item = currentUser;
             }
           });

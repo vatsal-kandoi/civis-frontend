@@ -8,7 +8,7 @@
         </div>
         <div class="w-50 row no-gutters justify-content-end align-items-center"
         *ngIf="profileData?.reviewType !== 'policy'">
-        <div (click)="scrollToResponses()" class="link mr-3">{{'or, select a public response' | translate}}</div>
+        <div (click)="scrollToResponses()" class="link" [ngClass]="{'w-75 mr-1': isMobile, 'mr-3': !isMobile}">{{'or, select a public response' | translate}}</div>
         <div class="info-mark"><i class="fa fa-question-circle"></i></div>
         </div>
     </div>
@@ -26,7 +26,7 @@
         <div class="input-checbox">
             <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" />
             <label class="m-0">{{'Make my response public' | translate}}</label>
-            <span class="link" tooltip="If you feel passionately about this Consultation, you can make your response public, 
+            <span class="link" tooltip="If you feel passionately about this Consultation, you can make your response public,
             for others to use as a template. Your first name is shared with the Government if you make your response public.
             If you’re not sure what to write, you can choose other people’s responses to send as your own.">{{'What does this mean?' | translate}}</span>
         </div>

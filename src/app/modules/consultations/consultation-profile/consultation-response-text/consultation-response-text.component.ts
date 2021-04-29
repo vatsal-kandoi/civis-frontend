@@ -1,11 +1,29 @@
-import { Component, OnInit, Input, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewEncapsulation,
+  ViewChild,
+  ElementRef,
+  Output,
+  EventEmitter,
+  AfterViewChecked,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { filter, map } from 'rxjs/operators';
-import { isObjectEmpty, checkPropertiesPresence, scrollToFirstError } from 'src/app/shared/functions/modular.functions';
+import {
+  isObjectEmpty,
+  checkPropertiesPresence,
+  scrollToFirstError,
+} from 'src/app/shared/functions/modular.functions';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { ConsultationProfileCurrentUser, SubmitResponseQuery } from '../consultation-profile.graphql';
+import {
+  ConsultationProfileCurrentUser,
+  SubmitResponseQuery,
+} from '../consultation-profile.graphql';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -15,20 +33,22 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./consultation-response-text.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ConsultationResponseTextComponent implements OnInit, AfterViewChecked {
+export class ConsultationResponseTextComponent
+  implements OnInit, AfterViewChecked {
   @Input() profileData;
-  @ViewChild('responseIndex', { read: ElementRef, static: false }) responseIndex: ElementRef<any>;
-  @ViewChild('responseContainer', { read: ElementRef, static: false }) responseContainer: ElementRef<any>;
+  @ViewChild('responseIndex', { read: ElementRef, static: false })
+  responseIndex: ElementRef<any>;
+  @ViewChild('responseContainer', { read: ElementRef, static: false })
+  responseContainer: ElementRef<any>;
   @Output() openThankYouModal: EventEmitter<any> = new EventEmitter();
 
-
-
-  ckeConfig =  {
+  ckeConfig = {
     removePlugins: 'elementspath',
     resize_enabled: false,
-   };
+  };
   currentUser: any;
   consultationId: any;
+  isMobile = window.innerWidth <= 768;
   responseText: any;
   showPublicResponseOption: boolean;
   showAutoSaved: boolean;
@@ -51,15 +71,14 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     private el: ElementRef,
     private apollo: Apollo,
     private sanitizer: DomSanitizer,
-    private errorService: ErrorService) {
-      this.consultationService.consultationId$
-      .pipe(
-        filter(i => i !== null)
-      )
+    private errorService: ErrorService
+  ) {
+    this.consultationService.consultationId$
+      .pipe(filter((i) => i !== null))
       .subscribe((consulationId: any) => {
         this.consultationId = consulationId;
       });
-   }
+  }
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -77,8 +96,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   }
 
   createResponse() {
-    this.consultationService.submitResponseText
-    .subscribe((status) => {
+    this.consultationService.submitResponseText.subscribe((status) => {
       if (status) {
         this.submitAnswer();
       }
@@ -93,24 +111,24 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     });
   }
 
-
   getConsultationResponse() {
-    const consultationResponse =  {
+    const consultationResponse = {
       consultationId: this.consultationId,
       visibility: this.responseVisibility ? 'shared' : 'anonymous',
       responseText: this.responseText,
       satisfactionRating: this.responseFeedback,
     };
     if (checkPropertiesPresence(consultationResponse)) {
-      consultationResponse['templateId'] = this.templateId ? this.templateId : null;
+      consultationResponse['templateId'] = this.templateId
+        ? this.templateId
+        : null;
       return consultationResponse;
     }
     return;
   }
 
   getCurrentUser() {
-    this.userService.userLoaded$
-    .subscribe((data) => {
+    this.userService.userLoaded$.subscribe((data) => {
       if (data) {
         this.currentUser = this.userService.currentUser;
       } else {
@@ -121,14 +139,19 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
 
   getResponseText() {
     let draftObj: any = localStorage.getItem('responseDraft');
-    if (draftObj && this.currentUser) {
+    if (draftObj && !isObjectEmpty(draftObj)) {
       draftObj = JSON.parse(draftObj);
       let currentUser: any;
-      if ( draftObj.users && draftObj.users.length > 0) {
-        currentUser = draftObj.users.find(user => user.id === this.currentUser.id);
+      if (draftObj.users && draftObj.users.length > 0) {
+        currentUser = draftObj.users.find(
+          (user) =>
+            user.id === (this.currentUser ? this.currentUser.id : 'guest')
+        );
       }
       if (currentUser) {
-        const consultation = currentUser.consultations.find(item => item.id === this.consultationId);
+        const consultation = currentUser.consultations.find(
+          (item) => item.id === this.consultationId
+        );
         if (consultation) {
           this.responseText = consultation.responseText;
           if (consultation.templatesText) {
@@ -142,7 +165,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   editIframe() {
     const editorElement = document.getElementById('editor-container');
     if (editorElement) {
-      const iFrameElements =  editorElement.getElementsByTagName('iframe');
+      const iFrameElements = editorElement.getElementsByTagName('iframe');
       if (iFrameElements.length) {
        const doc = iFrameElements[0].contentDocument;
        const checkElementExist = setInterval(() => {
@@ -169,7 +192,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
         this.usingTemplate = this.showPublicResponseOption = false;
         this.autoSave(value);
       }
-      if (this.templateText && (value === this.templateText)) {
+      if (this.templateText && value === this.templateText) {
         this.showPublicResponseOption = false;
       } else {
         this.showPublicResponseOption = true;
@@ -179,63 +202,78 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   }
 
   autoSave(text) {
-    if (text)  {
+    if (text) {
       this.showAutoSaved = true;
       let draftObj: any = localStorage.getItem('responseDraft');
-      if (!draftObj) {
+      // const isEmptyObject = Object.getOwnPropertyNames(JSON.parse(draftObj))
+      //   .length > 0;
+
+      if (!draftObj && isObjectEmpty(draftObj)) {
         draftObj = {};
-        if (this.currentUser) {
-          draftObj['users'] = [{
-            id: this.currentUser.id,
-            consultations: [{
-              id: this.consultationId,
-              responseText: text,
-              templatesText: this.showPublicResponseOption ? false : true
-            }]
-          }];
-        }
+        draftObj['users'] = [
+          {
+            id: this.currentUser ? this.currentUser.id : 'guest',
+            consultations: [
+              {
+                id: this.consultationId,
+                responseText: text,
+                templatesText: this.showPublicResponseOption ? false : true,
+              },
+            ],
+          },
+        ];
       } else {
         draftObj = JSON.parse(draftObj);
         let currentUser: any;
         if (draftObj.users) {
-          currentUser = draftObj.users.find(user => user.id === this.currentUser.id);
+          currentUser = draftObj.users.find(
+            (user) =>
+              user.id === (this.currentUser ? this.currentUser.id : 'guest')
+          );
         }
         if (currentUser) {
-          const consultation = currentUser.consultations.find(item => item.id === this.consultationId);
+          const consultation = currentUser.consultations.find(
+            (item) => item.id === this.consultationId
+          );
           if (consultation) {
-            currentUser.consultations.forEach(item => {
+            currentUser.consultations.forEach((item) => {
               if (+item.id === +this.consultationId) {
                 item.responseText = text;
-                item['templatesText'] = this.showPublicResponseOption ? false : true;
+                item['templatesText'] = this.showPublicResponseOption
+                  ? false
+                  : true;
               }
             });
           } else {
             currentUser.consultations.push({
               id: this.consultationId,
               responseText: text,
-              templatesText: this.showPublicResponseOption ? false : true
+              templatesText: this.showPublicResponseOption ? false : true,
             });
           }
           draftObj.users.forEach((item) => {
-            if (item.id === this.currentUser.id) {
+            if (
+              item.id === (this.currentUser ? this.currentUser.id : 'guest')
+            ) {
               item = currentUser;
             }
           });
         } else {
-          if (this.currentUser && draftObj.users) {
+          if (draftObj.users) {
             draftObj.users.push({
-              id: this.currentUser.id,
-              consultations: [{
-                id: this.consultationId,
-                responseText: text,
-                templatesText: this.showPublicResponseOption ? false : true
-              }]
+              id: this.currentUser ? this.currentUser.id : 'guest',
+              consultations: [
+                {
+                  id: this.consultationId,
+                  responseText: text,
+                  templatesText: this.showPublicResponseOption ? false : true,
+                },
+              ],
             });
           }
-
         }
       }
-      localStorage.setItem('responseDraft', JSON.stringify(draftObj));
+      localStorage.setItem('responseDraft', JSON.stringify(draftObj || ''));
       setTimeout(() => {
         this.showAutoSaved = false;
       }, 1250);
@@ -246,7 +284,7 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
     this.consultationService.useThisResponseText.subscribe((obj: any) => {
       if (obj && !isObjectEmpty(obj)) {
         this.usingTemplate = true;
-        const {responseText, templateId} = obj;
+        const { responseText, templateId } = obj;
         this.responseText = this.templateText = responseText;
         this.templateId = templateId;
         this.customStyleAdded = false;
@@ -272,17 +310,19 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
   }
 
   urlToText(text: string): string {
-    const str: any =  text.replace(/<\/?[^>]+(>|$)/g, '');
+    const str: any = text.replace(/<\/?[^>]+(>|$)/g, '');
     return str.replaceAll('&nbsp;', '').trim();
   }
-
 
   submitAnswer() {
     if (this.responseSubmitLoading) {
       return;
     }
-    let responseTextString: any = this.sanitizer.bypassSecurityTrustHtml(this.responseText);
-    responseTextString = responseTextString.changingThisBreaksApplicationSecurity;
+    let responseTextString: any = this.sanitizer.bypassSecurityTrustHtml(
+      this.responseText
+    );
+    responseTextString =
+      responseTextString.changingThisBreaksApplicationSecurity;
     if (this.urlToText(responseTextString).length <= 0) {
       this.responseText = null;
       this.showError = true;
@@ -296,7 +336,10 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
           this.showError = false;
         } else {
           this.authModal = true;
-          localStorage.setItem('consultationResponse', JSON.stringify(consultationResponse));
+          localStorage.setItem(
+            'consultationResponse',
+            JSON.stringify(consultationResponse)
+          );
         }
       }
     } else {
@@ -310,33 +353,44 @@ export class ConsultationResponseTextComponent implements OnInit, AfterViewCheck
 
   submitResponse(consultationResponse) {
     this.responseSubmitLoading = true;
-    this.apollo.mutate({
-      mutation: SubmitResponseQuery,
-      variables: {
-        consultationResponse: consultationResponse
-      },
-      update: (store, {data: res}) => {
-        const variables = {id: this.consultationId};
-        const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
-        if (res) {
-          resp.consultationProfile.respondedOn = res.consultationResponseCreate.consultation.respondedOn;
-          resp.consultationProfile.sharedResponses = res.consultationResponseCreate.consultation.sharedResponses;
-          resp.consultationProfile.responseSubmissionMessage = res.consultationResponseCreate.consultation.responseSubmissionMessage;
-          resp.consultationProfile.satisfactionRatingDistribution =
-            res.consultationResponseCreate.consultation.satisfactionRatingDistribution;
+    this.apollo
+      .mutate({
+        mutation: SubmitResponseQuery,
+        variables: {
+          consultationResponse: consultationResponse,
+        },
+        update: (store, { data: res }) => {
+          const variables = { id: this.consultationId };
+          const resp: any = store.readQuery({
+            query: ConsultationProfileCurrentUser,
+            variables,
+          });
+          if (res) {
+            resp.consultationProfile.respondedOn =
+              res.consultationResponseCreate.consultation.respondedOn;
+            resp.consultationProfile.sharedResponses =
+              res.consultationResponseCreate.consultation.sharedResponses;
+            resp.consultationProfile.responseSubmissionMessage =
+              res.consultationResponseCreate.consultation.responseSubmissionMessage;
+            resp.consultationProfile.satisfactionRatingDistribution =
+              res.consultationResponseCreate.consultation.satisfactionRatingDistribution;
+          }
+          store.writeQuery({
+            query: ConsultationProfileCurrentUser,
+            variables,
+            data: resp,
+          });
+        },
+      })
+      .pipe(map((res: any) => res.data.consultationResponseCreate))
+      .subscribe(
+        (res) => {
+          this.openThankYouModal.emit(res.points);
+        },
+        (err) => {
+          this.responseSubmitLoading = false;
+          this.errorService.showErrorModal(err);
         }
-        store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
-      }
-    })
-    .pipe (
-      map((res: any) => res.data.consultationResponseCreate)
-    )
-    .subscribe((res) => {
-        this.openThankYouModal.emit(res.points);
-    }, err => {
-      this.responseSubmitLoading = false;
-      this.errorService.showErrorModal(err);
-    });
+      );
   }
-
 }

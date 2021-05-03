@@ -205,10 +205,7 @@ export class ConsultationResponseTextComponent
     if (text) {
       this.showAutoSaved = true;
       let draftObj: any = localStorage.getItem('responseDraft');
-      // const isEmptyObject = Object.getOwnPropertyNames(JSON.parse(draftObj))
-      //   .length > 0;
-
-      if (!draftObj && isObjectEmpty(draftObj)) {
+      if (!draftObj || isObjectEmpty(draftObj)) {
         draftObj = {};
         draftObj['users'] = [
           {

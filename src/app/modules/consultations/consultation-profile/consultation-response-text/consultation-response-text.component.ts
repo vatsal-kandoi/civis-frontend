@@ -307,8 +307,12 @@ export class ConsultationResponseTextComponent
   }
 
   urlToText(text: string): string {
-    const str: any = text.replace(/<\/?[^>]+(>|$)/g, '');
-    return str.replaceAll('&nbsp;', '').trim();
+    if (text) {
+      const str: any =  text.replace(/<\/?[^>]+(>|$)/g, '');
+      return str.replaceAll('&nbsp;', '').trim();
+    } else {
+      return '';
+    }
   }
 
   submitAnswer() {

@@ -101,15 +101,14 @@ export class ResponseFooterComponent implements OnInit {
 
   vote(direction, response) {
     if (!this.loading) {
+      this.loading = true;
       if (response.votedAs) {
-        this.loading = true;
         if (response.votedAs.voteDirection === direction) {
           this.undoVote(response, direction);
         } else {
           this.undoVote(response, direction, true);
         }
       } else {
-        this.loading = true;
         this.createVote(response, direction);
       }
     }

@@ -117,7 +117,6 @@ export class ResponseFooterComponent implements OnInit {
 
   undoVote(response, direction, createVote?) {
     if (response.id) {
-<<<<<<< Updated upstream
       this.apollo
         .mutate({
           mutation: VoteDeleteQuery,
@@ -142,21 +141,6 @@ export class ResponseFooterComponent implements OnInit {
                   value.node.votedAs = null;
                   this.response = value;
                   break;
-=======
-      this.apollo.mutate({
-        mutation: VoteDeleteQuery,
-        variables: {
-          consultationResponseId: response.id
-        },
-        update: (store, {data: res}) => {
-          const variables = {id: this.consultationId};
-          const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
-          if (res) {
-            for (const value of resp['consultationProfile'].sharedResponses.edges) {
-              if (value.node.id ===  response['id']) {
-                if (response.votedAs) {
-                  value.node[response.votedAs.voteDirection + 'VoteCount'] -= 1;
->>>>>>> Stashed changes
                 }
               }
             }
@@ -171,28 +155,14 @@ export class ResponseFooterComponent implements OnInit {
           (res) => {
             if (createVote) {
               this.createVote(response, direction);
+            } else {
+              this.loading = false;
             }
           },
           (err) => {
             this.errorService.showErrorModal(err);
           }
-<<<<<<< Updated upstream
         );
-=======
-          store.writeQuery({query: ConsultationProfileCurrentUser, variables, data: resp});
-        }
-      })
-      .subscribe((res) => {
-        if (createVote) {
-          this.createVote(response, direction);
-        } else {
-          this.loading = false;
-        }
-      }, err => {
-        this.loading = false;
-        this.errorService.showErrorModal(err);
-      });
->>>>>>> Stashed changes
     }
   }
 
@@ -203,7 +173,6 @@ export class ResponseFooterComponent implements OnInit {
         voteDirection: direction,
       },
     };
-<<<<<<< Updated upstream
     this.apollo
       .mutate({
         mutation: VoteCreateQuery,
@@ -226,21 +195,6 @@ export class ResponseFooterComponent implements OnInit {
                 value.node.votedAs = res.voteCreate;
                 this.response = value;
                 break;
-=======
-    this.apollo.mutate({
-      mutation: VoteCreateQuery,
-      variables: vote,
-      update: (store, {data: res}) => {
-        const variables = {id: this.consultationId};
-        const resp: any = store.readQuery({query: ConsultationProfileCurrentUser, variables});
-        if (res) {
-          for (const value of resp['consultationProfile'].sharedResponses.edges) {
-            if (value.node.id ===  response['id']) {
-              if (value.node[res.voteCreate.voteDirection + 'VoteCount']) {
-                value.node[res.voteCreate.voteDirection + 'VoteCount'] += 1;
-              } else {
-                value.node[res.voteCreate.voteDirection + 'VoteCount'] = 1;
->>>>>>> Stashed changes
               }
             }
           }
@@ -252,8 +206,11 @@ export class ResponseFooterComponent implements OnInit {
         },
       })
       .subscribe(
-        (data) => {},
+        (data) => {
+          this.loading = false;
+        },
         (err) => {
+          this.loading = false;
           this.errorService.showErrorModal(err);
         }
       );

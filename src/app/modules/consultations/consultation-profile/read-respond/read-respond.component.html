@@ -22,7 +22,7 @@
   <div *ngIf="profileData?.reviewType !== 'policy'">
     <app-satisfaction-rating-distribution [satisfactionRatingDistribution]="satisfactionRatingDistribution" [profileData]="profileData"></app-satisfaction-rating-distribution>
     <app-consultation-public-responses></app-consultation-public-responses>
-  </div>   
+  </div>
 </section>
 <app-thank-you-modal *ngIf="showThankYouModal" [points]="earnedPoints" [profileData]="profileData" (closeThankYouModal)="onCloseThanksModal()">
 </app-thank-you-modal>
@@ -34,7 +34,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <button class="close-btn" ><img src="assets/images/close.png" (click)="onCloseEmailModal()" /></button>
+        <button class="cls-btn" ><img src="assets/images/close.png" (click)="onCloseEmailModal()" /></button>
         <div class="email-modal">
             <img class="modal-img mb-3" src="assets/images/email-verify.png" />
             <p class="heading-text mb-2">Please check your email and verify</p>

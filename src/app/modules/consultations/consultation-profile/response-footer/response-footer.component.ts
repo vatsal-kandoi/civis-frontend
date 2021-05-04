@@ -101,6 +101,7 @@ export class ResponseFooterComponent implements OnInit {
 
   vote(direction, response) {
     if (!this.loading) {
+      this.loading = true;
       if (response.votedAs) {
         if (response.votedAs.voteDirection === direction) {
           this.undoVote(response, direction);
@@ -153,6 +154,8 @@ export class ResponseFooterComponent implements OnInit {
           (res) => {
             if (createVote) {
               this.createVote(response, direction);
+            } else {
+              this.loading = false;
             }
           },
           (err) => {
@@ -202,8 +205,11 @@ export class ResponseFooterComponent implements OnInit {
         },
       })
       .subscribe(
-        (data) => {},
+        (data) => {
+          this.loading = false;
+        },
         (err) => {
+          this.loading = false;
           this.errorService.showErrorModal(err);
         }
       );

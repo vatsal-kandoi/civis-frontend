@@ -99,10 +99,13 @@ export class ConsultationResponseTextComponent
     this.consultationService.submitResponseText.subscribe((status) => {
       if (status) {
         this.submitAnswer();
-        window.scrollTo({
-          top: this.responseIndex.nativeElement.offsetTop - 80,
-          behavior: 'smooth',
-        });
+        if (this.responseIndex) {
+          window.scrollTo({
+            top: this.responseIndex.nativeElement.offsetTop - 80,
+            behavior: 'smooth',
+          });
+        }
+
       }
     });
   }

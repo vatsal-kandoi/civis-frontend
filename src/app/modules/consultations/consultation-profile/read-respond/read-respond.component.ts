@@ -79,7 +79,6 @@ export class ReadRespondComponent implements OnInit {
     )
     .subscribe((data: any) => {
         this.profileData = data;
-        console.log(this.profileData);
         const questions = this.consultationService.getQuestions(data);
         if (questions && questions.length > 0) {
           this.questionnaireExist = true;

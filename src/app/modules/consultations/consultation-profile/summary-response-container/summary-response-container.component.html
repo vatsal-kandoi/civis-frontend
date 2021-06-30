@@ -3,7 +3,7 @@
         <img class="avatar avatar--42" 
         appDefaultImage [type]="'user'"
         [src]="'null'" />
-      <p class="regular-text bold-text m-0 ml-2">{{response?.node?.user?.firstName}}</p>
+      <p class="regular-text bold-text m-0 ml-2">{{response?.node?.respondentName}}</p>
     </div>
     <ng-template #otherUser>
         <div class="d-inline-flex align-items-center">
@@ -13,7 +13,7 @@
               [src]="'null'" />
             </div>
             <p class="regular-text bold-text m-0 ml-2">
-              {{'Citizen Leader [Name undisclosed]' | translate}}
+              {{response?.node?.visibility === 'shared' ? response?.node?.respondentName : 'Citizen Leader [Name undisclosed]' | translate}}
             </p>
             <p class="unverified-text"  *ngIf="!response?.node?.isVerified" tooltip="The person who made this response has not verified their email address yet." >(Unverified)</p>
           </div>

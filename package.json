@@ -33,6 +33,8 @@
     "@nguniversal/express-engine": "^9.1.1",
     "@ngx-share/button": "^7.1.3",
     "@ngx-share/core": "^7.1.3",
+    "@sentry/angular": "^6.10.0",
+    "@sentry/tracing": "^6.10.0",
     "@types/express-serve-static-core": "^4.17.7",
     "angular2-draggable": "^2.3.2",
     "apollo-angular": "^1.5.0",

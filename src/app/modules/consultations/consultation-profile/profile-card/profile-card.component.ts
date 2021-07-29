@@ -93,7 +93,8 @@ export class ProfileCardComponent implements OnInit, OnChanges {
 
   getRemainigDays(deadline) {
     if (deadline) {
-      const diff_in_days = this.getDifferenceInDays(deadline);
+      let diff_in_days = this.getDifferenceInDays(deadline);
+      diff_in_days = Math.floor(diff_in_days );
       if (diff_in_days <= 0) {
         return diff_in_days === 0 ? 'Last day to respond' : 'Closed';
       } else {
@@ -120,7 +121,8 @@ export class ProfileCardComponent implements OnInit, OnChanges {
   }
 
   getTwitterUrl(link) {
-      const diff_in_days = this.getDifferenceInDays(this.profile.responseDeadline);
+      let diff_in_days = this.getDifferenceInDays(this.profile.responseDeadline);
+      diff_in_days = Math.floor(diff_in_days );
       let remainingDays = '';
       if (diff_in_days <= 0) {
         remainingDays =  diff_in_days === 0 ? ', last day for you to share your feedback too!' : '.';

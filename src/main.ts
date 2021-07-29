@@ -20,7 +20,7 @@ Sentry.init({
   dsn: 'https://6c7282af128d432ba4a6bfd81296d164@o62908.ingest.sentry.io/5884402',
   integrations: [
     new Integrations.BrowserTracing({
-      tracingOrigins: ['localhost', 'https://api.civis.vote/api'],
+      tracingOrigins: ['localhost', 'https://api.civis.vote'],
       routingInstrumentation: Sentry.routingInstrumentation,
     }),
   ],

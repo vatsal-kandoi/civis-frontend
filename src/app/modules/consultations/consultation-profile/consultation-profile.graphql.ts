@@ -87,7 +87,6 @@ export const ConsultationProfile = gql`
             roundNumber
             templatesCount
             upVoteCount
-            respondentName
             user {
               id
               firstName
@@ -208,7 +207,6 @@ export const ConsultationProfileCurrentUser = gql`
             roundNumber
             templatesCount
             upVoteCount
-            respondentName
             user {
               id
               firstName
@@ -311,7 +309,6 @@ export const SubmitResponseQuery = gql`
               roundNumber
               templatesCount
               upVoteCount
-              respondentName
               user {
                 id
                 firstName

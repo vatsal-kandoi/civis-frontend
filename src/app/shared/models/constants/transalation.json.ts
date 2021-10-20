@@ -276,8 +276,8 @@ export const HindiLang = [
     "translation": "सिविक इनोवेशन फाउंडेशन (\"Civis\") गोपनीयता नीति"
   },
   {
-    "text": "Civic Innovation Foundation 2019. Unless otherwise mentioned, all content is licensed under",
-    "translation": "Civis इनोवेशन फाउंडेशन 2019।यहां प्रस्तुत हर सामग्री क्रिएटिव कॉमन्स ऐट्रिब्यूशन-नो डेरिवेटिव्स 4.0 अंतरराष्ट्रीय लाइसेन्स के तहत है।"
+    "text": "Civic Innovation Foundation 2021. Unless otherwise mentioned, all content is licensed under",
+    "translation": "Civis इनोवेशन फाउंडेशन 2021।यहां प्रस्तुत हर सामग्री क्रिएटिव कॉमन्स ऐट्रिब्यूशन-नो डेरिवेटिव्स 4.0 अंतरराष्ट्रीय लाइसेन्स के तहत है।"
   },
   {
     "text": "Civic Innovation Foundation is a non-profit organisation whose aim is to generate public awareness and provide education on issues of civic importance.",

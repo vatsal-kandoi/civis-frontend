@@ -21,6 +21,7 @@ export const ConsultationList = gql`
             }
           }
           name
+          locationId
         }
         status
       }

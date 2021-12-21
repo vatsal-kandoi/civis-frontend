@@ -5,12 +5,10 @@
     "ng": "ng",
     "start": "node server.js",
     "serve:staging": "ng serve --configuration=dev-staging",
-    "serve:ffgstaging": "ng serve --configuration=dev-staging-ffg",
     "serve:prod": "ng serve --configuration=dev-production",
     "build": "ng build --configuration=production",
     "build:production": "ng build --configuration=production",
     "build:staging": "ng build --configuration=staging",
-    "build:ffgstaging": "ng build --configuration=dev-staging-ffg",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

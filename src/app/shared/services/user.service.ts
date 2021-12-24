@@ -1,3 +1,4 @@
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {BehaviorSubject} from 'rxjs';
@@ -16,7 +17,8 @@ export class UserService {
 
 constructor(
   private apollo: Apollo,
-  private tokenService: TokenService
+  private tokenService: TokenService,
+  private toastService: ToastService,
 ) {
   this.manageUserToken();
 }
@@ -55,9 +57,13 @@ constructor(
           if (!this.currentUser.city || !this.currentUser.city.id) {
             this.forceCitySelection$.next(true);
           }
+        } else {
+          console.error('User not found');
         }
       }, (err: any) => {
+        console.error('Error fetching user', err);
         this.userLoaded$.next(false);
+        this.toastService.displayToast('error', err);
       });
   }
 }

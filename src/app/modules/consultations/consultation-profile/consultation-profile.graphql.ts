@@ -87,7 +87,6 @@ export const ConsultationProfile = gql`
             roundNumber
             templatesCount
             upVoteCount
-            respondentName
             user {
               id
               firstName
@@ -208,7 +207,6 @@ export const ConsultationProfileCurrentUser = gql`
             roundNumber
             templatesCount
             upVoteCount
-            respondentName
             user {
               id
               firstName
@@ -232,7 +230,7 @@ export const ConsultationProfileCurrentUser = gql`
   }
 `;
 
-export const VoteCreateQuery = gql `
+export const VoteCreateQuery = gql`
   mutation voteCreate($consultationResponseVote: VoteCreateInput!) {
     voteCreate(consultationResponseVote: $consultationResponseVote) {
       id
@@ -241,9 +239,39 @@ export const VoteCreateQuery = gql `
   }
 `
 
-export const VoteDeleteQuery = gql `
+export const VoteDeleteQuery = gql`
   mutation voteDelete($consultationResponseId : Int!) {
     voteDelete(consultationResponseId : $consultationResponseId )
+  }
+`;
+
+export const CreateUserCountRecord = gql`
+  mutation userCountCreate($userCount:UserCountInput!){
+    userCountCreate(userCount: $userCount){
+      userId
+      profanityCount
+      shortResponseCount
+    }
+  }
+`;
+
+export const UpdateUserCountRecord = gql`
+  mutation userCountUpdate($userCount:UserCountInput!){
+    userCountUpdate(userCount: $userCount){
+      userId
+      profanityCount
+      shortResponseCount
+    }
+  }
+`;
+
+export const UserCountUser = gql`
+  query userCountUser($userId: Int!){
+    userCountUser(userId: $userId){
+      userId
+      profanityCount
+      shortResponseCount
+    }
   }
 `;
 
@@ -307,11 +335,11 @@ export const SubmitResponseQuery = gql`
               }
               downVoteCount
               responseText
+              responseStatus
               isVerified
               roundNumber
               templatesCount
               upVoteCount
-              respondentName
               user {
                 id
                 firstName

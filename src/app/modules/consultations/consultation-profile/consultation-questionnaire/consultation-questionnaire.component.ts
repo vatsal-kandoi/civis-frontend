@@ -5,9 +5,10 @@ import { ConsultationsService } from 'src/app/shared/services/consultations.serv
 import { isObjectEmpty, checkPropertiesPresence, scrollToFirstError } from '../../../../shared/functions/modular.functions';
 import { atLeastOneCheckboxCheckedValidator } from 'src/app/shared/validators/checkbox-validator';
 import { Apollo } from 'apollo-angular';
-import { SubmitResponseQuery, ConsultationProfileCurrentUser } from '../consultation-profile.graphql';
+import { SubmitResponseQuery, ConsultationProfileCurrentUser, CreateUserCountRecord,UpdateUserCountRecord, UserCountUser } from '../consultation-profile.graphql';
 import { filter, map } from 'rxjs/operators';
 import { ErrorService } from 'src/app/shared/components/error-modal/error.service';
+import { profanityList } from 'src/app/graphql/queries.graphql';
 
 
 @Component({
@@ -39,6 +40,20 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   respondedRounds = [];
   responseCreated: boolean;
   authModal = false;
+  isConfirmModal = false;
+  confirmMessage = {
+    msg: 'Do you want to reconsider your response? We detected some potentially harmful language, and to keep Civis safe and open we recommend revising responses that were detected as potentially harmful.',
+    title: ''
+  };
+  nudgeMessageDisplayed= false;
+  userResponse='';
+  profanityCount: any;
+  userData:any;
+  profanity_count_changed: boolean=false;
+  isUserResponseProfane: boolean=false;
+  responseStatus = 0;
+  profaneWords = [];
+
   constructor(private _fb: FormBuilder,
     private userService: UserService,
     private consultationService: ConsultationsService,
@@ -52,6 +67,19 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
     )
     .subscribe((consulationId: any) => {
       this.consultationId = consulationId;
+    });
+
+    this.apollo.watchQuery({
+      query: profanityList,
+      fetchPolicy: 'network-only'
+    })
+    .valueChanges
+    .pipe(
+      map((res: any) => res.data)
+    )
+    .subscribe((response: any) => {
+      this.profaneWords = response.profanityList.data.map((profane) => profane.profaneWord);
+    }, (err: any) => {
     });
   }
 
@@ -188,11 +216,30 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       const consultationResponse = this.getConsultationResponse();
       if (!isObjectEmpty(consultationResponse)) {
         if (this.currentUser) {
-          this.submitResponse(consultationResponse);
-          this.showError = false;
+          this.apollo.watchQuery({
+            query: UserCountUser,
+            variables: {userId:this.currentUser.id},
+            fetchPolicy:'no-cache'
+          })
+          .valueChanges
+          .pipe (
+            map((res: any) => res.data.userCountUser)
+          )
+          .subscribe(data => {
+            if(!this.profanity_count_changed){
+              this.userData=data;
+              this.checkAndUpdateProfanityCount();
+            }
+          }, err => {
+            const e = new Error(err);
+              this.errorService.showErrorModal(err);
+          });
         } else {
           this.authModal = true;
-          localStorage.setItem('consultationResponse', JSON.stringify(consultationResponse));
+          localStorage.setItem(
+            'consultationResponse',
+            JSON.stringify(consultationResponse)
+          );
         }
       }
     } else {
@@ -202,6 +249,91 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       this.showError = true;
       this.scrollToError = true;
     }
+  }
+
+  checkAndUpdateProfanityCount(){
+    var Filter = require('bad-words'),
+    filter = new Filter({list: this.profaneWords});
+
+    this.isUserResponseProfane=filter.isProfane(this.userResponse);
+    
+    if (this.userData!==null){
+      this.profanityCount=this.userData.profanityCount;
+    }
+    else{
+      this.profanityCount=0;
+      if(this.isUserResponseProfane){
+        if (!this.nudgeMessageDisplayed) {
+          this.isConfirmModal = true;
+          this.nudgeMessageDisplayed=true;
+          return;
+        }
+        this.profanityCount+=1;
+        this.responseStatus=+1;
+      }
+      this.apollo.mutate({
+        mutation: CreateUserCountRecord,
+        variables:{
+          userCount:{
+            userId: this.currentUser.id,
+            profanityCount: this.profanityCount,
+            shortResponseCount: 0
+          }
+         },
+       })
+      .subscribe((data) => {
+        this.invokeSubmitResponse();
+      }, err => {
+        this.errorService.showErrorModal(err);
+      });
+      this.profanity_count_changed=true;
+    return;
+    }
+
+    if(this.isUserResponseProfane){
+      if (!this.nudgeMessageDisplayed) {
+        this.isConfirmModal = true;
+        this.nudgeMessageDisplayed=true;
+        return;
+      }
+      this.profanityCount+=1;
+      this.responseStatus=+1;
+      if(this.profanityCount>=3){
+        this.confirmMessage.msg = 'We detected that your response may contain harmful language. This response will be moderated and sent to the Government at our moderator\'s discretion.'
+        this.isConfirmModal = true;
+      }
+    }
+    else{
+      this.invokeSubmitResponse();
+      return;
+    }
+    
+    this.apollo.mutate({
+      mutation: UpdateUserCountRecord,
+        variables:{
+          userCount:{
+          userId: this.currentUser.id,
+          profanityCount:this.profanityCount,
+          shortResponseCount: this.userData.shortResponseCount
+        }
+      },
+    })
+    .subscribe((data) => {   
+      this.invokeSubmitResponse();
+    }, err => {
+      this.errorService.showErrorModal(err);
+    });
+    this.profanity_count_changed=true;
+  }
+
+  confirmed(event) {
+    this.isConfirmModal = false;
+  }
+
+  invokeSubmitResponse(){
+    const consultationResponse = this.getConsultationResponse();
+    this.submitResponse(consultationResponse);
+    this.showError = false;
   }
 
   getResponseAnswers () {
@@ -282,6 +414,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
       consultationId: this.profileData.id,
       satisfactionRating : this.responseFeedback,
       visibility: this.responseVisibility ? 'shared' : 'anonymous',
+      responseStatus: this.responseStatus,
     };
     if (checkPropertiesPresence(consultationResponse)) {
       consultationResponse['templateId'] = this.templateId;

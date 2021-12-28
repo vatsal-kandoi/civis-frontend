@@ -3,37 +3,25 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="title">{{'Glossary Terms' | translate}}</div>
-        <div class="pointer" (click)="closeModal()">X</div>
+        <div class="title">{{'Legal Terms Simplified' | translate}}</div>
+        <div class="pointer" (click)="closeModal()"><img src="assets/images/close.svg" alt="close"></div>
       </div>
       <div class="modal-body">
-        <div class="glossary-wrapper__inner-container">
-          <table>
-            <thead>
-              <tr class="container-body__data-row ">
-                <th>
-                  S No.
-                </th>
-                <th>
-                  Legal Terms
-                </th>
-                <th>
-                  Definition
-                </th>
-              </tr>
-            </thead>
-            <tr class="container-body__data-row " *ngFor="let item of glossaryWordArray; let i = index">
-              <td>
-                {{i +1}}
-              </td>
-              <td>
-                {{item?.wordindex.word}}
-              </td>
-              <td>
-                {{item?.wordindex.description}}
-              </td>
-            </tr>
-          </table>
+        <div class="glossary-wrapper">
+          <ng-container *ngFor="let item of glossaryWordArray">
+            <div class="glossary-wrapper__item mb-2">
+              <span class="legal-title">{{item?.wordindex.word}}</span>
+              <span class="legal-description">{{item?.wordindex.description}}
+              </span>
+            </div>
+          </ng-container>
+          <button (click)="closeModal()" class="glossary-wrapper__btn">
+            RETURN TO SUMMARY
+          </button>
+          <div class="glossary-wrapper__icon">
+            Powered By:
+            <img src="assets/images/nyaaya.svg" alt="nyaaya">
+          </div>
         </div>
       </div>
     </div>

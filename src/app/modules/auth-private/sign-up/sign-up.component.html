@@ -140,7 +140,7 @@
               <div class="input-box required-field col-12">
                 <label for="password">Password</label>
                 <div class="input-box__border">
-                  <input placeholder="At least 6 characters" type="password" id="password" #password="ngModel"
+                  <input placeholder="At least 8 characters" type="password" id="password" #password="ngModel"
                     name="password" [(ngModel)]="signupObject.password" required />
                 </div>
                 <div *ngIf="password.invalid && (password.touched || signupForm.submitted)" class="error-msg">Password

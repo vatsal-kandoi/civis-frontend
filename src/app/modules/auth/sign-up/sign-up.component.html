@@ -17,7 +17,7 @@
         <img class="logo" [routerLink]="['/']" src='assets/images/brand-logo/brand-logo.svg' />
       </div>
       <div class="login-container">
-        <p class="auth-text"> 
+        <p class="auth-text">
           {{'Already have an account with Civis?' | translate}}
         </p>
         <button class="app-btn circular auth-btn" [routerLink]="['/auth', 'login']">{{'Sign In' | translate}}</button>
@@ -42,7 +42,7 @@
               </picture>
             </div>
             <p class="mb-0 ml-4">{{'Sign up with Google' | translate}}</p>
-          </button> 
+          </button>
           <button class="app-btn facebook" (click)="redirectTo('facebook')">
             <div class="social-img">
               <picture>
@@ -57,7 +57,7 @@
       </div>
 
       <div class="row">
-        <div class="form-space-middle col-md-5">  
+        <div class="form-space-middle col-md-5">
           <div class="or-text">{{'OR' | translate}}</div>
           <!-- horizontal-divider for mobile -->
           <hr class="horizontal-divider" data-content="OR">
@@ -71,11 +71,11 @@
               <div class="input-box required-field">
                   <label for="fname">{{'First name' | translate}}</label>
                   <div class="input-box__border">
-                      <input placeholder="First Name" type="text" id="fname" #fname="ngModel" name="fname" [(ngModel)]="signupObject.firstName" required />   
+                      <input placeholder="First Name" type="text" id="fname" #fname="ngModel" name="fname" [(ngModel)]="signupObject.firstName" required />
                   </div>
                   <div *ngIf="fname.invalid && (fname.touched || signupForm.submitted)" class="error-msg">{{'First name is Required' | translate}}</div>
               </div>
-      
+
               <div class="input-box required-field">
                   <label for="efname">{{'Email' | translate}}</label>
                   <div class="input-box__border">
@@ -86,35 +86,35 @@
                     <div *ngIf="email.errors.email">{{'Email must be a valid email address' | translate}}</div>
                   </div>
               </div>
-      
+
               <div class="input-box required-field">
                   <label for="password">{{'Password' | translate}}</label>
                   <div class="input-box__border">
-                      <input placeholder="At least 6 characters" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="signupObject.password" required />
+                      <input placeholder="At least 8 characters" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="signupObject.password" required />
                   </div>
                   <div *ngIf="password.invalid && (password.touched || signupForm.submitted)" class="error-msg">{{'Password is Required' | translate}}</div>
               </div>
-  
+
               <div class="input-checbox">
-                  <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required /> 
+                  <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required />
                   <label for="agreedForTermsCondition">
-                    {{"I'm good with the Civis"| translate}}<br> 
+                    {{"I'm good with the Civis"| translate}}<br>
                     <a href="/terms" class="policy-link">{{'Terms of Service,' | translate}}</a>
                     &nbsp;
                     <a href="/privacy" class="policy-link">{{'Privacy Policy' | translate}}</a>
-                    & 
+                    &
                     <a href="/content-policy" class="policy-link">{{'Content Policy.' | translate}}</a>
                   </label>
               </div>
               <div class="error-msg"  *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)">
                 {{'Please accept our Terms of Service & Privacy Policy to continue.' | translate}}
               </div>
-      
+
               <div class="input-checbox">
-                  <input class="cm-checkbox" type="checkbox"  id="notifyMe" #notifyMe="ngModel"  name="notifyMe" [(ngModel)]="signupObject.notifyForNewConsultation" /> 
+                  <input class="cm-checkbox" type="checkbox"  id="notifyMe" #notifyMe="ngModel"  name="notifyMe" [(ngModel)]="signupObject.notifyForNewConsultation" />
                   <label for="notifyMe">{{'Notify me when an open consultation' | translate }}<br>&nbsp; {{'is created on Civis.' | translate}}</label>
               </div>
-      
+
               <re-captcha #captchaRef="reCaptcha" (resolved)="captchaResolved($event)" [siteKey]="reCAPTCHA_KEY" size="invisible"></re-captcha>
               <div>
                 <button class="app-btn secondary get-start-btn" (click)="checkForCaptcha()">
@@ -127,7 +127,7 @@
       </div>
 
     </div>
-    
+
   </div>
 
 </div>

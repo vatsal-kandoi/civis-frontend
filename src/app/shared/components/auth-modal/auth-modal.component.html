@@ -30,11 +30,11 @@
               <div class="input-box required-field">
                   <label for="fname">{{'First name' | translate}}</label>
                   <div class="input-box__border">
-                      <input placeholder="First Name" type="text" id="fname" #fname="ngModel" name="fname" [(ngModel)]="signupObject.firstName" required />   
+                      <input placeholder="First Name" type="text" id="fname" #fname="ngModel" name="fname" [(ngModel)]="signupObject.firstName" required />
                   </div>
                   <div *ngIf="fname.invalid && (fname.touched || signupForm.submitted)" class="error-msg">{{'First name is Required' | translate}}</div>
               </div>
-      
+
               <div class="input-box required-field">
                   <label for="efname">{{'Email' | translate}}</label>
                   <div class="input-box__border">
@@ -45,11 +45,11 @@
                     <div *ngIf="email.errors.email">{{'Email must be a valid email address' | translate}}</div>
                   </div>
               </div>
-      
+
               <div class="input-box required-field">
                   <label for="password">{{'Password' | translate}}</label>
                   <div class="input-box__border">
-                      <input placeholder="At least 6 characters" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="signupObject.password" required />
+                      <input placeholder="At least 8 characters" type="password" id="password" #password="ngModel" name="password" [(ngModel)]="signupObject.password" required />
                   </div>
                   <div *ngIf="password.invalid && (password.touched || signupForm.submitted)" class="error-msg">{{'Password is Required' | translate}}</div>
               </div>
@@ -70,11 +70,11 @@
                   Required
                 </div>
               </div>
-  
+
               <div class="input-checbox">
-                  <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required /> 
+                  <input class="cm-checkbox" type="checkbox" #agreedForTermsCondition="ngModel" id="agreedForTermsCondition"  name="agreedForTermsCondition" [(ngModel)]="signupObject.agreedForTermsCondition" required />
                   <label for="agreedForTermsCondition" class="d-flex">
-                    I agree to the <br> 
+                    I agree to the <br>
                     <a href="/terms" class="policy-link">{{'Terms of Service,' | translate}}</a>
                     &nbsp;
                     <a href="/privacy" class="policy-link">{{'Privacy Policy' | translate}}</a>
@@ -87,18 +87,18 @@
               </div>
 
               <div class="input-checbox">
-                <input class="cm-checkbox" type="checkbox"  id="notifyMe" #notifyMe="ngModel"  name="notifyMe" [(ngModel)]="signupObject.notifyForNewConsultation" /> 
+                <input class="cm-checkbox" type="checkbox"  id="notifyMe" #notifyMe="ngModel"  name="notifyMe" [(ngModel)]="signupObject.notifyForNewConsultation" />
                 <label for="notifyMe">{{'Notify me when an open consultation' | translate }}<br>&nbsp; {{'is created on Civis.' | translate}}</label>
               </div>
-    
 
-              
+
+
               <div>
                 <button class="app-btn secondary get-start-btn" (click)="submit()">
                   <p class="m-0">Create my account</p>
                 </button>
               </div>
-          </form> 
+          </form>
           <div class="hline" *ngIf="signin"><span>Or</span></div>
           <form #loginForm="ngForm" *ngIf="signin" (ngSubmit)="submitLogin(loginForm.valid)" autocomplete="off">
               <div class="row">
@@ -113,7 +113,7 @@
                     <div *ngIf="email.errors.email">Email must be a valid email address</div>
                   </div>
                 </div>
-    
+
                 <div class="input-box col-12">
                   <div class="d-flex justify-content-between">
                     <label for="password">Password</label>

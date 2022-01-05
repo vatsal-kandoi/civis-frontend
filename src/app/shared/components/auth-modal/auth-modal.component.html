@@ -122,7 +122,7 @@
                 "
                 class="error-msg"
               >
-                {{ 'Password is Required' | translate }}
+                {{ signupObject.password ? 'Password is invalid' : ('Password is Required' | translate) }}
               </div>
             </div>
 

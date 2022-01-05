@@ -226,7 +226,7 @@
                 "
                 class="error-msg"
               >
-                Password is Required
+                {{ signupObject.password ? 'Password is invalid' : ('Password is Required' | translate) }}
               </div>
             </div>
 

@@ -186,10 +186,10 @@
               <div class="input-box col-12">
                 <label for="company">Organisation/Department</label>
                 <div class="input-box__border">
-                  <input placeholder="Company Name" type="text" id="company" #company="ngModel" name="company"
-                    [(ngModel)]="signupObject.company" />
+                  <input placeholder="Company Name" type="text" id="organization" #organization="ngModel" name="organization"
+                    [(ngModel)]="signupObject.organization" />
                 </div>
-                <div *ngIf="company.invalid && (company.touched || signupForm.submitted)" class="error-msg">
+                <div *ngIf="organization.invalid && (organization.touched || signupForm.submitted)" class="error-msg">
                   <div>Invalid Organisation/Department</div>
                 </div>
               </div>

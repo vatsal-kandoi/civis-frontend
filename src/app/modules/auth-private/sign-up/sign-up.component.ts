@@ -36,7 +36,7 @@ export class SignUpComponent implements OnInit {
     password: '',
     cityId: null,
     agreedForTermsCondition: false,
-    company: '',
+    organization: '',
     designation: '',
     callbackUrl: ''
   };

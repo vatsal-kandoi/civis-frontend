@@ -36,7 +36,7 @@ export class SignUpComponent implements OnInit {
     password: '',
     cityId: null,
     agreedForTermsCondition: false,
-    company: '',
+    organization: '',
     designation: '',
     callbackUrl: ''
   };
@@ -182,8 +182,6 @@ export class SignUpComponent implements OnInit {
 
       const signupObject = {...this.signupObject};
       delete signupObject['agreedForTermsCondition'];
-      delete signupObject['designation'];
-      delete signupObject['company'];
       // signupObject['callbackUrl'] = this.cookieService.get('loginCallbackUrl');
       // console.log(this.signupObject.callbackUrl);
       const variables = {

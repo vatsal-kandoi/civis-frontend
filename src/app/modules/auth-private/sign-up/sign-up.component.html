@@ -297,15 +297,15 @@
                 <input
                   placeholder="Company Name"
                   type="text"
-                  id="company"
-                  #company="ngModel"
-                  name="company"
-                  [(ngModel)]="signupObject.company"
+                  id="organization"
+                  #organization="ngModel"
+                  name="organization"
+                  [(ngModel)]="signupObject.organization"
                 />
               </div>
               <div
                 *ngIf="
-                  company.invalid && (company.touched || signupForm.submitted)
+                  organization.invalid && (organization.touched || signupForm.submitted)
                 "
                 class="error-msg"
               >

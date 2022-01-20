@@ -155,19 +155,22 @@ export class SignUpComponent implements OnInit {
     ).subscribe((token) => {
       if (token) {
         this.tokenService.storeToken(token);
-        this.getCurrentUser();
-        this.onSignUp();
-        this.userService.userLoaded$
-        .subscribe((exists: boolean) => {
-          if (exists) {
-            this.currentUser = this.userService.currentUser;
-            const url = `consultations/${this.consultationId}/read`;
-            this.router.navigateByUrl(url);
-          }
-        },
-        err => {
-          this.errorService.showErrorModal(err);
-        });
+        this.signupObject.callbackUrl =
+          this.cookieService.get('loginCallbackUrl');
+        this.nextScreen = true;
+        // this.getCurrentUser();
+        // this.onSignUp();
+        // this.userService.userLoaded$
+        // .subscribe((exists: boolean) => {
+        //   if (exists) {
+        //     this.currentUser = this.userService.currentUser;
+        //     const url = `consultations/${this.consultationId}/read`;
+        //     this.router.navigateByUrl(url);
+        //   }
+        // },
+        // err => {
+        //   this.errorService.showErrorModal(err);
+        // });
       }
     }, err => {
       this.errorService.showErrorModal(err);

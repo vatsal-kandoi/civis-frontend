@@ -4,8 +4,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: 20px 50px;
-  background-color: #FFFFFF;
+  justify-content: space-between;
+  padding: 0px 50px;
+  margin-top: 20px;
+  font-family: 'Encode Sans';
+  background-color: #ffffff;
   &__item {
     display: flex;
     width: 100%;
@@ -15,14 +18,16 @@
 
     .legal-title {
       font-size: 16px;
-      font-weight: 700;
+      font-weight: bold;
+      line-height: 130.5%;
+      letter-spacing: 0.045em;
       color: $darker-gray;
       margin: 0;
     }
     .legal-description {
       font-size: 16px;
       font-weight: 400;
-      color: $light-gray;
+      color: $dark-gray;
       margin-bottom: 10px;
     }
   }
@@ -37,6 +42,7 @@
     font-size: 14px;
     height: 40px;
     font-weight: 600;
+    line-height: 17px;
     margin: 20px auto;
   }
   &__icon {
@@ -44,31 +50,49 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 119.5%;
+    letter-spacing: 0.01em;
+    color: #909090;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
   }
 }
 
 .modal-dialog {
-  min-width: 800px !important;
-  max-width: 900px !important;
+  width: 800px !important;
+  max-width: unset;
+  .modal-content {
+    border: 1px dashed #7b61ff;
+    box-sizing: border-box;
+    border-radius: 20px;
+    min-height: 332px;
+  }
   .modal-header {
     align-items: center !important;
     border-bottom: unset;
     text-align: center;
-    padding-top: 0.1rem;
+    padding-top: 1rem;
     .title {
       font-size: 30px;
-      font-weight: 600;
+      font-weight: bolder;
       color: $primary-color;
       margin: 0;
       width: 100%;
+      @media screen and (max-width: 768px) {
+        font-size: 24px;
+      }
     }
   }
-  .modal-body {
-
+  @media screen and (max-width: 768px) {
+    width: 100%;
   }
 }
 
 .align-center {
-display: flex !important;
-align-items: center;
+  display: flex !important;
+  align-items: center;
 }

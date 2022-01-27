@@ -1,8 +1,8 @@
 import { CookieService } from 'ngx-cookie';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute, RoutesRecognized } from '@angular/router';
 import { UserService } from './shared/services/user.service';
-import { filter } from 'rxjs/operators';
+import { filter, pairwise } from 'rxjs/operators';
 import { StarterService } from './shared/services/starter.service';
 import { Subscription } from 'rxjs';
 @Component({
@@ -47,9 +47,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.router.events.subscribe((evt) => {
-      this.isPrivate = this.router.url.includes('private');
-      if (evt instanceof NavigationEnd) {
+    this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
+    .subscribe((evt) => {
+      if (evt) {
+        this.isPrivate = evt[0].urlAfterRedirects.includes('private');
         window.scrollTo(0, 0);
       }
     });

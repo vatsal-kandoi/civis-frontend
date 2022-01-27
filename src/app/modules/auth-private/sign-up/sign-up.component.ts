@@ -130,7 +130,8 @@ export class SignUpComponent implements OnInit {
           query: CitiesSearchQuery,
           variables: {
             q: name,
-            type: 'city'
+            type: 'city',
+            isInternationalCity: true
           }
         })
         .pipe(
@@ -262,7 +263,8 @@ export class SignUpComponent implements OnInit {
     this.apollo.query({
       query: LocationListQuery,
       variables: {
-        type: 'city'
+        type: 'city',
+        isInternational: true
       }
     })
     .pipe(

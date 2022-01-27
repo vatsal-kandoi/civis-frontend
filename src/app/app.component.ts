@@ -16,6 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription;
   selectedLanguage = "en";
   confirmMessage = {};
+  isPrivate = false;
   language = {
     id: null,
     name: null
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {
+      this.isPrivate = this.router.url.includes('private');
       if (evt instanceof NavigationEnd) {
         window.scrollTo(0, 0);
       }

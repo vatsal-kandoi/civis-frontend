@@ -73,10 +73,6 @@ export class SignUpComponent implements OnInit {
     if (!this.signupForm.valid) {
       return;
     } else {
-      if (this.invitationToken) {
-        this.submitAuthAcceptInvite();
-        return;
-      }
       this.signupObject.callbackUrl = this.cookieService.get('loginCallbackUrl');
       this.nextScreen = true;
     }
@@ -141,13 +137,16 @@ export class SignUpComponent implements OnInit {
   }
 
   submitAuthAcceptInvite() {
-    const {firstName, lastName, password} = this.signupObject;
+    const {firstName, lastName, password, organization, phoneNumber, designation} = this.signupObject;
     const authVariables = {
-      firstName: firstName,
-      lastName: lastName,
-      password: password,
+      firstName,
+      lastName,
+      password,
       invitationToken: this.invitationToken,
-      consultationId: +this.consultationId
+      consultationId: +this.consultationId,
+      phoneNumber,
+      organization,
+      designation
     };
     this.apollo.mutate({mutation: AuhtAcceptInviteMutation, variables: {auth: authVariables}})
     .pipe(
@@ -157,20 +156,19 @@ export class SignUpComponent implements OnInit {
         this.tokenService.storeToken(token);
         this.signupObject.callbackUrl =
           this.cookieService.get('loginCallbackUrl');
-        this.nextScreen = true;
-        // this.getCurrentUser();
-        // this.onSignUp();
-        // this.userService.userLoaded$
-        // .subscribe((exists: boolean) => {
-        //   if (exists) {
-        //     this.currentUser = this.userService.currentUser;
-        //     const url = `consultations/${this.consultationId}/read`;
-        //     this.router.navigateByUrl(url);
-        //   }
-        // },
-        // err => {
-        //   this.errorService.showErrorModal(err);
-        // });
+        this.getCurrentUser();
+        this.onSignUp();
+        this.userService.userLoaded$
+        .subscribe((exists: boolean) => {
+          if (exists) {
+            this.currentUser = this.userService.currentUser;
+            const url = `consultations/${this.consultationId}/read`;
+            this.router.navigateByUrl(url);
+          }
+        },
+        err => {
+          this.errorService.showErrorModal(err);
+        });
       }
     }, err => {
       this.errorService.showErrorModal(err);
@@ -178,8 +176,10 @@ export class SignUpComponent implements OnInit {
   }
 
   submit() {
-
     if (!this.signupForm.valid || !this.isCaptchaResolved) {
+      return;
+    } else if (this.invitationToken) {
+      this.submitAuthAcceptInvite();
       return;
     } else {
 

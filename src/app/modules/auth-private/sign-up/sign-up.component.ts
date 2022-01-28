@@ -186,7 +186,6 @@ export class SignUpComponent implements OnInit {
 
       const signupObject = {...this.signupObject};
       delete signupObject['agreedForTermsCondition'];
-
       const variables = {
         auth: signupObject
       };

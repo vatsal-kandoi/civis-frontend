@@ -12,9 +12,7 @@ import { CookieService } from 'ngx-cookie';
 
 const ConfirmEmailMutation = gql`
     mutation confirmEmail($confirmationToken: String!) {
-        authConfirmEmail (confirmationToken: $confirmationToken) {
-            accessToken
-        }
+        authConfirmEmail (confirmationToken: $confirmationToken)
     }
 `;
 
@@ -46,7 +44,7 @@ export class ConfirmUserGuard implements CanActivate {
         )
         .subscribe((tokenObj) => {
           if (tokenObj) {
-            this.tokenService.storeToken(tokenObj);
+            this.tokenService.storeToken({tokenObj});
             this.navigateTo();
             this.tokenService.tokenHandler();
             this.userService.manageUserToken();

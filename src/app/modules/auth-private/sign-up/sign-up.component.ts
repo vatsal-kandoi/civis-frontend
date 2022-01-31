@@ -73,10 +73,6 @@ export class SignUpComponent implements OnInit {
     if (!this.signupForm.valid) {
       return;
     } else {
-      if (this.invitationToken) {
-        this.submitAuthAcceptInvite();
-        return;
-      }
       this.signupObject.callbackUrl = this.cookieService.get('loginCallbackUrl');
       this.nextScreen = true;
     }
@@ -130,7 +126,8 @@ export class SignUpComponent implements OnInit {
           query: CitiesSearchQuery,
           variables: {
             q: name,
-            type: 'city'
+            type: 'city',
+            isInternationalCity: true
           }
         })
         .pipe(
@@ -141,11 +138,14 @@ export class SignUpComponent implements OnInit {
   }
 
   submitAuthAcceptInvite() {
-    const {firstName, lastName, password} = this.signupObject;
+    const {firstName, lastName, password, organization, designation, phoneNumber} = this.signupObject;
     const authVariables = {
-      firstName: firstName,
-      lastName: lastName,
-      password: password,
+      firstName,
+      lastName,
+      password,
+      phoneNumber,
+      organization,
+      designation,
       invitationToken: this.invitationToken,
       consultationId: +this.consultationId
     };
@@ -177,6 +177,9 @@ export class SignUpComponent implements OnInit {
   submit() {
 
     if (!this.signupForm.valid || !this.isCaptchaResolved) {
+      return;
+    } else if (this.invitationToken) {
+      this.submitAuthAcceptInvite();
       return;
     } else {
 
@@ -260,7 +263,8 @@ export class SignUpComponent implements OnInit {
     this.apollo.query({
       query: LocationListQuery,
       variables: {
-        type: 'city'
+        type: 'city',
+        isInternationalCity: true
       }
     })
     .pipe(

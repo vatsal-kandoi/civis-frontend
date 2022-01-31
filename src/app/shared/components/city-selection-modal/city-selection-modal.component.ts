@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, ViewEncapsulation, Input } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { distinctUntilChanged, debounceTime, takeWhile, switchMap, map, tap } from 'rxjs/operators';
 import { CitiesSearchQuery, UpdateCity } from './city-selection-modal.graphql';
@@ -15,6 +15,7 @@ import { CurrentUser } from 'src/app/graphql/queries.graphql';
 })
 export class CitySelectionModalComponent implements OnInit {
 
+  @Input() isPrivate = false;
   @ViewChild('citySelectionModal', { static: false }) citySelectionModal: ModalDirective;
   searchEmitter: EventEmitter<any> = new EventEmitter();
   loading: boolean;
@@ -72,7 +73,8 @@ export class CitySelectionModalComponent implements OnInit {
           query: CitiesSearchQuery,
           variables: {
             q: name,
-            type: 'city'
+            type: 'city',
+            isInternationalCity: this.isPrivate
           }
         })
         .pipe(

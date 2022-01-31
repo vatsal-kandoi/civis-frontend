@@ -24,7 +24,7 @@ export class TokenService {
 
   storeToken(tokenObject: any) {
     const token = tokenObject.accessToken;
-    // const expiry = tokenObject.expires_at;
+    const expiry = tokenObject.expires_at;
     localStorage.setItem('civis-token', token);
   }
 }

@@ -41,6 +41,7 @@ constructor(
             this.setIndex();
         } else {
             const lang = HindiLang;
+            lang.sort(this.sortLang);
             this.dictionary.next(lang);
             this.storage.store('lang', lang);
             this.setIndex();
@@ -50,6 +51,16 @@ constructor(
         this.loading.next(true);
         this.loading.complete();
     }
+}
+
+sortLang(a, b) {
+  if ( a.text.toLowerCase() < b.text.toLowerCase() ){
+    return -1;
+  }
+  if (  a.text.toLowerCase() > b.text.toLowerCase() ){
+    return 1;
+  }
+  return 0;
 }
 
 canActivate() {

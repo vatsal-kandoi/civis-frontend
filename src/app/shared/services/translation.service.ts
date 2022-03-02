@@ -8,7 +8,7 @@ import {CookieService} from 'ngx-cookie';
 import {LocalStorageService} from 'ngx-webstorage';
 import {HttpClient} from '@angular/common/http';
 import {Resolve, ActivatedRouteSnapshot, CanActivate} from '@angular/router';
-import { HindiLang } from '../../shared/models/constants/transalation.json';
+import HindiLang from '../../shared/models/constants/transalation.json';
 
 interface Dictionary {
 text: string;
@@ -41,7 +41,6 @@ constructor(
             this.setIndex();
         } else {
             const lang = HindiLang;
-            lang.sort(this.sortLang);
             this.dictionary.next(lang);
             this.storage.store('lang', lang);
             this.setIndex();
@@ -53,15 +52,6 @@ constructor(
     }
 }
 
-sortLang(a, b) {
-  if ( a.text.toLowerCase() < b.text.toLowerCase() ){
-    return -1;
-  }
-  if (  a.text.toLowerCase() > b.text.toLowerCase() ){
-    return 1;
-  }
-  return 0;
-}
 
 canActivate() {
     return this.loading;

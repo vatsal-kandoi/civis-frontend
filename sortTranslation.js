@@ -1,7 +1,7 @@
 // import { HindiLang } from './src/app/shared/models/constants/transalation.json';
 
 const fs = require('fs');
-const fileName = './src/app/shared/models/constants/transalation.json'
+const fileName = './src/app/shared/models/constants/translation.json'
 const data = fs.readFileSync(fileName, 'utf8');
 const words = JSON.parse(data);
 

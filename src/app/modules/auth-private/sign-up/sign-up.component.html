@@ -226,11 +226,7 @@
                 "
                 class="error-msg"
               >
-                {{
-                  signupObject.password
-                    ? "Password must be at least 8 characters long, must have 1 special character and 1 numeric character"
-                    : ("Password is Required" | translate)
-                }}
+                {{ signupObject.password ? 'Password must be at least 8 characters long, must have 1 uppercase 1 lowercase letter must have 1 special character and 1 numeric character' : ('Password is Required' | translate) }}
               </div>
             </div>
 

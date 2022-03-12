@@ -119,9 +119,13 @@ export class ConsultationResponseTextComponent
   }
 
   getConsultationResponse() {
+    const typeResponse = {
+      true: 'shared',
+      false: 'anonymous'
+    };
     const consultationResponse = {
       consultationId: this.consultationId,
-      visibility: this.responseVisibility ? 'shared' : 'anonymous',
+      visibility: this.currentUser ? typeResponse[this.responseVisibility && this.currentUser.isVerified] : 'anonymous',
       responseText: this.responseText,
       satisfactionRating: this.responseFeedback,
     };

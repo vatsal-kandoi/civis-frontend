@@ -278,10 +278,14 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
   }
 
   getConsultationResponse() {
+    const typeResponse = {
+      true: 'shared',
+      false: 'anonymous'
+    };
     const consultationResponse =  {
       consultationId: this.profileData.id,
       satisfactionRating : this.responseFeedback,
-      visibility: this.responseVisibility ? 'shared' : 'anonymous',
+      visibility: this.currentUser ? typeResponse[this.responseVisibility && this.currentUser.isVerified] : 'anonymous'
     };
     if (checkPropertiesPresence(consultationResponse)) {
       consultationResponse['templateId'] = this.templateId;

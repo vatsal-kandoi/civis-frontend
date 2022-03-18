@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        run: npm run build:staging -- --base-href='https://vatsal-kandoi.github.io/civis-frontend'
+        run: npm run build:staging -- --base-href='https://vatsal-kandoi.github.io/civis-frontend/'
       - name: Archive build
         if: success()
         uses: actions/upload-artifact@v1

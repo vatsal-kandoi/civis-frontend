@@ -11,7 +11,8 @@
     "build:staging": "ng build --configuration=staging",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "create404":"node create404.js"    
   },
   "private": true,
   "dependencies": {

@@ -21,13 +21,13 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        run: npm run build:staging
+        run: npm run build:staging -- --base-href='https://vatsal-kandoi.github.io/civis-frontend'
       - name: Archive build
         if: success()
         uses: actions/upload-artifact@v1
         with:
           name: deploy_dist
-          path: docs
+          path: dist/civis
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -43,4 +43,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: deploy_dist/docs/
+          FOLDER: deploy_dist/dist/civis/

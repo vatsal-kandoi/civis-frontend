@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - 'ffg-accessibility-develop'
+      
+  workflow_dispatch:
 
 jobs:
   build:

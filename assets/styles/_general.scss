@@ -1,0 +1,127 @@
+@import "helpers/variables";
+
+.regular-text {
+  font-size: 14px;
+  line-height: 22px;
+  color: $black;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.text-18 {
+  font-size: 18px;
+  color: $black;
+}
+
+.text-24 {
+  font-size: 24px;
+  color: $black;
+}
+
+.text-16 {
+  font-size: 16px;
+  color: $black;
+}
+
+.blue-text {
+  font-size: 14px;
+  line-height: 22px;
+  color: $primary-color;
+}
+
+.clr-blue {
+  color: $primary-color;
+}
+
+.clr-white {
+  color: $white;
+}
+.clr-black {
+  color: $black;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.italic-text {
+  font-style: italic;
+}
+
+.content {
+  margin-top: 77px;
+  @media screen and (max-width: 991px) {
+    margin-top: 57px;
+  }
+}
+
+.hidden-md-down {
+  @media screen and (max-width: 991px) {
+    display: none;
+  }
+}
+
+.hidden-md-up {
+  display: none;
+  @media screen and (max-width: 991px) {
+    display: block;
+  }    
+}
+
+@media screen and (max-width: 991px) {
+  .text-16-sm {
+    font-size: 16px;
+  }
+  
+  .text-14-sm {
+    font-size: 14px;
+  }
+
+  .text-13-sm {
+    font-size: 12px;
+  }
+
+  .text-12-sm {
+    font-size: 12px;
+  }
+  .m-0-sm {
+    margin: 0 !important;
+  }
+}
+
+.btn-arrow {
+  font-size: 16px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.truncate {
+  /* autoprefixer: ignore next */      
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.sticky {
+  position: sticky;
+  top: 77px;
+}
+
+.fit-cover {
+  object-fit: cover;
+}
+
+.decoration-none {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}

@@ -1,0 +1,52 @@
+@import "../helpers/variables";
+
+.avatar {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+
+  &--24 {
+    height: 24px;
+    width: 24px;
+  }
+
+  &--32 {
+    height: 32px;
+    width: 32px;
+  }
+
+  &--42 {
+    height: 42px;
+    width: 42px;
+  }
+
+  &--56 {
+    height: 56px;
+    width: 56px;
+  }
+
+  &--60 {
+    height: 60px;
+    width: 60px;
+  }
+  
+  &--64 {
+    height: 64px;
+    width: 64px;
+  }
+
+  &--76 {
+    height: 76px;
+    width: 76px;
+  }
+
+  &--80 {
+    height: 80px;
+    width: 80px;
+  }
+
+  &--128 {
+    height: 128px;
+    width: 128px;
+  }
+}

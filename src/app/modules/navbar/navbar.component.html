@@ -1,17 +1,17 @@
 <div class="nav-container white-nav" *ngIf="currentUrl !== 'auth'">
   <nav class="app-navbar" [ngClass]="currentUrl == 'landing' ? 'landing-nav-spacer' : 'nav-spacer'">
     <div class="app-navbar__left-item">
-      <div class="logo-space pointer" [routerLink]="['/']">
-        <img class="logo pointer" [src]="getLogoUrl()"
+      <a class="logo-space pointer" [routerLink]="['/']">
+       <img class="logo pointer" alt="Civis logo that directs to landing page" [src]="getLogoUrl()"
           [ngClass]="(currentUrl == 'consultations-profile') ? 'xs-logo' : ''" />
-      </div>
+      </a>
       <div class="left-nav-link" *ngIf="currentUrl !== 'consultations-profile'">
-        <p class="nav-link-text bold-text" [routerLink]="['consultations/list']">
+        <a class="nav-link-text bold-text text-decoration-none" [routerLink]="['consultations/list']">
           {{'Active Consultations' | translate}} <span class="active-count-box">{{activeCount}}</span>
-        </p>
-        <p data-event="click-navbar-leaderboard" class="nav-link-text bold-text" [routerLink]="['/leader-board']">
-          {{'Leaderboard' | translate}}</p>
-        <p class="nav-link-text" [routerLink]="['/how-civis-works']">{{'How Civis Works' | translate}}</p>
+        </a>
+        <a data-event="click-navbar-leaderboard" class="nav-link-text bold-text text-decoration-none" [routerLink]="['/leader-board']">
+          {{'Leaderboard' | translate}}</a>
+        <a class="nav-link-text text-decoration-none" [routerLink]="['/how-civis-works']" >{{'How Civis Works' | translate}}</a>
       </div>
     </div>
 

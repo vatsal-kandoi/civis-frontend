@@ -3,15 +3,15 @@
     <div class="footer-wrapper__top-section">
       <div class="left-item">
         <ul class="item-list">
-          <li [routerLink]="['/about-us']">{{'About Us' | translate}}</li>
+          <a [routerLink]="['/about-us']" class="text-decoration-none"> <li>{{'About Us' | translate}}</li></a>
           <a data-event="click-blog" href="https://medium.com/civis-vote" target="_blank" class="text-decoration-none">
             <li>{{'Blog' | translate}}</li>
           </a>
         </ul>
         <ul class="item-list">
-          <li [routerLink]="['/terms']">{{'Terms of Service' | translate}}</li>
-          <li [routerLink]="['/privacy']">{{'Privacy Policy' | translate}} </li>
-          <li [routerLink]="['/content-policy']">{{'Content Policy' | translate}}</li>
+          <a [routerLink]="['/terms']" class="text-decoration-none"><li>{{'Terms of Service' | translate}}</li></a>
+          <a [routerLink]="['/privacy']" class="text-decoration-none"><li>{{'Privacy Policy' | translate}}</li></a>
+          <a [routerLink]="['/content-policy']" class="text-decoration-none"><li>{{'Content Policy' | translate}}</li></a>
         </ul>
       </div>
       <div class="middle-item">
@@ -22,20 +22,20 @@
       <div class="right-item">
         <div class="social-icons">
           <a href="https://in.linkedin.com/company/civis-vote" target="_blank">
-            <span><i class="fa fa-linkedin-square"></i></span>
+            <span ><i class="fa fa-linkedin-square" aria-label="Links to Civis LinkedIn"></i></span>
           </a>
           <a href="https://github.com/civis-vote" target="_blank">
-            <span><i class="fa fa-github-square"></i></span>
+            <span><i class="fa fa-github-square" aria-label="Links to Civis Github"></i></span>
           </a>
           <a href="https://www.facebook.com/Civis.Vote/" target="_blank">
-            <span><i class="fa fa-facebook-square"></i></span>
+            <span><i class="fa fa-facebook-square" aria-label="Links to Civis Facebook"></i></span>
           </a>
           <a href="https://twitter.com/civis_vote" target="_blank">
-            <span><i class="fa fa-twitter-square"></i></span>
+            <span><i class="fa fa-twitter-square" aria-label="Links to Civis Twitter"></i></span>
           </a>
           <div class="instagram-icon" >
             <a href="https://www.instagram.com/civis.vote" target="_blank">
-              <i class="fa fa-instagram"></i>
+              <i class="fa fa-instagram" aria-label="Links to Civis Instagram"></i>
             </a>
           </div>
         </div>
@@ -74,7 +74,7 @@
           <picture>
             <source srcset="assets/images/footerlogo3.webp" type="image/webp">
             <source srcset="assets/images/footerlogo3.jpg" type="image/jpeg">
-            <img src="assets/images/footerlogo3.jpg" alt="footer logo" />
+            <img src="assets/images/footerlogo3.jpg" alt="" />
           </picture>
         </a>
       </div>

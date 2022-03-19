@@ -2,13 +2,13 @@
   <section class="app-landing__cover-section">
     <div class="cover-inner-container">
       <div class="cover-details">
-        <p class="cover-title">{{'Your turn, citizen' | translate}}</p>
+        <p class="cover-title" tabindex="0">{{'Your turn, citizen' | translate}}</p>
         <p class="cover-subtitle">
           {{'Simple thing is, the bodies that create laws, rules and regulations seek feedback from us, the citizens, to finalise them. What are we waiting for?' | translate}}
         </p>
         <div class="d-flex align-items-center mt-4 cover-btn-section">
           <button class="app-btn secondary circular participate-btn" [routerLink]="['/consultations/list']">{{'Start participating' | translate}}</button>
-          <p class="civis-works-link pointer" [routerLink]="['/how-civis-works']">{{'How Civis Works' | translate}}</p>
+          <a class="civis-works-link pointer text-decoration-none" [routerLink]="['/how-civis-works']">{{'How Civis Works' | translate}}</a>
         </div>
       </div>
       <div class="cover-card">
@@ -59,7 +59,7 @@
         <div class="carousel-arrow-left pointer" (click)='previousSlide()'><i class="fa fa-angle-left"></i></div>
         <div @slideInRight class="carousel-inner-container">
           <div class="carousel-header">
-            <img class="avatar avatar--60 pointer" appDefaultImage appLazyLoad [type]="'user'" [src]="currentReponseData?.user?.profilePicture?.url" (click)="openUserProfile(currentReponseData?.user)" />
+            <img class="avatar avatar--60 pointer" alt="" appDefaultImage appLazyLoad [type]="'user'" [src]="currentReponseData?.user?.profilePicture?.url" (click)="openUserProfile(currentReponseData?.user)" />
             <p class="bold-text mt-1 mb-1">{{currentReponseData?.user?.firstName}}</p>
           </div>
           <p class="response-title bold-text">{{currentReponseData?.consultation?.title}}</p>
@@ -78,10 +78,10 @@
     </div>
 
     <div class="citizen-leader-section">
-      <p class="section-heading">{{'CITIZEN LEADERS ON CIVIS' | translate}}</p>
+      <p class="section-heading" tabindex="0">{{'CITIZEN LEADERS ON CIVIS' | translate}}</p>
       <div class="leaders-list">
         <div class="leader-profile" *ngFor='let item of citizenLeaders'>
-          <img class="avatar avatar--60 mb-2 pointer" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
+          <img class="avatar avatar--60 mb-2 pointer" alt="" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
           <p class="text-18 m-0">{{item?.firstName}}</p>
           <p class="blue-text m-0">{{item?.points}} &nbsp; {{'Points' | translate}}</p>
         </div>
@@ -89,7 +89,7 @@
       <!-- leaders-list-mobile -->
       <div class="mb-3">
         <div class="leaders-list-row" *ngFor='let item of citizenLeaders'>
-          <img class="avatar avatar--42" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
+          <img class="avatar avatar--42" alt="" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
           <div class="leader-detail">
             <p class="leader-name">{{item?.firstName}}</p>
             <p class="leader-stats">
@@ -105,7 +105,7 @@
     </div>
 
     <div class="civis-work-section">
-      <p class="section-heading">{{'HOW CIVIS WORKS' | translate}}</p>
+      <p class="section-heading" tabindex="0">{{'HOW CIVIS WORKS' | translate}}</p>
       <div class="d-flex justify-content-center mt-5">
         <button
           class="app-btn circular landing-btn"
@@ -127,31 +127,31 @@
     <app-how-civis-works-carousel [tab]="activeTab"></app-how-civis-works-carousel>
 
     <div class="impact-section">
-        <p class="section-heading">{{'IMPACT SO FAR' | translate}}</p>
+        <p class="section-heading" tabindex="0">{{'IMPACT SO FAR' | translate}}</p>
       <div class="count-grid">
         <div class="count-item">
-          <p>{{'Consultations Created on Civis' | translate}}</p>
-          <p>{{numberWithCommas(impactStats?.consultation_count + 2)}}</p>
+          <p tabindex="0">{{'Consultations Created on Civis' | translate}}</p>
+          <p tabindex="0">{{numberWithCommas(impactStats?.consultation_count + 2)}}</p>
         </div>
         <div class="count-item">
-          <p>{{'Total Number of Responses' | translate}}</p>
-          <p>{{numberWithCommas(impactStats?.consultation_response_count + 5790 + 2938)}}</p>
+          <p tabindex="0">{{'Total Number of Responses' | translate}}</p>
+          <p tabindex="0">{{numberWithCommas(impactStats?.consultation_response_count + 5790 + 2938)}}</p>
         </div>
         <div class="count-item">
-          <p>{{'Total Number of Citizens Engaged' | translate}}</p>
-          <p>{{numberWithCommas(impactStats?.total_registered_users + 3057)}}</p>
+          <p tabindex="0">{{'Total Number of Citizens Engaged' | translate}}</p>
+          <p tabindex="0">{{numberWithCommas(impactStats?.total_registered_users + 3057)}}</p>
         </div>
       </div>
     </div>
 
     <div class="press-section">
-      <p class="section-heading">{{'IN THE PRESS' | translate}}</p>
+      <p class="section-heading" tabindex="0">{{'IN THE PRESS' | translate}}</p>
       <div class="press-logo-grid">
         <a href="https://audioboom.com/posts/6611014-what-is-civis" class="grid-item" target="_blank">
           <picture>
             <source srcset="assets/images/RedFM_Logo.webp" type="image/webp">
             <source srcset="assets/images/RedFM_Logo.jpg" type="image/jpeg">
-            <img appLazyLoad src="assets/images/RedFM_Logo.jpg" alt="Red FM logo" />
+            <img appLazyLoad src="assets/images/RedFM_Logo.jpg" alt="Links to Red FM news" />
           </picture>
         </a>
         <a
@@ -162,7 +162,7 @@
           <picture>
             <source srcset="assets/images/Financial-Express-Logo.webp" type="image/webp">
             <source srcset="assets/images/Financial-Express-Logo.jpg" type="image/jpeg">
-            <img appLazyLoad src="assets/images/Financial-Express-Logo.jpg" alt="Financial-Express-Logo" />
+            <img appLazyLoad src="assets/images/Financial-Express-Logo.jpg" alt="Link to Financial Express News" />
           </picture>
         </a>
         <a
@@ -173,14 +173,14 @@
           <picture>
             <source srcset="assets/images/forbes.webp" type="image/webp">
             <source srcset="assets/images/forbes.jpg" type="image/jpeg">
-            <img appLazyLoad src="assets/images/forbes.jpg" alt="Forbes logo" />
+            <img appLazyLoad src="assets/images/forbes.jpg" alt="Link to Forbes News" />
           </picture>
         </a>
         <a href="https://www.dropbox.com/s/obr9ows30x9fukh/TOI_9.30.2018-1.png?dl=0" class="grid-item" target="_blank">
           <picture>
             <source srcset="assets/images/TOI.webp" type="image/webp">
             <source srcset="assets/images/TOI.jpg" type="image/jpeg">
-            <img appLazyLoad src="assets/images/TOI.jpg" alt="TOI logo" />
+            <img appLazyLoad src="assets/images/TOI.jpg" alt="Link to Times of India News" />
           </picture>
         </a>
         <a
@@ -191,7 +191,7 @@
           <picture>
             <source srcset="assets/images/Mint-Logo.webp" type="image/webp">
             <source srcset="assets/images/Mint-Logo.jpg" type="image/jpeg">
-            <img appLazyLoad src="assets/images/Mint-Logo.jpg" alt="Mint logo" />
+            <img appLazyLoad src="assets/images/Mint-Logo.jpg" alt="Link to Mint News" />
           </picture>
         </a>
       </div>

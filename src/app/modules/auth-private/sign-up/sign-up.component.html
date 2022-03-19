@@ -52,7 +52,7 @@
         <div class="mt-4 invitation-block">
           <span>
             {{
-              'You have been invited to this consultation and logged in as '
+              "You have been invited to this consultation and logged in as "
                 | translate
             }}
           </span>
@@ -60,10 +60,10 @@
             <b>
               {{ signupObject.email }}
             </b>
-            {{ ' - ' }}
+            {{ " - " }}
           </span>
           <span (click)="showLogoutModal = true">
-            <b>{{ 'Not you?' | translate }}</b>
+            <b>{{ "Not you?" | translate }}</b>
           </span>
         </div>
       </ng-template>
@@ -226,39 +226,6 @@
                 "
                 class="error-msg"
               >
-                {{ signupObject.password ? 'Password must be at least 8 characters long, must have 1 special character and 1 numeric character' : ('Password is Required' | translate) }}
-              </div>
-            </div>
-
-            <div class="input-checbox col-12">
-              <input
-                class="cm-checkbox"
-                type="checkbox"
-                #agreedForTermsCondition="ngModel"
-                id="agreedForTermsCondition"
-                name="agreedForTermsCondition"
-                [(ngModel)]="signupObject.agreedForTermsCondition"
-                required
-              />
-              <label for="agreedForTermsCondition">
-                I agree to the
-                <a href="/terms" class="policy-link">Terms of Service,</a>
-                &nbsp;
-                <a href="/privacy" class="policy-link">Privacy Policy</a>
-                and
-                <a href="/content-policy" class="policy-link"
-                  >Content Policy.</a
-                >
-              </label>
-            </div>
-            <div
-              class="error-msg col-12"
-              *ngIf="
-                agreedForTermsCondition.invalid &&
-                (agreedForTermsCondition.touched || signupForm.submitted)
-              "
-            >
-              Please accept our Terms of Service & Privacy Policy to continue.
             </div>
 
             <div class="col-12">
@@ -294,7 +261,6 @@
             <div class="input-box col-12">
               <label for="company">Organisation/Department</label>
               <div class="input-box__border">
-                <input
                   placeholder="Company Name"
                   type="text"
                   id="organization"
@@ -305,7 +271,8 @@
               </div>
               <div
                 *ngIf="
-                  organization.invalid && (organization.touched || signupForm.submitted)
+                  organization.invalid &&
+                  (organization.touched || signupForm.submitted)
                 "
                 class="error-msg"
               >

@@ -21,6 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
     id: null,
     name: null
   };
+  isPrivate = false;
   confirmModalOpen = false;
   languages = [
     {

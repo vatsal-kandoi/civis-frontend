@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { LoginMutation } from './login.graphql';
@@ -8,6 +8,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 import { UserService } from 'src/app/shared/services/user.service';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { CookieService } from 'ngx-cookie';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ import { CookieService } from 'ngx-cookie';
 })
 export class LoginComponent implements OnInit {
 
+  @ViewChild('loginForm', {static: false}) loginForm: NgForm;
+  @ViewChild('loginForm', { read: ElementRef }) loginFormElemRef: ElementRef;
   loginObject = {
     email: '',
     password: ''
@@ -31,34 +34,34 @@ export class LoginComponent implements OnInit {
               ) { }
 
   ngOnInit() {}
-
-  submit(isValid: boolean) {
-    if (!isValid) {
-      return;
-    }
-
-    this.apollo.mutate({
-        mutation: LoginMutation,
-        variables: {auth: this.loginObject}
-      })
-      .pipe(
-        map((res: any) => res.data.authLogin)
-      )
-      .subscribe((tokenObject: any) => {
-        if (tokenObject) {
-          this.tokenService.storeToken(tokenObject);
-          const callbackUrl = this.cookieService.get('loginCallbackUrl');
-          if (callbackUrl) {
-            this.router.navigateByUrl(callbackUrl);
-            this.cookieService.put('loginCallbackUrl', '');
-          } else {
-            this.router.navigateByUrl('/profile');
+  
+  submit() {
+    if (!this.loginForm.valid) this.loginFormElemRef.nativeElement.querySelector('.ng-invalid').focus()
+    // Proces form only on captcha resolved
+    else {
+      this.apollo.mutate({
+          mutation: LoginMutation,
+          variables: {auth: this.loginObject}
+        })
+        .pipe(
+          map((res: any) => res.data.authLogin)
+        )
+        .subscribe((tokenObject: any) => {
+          if (tokenObject) {
+            this.tokenService.storeToken(tokenObject);
+            const callbackUrl = this.cookieService.get('loginCallbackUrl');
+            if (callbackUrl) {
+              this.router.navigateByUrl(callbackUrl);
+              this.cookieService.put('loginCallbackUrl', '');
+            } else {
+              this.router.navigateByUrl('/profile');
+            }
+            this.onLoggedIn();
           }
-          this.onLoggedIn();
-        }
-      }, (err: any) => {
-        this.errorService.showErrorModal(err);
-      });
+        }, (err: any) => {
+          this.errorService.showErrorModal(err);
+        });
+      }
   }
 
   onLoggedIn() {

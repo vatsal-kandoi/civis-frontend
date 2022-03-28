@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { SignUpMutation, CitiesSearchQuery, LocationListQuery } from './sign-up.graphql';
 import {debounceTime, distinctUntilChanged, map, switchMap, takeWhile, tap} from 'rxjs/operators';
@@ -19,6 +19,7 @@ import { ResendEmailConfirmationMutation } from '../auth.graphql';
 export class SignUpComponent implements OnInit {
 
   @ViewChild('signupForm', {static: false}) signupForm: NgForm;
+  @ViewChild('signupForm', { read: ElementRef }) signupFormElemRef: ElementRef;  
   @ViewChild('captchaRef', {static: false}) captchaRef;
   signupObject = {
     firstName: '',
@@ -97,11 +98,21 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-
+  focusOnInvalidInput() {
+    console.log(this.signupForm.controls);
+    for (const key of Object.keys(this.signupForm.controls)) {
+      if (this.signupForm.controls[key].invalid) {
+        console.log(this.signupForm.controls[key]);
+        (<any> this.signupForm.controls[key]).nativeElement.focus();       
+        break;
+     }
+    }
+  }
+  
   submit() {
-    if (!this.signupForm.valid || !this.isCaptchaResolved) {
-      return;
-    } else {
+    if (!this.signupForm.valid) this.signupFormElemRef.nativeElement.querySelector('.ng-invalid').focus()
+    // Proces form only on captcha resolved
+    else if (this.isCaptchaResolved) {
       const signupObject = {...this.signupObject};
       delete signupObject['agreedForTermsCondition'];
       const variables = {

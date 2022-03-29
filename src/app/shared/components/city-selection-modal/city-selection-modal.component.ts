@@ -17,7 +17,6 @@ export class CitySelectionModalComponent implements OnInit {
 
   @Input() isPrivate = false;
   @ViewChild('citySelectionModal', { static: false }) citySelectionModal: ModalDirective;
-  @Input() isPrivate = false;
   searchEmitter: EventEmitter<any> = new EventEmitter();
   loading: boolean;
   cities: any;

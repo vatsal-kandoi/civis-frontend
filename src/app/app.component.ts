@@ -16,7 +16,6 @@ export class AppComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription;
   selectedLanguage = "en";
   confirmMessage = {};
-  isPrivate = false;
   language = {
     id: null,
     name: null

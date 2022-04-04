@@ -462,10 +462,7 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
           this.longTextAnswer = this.templateText = response.answer;
             const textAreaElement = document.getElementById(`text-area-${controlName}`);
             if (textAreaElement) {
-              window.scrollTo({
-                top: this.questionnaireContainer.nativeElement.offsetTop - 80,
-                behavior: 'smooth',
-              });
+              document.getElementById('responseTextArea').focus();
               this.questionnaireForm.get(controlName).patchValue(this.longTextAnswer);
             }
         });

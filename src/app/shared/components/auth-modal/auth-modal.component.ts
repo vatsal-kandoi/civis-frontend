@@ -1,15 +1,8 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { NgForm } from '@angular/forms';
-import { SignUpMutation, LocationListQuery } from 'src/app/modules/auth-private/sign-up/sign-up.graphql';
-import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
-import { TokenService } from '../../services/token.service';
-import { ErrorService } from '../error-modal/error.service';
-import { UserService } from '../../services/user.service';
-import { LoginMutation } from 'src/app/modules/auth-private/login/login.graphql';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
-import { NgSelectComponent } from '@ng-select/ng-select';
+import { LoginForm, SignupForm } from '../../interfaces';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-auth-modal',
@@ -18,9 +11,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 })
 export class AuthModalComponent implements OnInit {
 
-
   @ViewChild('authModal', { static: false }) authModal: ModalDirective;
-  @ViewChild('signupForm', {static: false}) signupForm: NgForm;
   @Output() close: EventEmitter<any> = new EventEmitter();
 
   signupObject = {
@@ -44,95 +35,22 @@ export class AuthModalComponent implements OnInit {
 
 
   constructor(
-    private apollo: Apollo,
-    private tokenService: TokenService,
-    private errorService: ErrorService,
-    private userService: UserService,
-    private graphqlService: GraphqlService
+    private graphqlService: GraphqlService,
+    private authService: AuthService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  submitSignupForm($event: SignupForm) {
+    if (!$event) return;
+    this.authService.signupUser($event);
+    this.onClose();
   }
 
-  submit() {
-
-    if (!this.signupForm.valid ) {
-      return;
-    } else {
-
-      const signupObject = {...this.signupObject};
-      delete signupObject['agreedForTermsCondition'];
-      delete signupObject['designation'];
-      delete signupObject['company'];
-      const variables: any = {
-        auth: signupObject
-      };
-      variables.auth.referringConsultationId = this.consultationId;
-      this.apollo.mutate({mutation: SignUpMutation, variables: variables})
-      .pipe(
-        map((res: any) => res.data.authSignUp)
-      )
-      .subscribe((token) => {
-        if (token) {
-          this.tokenService.storeToken(token);
-          // this.getCurrentUser();
-          this.onSignUp();
-          this.authModal.hide();
-          this.close.emit(true);
-        }
-      }, err => {
-        this.errorService.showErrorModal(err);
-      });
-    }
-  }
-
-  loadCities() {
-    this.loadingCities = true;
-    this.apollo.query({
-      query: LocationListQuery,
-      variables: {
-        type: 'city'
-      }
-    })
-    .pipe(
-      map((res: any) => res.data.locationList)
-    )
-    .subscribe((cities) => {
-      this.loadingCities = false;
-      this.cities = cities;
-    }, err => {
-      this.loadingCities = false;
-      this.errorService.showErrorModal(err);
-    });
-  }
-
-  submitLogin(isValid: boolean) {
-    if (!isValid) {
-      return;
-    }
-
-    this.apollo.mutate({
-        mutation: LoginMutation,
-        variables: {auth: this.loginObject}
-      })
-      .pipe(
-        map((res: any) => res.data.authLogin)
-      )
-      .subscribe((tokenObject: any) => {
-        if (tokenObject) {
-          this.tokenService.storeToken(tokenObject);
-          this.authModal.hide();
-          this.close.emit(true);
-          this.onSignUp();
-        }
-      }, (err: any) => {
-        this.errorService.showErrorModal(err);
-      });
-  }
-
-  onSignUp() {
-    this.tokenService.tokenHandler();
-    this.userService.manageUserToken();
+  submitLoginForm($event: LoginForm) {
+    if (!$event) return;
+    this.authService.loginUser($event);
+    this.onClose();
   }
 
   onClose() {
@@ -150,5 +68,4 @@ export class AuthModalComponent implements OnInit {
         break;
     }
   }
-
 }

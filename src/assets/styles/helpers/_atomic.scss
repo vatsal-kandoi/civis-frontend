@@ -9,3 +9,9 @@
 .text-uppercase {
   text-transform: uppercase;
 }
+
+.width {
+  &__100 {
+    width: 100%;
+  }
+}

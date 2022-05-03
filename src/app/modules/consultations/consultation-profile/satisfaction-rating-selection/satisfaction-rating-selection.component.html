@@ -7,11 +7,11 @@
         <p class="satisfactory-tip">
           {{'Choose an option to submit your feedback' | translate}}
         </p>
-        <div class="options-block">
+        <div class="options-block" role="radiogroup" aria-required="true">
           <button 
-            class="grey-bg"
+            class="grey-bg SatisfactionRating"
             [ngClass]="{'active': (responseFeedback === 'dissatisfied')}"
-            (click)="setSatisfactoryRating('dissatisfied')">
+            (click)="setSatisfactoryRating('dissatisfied')" role="radio" aria-checked="false" value="dissatisfied">
             <span>
               <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/dissatisfied.svg" />
               <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_dissatisfied.png" />
@@ -19,9 +19,9 @@
             </span>
           </button>
           <button 
-            class="grey-bg"
+            class="grey-bg SatisfactionRating"
             [ngClass]="{'active': (responseFeedback === 'somewhat_dissatisfied')}"
-            (click)="setSatisfactoryRating('somewhat_dissatisfied')">
+            (click)="setSatisfactoryRating('somewhat_dissatisfied')" role="radio" aria-checked="false" value="somewhat_dissatisfied">
             <span>
               <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_dissatisfied.svg" />
               <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_dissatisfied.png" />
@@ -29,9 +29,9 @@
             </span>
           </button>
           <button 
-            class="grey-bg"
+            class="grey-bg SatisfactionRating"
             [ngClass]="{'active': (responseFeedback === 'somewhat_satisfied')}"
-            (click)="setSatisfactoryRating('somewhat_satisfied')">
+            (click)="setSatisfactoryRating('somewhat_satisfied')" role="radio" aria-checked="false" value="somewhat_satisfied">
             <span>
               <img *ngIf="profileData?.visibility !== 'private_consultation'"  src="assets/images/somewhat_satisfied.svg" />
               <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_satisfied.png" />
@@ -39,9 +39,9 @@
             </span>
           </button>
           <button 
-            class="grey-bg"
+            class="grey-bg SatisfactionRating"
             [ngClass]="{'active': (responseFeedback === 'satisfied')}"
-            (click)="setSatisfactoryRating('satisfied')">
+            (click)="setSatisfactoryRating('satisfied')" role="radio" aria-checked="false" value="satisfied">
             <span>
               <img *ngIf="profileData?.visibility !== 'private_consultation'"  src="assets/images/satisfied.svg" />
               <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_satisfied.png" />

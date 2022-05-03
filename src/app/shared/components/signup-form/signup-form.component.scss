@@ -1,0 +1,127 @@
+@import './src/assets/styles/app';
+
+.input-box {
+    margin-bottom: 15px;
+
+    &__border {
+        width: 100%;
+        border: 1px solid $input-border;
+        box-sizing: border-box;
+        border-radius: 3px;
+
+        input { 
+            width: 100%;
+            font-weight: 500;
+            font-size: 15px;
+            background: $white;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        @media screen and (max-width: 991px) {
+            width: 100%;
+        }
+    }
+
+    label {
+        display: block;
+        font-weight: 600;
+        font-size: 14px;
+        color: $black;
+        margin-bottom: 10px;
+    }
+}
+
+.required-field { 
+    label {
+        &::after {
+            content: "*";
+            color: #F0653A;
+        }
+    }
+}
+
+.input-checbox {
+    display: flex;
+    margin-bottom: 15px;
+
+    label {
+        margin-left: 12px;
+        font-size: 14px;
+        color: $black;
+    }
+
+    .policy-link {
+        color: $black;
+        text-decoration: underline;
+        
+        &:hover {
+            color: $black;
+        }
+    }
+}
+
+.location-box {
+    width: 100%;
+    margin-bottom: 15px;
+
+    label {
+        display: block;
+        font-weight: 500;
+        font-size: 15px;
+        color: #151515;
+        margin-bottom: 5px;
+    }
+
+    @media screen and (max-width: 991px) {
+        width: 100%;
+    }
+}
+
+.get-start-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+    padding: 12px 20px;
+
+    @media screen and (max-width: 991px) {
+        width: 100%;
+    }
+
+    i {
+        font-size: 24px;
+    }
+}
+
+.error-msg {
+    margin: 10px 0;
+    color: #F0653A;
+    font-size: 14px;
+}
+
+.phone {
+    position: relative;
+
+    input {
+        padding-left: 35px !important;
+
+        &:focus {
+            padding-top: 9px !important;
+        }
+    }
+}
+
+.country-code {
+    position: absolute;
+    top:0;
+    left:0;
+    font-weight: 500;
+    font-size: 15px;
+    background: $white;
+    padding: 9px 0  9px 9px;
+    border: none;
+    border-radius: 3px;
+    margin: 1px;
+}

@@ -42,38 +42,10 @@
   
       <div class="form-space no-gutters mt-md-5 mt-2">
         <div class="row">
-          <div class="form-space-right col-md-5">
-            <button
-              class="app-btn gmail mb-3"
-              (click)="redirectTo('google')"
-              aria-label="Sign in using Google">
-              <div class="social-img">
-                <picture>
-                  <source srcset="assets/images/Gmail.webp" type="image/webp" />
-                  <source srcset="assets/images/Gmail.jpg" type="image/jpeg" />
-                  <img src="assets/images/Gmail.jpg" alt="Gmail logo" />
-                </picture>
-              </div>
-              <p class="mb-0 ml-4">{{ 'Sign up with Google' | translate }}</p>
-            </button>
-            <button class="app-btn facebook"
-              (click)="redirectTo('facebook')"
-              aria-label="Sign in using Facebook">
-              <div class="social-img">
-                <picture>
-                  <source
-                    srcset="assets/images/Facebook.webp"
-                    type="image/webp"
-                  />
-                  <source srcset="assets/images/Facebook.jpg" type="image/jpeg" />
-                  <img src="assets/images/Facebook.jpg" alt="Facebook logo" />
-                </picture>
-              </div>
-              <p class="mb-0 ml-4">{{ 'Sign up with Facebook' | translate }}</p>
-            </button>
+          <div class="col-md-5">
+            <app-social-login-options [userSignUp]="false"></app-social-login-options>
           </div>
         </div>
-   
         <div class="row">
           <div class="form-space-middle col-md-5">
             <div class="or-text">{{'OR' | translate}}</div>
@@ -85,72 +57,7 @@
 
         <div class="row">
           <div class="form-space__left col-md-5">
-            <form #loginForm="ngForm" (ngSubmit)="submit()" autocomplete="off">
-                <div class="input-box">
-                    <label for="email">{{'Email' | translate}}</label>
-                    <div class="input-box__border">
-                        <input
-                          placeholder="Email"
-                          type="email"
-                          id="email"
-                          #email="ngModel"
-                          name="email"
-                          [(ngModel)]="loginObject.email"
-                          [attr.aria-invalid]="email.invalid && (email.touched || loginForm.submitted)"
-                          aria-describedby="email-error" 
-                          aria-required="true"                                  
-                          required
-                          email />
-                    </div>
-                    <div
-                      *ngIf="email.invalid && (email.touched || loginForm.submitted)"
-                      class="error-msg"
-                      id="email-error"
-                      >
-                        <div *ngIf="email.errors.required">{{'Email is Required' | translate}}</div>
-                        <div *ngIf="email.errors.email">{{'Email must be a valid email address' | translate}}</div>
-                      </div>
-                </div>
-        
-                <div class="input-box">
-                    <label for="password">{{'Password' | translate}}</label>
-                    <div class="input-box__border">
-                        <input
-                          placeholder="Password"
-                          type="password"
-                          id="password"
-                          #password="ngModel"
-                          name="password"
-                          [(ngModel)]="loginObject.password"
-                          required
-                          [attr.aria-invalid]="password.invalid && (password.touched || loginForm.submitted)"
-                          aria-describedby="password-error" 
-                          aria-required="true"
-                          required                  
-                        />        
-                    </div>
-                    <div
-                      *ngIf="password.invalid && (password.touched || loginForm.submitted)"
-                      class="error-msg"
-                      id="password-error"
-                      >
-                      {{'Password is Required' | translate}}</div>
-                </div>
-                
-                <div>
-                  <input type="button" tabindex="-1" value="Forgot my password" class="forgot-link" [routerLink]="['/auth', 'forgot-password']">
-                </div>
-        
-                <div>
-                  <button
-                    class="app-btn secondary get-start-btn"
-                    type="submit"
-                    aria-label="Log into your Civis account" >
-                      <p class="m-0">{{'SIGN IN TO MY ACCOUNT' | translate}}</p>
-                      <i class="fa fa-angle-right"></i>
-                  </button>
-                </div>
-              </form>
+            <app-login-form (onSubmit)="submitLoginForm($event)"></app-login-form>
           </div>
         </div>    
       </div>

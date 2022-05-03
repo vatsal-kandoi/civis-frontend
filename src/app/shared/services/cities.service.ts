@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
-import { LocationListQuery } from 'src/app/modules/auth/sign-up/sign-up.graphql';
-import { CitiesSearchQuery } from '../components/city-selection-modal/city-selection-modal.graphql';
+import { CitiesSearchQuery, LocationListQuery } from 'src/app/graphql/queries';
 
 @Injectable({
   providedIn: 'root'

@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { SignUpMutation } from 'src/app/modules/auth-private/sign-up/sign-up.graphql';
-import { CaseStudiesListQuery, ResendEmailConfirmationMutation } from 'src/app/modules/auth/auth.graphql';
-import { LoginMutation } from 'src/app/modules/auth/login/login.graphql';
 import { ErrorService } from '../components/error-modal/error.service';
 import { LoginForm, SignupForm } from '../interfaces';
 import { TokenService } from './token.service';
 import { UserService } from './user.service';
 import { CookieService } from 'ngx-cookie';
+import { LoginMutation, ResendEmailConfirmationMutation, SignUpMutation } from 'src/app/graphql/mutations';
+import { CaseStudiesListQuery } from 'src/app/modules/auth/auth.graphql';
+
 
 @Injectable({
   providedIn: 'root'

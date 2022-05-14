@@ -1,0 +1,32 @@
+<div class="app-btn-group"
+    role="group"
+    [attr.aria-label]="'Social sign-in options' | translate" >
+    <button
+        class="app-btn gmail mb-3"
+        (click)="redirectTo('google')"
+        aria-labelledby="google-auth-text">
+        <div class="social-img">
+            <picture>
+                <source srcset="assets/images/Gmail.webp" type="image/webp" />
+                <source srcset="assets/images/Gmail.jpg" type="image/jpeg" />
+                <img src="assets/images/Gmail.jpg" alt="Gmail logo" />
+                </picture>
+            </div>
+        <p *ngIf="userSignUp" id="google-auth-text" class="mb-0 ml-4">{{ 'Sign up with Google' | translate }}</p>
+        <p *ngIf="!userSignUp" id="google-auth-text" class="mb-0 ml-4">{{ 'Sign in with Google' | translate }}</p>
+    </button>
+    <button 
+        class="app-btn facebook"
+        (click)="redirectTo('facebook')"
+        aria-labelledby="facebook-auth-text">
+        <div class="social-img">
+            <picture>
+                <source srcset="assets/images/Facebook.webp" type="image/webp" />
+                <source srcset="assets/images/Facebook.jpg" type="image/jpeg" />
+                <img src="assets/images/Facebook.jpg" alt="Facebook logo" />
+            </picture>
+        </div>
+        <p *ngIf="userSignUp" id="facebook-auth-text" class="mb-0 ml-4">{{ 'Sign up with Facebook' | translate }}</p>
+        <p *ngIf="!userSignUp" id="facebook-auth-text" class="mb-0 ml-4">{{ 'Sign in with Facebook' | translate }}</p>
+    </button>
+</div>

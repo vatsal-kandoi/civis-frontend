@@ -1,10 +1,10 @@
 <section>
     <p class="satisfactory-heading">
-        <p class="satisfactory-heading">
+        <p class="satisfactory-heading" tabindex="0">
           {{'How satisfied are you with this ' | translate}}
           {{profileData?.visibility === 'public_consultation' ? 'Consultation' : 'Document' | translate }}
         </p>
-        <p class="satisfactory-tip">
+        <p class="satisfactory-tip" tabindex="0">
           {{'Choose an option to submit your feedback' | translate}}
         </p>
         <div class="options-block">
@@ -13,8 +13,8 @@
             [ngClass]="{'active': (responseFeedback === 'dissatisfied')}"
             (click)="setSatisfactoryRating('dissatisfied')">
             <span>
-              <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/dissatisfied.svg" />
-              <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_dissatisfied.png" />
+              <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/dissatisfied.svg" alt=""/>
+              <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_dissatisfied.png" alt=""/>
               Dissatisfied
             </span>
           </button>
@@ -23,8 +23,8 @@
             [ngClass]="{'active': (responseFeedback === 'somewhat_dissatisfied')}"
             (click)="setSatisfactoryRating('somewhat_dissatisfied')">
             <span>
-              <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_dissatisfied.svg" />
-              <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_dissatisfied.png" />
+              <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_dissatisfied.svg" alt=""/>
+              <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_dissatisfied.png" alt=""/>
               Somewhat Dissatisfied
             </span>
           </button>
@@ -33,8 +33,8 @@
             [ngClass]="{'active': (responseFeedback === 'somewhat_satisfied')}"
             (click)="setSatisfactoryRating('somewhat_satisfied')">
             <span>
-              <img *ngIf="profileData?.visibility !== 'private_consultation'"  src="assets/images/somewhat_satisfied.svg" />
-              <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_satisfied.png" />
+              <img *ngIf="profileData?.visibility !== 'private_consultation'"  src="assets/images/somewhat_satisfied.svg" alt=""/>
+              <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_satisfied.png" alt=""/>
               Somewhat Satisfied
             </span>
           </button>
@@ -43,12 +43,12 @@
             [ngClass]="{'active': (responseFeedback === 'satisfied')}"
             (click)="setSatisfactoryRating('satisfied')">
             <span>
-              <img *ngIf="profileData?.visibility !== 'private_consultation'"  src="assets/images/satisfied.svg" />
-              <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_satisfied.png" />
+              <img *ngIf="profileData?.visibility !== 'private_consultation'"  src="assets/images/satisfied.svg" alt=""/>
+              <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_satisfied.png" alt=""/>
               Satisfied
             </span>
           </button>
         </div>
-        <p class="error-msg" *ngIf="showError && !responseFeedback">Please select a Satisfaction Rating to submit the response</p>
+        <p class="error-msg" *ngIf="showError && !responseFeedback" tabindex="0">Please select a Satisfaction Rating to submit the response</p>
         <div class="hr-line"></div>
 </section>

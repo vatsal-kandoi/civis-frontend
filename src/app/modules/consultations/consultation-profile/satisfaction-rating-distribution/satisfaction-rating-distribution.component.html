@@ -1,32 +1,56 @@
 <div class="paper-effect mt-4 m-0-sm">
     <div *ngIf="satisfactionRatingDistribution">
-      <p class="text-16 m-0 bold-text">{{'Consultation satisfication' | translate}}</p>
+      <p class="text-16 m-0 bold-text" tabindex="0">{{'Consultation satisfication' | translate}}</p>
       <div class="d-flex mt-3 mb-3">
         <div class="satisfication-response">
+<<<<<<< Updated upstream
           <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/dissatisfied.svg" alt="Dissatisfied" />
           <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_dissatisfied.png" alt="Dissatisfied"/>
           <p class="text-16 m-0 bold-text pl-2">
+=======
+          <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/dissatisfied.svg" tabindex="0" alt="dissatisfied"/>
+          <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_dissatisfied.png"tabindex="0" alt="dissatisfied"/>
+          <p class="text-16 m-0 bold-text pl-2" tabindex="0">
+>>>>>>> Stashed changes
             {{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : '0'}}
           </p>
         </div>
         <div class="satisfication-response">
+<<<<<<< Updated upstream
           <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_dissatisfied.svg" alt="Somewhat dissatisfied"/>
           <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_dissatisfied.png" alt="Somewhat dissatisfied"/>
           <p class="text-16 m-0 bold-text pl-2">
+=======
+          <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_dissatisfied.svg" tabindex="0" alt="some what dissatisfied"/>
+          <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_dissatisfied.png" tabindex="0" alt="some what dissatisfied"/>
+          <p class="text-16 m-0 bold-text pl-2" tabindex="0">
+>>>>>>> Stashed changes
             {{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : '0'}}
           </p>
         </div>
         <div class="satisfication-response">
+<<<<<<< Updated upstream
           <img  *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_satisfied.svg" alt="Somewhat Satisfied"/>
           <img  *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_satisfied.png" alt="Somewhat Satisfied" />
           <p class="text-16 m-0 bold-text pl-2">
+=======
+          <img  *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_satisfied.svg" tabindex="0" alt="somewhat_satisfied"/>
+          <img  *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_satisfied.png" tabindex="0" alt="somewhat_satisfied"/>
+          <p class="text-16 m-0 bold-text pl-2" tabindex="0">
+>>>>>>> Stashed changes
             {{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : '0'}}
           </p>
         </div>
         <div class="satisfication-response">
+<<<<<<< Updated upstream
           <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/satisfied.svg" alt="Satisfied"/>
           <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_satisfied.png" alt="Satisfied" />
           <p class="text-16 m-0 bold-text pl-2">
+=======
+          <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/satisfied.svg" tabindex="0" alt="satisfied"/>
+          <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_satisfied.png" tabindex="0" alt="satisfied"/>
+          <p class="text-16 m-0 bold-text pl-2" tabindex="0">
+>>>>>>> Stashed changes
             {{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}</p>
         </div>
       </div>

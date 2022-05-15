@@ -3,7 +3,7 @@
     <p class="light-text m-0" tabindex="0">{{summaryData?.title ? summaryData?.title : 'SENDING IN YOUR RESPONSE TO'}}</p>
     <div class="d-flex justify-content-between mb-1 mt-2">
       <p class="card-title m-0" tabindex="0">{{profile?.title}}</p>
-      <a class="icon-circle" [href]="profile?.url" target="_blank" *ngIf="!summaryData">
+      <a class="icon-circle" [href]="profile?.url" target="_blank" *ngIf="!summaryData" aria-label="directs to consultation">
         <i class="fa fa-link" aria-hidden="true"></i>
       </a>
     </div>
@@ -15,7 +15,7 @@
         <div *ngIf="!profile?.respondedOn || showResponseCreation">
           <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
             <p class="days-remaining m-0" tabindex="0">{{getRemainigDays(profile?.responseDeadline)}}</p>
-            <a  [href]="createCalendarEvent()" class="icon-circle" target="_blank" tabindex="0">
+            <a  [href]="createCalendarEvent()" class="icon-circle" target="_blank" tabindex="0" aria-label="directs to calender">
               <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
             </a>
           </div>
@@ -49,7 +49,7 @@
             <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">
                 <a  class="share-btn"
                 [href]="getFbUrl(currentUrl)"
-                target="_blank" tabindex="0">
+                target="_blank" >
                   <span>
                       <i class="fa fa-facebook" aria-label="facebook"></i>
                   </span>

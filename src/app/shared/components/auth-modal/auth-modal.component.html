@@ -1,42 +1,31 @@
-<div
-  bsModal
-  #authModal="bs-modal"
-  class="modal fade logout-confirm-modal"
-  tabindex="-1"
-  [config]="{
-    show: true,
-    backdrop: false,
-    ignoreBackdropClick: true,
-    keyboard: false
-  }"
-  role="dialog"
-  aria-labelledby="authModal"
->
+
+<!-- Auto initialising ng-template so as to use the optoin on ngx-bootstrap where focus doesn't escape modal
+     on tab. Can be removed after auth code call is centralised and template is called directly from the create-response
+     page -->
+<ng-template #authTemplate>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <button class="close-btn" (click)="onClose()">
+        <button class="close-btn" (click)="onClose()" [attr.aria-label]="'Close the modal' | translate" >          
           <img src="assets/images/close.png" alt="" aria-hidden="true"/>
         </button>
         <div class="auth-modal">
           <img class="modal-img mb-3" src="assets/images/signup-modal.png" alt="" aria-hidden="true"/>
-          <p class="heading-text mb-2">Just one more step!</p>
-          <p class="sub-heading-text mb-4 text-center">
+          <p id="modal-heading" class="heading-text mb-2">Just one more step!</p>
+          <p id="modal-description" class="sub-heading-text mb-4 text-center">
             Your response will be submitted as soon as you create an account for
             verification
           </p>
           <div class="d-flex">
-            <div class="login-btn mr-3" (click)="redirectTo('google')">
+            <div class="login-btn mr-3" (click)="redirectTo('google')" aria-labelledby="google-auth-text">
               <img class="icon-img" src="assets/images/auth-google.png" alt="" aria-hidden="true" />
-              <p class="login-btn-text" *ngIf="!signin">Sign up with google</p>
-              <p class="login-btn-text" *ngIf="signin">Sign in with google</p>
+              <p *ngIf="!signin" id="google-auth-text" class="login-btn-text">{{ 'Sign up with Google' | translate }}</p>
+              <p *ngIf="signin" id="google-auth-text" class="login-btn-text">{{ 'Sign in with Google' | translate }}</p>      
             </div>
-            <div class="login-btn" (click)="redirectTo('facebook')">
+            <div class="login-btn" (click)="redirectTo('facebook')" aria-labelledby="facebook-auth-text">
               <img class="icon-img" src="assets/images/auth-fb.png" alt="" aria-hidden="true" />
-              <p class="login-btn-text" *ngIf="!signin">
-                Sign up with Facebook
-              </p>
-              <p class="login-btn-text" *ngIf="signin">Sign in with Facebook</p>
+              <p *ngIf="!signin" id="facebook-auth-text" class="login-btn-text">{{ 'Sign up with Facebook' | translate }}</p>
+              <p *ngIf="signin" id="facebook-auth-text" class="login-btn-text">{{ 'Sign in with Facebook' | translate }}</p>      
             </div>
           </div>
           <div
@@ -83,4 +72,5 @@
       </div>
     </div>
   </div>
-</div>
+</ng-template>
+

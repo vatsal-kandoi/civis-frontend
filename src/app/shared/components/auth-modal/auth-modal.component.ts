@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input, TemplateRef, AfterViewInit } from '@angular/core';
+import { ModalDirective, BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { LoginForm, SignupForm } from '../../interfaces';
 import { AuthService } from '../../services/auth.service';
@@ -9,11 +10,12 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './auth-modal.component.html',
   styleUrls: ['./auth-modal.component.scss']
 })
-export class AuthModalComponent implements OnInit {
+export class AuthModalComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('authModal', { static: false }) authModal: ModalDirective;
+  @ViewChild('authTemplate', { read: TemplateRef } ) authTemplateRef: TemplateRef<any>;
   @Output() close: EventEmitter<any> = new EventEmitter();
 
+  modalRef?: BsModalRef;
   signupObject = {
     firstName: '',
     email: '',
@@ -32,14 +34,32 @@ export class AuthModalComponent implements OnInit {
   loadingCities: boolean;
   cities: any;
   @Input() consultationId;
-
+  isModalInitialised: boolean = false;
 
   constructor(
     private graphqlService: GraphqlService,
-    private authService: AuthService
+    private authService: AuthService,
+    private modalService: BsModalService
   ) { }
 
-  ngOnInit() { }
+  ngAfterViewInit() {
+    this.openAuthModal();
+  }
+
+  ngOnInit() {
+  }
+
+  openAuthModal() {
+    console.log(this.authTemplateRef)
+    this.modalRef = this.modalService.show(this.authTemplateRef, {
+      ariaDescribedby: "modal-description",
+      ariaLabelledBy: "modal-heading",
+      keyboard: false,
+      show: true,
+      backdrop: false,
+      ignoreBackdropClick: true,
+    });
+  }
 
   submitSignupForm($event: SignupForm) {
     if (!$event) return;
@@ -54,7 +74,7 @@ export class AuthModalComponent implements OnInit {
   }
 
   onClose() {
-    this.authModal.hide();
+    this.modalRef.hide();
     this.close.emit(true);
   }
 

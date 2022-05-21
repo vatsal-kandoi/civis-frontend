@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, EventEmitter, ViewEncapsulation, Input } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { distinctUntilChanged, debounceTime, takeWhile, switchMap, map, tap } from 'rxjs/operators';
 import { CitiesSearchQuery, UpdateCity } from './city-selection-modal.graphql';
 import { Apollo } from 'apollo-angular';

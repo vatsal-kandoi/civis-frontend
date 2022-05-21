@@ -12,7 +12,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "create404":"node create404.js"    
+    "create404": "node create404.js"
   },
   "private": true,
   "dependencies": {
@@ -52,7 +52,6 @@
     "crypto-js": "^3.1.9-1",
     "express": "^4.17.1",
     "font-awesome": "^4.7.0",
-    "razorpay": "^2.0.6",
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.0",
     "highcharts": "^9.0.0",
@@ -60,13 +59,14 @@
     "moment": "^2.24.0",
     "ng-recaptcha": "^5.0.0",
     "ng2-ckeditor": "1.2.6",
-    "ngx-bootstrap": "^5.1.0",
+    "ngx-bootstrap": "^7.1.2",
     "ngx-cookie": "^4.1.2",
     "ngx-cookie-service": "^2.3.0",
     "ngx-img": "^10.19.0",
     "ngx-uploader": "^7.1.0",
     "ngx-webstorage": "^5.0.0",
     "path": "^0.12.7",
+    "razorpay": "^2.0.6",
     "rxjs": "~6.5.4",
     "s3-proxy": "^1.2.1",
     "ssl-express-www": "^3.0.3",

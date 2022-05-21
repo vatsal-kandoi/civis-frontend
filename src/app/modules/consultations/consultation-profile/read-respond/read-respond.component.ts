@@ -11,7 +11,7 @@ import { ErrorService } from 'src/app/shared/components/error-modal/error.servic
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 import { CookieService } from 'ngx-cookie';
 import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
-import { ModalDirective } from 'ngx-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { profanityList } from 'src/app/graphql/queries.graphql';
 
 @Component({

@@ -21,7 +21,7 @@ import { ResponseAnswersComponent } from './response-answers/response-answers.co
 import { ResendVerificationComponent } from './resendVerification/resendVerification.component';
 import { CaseStudiesListComponent } from './case-studies-list/case-studies-list.component';
 import { AuthModalComponent } from './auth-modal/auth-modal.component';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProfaneModalComponent } from './profane-modal/profane-modal.component';
 import { SocialLoginOptionsComponent } from './social-login-options/social-login-options.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';

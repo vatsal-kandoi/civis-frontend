@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { GraphqlService } from 'src/app/graphql/graphql.service';
 import { LoginForm, SignupForm } from '../../interfaces';
 import { AuthService } from '../../services/auth.service';

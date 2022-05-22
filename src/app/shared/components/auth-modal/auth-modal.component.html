@@ -11,31 +11,33 @@
         </button>
         <div class="auth-modal">
           <img class="modal-img mb-3" src="assets/images/signup-modal.png" alt="" aria-hidden="true"/>
+          <!-- TODO: Can heading be improved to say something more meaningful and related to authentication -->
           <p id="modal-heading" class="heading-text mb-2">Just one more step!</p>
           <p id="modal-description" class="sub-heading-text mb-4 text-center">
             Your response will be submitted as soon as you create an account for
             verification
           </p>
           <div class="d-flex">
-            <div class="login-btn mr-3" (click)="redirectTo('google')" aria-labelledby="google-auth-text">
+            <button tabindex="0" class="login-btn mr-3" (click)="redirectTo('google')" aria-labelledby="google-auth-text">
               <img class="icon-img" src="assets/images/auth-google.png" alt="" aria-hidden="true" />
               <p *ngIf="!signin" id="google-auth-text" class="login-btn-text">{{ 'Sign up with Google' | translate }}</p>
               <p *ngIf="signin" id="google-auth-text" class="login-btn-text">{{ 'Sign in with Google' | translate }}</p>      
-            </div>
-            <div class="login-btn" (click)="redirectTo('facebook')" aria-labelledby="facebook-auth-text">
+            </button>
+            <button tabindex="0" role="button" class="login-btn" (click)="redirectTo('facebook')" aria-labelledby="facebook-auth-text">
               <img class="icon-img" src="assets/images/auth-fb.png" alt="" aria-hidden="true" />
               <p *ngIf="!signin" id="facebook-auth-text" class="login-btn-text">{{ 'Sign up with Facebook' | translate }}</p>
               <p *ngIf="signin" id="facebook-auth-text" class="login-btn-text">{{ 'Sign in with Facebook' | translate }}</p>      
-            </div>
+            </button>
           </div>
-          <div
+          <button
             class="login-btn login-btn-email"
             *ngIf="!signup && !signin"
             (click)="signup = true"
+            tabindex="0"
           >
             <img class="icon-img" src="assets/images/auth-email.png" alt="" aria-hidden="true" />
             <p class="login-btn-text">Sign up with Email</p>
-          </div>
+          </button>
           <p class="signup-text" *ngIf="signup">Sign up with Email</p>
 
           <app-signup-form class="width__100" *ngIf="signup" (onSubmit)="submitSignupForm($event)"></app-signup-form>
@@ -45,27 +47,23 @@
           <app-login-form class="width__100" *ngIf="signin" (onSubmit)="submitLoginForm($event)"></app-login-form>
 
           <div class="app-hr"></div>
-          <div class="d-flex">
-            <p class="normal-text mb-2">
+          <div 
+            role="button" 
+            tabindex="0"
+            (click)="switchAuthOption()" 
+            class="d-flex" aria-labelledby="auth-switch-label">
+            <p id="auth-switch-label" class="normal-text mb-2">
               {{
                 signin
                   ? "Don'\t have an existing account?"
-                  : 'Already have an account?'
+                  : 'Already have an account?' | translate
               }}
-            </p>
-            <p
-              class="normal-text normal-text-link mb-2"
-              *ngIf="(!signin && signup) || (!signup && !signin)"
-              (click)="signup = false; signin = true"
-            >
-              Sign in
-            </p>
-            <p
-              class="normal-text normal-text-link mb-2"
-              *ngIf="signin"
-              (click)="signup = false; signin = false"
-            >
-              Sign Up
+              <span 
+                class="normal-text normal-text-link mb-2"
+                *ngIf="(!signin && signup) || (!signup && !signin)">{{ 'Sign in' | translate }}</span>
+              <span 
+                class="normal-text normal-text-link mb-2"
+                *ngIf="signin">{{ 'Sign Up' | translate }}</span>
             </p>
           </div>
         </div>

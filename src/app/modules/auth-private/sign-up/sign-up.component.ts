@@ -147,7 +147,7 @@ export class SignUpComponent implements OnInit {
       organization,
       designation,
       invitationToken: this.invitationToken,
-      consultationId: +this.consultationId
+      consultationId: +this.consultationId,
     };
     this.apollo.mutate({mutation: AuhtAcceptInviteMutation, variables: {auth: authVariables}})
     .pipe(
@@ -155,6 +155,8 @@ export class SignUpComponent implements OnInit {
     ).subscribe((token) => {
       if (token) {
         this.tokenService.storeToken(token);
+        this.signupObject.callbackUrl =
+          this.cookieService.get('loginCallbackUrl');
         this.getCurrentUser();
         this.onSignUp();
         this.userService.userLoaded$
@@ -175,7 +177,6 @@ export class SignUpComponent implements OnInit {
   }
 
   submit() {
-
     if (!this.signupForm.valid || !this.isCaptchaResolved) {
       return;
     } else if (this.invitationToken) {

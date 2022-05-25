@@ -1,21 +1,21 @@
 <div class="c-profile-card sticky">
   <div class="c-profile-card__top-section">
-    <p class="light-text m-0">{{summaryData?.title ? summaryData?.title : 'SENDING IN YOUR RESPONSE TO'}}</p>
+    <p class="light-text m-0" tabindex="0">{{summaryData?.title ? summaryData?.title : 'SENDING IN YOUR RESPONSE TO'}}</p>
     <div class="d-flex justify-content-between mb-1 mt-2">
-      <p class="card-title m-0">{{profile?.title}}</p>
-      <a class="icon-circle" [href]="profile?.url" target="_blank" *ngIf="!summaryData">
+      <p class="card-title m-0" tabindex="0">{{profile?.title}}</p>
+      <a class="icon-circle" [href]="profile?.url" target="_blank" *ngIf="!summaryData" aria-label="directs to consultation">
         <i class="fa fa-link" aria-hidden="true"></i>
       </a>
     </div>
       <div class="ministry-detail">
         <img [src]="profile?.ministry?.logo?.url" class="avatar avatar--42" alt=" " />
-        <p class="regular-text m-0">{{profile?.ministry?.name}}</p>
+        <p class="regular-text m-0" tabindex="0">{{profile?.ministry?.name}}</p>
       </div>
       <div *ngIf="!summaryData">
         <div *ngIf="!profile?.respondedOn || showResponseCreation">
           <div class="d-flex justify-content-between align-items-center mb-1 mt-1">
-            <p class="days-remaining m-0">{{getRemainigDays(profile?.responseDeadline)}}</p>
-            <a  [href]="createCalendarEvent()" class="icon-circle" target="_blank">
+            <p class="days-remaining m-0" tabindex="0">{{getRemainigDays(profile?.responseDeadline)}}</p>
+            <a  [href]="createCalendarEvent()" class="icon-circle" target="_blank" tabindex="0" aria-label="directs to calender">
               <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
             </a>
           </div>
@@ -25,7 +25,7 @@
                 <picture class="citizen-logo">
                   <source srcset="assets/images/Vector.webp" type="image/webp">
                   <source srcset="assets/images/Vector.jpg" type="image/jpeg">
-                  <img src="assets/images/Vector.jpg" />
+                  <img src="assets/images/Vector.jpg" alt=""/>
                 </picture>
               </span>
               {{'SUBMIT RESPONSE' | translate}}
@@ -49,30 +49,30 @@
             <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">
                 <a  class="share-btn"
                 [href]="getFbUrl(currentUrl)"
-                target="_blank">
+                target="_blank" >
                   <span>
-                      <i class="fa fa-facebook"></i>
+                      <i class="fa fa-facebook" aria-label="facebook"></i>
                   </span>
                 </a>
                 <a  class="share-btn"
                 [href]="getTwitterUrl(currentUrl)"
                 target="_blank">
                   <span>
-                      <i class="fa fa-twitter"></i>
+                      <i class="fa fa-twitter" aria-label="twitter"></i>
                   </span>
                 </a>
                 <a  class="share-btn"
                 [href]="getWhatsappUrl(currentUrl)"
                 target="_blank">
                   <span>
-                      <i class="fa fa-whatsapp"></i>
+                      <i class="fa fa-whatsapp" aria-label="whatsapp"></i>
                   </span>
                 </a>
                 <a  class="share-btn"
                 [href]="getLinkedinUrl(currentUrl)"
                 target="_blank">
                   <span>
-                      <i class="fa fa-linkedin"></i>
+                      <i class="fa fa-linkedin" aria-label="linkedin"></i>
                   </span>
                 </a>
             </div>
@@ -82,6 +82,9 @@
               (click)="showShareOptions = !showShareOptions">
               <span class="mr-2 clr-blue"><i class="fa fa-share"></i></span>
               <span class="blue-text bold-text">{{'Spread the word' | translate}}</span>
+            </button>
+            <button mat-button (click)="openDialog()" class="btn-circular" style="float: right;">
+              <span class="blue-text bold-text" tabindex="-1">{{'Glossary' | translate}}</span>
             </button>
           </div>
         </div>
@@ -103,12 +106,12 @@
 
   <div class="c-profile-card__bottom-section">
     <div class="d-flex justify-content-between mb-3">
-      <p class="count-text m-0">{{'TOTAL RESPONSES' | translate}}</p>
-      <p class="count-number bold-text text-right m-0">
+      <p class="count-text m-0" tabindex="0">{{'TOTAL RESPONSES' | translate}}</p>
+      <p class="count-number bold-text text-right m-0" tabindex="0">
         {{profile?.consultationResponsesCount ? profile?.consultationResponsesCount : 0}}
       </p>
     </div>
-    <div class="d-flex justify-content-between mb-3">
+    <!-- <div class="d-flex justify-content-between mb-3">
       <p class="count-text m-0">{{'TOTAL PUBLIC RESPONSES' | translate}}</p>
       <p class="count-number bold-text text-right m-0" *ngIf="!summaryData; else summaryDataCount">
         {{profile?.sharedResponses?.totalCount ? profile?.sharedResponses?.totalCount : 0 }}
@@ -118,12 +121,12 @@
           {{summaryData?.publicResponseCount ? summaryData?.publicResponseCount : 0}}
         </p>
       </ng-template>
-    </div>
+    </div> -->
     <div class="d-flex justify-content-between">
-      <p class="count-text m-0">{{profile?.visibility === 'public_consultation' ?  'DRAFT MADE PUBLIC ON'  : 'CONSULTATION PUBLISHED ON' | translate}}</p>
-      <p class="count-number bold-text text-right m-0">{{convertDateFormat(profile?.publishedAt)}}</p>
+      <p class="count-text m-0" tabindex="0">{{profile?.visibility === 'public_consultation' ?  'DRAFT MADE PUBLIC ON'  : 'CONSULTATION PUBLISHED ON' | translate}}</p>
+      <p class="count-number bold-text text-right m-0" tabindex="0">{{convertDateFormat(profile?.publishedAt)}}</p>
     </div>
   </div>
 </div>
-
+<app-glossary *ngIf="showGlossaryModal" (close)="showGlossaryModal = false"></app-glossary>
 <app-confirm-email-modal *ngIf="showConfirmEmailModal" (close)="showConfirmEmailModal = false"></app-confirm-email-modal>

@@ -1,10 +1,10 @@
 <section class="read-response-container" *ngIf="!loading">
   <div class="paper-effect">
-    <p class="heading">
+    <p class="heading" tabindex="0">
       {{'Summary' | translate}}
       <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
     </p>
-    <div *ngIf="profileData?.page || profileData?.summaryHindi">
+    <div *ngIf="profileData?.page || profileData?.summaryHindi" tabindex="0">
       <app-page-content-renderer [page]="useSummaryHindi ? profileData?.summaryHindi : profileData?.page">
       </app-page-content-renderer>
     </div>
@@ -26,6 +26,8 @@
 </section>
 <app-thank-you-modal *ngIf="showThankYouModal" [points]="earnedPoints" [profileData]="profileData" (closeThankYouModal)="onCloseThanksModal()">
 </app-thank-you-modal>
+<app-profane-modal *ngIf="isConfirmModal" [message]='confirmMessage' [showCancel]=false (close)='confirmed($event)'></app-profane-modal>
+<app-profane-modal *ngIf="isResponseShort" [message]='responseMessage' [showCancel]=false (close)='confirmed($event)'></app-profane-modal>
 
 
 <div bsModal #emailVerificationModal="bs-modal" *ngIf="emailVerification" class="modal fade logout-confirm-modal" tabindex="-1"

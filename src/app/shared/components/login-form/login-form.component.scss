@@ -1,0 +1,69 @@
+@import './src/assets/styles/app';
+
+.input-box {
+    margin-bottom: 15px;
+
+    &__border {
+        width: 100%;
+        border: 1px solid $input-border;
+        box-sizing: border-box;
+        border-radius: 3px;
+
+        input { 
+            width: 100%;
+            font-weight: 500;
+            font-size: 15px;
+            background: $white;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        @media screen and (max-width: 991px) {
+            width: 100%;
+        }
+    }
+
+    label {
+        display: block;
+        font-weight: 600;
+        font-size: 14px;
+        color: $black;
+        margin-bottom: 10px;
+    }
+}
+
+
+.forgot-link {
+    font-size: 14px;
+    letter-spacing: 0.045em;
+    text-decoration-line: underline;
+    color: #151515;
+    margin-bottom: 15px;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.get-start-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+    padding: 12px 20px;
+
+    @media screen and (max-width: 991px) {
+        width: 100%;
+    }
+
+    i {
+        font-size: 24px;
+    }
+}
+
+.error-msg {
+    margin: 10px 0;
+    color: #F0653A;
+    font-size: 14px;
+}

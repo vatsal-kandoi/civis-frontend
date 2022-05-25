@@ -46,6 +46,8 @@
     }
 
     .login-btn {
+        border: none;
+        outline: none;        
         display: flex;
         align-items: center;
         padding: 9px 33px;
@@ -278,4 +280,3 @@
         width: 100%;
     }
 }
-  

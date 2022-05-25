@@ -22,6 +22,11 @@ import { ResendVerificationComponent } from './resendVerification/resendVerifica
 import { CaseStudiesListComponent } from './case-studies-list/case-studies-list.component';
 import { AuthModalComponent } from './auth-modal/auth-modal.component';
 import { ModalModule } from 'ngx-bootstrap';
+import { ProfaneModalComponent } from './profane-modal/profane-modal.component';
+import { SocialLoginOptionsComponent } from './social-login-options/social-login-options.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -36,17 +41,23 @@ import { ModalModule } from 'ngx-bootstrap';
     ResponseAnswersComponent,
     ResendVerificationComponent,
     CaseStudiesListComponent,
-    AuthModalComponent
+    AuthModalComponent,
+    ProfaneModalComponent,
+    SocialLoginOptionsComponent,
+    SignupFormComponent,
+    LoginFormComponent
   ],
   imports: [
     CommonModule,
     LinearLoaderModule,
+    PipesModule,
     RouterModule,
     SharedDirectivesModule,
     FormsModule,
     NgSelectModule,
     CookieModule.forRoot(),
     PipesModule,
+    RecaptchaModule,
     ModalModule
   ],
   exports: [
@@ -63,7 +74,11 @@ import { ModalModule } from 'ngx-bootstrap';
     ResponseAnswersComponent,
     ResendVerificationComponent,
     CaseStudiesListComponent,
-    AuthModalComponent
+    AuthModalComponent,
+    ProfaneModalComponent,
+    SocialLoginOptionsComponent,
+    LoginFormComponent,
+    SignupFormComponent
   ],
   providers: [
     LinearLoaderService

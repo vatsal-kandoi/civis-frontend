@@ -106,10 +106,7 @@ export class ConsultationPublicResponsesComponent implements OnInit, AfterViewCh
     this.consultationService.scrollToPublicResponse
     .subscribe((scrollTo) => {
       if (scrollTo) {
-        window.scrollTo({
-          top: this.responsesListContainer.nativeElement.offsetTop - 80,
-          behavior: 'smooth',
-        });
+        document.getElementById('PublicResponse').focus();
         this.consultationService.scrollToPublicResponse.next(false);
       }
     });

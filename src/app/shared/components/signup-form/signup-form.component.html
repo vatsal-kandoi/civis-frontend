@@ -1,0 +1,171 @@
+<form #signupForm="ngForm" autocomplete="off">
+  <div class="input-box required-field">
+    <label for="fname">{{ 'First name' | translate }}</label>
+    <div class="input-box__border">
+    <!-- Using described by to showcase error reference: https://www.w3.org/WAI/GL/wiki/Using_ARIA_role_of_alert_for_Error_Feedback_in_Forms#:~:text=NOTE%3A%20The%20ARIA%20describedby%20attribute,the%20application%20of%20this%20technique. -->
+      <input
+        placeholder="First Name"
+        type="text"
+        id="fname"
+        #fname="ngModel"
+        name="fname"
+        [(ngModel)]="signupObject.firstName"
+        [attr.aria-invalid]="fname.invalid && (fname.touched || signupForm.submitted)"                  
+        aria-describedby="fname-error" 
+        aria-required="true"
+        required />
+    </div>
+    <div
+      *ngIf="fname.invalid && (fname.touched || signupForm.submitted)"
+      class="error-msg"
+      id="fname-error" >
+        {{ 'First name is Required' | translate }}
+    </div>
+  </div>
+
+  <div class="input-box required-field">
+    <label for="efname">{{ 'Email' | translate }}</label>
+    <div class="input-box__border">
+      <input
+        placeholder="Email"
+        type="email"
+        id="email"
+        #email="ngModel"
+        name="email"
+        [(ngModel)]="signupObject.email"
+        [attr.aria-invalid]="email.invalid && (email.touched || signupForm.submitted)"
+        aria-describedby="email-error" 
+        aria-required="true"
+        required                  
+        email />
+    </div>
+    <div
+      *ngIf="email.invalid && (email.touched || signupForm.submitted)"
+      class="error-msg"
+      id="email-error" >
+      <div *ngIf="email.errors.required">
+        {{ 'Email is Required' | translate }}
+      </div>
+      <div *ngIf="email.errors.email">
+        {{ 'Email must be a valid email address' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="input-box required-field">
+    <label for="password">{{ 'Password' | translate }}</label>
+    <div class="input-box__border">
+      <input
+        placeholder="At least 8 characters"
+        type="password"
+        id="password"
+        #password="ngModel"
+        name="password"
+        pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$#@$!%*?&])[A-Za-z\d$@#$!%*?&].{8,}'
+        [(ngModel)]="signupObject.password"
+        [attr.aria-invalid]="password.invalid && (password.touched || signupForm.submitted)"
+        aria-describedby="password-error" 
+        aria-required="true"
+        required                  
+      />
+    </div>
+    <div
+      *ngIf="password.invalid && (password.touched || signupForm.submitted)"
+      class="error-msg"
+      id="password-error" >
+      {{ signupObject.password ? 'Password must be at least 8 characters long, must have 1 special character and 1 numeric character' : ('Password is Required' | translate) }}
+    </div>
+  </div>
+  <div
+    class="location-box required-field"
+    *ngIf="!invitationToken" >
+    <label for="locations"> City </label>
+    <div class="location-box__border">
+      <ng-select
+        id="locations"
+        #city="ngModel"
+        name="city"
+        [loading]="loadingCities"
+        [items]="cities"
+        bindLabel="name"
+        [virtualScroll]="true"
+        dropdownPosition="bottom"
+        bindValue="id"
+        [notFoundText]="dropdownText"
+        [clearable]="true"
+        loadingText="Searching..."
+        (search)="onSearch($event)"
+        (open)="loadCities()"
+        [(ngModel)]="signupObject.cityId"
+        placeholder="City"
+        required
+      >
+      </ng-select>
+    </div>
+    <div
+      *ngIf="city.invalid && (city.touched || signupForm.submitted)"
+      class="error-msg" >
+      Location is Required
+    </div>
+  </div>
+
+  <div class="input-checbox">
+    <input
+      class="cm-checkbox"
+      type="checkbox"
+      #agreedForTermsCondition="ngModel"
+      id="agreedForTermsCondition"
+      name="agreedForTermsCondition"
+      [(ngModel)]="signupObject.agreedForTermsCondition"
+      [attr.aria-invalid]="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)"
+      aria-describedby="terms-error" 
+      aria-required="true"
+      required
+    />
+    <label for="agreedForTermsCondition">
+      {{ "I'm good with the Civis" | translate }}<br />
+      <a href="/terms" class="policy-link">{{ 'Terms of Service,' | translate }}</a>
+      &nbsp;
+      <a href="/privacy" class="policy-link"> {{ 'Privacy Policy' | translate }}</a>
+      &
+      <a href="/content-policy" class="policy-link">{{ 'Content Policy.' | translate }}</a>
+    </label>
+  </div>
+
+  <div
+    class="error-msg"
+    *ngIf="agreedForTermsCondition.invalid && (agreedForTermsCondition.touched || signupForm.submitted)"
+    id="terms-error" >
+    {{ 'Please accept our Terms of Service & Privacy Policy to continue.'  | translate }}
+  </div>
+
+  <div class="input-checbox">
+    <input
+      class="cm-checkbox"
+      type="checkbox"
+      id="notifyMe"
+      #notifyMe="ngModel"
+      name="notifyMe"
+      [(ngModel)]="signupObject.notifyForNewConsultation" />
+    <label for="notifyMe" >
+      {{ 'Notify me when an open consultation' | translate }}<br />&nbsp; {{ 'is created on Civis.' | translate }}
+    </label >
+  </div>
+
+  <re-captcha
+    #captchaRef="reCaptcha"
+    (resolved)="captchaResolved($event)"
+    [siteKey]="reCAPTCHA_KEY"
+    size="invisible" ></re-captcha>
+
+  <div>
+    <button
+      class="app-btn secondary get-start-btn"
+      (click)="submitSignupForm()"
+      aria-label="Sign up for Civis" >                
+      <p class="m-0">{{ 'GET WORKING' | translate }}</p>
+      <i class="fa fa-angle-right"></i>
+    </button>
+  </div>
+  
+</form>

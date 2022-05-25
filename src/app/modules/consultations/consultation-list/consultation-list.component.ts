@@ -75,6 +75,7 @@ export class ConsultationListComponent implements OnInit {
             this.loadingElements.consultationList = false;
             this.consultationListData = item;
             this.consultationListArray = item.data;
+            this.consultationListArray = this.sortConsulationList(item.data);
             this.consultationListPaging = item.paging;
             if (!this.consultationListArray.length || 
               (this.consultationListPaging.currentPage === this.consultationListPaging.totalPages)) {
@@ -89,6 +90,17 @@ export class ConsultationListComponent implements OnInit {
         });
   }
 
+  sortConsulationList(list) {
+    const city = (this.currentUser && this.currentUser.city)  ?  this.currentUser.city.id : undefined;
+    if (list && city) {
+      list.sort((a,b) => {
+          if (a.ministry.locationId === city && b.ministry.locationId === city) return 1;
+          return (a.ministry.locationId === city) ? -1: 1;
+      });
+    }
+    return list;
+  }
+  
   loadMoreCard() {
     if (this.loadingElements.consultationListMore || this.loadingElements.consultationList) {
       return;

@@ -1,4 +1,6 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Console } from 'console';
 import { ConsultationsService } from 'src/app/shared/services/consultations.service';
 
 @Component({
@@ -28,8 +30,22 @@ export class SatisfactionRatingSelectionComponent implements OnInit {
   setSatisfactoryRating(rating) {
     this.responseFeedback = rating;
     this.selectSatisfaction.emit(rating);
-  }
+    let elms=document.getElementsByClassName("SatisfactionRating");
+    console.log(elms);
+    for (let i=0;i<elms.length;i++){
+            elms[i].setAttribute("aria-checked", "false");
+            console.log("all are false");
+    };
+    for (let i=0;i<elms.length;i++){
+      if(elms[i].getAttribute('value')==rating){
+        elms[i].setAttribute("aria-checked", "true");
+        console.log("true");
+      }
+      
+};
 
+
+  }
   validateRating() {
     this.consultationService.satisfactionRatingError
     .subscribe((status) => {
@@ -39,6 +55,4 @@ export class SatisfactionRatingSelectionComponent implements OnInit {
       }
     });
   }
-
-
 }

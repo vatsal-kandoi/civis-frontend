@@ -68,4 +68,14 @@ export class AuthModalComponent implements OnInit {
         break;
     }
   }
+  
+  switchAuthOption() {
+    if (this.signin) {
+      this.signin = false;
+      this.signup = false;
+    } else {
+      this.signup = false;
+      this.signin = true;
+    }
+  }
 }

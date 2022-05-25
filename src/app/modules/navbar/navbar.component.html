@@ -20,15 +20,19 @@
         <!-- <ng-container *ngIf="consultationStatus === 'active'"> // To Toggle Read and Respond based on consultation status uncomment it.-->
           <a class="profile-tab px-3" [ngClass]="activeTab === 'read & respond' ? 'active-tab' : ''"
           (click)="routeToConsultation('read')">
-          <p tabindex="0">{{'Read & Respond' | translate}}</p>
-          <p tabindex="0">{{'Submit your feedback' | translate}}</p>
+          <div tabindex="0">
+            <p>{{'Read & Respond' | translate}}</p>
+            <p>{{'Submit your feedback' | translate}}</p>
+          </div>
         </a>
         <!-- </ng-container> -->
         <ng-container *ngIf="reviewTypse !== 'policy'">
           <a class="profile-tab px-3" [ngClass]="activeTab === 'discuss & engage' ? 'active-tab' : ''"
             (click)="routeToConsultation('discuss')">
-            <p tabindex="0">{{'Discuss & Engage' | translate}}</p>
-            <p tabindex="0">{{'Talk to the community' | translate}}</p>
+            <div tabindex="0">
+              <p>{{'Discuss & Engage' | translate}}</p>
+              <p>{{'Talk to the community' | translate}}</p>
+            </div>
           </a>
         </ng-container>
       </div>

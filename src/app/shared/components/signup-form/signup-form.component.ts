@@ -76,21 +76,14 @@ export class SignupFormComponent implements OnInit {
       return;
     }
     this.searchEmitter.emit(query);
-  }  
-  
-  submit() {
+  }    
+
+  submitSignupForm() {
     if (!this.signupForm.valid) this.signupFormElemRef.nativeElement.querySelector('.ng-invalid').focus()
     // Proces form only on captcha resolved
     else if (this.isCaptchaResolved) this.onSubmit.emit(this.signupObject);
-  }
-
-  checkForCaptcha() {
-    if (this.isCaptchaResolved) {
-      this.submit();
-    } else {
-      if (!this.captchaRef.executeRequested) {
-        this.captchaRef.execute();
-      }
+    else if (!this.captchaRef.executeRequested) {
+      this.captchaRef.execute();
     }
   }
 
@@ -108,8 +101,6 @@ export class SignupFormComponent implements OnInit {
 
   captchaResolved(event) {
     this.isCaptchaResolved = true;
-    if (this.signupForm.valid) {
-      this.submit();
-    }
+    this.submitSignupForm();
   }
 }

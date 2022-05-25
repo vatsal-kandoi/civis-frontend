@@ -1,13 +1,17 @@
 <section>
     <p class="satisfactory-heading">
-        <p class="satisfactory-heading" tabindex="0">
+        <p class="satisfactory-heading" id="satisfactory-heading">
           {{'How satisfied are you with this ' | translate}}
           {{profileData?.visibility === 'public_consultation' ? 'Consultation' : 'Document' | translate }}
         </p>
-        <p class="satisfactory-tip" tabindex="0">
+        <div class="satisfactory-tip" id="satisfactory-tip">
           {{'Choose an option to submit your feedback' | translate}}
-        </p>
-        <div class="options-block" role="radiogroup" aria-required="true">
+        </div>
+        <div class="options-block" 
+          role="radiogroup" 
+          aria-required="true"
+          aria-labelledby="satisfactory-heading"
+          aria-describedby="satisfactory-tip">
           <button 
             class="grey-bg SatisfactionRating"
             [ngClass]="{'active': (responseFeedback === 'dissatisfied')}"

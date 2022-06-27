@@ -95,7 +95,9 @@ export class ConsultationQuestionnaireComponent implements OnInit, AfterViewInit
 
   ngAfterViewChecked() {
     if (this.scrollToError) {
-      scrollToFirstError('.error-msg', this.el.nativeElement);
+      this.questionnaireContainer.nativeElement.querySelector('.response-form-invalid-input').focus()
+      this.questionnaireContainer.nativeElement.querySelector('.response-form-invalid-input').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      console.log(this.questionnaireContainer.nativeElement.querySelector('.response-form-invalid-input'))
       this.scrollToError = false;
     }
   }

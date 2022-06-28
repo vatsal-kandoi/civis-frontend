@@ -68,8 +68,7 @@
                   </ng-container>
 
                   <ng-container *ngIf="question.questionType === 'checkbox'">
-                    <div [formGroupName]="question.id">
-                      <fieldset id="{{question.id}}">    
+                      <fieldset id="{{question.id}}" [formGroupName]="question.id">    
 
                         <legend 
                           aria-hidden="true"
@@ -101,7 +100,6 @@
                             <label for="option-{{subQuestion.id}}"><span>{{subQuestion.questionText}}</span></label>
                         </div>
                       </fieldset>      
-                    </div>
                   </ng-container>
 
                   <ng-container *ngIf="question.questionType === 'long_text'">
@@ -140,9 +138,9 @@
                   </div>
                 </div>
 
-                <div *ngIf="showError && questionnaireForm.controls[question.other_answer]?.errors && question.is_other" class="error-msg text-left ml-3">This is a mandatory question and your response is required</div> 
+                <div id="{{question.id}}-error-msg" *ngIf="showError && questionnaireForm.controls[question.other_answer]?.errors && question.is_other" class="error-msg text-left ml-3">This is a mandatory question and your response is required</div> 
 
-                <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>
+                <div id="{{question.id}}-error-msg" *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>
 
               </div>
             </div>

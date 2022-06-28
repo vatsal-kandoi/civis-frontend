@@ -11,7 +11,7 @@
         name="fname"
         [(ngModel)]="signupObject.firstName"
         [attr.aria-invalid]="fname.invalid && (fname.touched || signupForm.submitted)"                  
-        aria-describedby="fname-error" 
+        aria-errormessage="fname-error" 
         aria-required="true"
         required />
     </div>
@@ -34,7 +34,7 @@
         name="email"
         [(ngModel)]="signupObject.email"
         [attr.aria-invalid]="email.invalid && (email.touched || signupForm.submitted)"
-        aria-describedby="email-error" 
+        aria-errormessage="email-error" 
         aria-required="true"
         required                  
         email />
@@ -64,7 +64,7 @@
         pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$#@$!%*?&])[A-Za-z\d$@#$!%*?&].{8,}'
         [(ngModel)]="signupObject.password"
         [attr.aria-invalid]="password.invalid && (password.touched || signupForm.submitted)"
-        aria-describedby="password-error" 
+        aria-errormessage="password-error" 
         aria-required="true"
         required                  
       />
@@ -87,7 +87,8 @@
         #city="ngModel"
         name="city"
         aria-labelledby="locations-label"
-        aria-describedby="city-error"
+        aria-errormessage="city-error" 
+        [attr.aria-invalid]="city.invalid && (city.touched || signupForm.submitted)"
         [loading]="loadingCities"
         [items]="cities"
         bindLabel="name"

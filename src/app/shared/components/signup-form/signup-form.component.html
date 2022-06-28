@@ -1,6 +1,6 @@
 <form #signupForm="ngForm" autocomplete="off">
   <div class="input-box required-field">
-    <label for="fname">{{ 'First name' | translate }}</label>
+    <label for="fname">{{ 'First name' | translate }} <app-required-indicator></app-required-indicator> </label>
     <div class="input-box__border">
     <!-- Using described by to showcase error reference: https://www.w3.org/WAI/GL/wiki/Using_ARIA_role_of_alert_for_Error_Feedback_in_Forms#:~:text=NOTE%3A%20The%20ARIA%20describedby%20attribute,the%20application%20of%20this%20technique. -->
       <input
@@ -24,7 +24,7 @@
   </div>
 
   <div class="input-box required-field">
-    <label for="efname">{{ 'Email' | translate }}</label>
+    <label for="efname">{{ 'Email' | translate }} <app-required-indicator></app-required-indicator> </label>
     <div class="input-box__border">
       <input
         placeholder="Email"
@@ -53,7 +53,7 @@
   </div>
 
   <div class="input-box required-field">
-    <label for="password">{{ 'Password' | translate }}</label>
+    <label for="password">{{ 'Password' | translate }} <app-required-indicator></app-required-indicator> </label>
     <div class="input-box__border">
       <input
         placeholder="At least 8 characters"
@@ -79,12 +79,15 @@
   <div
     class="location-box required-field"
     *ngIf="!invitationToken" >
-    <label for="locations"> City </label>
+    <!-- TODO: Investigate https://stackoverflow.com/questions/60413950/accessibility-issue-in-ng-select -->
+    <label id="locations-label" for="locations"> City <app-required-indicator></app-required-indicator> </label>
     <div class="location-box__border">
       <ng-select
         id="locations"
         #city="ngModel"
         name="city"
+        aria-labelledby="locations-label"
+        aria-describedby="city-error"
         [loading]="loadingCities"
         [items]="cities"
         bindLabel="name"
@@ -103,6 +106,7 @@
       </ng-select>
     </div>
     <div
+      id="city-error"
       *ngIf="city.invalid && (city.touched || signupForm.submitted)"
       class="error-msg" >
       Location is Required

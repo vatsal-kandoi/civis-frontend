@@ -24,17 +24,23 @@
     </div>
     <div class="response-index__footer" *ngIf="profileData?.reviewType !== 'policy'">
         <div class="checkbox-area" *ngIf="showPublicResponseOption && !profileData?.enforcePrivateResponse">
-        <div class="input-checbox">
-            <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" />
-            <label class="m-0" tabindex="0">{{'Make my response public' | translate}}</label>
-            <span class="link" tabindex="0" tooltip="If you feel passionately about this Consultation, you can make your response public,
-            for others to use as a template. Your first name is shared with the Government if you make your response public.
-            If you’re not sure what to write, you can choose other people’s responses to send as your own.">{{'What does this mean?' | translate}}</span>
-        </div>
-        <div class="d-flex">
-            <p class="auto-save-text mr-2" *ngIf="showAutoSaved" >{{'Draft autosaved' | translate}}</p>
-            <p class="auto-save-text pointer" click="autoSave(responseText)" tabindex="0">{{'Save as Draft' | translate}}</p>
-        </div>
+            <div class="input-checbox" >
+              <input aria-describedby="response-visibility-sub-label" aria-labelledby="response-visibility-label" class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" /> 
+              <label id="response-visibility-sub-label" class="m-0" id="response-visibility-label">{{'Make my response public' | translate}}</label>
+              <!-- hidden text showing described by for the checkbox -->
+              <span class="visually-hidden" id="response-visibility-sub-label">
+                If you feel passionately about this Consultation, you can make your response public, 
+                for others to use as a template. Your first name is shared with the Government if you make your response public.
+                If you’re not sure what to write, you can choose other people’s responses to send as your own.
+              </span>
+              <span aria-hidden="true" class="link" tooltip="If you feel passionately about this Consultation, you can make your response public, 
+              for others to use as a template. Your first name is shared with the Government if you make your response public.
+              If you’re not sure what to write, you can choose other people’s responses to send as your own.">{{'What does this mean?' | translate}}</span>
+            </div>
+            <div class="d-flex">
+                <p class="auto-save-text mr-2" *ngIf="showAutoSaved" >{{'Draft autosaved' | translate}}</p>
+                <p class="auto-save-text pointer" click="autoSave(responseText)" tabindex="0">{{'Save as Draft' | translate}}</p>
+            </div>
         </div>
         <div class="draggable-area">
         <span class="drag-bars"></span>
@@ -45,8 +51,8 @@
     <p class="error-msg" *ngIf="showError && !responseText">Please enter your response</p>
     <div class="hr-line"></div>
     <div class="py-3">
-        <button  class="btn-submit active" (click)="submitAnswer()" [tooltip]="(showError && !responseText) ? 'Please fill all the answers to submit response.' : ''" data-event="purchase">
-          <p class="m-0">
+        <button aria-labelledby="submit-btn-label" class="btn-submit active" (click)="submitAnswer()" [tooltip]="(showError && !responseText) ? 'Please fill all the answers to submit response.' : ''" data-event="purchase">
+          <p id="submit-btn-label" class="m-0">
             SUBMIT RESPONSE
           </p>
           <span class="ml-2"><i class="fa fa-angle-right"></i></span>

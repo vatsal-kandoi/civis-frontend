@@ -14,7 +14,7 @@
                   name="email"
                   [(ngModel)]="loginObject.email"
                   [attr.aria-invalid]="email.invalid && (email.touched || loginForm.submitted)"
-                  aria-describedby="email-error" 
+                  aria-errormessage="email-error" 
                   aria-required="true"                                  
                   required
                   email />
@@ -40,7 +40,7 @@
                   [(ngModel)]="loginObject.password"
                   required
                   [attr.aria-invalid]="password.invalid && (password.touched || loginForm.submitted)"
-                  aria-describedby="password-error" 
+                  aria-errormessage="password-error" 
                   aria-required="true"
                   required                  
                 />        

@@ -57,4 +57,28 @@ export class ConsultationsService {
     }
   }
 
+  /**
+   * Get the active response round
+   */
+  getActiveResponseRound(data) {
+    if (!data.responseRounds || !data.responseRounds.length) return;
+
+    const activeRound = data.responseRounds.find((round) => round.active)
+    if (!isObjectEmpty(activeRound)) return activeRound.roundNumber;
+
+    return;
+  }
+
+  /**
+   * Check if the consultation has public responses
+   */
+  hasPublicResponseForRound(data, roundNumber) {
+    return data.sharedResponses.edges.filter((res) => {
+      if (res.node.roundNumber !== roundNumber) return false;
+
+      if (res.node.responseText === undefined || res.node.responseText === null) return false;
+
+      return true;
+    }).length > 0;
+  }
 }

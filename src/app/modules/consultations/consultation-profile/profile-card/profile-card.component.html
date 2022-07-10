@@ -1,14 +1,14 @@
 <div class="c-profile-card sticky">
   <div class="c-profile-card__top-section">
-    <p class="light-text m-0" tabindex="0">{{summaryData?.title ? summaryData?.title : 'SENDING IN YOUR RESPONSE TO'}}</p>
+    <p class="light-text m-0" tabindex="0">{{summaryData?.title ? summaryData?.title : 'SENDING IN YOUR RESPONSE TO' | translate}}</p>
     <div class="d-flex justify-content-between mb-1 mt-2">
-      <p class="card-title m-0" tabindex="0">{{profile?.title}}</p>
+      <p class="card-title m-0" tabindex="0">{{profile?.title | translate}}</p>
       <a class="icon-circle" [href]="profile?.url" target="_blank" *ngIf="!summaryData" aria-label="directs to consultation">
         <i class="fa fa-link" aria-hidden="true"></i>
       </a>
     </div>
       <div class="ministry-detail">
-        <img [src]="profile?.ministry?.logo?.url" class="avatar avatar--42" alt=" " />
+        <img [src]="profile?.ministry?.logo?.url" class="avatar avatar--42" role="presentation"/>
         <p class="regular-text m-0" tabindex="0">{{profile?.ministry?.name}}</p>
       </div>
       <div *ngIf="!summaryData">
@@ -47,32 +47,36 @@
         <div class="share-block" *ngIf="profile?.visibility === 'public_consultation'">
           <div class="share-block__position">
             <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">
-                <a  class="share-btn"
-                [href]="getFbUrl(currentUrl)"
-                target="_blank" >
+                <a class="share-btn"
+                  aria-label="facebook"
+                  [href]="getFbUrl(currentUrl)"
+                  target="_blank" >
                   <span>
-                      <i class="fa fa-facebook" aria-label="facebook"></i>
+                    <i class="fa fa-facebook"></i>
                   </span>
                 </a>
-                <a  class="share-btn"
-                [href]="getTwitterUrl(currentUrl)"
-                target="_blank">
+                <a class="share-btn"
+                  aria-label="twitter"
+                  [href]="getTwitterUrl(currentUrl)"
+                  target="_blank">
                   <span>
-                      <i class="fa fa-twitter" aria-label="twitter"></i>
+                    <i class="fa fa-twitter"></i>
                   </span>
                 </a>
-                <a  class="share-btn"
-                [href]="getWhatsappUrl(currentUrl)"
-                target="_blank">
+                <a class="share-btn"
+                  aria-label="whatsapp"
+                  [href]="getWhatsappUrl(currentUrl)"
+                  target="_blank">
                   <span>
-                      <i class="fa fa-whatsapp" aria-label="whatsapp"></i>
+                    <i class="fa fa-whatsapp"></i>
                   </span>
                 </a>
-                <a  class="share-btn"
-                [href]="getLinkedinUrl(currentUrl)"
-                target="_blank">
+                <a class="share-btn"
+                  aria-label="linkedin"
+                  [href]="getLinkedinUrl(currentUrl)"
+                  target="_blank">
                   <span>
-                      <i class="fa fa-linkedin" aria-label="linkedin"></i>
+                    <i class="fa fa-linkedin"></i>
                   </span>
                 </a>
             </div>

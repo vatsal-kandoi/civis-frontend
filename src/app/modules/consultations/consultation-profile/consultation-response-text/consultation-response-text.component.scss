@@ -27,11 +27,13 @@
         line-height: 106.6%;
         text-decoration-line: underline;
         color: #0e73b9;
+        border: none;
         cursor: pointer;
       }
 
       .info-mark {
         font-size: 40px;
+        cursor: pointer;
         color: rgba(196, 196, 196, 0.5);
       }
     }
@@ -91,4 +93,8 @@
   clip: rect(0,0,0,0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+.auto-save-text{
+  border: none;
 }

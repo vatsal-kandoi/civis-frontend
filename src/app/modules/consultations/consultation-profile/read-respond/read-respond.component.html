@@ -30,16 +30,20 @@
 <app-profane-modal *ngIf="isResponseShort" [message]='responseMessage' [showCancel]=false (close)='confirmed($event)'></app-profane-modal>
 
 
-<div bsModal #emailVerificationModal="bs-modal" *ngIf="emailVerification" class="modal fade logout-confirm-modal" tabindex="-1"
-  [config]="{show: true, backdrop: false, ignoreBackdropClick: true, keyboard: false}" role="dialog"
-  aria-labelledby="emailVerificationModal">
+<div bsModal 
+  #emailVerificationModal="bs-modal" 
+  *ngIf="emailVerification"
+  class="modal fade logout-confirm-modal"
+  [config]="{show: true, backdrop: false, ignoreBackdropClick: true, keyboard: false}" 
+  role="dialog"
+  aria-labelledby="email-verification-label">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <button class="cls-btn" ><img src="assets/images/close.png" (click)="onCloseEmailModal()" /></button>
+        <button aria-label="Close" class="cls-btn" (click)="onCloseEmailModal()"><img role="presentation" src="assets/images/close.png" /></button>
         <div class="email-modal">
-            <img class="modal-img mb-3" src="assets/images/email-verify.png" />
-            <p class="heading-text mb-2">Please check your email and verify</p>
+            <img class="modal-img mb-3" src="assets/images/email-verify.png" role="presentation"/>
+            <p id="email-verification-label" class="heading-text mb-2">Please check your email and verify</p>
             <p class="sub-heading-text mb-4 text-center">In order to claim your {{earnedPoints}} points and submit your response to the government, please verify your email</p>
         </div>
       </div>

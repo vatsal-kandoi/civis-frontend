@@ -77,20 +77,26 @@
               <!-- TODO Should draft be autosaved? Also if autosaved, show save option only if content changes. Also, should CSS be different? -->
               <div class="d-flex">
                   <!-- Change to not show the autosave button when nothing is to be saved -->
-                  <button class="auto-save-text pointer"
-                    aria-labelledby="auto-save-label" 
-                    disabled="{{!showAutoSaved}}"
-                    [attr.aria-disabled]="!showAutoSaved">
-                    <span id="auto-save-label">
-                      <ng-container *ngIf="showAutoSaved">
+                  <!-- TODO Show a saving text, when the draft is attempting -->
+                  <ng-container *ngIf="showAutoSaved">
+                    <div class="auto-save-text pointer"
+                      aria-labelledby="auto-save-label" 
+                      tabindex="0">
+                      <span id="auto-save-label">
                         {{ 'Draft autosaved' | translate}}
-                      </ng-container>                      
-                      <ng-container *ngIf="!showAutoSaved">
+                      </span>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="!showAutoSaved">
+                    <button class="auto-save-text pointer"
+                      (click)="autoSave(responseText)"
+                      aria-labelledby="auto-save-label">
+                      <span id="auto-save-label">
                         {{ 'Save as Draft' | translate}}
-                      </ng-container>
-                    </span>
-                  </button>
-              </div>
+                      </span>
+                    </button>
+                  </ng-container>
+                </div>
           </div>
           <div class="draggable-area">
           <span class="drag-bars"></span>

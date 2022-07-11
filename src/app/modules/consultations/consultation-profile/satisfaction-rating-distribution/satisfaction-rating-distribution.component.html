@@ -1,33 +1,38 @@
 <div class="paper-effect mt-4 m-0-sm">
     <div *ngIf="satisfactionRatingDistribution">
-      <p class="text-16 m-0 bold-text" tabindex="0">{{'Consultation satisfication' | translate}}</p>
-      <div class="d-flex mt-3 mb-3">
-        <div class="satisfication-response">
-          <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/dissatisfied.svg" tabindex="0" alt="dissatisfied"/>
-          <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_dissatisfied.png"tabindex="0" alt="dissatisfied"/>
-          <p class="text-16 m-0 bold-text pl-2" tabindex="0">
+      <span id="consultation-satisfaction-rating-label" class="text-16 m-0 bold-text">{{'Consultation satisfaction' | translate}}</span>      
+      <div tabindex="0" role="list" aria-labelledby="consultation-satisfaction-rating-label" class="d-flex mt-3 mb-3">
+        <div  tabindex="0" role="listitem" class="satisfication-response">
+          <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/dissatisfied.svg" role="presentation"/>
+          <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_dissatisfied.png" role="presentation"/>
+          <span class="text-16 m-0 bold-text pl-2">
             {{satisfactionRatingDistribution?.dissatisfied ? satisfactionRatingDistribution?.dissatisfied : '0'}}
-          </p>
+          </span>
+          <app-hidden-text accessibility_text=" dissatisfied users"></app-hidden-text>
         </div>
-        <div class="satisfication-response">
-          <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_dissatisfied.svg" tabindex="0" alt="some what dissatisfied"/>
-          <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_dissatisfied.png" tabindex="0" alt="some what dissatisfied"/>
-          <p class="text-16 m-0 bold-text pl-2" tabindex="0">
+        <div  tabindex="0" role="listitem" class="satisfication-response">
+          <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_dissatisfied.svg" role="presentation" />
+          <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_dissatisfied.png" role="presentation" />
+          <span class="text-16 m-0 bold-text pl-2">
             {{satisfactionRatingDistribution?.somewhat_dissatisfied ? satisfactionRatingDistribution?.somewhat_dissatisfied : '0'}}
-          </p>
+          </span>
+          <app-hidden-text accessibility_text=" some what dissatisfied users"></app-hidden-text>
         </div>
-        <div class="satisfication-response">
-          <img  *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_satisfied.svg" tabindex="0" alt="somewhat_satisfied"/>
-          <img  *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_satisfied.png" tabindex="0" alt="somewhat_satisfied"/>
-          <p class="text-16 m-0 bold-text pl-2" tabindex="0">
+        <div  tabindex="0" role="listitem" class="satisfication-response">
+          <img  *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/somewhat_satisfied.svg" role="presentation" />
+          <img  *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_somewhat_satisfied.png" role="presentation" />
+          <span class="text-16 m-0 bold-text pl-2">
             {{satisfactionRatingDistribution?.somewhat_satisfied ? satisfactionRatingDistribution?.somewhat_satisfied : '0'}}
-          </p>
+          </span>
+          <app-hidden-text accessibility_text=" some what satisfied users"></app-hidden-text>
         </div>
-        <div class="satisfication-response">
-          <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/satisfied.svg" tabindex="0" alt="satisfied"/>
-          <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_satisfied.png" tabindex="0" alt="satisfied"/>
-          <p class="text-16 m-0 bold-text pl-2" tabindex="0">
-            {{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}</p>
+        <div  tabindex="0" role="listitem" class="satisfication-response">
+          <img *ngIf="profileData?.visibility !== 'private_consultation'" src="assets/images/satisfied.svg" role="presentation" />
+          <img *ngIf="profileData?.visibility === 'private_consultation'" class="s-32" src="assets/images/private_satisfied.png" role="presentation"/>
+          <span class="text-16 m-0 bold-text pl-2">
+            {{satisfactionRatingDistribution?.satisfied ? satisfactionRatingDistribution?.satisfied : '0'}}
+          </span>
+          <app-hidden-text accessibility_text=" satisfied users"></app-hidden-text>
         </div>
       </div>
     </div>

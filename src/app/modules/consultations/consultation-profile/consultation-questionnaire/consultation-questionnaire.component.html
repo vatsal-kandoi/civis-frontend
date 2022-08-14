@@ -38,10 +38,10 @@
                   </ng-container>  
                   
                   <ng-container *ngIf="question.questionType === 'dropdown'">
-                    <p  
+                    <label 
+                      for="question-{{question.id}}" 
                       id="question-{{question.id}}-label" 
-                      class="question-text"
-                      aria-hidden="true" >        
+                      class="question-text">
                       <app-hidden-text
                         main_class="question-text__number" 
                         main_text="{{question_number + 1}}. "
@@ -49,23 +49,28 @@
 
                       {{question.questionText}} 
                       <app-required-indicator *ngIf="!question.isOptional"></app-required-indicator>
-                    </p>
+                  </label>
 
                     <ng-select 
+                      id="question-{{question.id}}"
                       [items]="question.subQuestions" 
                       bindLabel="question-{{question.id}}-label" 
                       [virtualScroll]="true" 
                       dropdownPosition="bottom" 
+                      aria-labelledby="question-{{question.id}}-label"
                       bindValue="id"  
                       [clearable]="false" 
                       loadingText="Searching..." 
-                      [searchable]="false" 
+                      [searchable]="false"
+                      aria-errormessage="{{question.id}}-error-msg"  
+                      [attr.aria-invalid]="showError && questionnaireForm.controls[question.id].errors"
                       (change)="onAnswerChange(question, $event)"
                       placeholder="Select an option" 
-                      [formControlName]="question.id"> 
+                      [formControlName]="question.id"
+                      [attr.required]="!question.isOptional" > 
                     </ng-select>
 
-                  </ng-container>
+                  </ng-container>                  
 
                   <ng-container *ngIf="question.questionType === 'checkbox'">
                       <fieldset id="{{question.id}}" [formGroupName]="question.id">    
@@ -104,9 +109,9 @@
 
                   <ng-container *ngIf="question.questionType === 'long_text'">
                     <div [id]="'text-area-' + question.id">
-                      <p 
+                      <label
                         aria-hidden="true"
-                        id="question-{{question.id}}-label" 
+                        for="question-{{question.id}}" 
                         class="question-text">        
                         <app-hidden-text
                           main_class="question-text__number" 
@@ -115,14 +120,14 @@
 
                         {{question.questionText}} 
                         <app-required-indicator *ngIf="!question.isOptional"></app-required-indicator>
-                      </p>
+                    </label>
                       <div class="text-area">
                         <textarea id="responseTextArea" 
                           (input)="longTextAnswer=$event.target.value" 
                           placeholder="Type your answer here, please refrain from using profane words" 
                           [formControlName]="question.id" 
                           [(ngModel)]='userResponse' 
-                          aria-labelledby="question-{{question.id}}-label" ></textarea>
+                          id="question-{{question.id}}" ></textarea>
                           <!--="Type your answer here, please refrain from using profane words -->
                       </div>
     

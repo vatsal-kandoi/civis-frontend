@@ -1,4 +1,4 @@
-<div class="paper-effect  mt-4 m-0-sm" *ngIf="profileData && !profileData.respondedOn" #responseIndex>
+<div tabindex="0" class="paper-effect  mt-4 m-0-sm" *ngIf="profileData && !profileData.respondedOn" #responseIndex>
     <app-satisfaction-rating-selection (selectSatisfaction)="responseFeedback = $event"></app-satisfaction-rating-selection>
     <div class="response-index mt-4" ngResizable [rzHandles]="'s'">
       <div class="response-index__nav">
@@ -56,6 +56,7 @@
           [config]="ckeConfig"
           (change)="onResponseTextChange($event)"
           (blur)="autoSave(responseText)"
+          id="text-editor"
           debounce="0">
           </ckeditor>
       </div>

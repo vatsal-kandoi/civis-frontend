@@ -25,7 +25,8 @@
       <div class="modal-body">
         <div class="glossary-wrapper">
           <ng-container *ngFor="let item of glossaryWordArray">
-            <div class="glossary-wrapper__item mb-2">
+            <!-- Adding tabindex to make each item individually na=vigable-->
+            <div tabindex="0" class="glossary-wrapper__item mb-2">
               <span class="legal-title">{{item?.wordindex.word}}</span>
               <span class="legal-description">{{item?.wordindex.description}}
               </span>

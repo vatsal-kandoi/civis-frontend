@@ -349,6 +349,8 @@ export class ConsultationResponseTextComponent
           top: this.responseIndex.nativeElement.offsetTop - 80,
           behavior: 'smooth',
         });
+        // TODO Check how to focus nto ckeditor
+        document.getElementById("text-response-input-label").focus()
       }
     });
   }

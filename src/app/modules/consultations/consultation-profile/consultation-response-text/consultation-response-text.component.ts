@@ -43,7 +43,10 @@ export class ConsultationResponseTextComponent
   ckeConfig = {
     removePlugins: 'elementspath',
     resize_enabled: false,
-  };
+    // TODO: Check what it to be read out to the user
+    title: "Your Response",
+    applicationTitle: "Your Response"
+};
   currentUser: any;
   consultationId: any;
   isMobile = window.innerWidth <= 768;
@@ -82,6 +85,9 @@ export class ConsultationResponseTextComponent
   responseStatus = 0;
   profaneWords = [];
 
+  /** Disabled if there are no public responses for the consulation */
+  isScrollToResponseDisabled: boolean = false;
+
   constructor(
     private userService: UserService,
     private consultationService: ConsultationsService,
@@ -95,6 +101,8 @@ export class ConsultationResponseTextComponent
       .pipe(filter((i) => i !== null))
       .subscribe((consulationId: any) => {
         this.consultationId = consulationId;
+        // TODO: Check how showPublicResponseOption is used
+        this.canScrollToPublicResponses();
       });
 
       this.apollo.watchQuery({
@@ -174,6 +182,18 @@ export class ConsultationResponseTextComponent
         this.currentUser = null;
       }
     });
+  }
+
+  /**
+   * Checks if there exists public responses for the consulation
+   */
+  canScrollToPublicResponses() {
+    this.consultationService.consultationProfileData.subscribe((data) => {
+      if (data) {
+        const activeRound = this.consultationService.getActiveResponseRound(data);
+        this.isScrollToResponseDisabled = !this.consultationService.hasPublicResponseForRound(data, activeRound);
+      }
+    });    
   }
 
   getResponseText() {

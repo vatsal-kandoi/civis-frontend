@@ -1,10 +1,26 @@
-<div bsModal #glossaryModal="bs-modal" class="modal fade"
-  [config]="{show: true, backdrop: 'static', ignoreBackdropClick: true}" [ngClass]="showModal ? 'align-center' : ''">
+<div bsModal 
+  #glossaryModal="bs-modal" 
+  class="modal fade"
+  tabindex="-1"
+  [config]="{
+    show: true,
+    backdrop: false,
+    ignoreBackdropClick: true,
+    keyboard: false
+  }"
+  role="dialog"
+  aria-labelledby="glossary-label"
+  [ngClass]="showModal ? 'align-center' : ''">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="title">{{'Legal Terms Simplified' | translate}}</h1>
-        <div class="pointer" (click)="closeModal()"><img src="assets/images/close.svg" alt="close"></div>
+        <h1 id="glossary-label" class="title">{{'Legal Terms Simplified' | translate}}</h1>
+        <div 
+          class="pointer" 
+          aria-label="Close"
+          role="button"
+          tabindex="0"
+          (click)="closeModal()"><img src="assets/images/close.svg" role="presentation"></div>
       </div>
       <div class="modal-body">
         <div class="glossary-wrapper">

@@ -1,10 +1,13 @@
 <div class="response-block" *ngIf="answers.length">
-  <div class="answers" *ngFor="let responseAnswer of alignedData; let i = index">
+  <div class="answers" *ngFor="let responseAnswer of alignedData; let question_number = index">
       <div *ngIf="responseAnswer.questionType === 'checkbox' && !showOnlyLongTextAnswer">
         <div class="answer" >
           <p class="question-text">
-            <span class="question-text__number">{{i+1}}.</span>
-            {{responseAnswer.questionText}}
+            <app-hidden-text
+            main_class="question-text__number" 
+            main_text="{{question_number + 1}}. "
+            accessibility_text="Question number {{question_number + 1}}"></app-hidden-text>
+            {{question.questionText}}
           </p>
           <div *ngFor="let item of responseAnswer.answer">
             <p class="question-answer answer-text">
@@ -16,8 +19,11 @@
       <div *ngIf="responseAnswer.questionType === 'multiple_choice' && !showOnlyLongTextAnswer">
         <div class="answer" >
           <p class="question-text">
-            <span class="question-text__number">{{i+1}}.</span>
-            {{responseAnswer.questionText}}
+            <app-hidden-text
+              main_class="question-text__number" 
+              main_text="{{question_number + 1}}. "
+              accessibility_text="Question number {{question_number + 1}}"></app-hidden-text>
+            {{question.questionText}}
           </p>
           <p class="answer-text question-answer">
             {{responseAnswer.answer}}
@@ -27,8 +33,11 @@
       <div *ngIf="responseAnswer.questionType === 'dropdown' && !showOnlyLongTextAnswer">
           <div class="answer" >
             <p class="question-text">
-              <span class="question-text__number">{{i+1}}.</span>
-              {{responseAnswer.questionText}}
+              <app-hidden-text
+                main_class="question-text__number" 
+                main_text="{{question_number + 1}}. "
+                accessibility_text="Question number {{question_number + 1}}"></app-hidden-text>
+              {{question.questionText}}
             </p>
             <p class="answer-text question-answer">
               {{responseAnswer.answer}}
@@ -38,8 +47,11 @@
       <div *ngIf="responseAnswer.questionType === 'long_text'">
         <div class="answer">
           <p class="question-text">
-            <span class="question-text__number">{{i+1}}.</span>
-            {{responseAnswer.questionText}}
+            <app-hidden-text
+              main_class="question-text__number" 
+              main_text="{{question_number + 1}}. "
+              accessibility_text="Question number {{question_number + 1}}"></app-hidden-text>
+            {{question.questionText}}
           </p>
           <p class="answer-text">
             {{responseAnswer.answer}}

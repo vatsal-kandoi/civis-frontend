@@ -21,21 +21,21 @@
       </div>
       <div class="right-item">
         <div class="social-icons">
-          <a href="https://in.linkedin.com/company/civis-vote" target="_blank">
-            <span ><i class="fa fa-linkedin-square" aria-label="Links to Civis LinkedIn"></i></span>
+          <a href="https://in.linkedin.com/company/civis-vote" aria-label="Links to Civis LinkedIn" target="_blank">
+            <span ><i class="fa fa-linkedin-square"></i></span>
           </a>
-          <a href="https://github.com/civis-vote" target="_blank">
-            <span><i class="fa fa-github-square" aria-label="Links to Civis Github"></i></span>
+          <a href="https://github.com/civis-vote" aria-label="Links to Civis Github" target="_blank">
+            <span><i class="fa fa-github-square"></i></span>
           </a>
-          <a href="https://www.facebook.com/Civis.Vote/" target="_blank">
-            <span><i class="fa fa-facebook-square" aria-label="Links to Civis Facebook"></i></span>
+          <a href="https://www.facebook.com/Civis.Vote/" aria-label="Links to Civis Facebook" target="_blank">
+            <span><i class="fa fa-facebook-square"></i></span>
           </a>
-          <a href="https://twitter.com/civis_vote" target="_blank">
-            <span><i class="fa fa-twitter-square" aria-label="Links to Civis Twitter"></i></span>
+          <a href="https://twitter.com/civis_vote" aria-label="Links to Civis Twitter" target="_blank">
+            <span><i class="fa fa-twitter-square"></i></span>
           </a>
-          <div class="instagram-icon" >
-            <a href="https://www.instagram.com/civis.vote" target="_blank">
-              <i class="fa fa-instagram" aria-label="Links to Civis Instagram"></i>
+          <div class="instagram-icon">
+            <a href="https://www.instagram.com/civis.vote" aria-label="Links to Civis Instagram" target="_blank">
+              <i class="fa fa-instagram"></i>
             </a>
           </div>
         </div>
@@ -55,21 +55,27 @@
           <img src="assets/images/footerlogo-1.jpg" alt="footer logo" />
         </picture> -->
         <div class="policy-text">
-          {{'Civic Innovation Foundation 2021. Unless otherwise mentioned,
-          all content is licensed under' | translate}}{{'a creative commons Attibution-No Derivates 4.0 International License' | translate}}
+          {{'Civic Innovation Foundation 2021. Unless otherwise mentioned, all content is licensed under' | translate}}{{'a creative commons Attibution-No Derivates 4.0 International License' | translate}}
         </div>
       </div>
       <div class="logo-right">
         <div class="mr-2 language-box">
+          <label for="languages" id="languages-label" class="visually-hidden">Language</label>
           <ng-select 
-          [items]="languages" bindLabel="name" dropdownPosition="bottom"
-          bindValue="id"
-          [clearable]="false"
-          [searchable]="false"
-          (change)="setLanguage()"
-          [(ngModel)]="selectedLanguage">
+            id="languages"
+            aria-labelledby="languages-label"
+            [items]="languages" 
+            bindLabel="name" 
+            dropdownPosition="bottom"
+            placeholder="Language"
+            bindValue="id"
+            [clearable]="false"
+            [searchable]="false"
+            (change)="setLanguage()"
+            [(ngModel)]="selectedLanguage">
           </ng-select>
         </div>
+            
         <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank">
           <picture>
             <source srcset="assets/images/footerlogo3.webp" type="image/webp">

@@ -4,69 +4,167 @@
     <div class="question-box">
       <form [formGroup]="questionnaireForm"  #f="ngForm">
         <div class="questions-container">
-          <div class="question-index" *ngFor="let question of questions; let i = index">
-              <div class="question">
-                <p class="question-text" tabindex="0">
-                  <span class="question-text__number">{{i+1}}.</span>
-                  {{question.questionText}} 
-                  <span *ngIf="!question.isOptional" class="required-text pl-1"> *</span>
-                </p>
-                <div class="answer" *ngIf="question.questionType === 'multiple_choice'">
-                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
-                    <label>
-                      <input type="radio" class="cm-radio" (input)="onAnswerChange(question,subQuestion)" [formControlName]="question.id" [value]="subQuestion.id">
-                      <span>{{subQuestion.questionText}}</span>
-                    </label>
-                  </div>
-                  <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>
-                </div>
-                <div class="answer" *ngIf="question.questionType === 'dropdown'">
+          <div class="question-index" *ngFor="let question of questions; let question_number = index">                        
+              <div class="question" tabindex="0" [ngClass]="{'response-form-invalid-input': (showError && questionnaireForm.controls[question.id].errors)}" >
+                <div class="answer">
+                  <ng-container *ngIf="question.questionType === 'multiple_choice'">
+                    <fieldset id="{{question.id}}" >    
+                      <legend 
+                          aria-hidden="true"
+                          id="question-{{question.id}}-label" 
+                          class="question-text" >
+                          <app-hidden-text
+                            main_class="question-text__number" 
+                            main_text="{{question_number + 1}}. "
+                            accessibility_text="Question number {{question_number + 1}}"></app-hidden-text>
+                          {{question.questionText}} 
+                          <app-required-indicator *ngIf="!question.isOptional"></app-required-indicator>
+                      </legend>                    
+                      <div 
+                          class="option-box" 
+                          *ngFor="let subQuestion of question.subQuestions">
+                                          
+                          <input 
+                            type="checkbox" 
+                            class="cm-radio" 
+                            (input)="onAnswerChange(question,subQuestion)" 
+                            [formControlName]="question.id" 
+                            [value]="subQuestion.id"           
+                            id="option-{{subQuestion.id}}"> 
+
+                          <label for="option-{{subQuestion.id}}"><span>{{subQuestion.questionText}}</span></label>
+                      </div>
+                    </fieldset>               
+                  </ng-container>  
+                  
+                  <ng-container *ngIf="question.questionType === 'dropdown'">
+                    <p  
+                      id="question-{{question.id}}-label" 
+                      class="question-text"
+                      aria-hidden="true" >        
+                      <app-hidden-text
+                        main_class="question-text__number" 
+                        main_text="{{question_number + 1}}. "
+                        accessibility_text="Question number {{question_number + 1}}"></app-hidden-text>
+
+                      {{question.questionText}} 
+                      <app-required-indicator *ngIf="!question.isOptional"></app-required-indicator>
+                    </p>
+
                     <ng-select 
-                    [items]="question.subQuestions" bindLabel="questionText" [virtualScroll]="true" dropdownPosition="bottom" 
-                    bindValue="id"  [clearable]="false" loadingText="Searching..." [searchable]="false" (change)="onAnswerChange(question, $event)"
-                    placeholder="Select an option" [formControlName]="question.id"> 
+                      [items]="question.subQuestions" 
+                      bindLabel="question-{{question.id}}-label" 
+                      [virtualScroll]="true" 
+                      dropdownPosition="bottom" 
+                      bindValue="id"  
+                      [clearable]="false" 
+                      loadingText="Searching..." 
+                      [searchable]="false" 
+                      (change)="onAnswerChange(question, $event)"
+                      placeholder="Select an option" 
+                      [formControlName]="question.id"> 
                     </ng-select>
-                    <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>  
+
+                  </ng-container>
+
+                  <ng-container *ngIf="question.questionType === 'checkbox'">
+                      <fieldset id="{{question.id}}" [formGroupName]="question.id">    
+
+                        <legend 
+                          aria-hidden="true"
+                          id="question-{{question.id}}-label" 
+                          class="question-text">        
+                          <app-hidden-text
+                            main_class="question-text__number" 
+                            main_text="{{question_number + 1}}. "
+                            accessibility_text="Question number {{question_number + 1}}"></app-hidden-text>
+                          {{question.questionText}} 
+                          <app-required-indicator *ngIf="!question.isOptional"></app-required-indicator>
+                        </legend> 
+                      
+                        <span 
+                            class="answer__tips" 
+                            tabindex="-1" id="{{question.id}}-sublabel">{{ 'Choose as many as you like' | translate }}</span>
+                            
+                        <div 
+                            class="option-box" 
+                            *ngFor="let subQuestion of question.subQuestions">
+                                            
+                            <input 
+                              type="checkbox" 
+                              class="cm-radio" 
+                              (input)="onAnswerChange(question,subQuestion, $event.target.checked)" 
+                              [formControlName]="subQuestion.id" 
+                              (click)="toggleCheckbox(question.id, subQuestion.id)"
+                              id="option-{{subQuestion.id}}">   
+                            <label for="option-{{subQuestion.id}}"><span>{{subQuestion.questionText}}</span></label>
+                        </div>
+                      </fieldset>      
+                  </ng-container>
+
+                  <ng-container *ngIf="question.questionType === 'long_text'">
+                    <div [id]="'text-area-' + question.id">
+                      <p 
+                        aria-hidden="true"
+                        id="question-{{question.id}}-label" 
+                        class="question-text">        
+                        <app-hidden-text
+                          main_class="question-text__number" 
+                          main_text="{{question_number + 1}}. "
+                          accessibility_text="Question number {{question_number + 1}}"></app-hidden-text>
+
+                        {{question.questionText}} 
+                        <app-required-indicator *ngIf="!question.isOptional"></app-required-indicator>
+                      </p>
+                      <div class="text-area">
+                        <textarea id="responseTextArea" 
+                          (input)="longTextAnswer=$event.target.value" 
+                          placeholder="Type your answer here, please refrain from using profane words" 
+                          [formControlName]="question.id" 
+                          [(ngModel)]='userResponse' 
+                          aria-labelledby="question-{{question.id}}-label" ></textarea>
+                          <!--="Type your answer here, please refrain from using profane words -->
+                      </div>
+    
+                    </div>
+                  </ng-container>
+
                 </div>
-                <div class="answer" [formGroupName]="question.id" *ngIf="question.questionType === 'checkbox'">
-                  <label class="answer__tips" tabindex="0">Choose as many as you like</label>
-                  <div class="option-box" *ngFor="let subQuestion of question.subQuestions">
-                    <label>
-                      <input type="checkbox" class="cm-radio" (input)="onAnswerChange(question,subQuestion, $event.target.checked)" [formControlName]="subQuestion.id" (click)="toggleCheckbox(question.id, subQuestion.id)">
-                      <span>{{subQuestion.questionText}}</span>
-                    </label>
-                  </div>
-                  <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>
-                </div>
-                <div class="answer" [id]="'text-area-' + question.id" *ngIf="question.questionType === 'long_text'">
-                  <div class="text-area">
-                    <textarea id = "responseTextArea" (input)="longTextAnswer = $event.target.value" placeholder="Type your answer here, please refrain from using profane words" 
-                    [formControlName]="question.id" [(ngModel)]='userResponse' aria-label="Type your answer here, please refrain from using profane words " ></textarea>
-                  </div>
-                  <div *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div> 
-                </div>
+                    
                 <div class="input-box" *ngIf="question.is_other">
                   <div class="input-box__border">
                     <input placeholder="Type answer here" type="text"
                     [formControlName]="question.other_answer" />
                   </div>
                 </div>
-                <div *ngIf="showError && questionnaireForm.controls[question.other_answer]?.errors && question.is_other" class="error-msg text-left ml-3">This is a mandatory question and your response is required</div> 
+
+                <div id="{{question.id}}-error-msg" *ngIf="showError && questionnaireForm.controls[question.other_answer]?.errors && question.is_other" class="error-msg text-left ml-3">This is a mandatory question and your response is required</div> 
+
+                <div id="{{question.id}}-error-msg" *ngIf="showError && questionnaireForm.controls[question.id].errors" class="error-msg text-left">This is a mandatory question and your response is required</div>
+
               </div>
             </div>
           </div>
+
           <div class="checkbox-area" *ngIf="showPublicResponseOption()">
             <div class="input-checbox" >
-              <input class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" [ngModelOptions]="{standalone: true}"/> 
-              <label class="m-0" tabindex="0">{{'Make my response public' | translate}}</label>
-              <span class="link" tabindex="0"   tooltip="If you feel passionately about this Consultation, you can make your response public, 
+              <input aria-describedby="response-visibility-sub-label" aria-labelledby="response-visibility-label" class="cm-checkbox mr-2" type="checkbox" [(ngModel)]="responseVisibility" [ngModelOptions]="{standalone: true}"/> 
+              <label id="response-visibility-sub-label" class="m-0" id="response-visibility-label">{{'Make my response public' | translate}}</label>
+              <!-- hidden text showing described by for the checkbox -->
+              <span class="visually-hidden" id="response-visibility-sub-label">
+                If you feel passionately about this Consultation, you can make your response public, 
+                for others to use as a template. Your first name is shared with the Government if you make your response public.
+                If you’re not sure what to write, you can choose other people’s responses to send as your own.
+              </span>
+              <span aria-hidden="true" class="link" tooltip="If you feel passionately about this Consultation, you can make your response public, 
               for others to use as a template. Your first name is shared with the Government if you make your response public.
               If you’re not sure what to write, you can choose other people’s responses to send as your own.">{{'What does this mean?' | translate}}</span>
             </div>
           </div>
+
           <div class="py-3">
-            <button  class="btn-submit active" (click)='submitAnswer()' [tooltip]="(showError && !f.valid)  ? 'Please fill all the answers to submit response.' : ''" data-event="purchase">
-              <p class="m-0">
+            <button aria-labelledby="response-submit-btn-label" class="btn-submit active" (click)='submitAnswer()' [tooltip]="(showError && !f.valid)  ? 'Please fill all the answers to submit response.' : ''" data-event="purchase">
+              <p id="response-submit-btn-label" class="m-0">
                 SUBMIT RESPONSE
               </p>
               <span class="ml-2"><i class="fa fa-angle-right"></i></span>

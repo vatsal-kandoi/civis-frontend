@@ -27,6 +27,8 @@ import { SocialLoginOptionsComponent } from './social-login-options/social-login
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { RequiredIndicatorComponent } from './required-indicator/required-indicator.component';
+import { HiddenTextComponent } from './hidden-text/hidden-text.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { RecaptchaModule } from 'ng-recaptcha';
     ProfaneModalComponent,
     SocialLoginOptionsComponent,
     SignupFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    RequiredIndicatorComponent,
+    HiddenTextComponent
   ],
   imports: [
     CommonModule,
@@ -78,7 +82,9 @@ import { RecaptchaModule } from 'ng-recaptcha';
     ProfaneModalComponent,
     SocialLoginOptionsComponent,
     LoginFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    RequiredIndicatorComponent,
+    HiddenTextComponent
   ],
   providers: [
     LinearLoaderService

@@ -7,9 +7,12 @@
         <div class="satisfactory-tip" id="satisfactory-tip">
           {{'Choose an option to submit your feedback' | translate}}
         </div>
-        <div class="options-block" 
+        <div 
+          class="options-block" 
+          [ngClass]="{'response-form-invalid-input': (showError && !responseFeedback)}"
           role="radiogroup" 
           aria-required="true"
+          tabindex="0"
           aria-labelledby="satisfactory-heading"
           aria-describedby="satisfactory-tip">
           <button 

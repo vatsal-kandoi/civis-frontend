@@ -24,6 +24,6 @@ export class LoginFormComponent implements OnInit {
 
   submit() {
     if (!this.loginForm.valid) this.loginFormElemRef.nativeElement.querySelector('.ng-invalid').focus()
-    else this.onSubmit.emit(true);  
+    else this.onSubmit.emit(this.loginObject);  
   }
 }

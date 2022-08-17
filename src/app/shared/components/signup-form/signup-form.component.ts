@@ -81,10 +81,12 @@ export class SignupFormComponent implements OnInit {
   submitSignupForm() {
     if (!this.signupForm.valid) this.signupFormElemRef.nativeElement.querySelector('.ng-invalid').focus()
     // Proces form only on captcha resolved
-    else if (this.isCaptchaResolved) this.onSubmit.emit(this.signupObject);
-    else if (!this.captchaRef.executeRequested) {
-      this.captchaRef.execute();
-    }
+    this.onSubmit.emit(this.signupObject);
+    // TODO enable captcha when live 
+    //else if (this.isCaptchaResolved) this.onSubmit.emit(this.signupObject);
+    //else if (!this.captchaRef.executeRequested) {
+      //this.captchaRef.execute();
+    //}
   }
 
   loadCities() {

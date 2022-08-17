@@ -3657,7 +3657,7 @@ var LoginFormComponent = /** @class */ (function () {
         if (!this.loginForm.valid)
             this.loginFormElemRef.nativeElement.querySelector('.ng-invalid').focus();
         else
-            this.onSubmit.emit(true);
+            this.onSubmit.emit(this.loginObject);
     };
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
@@ -4429,11 +4429,12 @@ var SignupFormComponent = /** @class */ (function () {
         if (!this.signupForm.valid)
             this.signupFormElemRef.nativeElement.querySelector('.ng-invalid').focus();
         // Proces form only on captcha resolved
-        else if (this.isCaptchaResolved)
-            this.onSubmit.emit(this.signupObject);
-        else if (!this.captchaRef.executeRequested) {
-            this.captchaRef.execute();
-        }
+        this.onSubmit.emit(this.signupObject);
+        // TODO enable captcha when live 
+        //else if (this.isCaptchaResolved) this.onSubmit.emit(this.signupObject);
+        //else if (!this.captchaRef.executeRequested) {
+        //this.captchaRef.execute();
+        //}
     };
     SignupFormComponent.prototype.loadCities = function () {
         var _this = this;

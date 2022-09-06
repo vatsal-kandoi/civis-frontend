@@ -3,6 +3,9 @@
     <div
       class="vote-item"
       (click)="vote('up', response?.node)"
+      aria-label="Upvote"
+      role="button"
+      tabindex="0"
       tooltip="{{ 'Upvote' }}"
       [ngClass]="
         response?.node?.votedAs?.voteDirection === 'up'
@@ -19,6 +22,9 @@
       class="vote-item"
       (click)="vote('down', response?.node)"
       tooltip="{{ 'Downvote' }}"
+      role="button"
+      tabindex="0"
+      aria-label="Downvote"
       [ngClass]="
         response?.node?.votedAs?.voteDirection === 'down'
           ? 'vote-item-active'
@@ -33,6 +39,9 @@
     <div
       tooltip="{{ 'Share' }}"
       class="share-block"
+      role="button"
+      tabindex="0"      
+      aria-label="Share"
       (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true"
       *ngIf="profileData?.visibility === 'public_consultation'"
     >

@@ -74,6 +74,7 @@ export class AuthService {
       .subscribe((token) => {
         if (token) {
           this.tokenService.storeToken(token);
+          this.handleUserToken();
           this.userService.userLoaded$
           .subscribe((exists: boolean) => {
             if (exists) {

@@ -7906,6 +7906,7 @@ var AuthService = /** @class */ (function () {
             .subscribe(function (token) {
             if (token) {
                 _this.tokenService.storeToken(token);
+                _this.handleUserToken();
                 _this.userService.userLoaded$
                     .subscribe(function (exists) {
                     if (exists) {

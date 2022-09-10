@@ -78,7 +78,7 @@
   </div>
   <div
     class="location-box required-field"
-    *ngIf="!invitationToken" >
+    *ngIf="!invitationToken && showCityInputOption" >
     <!-- TODO: Investigate https://stackoverflow.com/questions/60413950/accessibility-issue-in-ng-select -->
     <label id="locations-label" for="locations"> City <app-required-indicator></app-required-indicator> </label>
     <div class="location-box__border">

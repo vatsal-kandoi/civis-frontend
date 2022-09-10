@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { distinctUntilChanged, debounceTime, map, takeWhile, switchMap, tap } from 'rxjs/operators';
@@ -16,6 +16,7 @@ import { ErrorService } from '../error-modal/error.service';
 })
 export class SignupFormComponent implements OnInit {
 
+  @Input() showCityInputOption: boolean = false;
   @Output() onSubmit: EventEmitter<SignupForm> = new EventEmitter(null);
 
   @ViewChild('signupForm', {static: false}) signupForm: NgForm;
@@ -79,7 +80,10 @@ export class SignupFormComponent implements OnInit {
   }    
 
   submitSignupForm() {
-    if (!this.signupForm.valid) this.signupFormElemRef.nativeElement.querySelector('.ng-invalid').focus()
+    if (!this.signupForm.valid) {
+      this.signupFormElemRef.nativeElement.querySelector('.ng-invalid').focus();
+      return; 
+    }
     // Proces form only on captcha resolved
     this.onSubmit.emit(this.signupObject);
     // TODO enable captcha when live 

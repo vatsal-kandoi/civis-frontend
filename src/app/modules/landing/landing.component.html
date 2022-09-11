@@ -54,7 +54,7 @@
   <section class="app-landing__detail-section">
 
     <div class="latest-response-container">
-      <p class="section-heading">{{'LATEST RESPONSES' | translate}}</p>
+      <h3 class="section-heading" tabindex="0">{{'LATEST RESPONSES' | translate}}</h3>
       <div class="person-carousel">
         <div class="carousel-arrow-left pointer" (click)='previousSlide()'><i class="fa fa-angle-left"></i></div>
         <div @slideInRight class="carousel-inner-container">
@@ -78,24 +78,39 @@
     </div>
 
     <div class="citizen-leader-section">
-      <p class="section-heading" tabindex="0">{{'CITIZEN LEADERS ON CIVIS' | translate}}</p>
-      <div class="leaders-list">
-        <div class="leader-profile" *ngFor='let item of citizenLeaders'>
-          <img class="avatar avatar--60 mb-2 pointer" alt="" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
-          <p class="text-18 m-0">{{item?.firstName}}</p>
-          <p class="blue-text m-0">{{item?.points}} &nbsp; {{'Points' | translate}}</p>
+      <h3 class="section-heading" tabindex="0">{{'CITIZEN LEADERS ON CIVIS' | translate}}</h3>
+      <div class="leaders-list" tabindex="0" role="list" aria-label="Citizen leaders on Civis with maximum points">
+        <div class="leader-profile" role="listitem" *ngFor='let item of citizenLeaders'>
+          <div role="button" 
+            class="leader-btn"
+            [attr.aria-label]="'Click to open ' + item?.firstName + 's profile'"
+            (click)="openUserProfile(item)">
+            <img class="avatar avatar--60 mb-2 pointer" role="presentation" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
+          </div>
+          <app-hidden-text [main_text]="''" [accessibility_text]="item?.firstName + ' with ' + item?.points +  ' points'">
+            <p class="text-18 m-0">{{item?.firstName}}</p>
+            <p class="blue-text m-0">{{item?.points}} &nbsp; {{'Points' | translate}}</p>            
+          </app-hidden-text>
         </div>
       </div>
+
       <!-- leaders-list-mobile -->
-      <div class="mb-3">
-        <div class="leaders-list-row" *ngFor='let item of citizenLeaders'>
-          <img class="avatar avatar--42" alt="" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url" (click)="openUserProfile(item)" />
-          <div class="leader-detail">
-            <p class="leader-name">{{item?.firstName}}</p>
-            <p class="leader-stats">
-              <span class="bold-text mr-1">{{item?.points}}</span>Points <span class="seprator-dot"></span> {{item?.points > 500 ? 'SuperLeader' : 'ActiveLeader'}}
-            </p>
+      <div class="mb-3" role="list" aria-label="Citizen leaders on Civis with maximum points">
+        <div class="leaders-list-row" role="listitem" *ngFor='let item of citizenLeaders'>
+          <div role="button" 
+            class="leader-btn"
+            [attr.aria-label]="'Click to open ' + item?.firstName + 's profile'"
+            (click)="openUserProfile(item)">
+            <img class="avatar avatar--42" role="presentation" appDefaultImage appLazyLoad [type]="'user'" [src]="item?.profilePicture?.url"  />          
           </div>
+          <app-hidden-text [main_text]="''" [accessibility_text]="item?.firstName + ' with ' + item?.points +  ' points'">
+            <div class="leader-detail">
+              <div class="leader-name">{{item?.firstName}}</div>
+              <div class="leader-stats">
+                <span class="bold-text mr-1">{{item?.points}}</span>Points <span class="seprator-dot"></span> {{item?.points > 500 ? 'SuperLeader' : 'ActiveLeader'}}
+              </div>
+            </div>
+          </app-hidden-text>
         </div>
       </div>
       <button [routerLink]="['/leader-board']" class="app-btn circular blue-light landing-btn">
@@ -105,7 +120,7 @@
     </div>
 
     <div class="civis-work-section">
-      <p class="section-heading" tabindex="0">{{'HOW CIVIS WORKS' | translate}}</p>
+      <h3 class="section-heading" tabindex="0">{{'HOW CIVIS WORKS' | translate}}</h3>
       <div class="d-flex justify-content-center mt-5">
         <button
           class="app-btn circular landing-btn"
@@ -127,25 +142,25 @@
     <app-how-civis-works-carousel [tab]="activeTab"></app-how-civis-works-carousel>
 
     <div class="impact-section">
-        <p class="section-heading" tabindex="0">{{'IMPACT SO FAR' | translate}}</p>
+        <h3 class="section-heading" tabindex="0">{{'IMPACT SO FAR' | translate}}</h3>
       <div class="count-grid">
-        <div class="count-item">
-          <p tabindex="0">{{'Consultations Created on Civis' | translate}}</p>
-          <p tabindex="0">{{numberWithCommas(impactStats?.consultation_count + 2)}}</p>
+        <div class="count-item" tabindex="0">
+          <p>{{'Consultations Created on Civis' | translate}}</p>
+          <p>{{numberWithCommas(impactStats?.consultation_count + 2)}}</p>
         </div>
-        <div class="count-item">
-          <p tabindex="0">{{'Total Number of Responses' | translate}}</p>
-          <p tabindex="0">{{numberWithCommas(impactStats?.consultation_response_count + 5790 + 2938)}}</p>
+        <div class="count-item" tabindex="0">
+          <p>{{'Total Number of Responses' | translate}}</p>
+          <p>{{numberWithCommas(impactStats?.consultation_response_count + 5790 + 2938)}}</p>
         </div>
-        <div class="count-item">
-          <p tabindex="0">{{'Total Number of Citizens Engaged' | translate}}</p>
-          <p tabindex="0">{{numberWithCommas(impactStats?.total_registered_users + 3057)}}</p>
+        <div class="count-item" tabindex="0">
+          <p>{{'Total Number of Citizens Engaged' | translate}}</p>
+          <p>{{numberWithCommas(impactStats?.total_registered_users + 3057)}}</p>
         </div>
       </div>
     </div>
 
     <div class="press-section">
-      <p class="section-heading" tabindex="0">{{'IN THE PRESS' | translate}}</p>
+      <h3 class="section-heading" tabindex="0">{{'IN THE PRESS' | translate}}</h3>
       <div class="press-logo-grid">
         <a href="https://audioboom.com/posts/6611014-what-is-civis" class="grid-item" target="_blank">
           <picture>

@@ -1,5 +1,4 @@
 import { EventEmitter, AfterViewInit, Component, Input, OnInit, Output } from '@angular/core';
-import { getSocialLink } from 'src/app/modules/consultations/consultation-profile/socialLink.function';
 
 @Component({
   selector: 'app-social-share-options',
@@ -8,10 +7,13 @@ import { getSocialLink } from 'src/app/modules/consultations/consultation-profil
 })
 export class SocialShareOptionsComponent implements OnInit, AfterViewInit {
 
-  @Input("url") url;
-  @Input("title") title;
-  @Input("nodeID") nodeID;
-
+  @Input("socialShareLinkMap") socialShareLinkMap: { facebook: string, twitter: string, whatsapp: string, linkedin: string } = { 
+      "facebook": "",
+      "twitter": "",
+      "whatsapp": "",
+      "linkedin": "",
+  };
+  
   @Output("closeShareOptions") closeShareOptions: EventEmitter<boolean> = new EventEmitter();
 
   constructor() { }
@@ -28,22 +30,5 @@ export class SocialShareOptionsComponent implements OnInit, AfterViewInit {
         this.closeShareOptions.emit(true);
       }
     });
-  }
-
-  /**
-   * Return the URL to share on a particular social channel
-   * @param socialType Social Share option
-   * @returns URL
-   */
-  getSocialURL(socialType) {
-    if(socialType === "facebook") {
-      return getSocialLink("facebook", this.url, this.title);
-    } else if( socialType === "twitter") {
-      return getSocialLink("twitter", this.url, this.title, this.nodeID )
-    } else if (socialType === "whatsapp") {
-      return getSocialLink('whatsapp', this.url, this.title);
-    } else if (socialType === "linkedin") {
-      return getSocialLink('linkedin', this.url, this.title);
-    }
   }
 }

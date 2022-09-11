@@ -161,6 +161,21 @@ export class ProfileCardComponent implements OnInit, OnChanges {
     return null;
   }
 
+  generateShareURL(url): { facebook: string, twitter: string, whatsapp: string, linkedin: string } {
+    return {
+      facebook: this.getFbUrl(url),
+      twitter: this.getTwitterUrl(url),
+      whatsapp: this.getWhatsappUrl(url),
+      linkedin: this.getLinkedinUrl(url),
+    }
+  }
+
+  closeShareBlock(close) {
+    if(this.showShareOptions && close) {
+      this.showShareOptions = false;
+    }
+  }
+
   createCalendarEvent() {
     if (this.profile && this.profile.title && this.profile.responseDeadline) {
       let startDate: any =  new Date(this.profile.responseDeadline).setHours(0, 0, 0);

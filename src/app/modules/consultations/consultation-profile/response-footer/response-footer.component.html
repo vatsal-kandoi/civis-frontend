@@ -54,9 +54,8 @@
       <div class="share-block__position">
         <div *ngIf="showShareBlock && responseId && responseId === response?.node?.id"
           class="share-pop-up" >
-            <app-social-share-options [url]="currentUrl" 
-              [title]="profileData?.title" (closeShareOptions)="closeShareBlock($event)"
-              [nodeID]="response?.node?.id"></app-social-share-options>          
+            <app-social-share-options [socialShareLinkMap]="generateShareURL(currentUrl, profileData?.title, response?.node?.id)"
+            (closeShareOptions)="closeShareBlock($event)" ></app-social-share-options>          
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ import { ConsultationsService } from 'src/app/shared/services/consultations.serv
 import { filter } from 'rxjs/operators';
 import * as moment from 'moment';
 import { isObjectEmpty } from 'src/app/shared/functions/modular.functions';
+import { getSocialLink } from 'src/app/modules/consultations/consultation-profile/socialLink.function';
 
 @Component({
   selector: 'app-response-footer',
@@ -224,6 +225,17 @@ export class ResponseFooterComponent implements OnInit {
   closeShareBlock(close) {
     if(this.showShareBlock && close) {
       this.showShareBlock = false;
+    }
+  }
+  /**
+   * Return the URL to share on a particular social channel
+  **/
+  generateShareURL(url, title, nodeID): { facebook: string, twitter: string, whatsapp: string, linkedin: string } {
+    return {
+      facebook: getSocialLink("facebook", url, title),
+      twitter: getSocialLink("twitter", url, title, nodeID ),
+      whatsapp: getSocialLink('', url, title),
+      linkedin: getSocialLink('linkedin', url, title),
     }
   }
 

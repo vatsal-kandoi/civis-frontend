@@ -45,48 +45,21 @@
           </div>
         </div>
         <div class="share-block" *ngIf="profile?.visibility === 'public_consultation'">
-          <div class="share-block__position">
-            <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">
-                <a class="share-btn"
-                  aria-label="facebook"
-                  [href]="getFbUrl(currentUrl)"
-                  target="_blank" >
-                  <span>
-                    <i class="fa fa-facebook"></i>
-                  </span>
-                </a>
-                <a class="share-btn"
-                  aria-label="twitter"
-                  [href]="getTwitterUrl(currentUrl)"
-                  target="_blank">
-                  <span>
-                    <i class="fa fa-twitter"></i>
-                  </span>
-                </a>
-                <a class="share-btn"
-                  aria-label="whatsapp"
-                  [href]="getWhatsappUrl(currentUrl)"
-                  target="_blank">
-                  <span>
-                    <i class="fa fa-whatsapp"></i>
-                  </span>
-                </a>
-                <a class="share-btn"
-                  aria-label="linkedin"
-                  [href]="getLinkedinUrl(currentUrl)"
-                  target="_blank">
-                  <span>
-                    <i class="fa fa-linkedin"></i>
-                  </span>
-                </a>
-            </div>
-          </div>
           <div class="spread-btn mt-3">
             <button data-event="click-sidebar-share" #spreadButtonElement class="btn-circular"
               (click)="showShareOptions = !showShareOptions">
               <span class="mr-2 clr-blue"><i class="fa fa-share"></i></span>
               <span class="blue-text bold-text">{{'Spread the word' | translate}}</span>
             </button>
+
+            <div class="share-block__position">
+              <div #shareOptionsElement class="share-pop-up" *ngIf="showShareOptions">
+                <app-social-share-options [socialShareLinkMap]="generateShareURL(currentUrl)"
+                  (closeShareOptions)="closeShareBlock($event)" ></app-social-share-options>          
+                  
+              </div>
+            </div>
+  
             <button mat-button (click)="openDialog()" class="btn-circular" style="float: right;">
               <span class="blue-text bold-text" tabindex="-1">{{'Glossary' | translate}}</span>
             </button>

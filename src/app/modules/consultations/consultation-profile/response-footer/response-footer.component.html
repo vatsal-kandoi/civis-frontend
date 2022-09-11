@@ -42,79 +42,28 @@
       role="button"
       tabindex="0"      
       aria-label="Share"
-      (click)="toggleShareBlock(response?.node?.id); shareBtnClicked = true"
-      *ngIf="profileData?.visibility === 'public_consultation'"
-    >
-      <div class="share-block__position">
-        <div
-          #shareBlockElement
-          *ngIf="
-            showShareBlock && responseId && responseId === response?.node?.id
-          "
-          class="share-pop-up"
-        >
-          <a
-            class="share-btn"
-            [href]="getSocialLink('facebook', currentUrl, profileData?.title)"
-            target="_blank"
-          >
-            <span>
-              <i class="fa fa-facebook"></i>
-            </span>
-          </a>
-          <a
-            class="share-btn"
-            [href]="
-              getSocialLink(
-                'twitter',
-                currentUrl,
-                profileData?.title,
-                response?.node?.id
-              )
-            "
-            target="_blank"
-          >
-            <span>
-              <i class="fa fa-twitter"></i>
-            </span>
-          </a>
-          <a
-            class="share-btn"
-            [href]="getSocialLink('whatsapp', currentUrl, profileData?.title)"
-            target="_blank"
-          >
-            <span>
-              <i class="fa fa-whatsapp"></i>
-            </span>
-          </a>
-          <a
-            class="share-btn"
-            [href]="getSocialLink('linkedin', currentUrl, profileData?.title)"
-            target="_blank"
-          >
-            <span>
-              <i class="fa fa-linkedin"></i>
-            </span>
-          </a>
-        </div>
-      </div>
+      #shareBlockElement
+      (click)="toggleShareBlock(response?.node?.id)"
+      *ngIf="profileData?.visibility === 'public_consultation'">
       <span class="fs-20">
         <i class="fa fa-share"></i>
       </span>
       <span *ngIf="response.node?.templatesCount">
         {{ response.node?.templatesCount ? response.node?.templatesCount : '' }}
-      </span>
+      </span>      
+      <div class="share-block__position">
+        <div *ngIf="showShareBlock && responseId && responseId === response?.node?.id"
+          class="share-pop-up" >
+            <app-social-share-options [socialShareLinkMap]="generateShareURL(currentUrl, profileData?.title, response?.node?.id)"
+            (closeShareOptions)="closeShareBlock($event)" ></app-social-share-options>          
+        </div>
+      </div>
     </div>
   </div>
-  <div
-    *ngIf="
-      showCreateResponse() && activeRoundNumber === response?.node?.roundNumber
-    "
-  >
+  <div *ngIf="showCreateResponse() && activeRoundNumber === response?.node?.roundNumber" >
     <button
       class="app-btn response-btn"
-      (click)="useThisResponse(response?.node)"
-    >
+      (click)="useThisResponse(response?.node)">
       {{ 'Use this response' | translate }}
     </button>
   </div>

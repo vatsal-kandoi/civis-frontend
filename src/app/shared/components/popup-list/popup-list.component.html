@@ -1,0 +1,7 @@
+<div tabindex="0" 
+    role="list" 
+    class="main-menu-container" 
+    [attr.aria-label]="list_label" 
+    [ngClass]="{'popup-list-row': menu_type === 'row', 'popup-list-column': menu_type === 'column'}">
+    <ng-content></ng-content>
+</div>

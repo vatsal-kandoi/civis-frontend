@@ -30,6 +30,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { RequiredIndicatorComponent } from './required-indicator/required-indicator.component';
 import { HiddenTextComponent } from './hidden-text/hidden-text.component';
 import { SocialShareOptionsComponent } from './social-share-options/social-share-options.component';
+import { PopupListComponent } from './popup-list/popup-list.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { SocialShareOptionsComponent } from './social-share-options/social-share
     LoginFormComponent,
     RequiredIndicatorComponent,
     HiddenTextComponent,
-    SocialShareOptionsComponent
+    SocialShareOptionsComponent,
+    PopupListComponent,
   ],
   imports: [
     CommonModule,
@@ -87,7 +89,8 @@ import { SocialShareOptionsComponent } from './social-share-options/social-share
     SignupFormComponent,
     RequiredIndicatorComponent,
     HiddenTextComponent,
-    SocialShareOptionsComponent
+    PopupListComponent,
+    SocialShareOptionsComponent,
   ],
   providers: [
     LinearLoaderService

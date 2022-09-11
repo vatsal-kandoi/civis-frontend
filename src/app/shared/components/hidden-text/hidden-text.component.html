@@ -1,3 +1,15 @@
-<span [class]="main_class" 
-    aria-hidden="true">{{ main_text }}</span>
-<span class="visually-hidden">{{ accessibility_text }}</span>
+<ng-container *ngIf="main_text !== ''">
+    <span [class]="main_class" 
+        aria-hidden="true">{{ main_text }}</span>
+    <span class="visually-hidden">{{ accessibility_text }}</span>        
+</ng-container>
+
+<ng-container *ngIf="main_text === ''">
+    <div>
+        <div aria-hidden="true">
+            <ng-content></ng-content>
+        </div>
+        <div class="visually-hidden">{{ accessibility_text }}</div>        
+    </div>
+</ng-container>
+

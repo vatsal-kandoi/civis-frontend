@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/operators';

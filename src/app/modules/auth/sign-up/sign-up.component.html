@@ -15,22 +15,31 @@
 
   <div class="sign-up-index__right col-md-8 col-12">
     <div class="header">
-      <div class="logo-container">
+      <div class="logo-container" tabindex="0">
         <img
           class="logo"
-          [routerLink]="['/']"
-          alt="Civis logo"
+          aria-hidden="true"
+          alt=""
+          role="presentation"
           src="assets/images/brand-logo/brand-logo.svg"
         />
+        <div class="logo-heading">
+          <h1>{{ 'Sign up as a Citizen Leader.' | translate }}</h1>
+          <p>
+            {{ 'Join the movement towards citizen-led governance.' | translate }}
+          </p>
+        </div>
+      
       </div>
       <div class="login-container">
-        <p class="auth-text">
+        <p class="auth-text" id="signin-btn-description">
           {{ 'Already have an account with Civis?' | translate }}
         </p>
         <button
           class="app-btn circular auth-btn"
           [routerLink]="['/auth', 'login']"
-          aria-label="Sign into your Civis account">
+          aria-label="Sign into your Civis account"
+          aria-describedby="signin-btn-description">
           {{ 'Sign In' | translate }}
         </button>
       </div>
@@ -45,10 +54,6 @@
         </div>
       </div>
     </div>
-    <p class="logo-heading">
-      {{ 'Sign up as a Citizen Leader.' | translate }}<br />
-      {{ 'Join the movement towards citizen-led governance.' | translate }}
-    </p>
 
     <div class="form-space no-gutters mt-md-5 mt-2">
       <div class="row">

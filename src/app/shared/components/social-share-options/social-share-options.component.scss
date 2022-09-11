@@ -1,12 +1,5 @@
 @import "./src/assets/styles/app";
 
-div[role="list"] {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    -ms-flex-direction: row;
-}
-
 .share-btn {
     display: flex;
     justify-content: center;

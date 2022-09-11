@@ -62,7 +62,7 @@
           </ng-container>
 
           <ng-container *ngIf="reviewType === 'policy'">
-            <div class="single-option">
+            <div class="single-option" tabindex="0">
               <p class="mb-1 font-weight-bold">{{'Read & Respond' | translate}}</p>
               <p class="m-0" style="font-size:13px">{{'Submit your feedback' | translate}}</p>
             </div>
@@ -85,14 +85,26 @@
       <div class="nav-btns" *ngIf="!currentUser">
         <button class="btn btn-transparent auth-btn" (click)="onSignUp()">{{'Log In / Sign Up' | translate}}</button>
       </div>
-      <div class="nav-btns profile-item pointer" *ngIf="currentUser"
-        (click)="$event.preventDefault();$event.stopPropagation(); showProfilePopup()">
-        <img class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
+      <div tabindex="0" 
+        aria-label="Click to open user profile" 
+        role="button" 
+        class="nav-btns profile-item pointer" *ngIf="currentUser"
+        (click)="toggleProfilePopup($event)">
+        <img alt="Profile image" class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
         <span class="clr-black"><i class="fa fa-angle-down ml-2"></i></span>
 
-        <div class="profile-popup" *ngIf="profilePopup">
-          <p [routerLink]="['/profile']">{{'Profile' | translate}}</p>
-          <p (click)="logout($event)">{{'Logout' | translate}}</p>
+        <div class="profile-popup" 
+          id="user-profile-menu"
+          *ngIf="profilePopup">
+          <app-popup-list [list_label]="'User profile menu'" 
+            [childQueryCls]="'menu-option'"
+            [menu_type]="'column'"
+            (close_list_popup)="closeUserProfileMenu($event)">
+            <div role="button" tabindex="0"
+                [routerLink]="['/profile']" class="menu-option">{{'Profile' | translate}}</div>
+            <div role="button" tabindex="0" 
+              (click)="logout($event)" class="menu-option">{{'Logout' | translate}}</div>
+          </app-popup-list>
         </div>
       </div>
 

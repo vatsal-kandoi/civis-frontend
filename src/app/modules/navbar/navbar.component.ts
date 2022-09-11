@@ -161,8 +161,20 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  showProfilePopup() {
+  /**
+   * Opena nd focus into user menu
+   * @param $event HTML Click event
+   */
+  toggleProfilePopup($event) {
+      $event.preventDefault();
+      $event.stopPropagation();    
       this.profilePopup = !this.profilePopup;
+  }
+
+  closeUserProfileMenu($event) {
+    if($event) {
+      this.profilePopup = false;
+    }
   }
 
   getLogoUrl() {

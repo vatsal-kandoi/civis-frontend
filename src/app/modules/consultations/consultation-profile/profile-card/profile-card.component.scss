@@ -94,7 +94,7 @@
         position: absolute;
         bottom: 35px;
         .share-pop-up {
-          width: 250px;
+          width: 100%;
           display: flex;
           justify-content: center;
           margin-bottom: 10px;
@@ -114,44 +114,6 @@
             border-top: 10px solid white;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-          }
-          .share-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: .3125em;
-            border: none;
-            border-radius: 5px;
-            width: 57px;
-            height: 35px;
-
-            &:visited {
-              color: transparent;
-            }
-            &:hover {
-              color: transparent;
-            }
-            &:active {
-              color: transparent;
-            }
-
-            i {
-              color: $white;
-              font-size: 18px;
-            }
-
-            &:nth-child(1) {
-              background-color: #4267b2
-            }
-            &:nth-child(2) {
-              background-color: #00acee;
-            }
-            &:nth-child(3) {
-              background-color: #25D366;
-            }
-            &:nth-child(4) {
-              background-color: #0e76a8;
-            }
           }
         }
       }

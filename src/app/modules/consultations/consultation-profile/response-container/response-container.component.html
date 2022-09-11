@@ -1,15 +1,22 @@
 <div class="response-container pb-0" [id]="response?.node?.id">
-    <div class="d-inline-flex align-items-center">
-      <img class="avatar avatar--42 pointer" alt="" appDefaultImage [type]="'user'"
-        [src]="response?.node?.user?.profilePicture?.url" (click)="openUserProfile(response?.node?.user)" alt="{{response?.node?.user ? response?.node?.user?.firstName : 'Anonymous'}}"/>
-        <p class="regular-text bold-text m-0 ml-2" tabindex="0">{{response?.node?.user ? response?.node?.user?.firstName : 'Anonymous'}}</p>
-        <p class="unverified-text" tooltip="The person who made this response has not verified their email address yet." *ngIf="!response?.node?.isVerified">(Unverified)</p>
-    </div>     
-    <p class="text-16" *ngIf="!response?.node?.answers && response?.node?.responseText ; else responseAnswers" [innerHTML]="response.node?.responseText"></p>
-    <ng-template #responseAnswers>
-      <div tabindex="0">
-        <app-response-answers [showOnlyLongTextAnswer]="true" [activeRoundNumber]="activeRoundNumber" [response]="response?.node"></app-response-answers>
-      </div>
-    </ng-template>
+    <div tabindex="0">
+      <div class="d-inline-flex align-items-center">
+        <div role="button" 
+          [attr.aria-disabled]="response?.node?.user ? false : true"  
+          [attr.aria-label]="response?.node?.user ? 'Click to open ' + response?.node?.user?.firstName + 's profile' : 'Anonymous'"
+          (click)="openUserProfile(response?.node?.user)">
+          <img class="avatar avatar--42 pointer" appDefaultImage [type]="'user'" role="presentation"
+            [src]="response?.node?.user?.profilePicture?.url"  alt=""/>
+        </div>            
+        <div class="regular-text bold-text m-0 ml-2">{{response?.node?.user ? response?.node?.user?.firstName : 'Anonymous'}}</div>
+        <div class="unverified-text" tooltip="The person who made this response has not verified their email address yet." *ngIf="!response?.node?.isVerified">(Unverified)</div>
+      </div>     
+      <div class="text-16" *ngIf="!response?.node?.answers && response?.node?.responseText ; else responseAnswers" [innerHTML]="response.node?.responseText"></div>
+      <ng-template #responseAnswers>
+        <div>
+          <app-response-answers [showOnlyLongTextAnswer]="true" [activeRoundNumber]="activeRoundNumber" [response]="response?.node"></app-response-answers>
+        </div>
+      </ng-template>
+    </div>
     <app-response-footer [response]="response"></app-response-footer>
   </div>

@@ -1,13 +1,22 @@
 <div class="paper-effect mt-4 m-0-sm" *ngIf="responseList?.length"  #responsesListContainer>
     <div class="d-flex justify-content-between">
-      <p id="PublicResponse" class="text-16 m-0 bold-text" tabindex="0">{{'Public responses' | translate}}</p>
-      <p class="what-resp-text" tabindex="0" tooltip="If you feel passionately about this Consultation, you can make your response public, 
+      <h3 id="PublicResponse"
+        aria-describedby="public-responses-explanation" 
+        class="text-16 m-0 bold-text" tabindex="0">{{'Public responses' | translate}}</h3>
+      <p class="what-resp-text" 
+        tooltip="If you feel passionately about this Consultation, you can make your response public, 
         for others to use as a template. Your first name is shared with the Government if you make your response public.
         If you’re not sure what to write, you can choose other people’s responses to send as your own."
-        placement="left" container="body">
+        placement="left" 
+        container="body">
         {{'What are public responses?' | translate}}
       </p>
     </div>
+    <p id="public-responses-explanation" class="visually-hidden">
+      If you feel passionately about this Consultation, you can make your response public, 
+        for others to use as a template. Your first name is shared with the Government if you make your response public.
+        If you’re not sure what to write, you can choose other people’s responses to send as your own.
+    </p>
     <div class="tabs-block" *ngIf="responseRounds.length > 1">
       <p *ngFor="let round of responseRounds" 
         (click)="setActiveRound(round.roundNumber)"

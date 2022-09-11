@@ -490,7 +490,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<span [class]=\"main_class\" \n    aria-hidden=\"true\">{{ main_text }}</span>\n<span class=\"visually-hidden\">{{ accessibility_text }}</span>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ng-container *ngIf=\"main_text !== ''\">\n    <span [class]=\"main_class\" \n        aria-hidden=\"true\">{{ main_text }}</span>\n    <span class=\"visually-hidden\">{{ accessibility_text }}</span>        \n</ng-container>\n\n<ng-container *ngIf=\"main_text === ''\">\n    <div>\n        <div aria-hidden=\"true\">\n            <ng-content></ng-content>\n        </div>\n        <div class=\"visually-hidden\">{{ accessibility_text }}</div>        \n    </div>\n</ng-container>\n\n");
 
 /***/ }),
 

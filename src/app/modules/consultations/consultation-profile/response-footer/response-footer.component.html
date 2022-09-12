@@ -51,13 +51,13 @@
       <span *ngIf="response.node?.templatesCount">
         {{ response.node?.templatesCount ? response.node?.templatesCount : '' }}
       </span>      
-      <div class="share-block__position">
-        <div *ngIf="showShareBlock && responseId && responseId === response?.node?.id"
-          class="share-pop-up" >
-            <app-social-share-options [socialShareLinkMap]="generateShareURL(currentUrl, profileData?.title, response?.node?.id)"
-            (closeShareOptions)="closeShareBlock($event)" ></app-social-share-options>          
+    </div>
+    <div class="share-block__position">
+      <div *ngIf="showShareBlock && responseId && responseId === response?.node?.id"
+        class="share-pop-up" >
+          <app-social-share-options [socialShareLinkMap]="generateShareURL(currentUrl, profileData?.title, response?.node?.id)"
+          (closeShareOptions)="closeShareBlock($event)" ></app-social-share-options>          
         </div>
-      </div>
     </div>
   </div>
   <div *ngIf="showCreateResponse() && activeRoundNumber === response?.node?.roundNumber" >

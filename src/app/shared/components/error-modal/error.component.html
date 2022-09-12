@@ -1,4 +1,24 @@
-<div *ngIf="showModal" class="response-alert bg-danger">
-  <p>{{ customMessage ? customMessage : error?.message }}</p>
-  <button class="btn-ed btn-oblique-red text-white" (click)="close()">Okay</button>
+<div *ngIf="showModal;" 
+  [config]="{
+    show: true,
+    backdrop: false,
+    ignoreBackdropClick: true,
+    keyboard: true}" 
+    (onHidden)="close()" 
+    bsModal 
+    #autoShownModal="bs-modal"
+    class="modal fade" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-label="Error modal"> <!-- Consider adding a error specific label -->
+  <div class="modal-dialog modal-sm modal-position">
+    <div class="modal-content bg-danger response-alert" tabindex="0">
+      <div class="modal-body">
+        <p>{{ customMessage ? customMessage : error?.message }}</p>
+      </div>
+      <div class="response-alert-footer">
+        <button class="btn-ed btn-oblique-red text-white" (click)="close()">Okay</button>
+      </div>
+    </div>
+  </div>
 </div>

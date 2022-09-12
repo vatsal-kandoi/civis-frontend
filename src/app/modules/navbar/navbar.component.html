@@ -92,20 +92,19 @@
         (click)="toggleProfilePopup($event)">
         <img alt="Profile image" class="avatar avatar--42" appDefaultImage [type]="'user'" [src]="currentUser?.profilePicture?.url" />
         <span class="clr-black"><i class="fa fa-angle-down ml-2"></i></span>
-
-        <div class="profile-popup" 
-          id="user-profile-menu"
-          *ngIf="profilePopup">
-          <app-popup-list [list_label]="'User profile menu'" 
-            [childQueryCls]="'menu-option'"
-            [menu_type]="'column'"
-            (close_list_popup)="closeUserProfileMenu($event)">
-            <div role="button" tabindex="0"
-                [routerLink]="['/profile']" class="menu-option">{{'Profile' | translate}}</div>
-            <div role="button" tabindex="0" 
-              (click)="logout($event)" class="menu-option">{{'Logout' | translate}}</div>
-          </app-popup-list>
-        </div>
+      </div>
+      <div class="profile-popup" 
+        id="user-profile-menu"
+        *ngIf="profilePopup">
+        <app-popup-list [list_label]="'User profile menu'" 
+          [childQueryCls]="'menu-option'"
+          [menu_type]="'column'"
+          (close_list_popup)="closeUserProfileMenu($event)">
+          <div role="button" tabindex="0"
+              (click)="goToProfile($event)" class="menu-option">{{'Profile' | translate}}</div>
+          <div role="button" tabindex="0" 
+            (click)="logout($event)" class="menu-option">{{'Logout' | translate}}</div>
+        </app-popup-list>
       </div>
 
       <div class="mobile-space">

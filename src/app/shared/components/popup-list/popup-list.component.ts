@@ -22,15 +22,15 @@ export class PopupListComponent implements OnInit, AfterViewInit {
     const listElement: HTMLElement = (document.getElementsByClassName("main-menu-container")[0] as HTMLElement);
     listElement.focus();
     // Close modal when last tab clicked on last button
-    this.listenForEventsOnElements(listElement, false);    
+    this.listenForEventsOnElements(listElement, false, false);    
 
     const search_field: any = document.getElementsByClassName(this.childQueryCls);
     let index = 0;
     for(let shareBtn of search_field) {
       if (index === search_field.length - 1){
-        this.listenForEventsOnElements(shareBtn as HTMLElement, true);
+        this.listenForEventsOnElements(shareBtn as HTMLElement, true, true);
       } else { 
-        this.listenForEventsOnElements(shareBtn as HTMLElement, false);
+        this.listenForEventsOnElements(shareBtn as HTMLElement, false, true);
       }
       index += 1;
     }
@@ -41,13 +41,25 @@ export class PopupListComponent implements OnInit, AfterViewInit {
    * @param element HTML Element
    * @param closeOnLastTab To add a listener for tab on the last anchor tag
    */
-  listenForEventsOnElements(element: HTMLElement, closeOnLastTab: boolean): void {
+  listenForEventsOnElements(element: HTMLElement, closeOnLastTab: boolean, isChildElement: boolean): void {
     element.addEventListener('keydown', (event:KeyboardEvent) => {
       if (event.key === 'Tab' && closeOnLastTab) {
         this.close_list_popup.emit(true);
       } else if(event.key === "Escape") {
         this.close_list_popup.emit(true);
+      } else if(event.key === "Enter" && isChildElement) {
+        element.click();
       }
     });
+    if(isChildElement) {    
+      element.addEventListener('keyup', (event:KeyboardEvent) => {
+        if(event.key === "Enter") {
+          element.click();
+        }
+      });
+      element.addEventListener('click', (event:KeyboardEvent) => {
+        element.click();        
+      });
+    }
   }
 }

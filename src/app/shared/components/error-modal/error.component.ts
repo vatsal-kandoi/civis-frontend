@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {ErrorService} from './error.service';
 
@@ -7,7 +7,7 @@ import {ErrorService} from './error.service';
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.scss']
 })
-export class ErrorComponent implements OnInit {
+export class ErrorComponent implements OnInit, AfterViewInit {
 
   showModal: boolean;
   error: any;
@@ -36,6 +36,10 @@ export class ErrorComponent implements OnInit {
           this.shouldReload = false;
         }
       });
+  }
+
+  ngAfterViewInit(): void {
+    (document.getElementsByClassName('response-alert')[0] as HTMLElement).focus();
   }
 
   close() {

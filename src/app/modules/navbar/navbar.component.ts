@@ -171,6 +171,10 @@ export class NavbarComponent implements OnInit {
       this.profilePopup = !this.profilePopup;
   }
 
+  goToProfile() {
+    this.router.navigateByUrl('/profile');
+  }
+
   closeUserProfileMenu($event) {
     if($event) {
       this.profilePopup = false;

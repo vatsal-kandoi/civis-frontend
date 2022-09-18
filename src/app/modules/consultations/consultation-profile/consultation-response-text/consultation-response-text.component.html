@@ -28,13 +28,14 @@
           </ng-container>
 
           <ng-container *ngIf="!isScrollToResponseDisabled">
-            <button 
+            <div 
               (click)="scrollToResponses()"
               class="link"
+              role="link"
               tabindex="0"
               aria-describedby="select-public-resp-label"
               [ngClass]="{'w-75 mr-1': isMobile, 'mr-3': !isMobile}"
-            >{{'or, select a public response' | translate}}</button>
+            >{{'or, select a public response' | translate}}</div>
 
             <span class="visually-hidden" id="select-public-resp-label">
               {{ 'Choose from what other people people have shared for this consulation, and your own thoughts to it, or submit as is.' | translate }}
@@ -107,8 +108,16 @@
     </div>
     <p class="error-msg" *ngIf="showError && !responseText">Please enter your response</p>
     <div class="hr-line"></div>
+
+    <app-hidden-text id="submit-btn-disabled-description" accessibility_text="Please fill all the answers to submit response"></app-hidden-text>
+
     <div class="py-3">
-      <button aria-labelledby="submit-btn-label" class="btn-submit active" (click)="submitAnswer()" [tooltip]="(showError && !responseText) ? 'Please fill all the answers to submit response.' : ''" data-event="purchase">
+      <button aria-labelledby="submit-btn-label" class="btn-submit active" 
+        (click)="submitAnswer()" 
+        [attr.aria-disabled]="(showError && !responseText)"
+        [attr.aria-describedby]="(showError && !responseText) ? 'submit-btn-disabled-description' : ''"
+        [tooltip]="(showError && !responseText) ? 'Please fill all the answers to submit response.' : ''" 
+        data-event="purchase">
         <p id="submit-btn-label" class="m-0"> {{ 'SUBMIT RESPONSE' | translate }}</p>
         <span class="ml-2"><i class="fa fa-angle-right"></i></span>
       </button>

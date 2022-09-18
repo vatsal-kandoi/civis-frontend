@@ -11,6 +11,7 @@
         <div 
           class="options-block" 
           [ngClass]="{'response-form-invalid-input': (showError && !responseFeedback)}"
+          id="satisfaction-rating-selection-form"
           role="radiogroup" 
           aria-errormessage="satisfaction-rating-error"
           [attr.aria-invalid]="showError && !responseFeedback"

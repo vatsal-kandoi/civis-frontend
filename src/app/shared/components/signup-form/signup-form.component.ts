@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { distinctUntilChanged, debounceTime, map, takeWhile, switchMap, tap } from 'rxjs/operators';
@@ -14,9 +14,10 @@ import { ErrorService } from '../error-modal/error.service';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.scss']
 })
-export class SignupFormComponent implements OnInit {
+export class SignupFormComponent implements OnInit, AfterViewInit {
 
   @Input() showCityInputOption: boolean = false;
+  @Input() triggerFocusToFirstElement: boolean = false;
   @Output() onSubmit: EventEmitter<SignupForm> = new EventEmitter(null);
 
   @ViewChild('signupForm', {static: false}) signupForm: NgForm;
@@ -47,6 +48,12 @@ export class SignupFormComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeToSearch();
+  }
+
+  ngAfterViewInit(): void {
+    if(this.triggerFocusToFirstElement) {
+      ((this.signupFormElemRef.nativeElement.getElementsByClassName('input-box__border')[0] as HTMLElement).firstChild as HTMLElement).focus();
+    }
   }
 
   subscribeToSearch() {

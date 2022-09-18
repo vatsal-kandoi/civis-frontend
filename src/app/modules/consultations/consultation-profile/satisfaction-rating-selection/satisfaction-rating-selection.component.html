@@ -1,21 +1,25 @@
-<section>
-    <p class="satisfactory-heading">
-        <p class="satisfactory-heading" id="satisfactory-heading">
-          {{'How satisfied are you with this ' | translate}}
-          {{profileData?.visibility === 'public_consultation' ? 'Consultation' : 'Document' | translate }}
-        </p>
-        <div class="satisfactory-tip" id="satisfactory-tip">
-          {{'Choose an option to submit your feedback' | translate}}
-        </div>
+  
+    <div>
+      <div class="satisfactory-heading" id="satisfactory-heading" >
+        {{'How satisfied are you with this ' | translate}}
+        {{profileData?.visibility === 'public_consultation' ? 'Consultation' : 'Document' | translate }}
+      </div>
+      <div class="satisfactory-tip" id="satisfactory-tip">
+        {{'Choose an option to submit your feedback' | translate}}
+      </div>
+    </div>
         <div 
           class="options-block" 
           [ngClass]="{'response-form-invalid-input': (showError && !responseFeedback)}"
           role="radiogroup" 
+          aria-errormessage="satisfaction-rating-error"
+          [attr.aria-invalid]="showError && !responseFeedback"
           aria-required="true"
           tabindex="0"
-          aria-labelledby="satisfactory-heading"
-          aria-describedby="satisfactory-tip">
-          <button 
+          aria-describedby="satisfactory-tip"
+          aria-labelledby="satisfactory-heading">
+        
+        <button 
             class="grey-bg SatisfactionRating"
             [ngClass]="{'active': (responseFeedback === 'dissatisfied')}"
             (click)="setSatisfactoryRating('dissatisfied')" role="radio" aria-checked="false" value="dissatisfied">
@@ -58,4 +62,3 @@
         </div>
         <p class="error-msg" *ngIf="showError && !responseFeedback" tabindex="0">Please select a Satisfaction Rating to submit the response</p>
         <div class="hr-line"></div>
-</section>

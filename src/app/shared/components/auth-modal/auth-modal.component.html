@@ -49,11 +49,16 @@
           </button>
           <p class="signup-text" *ngIf="signup">{{ 'Sign up with Email' | translate }}</p>
 
-          <app-signup-form class="width__100" [showCityInputOption]="true" *ngIf="signup" (onSubmit)="submitSignupForm($event)"></app-signup-form>
+          <app-signup-form class="width__100" 
+            [showCityInputOption]="true" 
+            [triggerFocusToFirstElement]="triggerFocusToFirstElement"
+            *ngIf="signup" (onSubmit)="submitSignupForm($event)"></app-signup-form>
 
           <div class="hline" *ngIf="signin"><span>Or</span></div>
           
-          <app-login-form class="width__100" *ngIf="signin" (onSubmit)="submitLoginForm($event)"></app-login-form>
+          <app-login-form class="width__100" *ngIf="signin" 
+            [triggerFocusToFirstElement]="triggerFocusToFirstElement"
+            (onSubmit)="submitLoginForm($event)"></app-login-form>
 
           <div class="app-hr"></div>
           <div 

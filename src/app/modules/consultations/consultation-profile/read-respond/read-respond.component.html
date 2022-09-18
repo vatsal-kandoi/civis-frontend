@@ -1,10 +1,10 @@
 <section class="read-response-container" *ngIf="!loading">
-  <div class="paper-effect">
-    <p class="heading" tabindex="0">
+  <div class="paper-effect"  tabindex="0">
+    <p class="heading">
       {{'Summary' | translate}}
       <span>{{profileData?.readingTime ? '(' + profileData?.readingTime + ' min)' : '' }}</span>
     </p>
-    <div *ngIf="profileData?.page || profileData?.summaryHindi" tabindex="0">
+    <div *ngIf="profileData?.page || profileData?.summaryHindi">
       <app-page-content-renderer [page]="useSummaryHindi ? profileData?.summaryHindi : profileData?.page">
       </app-page-content-renderer>
     </div>

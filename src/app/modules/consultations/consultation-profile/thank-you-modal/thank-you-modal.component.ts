@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, Input, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { getSocialLink } from '../socialLink.function';
 
@@ -8,7 +8,7 @@ import { getSocialLink } from '../socialLink.function';
   templateUrl: './thank-you-modal.component.html',
   styleUrls: ['./thank-you-modal.component.scss']
 })
-export class ThankYouModalComponent implements OnInit {
+export class ThankYouModalComponent implements OnInit, AfterViewInit {
   @ViewChild('thankyouModal', { static: false }) thankyouModal: ModalDirective;
   @Output() closeThankYouModal: EventEmitter<any> = new EventEmitter();
   @Input() profileData;
@@ -22,6 +22,10 @@ export class ThankYouModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUrl = window.location.href;
+  }
+
+  ngAfterViewInit(): void {
+    (document.getElementById("thank-you-modal") as HTMLElement).focus();
   }
 
   closeModal() {

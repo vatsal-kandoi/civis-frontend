@@ -52,6 +52,7 @@ export class SatisfactionRatingSelectionComponent implements OnInit {
       if (status) {
         this.showError = true;
         this.consultationService.satisfactionRatingError.next(false);
+        (document.getElementById('satisfaction-rating-selection-form') as HTMLElement).focus();
       }
     });
   }

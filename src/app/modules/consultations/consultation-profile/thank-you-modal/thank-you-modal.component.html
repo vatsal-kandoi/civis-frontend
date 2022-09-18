@@ -3,10 +3,11 @@
       #thankyouModal="bs-modal" 
       class="modal fade" 
       [ngClass]="showThankYouModal? 'align-center' : ''"
-      [config]="{show: true, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}" role="dialog"
+      [config]="{show: true, backdrop: 'static', ignoreBackdropClick: true, keyboard: false}" 
+      role="dialog"
       aria-labelledby="thankyouModal">
       <div class="modal-dialog">
-        <div data-event="thank-you-modal-appear" class="modal-content">
+        <div data-event="thank-you-modal-appear" class="modal-content" id="thank-you-modal" tabindex="0">
           <div class="modal-body">
             <div class="thankyou-inner">
               <button class="close-btn" 
@@ -15,7 +16,7 @@
                 <img src="assets/images/close.png" role="presentation"> </button>
               <div class="thankyou-inner__top">
                 <img class="thankyou-img" src="assets/images/thankyou.png" role="presentation"/>
-                <div class="thankyou-content">
+                <div class="thankyou-content" id="thankyouModal">
                   <p>
                     Thank you for your response.
                     <span *ngIf="profileData?.visibility === 'public_consultation'">
@@ -40,7 +41,7 @@
                 </div>
               </div> 
               <div class="thankyou-inner__bottom" *ngIf="profileData?.visibility === 'public_consultation'">
-                <div class="social-list">
+                <div class="social-list" role="list" >
                   <a class="social-item" [href]="getSocialLink('whatsapp', currentUrl, profileData?.title)" target="_blank">
                     <img src="assets/images/whatsapp.svg" alt="whatsapp logo" />
                   </a>
@@ -54,9 +55,12 @@
                     <img src="assets/images/linkedin.svg" alt="linkedin logo" />
                   </a>
                   <div class="social-item"
-                  (click)="copyMessage(currentUrl)" 
-                  [tooltip]="copyStatus ? 'Copied': 'Copy'">
-                    <img src="assets/images/link.svg" alt="link logo" />
+                    tabindex="0"
+                    role="button"
+                    aria-label="Copy the message"
+                    (click)="copyMessage(currentUrl)" 
+                    [tooltip]="copyStatus ? 'Copied': 'Copy'">
+                    <img src="assets/images/link.svg" role="presentation" />
                   </div>
                 </div>
               </div> 

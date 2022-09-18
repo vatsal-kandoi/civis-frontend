@@ -23,6 +23,8 @@ export class AuthModalComponent implements OnInit {
     cityId: null
   };
   signup = false;
+  // Used to control the focus change to the frist element of the form. Used when user moves between signup and signin
+  triggerFocusToFirstElement= false;
   signin = false;
   login = false;
   loginObject = {
@@ -70,6 +72,7 @@ export class AuthModalComponent implements OnInit {
   }
   
   switchAuthOption() {
+    this.triggerFocusToFirstElement = true;
     if (this.signin) {
       this.signin = false;
       this.signup = false;

@@ -378,8 +378,15 @@ export class ConsultationResponseTextComponent
 
   submitAnswer() {
     if (this.responseSubmitLoading) {
+      return; 
+    }
+    if (!this.responseFeedback) {
+      this.consultationService.satisfactionRatingError.next(true);
+      this.showError = true;
+      this.scrollToError = true;
       return;
     }
+
     let responseTextString: any = this.sanitizer.bypassSecurityTrustHtml(
       this.responseText
     );
@@ -388,6 +395,7 @@ export class ConsultationResponseTextComponent
     if (this.urlToText(responseTextString).length <= 0) {
       this.responseText = null;
       this.showError = true;
+      document.getElementById("text-editor").focus();
       return;
     }
     if (this.responseText && this.responseFeedback) {
@@ -423,11 +431,9 @@ export class ConsultationResponseTextComponent
         }
       }
     } else {
-      if (!this.responseFeedback) {
-        this.consultationService.satisfactionRatingError.next(true);
-      }
       this.showError = true;
       this.scrollToError = true;
+      document.getElementById("text-editor").focus();
     }
   }
 

@@ -252,6 +252,7 @@ export class ReadRespondComponent implements OnInit {
       this.isResponseShort = false;
       this.submitConsultationResponse(null,false);
     }
+    this.showThankYouModal = true;
   }
 
   submitConsultationResponse(consultationResponse:any = null, isProfane:boolean = false){

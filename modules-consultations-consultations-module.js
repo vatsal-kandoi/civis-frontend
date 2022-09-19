@@ -9889,6 +9889,7 @@ var ReadRespondComponent = /** @class */ (function () {
             this.isResponseShort = false;
             this.submitConsultationResponse(null, false);
         }
+        this.showThankYouModal = true;
     };
     ReadRespondComponent.prototype.submitConsultationResponse = function (consultationResponse, isProfane) {
         var _this = this;

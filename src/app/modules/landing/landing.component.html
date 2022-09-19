@@ -80,7 +80,7 @@
     <div class="citizen-leader-section">
       <h3 class="section-heading" tabindex="0">{{'CITIZEN LEADERS ON CIVIS' | translate}}</h3>
       <div class="leaders-list" tabindex="0" role="list" aria-label="Citizen leaders on Civis with maximum points">
-        <div class="leader-profile" role="listitem" *ngFor='let item of citizenLeaders'>
+        <div class="leader-profile" role="listitem" *ngFor='let item of citizenLeaders' tabindex="0" >
           <div role="button" 
             class="leader-btn"
             [attr.aria-label]="'Click to open ' + item?.firstName + 's profile'"
